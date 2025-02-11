@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option go_package = "nem/idl/gen";
 option java_multiple_files = true;
-option java_package = "nem";
+option java_package = "github.com/nuzur/nem";
 option java_outer_classname = "FieldTypeEnumConfig";
 
 package nem;
