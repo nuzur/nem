@@ -5,8 +5,8 @@ import (
 
 	"database/sql"
 
-	nemdb "nem/core/repository/gen"
-	"nem/core/repository/list"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/core/repository/list"
 )
 
 type Implementation struct {

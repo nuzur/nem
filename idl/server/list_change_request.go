@@ -5,10 +5,10 @@ import (
 	"fmt"
 	//"encoding/json"
 
-	"nem/core/module/change_request/types"
-	pb "nem/idl/gen"
-	pbmapper "nem/idl/mapper"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/change_request/types"
+	pb "github.com/nuzur/nem/idl/gen"
+	pbmapper "github.com/nuzur/nem/idl/mapper"
+	"github.com/nuzur/nem/monitoring"
 
 	"go.einride.tech/aip/filtering"
 	"go.einride.tech/aip/ordering"

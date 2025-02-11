@@ -1,7 +1,7 @@
 package types
 
 import (
-	main_entity "nem/core/entity/organization"
+	main_entity "github.com/nuzur/nem/core/entity/organization"
 )
 
 type SearchOrganizationResponse struct {

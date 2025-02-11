@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/field_type_integer_config"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/field_type_integer_config"
+	pb "github.com/nuzur/nem/idl/gen"
 )
 
 func FieldTypeIntegerConfigToProto(e main_entity.FieldTypeIntegerConfig) *pb.FieldTypeIntegerConfig {

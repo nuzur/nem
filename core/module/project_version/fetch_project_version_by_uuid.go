@@ -3,9 +3,9 @@ package project_version
 import (
 	"context"
 
-	"nem/core/module/project_version/types"
+	"github.com/nuzur/nem/core/module/project_version/types"
 
-	"nem/monitoring"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchProjectVersionByUUID(

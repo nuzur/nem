@@ -2,13 +2,13 @@ package change_request
 
 import (
 	"context"
-	"nem/core/module/change_request/types"
-	"nem/core/repository"
-	coretypes "nem/core/types"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/change_request/types"
+	"github.com/nuzur/nem/core/repository"
+	coretypes "github.com/nuzur/nem/core/types"
+	"github.com/nuzur/nem/monitoring"
 	"sync"
 
-	"nem/core/events"
+	"github.com/nuzur/nem/core/events"
 )
 
 type Module interface {

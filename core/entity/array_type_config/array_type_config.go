@@ -3,22 +3,22 @@ package array_type_config
 import (
 	"encoding/json"
 
-	"nem/core/entity/field_type_char_config"
-	"nem/core/entity/field_type_date_config"
-	"nem/core/entity/field_type_datetime_config"
-	"nem/core/entity/field_type_decimal_config"
-	"nem/core/entity/field_type_email_config"
-	"nem/core/entity/field_type_encrypted_config"
-	"nem/core/entity/field_type_enum_config"
-	"nem/core/entity/field_type_float_config"
-	"nem/core/entity/field_type_integer_config"
-	"nem/core/entity/field_type_phone_config"
-	"nem/core/entity/field_type_url_config"
-	"nem/core/entity/field_type_varchar_config"
+	"github.com/nuzur/nem/core/entity/field_type_char_config"
+	"github.com/nuzur/nem/core/entity/field_type_date_config"
+	"github.com/nuzur/nem/core/entity/field_type_datetime_config"
+	"github.com/nuzur/nem/core/entity/field_type_decimal_config"
+	"github.com/nuzur/nem/core/entity/field_type_email_config"
+	"github.com/nuzur/nem/core/entity/field_type_encrypted_config"
+	"github.com/nuzur/nem/core/entity/field_type_enum_config"
+	"github.com/nuzur/nem/core/entity/field_type_float_config"
+	"github.com/nuzur/nem/core/entity/field_type_integer_config"
+	"github.com/nuzur/nem/core/entity/field_type_phone_config"
+	"github.com/nuzur/nem/core/entity/field_type_url_config"
+	"github.com/nuzur/nem/core/entity/field_type_varchar_config"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
 	"math/rand"
 

@@ -4,8 +4,8 @@ import (
 	"go.einride.tech/aip/filtering"
 	"go.einride.tech/aip/ordering"
 
+	entitytypes "github.com/nuzur/nem/core/entity/types"
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
-	entitytypes "nem/core/entity/types"
 )
 
 type JoinParams struct {

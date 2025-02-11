@@ -6,11 +6,11 @@ import (
 	"errors"
 
 	"github.com/gofrs/uuid"
-	"nem/core/module/extension_execution/types"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/extension_execution/types"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 
-	"nem/custom"
+	"github.com/nuzur/nem/custom"
 )
 
 func (m *module) Insert(

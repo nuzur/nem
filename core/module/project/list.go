@@ -3,10 +3,10 @@ package project
 import (
 	"context"
 	//"fmt"
-	main_entity "nem/core/entity/project"
-	"nem/core/module/project/types"
-	repogen "nem/core/repository/gen"
-	"nem/monitoring"
+	main_entity "github.com/nuzur/nem/core/entity/project"
+	"github.com/nuzur/nem/core/module/project/types"
+	repogen "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) List(ctx context.Context,

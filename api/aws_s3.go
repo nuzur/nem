@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strings"
 
-	"nem/aws"
+	"github.com/nuzur/nem/aws"
 )
 
 func serverHandlerUploadFunc() http.HandlerFunc {

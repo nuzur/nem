@@ -1,11 +1,11 @@
 package types
 
 import (
-	"nem/core/repository"
+	"github.com/nuzur/nem/core/repository"
 
-	"nem/core/events"
+	"github.com/nuzur/nem/core/events"
 
-	"nem/monitoring"
+	"github.com/nuzur/nem/monitoring"
 )
 
 type ModuleParams struct {

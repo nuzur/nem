@@ -4,17 +4,17 @@ import (
 	"context"
 	"errors"
 
-	"nem/core/module/project_version/types"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/project_version/types"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 
-	"nem/core/entity/entity"
-	"nem/core/entity/enum"
-	"nem/core/entity/project_version_deployment"
-	"nem/core/entity/relationship"
-	"nem/core/entity/service"
+	"github.com/nuzur/nem/core/entity/entity"
+	"github.com/nuzur/nem/core/entity/enum"
+	"github.com/nuzur/nem/core/entity/project_version_deployment"
+	"github.com/nuzur/nem/core/entity/relationship"
+	"github.com/nuzur/nem/core/entity/service"
 
-	"nem/custom"
+	"github.com/nuzur/nem/custom"
 
 	"time"
 )

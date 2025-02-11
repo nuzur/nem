@@ -1,8 +1,8 @@
 package user
 
 import (
-	main_entity "nem/core/entity/user"
-	nemdb "nem/core/repository/gen"
+	main_entity "github.com/nuzur/nem/core/entity/user"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
 
 	"github.com/gofrs/uuid"
 )

@@ -3,10 +3,10 @@ package user_team
 import (
 	"context"
 	//"fmt"
-	main_entity "nem/core/entity/user_team"
-	"nem/core/module/user_team/types"
-	repogen "nem/core/repository/gen"
-	"nem/monitoring"
+	main_entity "github.com/nuzur/nem/core/entity/user_team"
+	"github.com/nuzur/nem/core/module/user_team/types"
+	repogen "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) List(ctx context.Context,

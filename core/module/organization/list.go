@@ -3,10 +3,10 @@ package organization
 import (
 	"context"
 	//"fmt"
-	main_entity "nem/core/entity/organization"
-	"nem/core/module/organization/types"
-	repogen "nem/core/repository/gen"
-	"nem/monitoring"
+	main_entity "github.com/nuzur/nem/core/entity/organization"
+	"github.com/nuzur/nem/core/module/organization/types"
+	repogen "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) List(ctx context.Context,

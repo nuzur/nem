@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/gofrs/uuid"
-	"nem/core/module/project_version/types"
+	"github.com/nuzur/nem/core/module/project_version/types"
 )
 
 func (m *module) Upsert(

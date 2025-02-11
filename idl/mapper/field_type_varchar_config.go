@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/field_type_varchar_config"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/field_type_varchar_config"
+	pb "github.com/nuzur/nem/idl/gen"
 )
 
 func FieldTypeVarcharConfigToProto(e main_entity.FieldTypeVarcharConfig) *pb.FieldTypeVarcharConfig {

@@ -4,14 +4,14 @@ import (
 	"context"
 	"errors"
 
-	"nem/core/module/user_connection/types"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/user_connection/types"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 
-	"nem/core/entity/user_connection_execution"
-	"nem/core/entity/user_connection_type_config"
+	"github.com/nuzur/nem/core/entity/user_connection_execution"
+	"github.com/nuzur/nem/core/entity/user_connection_type_config"
 
-	"nem/custom"
+	"github.com/nuzur/nem/custom"
 )
 
 func (m *module) Update(

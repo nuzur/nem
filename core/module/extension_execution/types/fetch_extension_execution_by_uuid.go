@@ -1,7 +1,7 @@
 package types
 
 import (
-	main_entity "nem/core/entity/extension_execution"
+	main_entity "github.com/nuzur/nem/core/entity/extension_execution"
 
 	"github.com/gofrs/uuid"
 	"go.uber.org/zap/zapcore"

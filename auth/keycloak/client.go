@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/Nerzal/gocloak/v13"
 	"github.com/gofrs/uuid"
-	base "nem/auth"
+	base "github.com/nuzur/nem/auth"
 )
 
 func New(params Params) (base.Interface, error) {

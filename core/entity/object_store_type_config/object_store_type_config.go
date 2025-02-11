@@ -3,11 +3,11 @@ package object_store_type_config
 import (
 	"encoding/json"
 
-	"nem/core/entity/object_store_s3_type_config"
+	"github.com/nuzur/nem/core/entity/object_store_s3_type_config"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
 	"math/rand"
 

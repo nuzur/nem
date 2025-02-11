@@ -3,9 +3,9 @@ package change_request
 import (
 	"context"
 
-	"nem/core/module/change_request/types"
+	"github.com/nuzur/nem/core/module/change_request/types"
 
-	"nem/monitoring"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchChangeRequestByUUID(

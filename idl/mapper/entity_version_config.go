@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/entity_version_config"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/entity_version_config"
+	pb "github.com/nuzur/nem/idl/gen"
 )
 
 func EntityVersionConfigToProto(e main_entity.EntityVersionConfig) *pb.EntityVersionConfig {

@@ -3,10 +3,10 @@ package extension_version
 import (
 	"context"
 	//"fmt"
-	main_entity "nem/core/entity/extension_version"
-	"nem/core/module/extension_version/types"
-	repogen "nem/core/repository/gen"
-	"nem/monitoring"
+	main_entity "github.com/nuzur/nem/core/entity/extension_version"
+	"github.com/nuzur/nem/core/module/extension_version/types"
+	repogen "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) List(ctx context.Context,

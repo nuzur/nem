@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
+	entitytypes "github.com/nuzur/nem/core/entity/types"
 	"go.einride.tech/aip/filtering"
 	"google.golang.org/protobuf/reflect/protoreflect"
-	entitytypes "nem/core/entity/types"
 )
 
 func handleClauseByType(req SingleClauseRequest, entity ListEntity, fieldType entitytypes.FieldType) (SingleClauseResponse, error) {

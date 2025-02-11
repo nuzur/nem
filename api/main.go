@@ -1,18 +1,18 @@
 package main
 
 import (
+	nemconfig "github.com/nuzur/nem/config"
+	"github.com/nuzur/nem/core"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
-	nemconfig "nem/config"
-	"nem/core"
 
-	pbserver "nem/idl/server"
+	pbserver "github.com/nuzur/nem/idl/server"
 
-	auth "nem/auth/keycloak"
+	auth "github.com/nuzur/nem/auth/keycloak"
 
-	"nem/monitoring"
+	"github.com/nuzur/nem/monitoring"
 
-	"nem/core/events"
+	"github.com/nuzur/nem/core/events"
 
 	saramafx "github.com/mklfarha/sarama-fx"
 )

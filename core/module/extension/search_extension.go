@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"nem/core/module/extension/types"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/extension/types"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) Search(

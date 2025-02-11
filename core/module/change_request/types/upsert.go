@@ -2,7 +2,7 @@ package types
 
 import (
 	"github.com/gofrs/uuid"
-	main_entity "nem/core/entity/change_request"
+	main_entity "github.com/nuzur/nem/core/entity/change_request"
 )
 
 type UpsertRequest struct {

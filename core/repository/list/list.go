@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
+	entitytypes "github.com/nuzur/nem/core/entity/types"
 	"go.einride.tech/aip/filtering"
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
-	entitytypes "nem/core/entity/types"
 )
 
 type Implementation struct {

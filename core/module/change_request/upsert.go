@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/gofrs/uuid"
-	"nem/core/module/change_request/types"
+	"github.com/nuzur/nem/core/module/change_request/types"
 )
 
 func (m *module) Upsert(

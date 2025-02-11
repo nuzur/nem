@@ -6,17 +6,17 @@ import (
 	"errors"
 
 	"github.com/gofrs/uuid"
-	"nem/core/module/project/types"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/project/types"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 
-	"nem/custom"
+	"github.com/nuzur/nem/custom"
 
-	"nem/core/entity/project_extension"
+	"github.com/nuzur/nem/core/entity/project_extension"
 
 	"time"
 
-	"nem/core/entity/mapper"
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(

@@ -1,8 +1,8 @@
 package extension_execution
 
 import (
-	main_entity "nem/core/entity/extension_execution"
-	nemdb "nem/core/repository/gen"
+	main_entity "github.com/nuzur/nem/core/entity/extension_execution"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
 
 	"github.com/gofrs/uuid"
 )

@@ -4,18 +4,18 @@ import (
 	"encoding/json"
 
 	"github.com/gofrs/uuid"
-	"nem/core/entity/entity"
-	"nem/core/entity/enum"
-	"nem/core/entity/project_version_deployment"
-	"nem/core/entity/relationship"
-	"nem/core/entity/service"
+	"github.com/nuzur/nem/core/entity/entity"
+	"github.com/nuzur/nem/core/entity/enum"
+	"github.com/nuzur/nem/core/entity/project_version_deployment"
+	"github.com/nuzur/nem/core/entity/relationship"
+	"github.com/nuzur/nem/core/entity/service"
 	"time"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
-	"nem/core/randomvalues"
+	"github.com/nuzur/nem/core/randomvalues"
 
 	"math/rand"
 )

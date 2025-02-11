@@ -3,12 +3,12 @@ package relationship_node_type_config
 import (
 	"encoding/json"
 
-	"nem/core/entity/relationship_node_type_entity_config"
-	"nem/core/entity/relationship_node_type_service_config"
+	"github.com/nuzur/nem/core/entity/relationship_node_type_entity_config"
+	"github.com/nuzur/nem/core/entity/relationship_node_type_service_config"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
 	"math/rand"
 

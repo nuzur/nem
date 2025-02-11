@@ -5,8 +5,8 @@ import (
 
 	saramafx "github.com/mklfarha/sarama-fx"
 
+	"github.com/nuzur/nem/monitoring"
 	"go.uber.org/config"
-	"nem/monitoring"
 	"time"
 )
 

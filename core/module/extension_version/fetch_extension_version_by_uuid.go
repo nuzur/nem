@@ -3,9 +3,9 @@ package extension_version
 import (
 	"context"
 
-	"nem/core/module/extension_version/types"
+	"github.com/nuzur/nem/core/module/extension_version/types"
 
-	"nem/monitoring"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchExtensionVersionByUUID(

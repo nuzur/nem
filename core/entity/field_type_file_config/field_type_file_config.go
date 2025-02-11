@@ -3,13 +3,13 @@ package field_type_file_config
 import (
 	"encoding/json"
 
-	"nem/core/entity/file_storage_config"
+	"github.com/nuzur/nem/core/entity/file_storage_config"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
-	"nem/core/randomvalues"
+	"github.com/nuzur/nem/core/randomvalues"
 
 	"math/rand"
 

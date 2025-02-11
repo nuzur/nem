@@ -3,11 +3,11 @@ package file_storage_config
 import (
 	"encoding/json"
 
-	"nem/core/entity/file_object_storage_config"
+	"github.com/nuzur/nem/core/entity/file_object_storage_config"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
 	"math/rand"
 

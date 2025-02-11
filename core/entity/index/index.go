@@ -4,14 +4,14 @@ import (
 	"encoding/json"
 
 	"github.com/gofrs/uuid"
-	"nem/core/entity/index_field"
+	"github.com/nuzur/nem/core/entity/index_field"
 	"time"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
-	"nem/core/randomvalues"
+	"github.com/nuzur/nem/core/randomvalues"
 
 	"math/rand"
 )

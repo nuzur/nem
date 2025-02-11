@@ -12,42 +12,42 @@ import (
 	"os"
 	"sort"
 
-	"nem/config"
-	"nem/core"
-	"nem/monitoring"
+	"github.com/nuzur/nem/config"
+	"github.com/nuzur/nem/core"
+	"github.com/nuzur/nem/monitoring"
 
-	"nem/core/entity/team"
-	teamtypes "nem/core/module/team/types"
+	"github.com/nuzur/nem/core/entity/team"
+	teamtypes "github.com/nuzur/nem/core/module/team/types"
 
-	"nem/core/entity/organization"
-	organizationtypes "nem/core/module/organization/types"
+	"github.com/nuzur/nem/core/entity/organization"
+	organizationtypes "github.com/nuzur/nem/core/module/organization/types"
 
-	"nem/core/entity/project"
-	projecttypes "nem/core/module/project/types"
+	"github.com/nuzur/nem/core/entity/project"
+	projecttypes "github.com/nuzur/nem/core/module/project/types"
 
-	"nem/core/entity/extension"
-	extensiontypes "nem/core/module/extension/types"
+	"github.com/nuzur/nem/core/entity/extension"
+	extensiontypes "github.com/nuzur/nem/core/module/extension/types"
 
-	"nem/core/entity/extension_version"
-	extension_versiontypes "nem/core/module/extension_version/types"
+	"github.com/nuzur/nem/core/entity/extension_version"
+	extension_versiontypes "github.com/nuzur/nem/core/module/extension_version/types"
 
-	"nem/core/entity/user"
-	usertypes "nem/core/module/user/types"
+	"github.com/nuzur/nem/core/entity/user"
+	usertypes "github.com/nuzur/nem/core/module/user/types"
 
-	"nem/core/entity/change_request"
-	change_requesttypes "nem/core/module/change_request/types"
+	"github.com/nuzur/nem/core/entity/change_request"
+	change_requesttypes "github.com/nuzur/nem/core/module/change_request/types"
 
-	"nem/core/entity/project_version"
-	project_versiontypes "nem/core/module/project_version/types"
+	"github.com/nuzur/nem/core/entity/project_version"
+	project_versiontypes "github.com/nuzur/nem/core/module/project_version/types"
 
-	"nem/core/entity/user_team"
-	user_teamtypes "nem/core/module/user_team/types"
+	"github.com/nuzur/nem/core/entity/user_team"
+	user_teamtypes "github.com/nuzur/nem/core/module/user_team/types"
 
-	"nem/core/entity/extension_execution"
-	extension_executiontypes "nem/core/module/extension_execution/types"
+	"github.com/nuzur/nem/core/entity/extension_execution"
+	extension_executiontypes "github.com/nuzur/nem/core/module/extension_execution/types"
 
-	"nem/core/entity/user_connection"
-	user_connectiontypes "nem/core/module/user_connection/types"
+	"github.com/nuzur/nem/core/entity/user_connection"
+	user_connectiontypes "github.com/nuzur/nem/core/module/user_connection/types"
 
 	"github.com/gofrs/uuid"
 	"github.com/manifoldco/promptui"

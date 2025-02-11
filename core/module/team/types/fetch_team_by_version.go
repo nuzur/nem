@@ -1,7 +1,7 @@
 package types
 
 import (
-	main_entity "nem/core/entity/team"
+	main_entity "github.com/nuzur/nem/core/entity/team"
 
 	"go.uber.org/zap/zapcore"
 )

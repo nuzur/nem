@@ -2,13 +2,13 @@ package user_connection
 
 import (
 	"context"
-	"nem/core/module/user_connection/types"
-	"nem/core/repository"
-	coretypes "nem/core/types"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/user_connection/types"
+	"github.com/nuzur/nem/core/repository"
+	coretypes "github.com/nuzur/nem/core/types"
+	"github.com/nuzur/nem/monitoring"
 	"sync"
 
-	"nem/core/events"
+	"github.com/nuzur/nem/core/events"
 )
 
 type Module interface {

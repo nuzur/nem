@@ -2,12 +2,12 @@ package types
 
 import (
 	"encoding/json"
-	main_entity "nem/core/entity/extension_version"
+	main_entity "github.com/nuzur/nem/core/entity/extension_version"
 
+	"github.com/nuzur/nem/core/repository/list"
 	"go.einride.tech/aip/filtering"
 	"go.einride.tech/aip/ordering"
 	"go.uber.org/zap/zapcore"
-	"nem/core/repository/list"
 )
 
 type ListRequest struct {

@@ -3,11 +3,11 @@ package extension_execution
 import (
 	"context"
 
-	"nem/core/module/extension_execution/types"
+	"github.com/nuzur/nem/core/module/extension_execution/types"
 
 	"errors"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchExtensionExecutionByStatus(

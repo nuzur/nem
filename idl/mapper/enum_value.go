@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/enum_value"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/enum_value"
+	pb "github.com/nuzur/nem/idl/gen"
 )
 
 func EnumValueToProto(e main_entity.EnumValue) *pb.EnumValue {

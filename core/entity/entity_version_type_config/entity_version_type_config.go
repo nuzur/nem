@@ -3,12 +3,12 @@ package entity_version_type_config
 import (
 	"encoding/json"
 
-	"nem/core/entity/entity_version_type_entity_config"
-	"nem/core/entity/entity_version_type_field_config"
+	"github.com/nuzur/nem/core/entity/entity_version_type_entity_config"
+	"github.com/nuzur/nem/core/entity/entity_version_type_field_config"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
 	"math/rand"
 

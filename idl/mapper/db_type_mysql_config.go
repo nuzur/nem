@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/db_type_mysql_config"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/db_type_mysql_config"
+	pb "github.com/nuzur/nem/idl/gen"
 )
 
 func DbTypeMysqlConfigToProto(e main_entity.DbTypeMysqlConfig) *pb.DbTypeMysqlConfig {

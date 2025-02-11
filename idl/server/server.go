@@ -3,9 +3,9 @@ package server
 import (
 	"context"
 	"fmt"
-	"nem/core"
-	pb "nem/idl/gen"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core"
+	pb "github.com/nuzur/nem/idl/gen"
+	"github.com/nuzur/nem/monitoring"
 	"net"
 
 	"go.uber.org/config"
@@ -16,7 +16,7 @@ import (
 	"google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/reflection"
 
-	"nem/auth"
+	"github.com/nuzur/nem/auth"
 )
 
 type server struct {

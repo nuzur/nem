@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/tcp_ip_connection_type_config"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/tcp_ip_connection_type_config"
+	pb "github.com/nuzur/nem/idl/gen"
 )
 
 func TcpIpConnectionTypeConfigToProto(e main_entity.TcpIpConnectionTypeConfig) *pb.TcpIpConnectionTypeConfig {

@@ -1,11 +1,11 @@
 package change_request
 
 import (
-	main_entity "nem/core/entity/change_request"
-	nemdb "nem/core/repository/gen"
+	main_entity "github.com/nuzur/nem/core/entity/change_request"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
 
 	"github.com/gofrs/uuid"
-	"nem/core/entity/change_request_review"
+	"github.com/nuzur/nem/core/entity/change_request_review"
 )
 
 func mapModelsToEntities(models []nemdb.ChangeRequest) []main_entity.ChangeRequest {

@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/element_render"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/element_render"
+	pb "github.com/nuzur/nem/idl/gen"
 )
 
 func ElementRenderToProto(e main_entity.ElementRender) *pb.ElementRender {

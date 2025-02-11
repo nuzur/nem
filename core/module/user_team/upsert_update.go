@@ -4,13 +4,13 @@ import (
 	"context"
 	"errors"
 
-	"nem/core/module/user_team/types"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/user_team/types"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 
-	main_entity "nem/core/entity/user_team"
+	main_entity "github.com/nuzur/nem/core/entity/user_team"
 
-	"nem/custom"
+	"github.com/nuzur/nem/custom"
 )
 
 func (m *module) Update(

@@ -1,13 +1,13 @@
 package project
 
 import (
-	main_entity "nem/core/entity/project"
-	nemdb "nem/core/repository/gen"
+	main_entity "github.com/nuzur/nem/core/entity/project"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
 
-	"nem/core/entity/mapper"
+	"github.com/nuzur/nem/core/entity/mapper"
 
 	"github.com/gofrs/uuid"
-	"nem/core/entity/project_extension"
+	"github.com/nuzur/nem/core/entity/project_extension"
 )
 
 func mapModelsToEntities(models []nemdb.Project) []main_entity.Project {

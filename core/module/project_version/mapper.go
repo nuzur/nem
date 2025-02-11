@@ -1,15 +1,15 @@
 package project_version
 
 import (
-	main_entity "nem/core/entity/project_version"
-	nemdb "nem/core/repository/gen"
+	main_entity "github.com/nuzur/nem/core/entity/project_version"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
 
 	"github.com/gofrs/uuid"
-	"nem/core/entity/entity"
-	"nem/core/entity/enum"
-	"nem/core/entity/project_version_deployment"
-	"nem/core/entity/relationship"
-	"nem/core/entity/service"
+	"github.com/nuzur/nem/core/entity/entity"
+	"github.com/nuzur/nem/core/entity/enum"
+	"github.com/nuzur/nem/core/entity/project_version_deployment"
+	"github.com/nuzur/nem/core/entity/relationship"
+	"github.com/nuzur/nem/core/entity/service"
 )
 
 func mapModelsToEntities(models []nemdb.ProjectVersion) []main_entity.ProjectVersion {

@@ -3,10 +3,10 @@ package user_connection
 import (
 	"context"
 	//"fmt"
-	main_entity "nem/core/entity/user_connection"
-	"nem/core/module/user_connection/types"
-	repogen "nem/core/repository/gen"
-	"nem/monitoring"
+	main_entity "github.com/nuzur/nem/core/entity/user_connection"
+	"github.com/nuzur/nem/core/module/user_connection/types"
+	repogen "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) List(ctx context.Context,

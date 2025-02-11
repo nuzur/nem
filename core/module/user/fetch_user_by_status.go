@@ -3,11 +3,11 @@ package user
 import (
 	"context"
 
-	"nem/core/module/user/types"
+	"github.com/nuzur/nem/core/module/user/types"
 
 	"errors"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchUserByStatus(

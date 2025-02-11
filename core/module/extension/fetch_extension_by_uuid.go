@@ -3,9 +3,9 @@ package extension
 import (
 	"context"
 
-	"nem/core/module/extension/types"
+	"github.com/nuzur/nem/core/module/extension/types"
 
-	"nem/monitoring"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchExtensionByUUID(

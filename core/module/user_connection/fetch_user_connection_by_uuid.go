@@ -3,9 +3,9 @@ package user_connection
 import (
 	"context"
 
-	"nem/core/module/user_connection/types"
+	"github.com/nuzur/nem/core/module/user_connection/types"
 
-	"nem/monitoring"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchUserConnectionByUUID(

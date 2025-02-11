@@ -1,12 +1,12 @@
 package user_connection
 
 import (
-	main_entity "nem/core/entity/user_connection"
-	nemdb "nem/core/repository/gen"
+	main_entity "github.com/nuzur/nem/core/entity/user_connection"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
 
 	"github.com/gofrs/uuid"
-	"nem/core/entity/user_connection_execution"
-	"nem/core/entity/user_connection_type_config"
+	"github.com/nuzur/nem/core/entity/user_connection_execution"
+	"github.com/nuzur/nem/core/entity/user_connection_type_config"
 )
 
 func mapModelsToEntities(models []nemdb.UserConnection) []main_entity.UserConnection {

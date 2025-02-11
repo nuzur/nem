@@ -7,37 +7,37 @@ import (
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
+	nemconfig "github.com/nuzur/nem/config"
+	coretypes "github.com/nuzur/nem/core/types"
 	"go.uber.org/config"
 	"go.uber.org/fx"
-	nemconfig "nem/config"
-	coretypes "nem/core/types"
 
-	"nem/core/module/team"
+	"github.com/nuzur/nem/core/module/team"
 
-	"nem/core/module/organization"
+	"github.com/nuzur/nem/core/module/organization"
 
-	"nem/core/module/project"
+	"github.com/nuzur/nem/core/module/project"
 
-	"nem/core/module/extension"
+	"github.com/nuzur/nem/core/module/extension"
 
-	"nem/core/module/extension_version"
+	"github.com/nuzur/nem/core/module/extension_version"
 
-	"nem/core/module/user"
+	"github.com/nuzur/nem/core/module/user"
 
-	"nem/core/module/change_request"
+	"github.com/nuzur/nem/core/module/change_request"
 
-	"nem/core/module/project_version"
+	"github.com/nuzur/nem/core/module/project_version"
 
-	"nem/core/module/user_team"
+	"github.com/nuzur/nem/core/module/user_team"
 
-	"nem/core/module/extension_execution"
+	"github.com/nuzur/nem/core/module/extension_execution"
 
-	"nem/core/module/user_connection"
+	"github.com/nuzur/nem/core/module/user_connection"
 
-	"nem/core/repository"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/repository"
+	"github.com/nuzur/nem/monitoring"
 
-	"nem/core/events"
+	"github.com/nuzur/nem/core/events"
 )
 
 type Implementation struct {

@@ -3,10 +3,10 @@ package server
 import (
 	"context"
 	"errors"
-	"nem/core/module/user_connection/types"
-	pb "nem/idl/gen"
-	pbmapper "nem/idl/mapper"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/user_connection/types"
+	pb "github.com/nuzur/nem/idl/gen"
+	pbmapper "github.com/nuzur/nem/idl/mapper"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (s *server) CreateUserConnection(ctx context.Context, req *pb.CreateUserConnectionRequest) (*pb.UserConnection, error) {

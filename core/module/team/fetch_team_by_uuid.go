@@ -3,9 +3,9 @@ package team
 import (
 	"context"
 
-	"nem/core/module/team/types"
+	"github.com/nuzur/nem/core/module/team/types"
 
-	"nem/monitoring"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchTeamByUUID(

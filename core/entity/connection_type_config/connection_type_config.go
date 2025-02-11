@@ -3,12 +3,12 @@ package connection_type_config
 import (
 	"encoding/json"
 
-	"nem/core/entity/tcp_ip_connection_type_config"
-	"nem/core/entity/tcp_ip_ssh_connection_type_config"
+	"github.com/nuzur/nem/core/entity/tcp_ip_connection_type_config"
+	"github.com/nuzur/nem/core/entity/tcp_ip_ssh_connection_type_config"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
 	"math/rand"
 

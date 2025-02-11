@@ -1,8 +1,8 @@
 package extension_version
 
 import (
-	main_entity "nem/core/entity/extension_version"
-	nemdb "nem/core/repository/gen"
+	main_entity "github.com/nuzur/nem/core/entity/extension_version"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
 
 	"github.com/gofrs/uuid"
 )

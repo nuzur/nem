@@ -4,20 +4,20 @@ import (
 	"encoding/json"
 
 	"github.com/gofrs/uuid"
-	"nem/core/entity/connection"
-	"nem/core/entity/entity"
-	"nem/core/entity/enviorment"
-	"nem/core/entity/membership"
-	"nem/core/entity/object_store"
-	"nem/core/entity/review_config"
-	"nem/core/entity/store"
+	"github.com/nuzur/nem/core/entity/connection"
+	"github.com/nuzur/nem/core/entity/entity"
+	"github.com/nuzur/nem/core/entity/enviorment"
+	"github.com/nuzur/nem/core/entity/membership"
+	"github.com/nuzur/nem/core/entity/object_store"
+	"github.com/nuzur/nem/core/entity/review_config"
+	"github.com/nuzur/nem/core/entity/store"
 	"time"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
-	"nem/core/randomvalues"
+	"github.com/nuzur/nem/core/randomvalues"
 
 	"math/rand"
 )

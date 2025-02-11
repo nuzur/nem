@@ -4,8 +4,8 @@ import (
 	saramafx "github.com/mklfarha/sarama-fx"
 
 	"fmt"
+	"github.com/nuzur/nem/monitoring"
 	"golang.org/x/sync/errgroup"
-	"nem/monitoring"
 )
 
 func (i *Implementation) Produce(message []byte, entityIdentifier string, action string) error {

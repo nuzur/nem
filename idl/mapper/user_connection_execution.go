@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/user_connection_execution"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/user_connection_execution"
+	pb "github.com/nuzur/nem/idl/gen"
 
 	"github.com/gofrs/uuid"
 

@@ -3,11 +3,11 @@ package organization
 import (
 	"context"
 
-	"nem/core/module/organization/types"
+	"github.com/nuzur/nem/core/module/organization/types"
 
 	"errors"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchOrganizationByVersionAndStatus(

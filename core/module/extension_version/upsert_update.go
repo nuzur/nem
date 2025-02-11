@@ -4,13 +4,13 @@ import (
 	"context"
 	"errors"
 
-	"nem/core/module/extension_version/types"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/extension_version/types"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 
-	main_entity "nem/core/entity/extension_version"
+	main_entity "github.com/nuzur/nem/core/entity/extension_version"
 
-	"nem/custom"
+	"github.com/nuzur/nem/custom"
 
 	"time"
 )

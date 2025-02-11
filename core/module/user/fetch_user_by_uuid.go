@@ -3,9 +3,9 @@ package user
 import (
 	"context"
 
-	"nem/core/module/user/types"
+	"github.com/nuzur/nem/core/module/user/types"
 
-	"nem/monitoring"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchUserByUUID(

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"nem/config"
+	"github.com/nuzur/nem/config"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"

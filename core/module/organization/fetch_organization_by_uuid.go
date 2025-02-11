@@ -3,9 +3,9 @@ package organization
 import (
 	"context"
 
-	"nem/core/module/organization/types"
+	"github.com/nuzur/nem/core/module/organization/types"
 
-	"nem/monitoring"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchOrganizationByUUID(

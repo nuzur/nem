@@ -4,13 +4,13 @@ import (
 	"context"
 	"errors"
 
-	"nem/core/module/change_request/types"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/change_request/types"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 
-	"nem/core/entity/change_request_review"
+	"github.com/nuzur/nem/core/entity/change_request_review"
 
-	"nem/custom"
+	"github.com/nuzur/nem/custom"
 
 	"time"
 )

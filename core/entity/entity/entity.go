@@ -4,16 +4,16 @@ import (
 	"encoding/json"
 
 	"github.com/gofrs/uuid"
-	"nem/core/entity/element_render"
-	"nem/core/entity/entity_type_config"
-	"nem/core/entity/field"
+	"github.com/nuzur/nem/core/entity/element_render"
+	"github.com/nuzur/nem/core/entity/entity_type_config"
+	"github.com/nuzur/nem/core/entity/field"
 	"time"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
-	"nem/core/randomvalues"
+	"github.com/nuzur/nem/core/randomvalues"
 
 	"math/rand"
 )

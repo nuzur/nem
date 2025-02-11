@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/db_type_postgres_config"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/db_type_postgres_config"
+	pb "github.com/nuzur/nem/idl/gen"
 )
 
 func DbTypePostgresConfigToProto(e main_entity.DbTypePostgresConfig) *pb.DbTypePostgresConfig {

@@ -6,13 +6,13 @@ import (
 	"errors"
 
 	"github.com/gofrs/uuid"
-	"nem/core/module/extension_version/types"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/extension_version/types"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 
-	"nem/custom"
+	"github.com/nuzur/nem/custom"
 
-	main_entity "nem/core/entity/extension_version"
+	main_entity "github.com/nuzur/nem/core/entity/extension_version"
 
 	"time"
 )

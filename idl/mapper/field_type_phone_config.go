@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/field_type_phone_config"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/field_type_phone_config"
+	pb "github.com/nuzur/nem/idl/gen"
 )
 
 func FieldTypePhoneConfigToProto(e main_entity.FieldTypePhoneConfig) *pb.FieldTypePhoneConfig {

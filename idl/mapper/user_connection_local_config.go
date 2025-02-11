@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/user_connection_local_config"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/user_connection_local_config"
+	pb "github.com/nuzur/nem/idl/gen"
 )
 
 func UserConnectionLocalConfigToProto(e main_entity.UserConnectionLocalConfig) *pb.UserConnectionLocalConfig {

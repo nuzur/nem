@@ -1,13 +1,13 @@
 package organization
 
 import (
-	main_entity "nem/core/entity/organization"
-	nemdb "nem/core/repository/gen"
+	main_entity "github.com/nuzur/nem/core/entity/organization"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
 
-	"nem/core/entity/mapper"
+	"github.com/nuzur/nem/core/entity/mapper"
 
 	"github.com/gofrs/uuid"
-	"nem/core/entity/membership"
+	"github.com/nuzur/nem/core/entity/membership"
 )
 
 func mapModelsToEntities(models []nemdb.Organization) []main_entity.Organization {

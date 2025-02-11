@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"nem/auth"
-	"nem/monitoring"
+	"github.com/nuzur/nem/auth"
+	"github.com/nuzur/nem/monitoring"
 	"strings"
 
 	"google.golang.org/grpc"

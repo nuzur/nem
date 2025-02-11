@@ -3,9 +3,9 @@ package project
 import (
 	"context"
 
-	"nem/core/module/project/types"
+	"github.com/nuzur/nem/core/module/project/types"
 
-	"nem/monitoring"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) FetchProjectByUUID(

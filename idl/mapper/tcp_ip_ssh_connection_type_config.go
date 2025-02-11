@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	main_entity "nem/core/entity/tcp_ip_ssh_connection_type_config"
-	pb "nem/idl/gen"
+	main_entity "github.com/nuzur/nem/core/entity/tcp_ip_ssh_connection_type_config"
+	pb "github.com/nuzur/nem/idl/gen"
 )
 
 func TcpIpSshConnectionTypeConfigToProto(e main_entity.TcpIpSshConnectionTypeConfig) *pb.TcpIpSshConnectionTypeConfig {

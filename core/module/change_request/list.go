@@ -3,10 +3,10 @@ package change_request
 import (
 	"context"
 	//"fmt"
-	main_entity "nem/core/entity/change_request"
-	"nem/core/module/change_request/types"
-	repogen "nem/core/repository/gen"
-	"nem/monitoring"
+	main_entity "github.com/nuzur/nem/core/entity/change_request"
+	"github.com/nuzur/nem/core/module/change_request/types"
+	repogen "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 )
 
 func (m *module) List(ctx context.Context,

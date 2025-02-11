@@ -2,13 +2,13 @@ package user_team
 
 import (
 	"context"
-	"nem/core/module/user_team/types"
-	"nem/core/repository"
-	coretypes "nem/core/types"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/user_team/types"
+	"github.com/nuzur/nem/core/repository"
+	coretypes "github.com/nuzur/nem/core/types"
+	"github.com/nuzur/nem/monitoring"
 	"sync"
 
-	"nem/core/events"
+	"github.com/nuzur/nem/core/events"
 )
 
 type Module interface {

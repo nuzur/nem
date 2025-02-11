@@ -1,4 +1,4 @@
-module nem
+module github.com/nuzur/nem
 
 go 1.23.3
 

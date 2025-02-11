@@ -4,17 +4,17 @@ import (
 	"context"
 	"errors"
 
-	"nem/core/module/organization/types"
-	nemdb "nem/core/repository/gen"
-	"nem/monitoring"
+	"github.com/nuzur/nem/core/module/organization/types"
+	nemdb "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/monitoring"
 
-	"nem/core/entity/membership"
+	"github.com/nuzur/nem/core/entity/membership"
 
-	"nem/custom"
+	"github.com/nuzur/nem/custom"
 
 	"time"
 
-	"nem/core/entity/mapper"
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(

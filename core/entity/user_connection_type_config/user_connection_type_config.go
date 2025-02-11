@@ -3,12 +3,12 @@ package user_connection_type_config
 import (
 	"encoding/json"
 
-	"nem/core/entity/user_connection_local_config"
-	"nem/core/entity/user_connection_remote_config"
+	"github.com/nuzur/nem/core/entity/user_connection_local_config"
+	"github.com/nuzur/nem/core/entity/user_connection_remote_config"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
 	"math/rand"
 

@@ -3,12 +3,12 @@ package db_type_config
 import (
 	"encoding/json"
 
-	"nem/core/entity/db_type_mysql_config"
-	"nem/core/entity/db_type_postgres_config"
+	"github.com/nuzur/nem/core/entity/db_type_mysql_config"
+	"github.com/nuzur/nem/core/entity/db_type_postgres_config"
 
 	"fmt"
 
-	"nem/core/entity/types"
+	"github.com/nuzur/nem/core/entity/types"
 
 	"math/rand"
 
