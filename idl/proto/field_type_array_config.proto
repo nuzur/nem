@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "FieldTypeArrayConfig";
+
+package nem;
+
+
+import "array_type_config.proto";
+
+message FieldTypeArrayConfig {  
+    int64 min_elements = 1;
+    int64 max_elements = 2;
+    bool enforce_unique = 3;
+    FieldTypeArrayConfigType type = 4;
+    ArrayTypeConfig type_config = 5;    
+}
+
+enum FieldTypeArrayConfigType { 
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_INVALID = 0;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_UUID = 1;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_INTEGER = 2;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_FLOAT = 3;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_DECIMAL = 4;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_CHAR = 5;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_VARCHAR = 6;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_EMAIL = 7;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_PHONE = 8;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_URL = 9;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_COLOR = 10;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_DATE = 11;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_DATETIME = 12;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_ENCRYPTED = 13;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_TIME = 14;
+    FIELD_TYPE_ARRAY_CONFIG_TYPE_ENUM = 15;
+}

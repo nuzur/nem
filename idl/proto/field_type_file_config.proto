@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "FieldTypeFileConfig";
+
+package nem;
+
+
+import "file_storage_config.proto";
+
+message FieldTypeFileConfig {  
+    FieldTypeFileConfigStorageType storage_type = 1;
+    FileStorageConfig storage_config = 2;
+    repeated string allowed_extensions = 3;
+    int64 max_size = 4;
+    bool allow_multiple = 5;
+    int64 max_files = 6;    
+}
+
+enum FieldTypeFileConfigStorageType { 
+    FIELD_TYPE_FILE_CONFIG_STORAGE_TYPE_INVALID = 0;
+    FIELD_TYPE_FILE_CONFIG_STORAGE_TYPE_BINARY = 1;
+    FIELD_TYPE_FILE_CONFIG_STORAGE_TYPE_OBJECT_STORE = 2;
+}

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "ProjectVersionDeployment";
+
+package nem;
+
+
+
+message ProjectVersionDeployment {  
+    string enviroment_uuid = 1;
+    ProjectVersionDeploymentStatus status = 2;    
+}
+
+enum ProjectVersionDeploymentStatus { 
+    PROJECT_VERSION_DEPLOYMENT_STATUS_INVALID = 0;
+    PROJECT_VERSION_DEPLOYMENT_STATUS_NOT_STARTED = 1;
+    PROJECT_VERSION_DEPLOYMENT_STATUS_STARTED = 2;
+    PROJECT_VERSION_DEPLOYMENT_STATUS_COMPLETED = 3;
+    PROJECT_VERSION_DEPLOYMENT_STATUS_FAILED = 4;
+    PROJECT_VERSION_DEPLOYMENT_STATUS_ROLLED_BACK = 5;
+}

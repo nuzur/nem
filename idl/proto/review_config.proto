@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "ReviewConfig";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message ReviewConfig {  
+    string uuid = 1;
+    repeated ReviewConfigType types = 2;
+    repeated ReviewConfigUserRole user_roles = 3;
+    int64 min_reviews = 4;
+    ReviewConfigStatus status = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+    string created_by_uuid = 8;
+    string updated_by_uuid = 9;    
+}
+
+enum ReviewConfigStatus { 
+    REVIEW_CONFIG_STATUS_INVALID = 0;
+    REVIEW_CONFIG_STATUS_ACTIVE = 1;
+    REVIEW_CONFIG_STATUS_DISABLED = 2;
+}
+
+enum ReviewConfigType { 
+    REVIEW_CONFIG_TYPE_INVALID = 0;
+    REVIEW_CONFIG_TYPE_DEFAULT = 1;
+    REVIEW_CONFIG_TYPE_PROJECT_VERSION = 2;
+    REVIEW_CONFIG_TYPE_EXTENSION_VERSION = 3;
+}
+
+enum ReviewConfigUserRole { 
+    REVIEW_CONFIG_USER_ROLE_INVALID = 0;
+    REVIEW_CONFIG_USER_ROLE_ADMIN = 1;
+    REVIEW_CONFIG_USER_ROLE_DEVELOPER = 2;
+    REVIEW_CONFIG_USER_ROLE_DATA_MANAGER = 3;
+    REVIEW_CONFIG_USER_ROLE_DATA_ANALYST = 4;
+    REVIEW_CONFIG_USER_ROLE_VIEWER = 5;
+}

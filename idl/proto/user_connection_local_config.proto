@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "UserConnectionLocalConfig";
+
+package nem;
+
+
+
+message UserConnectionLocalConfig {  
+    string ip_address = 1;
+    UserConnectionLocalConfigDbType db_type = 2;    
+}
+
+enum UserConnectionLocalConfigDbType { 
+    USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_INVALID = 0;
+    USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_MYSQL = 1;
+    USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_POSTGRES = 2;
+}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Service";
+
+package nem;
+
+
+import "element_render.proto";
+import "google/protobuf/timestamp.proto";
+
+message Service {  
+    string uuid = 1;
+    int64 version = 2;
+    string identifier = 3;
+    string description = 4;
+    ElementRender render = 5;
+    ServiceStatus status = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+    string created_by_uuid = 9;
+    string updated_by_uuid = 10;    
+}
+
+enum ServiceStatus { 
+    SERVICE_STATUS_INVALID = 0;
+    SERVICE_STATUS_ACTIVE = 1;
+    SERVICE_STATUS_DISABLED = 2;
+}

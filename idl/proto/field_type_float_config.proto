@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "FieldTypeFloatConfig";
+
+package nem;
+
+
+
+message FieldTypeFloatConfig {  
+    double min_value = 1;
+    bool min_value_inclusive = 2;
+    double max_value = 3;
+    bool max_value_inclusive = 4;
+    bool allow_negatives = 5;
+    int64 number_of_decimals = 6;
+    FieldTypeFloatConfigSeparator separator = 7;
+    bool enable_limits = 8;    
+}
+
+enum FieldTypeFloatConfigSeparator { 
+    FIELD_TYPE_FLOAT_CONFIG_SEPARATOR_INVALID = 0;
+    FIELD_TYPE_FLOAT_CONFIG_SEPARATOR_POINT = 1;
+    FIELD_TYPE_FLOAT_CONFIG_SEPARATOR_COMMA = 2;
+}

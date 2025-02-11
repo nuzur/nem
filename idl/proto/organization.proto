@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Organization";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+import "membership.proto";
+
+message Organization {  
+    string uuid = 1;
+    int64 version = 2;
+    string name = 3;
+    repeated string domains = 4;
+    repeated string admin_uuids = 5;
+    repeated Membership memberships = 6;
+    OrganizationStatus status = 7;
+    google.protobuf.Timestamp created_at = 8;
+    google.protobuf.Timestamp updated_at = 9;
+    string created_by_uuid = 10;
+    string updated_by_uuid = 11;    
+}
+
+enum OrganizationStatus { 
+    ORGANIZATION_STATUS_INVALID = 0;
+    ORGANIZATION_STATUS_ACTIVE = 1;
+    ORGANIZATION_STATUS_DISABLED = 2;
+}

@@ -1,0 +1,522 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Nem";
+
+package nem;
+
+import "google/protobuf/field_mask.proto";
+
+import "team.proto";
+
+import "organization.proto";
+
+import "project.proto";
+
+import "extension.proto";
+
+import "extension_version.proto";
+
+import "user.proto";
+
+import "change_request.proto";
+
+import "project_version.proto";
+
+import "user_team.proto";
+
+import "extension_execution.proto";
+
+import "user_connection.proto";
+
+
+service Nem {    
+    
+    // team start
+    rpc ListTeams(ListTeamsRequest) returns (ListTeamsResponse){}
+    rpc CreateTeam(CreateTeamRequest) returns (Team) {}
+    rpc UpdateTeam(UpdateTeamRequest) returns (Team) {}
+    // team end
+    
+    // organization start
+    rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse){}
+    rpc CreateOrganization(CreateOrganizationRequest) returns (Organization) {}
+    rpc UpdateOrganization(UpdateOrganizationRequest) returns (Organization) {}
+    // organization end
+    
+    // project start
+    rpc ListProjects(ListProjectsRequest) returns (ListProjectsResponse){}
+    rpc CreateProject(CreateProjectRequest) returns (Project) {}
+    rpc UpdateProject(UpdateProjectRequest) returns (Project) {}
+    // project end
+    
+    // extension start
+    rpc ListExtensions(ListExtensionsRequest) returns (ListExtensionsResponse){}
+    rpc CreateExtension(CreateExtensionRequest) returns (Extension) {}
+    rpc UpdateExtension(UpdateExtensionRequest) returns (Extension) {}
+    // extension end
+    
+    // extension_version start
+    rpc ListExtensionVersions(ListExtensionVersionsRequest) returns (ListExtensionVersionsResponse){}
+    rpc CreateExtensionVersion(CreateExtensionVersionRequest) returns (ExtensionVersion) {}
+    rpc UpdateExtensionVersion(UpdateExtensionVersionRequest) returns (ExtensionVersion) {}
+    // extension_version end
+    
+    // user start
+    rpc ListUsers(ListUsersRequest) returns (ListUsersResponse){}
+    rpc CreateUser(CreateUserRequest) returns (User) {}
+    rpc UpdateUser(UpdateUserRequest) returns (User) {}
+    // user end
+    
+    // change_request start
+    rpc ListChangeRequests(ListChangeRequestsRequest) returns (ListChangeRequestsResponse){}
+    rpc CreateChangeRequest(CreateChangeRequestRequest) returns (ChangeRequest) {}
+    rpc UpdateChangeRequest(UpdateChangeRequestRequest) returns (ChangeRequest) {}
+    // change_request end
+    
+    // project_version start
+    rpc ListProjectVersions(ListProjectVersionsRequest) returns (ListProjectVersionsResponse){}
+    rpc CreateProjectVersion(CreateProjectVersionRequest) returns (ProjectVersion) {}
+    rpc UpdateProjectVersion(UpdateProjectVersionRequest) returns (ProjectVersion) {}
+    // project_version end
+    
+    // user_team start
+    rpc ListUserTeams(ListUserTeamsRequest) returns (ListUserTeamsResponse){}
+    rpc CreateUserTeam(CreateUserTeamRequest) returns (UserTeam) {}
+    rpc UpdateUserTeam(UpdateUserTeamRequest) returns (UserTeam) {}
+    // user_team end
+    
+    // extension_execution start
+    rpc ListExtensionExecutions(ListExtensionExecutionsRequest) returns (ListExtensionExecutionsResponse){}
+    rpc CreateExtensionExecution(CreateExtensionExecutionRequest) returns (ExtensionExecution) {}
+    rpc UpdateExtensionExecution(UpdateExtensionExecutionRequest) returns (ExtensionExecution) {}
+    // extension_execution end
+    
+    // user_connection start
+    rpc ListUserConnections(ListUserConnectionsRequest) returns (ListUserConnectionsResponse){}
+    rpc CreateUserConnection(CreateUserConnectionRequest) returns (UserConnection) {}
+    rpc UpdateUserConnection(UpdateUserConnectionRequest) returns (UserConnection) {}
+    // user_connection end
+    
+}
+
+
+// team start
+message ListTeamsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListTeamsResponse {
+    repeated Team teams = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateTeamRequest {
+    Team team = 1;
+}
+
+message UpdateTeamRequest {
+   
+    Team team = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// team end
+
+// organization start
+message ListOrganizationsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListOrganizationsResponse {
+    repeated Organization organizations = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateOrganizationRequest {
+    Organization organization = 1;
+}
+
+message UpdateOrganizationRequest {
+   
+    Organization organization = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// organization end
+
+// project start
+message ListProjectsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListProjectsResponse {
+    repeated Project projects = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateProjectRequest {
+    Project project = 1;
+}
+
+message UpdateProjectRequest {
+   
+    Project project = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// project end
+
+// extension start
+message ListExtensionsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListExtensionsResponse {
+    repeated Extension extensions = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateExtensionRequest {
+    Extension extension = 1;
+}
+
+message UpdateExtensionRequest {
+   
+    Extension extension = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// extension end
+
+// extension_version start
+message ListExtensionVersionsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListExtensionVersionsResponse {
+    repeated ExtensionVersion extension_versions = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateExtensionVersionRequest {
+    ExtensionVersion extension_version = 1;
+}
+
+message UpdateExtensionVersionRequest {
+   
+    ExtensionVersion extension_version = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// extension_version end
+
+// user start
+message ListUsersRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListUsersResponse {
+    repeated User users = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateUserRequest {
+    User user = 1;
+}
+
+message UpdateUserRequest {
+   
+    User user = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// user end
+
+// change_request start
+message ListChangeRequestsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListChangeRequestsResponse {
+    repeated ChangeRequest change_requests = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateChangeRequestRequest {
+    ChangeRequest change_request = 1;
+}
+
+message UpdateChangeRequestRequest {
+   
+    ChangeRequest change_request = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// change_request end
+
+// project_version start
+message ListProjectVersionsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListProjectVersionsResponse {
+    repeated ProjectVersion project_versions = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateProjectVersionRequest {
+    ProjectVersion project_version = 1;
+}
+
+message UpdateProjectVersionRequest {
+   
+    ProjectVersion project_version = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// project_version end
+
+// user_team start
+message ListUserTeamsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListUserTeamsResponse {
+    repeated UserTeam user_teams = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateUserTeamRequest {
+    UserTeam user_team = 1;
+}
+
+message UpdateUserTeamRequest {
+   
+    UserTeam user_team = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// user_team end
+
+// extension_execution start
+message ListExtensionExecutionsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListExtensionExecutionsResponse {
+    repeated ExtensionExecution extension_executions = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateExtensionExecutionRequest {
+    ExtensionExecution extension_execution = 1;
+}
+
+message UpdateExtensionExecutionRequest {
+   
+    ExtensionExecution extension_execution = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// extension_execution end
+
+// user_connection start
+message ListUserConnectionsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListUserConnectionsResponse {
+    repeated UserConnection user_connections = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateUserConnectionRequest {
+    UserConnection user_connection = 1;
+}
+
+message UpdateUserConnectionRequest {
+   
+    UserConnection user_connection = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// user_connection end

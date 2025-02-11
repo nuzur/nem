@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Visibility";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message Visibility {  
+    string uuid = 1;
+    string description = 2;
+    repeated string organization_uuids = 3;
+    repeated string team_uuids = 4;
+    repeated string user_uuids = 5;
+    repeated VisibilityRole roles = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+    string created_by_uuid = 9;
+    string updated_by_uuid = 10;    
+}
+
+enum VisibilityRole { 
+    VISIBILITY_ROLE_INVALID = 0;
+    VISIBILITY_ROLE_ADMIN = 1;
+    VISIBILITY_ROLE_DEVELOPER = 2;
+    VISIBILITY_ROLE_DATA_MANAGER = 3;
+    VISIBILITY_ROLE_DATA_ANALYST = 4;
+    VISIBILITY_ROLE_VIEWER = 5;
+}

@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Field";
+
+package nem;
+
+
+import "field_type_config.proto";
+import "google/protobuf/timestamp.proto";
+
+message Field {  
+    string uuid = 1;
+    int64 version = 2;
+    string identifier = 3;
+    string description = 4;
+    FieldType type = 5;
+    FieldTypeConfig type_config = 6;
+    bool required = 7;
+    bool key = 8;
+    bool key_auto_increment = 9;
+    bool unique = 10;
+    bool deprecated = 11;
+    bool generated = 12;
+    FieldStatus status = 13;
+    google.protobuf.Timestamp created_at = 14;
+    google.protobuf.Timestamp updated_at = 15;
+    string created_by_uuid = 16;
+    string updated_by_uuid = 17;    
+}
+
+enum FieldStatus { 
+    FIELD_STATUS_INVALID = 0;
+    FIELD_STATUS_ACTIVE = 1;
+    FIELD_STATUS_INACTIVE = 2;
+}
+
+enum FieldType { 
+    FIELD_TYPE_INVALID = 0;
+    FIELD_TYPE_UUID = 1;
+    FIELD_TYPE_INTEGER = 2;
+    FIELD_TYPE_FLOAT = 3;
+    FIELD_TYPE_DECIMAL = 4;
+    FIELD_TYPE_BOOLEAN = 5;
+    FIELD_TYPE_CHAR = 6;
+    FIELD_TYPE_VARCHAR = 7;
+    FIELD_TYPE_TEXT = 8;
+    FIELD_TYPE_ENCRYPTED = 9;
+    FIELD_TYPE_EMAIL = 10;
+    FIELD_TYPE_PHONE = 11;
+    FIELD_TYPE_URL = 12;
+    FIELD_TYPE_LOCATION = 13;
+    FIELD_TYPE_COLOR = 14;
+    FIELD_TYPE_RICHTEXT = 15;
+    FIELD_TYPE_CODE = 16;
+    FIELD_TYPE_MARKDOWN = 17;
+    FIELD_TYPE_FILE = 18;
+    FIELD_TYPE_IMAGE = 19;
+    FIELD_TYPE_AUDIO = 20;
+    FIELD_TYPE_VIDEO = 21;
+    FIELD_TYPE_ENUM = 22;
+    FIELD_TYPE_JSON = 23;
+    FIELD_TYPE_ARRAY = 24;
+    FIELD_TYPE_DATE = 25;
+    FIELD_TYPE_DATETIME = 26;
+    FIELD_TYPE_TIME = 27;
+    FIELD_TYPE_SLUG = 28;
+}

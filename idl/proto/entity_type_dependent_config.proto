@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "EntityTypeDependentConfig";
+
+package nem;
+
+
+
+message EntityTypeDependentConfig {  
+    repeated string service_source_uuids = 1;
+    repeated string entity_source_uuids = 2;    
+}

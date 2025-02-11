@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "ElementRender";
+
+package nem;
+
+
+
+message ElementRender {  
+    double x = 1;
+    double y = 2;
+    double width = 3;
+    double height = 4;
+    bool collapsed = 5;    
+}

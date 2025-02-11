@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "User";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message User {  
+    string uuid = 1;
+    string identifier = 2;
+    string name = 3;
+    string last_name = 4;
+    string email = 5;
+    UserUserType user_type = 6;
+    string country_ios2 = 7;
+    string locale = 8;
+    string metadata = 9;
+    UserStatus status = 10;
+    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp updated_at = 12;    
+}
+
+enum UserStatus { 
+    USER_STATUS_INVALID = 0;
+    USER_STATUS_ACTIVE = 1;
+    USER_STATUS_DISABLED = 2;
+}
+
+enum UserUserType { 
+    USER_USER_TYPE_INVALID = 0;
+    USER_USER_TYPE_ADMIN = 1;
+    USER_USER_TYPE_REGULAR = 2;
+}

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "UserConnectionExecution";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message UserConnectionExecution {  
+    string uuid = 1;
+    UserConnectionExecutionStatus status = 2;
+    string results_path = 3;
+    google.protobuf.Timestamp started_at = 4;
+    google.protobuf.Timestamp finished_at = 5;
+    string estimated_time = 6;
+    string user_msg = 7;    
+}
+
+enum UserConnectionExecutionStatus { 
+    USER_CONNECTION_EXECUTION_STATUS_INVALID = 0;
+    USER_CONNECTION_EXECUTION_STATUS_SUCCEEDED = 1;
+    USER_CONNECTION_EXECUTION_STATUS_FAILED = 2;
+    USER_CONNECTION_EXECUTION_STATUS_CANCELLED = 3;
+}

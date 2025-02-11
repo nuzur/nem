@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "ConnectionTypeConfig";
+
+package nem;
+
+
+import "tcp_ip_connection_type_config.proto";
+import "tcp_ip_ssh_connection_type_config.proto";
+
+message ConnectionTypeConfig {  
+    TcpIpConnectionTypeConfig tcp_ip = 1;
+    TcpIpSshConnectionTypeConfig tcp_ip_ssh = 2;    
+}

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "FieldTypeDecimalConfig";
+
+package nem;
+
+
+
+message FieldTypeDecimalConfig {  
+    double min_value = 1;
+    bool min_value_inclusive = 2;
+    double max_value = 3;
+    bool max_value_inclusive = 4;
+    bool allow_negatives = 5;
+    int64 number_of_decimals = 6;
+    FieldTypeDecimalConfigSeparator separator = 7;
+    bool is_currency = 8;
+    string currency_code = 9;
+    bool enable_limits = 10;    
+}
+
+enum FieldTypeDecimalConfigSeparator { 
+    FIELD_TYPE_DECIMAL_CONFIG_SEPARATOR_INVALID = 0;
+    FIELD_TYPE_DECIMAL_CONFIG_SEPARATOR_POINT = 1;
+    FIELD_TYPE_DECIMAL_CONFIG_SEPARATOR_COMMA = 2;
+}

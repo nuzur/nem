@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "ArrayTypeConfig";
+
+package nem;
+
+
+import "field_type_char_config.proto";
+import "field_type_date_config.proto";
+import "field_type_datetime_config.proto";
+import "field_type_decimal_config.proto";
+import "field_type_email_config.proto";
+import "field_type_encrypted_config.proto";
+import "field_type_enum_config.proto";
+import "field_type_float_config.proto";
+import "field_type_integer_config.proto";
+import "field_type_phone_config.proto";
+import "field_type_url_config.proto";
+import "field_type_varchar_config.proto";
+
+message ArrayTypeConfig {  
+    FieldTypeIntegerConfig integer = 1;
+    FieldTypeFloatConfig float = 2;
+    FieldTypeDecimalConfig decimal = 3;
+    FieldTypeCharConfig char = 4;
+    FieldTypeVarcharConfig varchar = 5;
+    FieldTypeEncryptedConfig encrypted = 6;
+    FieldTypeURLConfig url = 7;
+    FieldTypeEmailConfig email = 8;
+    FieldTypePhoneConfig phone = 9;
+    FieldTypeDateConfig date = 10;
+    FieldTypeDatetimeConfig datetime = 11;
+    FieldTypeEnumConfig enum = 12;    
+}

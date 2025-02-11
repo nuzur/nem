@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "ObjectStore";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+import "object_store_type_config.proto";
+
+message ObjectStore {  
+    string uuid = 1;
+    string identifier = 2;
+    ObjectStoreType type = 3;
+    ObjectStoreTypeConfig type_config = 4;
+    ObjectStoreStatus status = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+    string created_by_uuid = 8;
+    string updated_by_uuid = 9;    
+}
+
+enum ObjectStoreStatus { 
+    OBJECT_STORE_STATUS_INVALID = 0;
+    OBJECT_STORE_STATUS_ACTIVE = 1;
+    OBJECT_STORE_STATUS_DISABLED = 2;
+}
+
+enum ObjectStoreType { 
+    OBJECT_STORE_TYPE_INVALID = 0;
+    OBJECT_STORE_TYPE_S_3 = 1;
+}

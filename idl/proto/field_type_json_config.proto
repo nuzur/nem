@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "FieldTypeJSONConfig";
+
+package nem;
+
+
+
+message FieldTypeJSONConfig {  
+    bool enforce_schema_validation = 1;
+    string json_schema = 2;    
+}

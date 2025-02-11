@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "EntityTypeStandaloneConfig";
+
+package nem;
+
+
+import "entity_version_config.proto";
+import "index.proto";
+
+message EntityTypeStandaloneConfig {  
+    string store_uuid = 1;
+    bool versioned = 2;
+    EntityVersionConfig version_config = 3;
+    repeated Index indexes = 4;    
+}

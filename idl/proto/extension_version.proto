@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "ExtensionVersion";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message ExtensionVersion {  
+    string uuid = 1;
+    int64 version = 2;
+    string extension_uuid = 3;
+    string display_version = 4;
+    string description = 5;
+    string repository_tag = 6;
+    string configuration_entity = 7;
+    repeated ExtensionVersionExecutionMode execution_mode = 8;
+    ExtensionVersionReviewStatus review_status = 9;
+    ExtensionVersionStatus status = 10;
+    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp updated_at = 12;
+    string created_by_uuid = 13;
+    string updated_by_uuid = 14;    
+}
+
+enum ExtensionVersionExecutionMode { 
+    EXTENSION_VERSION_EXECUTION_MODE_INVALID = 0;
+    EXTENSION_VERSION_EXECUTION_MODE_MANUAL = 1;
+    EXTENSION_VERSION_EXECUTION_MODE_AUTOMATIC = 2;
+}
+
+enum ExtensionVersionReviewStatus { 
+    EXTENSION_VERSION_REVIEW_STATUS_INVALID = 0;
+    EXTENSION_VERSION_REVIEW_STATUS_DRAFT = 1;
+    EXTENSION_VERSION_REVIEW_STATUS_IN_REVIEW = 2;
+    EXTENSION_VERSION_REVIEW_STATUS_APPROVED = 3;
+    EXTENSION_VERSION_REVIEW_STATUS_REJECTED = 4;
+    EXTENSION_VERSION_REVIEW_STATUS_PUBLISHED = 5;
+}
+
+enum ExtensionVersionStatus { 
+    EXTENSION_VERSION_STATUS_INVALID = 0;
+    EXTENSION_VERSION_STATUS_ACTIVE = 1;
+    EXTENSION_VERSION_STATUS_DISABLED = 2;
+}

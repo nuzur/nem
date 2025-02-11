@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "ProjectVersion";
+
+package nem;
+
+
+import "entity.proto";
+import "enum.proto";
+import "google/protobuf/timestamp.proto";
+import "project_version_deployment.proto";
+import "relationship.proto";
+import "service.proto";
+
+message ProjectVersion {  
+    string uuid = 1;
+    int64 version = 2;
+    string identifier = 3;
+    string description = 4;
+    string project_uuid = 5;
+    repeated Entity entities = 6;
+    repeated Relationship relationships = 7;
+    repeated Enum enums = 8;
+    repeated Service services = 9;
+    string base_version_uuid = 10;
+    ProjectVersionReviewStatus review_status = 11;
+    repeated ProjectVersionDeployment deployments = 12;
+    ProjectVersionStatus status = 13;
+    google.protobuf.Timestamp created_at = 14;
+    google.protobuf.Timestamp updated_at = 15;
+    string created_by_uuid = 16;
+    string updated_by_uuid = 17;    
+}
+
+enum ProjectVersionReviewStatus { 
+    PROJECT_VERSION_REVIEW_STATUS_INVALID = 0;
+    PROJECT_VERSION_REVIEW_STATUS_DRAFT = 1;
+    PROJECT_VERSION_REVIEW_STATUS_IN_REVIEW = 2;
+    PROJECT_VERSION_REVIEW_STATUS_APPROVED = 3;
+    PROJECT_VERSION_REVIEW_STATUS_REJECTED = 4;
+    PROJECT_VERSION_REVIEW_STATUS_PUBLISHED = 5;
+}
+
+enum ProjectVersionStatus { 
+    PROJECT_VERSION_STATUS_INVALID = 0;
+    PROJECT_VERSION_STATUS_ACTIVE = 1;
+    PROJECT_VERSION_STATUS_DISABLED = 2;
+}

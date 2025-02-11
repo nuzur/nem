@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Extension";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+import "visibility.proto";
+
+message Extension {  
+    string uuid = 1;
+    int64 version = 2;
+    string identifier = 3;
+    string display_name = 4;
+    string display_author_name = 5;
+    string description = 6;
+    string url = 7;
+    bool verfied = 8;
+    string repository = 9;
+    ExtensionExtensionType extension_type = 10;
+    repeated string tags = 11;
+    bool public = 12;
+    repeated Visibility visibility = 13;
+    ExtensionStatus status = 14;
+    string owner_uuid = 15;
+    google.protobuf.Timestamp created_at = 16;
+    google.protobuf.Timestamp updated_at = 17;
+    string created_by_uuid = 18;
+    string updated_by_uuid = 19;    
+}
+
+enum ExtensionExtensionType { 
+    EXTENSION_EXTENSION_TYPE_INVALID = 0;
+    EXTENSION_EXTENSION_TYPE_IMPORTER = 1;
+    EXTENSION_EXTENSION_TYPE_SYNCHRONIZER = 2;
+    EXTENSION_EXTENSION_TYPE_GENERATOR = 3;
+}
+
+enum ExtensionStatus { 
+    EXTENSION_STATUS_INVALID = 0;
+    EXTENSION_STATUS_ACTIVE = 1;
+    EXTENSION_STATUS_DISABLED = 2;
+}

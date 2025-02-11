@@ -1,0 +1,37 @@
+package user_team
+
+import (
+	"context"
+
+	"nem/core/module/user_team/types"
+
+	"nem/monitoring"
+)
+
+func (m *module) FetchUserTeamByUUID(
+	ctx context.Context,
+	req types.FetchUserTeamByUUIDRequest,
+	opts ...Option,
+) (types.FetchUserTeamByUUIDResponse, error) {
+
+	models, err := m.repository.Queries.FetchUserTeamByUUID(
+		ctx,
+		req.UUID.String(),
+	)
+	if err != nil {
+		m.monitoring.Emit(monitoring.EmitRequest{
+			ActionIdentifier: "fetch_user_team_by_uuid",
+			Message:          "error in FetchUserTeamByUUID",
+			EntityIdentifier: "user_team",
+			Layer:            monitoring.RepositoryServiceLayer,
+			Type:             monitoring.EmitTypeError,
+			Data:             req,
+			Error:            err,
+		})
+		return types.FetchUserTeamByUUIDResponse{}, err
+	}
+	return types.FetchUserTeamByUUIDResponse{
+		Results: mapModelsToEntities(models),
+	}, nil
+
+}

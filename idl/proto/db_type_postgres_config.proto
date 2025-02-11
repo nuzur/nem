@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "DbTypePostgresConfig";
+
+package nem;
+
+
+
+message DbTypePostgresConfig {  
+    string database = 1;
+    DbTypePostgresConfigSslmode sslmode = 2;    
+}
+
+enum DbTypePostgresConfigSslmode { 
+    DB_TYPE_POSTGRES_CONFIG_SSLMODE_INVALID = 0;
+    DB_TYPE_POSTGRES_CONFIG_SSLMODE_DISABLE = 1;
+    DB_TYPE_POSTGRES_CONFIG_SSLMODE_ALLOW = 2;
+    DB_TYPE_POSTGRES_CONFIG_SSLMODE_PREFER = 3;
+    DB_TYPE_POSTGRES_CONFIG_SSLMODE_REQUIRE = 4;
+    DB_TYPE_POSTGRES_CONFIG_SSLMODE_VERIFY_CA = 5;
+    DB_TYPE_POSTGRES_CONFIG_SSLMODE_VERIFY_FULL = 6;
+}

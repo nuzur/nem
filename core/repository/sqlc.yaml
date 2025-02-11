@@ -1,0 +1,89 @@
+version: "2"
+sql:
+  - engine: "mysql"
+    schema: "sql/schemas/"
+    queries: "sql/queries/"
+    gen:
+      go:
+        package: "nemdb"
+        out: "gen"
+        emit_interface: true
+        emit_json_tags: true
+        rename:
+          admin_uuids: AdminUUIDs
+          base_version_uuid: BaseVersionUUID
+          configuration_entity: ConfigurationEntity
+          connections: Connections
+          country_ios2: CountryIos2
+          created_at: CreatedAt
+          created_by_uuid: CreatedByUUID
+          db_schema: DbSchema
+          default_entity: DefaultEntity
+          deployments: Deployments
+          description: Description
+          display_author_name: DisplayAuthorName
+          display_name: DisplayName
+          display_version: DisplayVersion
+          domains: Domains
+          email: Email
+          entities: Entities
+          enums: Enums
+          enviorments: Enviorments
+          executed_by_uuid: ExecutedByUUID
+          execution_mode: ExecutionMode
+          executions: Executions
+          extension_type: ExtensionType
+          extension_uuid: ExtensionUUID
+          extension_version_uuid: ExtensionVersionUUID
+          identifier: Identifier
+          last_name: LastName
+          locale: Locale
+          memberships: Memberships
+          metadata: Metadata
+          name: Name
+          new_data: NewData
+          new_data_ref: NewDataRef
+          object_stores: ObjectStores
+          old_data: OldData
+          old_data_ref: OldDataRef
+          organization_uuid: OrganizationUUID
+          owner_uuid: OwnerUUID
+          project_extension_uuid: ProjectExtensionUUID
+          project_extensions: ProjectExtensions
+          project_uuid: ProjectUUID
+          project_version_uuid: ProjectVersionUUID
+          public: Public
+          ref_uuid: RefUUID
+          relationships: Relationships
+          repository: Repository
+          repository_tag: RepositoryTag
+          review_configs: ReviewConfigs
+          review_status: ReviewStatus
+          review_type: ReviewType
+          reviews: Reviews
+          roles: Roles
+          services: Services
+          status: Status
+          status_msg: StatusMsg
+          stores: Stores
+          tags: Tags
+          team_uuid: TeamUUID
+          title: Title
+          type: Type
+          type_config: TypeConfig
+          updated_at: UpdatedAt
+          updated_by_uuid: UpdatedByUUID
+          url: URL
+          user_email: UserEmail
+          user_type: UserType
+          user_uuid: UserUUID
+          uuid: UUID
+          verfied: Verfied
+          version: Version
+          visibility: Visibility
+        overrides:
+          - db_type: "int"            
+            engine: "mysql"
+            go_type:              
+              type: "int64"
+          

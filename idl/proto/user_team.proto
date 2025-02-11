@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "UserTeam";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message UserTeam {  
+    string uuid = 1;
+    string user_uuid = 2;
+    string user_email = 3;
+    string team_uuid = 4;
+    repeated UserTeamRole roles = 5;
+    UserTeamStatus status = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+    string created_by_uuid = 9;
+    string updated_by_uuid = 10;    
+}
+
+enum UserTeamRole { 
+    USER_TEAM_ROLE_INVALID = 0;
+    USER_TEAM_ROLE_ADMIN = 1;
+    USER_TEAM_ROLE_DEVELOPER = 2;
+    USER_TEAM_ROLE_DATA_MANAGER = 3;
+    USER_TEAM_ROLE_DATA_ANALYST = 4;
+    USER_TEAM_ROLE_VIEWER = 5;
+}
+
+enum UserTeamStatus { 
+    USER_TEAM_STATUS_INVALID = 0;
+    USER_TEAM_STATUS_ACTIVE = 1;
+    USER_TEAM_STATUS_DISABLED = 2;
+    USER_TEAM_STATUS_INVITED = 3;
+}

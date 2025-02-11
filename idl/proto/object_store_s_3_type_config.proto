@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "ObjectStoreS3TypeConfig";
+
+package nem;
+
+
+
+message ObjectStoreS3TypeConfig {  
+    string region = 1;
+    string key = 2;
+    string secret = 3;
+    string bucket = 4;    
+}

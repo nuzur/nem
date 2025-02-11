@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "FieldTypeEncryptedConfig";
+
+package nem;
+
+
+
+message FieldTypeEncryptedConfig {  
+    int64 min_size = 1;
+    int64 max_size = 2;
+    string regex_validation = 3;
+    FieldTypeEncryptedConfigEncryptionType encryption_type = 4;
+    bool use_salt = 5;
+    repeated string salt_field_uuids = 6;    
+}
+
+enum FieldTypeEncryptedConfigEncryptionType { 
+    FIELD_TYPE_ENCRYPTED_CONFIG_ENCRYPTION_TYPE_INVALID = 0;
+    FIELD_TYPE_ENCRYPTED_CONFIG_ENCRYPTION_TYPE_BCRYPT = 1;
+    FIELD_TYPE_ENCRYPTED_CONFIG_ENCRYPTION_TYPE_SHA_512 = 2;
+}

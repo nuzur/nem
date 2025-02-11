@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "UserConnection";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+import "user_connection_execution.proto";
+import "user_connection_type_config.proto";
+
+message UserConnection {  
+    string uuid = 1;
+    string user_uuid = 2;
+    string project_uuid = 3;
+    string project_version_uuid = 4;
+    UserConnectionType type = 5;
+    UserConnectionTypeConfig type_config = 6;
+    string db_schema = 7;
+    repeated UserConnectionExecution executions = 8;
+    UserConnectionStatus status = 9;
+    google.protobuf.Timestamp created_at = 10;
+    google.protobuf.Timestamp updated_at = 11;    
+}
+
+enum UserConnectionStatus { 
+    USER_CONNECTION_STATUS_INVALID = 0;
+    USER_CONNECTION_STATUS_ACTIVE = 1;
+    USER_CONNECTION_STATUS_DISABLED = 2;
+}
+
+enum UserConnectionType { 
+    USER_CONNECTION_TYPE_INVALID = 0;
+    USER_CONNECTION_TYPE_LOCAL = 1;
+    USER_CONNECTION_TYPE_REMOTE = 2;
+}

@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Team";
+
+package nem;
+
+
+import "connection.proto";
+import "entity.proto";
+import "enviorment.proto";
+import "google/protobuf/timestamp.proto";
+import "membership.proto";
+import "object_store.proto";
+import "review_config.proto";
+import "store.proto";
+
+message Team {  
+    string uuid = 1;
+    int64 version = 2;
+    string name = 3;
+    repeated Enviorment enviorments = 4;
+    repeated ReviewConfig review_configs = 5;
+    repeated Membership memberships = 6;
+    repeated Store stores = 7;
+    repeated Connection connections = 8;
+    repeated ObjectStore object_stores = 9;
+    string organization_uuid = 10;
+    Entity default_entity = 11;
+    TeamStatus status = 12;
+    google.protobuf.Timestamp created_at = 13;
+    google.protobuf.Timestamp updated_at = 14;
+    string created_by_uuid = 15;
+    string updated_by_uuid = 16;    
+}
+
+enum TeamStatus { 
+    TEAM_STATUS_INVALID = 0;
+    TEAM_STATUS_ACTIVE = 1;
+    TEAM_STATUS_DISABLED = 2;
+}

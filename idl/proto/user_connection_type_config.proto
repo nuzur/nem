@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "UserConnectionTypeConfig";
+
+package nem;
+
+
+import "user_connection_local_config.proto";
+import "user_connection_remote_config.proto";
+
+message UserConnectionTypeConfig {  
+    UserConnectionLocalConfig local = 1;
+    UserConnectionRemoteConfig remote = 2;    
+}

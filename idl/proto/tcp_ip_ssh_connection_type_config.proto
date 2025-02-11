@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "TcpIpSshConnectionTypeConfig";
+
+package nem;
+
+
+
+message TcpIpSshConnectionTypeConfig {  
+    string ssh_hostname = 1;
+    string ssh_username = 2;
+    string ssh_password = 3;
+    string ssh_key_file = 4;
+    bool use_ssh_key_file = 5;
+    string hostname = 6;
+    string port = 7;
+    string username = 8;
+    string password = 9;    
+}

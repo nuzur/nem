@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Relationship";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+import "relationship_node.proto";
+
+message Relationship {  
+    string uuid = 1;
+    int64 version = 2;
+    string identifier = 3;
+    string description = 4;
+    RelationshipCardinality cardinality = 5;
+    RelationshipNode from = 6;
+    RelationshipNode to = 7;
+    bool use_foreign_key = 8;
+    RelationshipStatus status = 9;
+    google.protobuf.Timestamp created_at = 10;
+    google.protobuf.Timestamp updated_at = 11;
+    string created_by_uuid = 12;
+    string updated_by_uuid = 13;    
+}
+
+enum RelationshipCardinality { 
+    RELATIONSHIP_CARDINALITY_INVALID = 0;
+    RELATIONSHIP_CARDINALITY_ONE_TO_ONE = 1;
+    RELATIONSHIP_CARDINALITY_ONE_TO_MANY = 2;
+}
+
+enum RelationshipStatus { 
+    RELATIONSHIP_STATUS_INVALID = 0;
+    RELATIONSHIP_STATUS_ACTIVE = 1;
+    RELATIONSHIP_STATUS_DISABLED = 2;
+}

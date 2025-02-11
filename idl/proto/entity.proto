@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Entity";
+
+package nem;
+
+
+import "element_render.proto";
+import "entity_type_config.proto";
+import "field.proto";
+import "google/protobuf/timestamp.proto";
+
+message Entity {  
+    string uuid = 1;
+    int64 version = 2;
+    string identifier = 3;
+    string description = 4;
+    repeated Field fields = 5;
+    EntityType type = 6;
+    EntityTypeConfig type_config = 7;
+    ElementRender render = 8;
+    EntityStatus status = 9;
+    google.protobuf.Timestamp created_at = 10;
+    google.protobuf.Timestamp updated_at = 11;
+    string created_by_uuid = 12;
+    string updated_by_uuid = 13;    
+}
+
+enum EntityStatus { 
+    ENTITY_STATUS_INVALID = 0;
+    ENTITY_STATUS_ACTIVE = 1;
+    ENTITY_STATUS_DISABLED = 2;
+}
+
+enum EntityType { 
+    ENTITY_TYPE_INVALID = 0;
+    ENTITY_TYPE_STANDALONE = 1;
+    ENTITY_TYPE_DEPENDENT = 2;
+}

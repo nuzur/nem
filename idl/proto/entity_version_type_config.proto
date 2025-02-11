@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "EntityVersionTypeConfig";
+
+package nem;
+
+
+import "entity_version_type_entity_config.proto";
+import "entity_version_type_field_config.proto";
+
+message EntityVersionTypeConfig {  
+    EntityVersionTypeFieldConfig field = 1;
+    EntityVersionTypeEntityConfig entity = 2;    
+}

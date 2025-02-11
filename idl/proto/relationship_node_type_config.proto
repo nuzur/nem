@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "RelationshipNodeTypeConfig";
+
+package nem;
+
+
+import "relationship_node_type_entity_config.proto";
+import "relationship_node_type_service_config.proto";
+
+message RelationshipNodeTypeConfig {  
+    RelationshipNodeTypeEntityConfig entity = 1;
+    RelationshipNodeTypeServiceConfig service = 2;    
+}

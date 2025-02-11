@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "EntityTypeConfig";
+
+package nem;
+
+
+import "entity_type_dependent_config.proto";
+import "entity_type_standalone_config.proto";
+
+message EntityTypeConfig {  
+    EntityTypeStandaloneConfig standalone = 1;
+    EntityTypeDependentConfig dependent = 2;    
+}

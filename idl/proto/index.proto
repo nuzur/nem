@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Index";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+import "index_field.proto";
+
+message Index {  
+    string uuid = 1;
+    string identifier = 2;
+    IndexType type = 3;
+    repeated IndexField fields = 4;
+    IndexStatus status = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+    string created_by_uuid = 8;
+    string updated_by_uuid = 9;    
+}
+
+enum IndexStatus { 
+    INDEX_STATUS_INVALID = 0;
+    INDEX_STATUS_ACTIVE = 1;
+    INDEX_STATUS_DISABLED = 2;
+}
+
+enum IndexType { 
+    INDEX_TYPE_INVALID = 0;
+    INDEX_TYPE_INDEX = 1;
+    INDEX_TYPE_PRIMARY = 2;
+    INDEX_TYPE_UNIQUE = 3;
+    INDEX_TYPE_FULLTEXT = 4;
+}

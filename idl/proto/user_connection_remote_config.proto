@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "UserConnectionRemoteConfig";
+
+package nem;
+
+
+
+message UserConnectionRemoteConfig {  
+    string team_uuid = 1;
+    string store_uuid = 2;
+    string connection_uuid = 3;    
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "EntityVersionTypeFieldConfig";
+
+package nem;
+
+
+
+message EntityVersionTypeFieldConfig {  
+    string version_field_uuid = 1;
+    bool append_only = 2;    
+}

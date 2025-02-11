@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "FileStorageConfig";
+
+package nem;
+
+
+import "file_object_storage_config.proto";
+
+message FileStorageConfig {  
+    FileObjectStorageConfig object_store = 1;    
+}

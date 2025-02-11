@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "ProjectExtension";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message ProjectExtension {  
+    string uuid = 1;
+    string extension_uuid = 2;
+    string extension_version_uuid = 3;
+    string configuration_entity_values = 4;
+    bool blocking = 5;
+    ProjectExtensionStatus status = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+    string created_by_uuid = 9;
+    string updated_by_uuid = 10;    
+}
+
+enum ProjectExtensionStatus { 
+    PROJECT_EXTENSION_STATUS_INVALID = 0;
+    PROJECT_EXTENSION_STATUS_ACTIVE = 1;
+    PROJECT_EXTENSION_STATUS_DISABLED = 2;
+}

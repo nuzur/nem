@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "TcpIpConnectionTypeConfig";
+
+package nem;
+
+
+
+message TcpIpConnectionTypeConfig {  
+    string hostname = 1;
+    string port = 2;
+    string username = 3;
+    string password = 4;    
+}

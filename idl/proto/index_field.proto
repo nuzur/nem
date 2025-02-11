@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "IndexField";
+
+package nem;
+
+
+
+message IndexField {  
+    string field_uuid = 1;
+    int64 priority = 2;
+    IndexFieldOrder order = 3;
+    int64 length = 4;    
+}
+
+enum IndexFieldOrder { 
+    INDEX_FIELD_ORDER_INVALID = 0;
+    INDEX_FIELD_ORDER_ASC = 1;
+    INDEX_FIELD_ORDER_DESC = 2;
+}

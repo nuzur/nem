@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "FieldTypeConfig";
+
+package nem;
+
+
+import "field_type_array_config.proto";
+import "field_type_char_config.proto";
+import "field_type_date_config.proto";
+import "field_type_datetime_config.proto";
+import "field_type_decimal_config.proto";
+import "field_type_email_config.proto";
+import "field_type_encrypted_config.proto";
+import "field_type_enum_config.proto";
+import "field_type_file_config.proto";
+import "field_type_float_config.proto";
+import "field_type_integer_config.proto";
+import "field_type_json_config.proto";
+import "field_type_phone_config.proto";
+import "field_type_slug_config.proto";
+import "field_type_text_config.proto";
+import "field_type_url_config.proto";
+import "field_type_varchar_config.proto";
+
+message FieldTypeConfig {  
+    string uuid = 1;
+    FieldTypeIntegerConfig integer = 2;
+    FieldTypeFloatConfig float = 3;
+    FieldTypeDecimalConfig decimal = 4;
+    string boolean = 5;
+    FieldTypeCharConfig char = 6;
+    FieldTypeVarcharConfig varchar = 7;
+    FieldTypeTextConfig text = 8;
+    FieldTypeEncryptedConfig encrypted = 9;
+    FieldTypeEmailConfig email = 10;
+    FieldTypePhoneConfig phone = 11;
+    FieldTypeURLConfig url = 12;
+    string location = 13;
+    string color = 14;
+    string rich_text = 15;
+    string code = 16;
+    string markdown = 17;
+    FieldTypeFileConfig file = 18;
+    FieldTypeFileConfig image = 19;
+    FieldTypeFileConfig video = 20;
+    FieldTypeFileConfig audio = 21;
+    FieldTypeEnumConfig enum = 22;
+    FieldTypeJSONConfig json = 23;
+    FieldTypeArrayConfig array = 24;
+    FieldTypeDateConfig date = 25;
+    FieldTypeDatetimeConfig datetime = 26;
+    string time = 27;
+    FieldTypeSlugConfig slug = 28;    
+}

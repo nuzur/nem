@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "ChangeRequest";
+
+package nem;
+
+
+import "change_request_review.proto";
+import "google/protobuf/timestamp.proto";
+
+message ChangeRequest {  
+    string uuid = 1;
+    int64 version = 2;
+    string title = 3;
+    string description = 4;
+    ChangeRequestReviewType review_type = 5;
+    string ref_uuid = 6;
+    string old_data = 7;
+    string old_data_ref = 8;
+    string new_data = 9;
+    string new_data_ref = 10;
+    repeated ChangeRequestReview reviews = 11;
+    string owner_uuid = 12;
+    ChangeRequestStatus status = 13;
+    google.protobuf.Timestamp created_at = 14;
+    google.protobuf.Timestamp updated_at = 15;
+    string created_by_uuid = 16;
+    string updated_by_uuid = 17;    
+}
+
+enum ChangeRequestReviewType { 
+    CHANGE_REQUEST_REVIEW_TYPE_INVALID = 0;
+    CHANGE_REQUEST_REVIEW_TYPE_PROJECT_DATA = 1;
+    CHANGE_REQUEST_REVIEW_TYPE_PROJECT_VERSION = 2;
+    CHANGE_REQUEST_REVIEW_TYPE_EXTENSION_VERSION = 3;
+}
+
+enum ChangeRequestStatus { 
+    CHANGE_REQUEST_STATUS_INVALID = 0;
+    CHANGE_REQUEST_STATUS_ACTIVE = 1;
+    CHANGE_REQUEST_STATUS_DISABLED = 2;
+}

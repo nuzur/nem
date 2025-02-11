@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "EnumValue";
+
+package nem;
+
+
+
+message EnumValue {  
+    string identifier = 1;
+    string display = 2;
+    int64 numeric_value = 3;    
+}

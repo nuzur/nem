@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "RelationshipNode";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+import "relationship_node_type_config.proto";
+
+message RelationshipNode {  
+    string uuid = 1;
+    RelationshipNodeType type = 2;
+    RelationshipNodeTypeConfig type_config = 3;
+    google.protobuf.Timestamp created_at = 4;
+    google.protobuf.Timestamp updated_at = 5;
+    string created_by_uuid = 6;
+    string updated_by_uuid = 7;    
+}
+
+enum RelationshipNodeType { 
+    RELATIONSHIP_NODE_TYPE_INVALID = 0;
+    RELATIONSHIP_NODE_TYPE_ENTITY = 1;
+    RELATIONSHIP_NODE_TYPE_SERVICE = 2;
+}

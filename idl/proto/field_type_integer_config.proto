@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "FieldTypeIntegerConfig";
+
+package nem;
+
+
+
+message FieldTypeIntegerConfig {  
+    FieldTypeIntegerConfigSize size = 1;
+    int64 min_value = 2;
+    bool min_value_inclusive = 3;
+    int64 max_value = 4;
+    bool max_value_inclusive = 5;
+    bool allow_negatives = 6;
+    bool enable_limits = 7;    
+}
+
+enum FieldTypeIntegerConfigSize { 
+    FIELD_TYPE_INTEGER_CONFIG_SIZE_INVALID = 0;
+    FIELD_TYPE_INTEGER_CONFIG_SIZE_ONE_BIT = 1;
+    FIELD_TYPE_INTEGER_CONFIG_SIZE_EIGHT_BITS = 2;
+    FIELD_TYPE_INTEGER_CONFIG_SIZE_SIXTEEN_BITS = 3;
+    FIELD_TYPE_INTEGER_CONFIG_SIZE_TWENTY_FOUR_BITS = 4;
+    FIELD_TYPE_INTEGER_CONFIG_SIZE_THIRTY_TWO_BITS = 5;
+    FIELD_TYPE_INTEGER_CONFIG_SIZE_SIXTY_FOUR_BITS = 6;
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "FieldTypeDatetimeConfig";
+
+package nem;
+
+
+
+message FieldTypeDatetimeConfig {  
+    bool enforce_future = 1;
+    bool enforce_past = 2;
+    string display_timezone = 3;
+    string storage_timezone = 4;    
+}

@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Membership";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message Membership {  
+    string uuid = 1;
+    string owner_uuid = 2;
+    MembershipType type = 3;
+    string metadata = 4;
+    MembershipStatus status = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+    string created_by_uuid = 8;
+    string updated_by_uuid = 9;    
+}
+
+enum MembershipStatus { 
+    MEMBERSHIP_STATUS_INVALID = 0;
+    MEMBERSHIP_STATUS_ACTIVE = 1;
+    MEMBERSHIP_STATUS_DISABLED = 2;
+}
+
+enum MembershipType { 
+    MEMBERSHIP_TYPE_INVALID = 0;
+    MEMBERSHIP_TYPE_FREE = 1;
+    MEMBERSHIP_TYPE_SMALL = 2;
+    MEMBERSHIP_TYPE_MEDIUM = 3;
+    MEMBERSHIP_TYPE_ENTERPRISE = 4;
+}

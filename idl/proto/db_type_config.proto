@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "DbTypeConfig";
+
+package nem;
+
+
+import "db_type_mysql_config.proto";
+import "db_type_postgres_config.proto";
+
+message DbTypeConfig {  
+    DbTypePostgresConfig postgres = 1;
+    DbTypeMysqlConfig mysql = 2;    
+}

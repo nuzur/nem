@@ -1,0 +1,49 @@
+
+ports:
+  http: 8085
+  grpc: 6005
+
+auth:  
+  basic:
+    username: maykel
+    password: test
+  
+  keycloak:
+    hostname: http://localhost:8081
+    realm: nuzur
+    client_id: test
+    client_secret: sbUlCIJxP2qNs3R1VxzcfILUDbdAwSZx
+
+
+events:
+  enabled: true
+kafka:  
+  version: 3.6.0 
+  brokers:   
+    - localhost:9092     
+  topics:   
+    - test 
+
+
+db:
+  - name: nuzur-entities 
+    host: localhost
+    port: 3306
+    user: root
+    pswd: 
+    params: parseTime=true&loc=UTC&charset=utf8mb4&collation=utf8mb4_unicode_ci
+    driver: "mysql"
+
+aws:
+  - region: 
+    key_id: 
+    secret: 
+    bucket: 
+
+monitoring:
+  logging-enabled: true
+  logging-level: success
+  metrics-enabled: true
+  metrics-level: success
+  metrics-provider: datadog
+  datadog-addr: localhost:8125

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "nem";
+option java_outer_classname = "Enviorment";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message Enviorment {  
+    string uuid = 1;
+    string identifier = 2;
+    bool critical = 3;
+    EnviormentStatus status = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+    string created_by_uuid = 7;
+    string updated_by_uuid = 8;    
+}
+
+enum EnviormentStatus { 
+    ENVIORMENT_STATUS_INVALID = 0;
+    ENVIORMENT_STATUS_ACTIVE = 1;
+    ENVIORMENT_STATUS_DISABLED = 2;
+}
