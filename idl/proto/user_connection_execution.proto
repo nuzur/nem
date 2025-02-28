@@ -14,10 +14,11 @@ message UserConnectionExecution {
     string uuid = 1;
     UserConnectionExecutionStatus status = 2;
     string results_path = 3;
-    google.protobuf.Timestamp started_at = 4;
-    google.protobuf.Timestamp finished_at = 5;
-    string estimated_time = 6;
-    string user_msg = 7;    
+    int64 num_results = 4;
+    google.protobuf.Timestamp started_at = 5;
+    google.protobuf.Timestamp finished_at = 6;
+    string estimated_time = 7;
+    string user_msg = 8;    
 }
 
 enum UserConnectionExecutionStatus { 

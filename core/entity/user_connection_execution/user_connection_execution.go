@@ -19,6 +19,7 @@ type UserConnectionExecution struct {
 	UUID          uuid.UUID `json:"uuid"`
 	Status        Status    `json:"status"`
 	ResultsPath   string    `json:"results_path"`
+	NumResults    int64     `json:"num_results"`
 	StartedAt     time.Time `json:"started_at"`
 	FinishedAt    time.Time `json:"finished_at"`
 	EstimatedTime string    `json:"estimated_time"`
@@ -40,6 +41,7 @@ func (e UserConnectionExecution) FieldIdentfierToTypeMap() map[string]types.Fiel
 	res["uuid"] = types.UUIDFieldType
 	res["status"] = types.SingleEnumFieldType
 	res["results_path"] = types.StringFieldType
+	res["num_results"] = types.IntFieldType
 	res["started_at"] = types.TimestampFieldType
 	res["finished_at"] = types.TimestampFieldType
 	res["estimated_time"] = types.StringFieldType
@@ -106,6 +108,7 @@ func NewUserConnectionExecutionWithRandomValues() UserConnectionExecution {
 		UUID:          randomvalues.GetRandomUUIDValue(),
 		Status:        randomvalues.GetRandomOptionValue[Status](3),
 		ResultsPath:   randomvalues.GetRandomStringValue(),
+		NumResults:    randomvalues.GetRandomIntValue(),
 		StartedAt:     randomvalues.GetRandomTimeValue(),
 		FinishedAt:    randomvalues.GetRandomTimeValue(),
 		EstimatedTime: randomvalues.GetRandomStringValue(),
