@@ -143,7 +143,6 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 	}
 
 	res := nemdb.UpdateExtensionExecutionParams{}
-	emptyReq := types.UpsertRequest{}
 
 	res.UUID = req.ExtensionExecution.UUID.String()
 

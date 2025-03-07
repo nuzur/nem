@@ -169,7 +169,6 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Proj
 	}
 
 	res := nemdb.UpdateProjectParams{}
-	emptyReq := types.UpsertRequest{}
 
 	res.UUID = req.Project.UUID.String()
 

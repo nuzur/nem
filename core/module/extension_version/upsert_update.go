@@ -167,7 +167,6 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 	}
 
 	res := nemdb.UpdateExtensionVersionParams{}
-	emptyReq := types.UpsertRequest{}
 
 	res.UUID = req.ExtensionVersion.UUID.String()
 

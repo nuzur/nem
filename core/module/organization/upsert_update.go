@@ -163,7 +163,6 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Orga
 	}
 
 	res := nemdb.UpdateOrganizationParams{}
-	emptyReq := types.UpsertRequest{}
 
 	res.UUID = req.Organization.UUID.String()
 
