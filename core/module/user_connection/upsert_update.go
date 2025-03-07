@@ -146,114 +146,27 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.User
 	res := nemdb.UpdateUserConnectionParams{}
 	emptyReq := types.UpsertRequest{}
 
-	// regular field
-	if req.UserConnection.UUID == emptyReq.UserConnection.UUID {
+	res.UUID = req.UserConnection.UUID.String()
 
-		res.UUID = existing.UUID
-	} else {
+	res.UserUUID = req.UserConnection.UserUUID.String()
 
-		res.UUID = req.UserConnection.UUID.String()
+	res.ProjectUUID = req.UserConnection.ProjectUUID.String()
 
-	}
+	res.ProjectVersionUUID = req.UserConnection.ProjectVersionUUID.String()
 
-	// regular field
-	if req.UserConnection.UserUUID == emptyReq.UserConnection.UserUUID {
+	res.Type = req.UserConnection.Type.ToInt64()
 
-		res.UserUUID = existing.UserUUID
-	} else {
+	res.TypeConfig = user_connection_type_config.UserConnectionTypeConfigToJSON(req.UserConnection.TypeConfig)
 
-		res.UserUUID = req.UserConnection.UserUUID.String()
+	res.DbSchema = req.UserConnection.DbSchema
 
-	}
+	res.Executions = user_connection_execution.UserConnectionExecutionSliceToJSON(req.UserConnection.Executions)
 
-	// regular field
-	if req.UserConnection.ProjectUUID == emptyReq.UserConnection.ProjectUUID {
+	res.Status = req.UserConnection.Status.ToInt64()
 
-		res.ProjectUUID = existing.ProjectUUID
-	} else {
+	res.CreatedAt = existing.CreatedAt
 
-		res.ProjectUUID = req.UserConnection.ProjectUUID.String()
-
-	}
-
-	// regular field
-	if req.UserConnection.ProjectVersionUUID == emptyReq.UserConnection.ProjectVersionUUID {
-
-		res.ProjectVersionUUID = existing.ProjectVersionUUID
-	} else {
-
-		res.ProjectVersionUUID = req.UserConnection.ProjectVersionUUID.String()
-
-	}
-
-	// regular field
-	if req.UserConnection.Type == emptyReq.UserConnection.Type {
-
-		res.Type = existing.Type
-	} else {
-
-		res.Type = req.UserConnection.Type.ToInt64()
-
-	}
-
-	if req.UserConnection.TypeConfig.ToJSON() == nil {
-
-		res.TypeConfig = existing.TypeConfig
-	} else {
-
-		res.TypeConfig = user_connection_type_config.UserConnectionTypeConfigToJSON(req.UserConnection.TypeConfig)
-
-	}
-
-	// regular field
-	if req.UserConnection.DbSchema == emptyReq.UserConnection.DbSchema {
-
-		res.DbSchema = existing.DbSchema
-	} else {
-
-		res.DbSchema = req.UserConnection.DbSchema
-
-	}
-
-	// json array
-	if len(req.UserConnection.Executions) == 0 {
-
-		res.Executions = existing.Executions
-	} else {
-
-		res.Executions = user_connection_execution.UserConnectionExecutionSliceToJSON(req.UserConnection.Executions)
-
-	}
-
-	// regular field
-	if req.UserConnection.Status == emptyReq.UserConnection.Status {
-
-		res.Status = existing.Status
-	} else {
-
-		res.Status = req.UserConnection.Status.ToInt64()
-
-	}
-
-	// regular field
-	if req.UserConnection.CreatedAt == emptyReq.UserConnection.CreatedAt {
-
-		res.CreatedAt = existing.CreatedAt
-	} else {
-
-		res.CreatedAt = existing.CreatedAt
-
-	}
-
-	// regular field
-	if req.UserConnection.UpdatedAt == emptyReq.UserConnection.UpdatedAt {
-
-		res.UpdatedAt = existing.UpdatedAt
-	} else {
-
-		res.UpdatedAt = custom.Now()
-
-	}
+	res.UpdatedAt = custom.Now()
 
 	return res
 

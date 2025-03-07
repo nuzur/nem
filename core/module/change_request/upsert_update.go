@@ -175,175 +175,39 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 	res := nemdb.UpdateChangeRequestParams{}
 	emptyReq := types.UpsertRequest{}
 
-	// regular field
-	if req.ChangeRequest.UUID == emptyReq.ChangeRequest.UUID {
+	res.UUID = req.ChangeRequest.UUID.String()
 
-		res.UUID = existing.UUID
-	} else {
+	res.Version = req.ChangeRequest.Version
 
-		res.UUID = req.ChangeRequest.UUID.String()
+	res.Title = req.ChangeRequest.Title
 
-	}
+	res.Description = req.ChangeRequest.Description
 
-	// regular field
-	if req.ChangeRequest.Version == emptyReq.ChangeRequest.Version {
+	res.ReviewType = req.ChangeRequest.ReviewType.ToInt64()
 
-		res.Version = existing.Version
-	} else {
+	res.RefUUID = req.ChangeRequest.RefUUID.String()
 
-		res.Version = req.ChangeRequest.Version
+	res.OldData = []byte(req.ChangeRequest.OldData)
 
-	}
+	res.OldDataRef = req.ChangeRequest.OldDataRef
 
-	// regular field
-	if req.ChangeRequest.Title == emptyReq.ChangeRequest.Title {
+	res.NewData = []byte(req.ChangeRequest.NewData)
 
-		res.Title = existing.Title
-	} else {
+	res.NewDataRef = req.ChangeRequest.NewDataRef
 
-		res.Title = req.ChangeRequest.Title
+	res.Reviews = change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews)
 
-	}
+	res.OwnerUUID = req.ChangeRequest.OwnerUUID.String()
 
-	// regular field
-	if req.ChangeRequest.Description == emptyReq.ChangeRequest.Description {
+	res.Status = req.ChangeRequest.Status.ToInt64()
 
-		res.Description = existing.Description
-	} else {
+	res.CreatedAt = existing.CreatedAt
 
-		res.Description = req.ChangeRequest.Description
+	res.UpdatedAt = custom.Now()
 
-	}
+	res.CreatedByUUID = req.ChangeRequest.CreatedByUUID.String()
 
-	// regular field
-	if req.ChangeRequest.ReviewType == emptyReq.ChangeRequest.ReviewType {
-
-		res.ReviewType = existing.ReviewType
-	} else {
-
-		res.ReviewType = req.ChangeRequest.ReviewType.ToInt64()
-
-	}
-
-	// regular field
-	if req.ChangeRequest.RefUUID == emptyReq.ChangeRequest.RefUUID {
-
-		res.RefUUID = existing.RefUUID
-	} else {
-
-		res.RefUUID = req.ChangeRequest.RefUUID.String()
-
-	}
-
-	// regular field
-	if req.ChangeRequest.OldData == emptyReq.ChangeRequest.OldData {
-
-		res.OldData = existing.OldData
-	} else {
-
-		res.OldData = []byte(req.ChangeRequest.OldData)
-
-	}
-
-	// regular field
-	if req.ChangeRequest.OldDataRef == emptyReq.ChangeRequest.OldDataRef {
-
-		res.OldDataRef = existing.OldDataRef
-	} else {
-
-		res.OldDataRef = req.ChangeRequest.OldDataRef
-
-	}
-
-	// regular field
-	if req.ChangeRequest.NewData == emptyReq.ChangeRequest.NewData {
-
-		res.NewData = existing.NewData
-	} else {
-
-		res.NewData = []byte(req.ChangeRequest.NewData)
-
-	}
-
-	// regular field
-	if req.ChangeRequest.NewDataRef == emptyReq.ChangeRequest.NewDataRef {
-
-		res.NewDataRef = existing.NewDataRef
-	} else {
-
-		res.NewDataRef = req.ChangeRequest.NewDataRef
-
-	}
-
-	// json array
-	if len(req.ChangeRequest.Reviews) == 0 {
-
-		res.Reviews = existing.Reviews
-	} else {
-
-		res.Reviews = change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews)
-
-	}
-
-	// regular field
-	if req.ChangeRequest.OwnerUUID == emptyReq.ChangeRequest.OwnerUUID {
-
-		res.OwnerUUID = existing.OwnerUUID
-	} else {
-
-		res.OwnerUUID = req.ChangeRequest.OwnerUUID.String()
-
-	}
-
-	// regular field
-	if req.ChangeRequest.Status == emptyReq.ChangeRequest.Status {
-
-		res.Status = existing.Status
-	} else {
-
-		res.Status = req.ChangeRequest.Status.ToInt64()
-
-	}
-
-	// regular field
-	if req.ChangeRequest.CreatedAt == emptyReq.ChangeRequest.CreatedAt {
-
-		res.CreatedAt = existing.CreatedAt
-	} else {
-
-		res.CreatedAt = existing.CreatedAt
-
-	}
-
-	// regular field
-	if req.ChangeRequest.UpdatedAt == emptyReq.ChangeRequest.UpdatedAt {
-
-		res.UpdatedAt = existing.UpdatedAt
-	} else {
-
-		res.UpdatedAt = custom.Now()
-
-	}
-
-	// regular field
-	if req.ChangeRequest.CreatedByUUID == emptyReq.ChangeRequest.CreatedByUUID {
-
-		res.CreatedByUUID = existing.CreatedByUUID
-	} else {
-
-		res.CreatedByUUID = req.ChangeRequest.CreatedByUUID.String()
-
-	}
-
-	// regular field
-	if req.ChangeRequest.UpdatedByUUID == emptyReq.ChangeRequest.UpdatedByUUID {
-
-		res.UpdatedByUUID = existing.UpdatedByUUID
-	} else {
-
-		res.UpdatedByUUID = req.ChangeRequest.UpdatedByUUID.String()
-
-	}
+	res.UpdatedByUUID = req.ChangeRequest.UpdatedByUUID.String()
 
 	return res
 

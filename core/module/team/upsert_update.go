@@ -179,164 +179,37 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Team
 	res := nemdb.UpdateTeamParams{}
 	emptyReq := types.UpsertRequest{}
 
-	// regular field
-	if req.Team.UUID == emptyReq.Team.UUID {
+	res.UUID = req.Team.UUID.String()
 
-		res.UUID = existing.UUID
-	} else {
+	res.Version = req.Team.Version
 
-		res.UUID = req.Team.UUID.String()
+	res.Name = req.Team.Name
 
-	}
+	res.Enviorments = enviorment.EnviormentSliceToJSON(req.Team.Enviorments)
 
-	// regular field
-	if req.Team.Version == emptyReq.Team.Version {
+	res.ReviewConfigs = review_config.ReviewConfigSliceToJSON(req.Team.ReviewConfigs)
 
-		res.Version = existing.Version
-	} else {
+	res.Memberships = membership.MembershipSliceToJSON(req.Team.Memberships)
 
-		res.Version = req.Team.Version
+	res.Stores = store.StoreSliceToJSON(req.Team.Stores)
 
-	}
+	res.Connections = connection.ConnectionSliceToJSON(req.Team.Connections)
 
-	// regular field
-	if req.Team.Name == emptyReq.Team.Name {
+	res.ObjectStores = object_store.ObjectStoreSliceToJSON(req.Team.ObjectStores)
 
-		res.Name = existing.Name
-	} else {
+	res.OrganizationUUID = req.Team.OrganizationUUID.String()
 
-		res.Name = req.Team.Name
+	res.DefaultEntity = entity.EntityToJSON(req.Team.DefaultEntity)
 
-	}
+	res.Status = req.Team.Status.ToInt64()
 
-	// json array
-	if len(req.Team.Enviorments) == 0 {
+	res.CreatedAt = existing.CreatedAt
 
-		res.Enviorments = existing.Enviorments
-	} else {
+	res.UpdatedAt = custom.Now()
 
-		res.Enviorments = enviorment.EnviormentSliceToJSON(req.Team.Enviorments)
+	res.CreatedByUUID = req.Team.CreatedByUUID.String()
 
-	}
-
-	// json array
-	if len(req.Team.ReviewConfigs) == 0 {
-
-		res.ReviewConfigs = existing.ReviewConfigs
-	} else {
-
-		res.ReviewConfigs = review_config.ReviewConfigSliceToJSON(req.Team.ReviewConfigs)
-
-	}
-
-	// json array
-	if len(req.Team.Memberships) == 0 {
-
-		res.Memberships = existing.Memberships
-	} else {
-
-		res.Memberships = membership.MembershipSliceToJSON(req.Team.Memberships)
-
-	}
-
-	// json array
-	if len(req.Team.Stores) == 0 {
-
-		res.Stores = existing.Stores
-	} else {
-
-		res.Stores = store.StoreSliceToJSON(req.Team.Stores)
-
-	}
-
-	// json array
-	if len(req.Team.Connections) == 0 {
-
-		res.Connections = existing.Connections
-	} else {
-
-		res.Connections = connection.ConnectionSliceToJSON(req.Team.Connections)
-
-	}
-
-	// json array
-	if len(req.Team.ObjectStores) == 0 {
-
-		res.ObjectStores = existing.ObjectStores
-	} else {
-
-		res.ObjectStores = object_store.ObjectStoreSliceToJSON(req.Team.ObjectStores)
-
-	}
-
-	// regular field
-	if req.Team.OrganizationUUID == emptyReq.Team.OrganizationUUID {
-
-		res.OrganizationUUID = existing.OrganizationUUID
-	} else {
-
-		res.OrganizationUUID = req.Team.OrganizationUUID.String()
-
-	}
-
-	if req.Team.DefaultEntity.ToJSON() == nil {
-
-		res.DefaultEntity = existing.DefaultEntity
-	} else {
-
-		res.DefaultEntity = entity.EntityToJSON(req.Team.DefaultEntity)
-
-	}
-
-	// regular field
-	if req.Team.Status == emptyReq.Team.Status {
-
-		res.Status = existing.Status
-	} else {
-
-		res.Status = req.Team.Status.ToInt64()
-
-	}
-
-	// regular field
-	if req.Team.CreatedAt == emptyReq.Team.CreatedAt {
-
-		res.CreatedAt = existing.CreatedAt
-	} else {
-
-		res.CreatedAt = existing.CreatedAt
-
-	}
-
-	// regular field
-	if req.Team.UpdatedAt == emptyReq.Team.UpdatedAt {
-
-		res.UpdatedAt = existing.UpdatedAt
-	} else {
-
-		res.UpdatedAt = custom.Now()
-
-	}
-
-	// regular field
-	if req.Team.CreatedByUUID == emptyReq.Team.CreatedByUUID {
-
-		res.CreatedByUUID = existing.CreatedByUUID
-	} else {
-
-		res.CreatedByUUID = req.Team.CreatedByUUID.String()
-
-	}
-
-	// regular field
-	if req.Team.UpdatedByUUID == emptyReq.Team.UpdatedByUUID {
-
-		res.UpdatedByUUID = existing.UpdatedByUUID
-	} else {
-
-		res.UpdatedByUUID = req.Team.UpdatedByUUID.String()
-
-	}
+	res.UpdatedByUUID = req.Team.UpdatedByUUID.String()
 
 	return res
 

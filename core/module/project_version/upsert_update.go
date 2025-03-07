@@ -179,175 +179,39 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Proj
 	res := nemdb.UpdateProjectVersionParams{}
 	emptyReq := types.UpsertRequest{}
 
-	// regular field
-	if req.ProjectVersion.UUID == emptyReq.ProjectVersion.UUID {
+	res.UUID = req.ProjectVersion.UUID.String()
 
-		res.UUID = existing.UUID
-	} else {
+	res.Version = req.ProjectVersion.Version
 
-		res.UUID = req.ProjectVersion.UUID.String()
+	res.Identifier = req.ProjectVersion.Identifier
 
-	}
+	res.Description = req.ProjectVersion.Description
 
-	// regular field
-	if req.ProjectVersion.Version == emptyReq.ProjectVersion.Version {
+	res.ProjectUUID = req.ProjectVersion.ProjectUUID.String()
 
-		res.Version = existing.Version
-	} else {
+	res.Entities = entity.EntitySliceToJSON(req.ProjectVersion.Entities)
 
-		res.Version = req.ProjectVersion.Version
+	res.Relationships = relationship.RelationshipSliceToJSON(req.ProjectVersion.Relationships)
 
-	}
+	res.Enums = enum.EnumSliceToJSON(req.ProjectVersion.Enums)
 
-	// regular field
-	if req.ProjectVersion.Identifier == emptyReq.ProjectVersion.Identifier {
+	res.Services = service.ServiceSliceToJSON(req.ProjectVersion.Services)
 
-		res.Identifier = existing.Identifier
-	} else {
+	res.BaseVersionUUID = req.ProjectVersion.BaseVersionUUID.String()
 
-		res.Identifier = req.ProjectVersion.Identifier
+	res.ReviewStatus = req.ProjectVersion.ReviewStatus.ToInt64()
 
-	}
+	res.Deployments = project_version_deployment.ProjectVersionDeploymentSliceToJSON(req.ProjectVersion.Deployments)
 
-	// regular field
-	if req.ProjectVersion.Description == emptyReq.ProjectVersion.Description {
+	res.Status = req.ProjectVersion.Status.ToInt64()
 
-		res.Description = existing.Description
-	} else {
+	res.CreatedAt = existing.CreatedAt
 
-		res.Description = req.ProjectVersion.Description
+	res.UpdatedAt = custom.Now()
 
-	}
+	res.CreatedByUUID = req.ProjectVersion.CreatedByUUID.String()
 
-	// regular field
-	if req.ProjectVersion.ProjectUUID == emptyReq.ProjectVersion.ProjectUUID {
-
-		res.ProjectUUID = existing.ProjectUUID
-	} else {
-
-		res.ProjectUUID = req.ProjectVersion.ProjectUUID.String()
-
-	}
-
-	// json array
-	if len(req.ProjectVersion.Entities) == 0 {
-
-		res.Entities = existing.Entities
-	} else {
-
-		res.Entities = entity.EntitySliceToJSON(req.ProjectVersion.Entities)
-
-	}
-
-	// json array
-	if len(req.ProjectVersion.Relationships) == 0 {
-
-		res.Relationships = existing.Relationships
-	} else {
-
-		res.Relationships = relationship.RelationshipSliceToJSON(req.ProjectVersion.Relationships)
-
-	}
-
-	// json array
-	if len(req.ProjectVersion.Enums) == 0 {
-
-		res.Enums = existing.Enums
-	} else {
-
-		res.Enums = enum.EnumSliceToJSON(req.ProjectVersion.Enums)
-
-	}
-
-	// json array
-	if len(req.ProjectVersion.Services) == 0 {
-
-		res.Services = existing.Services
-	} else {
-
-		res.Services = service.ServiceSliceToJSON(req.ProjectVersion.Services)
-
-	}
-
-	// regular field
-	if req.ProjectVersion.BaseVersionUUID == emptyReq.ProjectVersion.BaseVersionUUID {
-
-		res.BaseVersionUUID = existing.BaseVersionUUID
-	} else {
-
-		res.BaseVersionUUID = req.ProjectVersion.BaseVersionUUID.String()
-
-	}
-
-	// regular field
-	if req.ProjectVersion.ReviewStatus == emptyReq.ProjectVersion.ReviewStatus {
-
-		res.ReviewStatus = existing.ReviewStatus
-	} else {
-
-		res.ReviewStatus = req.ProjectVersion.ReviewStatus.ToInt64()
-
-	}
-
-	// json array
-	if len(req.ProjectVersion.Deployments) == 0 {
-
-		res.Deployments = existing.Deployments
-	} else {
-
-		res.Deployments = project_version_deployment.ProjectVersionDeploymentSliceToJSON(req.ProjectVersion.Deployments)
-
-	}
-
-	// regular field
-	if req.ProjectVersion.Status == emptyReq.ProjectVersion.Status {
-
-		res.Status = existing.Status
-	} else {
-
-		res.Status = req.ProjectVersion.Status.ToInt64()
-
-	}
-
-	// regular field
-	if req.ProjectVersion.CreatedAt == emptyReq.ProjectVersion.CreatedAt {
-
-		res.CreatedAt = existing.CreatedAt
-	} else {
-
-		res.CreatedAt = existing.CreatedAt
-
-	}
-
-	// regular field
-	if req.ProjectVersion.UpdatedAt == emptyReq.ProjectVersion.UpdatedAt {
-
-		res.UpdatedAt = existing.UpdatedAt
-	} else {
-
-		res.UpdatedAt = custom.Now()
-
-	}
-
-	// regular field
-	if req.ProjectVersion.CreatedByUUID == emptyReq.ProjectVersion.CreatedByUUID {
-
-		res.CreatedByUUID = existing.CreatedByUUID
-	} else {
-
-		res.CreatedByUUID = req.ProjectVersion.CreatedByUUID.String()
-
-	}
-
-	// regular field
-	if req.ProjectVersion.UpdatedByUUID == emptyReq.ProjectVersion.UpdatedByUUID {
-
-		res.UpdatedByUUID = existing.UpdatedByUUID
-	} else {
-
-		res.UpdatedByUUID = req.ProjectVersion.UpdatedByUUID.String()
-
-	}
+	res.UpdatedByUUID = req.ProjectVersion.UpdatedByUUID.String()
 
 	return res
 

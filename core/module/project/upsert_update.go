@@ -171,145 +171,33 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Proj
 	res := nemdb.UpdateProjectParams{}
 	emptyReq := types.UpsertRequest{}
 
-	// regular field
-	if req.Project.UUID == emptyReq.Project.UUID {
+	res.UUID = req.Project.UUID.String()
 
-		res.UUID = existing.UUID
-	} else {
+	res.Version = req.Project.Version
 
-		res.UUID = req.Project.UUID.String()
+	res.Name = req.Project.Name
 
-	}
+	res.Description = req.Project.Description
 
-	// regular field
-	if req.Project.Version == emptyReq.Project.Version {
+	res.Tags = mapper.SliceToJSON(req.Project.Tags)
 
-		res.Version = existing.Version
-	} else {
+	res.URL = req.Project.URL
 
-		res.Version = req.Project.Version
+	res.OwnerUUID = req.Project.OwnerUUID.String()
 
-	}
+	res.TeamUUID = req.Project.TeamUUID.String()
 
-	// regular field
-	if req.Project.Name == emptyReq.Project.Name {
+	res.ProjectExtensions = project_extension.ProjectExtensionSliceToJSON(req.Project.ProjectExtensions)
 
-		res.Name = existing.Name
-	} else {
+	res.Status = req.Project.Status.ToInt64()
 
-		res.Name = req.Project.Name
+	res.CreatedAt = existing.CreatedAt
 
-	}
+	res.UpdatedAt = custom.Now()
 
-	// regular field
-	if req.Project.Description == emptyReq.Project.Description {
+	res.CreatedByUUID = req.Project.CreatedByUUID.String()
 
-		res.Description = existing.Description
-	} else {
-
-		res.Description = req.Project.Description
-
-	}
-
-	// raw json is a pointer
-	if req.Project.Tags == nil {
-
-		res.Tags = existing.Tags
-	} else {
-
-		res.Tags = mapper.SliceToJSON(req.Project.Tags)
-
-	}
-
-	// regular field
-	if req.Project.URL == emptyReq.Project.URL {
-
-		res.URL = existing.URL
-	} else {
-
-		res.URL = req.Project.URL
-
-	}
-
-	// regular field
-	if req.Project.OwnerUUID == emptyReq.Project.OwnerUUID {
-
-		res.OwnerUUID = existing.OwnerUUID
-	} else {
-
-		res.OwnerUUID = req.Project.OwnerUUID.String()
-
-	}
-
-	// regular field
-	if req.Project.TeamUUID == emptyReq.Project.TeamUUID {
-
-		res.TeamUUID = existing.TeamUUID
-	} else {
-
-		res.TeamUUID = req.Project.TeamUUID.String()
-
-	}
-
-	// json array
-	if len(req.Project.ProjectExtensions) == 0 {
-
-		res.ProjectExtensions = existing.ProjectExtensions
-	} else {
-
-		res.ProjectExtensions = project_extension.ProjectExtensionSliceToJSON(req.Project.ProjectExtensions)
-
-	}
-
-	// regular field
-	if req.Project.Status == emptyReq.Project.Status {
-
-		res.Status = existing.Status
-	} else {
-
-		res.Status = req.Project.Status.ToInt64()
-
-	}
-
-	// regular field
-	if req.Project.CreatedAt == emptyReq.Project.CreatedAt {
-
-		res.CreatedAt = existing.CreatedAt
-	} else {
-
-		res.CreatedAt = existing.CreatedAt
-
-	}
-
-	// regular field
-	if req.Project.UpdatedAt == emptyReq.Project.UpdatedAt {
-
-		res.UpdatedAt = existing.UpdatedAt
-	} else {
-
-		res.UpdatedAt = custom.Now()
-
-	}
-
-	// regular field
-	if req.Project.CreatedByUUID == emptyReq.Project.CreatedByUUID {
-
-		res.CreatedByUUID = existing.CreatedByUUID
-	} else {
-
-		res.CreatedByUUID = req.Project.CreatedByUUID.String()
-
-	}
-
-	// regular field
-	if req.Project.UpdatedByUUID == emptyReq.Project.UpdatedByUUID {
-
-		res.UpdatedByUUID = existing.UpdatedByUUID
-	} else {
-
-		res.UpdatedByUUID = req.Project.UpdatedByUUID.String()
-
-	}
+	res.UpdatedByUUID = req.Project.UpdatedByUUID.String()
 
 	return res
 

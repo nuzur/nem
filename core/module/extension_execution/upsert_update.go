@@ -145,125 +145,29 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 	res := nemdb.UpdateExtensionExecutionParams{}
 	emptyReq := types.UpsertRequest{}
 
-	// regular field
-	if req.ExtensionExecution.UUID == emptyReq.ExtensionExecution.UUID {
+	res.UUID = req.ExtensionExecution.UUID.String()
 
-		res.UUID = existing.UUID
-	} else {
+	res.ExtensionUUID = req.ExtensionExecution.ExtensionUUID.String()
 
-		res.UUID = req.ExtensionExecution.UUID.String()
+	res.ExtensionVersionUUID = req.ExtensionExecution.ExtensionVersionUUID.String()
 
-	}
+	res.ProjectExtensionUUID = req.ExtensionExecution.ProjectExtensionUUID.String()
 
-	// regular field
-	if req.ExtensionExecution.ExtensionUUID == emptyReq.ExtensionExecution.ExtensionUUID {
+	res.ProjectUUID = req.ExtensionExecution.ProjectUUID.String()
 
-		res.ExtensionUUID = existing.ExtensionUUID
-	} else {
+	res.ProjectVersionUUID = req.ExtensionExecution.ProjectVersionUUID.String()
 
-		res.ExtensionUUID = req.ExtensionExecution.ExtensionUUID.String()
+	res.ExecutedByUUID = req.ExtensionExecution.ExecutedByUUID.String()
 
-	}
+	res.Metadata = []byte(req.ExtensionExecution.Metadata)
 
-	// regular field
-	if req.ExtensionExecution.ExtensionVersionUUID == emptyReq.ExtensionExecution.ExtensionVersionUUID {
+	res.Status = req.ExtensionExecution.Status.ToInt64()
 
-		res.ExtensionVersionUUID = existing.ExtensionVersionUUID
-	} else {
+	res.StatusMsg = req.ExtensionExecution.StatusMsg
 
-		res.ExtensionVersionUUID = req.ExtensionExecution.ExtensionVersionUUID.String()
+	res.CreatedAt = existing.CreatedAt
 
-	}
-
-	// regular field
-	if req.ExtensionExecution.ProjectExtensionUUID == emptyReq.ExtensionExecution.ProjectExtensionUUID {
-
-		res.ProjectExtensionUUID = existing.ProjectExtensionUUID
-	} else {
-
-		res.ProjectExtensionUUID = req.ExtensionExecution.ProjectExtensionUUID.String()
-
-	}
-
-	// regular field
-	if req.ExtensionExecution.ProjectUUID == emptyReq.ExtensionExecution.ProjectUUID {
-
-		res.ProjectUUID = existing.ProjectUUID
-	} else {
-
-		res.ProjectUUID = req.ExtensionExecution.ProjectUUID.String()
-
-	}
-
-	// regular field
-	if req.ExtensionExecution.ProjectVersionUUID == emptyReq.ExtensionExecution.ProjectVersionUUID {
-
-		res.ProjectVersionUUID = existing.ProjectVersionUUID
-	} else {
-
-		res.ProjectVersionUUID = req.ExtensionExecution.ProjectVersionUUID.String()
-
-	}
-
-	// regular field
-	if req.ExtensionExecution.ExecutedByUUID == emptyReq.ExtensionExecution.ExecutedByUUID {
-
-		res.ExecutedByUUID = existing.ExecutedByUUID
-	} else {
-
-		res.ExecutedByUUID = req.ExtensionExecution.ExecutedByUUID.String()
-
-	}
-
-	// regular field
-	if req.ExtensionExecution.Metadata == emptyReq.ExtensionExecution.Metadata {
-
-		res.Metadata = existing.Metadata
-	} else {
-
-		res.Metadata = []byte(req.ExtensionExecution.Metadata)
-
-	}
-
-	// regular field
-	if req.ExtensionExecution.Status == emptyReq.ExtensionExecution.Status {
-
-		res.Status = existing.Status
-	} else {
-
-		res.Status = req.ExtensionExecution.Status.ToInt64()
-
-	}
-
-	// regular field
-	if req.ExtensionExecution.StatusMsg == emptyReq.ExtensionExecution.StatusMsg {
-
-		res.StatusMsg = existing.StatusMsg
-	} else {
-
-		res.StatusMsg = req.ExtensionExecution.StatusMsg
-
-	}
-
-	// regular field
-	if req.ExtensionExecution.CreatedAt == emptyReq.ExtensionExecution.CreatedAt {
-
-		res.CreatedAt = existing.CreatedAt
-	} else {
-
-		res.CreatedAt = existing.CreatedAt
-
-	}
-
-	// regular field
-	if req.ExtensionExecution.UpdatedAt == emptyReq.ExtensionExecution.UpdatedAt {
-
-		res.UpdatedAt = existing.UpdatedAt
-	} else {
-
-		res.UpdatedAt = custom.Now()
-
-	}
+	res.UpdatedAt = custom.Now()
 
 	return res
 

@@ -165,115 +165,27 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Orga
 	res := nemdb.UpdateOrganizationParams{}
 	emptyReq := types.UpsertRequest{}
 
-	// regular field
-	if req.Organization.UUID == emptyReq.Organization.UUID {
+	res.UUID = req.Organization.UUID.String()
 
-		res.UUID = existing.UUID
-	} else {
+	res.Version = req.Organization.Version
 
-		res.UUID = req.Organization.UUID.String()
+	res.Name = req.Organization.Name
 
-	}
+	res.Domains = mapper.SliceToJSON(req.Organization.Domains)
 
-	// regular field
-	if req.Organization.Version == emptyReq.Organization.Version {
+	res.AdminUUIDs = mapper.SliceToJSON(req.Organization.AdminUUIDs)
 
-		res.Version = existing.Version
-	} else {
+	res.Memberships = membership.MembershipSliceToJSON(req.Organization.Memberships)
 
-		res.Version = req.Organization.Version
+	res.Status = req.Organization.Status.ToInt64()
 
-	}
+	res.CreatedAt = existing.CreatedAt
 
-	// regular field
-	if req.Organization.Name == emptyReq.Organization.Name {
+	res.UpdatedAt = custom.Now()
 
-		res.Name = existing.Name
-	} else {
+	res.CreatedByUUID = req.Organization.CreatedByUUID.String()
 
-		res.Name = req.Organization.Name
-
-	}
-
-	// raw json is a pointer
-	if req.Organization.Domains == nil {
-
-		res.Domains = existing.Domains
-	} else {
-
-		res.Domains = mapper.SliceToJSON(req.Organization.Domains)
-
-	}
-
-	// raw json is a pointer
-	if req.Organization.AdminUUIDs == nil {
-
-		res.AdminUUIDs = existing.AdminUUIDs
-	} else {
-
-		res.AdminUUIDs = mapper.SliceToJSON(req.Organization.AdminUUIDs)
-
-	}
-
-	// json array
-	if len(req.Organization.Memberships) == 0 {
-
-		res.Memberships = existing.Memberships
-	} else {
-
-		res.Memberships = membership.MembershipSliceToJSON(req.Organization.Memberships)
-
-	}
-
-	// regular field
-	if req.Organization.Status == emptyReq.Organization.Status {
-
-		res.Status = existing.Status
-	} else {
-
-		res.Status = req.Organization.Status.ToInt64()
-
-	}
-
-	// regular field
-	if req.Organization.CreatedAt == emptyReq.Organization.CreatedAt {
-
-		res.CreatedAt = existing.CreatedAt
-	} else {
-
-		res.CreatedAt = existing.CreatedAt
-
-	}
-
-	// regular field
-	if req.Organization.UpdatedAt == emptyReq.Organization.UpdatedAt {
-
-		res.UpdatedAt = existing.UpdatedAt
-	} else {
-
-		res.UpdatedAt = custom.Now()
-
-	}
-
-	// regular field
-	if req.Organization.CreatedByUUID == emptyReq.Organization.CreatedByUUID {
-
-		res.CreatedByUUID = existing.CreatedByUUID
-	} else {
-
-		res.CreatedByUUID = req.Organization.CreatedByUUID.String()
-
-	}
-
-	// regular field
-	if req.Organization.UpdatedByUUID == emptyReq.Organization.UpdatedByUUID {
-
-		res.UpdatedByUUID = existing.UpdatedByUUID
-	} else {
-
-		res.UpdatedByUUID = req.Organization.UpdatedByUUID.String()
-
-	}
+	res.UpdatedByUUID = req.Organization.UpdatedByUUID.String()
 
 	return res
 

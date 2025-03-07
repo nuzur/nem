@@ -143,105 +143,25 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.User
 	res := nemdb.UpdateUserTeamParams{}
 	emptyReq := types.UpsertRequest{}
 
-	// regular field
-	if req.UserTeam.UUID == emptyReq.UserTeam.UUID {
+	res.UUID = req.UserTeam.UUID.String()
 
-		res.UUID = existing.UUID
-	} else {
+	res.UserUUID = req.UserTeam.UserUUID.String()
 
-		res.UUID = req.UserTeam.UUID.String()
+	res.UserEmail = req.UserTeam.UserEmail
 
-	}
+	res.TeamUUID = req.UserTeam.TeamUUID.String()
 
-	// regular field
-	if req.UserTeam.UserUUID == emptyReq.UserTeam.UserUUID {
+	res.Roles = main_entity.RoleSliceToJSON(req.UserTeam.Roles)
 
-		res.UserUUID = existing.UserUUID
-	} else {
+	res.Status = req.UserTeam.Status.ToInt64()
 
-		res.UserUUID = req.UserTeam.UserUUID.String()
+	res.CreatedAt = existing.CreatedAt
 
-	}
+	res.UpdatedAt = custom.Now()
 
-	// regular field
-	if req.UserTeam.UserEmail == emptyReq.UserTeam.UserEmail {
+	res.CreatedByUUID = req.UserTeam.CreatedByUUID.String()
 
-		res.UserEmail = existing.UserEmail
-	} else {
-
-		res.UserEmail = req.UserTeam.UserEmail
-
-	}
-
-	// regular field
-	if req.UserTeam.TeamUUID == emptyReq.UserTeam.TeamUUID {
-
-		res.TeamUUID = existing.TeamUUID
-	} else {
-
-		res.TeamUUID = req.UserTeam.TeamUUID.String()
-
-	}
-
-	// raw json is a pointer
-	if req.UserTeam.Roles == nil {
-
-		res.Roles = existing.Roles
-	} else {
-
-		res.Roles = main_entity.RoleSliceToJSON(req.UserTeam.Roles)
-
-	}
-
-	// regular field
-	if req.UserTeam.Status == emptyReq.UserTeam.Status {
-
-		res.Status = existing.Status
-	} else {
-
-		res.Status = req.UserTeam.Status.ToInt64()
-
-	}
-
-	// regular field
-	if req.UserTeam.CreatedAt == emptyReq.UserTeam.CreatedAt {
-
-		res.CreatedAt = existing.CreatedAt
-	} else {
-
-		res.CreatedAt = existing.CreatedAt
-
-	}
-
-	// regular field
-	if req.UserTeam.UpdatedAt == emptyReq.UserTeam.UpdatedAt {
-
-		res.UpdatedAt = existing.UpdatedAt
-	} else {
-
-		res.UpdatedAt = custom.Now()
-
-	}
-
-	// regular field
-	if req.UserTeam.CreatedByUUID == emptyReq.UserTeam.CreatedByUUID {
-
-		res.CreatedByUUID = existing.CreatedByUUID
-	} else {
-
-		res.CreatedByUUID = req.UserTeam.CreatedByUUID.String()
-
-	}
-
-	// regular field
-	if req.UserTeam.UpdatedByUUID == emptyReq.UserTeam.UpdatedByUUID {
-
-		res.UpdatedByUUID = existing.UpdatedByUUID
-	} else {
-
-		res.UpdatedByUUID = req.UserTeam.UpdatedByUUID.String()
-
-	}
+	res.UpdatedByUUID = req.UserTeam.UpdatedByUUID.String()
 
 	return res
 

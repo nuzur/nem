@@ -181,195 +181,43 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 	res := nemdb.UpdateExtensionParams{}
 	emptyReq := types.UpsertRequest{}
 
-	// regular field
-	if req.Extension.UUID == emptyReq.Extension.UUID {
+	res.UUID = req.Extension.UUID.String()
 
-		res.UUID = existing.UUID
-	} else {
+	res.Version = req.Extension.Version
 
-		res.UUID = req.Extension.UUID.String()
+	res.Identifier = req.Extension.Identifier
 
-	}
+	res.DisplayName = req.Extension.DisplayName
 
-	// regular field
-	if req.Extension.Version == emptyReq.Extension.Version {
+	res.DisplayAuthorName = req.Extension.DisplayAuthorName
 
-		res.Version = existing.Version
-	} else {
+	res.Description = req.Extension.Description
 
-		res.Version = req.Extension.Version
+	res.URL = req.Extension.URL
 
-	}
+	res.Verfied = req.Extension.Verfied
 
-	// regular field
-	if req.Extension.Identifier == emptyReq.Extension.Identifier {
+	res.Repository = req.Extension.Repository
 
-		res.Identifier = existing.Identifier
-	} else {
+	res.ExtensionType = req.Extension.ExtensionType.ToInt64()
 
-		res.Identifier = req.Extension.Identifier
+	res.Tags = mapper.SliceToJSON(req.Extension.Tags)
 
-	}
+	res.Public = req.Extension.Public
 
-	// regular field
-	if req.Extension.DisplayName == emptyReq.Extension.DisplayName {
+	res.Visibility = visibility.VisibilitySliceToJSON(req.Extension.Visibility)
 
-		res.DisplayName = existing.DisplayName
-	} else {
+	res.Status = req.Extension.Status.ToInt64()
 
-		res.DisplayName = req.Extension.DisplayName
+	res.OwnerUUID = req.Extension.OwnerUUID.String()
 
-	}
+	res.CreatedAt = existing.CreatedAt
 
-	// regular field
-	if req.Extension.DisplayAuthorName == emptyReq.Extension.DisplayAuthorName {
+	res.UpdatedAt = custom.Now()
 
-		res.DisplayAuthorName = existing.DisplayAuthorName
-	} else {
+	res.CreatedByUUID = req.Extension.CreatedByUUID.String()
 
-		res.DisplayAuthorName = req.Extension.DisplayAuthorName
-
-	}
-
-	// regular field
-	if req.Extension.Description == emptyReq.Extension.Description {
-
-		res.Description = existing.Description
-	} else {
-
-		res.Description = req.Extension.Description
-
-	}
-
-	// regular field
-	if req.Extension.URL == emptyReq.Extension.URL {
-
-		res.URL = existing.URL
-	} else {
-
-		res.URL = req.Extension.URL
-
-	}
-
-	// regular field
-	if req.Extension.Verfied == emptyReq.Extension.Verfied {
-
-		res.Verfied = existing.Verfied
-	} else {
-
-		res.Verfied = req.Extension.Verfied
-
-	}
-
-	// regular field
-	if req.Extension.Repository == emptyReq.Extension.Repository {
-
-		res.Repository = existing.Repository
-	} else {
-
-		res.Repository = req.Extension.Repository
-
-	}
-
-	// regular field
-	if req.Extension.ExtensionType == emptyReq.Extension.ExtensionType {
-
-		res.ExtensionType = existing.ExtensionType
-	} else {
-
-		res.ExtensionType = req.Extension.ExtensionType.ToInt64()
-
-	}
-
-	// raw json is a pointer
-	if req.Extension.Tags == nil {
-
-		res.Tags = existing.Tags
-	} else {
-
-		res.Tags = mapper.SliceToJSON(req.Extension.Tags)
-
-	}
-
-	// regular field
-	if req.Extension.Public == emptyReq.Extension.Public {
-
-		res.Public = existing.Public
-	} else {
-
-		res.Public = req.Extension.Public
-
-	}
-
-	// json array
-	if len(req.Extension.Visibility) == 0 {
-
-		res.Visibility = existing.Visibility
-	} else {
-
-		res.Visibility = visibility.VisibilitySliceToJSON(req.Extension.Visibility)
-
-	}
-
-	// regular field
-	if req.Extension.Status == emptyReq.Extension.Status {
-
-		res.Status = existing.Status
-	} else {
-
-		res.Status = req.Extension.Status.ToInt64()
-
-	}
-
-	// regular field
-	if req.Extension.OwnerUUID == emptyReq.Extension.OwnerUUID {
-
-		res.OwnerUUID = existing.OwnerUUID
-	} else {
-
-		res.OwnerUUID = req.Extension.OwnerUUID.String()
-
-	}
-
-	// regular field
-	if req.Extension.CreatedAt == emptyReq.Extension.CreatedAt {
-
-		res.CreatedAt = existing.CreatedAt
-	} else {
-
-		res.CreatedAt = existing.CreatedAt
-
-	}
-
-	// regular field
-	if req.Extension.UpdatedAt == emptyReq.Extension.UpdatedAt {
-
-		res.UpdatedAt = existing.UpdatedAt
-	} else {
-
-		res.UpdatedAt = custom.Now()
-
-	}
-
-	// regular field
-	if req.Extension.CreatedByUUID == emptyReq.Extension.CreatedByUUID {
-
-		res.CreatedByUUID = existing.CreatedByUUID
-	} else {
-
-		res.CreatedByUUID = req.Extension.CreatedByUUID.String()
-
-	}
-
-	// regular field
-	if req.Extension.UpdatedByUUID == emptyReq.Extension.UpdatedByUUID {
-
-		res.UpdatedByUUID = existing.UpdatedByUUID
-	} else {
-
-		res.UpdatedByUUID = req.Extension.UpdatedByUUID.String()
-
-	}
+	res.UpdatedByUUID = req.Extension.UpdatedByUUID.String()
 
 	return res
 

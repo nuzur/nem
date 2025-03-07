@@ -145,125 +145,29 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.User
 	res := nemdb.UpdateUserParams{}
 	emptyReq := types.UpsertRequest{}
 
-	// regular field
-	if req.User.UUID == emptyReq.User.UUID {
+	res.UUID = req.User.UUID.String()
 
-		res.UUID = existing.UUID
-	} else {
+	res.Identifier = req.User.Identifier
 
-		res.UUID = req.User.UUID.String()
+	res.Name = req.User.Name
 
-	}
+	res.LastName = req.User.LastName
 
-	// regular field
-	if req.User.Identifier == emptyReq.User.Identifier {
+	res.Email = req.User.Email
 
-		res.Identifier = existing.Identifier
-	} else {
+	res.UserType = req.User.UserType.ToInt64()
 
-		res.Identifier = req.User.Identifier
+	res.CountryIos2 = req.User.CountryIos2
 
-	}
+	res.Locale = req.User.Locale
 
-	// regular field
-	if req.User.Name == emptyReq.User.Name {
+	res.Metadata = req.User.Metadata
 
-		res.Name = existing.Name
-	} else {
+	res.Status = req.User.Status.ToInt64()
 
-		res.Name = req.User.Name
+	res.CreatedAt = existing.CreatedAt
 
-	}
-
-	// regular field
-	if req.User.LastName == emptyReq.User.LastName {
-
-		res.LastName = existing.LastName
-	} else {
-
-		res.LastName = req.User.LastName
-
-	}
-
-	// regular field
-	if req.User.Email == emptyReq.User.Email {
-
-		res.Email = existing.Email
-	} else {
-
-		res.Email = req.User.Email
-
-	}
-
-	// regular field
-	if req.User.UserType == emptyReq.User.UserType {
-
-		res.UserType = existing.UserType
-	} else {
-
-		res.UserType = req.User.UserType.ToInt64()
-
-	}
-
-	// regular field
-	if req.User.CountryIos2 == emptyReq.User.CountryIos2 {
-
-		res.CountryIos2 = existing.CountryIos2
-	} else {
-
-		res.CountryIos2 = req.User.CountryIos2
-
-	}
-
-	// regular field
-	if req.User.Locale == emptyReq.User.Locale {
-
-		res.Locale = existing.Locale
-	} else {
-
-		res.Locale = req.User.Locale
-
-	}
-
-	// regular field
-	if req.User.Metadata == emptyReq.User.Metadata {
-
-		res.Metadata = existing.Metadata
-	} else {
-
-		res.Metadata = req.User.Metadata
-
-	}
-
-	// regular field
-	if req.User.Status == emptyReq.User.Status {
-
-		res.Status = existing.Status
-	} else {
-
-		res.Status = req.User.Status.ToInt64()
-
-	}
-
-	// regular field
-	if req.User.CreatedAt == emptyReq.User.CreatedAt {
-
-		res.CreatedAt = existing.CreatedAt
-	} else {
-
-		res.CreatedAt = existing.CreatedAt
-
-	}
-
-	// regular field
-	if req.User.UpdatedAt == emptyReq.User.UpdatedAt {
-
-		res.UpdatedAt = existing.UpdatedAt
-	} else {
-
-		res.UpdatedAt = custom.Now()
-
-	}
+	res.UpdatedAt = custom.Now()
 
 	return res
 

@@ -169,145 +169,33 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 	res := nemdb.UpdateExtensionVersionParams{}
 	emptyReq := types.UpsertRequest{}
 
-	// regular field
-	if req.ExtensionVersion.UUID == emptyReq.ExtensionVersion.UUID {
+	res.UUID = req.ExtensionVersion.UUID.String()
 
-		res.UUID = existing.UUID
-	} else {
+	res.Version = req.ExtensionVersion.Version
 
-		res.UUID = req.ExtensionVersion.UUID.String()
+	res.ExtensionUUID = req.ExtensionVersion.ExtensionUUID.String()
 
-	}
+	res.DisplayVersion = req.ExtensionVersion.DisplayVersion
 
-	// regular field
-	if req.ExtensionVersion.Version == emptyReq.ExtensionVersion.Version {
+	res.Description = req.ExtensionVersion.Description
 
-		res.Version = existing.Version
-	} else {
+	res.RepositoryTag = req.ExtensionVersion.RepositoryTag
 
-		res.Version = req.ExtensionVersion.Version
+	res.ConfigurationEntity = []byte(req.ExtensionVersion.ConfigurationEntity)
 
-	}
+	res.ExecutionMode = main_entity.ExecutionModeSliceToJSON(req.ExtensionVersion.ExecutionMode)
 
-	// regular field
-	if req.ExtensionVersion.ExtensionUUID == emptyReq.ExtensionVersion.ExtensionUUID {
+	res.ReviewStatus = req.ExtensionVersion.ReviewStatus.ToInt64()
 
-		res.ExtensionUUID = existing.ExtensionUUID
-	} else {
+	res.Status = req.ExtensionVersion.Status.ToInt64()
 
-		res.ExtensionUUID = req.ExtensionVersion.ExtensionUUID.String()
+	res.CreatedAt = existing.CreatedAt
 
-	}
+	res.UpdatedAt = custom.Now()
 
-	// regular field
-	if req.ExtensionVersion.DisplayVersion == emptyReq.ExtensionVersion.DisplayVersion {
+	res.CreatedByUUID = req.ExtensionVersion.CreatedByUUID.String()
 
-		res.DisplayVersion = existing.DisplayVersion
-	} else {
-
-		res.DisplayVersion = req.ExtensionVersion.DisplayVersion
-
-	}
-
-	// regular field
-	if req.ExtensionVersion.Description == emptyReq.ExtensionVersion.Description {
-
-		res.Description = existing.Description
-	} else {
-
-		res.Description = req.ExtensionVersion.Description
-
-	}
-
-	// regular field
-	if req.ExtensionVersion.RepositoryTag == emptyReq.ExtensionVersion.RepositoryTag {
-
-		res.RepositoryTag = existing.RepositoryTag
-	} else {
-
-		res.RepositoryTag = req.ExtensionVersion.RepositoryTag
-
-	}
-
-	// regular field
-	if req.ExtensionVersion.ConfigurationEntity == emptyReq.ExtensionVersion.ConfigurationEntity {
-
-		res.ConfigurationEntity = existing.ConfigurationEntity
-	} else {
-
-		res.ConfigurationEntity = []byte(req.ExtensionVersion.ConfigurationEntity)
-
-	}
-
-	// raw json is a pointer
-	if req.ExtensionVersion.ExecutionMode == nil {
-
-		res.ExecutionMode = existing.ExecutionMode
-	} else {
-
-		res.ExecutionMode = main_entity.ExecutionModeSliceToJSON(req.ExtensionVersion.ExecutionMode)
-
-	}
-
-	// regular field
-	if req.ExtensionVersion.ReviewStatus == emptyReq.ExtensionVersion.ReviewStatus {
-
-		res.ReviewStatus = existing.ReviewStatus
-	} else {
-
-		res.ReviewStatus = req.ExtensionVersion.ReviewStatus.ToInt64()
-
-	}
-
-	// regular field
-	if req.ExtensionVersion.Status == emptyReq.ExtensionVersion.Status {
-
-		res.Status = existing.Status
-	} else {
-
-		res.Status = req.ExtensionVersion.Status.ToInt64()
-
-	}
-
-	// regular field
-	if req.ExtensionVersion.CreatedAt == emptyReq.ExtensionVersion.CreatedAt {
-
-		res.CreatedAt = existing.CreatedAt
-	} else {
-
-		res.CreatedAt = existing.CreatedAt
-
-	}
-
-	// regular field
-	if req.ExtensionVersion.UpdatedAt == emptyReq.ExtensionVersion.UpdatedAt {
-
-		res.UpdatedAt = existing.UpdatedAt
-	} else {
-
-		res.UpdatedAt = custom.Now()
-
-	}
-
-	// regular field
-	if req.ExtensionVersion.CreatedByUUID == emptyReq.ExtensionVersion.CreatedByUUID {
-
-		res.CreatedByUUID = existing.CreatedByUUID
-	} else {
-
-		res.CreatedByUUID = req.ExtensionVersion.CreatedByUUID.String()
-
-	}
-
-	// regular field
-	if req.ExtensionVersion.UpdatedByUUID == emptyReq.ExtensionVersion.UpdatedByUUID {
-
-		res.UpdatedByUUID = existing.UpdatedByUUID
-	} else {
-
-		res.UpdatedByUUID = req.ExtensionVersion.UpdatedByUUID.String()
-
-	}
+	res.UpdatedByUUID = req.ExtensionVersion.UpdatedByUUID.String()
 
 	return res
 
