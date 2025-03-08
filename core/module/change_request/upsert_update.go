@@ -188,9 +188,17 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 
 	res.OldData = []byte(req.ChangeRequest.OldData)
 
+	if res.OldData == nil {
+		res.OldData = []byte(`{}`)
+	}
+
 	res.OldDataRef = req.ChangeRequest.OldDataRef
 
 	res.NewData = []byte(req.ChangeRequest.NewData)
+
+	if res.NewData == nil {
+		res.NewData = []byte(`{}`)
+	}
 
 	res.NewDataRef = req.ChangeRequest.NewDataRef
 

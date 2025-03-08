@@ -182,6 +182,10 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 	res.ConfigurationEntity = []byte(req.ExtensionVersion.ConfigurationEntity)
 
+	if res.ConfigurationEntity == nil {
+		res.ConfigurationEntity = []byte(`{}`)
+	}
+
 	res.ExecutionMode = main_entity.ExecutionModeSliceToJSON(req.ExtensionVersion.ExecutionMode)
 
 	res.ReviewStatus = req.ExtensionVersion.ReviewStatus.ToInt64()

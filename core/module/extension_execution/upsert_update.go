@@ -160,6 +160,10 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 	res.Metadata = []byte(req.ExtensionExecution.Metadata)
 
+	if res.Metadata == nil {
+		res.Metadata = []byte(`{}`)
+	}
+
 	res.Status = req.ExtensionExecution.Status.ToInt64()
 
 	res.StatusMsg = req.ExtensionExecution.StatusMsg
