@@ -182,7 +182,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 	res.ConfigurationEntity = []byte(req.ExtensionVersion.ConfigurationEntity)
 
-	if res.ConfigurationEntity == nil {
+	if string(res.ConfigurationEntity) == "" {
 		res.ConfigurationEntity = []byte(`{}`)
 	}
 

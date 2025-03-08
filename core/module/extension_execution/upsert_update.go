@@ -160,7 +160,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 	res.Metadata = []byte(req.ExtensionExecution.Metadata)
 
-	if res.Metadata == nil {
+	if string(res.Metadata) == "" {
 		res.Metadata = []byte(`{}`)
 	}
 
