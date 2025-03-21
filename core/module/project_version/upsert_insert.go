@@ -19,6 +19,8 @@ import (
 	"github.com/nuzur/nem/core/entity/service"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -118,7 +120,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertProject
 
 		Services: service.ServiceSliceToJSON(req.ProjectVersion.Services),
 
-		BaseVersionUUID: req.ProjectVersion.BaseVersionUUID.String(),
+		BaseVersionUUID: mapper.StringToSqlNullString(req.ProjectVersion.BaseVersionUUID.String()),
 
 		ReviewStatus: req.ProjectVersion.ReviewStatus.ToInt64(),
 

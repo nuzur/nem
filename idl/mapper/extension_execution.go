@@ -18,9 +18,9 @@ func ExtensionExecutionToProto(e main_entity.ExtensionExecution) *pb.ExtensionEx
 		ProjectUuid:          e.ProjectUUID.String(),
 		ProjectVersionUuid:   e.ProjectVersionUUID.String(),
 		ExecutedByUuid:       e.ExecutedByUUID.String(),
-		Metadata:             e.Metadata,
+		Metadata:             StringPtrToString(e.Metadata),
 		Status:               pb.ExtensionExecutionStatus(e.Status),
-		StatusMsg:            e.StatusMsg,
+		StatusMsg:            StringPtrToString(e.StatusMsg),
 		CreatedAt:            timestamppb.New(e.CreatedAt),
 		UpdatedAt:            timestamppb.New(e.UpdatedAt),
 	}
@@ -46,9 +46,9 @@ func ExtensionExecutionFromProto(m *pb.ExtensionExecution) main_entity.Extension
 		ProjectUUID:          uuid.FromStringOrNil(m.GetProjectUuid()),
 		ProjectVersionUUID:   uuid.FromStringOrNil(m.GetProjectVersionUuid()),
 		ExecutedByUUID:       uuid.FromStringOrNil(m.GetExecutedByUuid()),
-		Metadata:             m.GetMetadata(),
+		Metadata:             &m.Metadata,
 		Status:               main_entity.Status(m.GetStatus()),
-		StatusMsg:            m.GetStatusMsg(),
+		StatusMsg:            &m.StatusMsg,
 		CreatedAt:            m.GetCreatedAt().AsTime(),
 		UpdatedAt:            m.GetUpdatedAt().AsTime(),
 	}

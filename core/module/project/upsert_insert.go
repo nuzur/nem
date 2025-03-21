@@ -104,11 +104,11 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertProject
 
 		Name: req.Project.Name,
 
-		Description: req.Project.Description,
+		Description: mapper.StringPtrToSqlNullString(req.Project.Description),
 
 		Tags: mapper.SliceToJSON(req.Project.Tags),
 
-		URL: req.Project.URL,
+		URL: mapper.StringPtrToSqlNullString(req.Project.URL),
 
 		OwnerUUID: req.Project.OwnerUUID.String(),
 

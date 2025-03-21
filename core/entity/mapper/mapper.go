@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	"database/sql"
 	"github.com/gofrs/uuid"
 )
 
@@ -85,4 +86,46 @@ func SliceToJSON(slice interface{}) json.RawMessage {
 		return json.RawMessage{}
 	}
 	return res
+}
+
+func SqlNullStringToStringPtr(s sql.NullString) *string {
+	if s.Valid {
+		return &s.String
+	}
+	return nil
+}
+
+func SqlNullStringToString(s sql.NullString) string {
+	if s.Valid {
+		return s.String
+	}
+	return ""
+}
+
+func StringPtrToSqlNullString(s *string) sql.NullString {
+	if s == nil {
+		return sql.NullString{}
+	}
+	return sql.NullString{
+		String: *s,
+		Valid:  true,
+	}
+}
+
+func StringToSqlNullString(s string) sql.NullString {
+	return sql.NullString{
+		String: s,
+		Valid:  true,
+	}
+}
+
+func StringPtrToString(s *string) string {
+	if s == nil {
+		return ""
+	}
+	return *s
+}
+
+func StringToStringPtr(s string) *string {
+	return &s
 }

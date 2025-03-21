@@ -7,7 +7,7 @@ import (
 )
 
 type FetchUserTeamByUserEmailAndStatusRequest struct {
-	UserEmail string
+	UserEmail *string
 	Status    main_entity.Status
 
 	Offset  int32

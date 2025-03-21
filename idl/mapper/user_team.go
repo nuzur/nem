@@ -13,7 +13,7 @@ func UserTeamToProto(e main_entity.UserTeam) *pb.UserTeam {
 	return &pb.UserTeam{
 		Uuid:          e.UUID.String(),
 		UserUuid:      e.UserUUID.String(),
-		UserEmail:     e.UserEmail,
+		UserEmail:     StringPtrToString(e.UserEmail),
 		TeamUuid:      e.TeamUUID.String(),
 		Roles:         UserTeamRoleSliceToProto(e.Roles),
 		Status:        pb.UserTeamStatus(e.Status),
@@ -39,7 +39,7 @@ func UserTeamFromProto(m *pb.UserTeam) main_entity.UserTeam {
 	return main_entity.UserTeam{
 		UUID:          uuid.FromStringOrNil(m.GetUuid()),
 		UserUUID:      uuid.FromStringOrNil(m.GetUserUuid()),
-		UserEmail:     m.GetUserEmail(),
+		UserEmail:     &m.UserEmail,
 		TeamUUID:      uuid.FromStringOrNil(m.GetTeamUuid()),
 		Roles:         UserTeamRoleSliceFromProto(m.GetRoles()),
 		Status:        main_entity.Status(m.GetStatus()),

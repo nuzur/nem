@@ -20,8 +20,11 @@ func (m *module) FetchProjectByNameAndStatus(
 		models, err := m.repository.Queries.FetchProjectByNameAndStatus(
 			ctx,
 			nemdb.FetchProjectByNameAndStatusParams{
-				Name:   req.Name,
+
+				Name: req.Name,
+
 				Status: req.Status.ToInt64(),
+
 				Offset: req.Offset,
 				Limit:  req.Limit,
 			},
@@ -96,8 +99,11 @@ func (m *module) FetchProjectByNameAndStatus(
 			models, err := m.repository.Queries.FetchProjectByNameAndStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchProjectByNameAndStatusOrderedByCreatedAtASCParams{
-					Name:   req.Name,
+
+					Name: req.Name,
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -121,8 +127,11 @@ func (m *module) FetchProjectByNameAndStatus(
 			models, err := m.repository.Queries.FetchProjectByNameAndStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchProjectByNameAndStatusOrderedByCreatedAtDESCParams{
-					Name:   req.Name,
+
+					Name: req.Name,
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -149,8 +158,11 @@ func (m *module) FetchProjectByNameAndStatus(
 			models, err := m.repository.Queries.FetchProjectByNameAndStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchProjectByNameAndStatusOrderedByUpdatedAtASCParams{
-					Name:   req.Name,
+
+					Name: req.Name,
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -174,8 +186,11 @@ func (m *module) FetchProjectByNameAndStatus(
 			models, err := m.repository.Queries.FetchProjectByNameAndStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchProjectByNameAndStatusOrderedByUpdatedAtDESCParams{
-					Name:   req.Name,
+
+					Name: req.Name,
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},

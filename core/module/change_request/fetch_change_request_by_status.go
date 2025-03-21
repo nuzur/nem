@@ -20,7 +20,9 @@ func (m *module) FetchChangeRequestByStatus(
 		models, err := m.repository.Queries.FetchChangeRequestByStatus(
 			ctx,
 			nemdb.FetchChangeRequestByStatusParams{
+
 				Status: req.Status.ToInt64(),
+
 				Offset: req.Offset,
 				Limit:  req.Limit,
 			},
@@ -95,7 +97,9 @@ func (m *module) FetchChangeRequestByStatus(
 			models, err := m.repository.Queries.FetchChangeRequestByStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchChangeRequestByStatusOrderedByCreatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -119,7 +123,9 @@ func (m *module) FetchChangeRequestByStatus(
 			models, err := m.repository.Queries.FetchChangeRequestByStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchChangeRequestByStatusOrderedByCreatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -146,7 +152,9 @@ func (m *module) FetchChangeRequestByStatus(
 			models, err := m.repository.Queries.FetchChangeRequestByStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchChangeRequestByStatusOrderedByUpdatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -170,7 +178,9 @@ func (m *module) FetchChangeRequestByStatus(
 			models, err := m.repository.Queries.FetchChangeRequestByStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchChangeRequestByStatusOrderedByUpdatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},

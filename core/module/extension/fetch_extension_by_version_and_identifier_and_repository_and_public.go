@@ -20,12 +20,17 @@ func (m *module) FetchExtensionByVersionAndIdentifierAndRepositoryAndPublic(
 		models, err := m.repository.Queries.FetchExtensionByVersionAndIdentifierAndRepositoryAndPublic(
 			ctx,
 			nemdb.FetchExtensionByVersionAndIdentifierAndRepositoryAndPublicParams{
-				Version:    req.Version,
+
+				Version: req.Version,
+
 				Identifier: req.Identifier,
+
 				Repository: req.Repository,
-				Public:     req.Public,
-				Offset:     req.Offset,
-				Limit:      req.Limit,
+
+				Public: req.Public,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -98,12 +103,17 @@ func (m *module) FetchExtensionByVersionAndIdentifierAndRepositoryAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndIdentifierAndRepositoryAndPublicOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndIdentifierAndRepositoryAndPublicOrderedByCreatedAtASCParams{
-					Version:    req.Version,
+
+					Version: req.Version,
+
 					Identifier: req.Identifier,
+
 					Repository: req.Repository,
-					Public:     req.Public,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -125,12 +135,17 @@ func (m *module) FetchExtensionByVersionAndIdentifierAndRepositoryAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndIdentifierAndRepositoryAndPublicOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndIdentifierAndRepositoryAndPublicOrderedByCreatedAtDESCParams{
-					Version:    req.Version,
+
+					Version: req.Version,
+
 					Identifier: req.Identifier,
+
 					Repository: req.Repository,
-					Public:     req.Public,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -155,12 +170,17 @@ func (m *module) FetchExtensionByVersionAndIdentifierAndRepositoryAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndIdentifierAndRepositoryAndPublicOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndIdentifierAndRepositoryAndPublicOrderedByUpdatedAtASCParams{
-					Version:    req.Version,
+
+					Version: req.Version,
+
 					Identifier: req.Identifier,
+
 					Repository: req.Repository,
-					Public:     req.Public,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -182,12 +202,17 @@ func (m *module) FetchExtensionByVersionAndIdentifierAndRepositoryAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndIdentifierAndRepositoryAndPublicOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndIdentifierAndRepositoryAndPublicOrderedByUpdatedAtDESCParams{
-					Version:    req.Version,
+
+					Version: req.Version,
+
 					Identifier: req.Identifier,
+
 					Repository: req.Repository,
-					Public:     req.Public,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

@@ -17,7 +17,7 @@ import (
 
 type Visibility struct {
 	UUID              uuid.UUID   `json:"uuid"`
-	Description       string      `json:"description"`
+	Description       *string     `json:"description"`
 	OrganizationUUIDs []uuid.UUID `json:"organization_uuids"`
 	TeamUUIDs         []uuid.UUID `json:"team_uuids"`
 	UserUUIDs         []uuid.UUID `json:"user_uuids"`
@@ -113,7 +113,7 @@ func NewVisibilityWithRandomValues() Visibility {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return Visibility{
 		UUID:              randomvalues.GetRandomUUIDValue(),
-		Description:       randomvalues.GetRandomStringValue(),
+		Description:       randomvalues.GetRandomStringValuePtr(),
 		OrganizationUUIDs: []uuid.UUID{},
 		TeamUUIDs:         []uuid.UUID{},
 		UserUUIDs:         []uuid.UUID{},

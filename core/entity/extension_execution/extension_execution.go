@@ -23,9 +23,9 @@ type ExtensionExecution struct {
 	ProjectUUID          uuid.UUID `json:"project_uuid"`
 	ProjectVersionUUID   uuid.UUID `json:"project_version_uuid"`
 	ExecutedByUUID       uuid.UUID `json:"executed_by_uuid"`
-	Metadata             string    `json:"metadata"`
+	Metadata             *string   `json:"metadata"`
 	Status               Status    `json:"status"`
-	StatusMsg            string    `json:"status_msg"`
+	StatusMsg            *string   `json:"status_msg"`
 	CreatedAt            time.Time `json:"created_at"`
 	UpdatedAt            time.Time `json:"updated_at"`
 }
@@ -134,9 +134,9 @@ func NewExtensionExecutionWithRandomValues() ExtensionExecution {
 		ProjectUUID:          randomvalues.GetRandomUUIDValue(),
 		ProjectVersionUUID:   randomvalues.GetRandomUUIDValue(),
 		ExecutedByUUID:       randomvalues.GetRandomUUIDValue(),
-		Metadata:             randomvalues.GetRandomRawJSONValue(),
+		Metadata:             randomvalues.GetRandomRawJSONValuePtr(),
 		Status:               randomvalues.GetRandomOptionValue[Status](4),
-		StatusMsg:            randomvalues.GetRandomStringValue(),
+		StatusMsg:            randomvalues.GetRandomStringValuePtr(),
 		CreatedAt:            randomvalues.GetRandomTimeValue(),
 		UpdatedAt:            randomvalues.GetRandomTimeValue(),
 	}

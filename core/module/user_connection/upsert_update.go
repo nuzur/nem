@@ -12,6 +12,8 @@ import (
 	"github.com/nuzur/nem/core/entity/user_connection_type_config"
 
 	"github.com/nuzur/nem/custom"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -125,7 +127,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.User
 
 			ProjectUUID: req.UserConnection.ProjectUUID.String(),
 
-			ProjectVersionUUID: req.UserConnection.ProjectVersionUUID.String(),
+			ProjectVersionUUID: mapper.StringToSqlNullString(req.UserConnection.ProjectVersionUUID.String()),
 
 			Type: req.UserConnection.Type.ToInt64(),
 
@@ -151,7 +153,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.User
 
 	res.ProjectUUID = req.UserConnection.ProjectUUID.String()
 
-	res.ProjectVersionUUID = req.UserConnection.ProjectVersionUUID.String()
+	res.ProjectVersionUUID = mapper.StringToSqlNullString(req.UserConnection.ProjectVersionUUID.String())
 
 	res.Type = req.UserConnection.Type.ToInt64()
 

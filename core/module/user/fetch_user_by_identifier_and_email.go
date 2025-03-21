@@ -20,10 +20,13 @@ func (m *module) FetchUserByIdentifierAndEmail(
 		models, err := m.repository.Queries.FetchUserByIdentifierAndEmail(
 			ctx,
 			nemdb.FetchUserByIdentifierAndEmailParams{
+
 				Identifier: req.Identifier,
-				Email:      req.Email,
-				Offset:     req.Offset,
-				Limit:      req.Limit,
+
+				Email: req.Email,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchUserByIdentifierAndEmail(
 			models, err := m.repository.Queries.FetchUserByIdentifierAndEmailOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchUserByIdentifierAndEmailOrderedByCreatedAtASCParams{
+
 					Identifier: req.Identifier,
-					Email:      req.Email,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Email: req.Email,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchUserByIdentifierAndEmail(
 			models, err := m.repository.Queries.FetchUserByIdentifierAndEmailOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchUserByIdentifierAndEmailOrderedByCreatedAtDESCParams{
+
 					Identifier: req.Identifier,
-					Email:      req.Email,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Email: req.Email,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchUserByIdentifierAndEmail(
 			models, err := m.repository.Queries.FetchUserByIdentifierAndEmailOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchUserByIdentifierAndEmailOrderedByUpdatedAtASCParams{
+
 					Identifier: req.Identifier,
-					Email:      req.Email,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Email: req.Email,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchUserByIdentifierAndEmail(
 			models, err := m.repository.Queries.FetchUserByIdentifierAndEmailOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchUserByIdentifierAndEmailOrderedByUpdatedAtDESCParams{
+
 					Identifier: req.Identifier,
-					Email:      req.Email,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Email: req.Email,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

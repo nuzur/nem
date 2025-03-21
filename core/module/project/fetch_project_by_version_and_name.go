@@ -20,10 +20,13 @@ func (m *module) FetchProjectByVersionAndName(
 		models, err := m.repository.Queries.FetchProjectByVersionAndName(
 			ctx,
 			nemdb.FetchProjectByVersionAndNameParams{
+
 				Version: req.Version,
-				Name:    req.Name,
-				Offset:  req.Offset,
-				Limit:   req.Limit,
+
+				Name: req.Name,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchProjectByVersionAndName(
 			models, err := m.repository.Queries.FetchProjectByVersionAndNameOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchProjectByVersionAndNameOrderedByCreatedAtASCParams{
+
 					Version: req.Version,
-					Name:    req.Name,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Name: req.Name,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchProjectByVersionAndName(
 			models, err := m.repository.Queries.FetchProjectByVersionAndNameOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchProjectByVersionAndNameOrderedByCreatedAtDESCParams{
+
 					Version: req.Version,
-					Name:    req.Name,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Name: req.Name,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchProjectByVersionAndName(
 			models, err := m.repository.Queries.FetchProjectByVersionAndNameOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchProjectByVersionAndNameOrderedByUpdatedAtASCParams{
+
 					Version: req.Version,
-					Name:    req.Name,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Name: req.Name,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchProjectByVersionAndName(
 			models, err := m.repository.Queries.FetchProjectByVersionAndNameOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchProjectByVersionAndNameOrderedByUpdatedAtDESCParams{
+
 					Version: req.Version,
-					Name:    req.Name,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Name: req.Name,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

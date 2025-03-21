@@ -13,12 +13,12 @@ func UserConnectionExecutionToProto(e main_entity.UserConnectionExecution) *pb.U
 	return &pb.UserConnectionExecution{
 		Uuid:          e.UUID.String(),
 		Status:        pb.UserConnectionExecutionStatus(e.Status),
-		ResultsPath:   e.ResultsPath,
+		ResultsPath:   StringPtrToString(e.ResultsPath),
 		NumResults:    int64(e.NumResults),
 		StartedAt:     timestamppb.New(e.StartedAt),
 		FinishedAt:    timestamppb.New(e.FinishedAt),
-		EstimatedTime: e.EstimatedTime,
-		UserMsg:       e.UserMsg,
+		EstimatedTime: StringPtrToString(e.EstimatedTime),
+		UserMsg:       StringPtrToString(e.UserMsg),
 	}
 }
 
@@ -37,12 +37,12 @@ func UserConnectionExecutionFromProto(m *pb.UserConnectionExecution) main_entity
 	return main_entity.UserConnectionExecution{
 		UUID:          uuid.FromStringOrNil(m.GetUuid()),
 		Status:        main_entity.Status(m.GetStatus()),
-		ResultsPath:   m.GetResultsPath(),
+		ResultsPath:   &m.ResultsPath,
 		NumResults:    int64(m.GetNumResults()),
 		StartedAt:     m.GetStartedAt().AsTime(),
 		FinishedAt:    m.GetFinishedAt().AsTime(),
-		EstimatedTime: m.GetEstimatedTime(),
-		UserMsg:       m.GetUserMsg(),
+		EstimatedTime: &m.EstimatedTime,
+		UserMsg:       &m.UserMsg,
 	}
 }
 

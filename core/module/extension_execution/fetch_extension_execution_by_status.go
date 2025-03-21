@@ -20,7 +20,9 @@ func (m *module) FetchExtensionExecutionByStatus(
 		models, err := m.repository.Queries.FetchExtensionExecutionByStatus(
 			ctx,
 			nemdb.FetchExtensionExecutionByStatusParams{
+
 				Status: req.Status.ToInt64(),
+
 				Offset: req.Offset,
 				Limit:  req.Limit,
 			},
@@ -95,7 +97,9 @@ func (m *module) FetchExtensionExecutionByStatus(
 			models, err := m.repository.Queries.FetchExtensionExecutionByStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchExtensionExecutionByStatusOrderedByCreatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -119,7 +123,9 @@ func (m *module) FetchExtensionExecutionByStatus(
 			models, err := m.repository.Queries.FetchExtensionExecutionByStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionExecutionByStatusOrderedByCreatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -146,7 +152,9 @@ func (m *module) FetchExtensionExecutionByStatus(
 			models, err := m.repository.Queries.FetchExtensionExecutionByStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchExtensionExecutionByStatusOrderedByUpdatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -170,7 +178,9 @@ func (m *module) FetchExtensionExecutionByStatus(
 			models, err := m.repository.Queries.FetchExtensionExecutionByStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionExecutionByStatusOrderedByUpdatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},

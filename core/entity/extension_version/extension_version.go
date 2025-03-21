@@ -19,10 +19,10 @@ type ExtensionVersion struct {
 	UUID                uuid.UUID       `json:"uuid"`
 	Version             int64           `json:"version"`
 	ExtensionUUID       uuid.UUID       `json:"extension_uuid"`
-	DisplayVersion      string          `json:"display_version"`
-	Description         string          `json:"description"`
+	DisplayVersion      *string         `json:"display_version"`
+	Description         *string         `json:"description"`
 	RepositoryTag       string          `json:"repository_tag"`
-	ConfigurationEntity string          `json:"configuration_entity"`
+	ConfigurationEntity *string         `json:"configuration_entity"`
 	ExecutionMode       []ExecutionMode `json:"execution_mode"`
 	ReviewStatus        ReviewStatus    `json:"review_status"`
 	Status              Status          `json:"status"`
@@ -134,10 +134,10 @@ func NewExtensionVersionWithRandomValues() ExtensionVersion {
 		UUID:                randomvalues.GetRandomUUIDValue(),
 		Version:             randomvalues.GetRandomIntValue(),
 		ExtensionUUID:       randomvalues.GetRandomUUIDValue(),
-		DisplayVersion:      randomvalues.GetRandomStringValue(),
-		Description:         randomvalues.GetRandomStringValue(),
+		DisplayVersion:      randomvalues.GetRandomStringValuePtr(),
+		Description:         randomvalues.GetRandomStringValuePtr(),
 		RepositoryTag:       randomvalues.GetRandomStringValue(),
-		ConfigurationEntity: randomvalues.GetRandomRawJSONValue(),
+		ConfigurationEntity: randomvalues.GetRandomRawJSONValuePtr(),
 		ExecutionMode:       randomvalues.GetRandomOptionsValues[ExecutionMode](2),
 		ReviewStatus:        randomvalues.GetRandomOptionValue[ReviewStatus](5),
 		Status:              randomvalues.GetRandomOptionValue[Status](2),

@@ -20,10 +20,13 @@ func (m *module) FetchOrganizationByVersionAndStatus(
 		models, err := m.repository.Queries.FetchOrganizationByVersionAndStatus(
 			ctx,
 			nemdb.FetchOrganizationByVersionAndStatusParams{
+
 				Version: req.Version,
-				Status:  req.Status.ToInt64(),
-				Offset:  req.Offset,
-				Limit:   req.Limit,
+
+				Status: req.Status.ToInt64(),
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchOrganizationByVersionAndStatus(
 			models, err := m.repository.Queries.FetchOrganizationByVersionAndStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchOrganizationByVersionAndStatusOrderedByCreatedAtASCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchOrganizationByVersionAndStatus(
 			models, err := m.repository.Queries.FetchOrganizationByVersionAndStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchOrganizationByVersionAndStatusOrderedByCreatedAtDESCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchOrganizationByVersionAndStatus(
 			models, err := m.repository.Queries.FetchOrganizationByVersionAndStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchOrganizationByVersionAndStatusOrderedByUpdatedAtASCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchOrganizationByVersionAndStatus(
 			models, err := m.repository.Queries.FetchOrganizationByVersionAndStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchOrganizationByVersionAndStatusOrderedByUpdatedAtDESCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

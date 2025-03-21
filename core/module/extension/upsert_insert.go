@@ -104,13 +104,13 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertExtensi
 
 		Identifier: req.Extension.Identifier,
 
-		DisplayName: req.Extension.DisplayName,
+		DisplayName: mapper.StringPtrToSqlNullString(req.Extension.DisplayName),
 
-		DisplayAuthorName: req.Extension.DisplayAuthorName,
+		DisplayAuthorName: mapper.StringPtrToSqlNullString(req.Extension.DisplayAuthorName),
 
-		Description: req.Extension.Description,
+		Description: mapper.StringPtrToSqlNullString(req.Extension.Description),
 
-		URL: req.Extension.URL,
+		URL: mapper.StringPtrToSqlNullString(req.Extension.URL),
 
 		Verfied: req.Extension.Verfied,
 

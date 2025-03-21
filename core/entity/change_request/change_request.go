@@ -20,13 +20,13 @@ type ChangeRequest struct {
 	UUID          uuid.UUID                                   `json:"uuid"`
 	Version       int64                                       `json:"version"`
 	Title         string                                      `json:"title"`
-	Description   string                                      `json:"description"`
+	Description   *string                                     `json:"description"`
 	ReviewType    ReviewType                                  `json:"review_type"`
 	RefUUID       uuid.UUID                                   `json:"ref_uuid"`
-	OldData       string                                      `json:"old_data"`
-	OldDataRef    string                                      `json:"old_data_ref"`
-	NewData       string                                      `json:"new_data"`
-	NewDataRef    string                                      `json:"new_data_ref"`
+	OldData       *string                                     `json:"old_data"`
+	OldDataRef    *string                                     `json:"old_data_ref"`
+	NewData       *string                                     `json:"new_data"`
+	NewDataRef    *string                                     `json:"new_data_ref"`
 	Reviews       []change_request_review.ChangeRequestReview `json:"reviews"`
 	OwnerUUID     uuid.UUID                                   `json:"owner_uuid"`
 	Status        Status                                      `json:"status"`
@@ -142,13 +142,13 @@ func NewChangeRequestWithRandomValues() ChangeRequest {
 		UUID:          randomvalues.GetRandomUUIDValue(),
 		Version:       randomvalues.GetRandomIntValue(),
 		Title:         randomvalues.GetRandomStringValue(),
-		Description:   randomvalues.GetRandomStringValue(),
+		Description:   randomvalues.GetRandomStringValuePtr(),
 		ReviewType:    randomvalues.GetRandomOptionValue[ReviewType](3),
 		RefUUID:       randomvalues.GetRandomUUIDValue(),
-		OldData:       randomvalues.GetRandomRawJSONValue(),
-		OldDataRef:    randomvalues.GetRandomStringValue(),
-		NewData:       randomvalues.GetRandomRawJSONValue(),
-		NewDataRef:    randomvalues.GetRandomStringValue(),
+		OldData:       randomvalues.GetRandomRawJSONValuePtr(),
+		OldDataRef:    randomvalues.GetRandomStringValuePtr(),
+		NewData:       randomvalues.GetRandomRawJSONValuePtr(),
+		NewDataRef:    randomvalues.GetRandomStringValuePtr(),
 		Reviews:       change_request_review.NewChangeRequestReviewSliceWithRandomValues(rand.Intn(10)),
 		OwnerUUID:     randomvalues.GetRandomUUIDValue(),
 		Status:        randomvalues.GetRandomOptionValue[Status](2),

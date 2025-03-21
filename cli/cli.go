@@ -124,17 +124,7 @@ func main() {
 
 						Identifier: fields["identifier"].value,
 
-						Name: fields["name"].value,
-
-						LastName: fields["last_name"].value,
-
 						Email: fields["email"].value,
-
-						CountryIos2: fields["country_ios2"].value,
-
-						Locale: fields["locale"].value,
-
-						Metadata: fields["metadata"].value,
 
 						Status: user.Status(1),
 					},

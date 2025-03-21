@@ -15,7 +15,7 @@ import (
 )
 
 type DbTypeMysqlConfig struct {
-	Params string `json:"params"`
+	Params *string `json:"params"`
 }
 
 func (e DbTypeMysqlConfig) String() string {
@@ -90,7 +90,7 @@ func DbTypeMysqlConfigSliceToJSON(e []DbTypeMysqlConfig) json.RawMessage {
 func NewDbTypeMysqlConfigWithRandomValues() DbTypeMysqlConfig {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return DbTypeMysqlConfig{
-		Params: randomvalues.GetRandomStringValue(),
+		Params: randomvalues.GetRandomStringValuePtr(),
 	}
 }
 

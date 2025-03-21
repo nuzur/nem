@@ -13,6 +13,8 @@ import (
 	"github.com/nuzur/nem/custom"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -142,13 +144,13 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 			ExtensionUUID: req.ExtensionVersion.ExtensionUUID.String(),
 
-			DisplayVersion: req.ExtensionVersion.DisplayVersion,
+			DisplayVersion: mapper.StringPtrToSqlNullString(req.ExtensionVersion.DisplayVersion),
 
-			Description: req.ExtensionVersion.Description,
+			Description: mapper.StringPtrToSqlNullString(req.ExtensionVersion.Description),
 
 			RepositoryTag: req.ExtensionVersion.RepositoryTag,
 
-			ConfigurationEntity: []byte(req.ExtensionVersion.ConfigurationEntity),
+			ConfigurationEntity: []byte(mapper.StringPtrToString(req.ExtensionVersion.ConfigurationEntity)),
 
 			ExecutionMode: main_entity.ExecutionModeSliceToJSON(req.ExtensionVersion.ExecutionMode),
 
@@ -174,13 +176,13 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 	res.ExtensionUUID = req.ExtensionVersion.ExtensionUUID.String()
 
-	res.DisplayVersion = req.ExtensionVersion.DisplayVersion
+	res.DisplayVersion = mapper.StringPtrToSqlNullString(req.ExtensionVersion.DisplayVersion)
 
-	res.Description = req.ExtensionVersion.Description
+	res.Description = mapper.StringPtrToSqlNullString(req.ExtensionVersion.Description)
 
 	res.RepositoryTag = req.ExtensionVersion.RepositoryTag
 
-	res.ConfigurationEntity = []byte(req.ExtensionVersion.ConfigurationEntity)
+	res.ConfigurationEntity = []byte(mapper.StringPtrToString(req.ExtensionVersion.ConfigurationEntity))
 
 	if string(res.ConfigurationEntity) == "" {
 		res.ConfigurationEntity = []byte(`{}`)

@@ -7,10 +7,10 @@ import (
 
 func ObjectStoreS3TypeConfigToProto(e main_entity.ObjectStoreS3TypeConfig) *pb.ObjectStoreS3TypeConfig {
 	return &pb.ObjectStoreS3TypeConfig{
-		Region: e.Region,
-		Key:    e.Key,
-		Secret: e.Secret,
-		Bucket: e.Bucket,
+		Region: StringPtrToString(e.Region),
+		Key:    StringPtrToString(e.Key),
+		Secret: StringPtrToString(e.Secret),
+		Bucket: StringPtrToString(e.Bucket),
 	}
 }
 
@@ -27,10 +27,10 @@ func ObjectStoreS3TypeConfigFromProto(m *pb.ObjectStoreS3TypeConfig) main_entity
 		return main_entity.ObjectStoreS3TypeConfig{}
 	}
 	return main_entity.ObjectStoreS3TypeConfig{
-		Region: m.GetRegion(),
-		Key:    m.GetKey(),
-		Secret: m.GetSecret(),
-		Bucket: m.GetBucket(),
+		Region: &m.Region,
+		Key:    &m.Key,
+		Secret: &m.Secret,
+		Bucket: &m.Bucket,
 	}
 }
 

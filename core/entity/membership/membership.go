@@ -19,7 +19,7 @@ type Membership struct {
 	UUID          uuid.UUID `json:"uuid"`
 	OwnerUUID     uuid.UUID `json:"owner_uuid"`
 	Type          Type      `json:"type"`
-	Metadata      string    `json:"metadata"`
+	Metadata      *string   `json:"metadata"`
 	Status        Status    `json:"status"`
 	CreatedAt     time.Time `json:"created_at"`
 	UpdatedAt     time.Time `json:"updated_at"`
@@ -110,7 +110,7 @@ func NewMembershipWithRandomValues() Membership {
 		UUID:          randomvalues.GetRandomUUIDValue(),
 		OwnerUUID:     randomvalues.GetRandomUUIDValue(),
 		Type:          randomvalues.GetRandomOptionValue[Type](4),
-		Metadata:      randomvalues.GetRandomStringValue(),
+		Metadata:      randomvalues.GetRandomStringValuePtr(),
 		Status:        randomvalues.GetRandomOptionValue[Status](2),
 		CreatedAt:     randomvalues.GetRandomTimeValue(),
 		UpdatedAt:     randomvalues.GetRandomTimeValue(),

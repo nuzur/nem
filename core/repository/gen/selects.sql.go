@@ -7,6 +7,7 @@ package nemdb
 
 import (
 	"context"
+	"database/sql"
 )
 
 const fetchChangeRequestByStatus = `-- name: FetchChangeRequestByStatus :many
@@ -31170,9 +31171,9 @@ WHERE
 `
 
 type FetchUserTeamByUserEmailParams struct {
-	UserEmail string `json:"user_email"`
-	Offset    int32  `json:"offset"`
-	Limit     int32  `json:"limit"`
+	UserEmail sql.NullString `json:"user_email"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
 }
 
 func (q *Queries) FetchUserTeamByUserEmail(ctx context.Context, arg FetchUserTeamByUserEmailParams) ([]UserTeam, error) {
@@ -31217,10 +31218,10 @@ WHERE
 `
 
 type FetchUserTeamByUserEmailAndStatusParams struct {
-	UserEmail string `json:"user_email"`
-	Status    int64  `json:"status"`
-	Offset    int32  `json:"offset"`
-	Limit     int32  `json:"limit"`
+	UserEmail sql.NullString `json:"user_email"`
+	Status    int64          `json:"status"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
 }
 
 func (q *Queries) FetchUserTeamByUserEmailAndStatus(ctx context.Context, arg FetchUserTeamByUserEmailAndStatusParams) ([]UserTeam, error) {
@@ -31271,10 +31272,10 @@ WHERE
 `
 
 type FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtASCParams struct {
-	UserEmail string `json:"user_email"`
-	Status    int64  `json:"status"`
-	Offset    int32  `json:"offset"`
-	Limit     int32  `json:"limit"`
+	UserEmail sql.NullString `json:"user_email"`
+	Status    int64          `json:"status"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
 }
 
 func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtASCParams) ([]UserTeam, error) {
@@ -31325,10 +31326,10 @@ WHERE
 `
 
 type FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtDESCParams struct {
-	UserEmail string `json:"user_email"`
-	Status    int64  `json:"status"`
-	Offset    int32  `json:"offset"`
-	Limit     int32  `json:"limit"`
+	UserEmail sql.NullString `json:"user_email"`
+	Status    int64          `json:"status"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
 }
 
 func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtDESCParams) ([]UserTeam, error) {
@@ -31379,10 +31380,10 @@ WHERE
 `
 
 type FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtASCParams struct {
-	UserEmail string `json:"user_email"`
-	Status    int64  `json:"status"`
-	Offset    int32  `json:"offset"`
-	Limit     int32  `json:"limit"`
+	UserEmail sql.NullString `json:"user_email"`
+	Status    int64          `json:"status"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
 }
 
 func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtASCParams) ([]UserTeam, error) {
@@ -31433,10 +31434,10 @@ WHERE
 `
 
 type FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtDESCParams struct {
-	UserEmail string `json:"user_email"`
-	Status    int64  `json:"status"`
-	Offset    int32  `json:"offset"`
-	Limit     int32  `json:"limit"`
+	UserEmail sql.NullString `json:"user_email"`
+	Status    int64          `json:"status"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
 }
 
 func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtDESCParams) ([]UserTeam, error) {
@@ -31487,9 +31488,9 @@ WHERE
 `
 
 type FetchUserTeamByUserEmailOrderedByCreatedAtASCParams struct {
-	UserEmail string `json:"user_email"`
-	Offset    int32  `json:"offset"`
-	Limit     int32  `json:"limit"`
+	UserEmail sql.NullString `json:"user_email"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
 }
 
 func (q *Queries) FetchUserTeamByUserEmailOrderedByCreatedAtASC(ctx context.Context, arg FetchUserTeamByUserEmailOrderedByCreatedAtASCParams) ([]UserTeam, error) {
@@ -31535,9 +31536,9 @@ WHERE
 `
 
 type FetchUserTeamByUserEmailOrderedByCreatedAtDESCParams struct {
-	UserEmail string `json:"user_email"`
-	Offset    int32  `json:"offset"`
-	Limit     int32  `json:"limit"`
+	UserEmail sql.NullString `json:"user_email"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
 }
 
 func (q *Queries) FetchUserTeamByUserEmailOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserTeamByUserEmailOrderedByCreatedAtDESCParams) ([]UserTeam, error) {
@@ -31583,9 +31584,9 @@ WHERE
 `
 
 type FetchUserTeamByUserEmailOrderedByUpdatedAtASCParams struct {
-	UserEmail string `json:"user_email"`
-	Offset    int32  `json:"offset"`
-	Limit     int32  `json:"limit"`
+	UserEmail sql.NullString `json:"user_email"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
 }
 
 func (q *Queries) FetchUserTeamByUserEmailOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserTeamByUserEmailOrderedByUpdatedAtASCParams) ([]UserTeam, error) {
@@ -31631,9 +31632,9 @@ WHERE
 `
 
 type FetchUserTeamByUserEmailOrderedByUpdatedAtDESCParams struct {
-	UserEmail string `json:"user_email"`
-	Offset    int32  `json:"offset"`
-	Limit     int32  `json:"limit"`
+	UserEmail sql.NullString `json:"user_email"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
 }
 
 func (q *Queries) FetchUserTeamByUserEmailOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserTeamByUserEmailOrderedByUpdatedAtDESCParams) ([]UserTeam, error) {
@@ -31680,10 +31681,10 @@ WHERE
 `
 
 type SearchChangeRequestParams struct {
-	Title       string `json:"title"`
-	Description string `json:"description"`
-	Offset      int32  `json:"offset"`
-	Limit       int32  `json:"limit"`
+	Title       string         `json:"title"`
+	Description sql.NullString `json:"description"`
+	Offset      int32          `json:"offset"`
+	Limit       int32          `json:"limit"`
 }
 
 func (q *Queries) SearchChangeRequest(ctx context.Context, arg SearchChangeRequestParams) ([]ChangeRequest, error) {
@@ -31742,10 +31743,10 @@ WHERE
 `
 
 type SearchExtensionParams struct {
-	Identifier  string `json:"identifier"`
-	Description string `json:"description"`
-	Offset      int32  `json:"offset"`
-	Limit       int32  `json:"limit"`
+	Identifier  string         `json:"identifier"`
+	Description sql.NullString `json:"description"`
+	Offset      int32          `json:"offset"`
+	Limit       int32          `json:"limit"`
 }
 
 func (q *Queries) SearchExtension(ctx context.Context, arg SearchExtensionParams) ([]Extension, error) {
@@ -31854,10 +31855,10 @@ WHERE
 `
 
 type SearchProjectParams struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Offset      int32  `json:"offset"`
-	Limit       int32  `json:"limit"`
+	Name        string         `json:"name"`
+	Description sql.NullString `json:"description"`
+	Offset      int32          `json:"offset"`
+	Limit       int32          `json:"limit"`
 }
 
 func (q *Queries) SearchProject(ctx context.Context, arg SearchProjectParams) ([]Project, error) {

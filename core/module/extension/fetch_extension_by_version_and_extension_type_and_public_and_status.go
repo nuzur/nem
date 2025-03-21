@@ -20,12 +20,17 @@ func (m *module) FetchExtensionByVersionAndExtensionTypeAndPublicAndStatus(
 		models, err := m.repository.Queries.FetchExtensionByVersionAndExtensionTypeAndPublicAndStatus(
 			ctx,
 			nemdb.FetchExtensionByVersionAndExtensionTypeAndPublicAndStatusParams{
-				Version:       req.Version,
+
+				Version: req.Version,
+
 				ExtensionType: req.ExtensionType.ToInt64(),
-				Public:        req.Public,
-				Status:        req.Status.ToInt64(),
-				Offset:        req.Offset,
-				Limit:         req.Limit,
+
+				Public: req.Public,
+
+				Status: req.Status.ToInt64(),
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -98,12 +103,17 @@ func (m *module) FetchExtensionByVersionAndExtensionTypeAndPublicAndStatus(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndExtensionTypeAndPublicAndStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndExtensionTypeAndPublicAndStatusOrderedByCreatedAtASCParams{
-					Version:       req.Version,
+
+					Version: req.Version,
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Public:        req.Public,
-					Status:        req.Status.ToInt64(),
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Public: req.Public,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -125,12 +135,17 @@ func (m *module) FetchExtensionByVersionAndExtensionTypeAndPublicAndStatus(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndExtensionTypeAndPublicAndStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndExtensionTypeAndPublicAndStatusOrderedByCreatedAtDESCParams{
-					Version:       req.Version,
+
+					Version: req.Version,
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Public:        req.Public,
-					Status:        req.Status.ToInt64(),
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Public: req.Public,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -155,12 +170,17 @@ func (m *module) FetchExtensionByVersionAndExtensionTypeAndPublicAndStatus(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndExtensionTypeAndPublicAndStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndExtensionTypeAndPublicAndStatusOrderedByUpdatedAtASCParams{
-					Version:       req.Version,
+
+					Version: req.Version,
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Public:        req.Public,
-					Status:        req.Status.ToInt64(),
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Public: req.Public,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -182,12 +202,17 @@ func (m *module) FetchExtensionByVersionAndExtensionTypeAndPublicAndStatus(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndExtensionTypeAndPublicAndStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndExtensionTypeAndPublicAndStatusOrderedByUpdatedAtDESCParams{
-					Version:       req.Version,
+
+					Version: req.Version,
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Public:        req.Public,
-					Status:        req.Status.ToInt64(),
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Public: req.Public,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

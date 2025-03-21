@@ -9,8 +9,8 @@ func FieldTypeDatetimeConfigToProto(e main_entity.FieldTypeDatetimeConfig) *pb.F
 	return &pb.FieldTypeDatetimeConfig{
 		EnforceFuture:   e.EnforceFuture,
 		EnforcePast:     e.EnforcePast,
-		DisplayTimezone: e.DisplayTimezone,
-		StorageTimezone: e.StorageTimezone,
+		DisplayTimezone: StringPtrToString(e.DisplayTimezone),
+		StorageTimezone: StringPtrToString(e.StorageTimezone),
 	}
 }
 
@@ -29,8 +29,8 @@ func FieldTypeDatetimeConfigFromProto(m *pb.FieldTypeDatetimeConfig) main_entity
 	return main_entity.FieldTypeDatetimeConfig{
 		EnforceFuture:   m.GetEnforceFuture(),
 		EnforcePast:     m.GetEnforcePast(),
-		DisplayTimezone: m.GetDisplayTimezone(),
-		StorageTimezone: m.GetStorageTimezone(),
+		DisplayTimezone: &m.DisplayTimezone,
+		StorageTimezone: &m.StorageTimezone,
 	}
 }
 

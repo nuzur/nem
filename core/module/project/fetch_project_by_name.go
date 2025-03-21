@@ -20,7 +20,9 @@ func (m *module) FetchProjectByName(
 		models, err := m.repository.Queries.FetchProjectByName(
 			ctx,
 			nemdb.FetchProjectByNameParams{
-				Name:   req.Name,
+
+				Name: req.Name,
+
 				Offset: req.Offset,
 				Limit:  req.Limit,
 			},
@@ -95,7 +97,9 @@ func (m *module) FetchProjectByName(
 			models, err := m.repository.Queries.FetchProjectByNameOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchProjectByNameOrderedByCreatedAtASCParams{
-					Name:   req.Name,
+
+					Name: req.Name,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -119,7 +123,9 @@ func (m *module) FetchProjectByName(
 			models, err := m.repository.Queries.FetchProjectByNameOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchProjectByNameOrderedByCreatedAtDESCParams{
-					Name:   req.Name,
+
+					Name: req.Name,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -146,7 +152,9 @@ func (m *module) FetchProjectByName(
 			models, err := m.repository.Queries.FetchProjectByNameOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchProjectByNameOrderedByUpdatedAtASCParams{
-					Name:   req.Name,
+
+					Name: req.Name,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -170,7 +178,9 @@ func (m *module) FetchProjectByName(
 			models, err := m.repository.Queries.FetchProjectByNameOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchProjectByNameOrderedByUpdatedAtDESCParams{
-					Name:   req.Name,
+
+					Name: req.Name,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},

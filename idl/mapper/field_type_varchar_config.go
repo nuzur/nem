@@ -9,7 +9,7 @@ func FieldTypeVarcharConfigToProto(e main_entity.FieldTypeVarcharConfig) *pb.Fie
 	return &pb.FieldTypeVarcharConfig{
 		MinSize:         int64(e.MinSize),
 		MaxSize:         int64(e.MaxSize),
-		RegexValidation: e.RegexValidation,
+		RegexValidation: StringPtrToString(e.RegexValidation),
 	}
 }
 
@@ -28,7 +28,7 @@ func FieldTypeVarcharConfigFromProto(m *pb.FieldTypeVarcharConfig) main_entity.F
 	return main_entity.FieldTypeVarcharConfig{
 		MinSize:         int64(m.GetMinSize()),
 		MaxSize:         int64(m.GetMaxSize()),
-		RegexValidation: m.GetRegexValidation(),
+		RegexValidation: &m.RegexValidation,
 	}
 }
 

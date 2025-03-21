@@ -15,6 +15,8 @@ import (
 	main_entity "github.com/nuzur/nem/core/entity/extension_version"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -102,13 +104,13 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertExtensi
 
 		ExtensionUUID: req.ExtensionVersion.ExtensionUUID.String(),
 
-		DisplayVersion: req.ExtensionVersion.DisplayVersion,
+		DisplayVersion: mapper.StringPtrToSqlNullString(req.ExtensionVersion.DisplayVersion),
 
-		Description: req.ExtensionVersion.Description,
+		Description: mapper.StringPtrToSqlNullString(req.ExtensionVersion.Description),
 
 		RepositoryTag: req.ExtensionVersion.RepositoryTag,
 
-		ConfigurationEntity: []byte(req.ExtensionVersion.ConfigurationEntity),
+		ConfigurationEntity: []byte(mapper.StringPtrToString(req.ExtensionVersion.ConfigurationEntity)),
 
 		ExecutionMode: main_entity.ExecutionModeSliceToJSON(req.ExtensionVersion.ExecutionMode),
 

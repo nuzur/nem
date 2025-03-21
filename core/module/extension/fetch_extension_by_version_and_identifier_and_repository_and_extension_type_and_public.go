@@ -20,13 +20,19 @@ func (m *module) FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTy
 		models, err := m.repository.Queries.FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndPublic(
 			ctx,
 			nemdb.FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndPublicParams{
-				Version:       req.Version,
-				Identifier:    req.Identifier,
-				Repository:    req.Repository,
+
+				Version: req.Version,
+
+				Identifier: req.Identifier,
+
+				Repository: req.Repository,
+
 				ExtensionType: req.ExtensionType.ToInt64(),
-				Public:        req.Public,
-				Offset:        req.Offset,
-				Limit:         req.Limit,
+
+				Public: req.Public,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -99,13 +105,19 @@ func (m *module) FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTy
 			models, err := m.repository.Queries.FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndPublicOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndPublicOrderedByCreatedAtASCParams{
-					Version:       req.Version,
-					Identifier:    req.Identifier,
-					Repository:    req.Repository,
+
+					Version: req.Version,
+
+					Identifier: req.Identifier,
+
+					Repository: req.Repository,
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Public:        req.Public,
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -127,13 +139,19 @@ func (m *module) FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTy
 			models, err := m.repository.Queries.FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndPublicOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndPublicOrderedByCreatedAtDESCParams{
-					Version:       req.Version,
-					Identifier:    req.Identifier,
-					Repository:    req.Repository,
+
+					Version: req.Version,
+
+					Identifier: req.Identifier,
+
+					Repository: req.Repository,
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Public:        req.Public,
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -158,13 +176,19 @@ func (m *module) FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTy
 			models, err := m.repository.Queries.FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndPublicOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndPublicOrderedByUpdatedAtASCParams{
-					Version:       req.Version,
-					Identifier:    req.Identifier,
-					Repository:    req.Repository,
+
+					Version: req.Version,
+
+					Identifier: req.Identifier,
+
+					Repository: req.Repository,
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Public:        req.Public,
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -186,13 +210,19 @@ func (m *module) FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTy
 			models, err := m.repository.Queries.FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndPublicOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndPublicOrderedByUpdatedAtDESCParams{
-					Version:       req.Version,
-					Identifier:    req.Identifier,
-					Repository:    req.Repository,
+
+					Version: req.Version,
+
+					Identifier: req.Identifier,
+
+					Repository: req.Repository,
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Public:        req.Public,
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

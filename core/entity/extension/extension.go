@@ -20,10 +20,10 @@ type Extension struct {
 	UUID              uuid.UUID               `json:"uuid"`
 	Version           int64                   `json:"version"`
 	Identifier        string                  `json:"identifier"`
-	DisplayName       string                  `json:"display_name"`
-	DisplayAuthorName string                  `json:"display_author_name"`
-	Description       string                  `json:"description"`
-	URL               string                  `json:"url"`
+	DisplayName       *string                 `json:"display_name"`
+	DisplayAuthorName *string                 `json:"display_author_name"`
+	Description       *string                 `json:"description"`
+	URL               *string                 `json:"url"`
 	Verfied           bool                    `json:"verfied"`
 	Repository        string                  `json:"repository"`
 	ExtensionType     ExtensionType           `json:"extension_type"`
@@ -147,10 +147,10 @@ func NewExtensionWithRandomValues() Extension {
 		UUID:              randomvalues.GetRandomUUIDValue(),
 		Version:           randomvalues.GetRandomIntValue(),
 		Identifier:        randomvalues.GetRandomStringValue(),
-		DisplayName:       randomvalues.GetRandomStringValue(),
-		DisplayAuthorName: randomvalues.GetRandomStringValue(),
-		Description:       randomvalues.GetRandomStringValue(),
-		URL:               randomvalues.GetRandomStringValue(),
+		DisplayName:       randomvalues.GetRandomStringValuePtr(),
+		DisplayAuthorName: randomvalues.GetRandomStringValuePtr(),
+		Description:       randomvalues.GetRandomStringValuePtr(),
+		URL:               randomvalues.GetRandomStringValuePtr(),
 		Verfied:           randomvalues.GetRandomBoolValue(),
 		Repository:        randomvalues.GetRandomStringValue(),
 		ExtensionType:     randomvalues.GetRandomOptionValue[ExtensionType](3),

@@ -7,7 +7,7 @@ import (
 
 func UserConnectionLocalConfigToProto(e main_entity.UserConnectionLocalConfig) *pb.UserConnectionLocalConfig {
 	return &pb.UserConnectionLocalConfig{
-		IpAddress: e.IpAddress,
+		IpAddress: StringPtrToString(e.IpAddress),
 		DbType:    pb.UserConnectionLocalConfigDbType(e.DbType),
 	}
 }
@@ -25,7 +25,7 @@ func UserConnectionLocalConfigFromProto(m *pb.UserConnectionLocalConfig) main_en
 		return main_entity.UserConnectionLocalConfig{}
 	}
 	return main_entity.UserConnectionLocalConfig{
-		IpAddress: m.GetIpAddress(),
+		IpAddress: &m.IpAddress,
 		DbType:    main_entity.DbType(m.GetDbType()),
 	}
 }

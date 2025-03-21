@@ -11,6 +11,8 @@ import (
 	"github.com/nuzur/nem/monitoring"
 
 	"github.com/nuzur/nem/custom"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -96,7 +98,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertExtensi
 
 		ExtensionVersionUUID: req.ExtensionExecution.ExtensionVersionUUID.String(),
 
-		ProjectExtensionUUID: req.ExtensionExecution.ProjectExtensionUUID.String(),
+		ProjectExtensionUUID: mapper.StringToSqlNullString(req.ExtensionExecution.ProjectExtensionUUID.String()),
 
 		ProjectUUID: req.ExtensionExecution.ProjectUUID.String(),
 
@@ -104,11 +106,11 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertExtensi
 
 		ExecutedByUUID: req.ExtensionExecution.ExecutedByUUID.String(),
 
-		Metadata: []byte(req.ExtensionExecution.Metadata),
+		Metadata: []byte(mapper.StringPtrToString(req.ExtensionExecution.Metadata)),
 
 		Status: req.ExtensionExecution.Status.ToInt64(),
 
-		StatusMsg: req.ExtensionExecution.StatusMsg,
+		StatusMsg: mapper.StringPtrToSqlNullString(req.ExtensionExecution.StatusMsg),
 
 		CreatedAt: custom.Now(),
 

@@ -9,7 +9,7 @@ func FieldTypeSlugConfigToProto(e main_entity.FieldTypeSlugConfig) *pb.FieldType
 	return &pb.FieldTypeSlugConfig{
 		MinSize:           int64(e.MinSize),
 		MaxSize:           int64(e.MaxSize),
-		RegexValidation:   e.RegexValidation,
+		RegexValidation:   StringPtrToString(e.RegexValidation),
 		BasedOnFieldUuids: UUIDSliceToStringSlice(e.BasedOnFieldUUIDs),
 	}
 }
@@ -29,7 +29,7 @@ func FieldTypeSlugConfigFromProto(m *pb.FieldTypeSlugConfig) main_entity.FieldTy
 	return main_entity.FieldTypeSlugConfig{
 		MinSize:           int64(m.GetMinSize()),
 		MaxSize:           int64(m.GetMaxSize()),
-		RegexValidation:   m.GetRegexValidation(),
+		RegexValidation:   &m.RegexValidation,
 		BasedOnFieldUUIDs: StringSliceToUUIDSlice(m.GetBasedOnFieldUuids()),
 	}
 }

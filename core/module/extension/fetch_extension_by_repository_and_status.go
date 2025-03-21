@@ -20,10 +20,13 @@ func (m *module) FetchExtensionByRepositoryAndStatus(
 		models, err := m.repository.Queries.FetchExtensionByRepositoryAndStatus(
 			ctx,
 			nemdb.FetchExtensionByRepositoryAndStatusParams{
+
 				Repository: req.Repository,
-				Status:     req.Status.ToInt64(),
-				Offset:     req.Offset,
-				Limit:      req.Limit,
+
+				Status: req.Status.ToInt64(),
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchExtensionByRepositoryAndStatus(
 			models, err := m.repository.Queries.FetchExtensionByRepositoryAndStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByRepositoryAndStatusOrderedByCreatedAtASCParams{
+
 					Repository: req.Repository,
-					Status:     req.Status.ToInt64(),
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchExtensionByRepositoryAndStatus(
 			models, err := m.repository.Queries.FetchExtensionByRepositoryAndStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByRepositoryAndStatusOrderedByCreatedAtDESCParams{
+
 					Repository: req.Repository,
-					Status:     req.Status.ToInt64(),
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchExtensionByRepositoryAndStatus(
 			models, err := m.repository.Queries.FetchExtensionByRepositoryAndStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByRepositoryAndStatusOrderedByUpdatedAtASCParams{
+
 					Repository: req.Repository,
-					Status:     req.Status.ToInt64(),
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchExtensionByRepositoryAndStatus(
 			models, err := m.repository.Queries.FetchExtensionByRepositoryAndStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByRepositoryAndStatusOrderedByUpdatedAtDESCParams{
+
 					Repository: req.Repository,
-					Status:     req.Status.ToInt64(),
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

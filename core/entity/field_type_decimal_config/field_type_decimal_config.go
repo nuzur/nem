@@ -23,7 +23,7 @@ type FieldTypeDecimalConfig struct {
 	NumberOfDecimals  int64     `json:"number_of_decimals"`
 	Separator         Separator `json:"separator"`
 	IsCurrency        bool      `json:"is_currency"`
-	CurrencyCode      string    `json:"currency_code"`
+	CurrencyCode      *string   `json:"currency_code"`
 	EnableLimits      bool      `json:"enable_limits"`
 }
 
@@ -116,7 +116,7 @@ func NewFieldTypeDecimalConfigWithRandomValues() FieldTypeDecimalConfig {
 		NumberOfDecimals:  randomvalues.GetRandomIntValue(),
 		Separator:         randomvalues.GetRandomOptionValue[Separator](2),
 		IsCurrency:        randomvalues.GetRandomBoolValue(),
-		CurrencyCode:      randomvalues.GetRandomStringValue(),
+		CurrencyCode:      randomvalues.GetRandomStringValuePtr(),
 		EnableLimits:      randomvalues.GetRandomBoolValue(),
 	}
 }

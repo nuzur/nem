@@ -1,8 +1,8 @@
 
 CREATE TABLE IF NOT EXISTS `user_team` ( 
   `uuid` CHAR(36) NOT NULL  ,
-  `user_uuid` CHAR(36) NOT NULL  ,
-  `user_email` VARCHAR(255) NOT NULL  ,
+  `user_uuid` CHAR(36)   ,
+  `user_email` VARCHAR(255)   ,
   `team_uuid` CHAR(36) NOT NULL  ,
   `roles` JSON NOT NULL  ,
   `status` INT NOT NULL  ,

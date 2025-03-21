@@ -7,7 +7,7 @@ import (
 
 func DbTypeMysqlConfigToProto(e main_entity.DbTypeMysqlConfig) *pb.DbTypeMysqlConfig {
 	return &pb.DbTypeMysqlConfig{
-		Params: e.Params,
+		Params: StringPtrToString(e.Params),
 	}
 }
 
@@ -24,7 +24,7 @@ func DbTypeMysqlConfigFromProto(m *pb.DbTypeMysqlConfig) main_entity.DbTypeMysql
 		return main_entity.DbTypeMysqlConfig{}
 	}
 	return main_entity.DbTypeMysqlConfig{
-		Params: m.GetParams(),
+		Params: &m.Params,
 	}
 }
 

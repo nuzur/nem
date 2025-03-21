@@ -15,8 +15,8 @@ import (
 )
 
 type UserConnectionLocalConfig struct {
-	IpAddress string `json:"ip_address"`
-	DbType    DbType `json:"db_type"`
+	IpAddress *string `json:"ip_address"`
+	DbType    DbType  `json:"db_type"`
 }
 
 func (e UserConnectionLocalConfig) String() string {
@@ -92,7 +92,7 @@ func UserConnectionLocalConfigSliceToJSON(e []UserConnectionLocalConfig) json.Ra
 func NewUserConnectionLocalConfigWithRandomValues() UserConnectionLocalConfig {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return UserConnectionLocalConfig{
-		IpAddress: randomvalues.GetRandomStringValue(),
+		IpAddress: randomvalues.GetRandomStringValuePtr(),
 		DbType:    randomvalues.GetRandomOptionValue[DbType](2),
 	}
 }

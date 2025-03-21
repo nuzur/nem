@@ -4,6 +4,8 @@ import (
 	main_entity "github.com/nuzur/nem/core/entity/project_version"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/nuzur/nem/core/entity/mapper"
+
 	"github.com/gofrs/uuid"
 	"github.com/nuzur/nem/core/entity/entity"
 	"github.com/nuzur/nem/core/entity/enum"
@@ -31,7 +33,7 @@ func mapModelToEntity(model nemdb.ProjectVersion) main_entity.ProjectVersion {
 		Relationships:   relationship.RelationshipSliceFromJSON(model.Relationships),
 		Enums:           enum.EnumSliceFromJSON(model.Enums),
 		Services:        service.ServiceSliceFromJSON(model.Services),
-		BaseVersionUUID: uuid.FromStringOrNil(model.BaseVersionUUID),
+		BaseVersionUUID: uuid.FromStringOrNil(mapper.SqlNullStringToString(model.BaseVersionUUID)),
 		ReviewStatus:    main_entity.ReviewStatus(model.ReviewStatus),
 		Deployments:     project_version_deployment.ProjectVersionDeploymentSliceFromJSON(model.Deployments),
 		Status:          main_entity.Status(model.Status),

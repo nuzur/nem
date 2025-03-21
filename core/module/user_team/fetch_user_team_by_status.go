@@ -20,7 +20,9 @@ func (m *module) FetchUserTeamByStatus(
 		models, err := m.repository.Queries.FetchUserTeamByStatus(
 			ctx,
 			nemdb.FetchUserTeamByStatusParams{
+
 				Status: req.Status.ToInt64(),
+
 				Offset: req.Offset,
 				Limit:  req.Limit,
 			},
@@ -95,7 +97,9 @@ func (m *module) FetchUserTeamByStatus(
 			models, err := m.repository.Queries.FetchUserTeamByStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchUserTeamByStatusOrderedByCreatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -119,7 +123,9 @@ func (m *module) FetchUserTeamByStatus(
 			models, err := m.repository.Queries.FetchUserTeamByStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchUserTeamByStatusOrderedByCreatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -146,7 +152,9 @@ func (m *module) FetchUserTeamByStatus(
 			models, err := m.repository.Queries.FetchUserTeamByStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchUserTeamByStatusOrderedByUpdatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -170,7 +178,9 @@ func (m *module) FetchUserTeamByStatus(
 			models, err := m.repository.Queries.FetchUserTeamByStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchUserTeamByStatusOrderedByUpdatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},

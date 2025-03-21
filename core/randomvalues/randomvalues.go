@@ -54,10 +54,20 @@ func GetRandomStringValue() string {
 	return string(b)
 }
 
+func GetRandomStringValuePtr() *string {
+	str := GetRandomStringValue()
+	return &str
+}
+
 func GetRandomUUIDValue() uuid.UUID {
 	return uuid.Must(uuid.NewV4())
 }
 
 func GetRandomRawJSONValue() string {
 	return "{}"
+}
+
+func GetRandomRawJSONValuePtr() *string {
+	str := GetRandomRawJSONValue()
+	return &str
 }

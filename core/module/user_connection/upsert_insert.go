@@ -14,6 +14,8 @@ import (
 
 	"github.com/nuzur/nem/core/entity/user_connection_execution"
 	"github.com/nuzur/nem/core/entity/user_connection_type_config"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -99,7 +101,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertUserCon
 
 		ProjectUUID: req.UserConnection.ProjectUUID.String(),
 
-		ProjectVersionUUID: req.UserConnection.ProjectVersionUUID.String(),
+		ProjectVersionUUID: mapper.StringToSqlNullString(req.UserConnection.ProjectVersionUUID.String()),
 
 		Type: req.UserConnection.Type.ToInt64(),
 

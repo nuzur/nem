@@ -20,9 +20,11 @@ func (m *module) FetchProjectByVersion(
 		models, err := m.repository.Queries.FetchProjectByVersion(
 			ctx,
 			nemdb.FetchProjectByVersionParams{
+
 				Version: req.Version,
-				Offset:  req.Offset,
-				Limit:   req.Limit,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -95,9 +97,11 @@ func (m *module) FetchProjectByVersion(
 			models, err := m.repository.Queries.FetchProjectByVersionOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchProjectByVersionOrderedByCreatedAtASCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -119,9 +123,11 @@ func (m *module) FetchProjectByVersion(
 			models, err := m.repository.Queries.FetchProjectByVersionOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchProjectByVersionOrderedByCreatedAtDESCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -146,9 +152,11 @@ func (m *module) FetchProjectByVersion(
 			models, err := m.repository.Queries.FetchProjectByVersionOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchProjectByVersionOrderedByUpdatedAtASCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -170,9 +178,11 @@ func (m *module) FetchProjectByVersion(
 			models, err := m.repository.Queries.FetchProjectByVersionOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchProjectByVersionOrderedByUpdatedAtDESCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

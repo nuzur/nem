@@ -20,9 +20,11 @@ func (m *module) FetchChangeRequestByVersion(
 		models, err := m.repository.Queries.FetchChangeRequestByVersion(
 			ctx,
 			nemdb.FetchChangeRequestByVersionParams{
+
 				Version: req.Version,
-				Offset:  req.Offset,
-				Limit:   req.Limit,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -95,9 +97,11 @@ func (m *module) FetchChangeRequestByVersion(
 			models, err := m.repository.Queries.FetchChangeRequestByVersionOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchChangeRequestByVersionOrderedByCreatedAtASCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -119,9 +123,11 @@ func (m *module) FetchChangeRequestByVersion(
 			models, err := m.repository.Queries.FetchChangeRequestByVersionOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchChangeRequestByVersionOrderedByCreatedAtDESCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -146,9 +152,11 @@ func (m *module) FetchChangeRequestByVersion(
 			models, err := m.repository.Queries.FetchChangeRequestByVersionOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchChangeRequestByVersionOrderedByUpdatedAtASCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -170,9 +178,11 @@ func (m *module) FetchChangeRequestByVersion(
 			models, err := m.repository.Queries.FetchChangeRequestByVersionOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchChangeRequestByVersionOrderedByUpdatedAtDESCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

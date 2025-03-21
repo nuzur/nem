@@ -20,10 +20,13 @@ func (m *module) FetchExtensionByIdentifierAndRepository(
 		models, err := m.repository.Queries.FetchExtensionByIdentifierAndRepository(
 			ctx,
 			nemdb.FetchExtensionByIdentifierAndRepositoryParams{
+
 				Identifier: req.Identifier,
+
 				Repository: req.Repository,
-				Offset:     req.Offset,
-				Limit:      req.Limit,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchExtensionByIdentifierAndRepository(
 			models, err := m.repository.Queries.FetchExtensionByIdentifierAndRepositoryOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByIdentifierAndRepositoryOrderedByCreatedAtASCParams{
+
 					Identifier: req.Identifier,
+
 					Repository: req.Repository,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchExtensionByIdentifierAndRepository(
 			models, err := m.repository.Queries.FetchExtensionByIdentifierAndRepositoryOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByIdentifierAndRepositoryOrderedByCreatedAtDESCParams{
+
 					Identifier: req.Identifier,
+
 					Repository: req.Repository,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchExtensionByIdentifierAndRepository(
 			models, err := m.repository.Queries.FetchExtensionByIdentifierAndRepositoryOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByIdentifierAndRepositoryOrderedByUpdatedAtASCParams{
+
 					Identifier: req.Identifier,
+
 					Repository: req.Repository,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchExtensionByIdentifierAndRepository(
 			models, err := m.repository.Queries.FetchExtensionByIdentifierAndRepositoryOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByIdentifierAndRepositoryOrderedByUpdatedAtDESCParams{
+
 					Identifier: req.Identifier,
+
 					Repository: req.Repository,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

@@ -20,9 +20,11 @@ func (m *module) FetchUserByIdentifier(
 		models, err := m.repository.Queries.FetchUserByIdentifier(
 			ctx,
 			nemdb.FetchUserByIdentifierParams{
+
 				Identifier: req.Identifier,
-				Offset:     req.Offset,
-				Limit:      req.Limit,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -95,9 +97,11 @@ func (m *module) FetchUserByIdentifier(
 			models, err := m.repository.Queries.FetchUserByIdentifierOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchUserByIdentifierOrderedByCreatedAtASCParams{
+
 					Identifier: req.Identifier,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -119,9 +123,11 @@ func (m *module) FetchUserByIdentifier(
 			models, err := m.repository.Queries.FetchUserByIdentifierOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchUserByIdentifierOrderedByCreatedAtDESCParams{
+
 					Identifier: req.Identifier,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -146,9 +152,11 @@ func (m *module) FetchUserByIdentifier(
 			models, err := m.repository.Queries.FetchUserByIdentifierOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchUserByIdentifierOrderedByUpdatedAtASCParams{
+
 					Identifier: req.Identifier,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -170,9 +178,11 @@ func (m *module) FetchUserByIdentifier(
 			models, err := m.repository.Queries.FetchUserByIdentifierOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchUserByIdentifierOrderedByUpdatedAtDESCParams{
+
 					Identifier: req.Identifier,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

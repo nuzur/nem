@@ -20,10 +20,13 @@ func (m *module) FetchExtensionByVersionAndPublic(
 		models, err := m.repository.Queries.FetchExtensionByVersionAndPublic(
 			ctx,
 			nemdb.FetchExtensionByVersionAndPublicParams{
+
 				Version: req.Version,
-				Public:  req.Public,
-				Offset:  req.Offset,
-				Limit:   req.Limit,
+
+				Public: req.Public,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchExtensionByVersionAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndPublicOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndPublicOrderedByCreatedAtASCParams{
+
 					Version: req.Version,
-					Public:  req.Public,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchExtensionByVersionAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndPublicOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndPublicOrderedByCreatedAtDESCParams{
+
 					Version: req.Version,
-					Public:  req.Public,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchExtensionByVersionAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndPublicOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndPublicOrderedByUpdatedAtASCParams{
+
 					Version: req.Version,
-					Public:  req.Public,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchExtensionByVersionAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByVersionAndPublicOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByVersionAndPublicOrderedByUpdatedAtDESCParams{
+
 					Version: req.Version,
-					Public:  req.Public,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

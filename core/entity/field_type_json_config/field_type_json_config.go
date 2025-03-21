@@ -15,8 +15,8 @@ import (
 )
 
 type FieldTypeJSONConfig struct {
-	EnforceSchemaValidation bool   `json:"enforce_schema_validation"`
-	JSONSchema              string `json:"json_schema"`
+	EnforceSchemaValidation bool    `json:"enforce_schema_validation"`
+	JSONSchema              *string `json:"json_schema"`
 }
 
 func (e FieldTypeJSONConfig) String() string {
@@ -93,7 +93,7 @@ func NewFieldTypeJSONConfigWithRandomValues() FieldTypeJSONConfig {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return FieldTypeJSONConfig{
 		EnforceSchemaValidation: randomvalues.GetRandomBoolValue(),
-		JSONSchema:              randomvalues.GetRandomStringValue(),
+		JSONSchema:              randomvalues.GetRandomStringValuePtr(),
 	}
 }
 

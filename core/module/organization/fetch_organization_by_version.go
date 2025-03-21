@@ -20,9 +20,11 @@ func (m *module) FetchOrganizationByVersion(
 		models, err := m.repository.Queries.FetchOrganizationByVersion(
 			ctx,
 			nemdb.FetchOrganizationByVersionParams{
+
 				Version: req.Version,
-				Offset:  req.Offset,
-				Limit:   req.Limit,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -95,9 +97,11 @@ func (m *module) FetchOrganizationByVersion(
 			models, err := m.repository.Queries.FetchOrganizationByVersionOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchOrganizationByVersionOrderedByCreatedAtASCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -119,9 +123,11 @@ func (m *module) FetchOrganizationByVersion(
 			models, err := m.repository.Queries.FetchOrganizationByVersionOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchOrganizationByVersionOrderedByCreatedAtDESCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -146,9 +152,11 @@ func (m *module) FetchOrganizationByVersion(
 			models, err := m.repository.Queries.FetchOrganizationByVersionOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchOrganizationByVersionOrderedByUpdatedAtASCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -170,9 +178,11 @@ func (m *module) FetchOrganizationByVersion(
 			models, err := m.repository.Queries.FetchOrganizationByVersionOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchOrganizationByVersionOrderedByUpdatedAtDESCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

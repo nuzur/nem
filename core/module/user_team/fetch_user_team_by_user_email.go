@@ -8,6 +8,8 @@ import (
 	"errors"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 	"github.com/nuzur/nem/monitoring"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) FetchUserTeamByUserEmail(
@@ -20,9 +22,11 @@ func (m *module) FetchUserTeamByUserEmail(
 		models, err := m.repository.Queries.FetchUserTeamByUserEmail(
 			ctx,
 			nemdb.FetchUserTeamByUserEmailParams{
-				UserEmail: req.UserEmail,
-				Offset:    req.Offset,
-				Limit:     req.Limit,
+
+				UserEmail: mapper.StringPtrToSqlNullString(req.UserEmail),
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -95,9 +99,11 @@ func (m *module) FetchUserTeamByUserEmail(
 			models, err := m.repository.Queries.FetchUserTeamByUserEmailOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchUserTeamByUserEmailOrderedByCreatedAtASCParams{
-					UserEmail: req.UserEmail,
-					Offset:    req.Offset,
-					Limit:     req.Limit,
+
+					UserEmail: mapper.StringPtrToSqlNullString(req.UserEmail),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -119,9 +125,11 @@ func (m *module) FetchUserTeamByUserEmail(
 			models, err := m.repository.Queries.FetchUserTeamByUserEmailOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchUserTeamByUserEmailOrderedByCreatedAtDESCParams{
-					UserEmail: req.UserEmail,
-					Offset:    req.Offset,
-					Limit:     req.Limit,
+
+					UserEmail: mapper.StringPtrToSqlNullString(req.UserEmail),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -146,9 +154,11 @@ func (m *module) FetchUserTeamByUserEmail(
 			models, err := m.repository.Queries.FetchUserTeamByUserEmailOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchUserTeamByUserEmailOrderedByUpdatedAtASCParams{
-					UserEmail: req.UserEmail,
-					Offset:    req.Offset,
-					Limit:     req.Limit,
+
+					UserEmail: mapper.StringPtrToSqlNullString(req.UserEmail),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -170,9 +180,11 @@ func (m *module) FetchUserTeamByUserEmail(
 			models, err := m.repository.Queries.FetchUserTeamByUserEmailOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchUserTeamByUserEmailOrderedByUpdatedAtDESCParams{
-					UserEmail: req.UserEmail,
-					Offset:    req.Offset,
-					Limit:     req.Limit,
+
+					UserEmail: mapper.StringPtrToSqlNullString(req.UserEmail),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

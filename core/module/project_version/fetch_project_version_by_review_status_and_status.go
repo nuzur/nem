@@ -20,10 +20,13 @@ func (m *module) FetchProjectVersionByReviewStatusAndStatus(
 		models, err := m.repository.Queries.FetchProjectVersionByReviewStatusAndStatus(
 			ctx,
 			nemdb.FetchProjectVersionByReviewStatusAndStatusParams{
+
 				ReviewStatus: req.ReviewStatus.ToInt64(),
-				Status:       req.Status.ToInt64(),
-				Offset:       req.Offset,
-				Limit:        req.Limit,
+
+				Status: req.Status.ToInt64(),
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchProjectVersionByReviewStatusAndStatus(
 			models, err := m.repository.Queries.FetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtASCParams{
+
 					ReviewStatus: req.ReviewStatus.ToInt64(),
-					Status:       req.Status.ToInt64(),
-					Offset:       req.Offset,
-					Limit:        req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchProjectVersionByReviewStatusAndStatus(
 			models, err := m.repository.Queries.FetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtDESCParams{
+
 					ReviewStatus: req.ReviewStatus.ToInt64(),
-					Status:       req.Status.ToInt64(),
-					Offset:       req.Offset,
-					Limit:        req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchProjectVersionByReviewStatusAndStatus(
 			models, err := m.repository.Queries.FetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtASCParams{
+
 					ReviewStatus: req.ReviewStatus.ToInt64(),
-					Status:       req.Status.ToInt64(),
-					Offset:       req.Offset,
-					Limit:        req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchProjectVersionByReviewStatusAndStatus(
 			models, err := m.repository.Queries.FetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtDESCParams{
+
 					ReviewStatus: req.ReviewStatus.ToInt64(),
-					Status:       req.Status.ToInt64(),
-					Offset:       req.Offset,
-					Limit:        req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

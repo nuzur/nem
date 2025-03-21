@@ -18,7 +18,7 @@ import (
 type ChangeRequestReview struct {
 	UUID      uuid.UUID `json:"uuid"`
 	UserUUID  uuid.UUID `json:"user_uuid"`
-	Comment   string    `json:"comment"`
+	Comment   *string   `json:"comment"`
 	Status    Status    `json:"status"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
@@ -103,7 +103,7 @@ func NewChangeRequestReviewWithRandomValues() ChangeRequestReview {
 	return ChangeRequestReview{
 		UUID:      randomvalues.GetRandomUUIDValue(),
 		UserUUID:  randomvalues.GetRandomUUIDValue(),
-		Comment:   randomvalues.GetRandomStringValue(),
+		Comment:   randomvalues.GetRandomStringValuePtr(),
 		Status:    randomvalues.GetRandomOptionValue[Status](5),
 		CreatedAt: randomvalues.GetRandomTimeValue(),
 		UpdatedAt: randomvalues.GetRandomTimeValue(),

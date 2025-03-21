@@ -4,6 +4,8 @@ import (
 	main_entity "github.com/nuzur/nem/core/entity/extension_version"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/nuzur/nem/core/entity/mapper"
+
 	"github.com/gofrs/uuid"
 )
 
@@ -20,10 +22,10 @@ func mapModelToEntity(model nemdb.ExtensionVersion) main_entity.ExtensionVersion
 		UUID:                uuid.FromStringOrNil(model.UUID),
 		Version:             model.Version,
 		ExtensionUUID:       uuid.FromStringOrNil(model.ExtensionUUID),
-		DisplayVersion:      model.DisplayVersion,
-		Description:         model.Description,
+		DisplayVersion:      mapper.SqlNullStringToStringPtr(model.DisplayVersion),
+		Description:         mapper.SqlNullStringToStringPtr(model.Description),
 		RepositoryTag:       model.RepositoryTag,
-		ConfigurationEntity: string(model.ConfigurationEntity),
+		ConfigurationEntity: mapper.StringToStringPtr(string(model.ConfigurationEntity)),
 		ExecutionMode:       main_entity.JSONToExecutionModeSlice(model.ExecutionMode),
 		ReviewStatus:        main_entity.ReviewStatus(model.ReviewStatus),
 		Status:              main_entity.Status(model.Status),

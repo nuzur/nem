@@ -4,6 +4,8 @@ import (
 	main_entity "github.com/nuzur/nem/core/entity/team"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/nuzur/nem/core/entity/mapper"
+
 	"github.com/gofrs/uuid"
 	"github.com/nuzur/nem/core/entity/connection"
 	"github.com/nuzur/nem/core/entity/entity"
@@ -33,7 +35,7 @@ func mapModelToEntity(model nemdb.Team) main_entity.Team {
 		Stores:           store.StoreSliceFromJSON(model.Stores),
 		Connections:      connection.ConnectionSliceFromJSON(model.Connections),
 		ObjectStores:     object_store.ObjectStoreSliceFromJSON(model.ObjectStores),
-		OrganizationUUID: uuid.FromStringOrNil(model.OrganizationUUID),
+		OrganizationUUID: uuid.FromStringOrNil(mapper.SqlNullStringToString(model.OrganizationUUID)),
 		DefaultEntity:    entity.EntityFromJSON(model.DefaultEntity),
 		Status:           main_entity.Status(model.Status),
 		CreatedAt:        model.CreatedAt,

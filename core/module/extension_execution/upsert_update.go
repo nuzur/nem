@@ -9,6 +9,8 @@ import (
 	"github.com/nuzur/nem/monitoring"
 
 	"github.com/nuzur/nem/custom"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -122,7 +124,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 			ExtensionVersionUUID: req.ExtensionExecution.ExtensionVersionUUID.String(),
 
-			ProjectExtensionUUID: req.ExtensionExecution.ProjectExtensionUUID.String(),
+			ProjectExtensionUUID: mapper.StringToSqlNullString(req.ExtensionExecution.ProjectExtensionUUID.String()),
 
 			ProjectUUID: req.ExtensionExecution.ProjectUUID.String(),
 
@@ -130,11 +132,11 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 			ExecutedByUUID: req.ExtensionExecution.ExecutedByUUID.String(),
 
-			Metadata: []byte(req.ExtensionExecution.Metadata),
+			Metadata: []byte(mapper.StringPtrToString(req.ExtensionExecution.Metadata)),
 
 			Status: req.ExtensionExecution.Status.ToInt64(),
 
-			StatusMsg: req.ExtensionExecution.StatusMsg,
+			StatusMsg: mapper.StringPtrToSqlNullString(req.ExtensionExecution.StatusMsg),
 
 			CreatedAt: existing.CreatedAt,
 
@@ -150,7 +152,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 	res.ExtensionVersionUUID = req.ExtensionExecution.ExtensionVersionUUID.String()
 
-	res.ProjectExtensionUUID = req.ExtensionExecution.ProjectExtensionUUID.String()
+	res.ProjectExtensionUUID = mapper.StringToSqlNullString(req.ExtensionExecution.ProjectExtensionUUID.String())
 
 	res.ProjectUUID = req.ExtensionExecution.ProjectUUID.String()
 
@@ -158,7 +160,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 	res.ExecutedByUUID = req.ExtensionExecution.ExecutedByUUID.String()
 
-	res.Metadata = []byte(req.ExtensionExecution.Metadata)
+	res.Metadata = []byte(mapper.StringPtrToString(req.ExtensionExecution.Metadata))
 
 	if string(res.Metadata) == "" {
 		res.Metadata = []byte(`{}`)
@@ -166,7 +168,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 	res.Status = req.ExtensionExecution.Status.ToInt64()
 
-	res.StatusMsg = req.ExtensionExecution.StatusMsg
+	res.StatusMsg = mapper.StringPtrToSqlNullString(req.ExtensionExecution.StatusMsg)
 
 	res.CreatedAt = existing.CreatedAt
 

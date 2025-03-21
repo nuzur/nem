@@ -4,6 +4,8 @@ import (
 	main_entity "github.com/nuzur/nem/core/entity/extension_execution"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/nuzur/nem/core/entity/mapper"
+
 	"github.com/gofrs/uuid"
 )
 
@@ -20,13 +22,13 @@ func mapModelToEntity(model nemdb.ExtensionExecution) main_entity.ExtensionExecu
 		UUID:                 uuid.FromStringOrNil(model.UUID),
 		ExtensionUUID:        uuid.FromStringOrNil(model.ExtensionUUID),
 		ExtensionVersionUUID: uuid.FromStringOrNil(model.ExtensionVersionUUID),
-		ProjectExtensionUUID: uuid.FromStringOrNil(model.ProjectExtensionUUID),
+		ProjectExtensionUUID: uuid.FromStringOrNil(mapper.SqlNullStringToString(model.ProjectExtensionUUID)),
 		ProjectUUID:          uuid.FromStringOrNil(model.ProjectUUID),
 		ProjectVersionUUID:   uuid.FromStringOrNil(model.ProjectVersionUUID),
 		ExecutedByUUID:       uuid.FromStringOrNil(model.ExecutedByUUID),
-		Metadata:             string(model.Metadata),
+		Metadata:             mapper.StringToStringPtr(string(model.Metadata)),
 		Status:               main_entity.Status(model.Status),
-		StatusMsg:            model.StatusMsg,
+		StatusMsg:            mapper.SqlNullStringToStringPtr(model.StatusMsg),
 		CreatedAt:            model.CreatedAt,
 		UpdatedAt:            model.UpdatedAt,
 	}

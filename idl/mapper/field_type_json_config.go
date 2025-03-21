@@ -8,7 +8,7 @@ import (
 func FieldTypeJSONConfigToProto(e main_entity.FieldTypeJSONConfig) *pb.FieldTypeJSONConfig {
 	return &pb.FieldTypeJSONConfig{
 		EnforceSchemaValidation: e.EnforceSchemaValidation,
-		JsonSchema:              e.JSONSchema,
+		JsonSchema:              StringPtrToString(e.JSONSchema),
 	}
 }
 
@@ -26,7 +26,7 @@ func FieldTypeJSONConfigFromProto(m *pb.FieldTypeJSONConfig) main_entity.FieldTy
 	}
 	return main_entity.FieldTypeJSONConfig{
 		EnforceSchemaValidation: m.GetEnforceSchemaValidation(),
-		JSONSchema:              m.GetJsonSchema(),
+		JSONSchema:              &m.JsonSchema,
 	}
 }
 

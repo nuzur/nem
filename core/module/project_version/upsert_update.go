@@ -17,6 +17,8 @@ import (
 	"github.com/nuzur/nem/custom"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -158,7 +160,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Proj
 
 			Services: service.ServiceSliceToJSON(req.ProjectVersion.Services),
 
-			BaseVersionUUID: req.ProjectVersion.BaseVersionUUID.String(),
+			BaseVersionUUID: mapper.StringToSqlNullString(req.ProjectVersion.BaseVersionUUID.String()),
 
 			ReviewStatus: req.ProjectVersion.ReviewStatus.ToInt64(),
 
@@ -196,7 +198,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Proj
 
 	res.Services = service.ServiceSliceToJSON(req.ProjectVersion.Services)
 
-	res.BaseVersionUUID = req.ProjectVersion.BaseVersionUUID.String()
+	res.BaseVersionUUID = mapper.StringToSqlNullString(req.ProjectVersion.BaseVersionUUID.String())
 
 	res.ReviewStatus = req.ProjectVersion.ReviewStatus.ToInt64()
 

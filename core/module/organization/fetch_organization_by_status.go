@@ -20,7 +20,9 @@ func (m *module) FetchOrganizationByStatus(
 		models, err := m.repository.Queries.FetchOrganizationByStatus(
 			ctx,
 			nemdb.FetchOrganizationByStatusParams{
+
 				Status: req.Status.ToInt64(),
+
 				Offset: req.Offset,
 				Limit:  req.Limit,
 			},
@@ -95,7 +97,9 @@ func (m *module) FetchOrganizationByStatus(
 			models, err := m.repository.Queries.FetchOrganizationByStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchOrganizationByStatusOrderedByCreatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -119,7 +123,9 @@ func (m *module) FetchOrganizationByStatus(
 			models, err := m.repository.Queries.FetchOrganizationByStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchOrganizationByStatusOrderedByCreatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -146,7 +152,9 @@ func (m *module) FetchOrganizationByStatus(
 			models, err := m.repository.Queries.FetchOrganizationByStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchOrganizationByStatusOrderedByUpdatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -170,7 +178,9 @@ func (m *module) FetchOrganizationByStatus(
 			models, err := m.repository.Queries.FetchOrganizationByStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchOrganizationByStatusOrderedByUpdatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},

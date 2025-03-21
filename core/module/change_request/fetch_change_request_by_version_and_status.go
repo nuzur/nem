@@ -20,10 +20,13 @@ func (m *module) FetchChangeRequestByVersionAndStatus(
 		models, err := m.repository.Queries.FetchChangeRequestByVersionAndStatus(
 			ctx,
 			nemdb.FetchChangeRequestByVersionAndStatusParams{
+
 				Version: req.Version,
-				Status:  req.Status.ToInt64(),
-				Offset:  req.Offset,
-				Limit:   req.Limit,
+
+				Status: req.Status.ToInt64(),
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchChangeRequestByVersionAndStatus(
 			models, err := m.repository.Queries.FetchChangeRequestByVersionAndStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchChangeRequestByVersionAndStatusOrderedByCreatedAtASCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchChangeRequestByVersionAndStatus(
 			models, err := m.repository.Queries.FetchChangeRequestByVersionAndStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchChangeRequestByVersionAndStatusOrderedByCreatedAtDESCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchChangeRequestByVersionAndStatus(
 			models, err := m.repository.Queries.FetchChangeRequestByVersionAndStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchChangeRequestByVersionAndStatusOrderedByUpdatedAtASCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchChangeRequestByVersionAndStatus(
 			models, err := m.repository.Queries.FetchChangeRequestByVersionAndStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchChangeRequestByVersionAndStatusOrderedByUpdatedAtDESCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

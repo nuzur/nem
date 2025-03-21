@@ -4,6 +4,8 @@ import (
 	main_entity "github.com/nuzur/nem/core/entity/user"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/nuzur/nem/core/entity/mapper"
+
 	"github.com/gofrs/uuid"
 )
 
@@ -19,13 +21,13 @@ func mapModelToEntity(model nemdb.User) main_entity.User {
 	return main_entity.User{
 		UUID:        uuid.FromStringOrNil(model.UUID),
 		Identifier:  model.Identifier,
-		Name:        model.Name,
-		LastName:    model.LastName,
+		Name:        mapper.SqlNullStringToStringPtr(model.Name),
+		LastName:    mapper.SqlNullStringToStringPtr(model.LastName),
 		Email:       model.Email,
 		UserType:    main_entity.UserType(model.UserType),
-		CountryIos2: model.CountryIos2,
-		Locale:      model.Locale,
-		Metadata:    model.Metadata,
+		CountryIos2: mapper.SqlNullStringToStringPtr(model.CountryIos2),
+		Locale:      mapper.SqlNullStringToStringPtr(model.Locale),
+		Metadata:    mapper.SqlNullStringToStringPtr(model.Metadata),
 		Status:      main_entity.Status(model.Status),
 		CreatedAt:   model.CreatedAt,
 		UpdatedAt:   model.UpdatedAt,

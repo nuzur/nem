@@ -18,7 +18,7 @@ import (
 type Store struct {
 	UUID          uuid.UUID `json:"uuid"`
 	Identifier    string    `json:"identifier"`
-	Description   string    `json:"description"`
+	Description   *string   `json:"description"`
 	Status        Status    `json:"status"`
 	CreatedAt     time.Time `json:"created_at"`
 	UpdatedAt     time.Time `json:"updated_at"`
@@ -107,7 +107,7 @@ func NewStoreWithRandomValues() Store {
 	return Store{
 		UUID:          randomvalues.GetRandomUUIDValue(),
 		Identifier:    randomvalues.GetRandomStringValue(),
-		Description:   randomvalues.GetRandomStringValue(),
+		Description:   randomvalues.GetRandomStringValuePtr(),
 		Status:        randomvalues.GetRandomOptionValue[Status](2),
 		CreatedAt:     randomvalues.GetRandomTimeValue(),
 		UpdatedAt:     randomvalues.GetRandomTimeValue(),

@@ -22,7 +22,7 @@ type Entity struct {
 	UUID          uuid.UUID                           `json:"uuid"`
 	Version       int64                               `json:"version"`
 	Identifier    string                              `json:"identifier"`
-	Description   string                              `json:"description"`
+	Description   *string                             `json:"description"`
 	Fields        []field.Field                       `json:"fields"`
 	Type          Type                                `json:"type"`
 	TypeConfig    entity_type_config.EntityTypeConfig `json:"type_config"`
@@ -121,7 +121,7 @@ func NewEntityWithRandomValues() Entity {
 		UUID:          randomvalues.GetRandomUUIDValue(),
 		Version:       randomvalues.GetRandomIntValue(),
 		Identifier:    randomvalues.GetRandomStringValue(),
-		Description:   randomvalues.GetRandomStringValue(),
+		Description:   randomvalues.GetRandomStringValuePtr(),
 		Fields:        field.NewFieldSliceWithRandomValues(rand.Intn(10)),
 		Type:          randomvalues.GetRandomOptionValue[Type](2),
 		TypeConfig:    entity_type_config.NewEntityTypeConfigWithRandomValues(),

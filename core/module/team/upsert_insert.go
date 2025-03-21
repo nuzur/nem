@@ -21,6 +21,8 @@ import (
 	"github.com/nuzur/nem/core/entity/store"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -120,7 +122,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertTeamPar
 
 		ObjectStores: object_store.ObjectStoreSliceToJSON(req.Team.ObjectStores),
 
-		OrganizationUUID: custom.GenerateUUID().String(),
+		OrganizationUUID: mapper.StringToSqlNullString(req.Team.OrganizationUUID.String()),
 
 		DefaultEntity: entity.EntityToJSON(req.Team.DefaultEntity),
 

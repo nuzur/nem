@@ -144,11 +144,11 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Proj
 
 			Name: req.Project.Name,
 
-			Description: req.Project.Description,
+			Description: mapper.StringPtrToSqlNullString(req.Project.Description),
 
 			Tags: mapper.SliceToJSON(req.Project.Tags),
 
-			URL: req.Project.URL,
+			URL: mapper.StringPtrToSqlNullString(req.Project.URL),
 
 			OwnerUUID: req.Project.OwnerUUID.String(),
 
@@ -176,11 +176,11 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Proj
 
 	res.Name = req.Project.Name
 
-	res.Description = req.Project.Description
+	res.Description = mapper.StringPtrToSqlNullString(req.Project.Description)
 
 	res.Tags = mapper.SliceToJSON(req.Project.Tags)
 
-	res.URL = req.Project.URL
+	res.URL = mapper.StringPtrToSqlNullString(req.Project.URL)
 
 	res.OwnerUUID = req.Project.OwnerUUID.String()
 

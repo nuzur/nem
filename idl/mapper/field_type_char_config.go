@@ -9,7 +9,7 @@ func FieldTypeCharConfigToProto(e main_entity.FieldTypeCharConfig) *pb.FieldType
 	return &pb.FieldTypeCharConfig{
 		MinSize:         int64(e.MinSize),
 		MaxSize:         int64(e.MaxSize),
-		RegexValidation: e.RegexValidation,
+		RegexValidation: StringPtrToString(e.RegexValidation),
 	}
 }
 
@@ -28,7 +28,7 @@ func FieldTypeCharConfigFromProto(m *pb.FieldTypeCharConfig) main_entity.FieldTy
 	return main_entity.FieldTypeCharConfig{
 		MinSize:         int64(m.GetMinSize()),
 		MaxSize:         int64(m.GetMaxSize()),
-		RegexValidation: m.GetRegexValidation(),
+		RegexValidation: &m.RegexValidation,
 	}
 }
 

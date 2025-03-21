@@ -7,6 +7,8 @@ import (
 	"github.com/nuzur/nem/core/module/extension/types"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 	"github.com/nuzur/nem/monitoring"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Search(
@@ -17,7 +19,7 @@ func (m *module) Search(
 ) (types.SearchExtensionResponse, error) {
 	request := nemdb.SearchExtensionParams{
 		Identifier:  fmt.Sprintf("%%%s%%", query),
-		Description: fmt.Sprintf("%%%s%%", query),
+		Description: mapper.StringToSqlNullString(query),
 		Offset:      offset,
 		Limit:       limit,
 	}

@@ -15,10 +15,10 @@ import (
 )
 
 type FieldTypeDatetimeConfig struct {
-	EnforceFuture   bool   `json:"enforce_future"`
-	EnforcePast     bool   `json:"enforce_past"`
-	DisplayTimezone string `json:"display_timezone"`
-	StorageTimezone string `json:"storage_timezone"`
+	EnforceFuture   bool    `json:"enforce_future"`
+	EnforcePast     bool    `json:"enforce_past"`
+	DisplayTimezone *string `json:"display_timezone"`
+	StorageTimezone *string `json:"storage_timezone"`
 }
 
 func (e FieldTypeDatetimeConfig) String() string {
@@ -98,8 +98,8 @@ func NewFieldTypeDatetimeConfigWithRandomValues() FieldTypeDatetimeConfig {
 	return FieldTypeDatetimeConfig{
 		EnforceFuture:   randomvalues.GetRandomBoolValue(),
 		EnforcePast:     randomvalues.GetRandomBoolValue(),
-		DisplayTimezone: randomvalues.GetRandomStringValue(),
-		StorageTimezone: randomvalues.GetRandomStringValue(),
+		DisplayTimezone: randomvalues.GetRandomStringValuePtr(),
+		StorageTimezone: randomvalues.GetRandomStringValuePtr(),
 	}
 }
 

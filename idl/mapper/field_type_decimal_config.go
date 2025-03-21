@@ -15,7 +15,7 @@ func FieldTypeDecimalConfigToProto(e main_entity.FieldTypeDecimalConfig) *pb.Fie
 		NumberOfDecimals:  int64(e.NumberOfDecimals),
 		Separator:         pb.FieldTypeDecimalConfigSeparator(e.Separator),
 		IsCurrency:        e.IsCurrency,
-		CurrencyCode:      e.CurrencyCode,
+		CurrencyCode:      StringPtrToString(e.CurrencyCode),
 		EnableLimits:      e.EnableLimits,
 	}
 }
@@ -41,7 +41,7 @@ func FieldTypeDecimalConfigFromProto(m *pb.FieldTypeDecimalConfig) main_entity.F
 		NumberOfDecimals:  int64(m.GetNumberOfDecimals()),
 		Separator:         main_entity.Separator(m.GetSeparator()),
 		IsCurrency:        m.GetIsCurrency(),
-		CurrencyCode:      m.GetCurrencyCode(),
+		CurrencyCode:      &m.CurrencyCode,
 		EnableLimits:      m.GetEnableLimits(),
 	}
 }

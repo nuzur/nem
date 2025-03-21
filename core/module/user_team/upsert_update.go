@@ -11,6 +11,8 @@ import (
 	main_entity "github.com/nuzur/nem/core/entity/user_team"
 
 	"github.com/nuzur/nem/custom"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -120,9 +122,9 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.User
 
 			UUID: req.UserTeam.UUID.String(),
 
-			UserUUID: req.UserTeam.UserUUID.String(),
+			UserUUID: mapper.StringToSqlNullString(req.UserTeam.UserUUID.String()),
 
-			UserEmail: req.UserTeam.UserEmail,
+			UserEmail: mapper.StringPtrToSqlNullString(req.UserTeam.UserEmail),
 
 			TeamUUID: req.UserTeam.TeamUUID.String(),
 
@@ -144,9 +146,9 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.User
 
 	res.UUID = req.UserTeam.UUID.String()
 
-	res.UserUUID = req.UserTeam.UserUUID.String()
+	res.UserUUID = mapper.StringToSqlNullString(req.UserTeam.UserUUID.String())
 
-	res.UserEmail = req.UserTeam.UserEmail
+	res.UserEmail = mapper.StringPtrToSqlNullString(req.UserTeam.UserEmail)
 
 	res.TeamUUID = req.UserTeam.TeamUUID.String()
 

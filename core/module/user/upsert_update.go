@@ -9,6 +9,8 @@ import (
 	"github.com/nuzur/nem/monitoring"
 
 	"github.com/nuzur/nem/custom"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -120,19 +122,19 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.User
 
 			Identifier: req.User.Identifier,
 
-			Name: req.User.Name,
+			Name: mapper.StringPtrToSqlNullString(req.User.Name),
 
-			LastName: req.User.LastName,
+			LastName: mapper.StringPtrToSqlNullString(req.User.LastName),
 
 			Email: req.User.Email,
 
 			UserType: req.User.UserType.ToInt64(),
 
-			CountryIos2: req.User.CountryIos2,
+			CountryIos2: mapper.StringPtrToSqlNullString(req.User.CountryIos2),
 
-			Locale: req.User.Locale,
+			Locale: mapper.StringPtrToSqlNullString(req.User.Locale),
 
-			Metadata: req.User.Metadata,
+			Metadata: mapper.StringPtrToSqlNullString(req.User.Metadata),
 
 			Status: req.User.Status.ToInt64(),
 
@@ -148,19 +150,19 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.User
 
 	res.Identifier = req.User.Identifier
 
-	res.Name = req.User.Name
+	res.Name = mapper.StringPtrToSqlNullString(req.User.Name)
 
-	res.LastName = req.User.LastName
+	res.LastName = mapper.StringPtrToSqlNullString(req.User.LastName)
 
 	res.Email = req.User.Email
 
 	res.UserType = req.User.UserType.ToInt64()
 
-	res.CountryIos2 = req.User.CountryIos2
+	res.CountryIos2 = mapper.StringPtrToSqlNullString(req.User.CountryIos2)
 
-	res.Locale = req.User.Locale
+	res.Locale = mapper.StringPtrToSqlNullString(req.User.Locale)
 
-	res.Metadata = req.User.Metadata
+	res.Metadata = mapper.StringPtrToSqlNullString(req.User.Metadata)
 
 	res.Status = req.User.Status.ToInt64()
 

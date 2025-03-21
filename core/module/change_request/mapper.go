@@ -4,6 +4,8 @@ import (
 	main_entity "github.com/nuzur/nem/core/entity/change_request"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/nuzur/nem/core/entity/mapper"
+
 	"github.com/gofrs/uuid"
 	"github.com/nuzur/nem/core/entity/change_request_review"
 )
@@ -21,13 +23,13 @@ func mapModelToEntity(model nemdb.ChangeRequest) main_entity.ChangeRequest {
 		UUID:          uuid.FromStringOrNil(model.UUID),
 		Version:       model.Version,
 		Title:         model.Title,
-		Description:   model.Description,
+		Description:   mapper.SqlNullStringToStringPtr(model.Description),
 		ReviewType:    main_entity.ReviewType(model.ReviewType),
 		RefUUID:       uuid.FromStringOrNil(model.RefUUID),
-		OldData:       string(model.OldData),
-		OldDataRef:    model.OldDataRef,
-		NewData:       string(model.NewData),
-		NewDataRef:    model.NewDataRef,
+		OldData:       mapper.StringToStringPtr(string(model.OldData)),
+		OldDataRef:    mapper.SqlNullStringToStringPtr(model.OldDataRef),
+		NewData:       mapper.StringToStringPtr(string(model.NewData)),
+		NewDataRef:    mapper.SqlNullStringToStringPtr(model.NewDataRef),
 		Reviews:       change_request_review.ChangeRequestReviewSliceFromJSON(model.Reviews),
 		OwnerUUID:     uuid.FromStringOrNil(model.OwnerUUID),
 		Status:        main_entity.Status(model.Status),

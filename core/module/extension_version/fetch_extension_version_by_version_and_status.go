@@ -20,10 +20,13 @@ func (m *module) FetchExtensionVersionByVersionAndStatus(
 		models, err := m.repository.Queries.FetchExtensionVersionByVersionAndStatus(
 			ctx,
 			nemdb.FetchExtensionVersionByVersionAndStatusParams{
+
 				Version: req.Version,
-				Status:  req.Status.ToInt64(),
-				Offset:  req.Offset,
-				Limit:   req.Limit,
+
+				Status: req.Status.ToInt64(),
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchExtensionVersionByVersionAndStatus(
 			models, err := m.repository.Queries.FetchExtensionVersionByVersionAndStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchExtensionVersionByVersionAndStatusOrderedByCreatedAtASCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchExtensionVersionByVersionAndStatus(
 			models, err := m.repository.Queries.FetchExtensionVersionByVersionAndStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionVersionByVersionAndStatusOrderedByCreatedAtDESCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchExtensionVersionByVersionAndStatus(
 			models, err := m.repository.Queries.FetchExtensionVersionByVersionAndStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchExtensionVersionByVersionAndStatusOrderedByUpdatedAtASCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchExtensionVersionByVersionAndStatus(
 			models, err := m.repository.Queries.FetchExtensionVersionByVersionAndStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionVersionByVersionAndStatusOrderedByUpdatedAtDESCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

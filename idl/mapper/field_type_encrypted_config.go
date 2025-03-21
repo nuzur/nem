@@ -9,7 +9,7 @@ func FieldTypeEncryptedConfigToProto(e main_entity.FieldTypeEncryptedConfig) *pb
 	return &pb.FieldTypeEncryptedConfig{
 		MinSize:         int64(e.MinSize),
 		MaxSize:         int64(e.MaxSize),
-		RegexValidation: e.RegexValidation,
+		RegexValidation: StringPtrToString(e.RegexValidation),
 		EncryptionType:  pb.FieldTypeEncryptedConfigEncryptionType(e.EncryptionType),
 		UseSalt:         e.UseSalt,
 		SaltFieldUuids:  UUIDSliceToStringSlice(e.SaltFieldUUIDs),
@@ -31,7 +31,7 @@ func FieldTypeEncryptedConfigFromProto(m *pb.FieldTypeEncryptedConfig) main_enti
 	return main_entity.FieldTypeEncryptedConfig{
 		MinSize:         int64(m.GetMinSize()),
 		MaxSize:         int64(m.GetMaxSize()),
-		RegexValidation: m.GetRegexValidation(),
+		RegexValidation: &m.RegexValidation,
 		EncryptionType:  main_entity.EncryptionType(m.GetEncryptionType()),
 		UseSalt:         m.GetUseSalt(),
 		SaltFieldUUIDs:  StringSliceToUUIDSlice(m.GetSaltFieldUuids()),

@@ -4,6 +4,8 @@ import (
 	main_entity "github.com/nuzur/nem/core/entity/user_team"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/nuzur/nem/core/entity/mapper"
+
 	"github.com/gofrs/uuid"
 )
 
@@ -18,8 +20,8 @@ func mapModelsToEntities(models []nemdb.UserTeam) []main_entity.UserTeam {
 func mapModelToEntity(model nemdb.UserTeam) main_entity.UserTeam {
 	return main_entity.UserTeam{
 		UUID:          uuid.FromStringOrNil(model.UUID),
-		UserUUID:      uuid.FromStringOrNil(model.UserUUID),
-		UserEmail:     model.UserEmail,
+		UserUUID:      uuid.FromStringOrNil(mapper.SqlNullStringToString(model.UserUUID)),
+		UserEmail:     mapper.SqlNullStringToStringPtr(model.UserEmail),
 		TeamUUID:      uuid.FromStringOrNil(model.TeamUUID),
 		Roles:         main_entity.JSONToRoleSlice(model.Roles),
 		Status:        main_entity.Status(model.Status),

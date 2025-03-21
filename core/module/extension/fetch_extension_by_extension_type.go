@@ -20,9 +20,11 @@ func (m *module) FetchExtensionByExtensionType(
 		models, err := m.repository.Queries.FetchExtensionByExtensionType(
 			ctx,
 			nemdb.FetchExtensionByExtensionTypeParams{
+
 				ExtensionType: req.ExtensionType.ToInt64(),
-				Offset:        req.Offset,
-				Limit:         req.Limit,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -95,9 +97,11 @@ func (m *module) FetchExtensionByExtensionType(
 			models, err := m.repository.Queries.FetchExtensionByExtensionTypeOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByExtensionTypeOrderedByCreatedAtASCParams{
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -119,9 +123,11 @@ func (m *module) FetchExtensionByExtensionType(
 			models, err := m.repository.Queries.FetchExtensionByExtensionTypeOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByExtensionTypeOrderedByCreatedAtDESCParams{
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -146,9 +152,11 @@ func (m *module) FetchExtensionByExtensionType(
 			models, err := m.repository.Queries.FetchExtensionByExtensionTypeOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByExtensionTypeOrderedByUpdatedAtASCParams{
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -170,9 +178,11 @@ func (m *module) FetchExtensionByExtensionType(
 			models, err := m.repository.Queries.FetchExtensionByExtensionTypeOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByExtensionTypeOrderedByUpdatedAtDESCParams{
+
 					ExtensionType: req.ExtensionType.ToInt64(),
-					Offset:        req.Offset,
-					Limit:         req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

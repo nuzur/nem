@@ -18,12 +18,12 @@ import (
 type UserConnectionExecution struct {
 	UUID          uuid.UUID `json:"uuid"`
 	Status        Status    `json:"status"`
-	ResultsPath   string    `json:"results_path"`
+	ResultsPath   *string   `json:"results_path"`
 	NumResults    int64     `json:"num_results"`
 	StartedAt     time.Time `json:"started_at"`
 	FinishedAt    time.Time `json:"finished_at"`
-	EstimatedTime string    `json:"estimated_time"`
-	UserMsg       string    `json:"user_msg"`
+	EstimatedTime *string   `json:"estimated_time"`
+	UserMsg       *string   `json:"user_msg"`
 }
 
 func (e UserConnectionExecution) String() string {
@@ -107,12 +107,12 @@ func NewUserConnectionExecutionWithRandomValues() UserConnectionExecution {
 	return UserConnectionExecution{
 		UUID:          randomvalues.GetRandomUUIDValue(),
 		Status:        randomvalues.GetRandomOptionValue[Status](3),
-		ResultsPath:   randomvalues.GetRandomStringValue(),
+		ResultsPath:   randomvalues.GetRandomStringValuePtr(),
 		NumResults:    randomvalues.GetRandomIntValue(),
 		StartedAt:     randomvalues.GetRandomTimeValue(),
 		FinishedAt:    randomvalues.GetRandomTimeValue(),
-		EstimatedTime: randomvalues.GetRandomStringValue(),
-		UserMsg:       randomvalues.GetRandomStringValue(),
+		EstimatedTime: randomvalues.GetRandomStringValuePtr(),
+		UserMsg:       randomvalues.GetRandomStringValuePtr(),
 	}
 }
 

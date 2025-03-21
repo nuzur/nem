@@ -144,13 +144,13 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 			Identifier: req.Extension.Identifier,
 
-			DisplayName: req.Extension.DisplayName,
+			DisplayName: mapper.StringPtrToSqlNullString(req.Extension.DisplayName),
 
-			DisplayAuthorName: req.Extension.DisplayAuthorName,
+			DisplayAuthorName: mapper.StringPtrToSqlNullString(req.Extension.DisplayAuthorName),
 
-			Description: req.Extension.Description,
+			Description: mapper.StringPtrToSqlNullString(req.Extension.Description),
 
-			URL: req.Extension.URL,
+			URL: mapper.StringPtrToSqlNullString(req.Extension.URL),
 
 			Verfied: req.Extension.Verfied,
 
@@ -186,13 +186,13 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 	res.Identifier = req.Extension.Identifier
 
-	res.DisplayName = req.Extension.DisplayName
+	res.DisplayName = mapper.StringPtrToSqlNullString(req.Extension.DisplayName)
 
-	res.DisplayAuthorName = req.Extension.DisplayAuthorName
+	res.DisplayAuthorName = mapper.StringPtrToSqlNullString(req.Extension.DisplayAuthorName)
 
-	res.Description = req.Extension.Description
+	res.Description = mapper.StringPtrToSqlNullString(req.Extension.Description)
 
-	res.URL = req.Extension.URL
+	res.URL = mapper.StringPtrToSqlNullString(req.Extension.URL)
 
 	res.Verfied = req.Extension.Verfied
 

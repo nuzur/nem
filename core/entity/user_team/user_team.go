@@ -18,7 +18,7 @@ import (
 type UserTeam struct {
 	UUID          uuid.UUID `json:"uuid"`
 	UserUUID      uuid.UUID `json:"user_uuid"`
-	UserEmail     string    `json:"user_email"`
+	UserEmail     *string   `json:"user_email"`
 	TeamUUID      uuid.UUID `json:"team_uuid"`
 	Roles         []Role    `json:"roles"`
 	Status        Status    `json:"status"`
@@ -125,7 +125,7 @@ func NewUserTeamWithRandomValues() UserTeam {
 	return UserTeam{
 		UUID:          randomvalues.GetRandomUUIDValue(),
 		UserUUID:      randomvalues.GetRandomUUIDValue(),
-		UserEmail:     randomvalues.GetRandomStringValue(),
+		UserEmail:     randomvalues.GetRandomStringValuePtr(),
 		TeamUUID:      randomvalues.GetRandomUUIDValue(),
 		Roles:         randomvalues.GetRandomOptionsValues[Role](5),
 		Status:        randomvalues.GetRandomOptionValue[Status](3),

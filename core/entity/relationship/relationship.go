@@ -20,7 +20,7 @@ type Relationship struct {
 	UUID          uuid.UUID                          `json:"uuid"`
 	Version       int64                              `json:"version"`
 	Identifier    string                             `json:"identifier"`
-	Description   string                             `json:"description"`
+	Description   *string                            `json:"description"`
 	Cardinality   Cardinality                        `json:"cardinality"`
 	From          relationship_node.RelationshipNode `json:"from"`
 	To            relationship_node.RelationshipNode `json:"to"`
@@ -119,7 +119,7 @@ func NewRelationshipWithRandomValues() Relationship {
 		UUID:          randomvalues.GetRandomUUIDValue(),
 		Version:       randomvalues.GetRandomIntValue(),
 		Identifier:    randomvalues.GetRandomStringValue(),
-		Description:   randomvalues.GetRandomStringValue(),
+		Description:   randomvalues.GetRandomStringValuePtr(),
 		Cardinality:   randomvalues.GetRandomOptionValue[Cardinality](2),
 		From:          relationship_node.NewRelationshipNodeWithRandomValues(),
 		To:            relationship_node.NewRelationshipNodeWithRandomValues(),

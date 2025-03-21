@@ -20,7 +20,9 @@ func (m *module) FetchExtensionByPublic(
 		models, err := m.repository.Queries.FetchExtensionByPublic(
 			ctx,
 			nemdb.FetchExtensionByPublicParams{
+
 				Public: req.Public,
+
 				Offset: req.Offset,
 				Limit:  req.Limit,
 			},
@@ -95,7 +97,9 @@ func (m *module) FetchExtensionByPublic(
 			models, err := m.repository.Queries.FetchExtensionByPublicOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByPublicOrderedByCreatedAtASCParams{
+
 					Public: req.Public,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -119,7 +123,9 @@ func (m *module) FetchExtensionByPublic(
 			models, err := m.repository.Queries.FetchExtensionByPublicOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByPublicOrderedByCreatedAtDESCParams{
+
 					Public: req.Public,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -146,7 +152,9 @@ func (m *module) FetchExtensionByPublic(
 			models, err := m.repository.Queries.FetchExtensionByPublicOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByPublicOrderedByUpdatedAtASCParams{
+
 					Public: req.Public,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -170,7 +178,9 @@ func (m *module) FetchExtensionByPublic(
 			models, err := m.repository.Queries.FetchExtensionByPublicOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByPublicOrderedByUpdatedAtDESCParams{
+
 					Public: req.Public,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},

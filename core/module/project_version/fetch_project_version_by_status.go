@@ -20,7 +20,9 @@ func (m *module) FetchProjectVersionByStatus(
 		models, err := m.repository.Queries.FetchProjectVersionByStatus(
 			ctx,
 			nemdb.FetchProjectVersionByStatusParams{
+
 				Status: req.Status.ToInt64(),
+
 				Offset: req.Offset,
 				Limit:  req.Limit,
 			},
@@ -95,7 +97,9 @@ func (m *module) FetchProjectVersionByStatus(
 			models, err := m.repository.Queries.FetchProjectVersionByStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchProjectVersionByStatusOrderedByCreatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -119,7 +123,9 @@ func (m *module) FetchProjectVersionByStatus(
 			models, err := m.repository.Queries.FetchProjectVersionByStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchProjectVersionByStatusOrderedByCreatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -146,7 +152,9 @@ func (m *module) FetchProjectVersionByStatus(
 			models, err := m.repository.Queries.FetchProjectVersionByStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchProjectVersionByStatusOrderedByUpdatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -170,7 +178,9 @@ func (m *module) FetchProjectVersionByStatus(
 			models, err := m.repository.Queries.FetchProjectVersionByStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchProjectVersionByStatusOrderedByUpdatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},

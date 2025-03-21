@@ -20,10 +20,13 @@ func (m *module) FetchExtensionByRepositoryAndPublic(
 		models, err := m.repository.Queries.FetchExtensionByRepositoryAndPublic(
 			ctx,
 			nemdb.FetchExtensionByRepositoryAndPublicParams{
+
 				Repository: req.Repository,
-				Public:     req.Public,
-				Offset:     req.Offset,
-				Limit:      req.Limit,
+
+				Public: req.Public,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchExtensionByRepositoryAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByRepositoryAndPublicOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByRepositoryAndPublicOrderedByCreatedAtASCParams{
+
 					Repository: req.Repository,
-					Public:     req.Public,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchExtensionByRepositoryAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByRepositoryAndPublicOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByRepositoryAndPublicOrderedByCreatedAtDESCParams{
+
 					Repository: req.Repository,
-					Public:     req.Public,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchExtensionByRepositoryAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByRepositoryAndPublicOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchExtensionByRepositoryAndPublicOrderedByUpdatedAtASCParams{
+
 					Repository: req.Repository,
-					Public:     req.Public,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchExtensionByRepositoryAndPublic(
 			models, err := m.repository.Queries.FetchExtensionByRepositoryAndPublicOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchExtensionByRepositoryAndPublicOrderedByUpdatedAtDESCParams{
+
 					Repository: req.Repository,
-					Public:     req.Public,
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Public: req.Public,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

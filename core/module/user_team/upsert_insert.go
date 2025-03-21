@@ -13,6 +13,8 @@ import (
 	"github.com/nuzur/nem/custom"
 
 	main_entity "github.com/nuzur/nem/core/entity/user_team"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -94,9 +96,9 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertUserTea
 
 		UUID: custom.GenerateUUID().String(),
 
-		UserUUID: req.UserTeam.UserUUID.String(),
+		UserUUID: mapper.StringToSqlNullString(req.UserTeam.UserUUID.String()),
 
-		UserEmail: req.UserTeam.UserEmail,
+		UserEmail: mapper.StringPtrToSqlNullString(req.UserTeam.UserEmail),
 
 		TeamUUID: req.UserTeam.TeamUUID.String(),
 

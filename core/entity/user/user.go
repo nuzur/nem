@@ -18,13 +18,13 @@ import (
 type User struct {
 	UUID        uuid.UUID `json:"uuid"`
 	Identifier  string    `json:"identifier"`
-	Name        string    `json:"name"`
-	LastName    string    `json:"last_name"`
+	Name        *string   `json:"name"`
+	LastName    *string   `json:"last_name"`
 	Email       string    `json:"email"`
 	UserType    UserType  `json:"user_type"`
-	CountryIos2 string    `json:"country_ios2"`
-	Locale      string    `json:"locale"`
-	Metadata    string    `json:"metadata"`
+	CountryIos2 *string   `json:"country_ios2"`
+	Locale      *string   `json:"locale"`
+	Metadata    *string   `json:"metadata"`
 	Status      Status    `json:"status"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
@@ -129,13 +129,13 @@ func NewUserWithRandomValues() User {
 	return User{
 		UUID:        randomvalues.GetRandomUUIDValue(),
 		Identifier:  randomvalues.GetRandomStringValue(),
-		Name:        randomvalues.GetRandomStringValue(),
-		LastName:    randomvalues.GetRandomStringValue(),
+		Name:        randomvalues.GetRandomStringValuePtr(),
+		LastName:    randomvalues.GetRandomStringValuePtr(),
 		Email:       randomvalues.GetRandomStringValue(),
 		UserType:    randomvalues.GetRandomOptionValue[UserType](2),
-		CountryIos2: randomvalues.GetRandomStringValue(),
-		Locale:      randomvalues.GetRandomStringValue(),
-		Metadata:    randomvalues.GetRandomStringValue(),
+		CountryIos2: randomvalues.GetRandomStringValuePtr(),
+		Locale:      randomvalues.GetRandomStringValuePtr(),
+		Metadata:    randomvalues.GetRandomStringValuePtr(),
 		Status:      randomvalues.GetRandomOptionValue[Status](2),
 		CreatedAt:   randomvalues.GetRandomTimeValue(),
 		UpdatedAt:   randomvalues.GetRandomTimeValue(),

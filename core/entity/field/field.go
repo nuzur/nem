@@ -20,7 +20,7 @@ type Field struct {
 	UUID             uuid.UUID                         `json:"uuid"`
 	Version          int64                             `json:"version"`
 	Identifier       string                            `json:"identifier"`
-	Description      string                            `json:"description"`
+	Description      *string                           `json:"description"`
 	Type             Type                              `json:"type"`
 	TypeConfig       field_type_config.FieldTypeConfig `json:"type_config"`
 	Required         bool                              `json:"required"`
@@ -127,7 +127,7 @@ func NewFieldWithRandomValues() Field {
 		UUID:             randomvalues.GetRandomUUIDValue(),
 		Version:          randomvalues.GetRandomIntValue(),
 		Identifier:       randomvalues.GetRandomStringValue(),
-		Description:      randomvalues.GetRandomStringValue(),
+		Description:      randomvalues.GetRandomStringValuePtr(),
 		Type:             randomvalues.GetRandomOptionValue[Type](28),
 		TypeConfig:       field_type_config.NewFieldTypeConfigWithRandomValues(),
 		Required:         randomvalues.GetRandomBoolValue(),

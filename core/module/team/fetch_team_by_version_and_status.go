@@ -20,10 +20,13 @@ func (m *module) FetchTeamByVersionAndStatus(
 		models, err := m.repository.Queries.FetchTeamByVersionAndStatus(
 			ctx,
 			nemdb.FetchTeamByVersionAndStatusParams{
+
 				Version: req.Version,
-				Status:  req.Status.ToInt64(),
-				Offset:  req.Offset,
-				Limit:   req.Limit,
+
+				Status: req.Status.ToInt64(),
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchTeamByVersionAndStatus(
 			models, err := m.repository.Queries.FetchTeamByVersionAndStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchTeamByVersionAndStatusOrderedByCreatedAtASCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchTeamByVersionAndStatus(
 			models, err := m.repository.Queries.FetchTeamByVersionAndStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchTeamByVersionAndStatusOrderedByCreatedAtDESCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchTeamByVersionAndStatus(
 			models, err := m.repository.Queries.FetchTeamByVersionAndStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchTeamByVersionAndStatusOrderedByUpdatedAtASCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchTeamByVersionAndStatus(
 			models, err := m.repository.Queries.FetchTeamByVersionAndStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchTeamByVersionAndStatusOrderedByUpdatedAtDESCParams{
+
 					Version: req.Version,
-					Status:  req.Status.ToInt64(),
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

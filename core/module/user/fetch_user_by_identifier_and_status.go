@@ -20,10 +20,13 @@ func (m *module) FetchUserByIdentifierAndStatus(
 		models, err := m.repository.Queries.FetchUserByIdentifierAndStatus(
 			ctx,
 			nemdb.FetchUserByIdentifierAndStatusParams{
+
 				Identifier: req.Identifier,
-				Status:     req.Status.ToInt64(),
-				Offset:     req.Offset,
-				Limit:      req.Limit,
+
+				Status: req.Status.ToInt64(),
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +99,13 @@ func (m *module) FetchUserByIdentifierAndStatus(
 			models, err := m.repository.Queries.FetchUserByIdentifierAndStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchUserByIdentifierAndStatusOrderedByCreatedAtASCParams{
+
 					Identifier: req.Identifier,
-					Status:     req.Status.ToInt64(),
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +127,13 @@ func (m *module) FetchUserByIdentifierAndStatus(
 			models, err := m.repository.Queries.FetchUserByIdentifierAndStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchUserByIdentifierAndStatusOrderedByCreatedAtDESCParams{
+
 					Identifier: req.Identifier,
-					Status:     req.Status.ToInt64(),
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +158,13 @@ func (m *module) FetchUserByIdentifierAndStatus(
 			models, err := m.repository.Queries.FetchUserByIdentifierAndStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchUserByIdentifierAndStatusOrderedByUpdatedAtASCParams{
+
 					Identifier: req.Identifier,
-					Status:     req.Status.ToInt64(),
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +186,13 @@ func (m *module) FetchUserByIdentifierAndStatus(
 			models, err := m.repository.Queries.FetchUserByIdentifierAndStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchUserByIdentifierAndStatusOrderedByUpdatedAtDESCParams{
+
 					Identifier: req.Identifier,
-					Status:     req.Status.ToInt64(),
-					Offset:     req.Offset,
-					Limit:      req.Limit,
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

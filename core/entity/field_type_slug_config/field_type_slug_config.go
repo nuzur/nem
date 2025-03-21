@@ -19,7 +19,7 @@ import (
 type FieldTypeSlugConfig struct {
 	MinSize           int64       `json:"min_size"`
 	MaxSize           int64       `json:"max_size"`
-	RegexValidation   string      `json:"regex_validation"`
+	RegexValidation   *string     `json:"regex_validation"`
 	BasedOnFieldUUIDs []uuid.UUID `json:"based_on_field_uuids"`
 }
 
@@ -101,7 +101,7 @@ func NewFieldTypeSlugConfigWithRandomValues() FieldTypeSlugConfig {
 	return FieldTypeSlugConfig{
 		MinSize:           randomvalues.GetRandomIntValue(),
 		MaxSize:           randomvalues.GetRandomIntValue(),
-		RegexValidation:   randomvalues.GetRandomStringValue(),
+		RegexValidation:   randomvalues.GetRandomStringValuePtr(),
 		BasedOnFieldUUIDs: []uuid.UUID{},
 	}
 }

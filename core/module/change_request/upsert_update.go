@@ -13,6 +13,8 @@ import (
 	"github.com/nuzur/nem/custom"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -142,19 +144,19 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 
 			Title: req.ChangeRequest.Title,
 
-			Description: req.ChangeRequest.Description,
+			Description: mapper.StringPtrToSqlNullString(req.ChangeRequest.Description),
 
 			ReviewType: req.ChangeRequest.ReviewType.ToInt64(),
 
 			RefUUID: req.ChangeRequest.RefUUID.String(),
 
-			OldData: []byte(req.ChangeRequest.OldData),
+			OldData: []byte(mapper.StringPtrToString(req.ChangeRequest.OldData)),
 
-			OldDataRef: req.ChangeRequest.OldDataRef,
+			OldDataRef: mapper.StringPtrToSqlNullString(req.ChangeRequest.OldDataRef),
 
-			NewData: []byte(req.ChangeRequest.NewData),
+			NewData: []byte(mapper.StringPtrToString(req.ChangeRequest.NewData)),
 
-			NewDataRef: req.ChangeRequest.NewDataRef,
+			NewDataRef: mapper.StringPtrToSqlNullString(req.ChangeRequest.NewDataRef),
 
 			Reviews: change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews),
 
@@ -180,27 +182,27 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 
 	res.Title = req.ChangeRequest.Title
 
-	res.Description = req.ChangeRequest.Description
+	res.Description = mapper.StringPtrToSqlNullString(req.ChangeRequest.Description)
 
 	res.ReviewType = req.ChangeRequest.ReviewType.ToInt64()
 
 	res.RefUUID = req.ChangeRequest.RefUUID.String()
 
-	res.OldData = []byte(req.ChangeRequest.OldData)
+	res.OldData = []byte(mapper.StringPtrToString(req.ChangeRequest.OldData))
 
 	if string(res.OldData) == "" {
 		res.OldData = []byte(`{}`)
 	}
 
-	res.OldDataRef = req.ChangeRequest.OldDataRef
+	res.OldDataRef = mapper.StringPtrToSqlNullString(req.ChangeRequest.OldDataRef)
 
-	res.NewData = []byte(req.ChangeRequest.NewData)
+	res.NewData = []byte(mapper.StringPtrToString(req.ChangeRequest.NewData))
 
 	if string(res.NewData) == "" {
 		res.NewData = []byte(`{}`)
 	}
 
-	res.NewDataRef = req.ChangeRequest.NewDataRef
+	res.NewDataRef = mapper.StringPtrToSqlNullString(req.ChangeRequest.NewDataRef)
 
 	res.Reviews = change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews)
 

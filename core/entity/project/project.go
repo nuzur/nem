@@ -20,9 +20,9 @@ type Project struct {
 	UUID              uuid.UUID                            `json:"uuid"`
 	Version           int64                                `json:"version"`
 	Name              string                               `json:"name"`
-	Description       string                               `json:"description"`
+	Description       *string                              `json:"description"`
 	Tags              []string                             `json:"tags"`
-	URL               string                               `json:"url"`
+	URL               *string                              `json:"url"`
 	OwnerUUID         uuid.UUID                            `json:"owner_uuid"`
 	TeamUUID          uuid.UUID                            `json:"team_uuid"`
 	ProjectExtensions []project_extension.ProjectExtension `json:"project_extensions"`
@@ -137,9 +137,9 @@ func NewProjectWithRandomValues() Project {
 		UUID:              randomvalues.GetRandomUUIDValue(),
 		Version:           randomvalues.GetRandomIntValue(),
 		Name:              randomvalues.GetRandomStringValue(),
-		Description:       randomvalues.GetRandomStringValue(),
+		Description:       randomvalues.GetRandomStringValuePtr(),
 		Tags:              []string{},
-		URL:               randomvalues.GetRandomStringValue(),
+		URL:               randomvalues.GetRandomStringValuePtr(),
 		OwnerUUID:         randomvalues.GetRandomUUIDValue(),
 		TeamUUID:          randomvalues.GetRandomUUIDValue(),
 		ProjectExtensions: project_extension.NewProjectExtensionSliceWithRandomValues(rand.Intn(10)),

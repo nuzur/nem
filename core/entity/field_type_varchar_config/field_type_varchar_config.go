@@ -15,9 +15,9 @@ import (
 )
 
 type FieldTypeVarcharConfig struct {
-	MinSize         int64  `json:"min_size"`
-	MaxSize         int64  `json:"max_size"`
-	RegexValidation string `json:"regex_validation"`
+	MinSize         int64   `json:"min_size"`
+	MaxSize         int64   `json:"max_size"`
+	RegexValidation *string `json:"regex_validation"`
 }
 
 func (e FieldTypeVarcharConfig) String() string {
@@ -96,7 +96,7 @@ func NewFieldTypeVarcharConfigWithRandomValues() FieldTypeVarcharConfig {
 	return FieldTypeVarcharConfig{
 		MinSize:         randomvalues.GetRandomIntValue(),
 		MaxSize:         randomvalues.GetRandomIntValue(),
-		RegexValidation: randomvalues.GetRandomStringValue(),
+		RegexValidation: randomvalues.GetRandomStringValuePtr(),
 	}
 }
 

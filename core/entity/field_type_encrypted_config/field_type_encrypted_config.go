@@ -19,7 +19,7 @@ import (
 type FieldTypeEncryptedConfig struct {
 	MinSize         int64          `json:"min_size"`
 	MaxSize         int64          `json:"max_size"`
-	RegexValidation string         `json:"regex_validation"`
+	RegexValidation *string        `json:"regex_validation"`
 	EncryptionType  EncryptionType `json:"encryption_type"`
 	UseSalt         bool           `json:"use_salt"`
 	SaltFieldUUIDs  []uuid.UUID    `json:"salt_field_uuids"`
@@ -105,7 +105,7 @@ func NewFieldTypeEncryptedConfigWithRandomValues() FieldTypeEncryptedConfig {
 	return FieldTypeEncryptedConfig{
 		MinSize:         randomvalues.GetRandomIntValue(),
 		MaxSize:         randomvalues.GetRandomIntValue(),
-		RegexValidation: randomvalues.GetRandomStringValue(),
+		RegexValidation: randomvalues.GetRandomStringValuePtr(),
 		EncryptionType:  randomvalues.GetRandomOptionValue[EncryptionType](2),
 		UseSalt:         randomvalues.GetRandomBoolValue(),
 		SaltFieldUUIDs:  []uuid.UUID{},

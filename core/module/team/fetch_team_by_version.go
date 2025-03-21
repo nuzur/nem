@@ -20,9 +20,11 @@ func (m *module) FetchTeamByVersion(
 		models, err := m.repository.Queries.FetchTeamByVersion(
 			ctx,
 			nemdb.FetchTeamByVersionParams{
+
 				Version: req.Version,
-				Offset:  req.Offset,
-				Limit:   req.Limit,
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -95,9 +97,11 @@ func (m *module) FetchTeamByVersion(
 			models, err := m.repository.Queries.FetchTeamByVersionOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchTeamByVersionOrderedByCreatedAtASCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -119,9 +123,11 @@ func (m *module) FetchTeamByVersion(
 			models, err := m.repository.Queries.FetchTeamByVersionOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchTeamByVersionOrderedByCreatedAtDESCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -146,9 +152,11 @@ func (m *module) FetchTeamByVersion(
 			models, err := m.repository.Queries.FetchTeamByVersionOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchTeamByVersionOrderedByUpdatedAtASCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -170,9 +178,11 @@ func (m *module) FetchTeamByVersion(
 			models, err := m.repository.Queries.FetchTeamByVersionOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchTeamByVersionOrderedByUpdatedAtDESCParams{
+
 					Version: req.Version,
-					Offset:  req.Offset,
-					Limit:   req.Limit,
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

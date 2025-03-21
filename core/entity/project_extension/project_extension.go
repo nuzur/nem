@@ -19,7 +19,7 @@ type ProjectExtension struct {
 	UUID                      uuid.UUID `json:"uuid"`
 	ExtensionUUID             uuid.UUID `json:"extension_uuid"`
 	ExtensionVersionUUID      uuid.UUID `json:"extension_version_uuid"`
-	ConfigurationEntityValues string    `json:"configuration_entity_values"`
+	ConfigurationEntityValues *string   `json:"configuration_entity_values"`
 	Blocking                  bool      `json:"blocking"`
 	Status                    Status    `json:"status"`
 	CreatedAt                 time.Time `json:"created_at"`
@@ -112,7 +112,7 @@ func NewProjectExtensionWithRandomValues() ProjectExtension {
 		UUID:                      randomvalues.GetRandomUUIDValue(),
 		ExtensionUUID:             randomvalues.GetRandomUUIDValue(),
 		ExtensionVersionUUID:      randomvalues.GetRandomUUIDValue(),
-		ConfigurationEntityValues: randomvalues.GetRandomStringValue(),
+		ConfigurationEntityValues: randomvalues.GetRandomStringValuePtr(),
 		Blocking:                  randomvalues.GetRandomBoolValue(),
 		Status:                    randomvalues.GetRandomOptionValue[Status](2),
 		CreatedAt:                 randomvalues.GetRandomTimeValue(),

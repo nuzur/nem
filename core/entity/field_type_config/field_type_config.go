@@ -33,11 +33,11 @@ import (
 )
 
 type FieldTypeConfig struct {
-	UUID      string                                               `json:"uuid"`
+	UUID      *string                                              `json:"uuid"`
 	Integer   field_type_integer_config.FieldTypeIntegerConfig     `json:"integer"`
 	Float     field_type_float_config.FieldTypeFloatConfig         `json:"float"`
 	Decimal   field_type_decimal_config.FieldTypeDecimalConfig     `json:"decimal"`
-	Boolean   string                                               `json:"boolean"`
+	Boolean   *string                                              `json:"boolean"`
 	Char      field_type_char_config.FieldTypeCharConfig           `json:"char"`
 	Varchar   field_type_varchar_config.FieldTypeVarcharConfig     `json:"varchar"`
 	Text      field_type_text_config.FieldTypeTextConfig           `json:"text"`
@@ -45,11 +45,11 @@ type FieldTypeConfig struct {
 	Email     field_type_email_config.FieldTypeEmailConfig         `json:"email"`
 	Phone     field_type_phone_config.FieldTypePhoneConfig         `json:"phone"`
 	URL       field_type_url_config.FieldTypeURLConfig             `json:"url"`
-	Location  string                                               `json:"location"`
-	Color     string                                               `json:"color"`
-	RichText  string                                               `json:"rich_text"`
-	Code      string                                               `json:"code"`
-	Markdown  string                                               `json:"markdown"`
+	Location  *string                                              `json:"location"`
+	Color     *string                                              `json:"color"`
+	RichText  *string                                              `json:"rich_text"`
+	Code      *string                                              `json:"code"`
+	Markdown  *string                                              `json:"markdown"`
 	File      field_type_file_config.FieldTypeFileConfig           `json:"file"`
 	Image     field_type_file_config.FieldTypeFileConfig           `json:"image"`
 	Video     field_type_file_config.FieldTypeFileConfig           `json:"video"`
@@ -59,7 +59,7 @@ type FieldTypeConfig struct {
 	Array     field_type_array_config.FieldTypeArrayConfig         `json:"array"`
 	Date      field_type_date_config.FieldTypeDateConfig           `json:"date"`
 	Datetime  field_type_datetime_config.FieldTypeDatetimeConfig   `json:"datetime"`
-	Time      string                                               `json:"time"`
+	Time      *string                                              `json:"time"`
 	Slug      field_type_slug_config.FieldTypeSlugConfig           `json:"slug"`
 }
 
@@ -162,11 +162,11 @@ func FieldTypeConfigSliceToJSON(e []FieldTypeConfig) json.RawMessage {
 func NewFieldTypeConfigWithRandomValues() FieldTypeConfig {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return FieldTypeConfig{
-		UUID:      randomvalues.GetRandomRawJSONValue(),
+		UUID:      randomvalues.GetRandomRawJSONValuePtr(),
 		Integer:   field_type_integer_config.NewFieldTypeIntegerConfigWithRandomValues(),
 		Float:     field_type_float_config.NewFieldTypeFloatConfigWithRandomValues(),
 		Decimal:   field_type_decimal_config.NewFieldTypeDecimalConfigWithRandomValues(),
-		Boolean:   randomvalues.GetRandomRawJSONValue(),
+		Boolean:   randomvalues.GetRandomRawJSONValuePtr(),
 		Char:      field_type_char_config.NewFieldTypeCharConfigWithRandomValues(),
 		Varchar:   field_type_varchar_config.NewFieldTypeVarcharConfigWithRandomValues(),
 		Text:      field_type_text_config.NewFieldTypeTextConfigWithRandomValues(),
@@ -174,11 +174,11 @@ func NewFieldTypeConfigWithRandomValues() FieldTypeConfig {
 		Email:     field_type_email_config.NewFieldTypeEmailConfigWithRandomValues(),
 		Phone:     field_type_phone_config.NewFieldTypePhoneConfigWithRandomValues(),
 		URL:       field_type_url_config.NewFieldTypeURLConfigWithRandomValues(),
-		Location:  randomvalues.GetRandomRawJSONValue(),
-		Color:     randomvalues.GetRandomRawJSONValue(),
-		RichText:  randomvalues.GetRandomRawJSONValue(),
-		Code:      randomvalues.GetRandomRawJSONValue(),
-		Markdown:  randomvalues.GetRandomRawJSONValue(),
+		Location:  randomvalues.GetRandomRawJSONValuePtr(),
+		Color:     randomvalues.GetRandomRawJSONValuePtr(),
+		RichText:  randomvalues.GetRandomRawJSONValuePtr(),
+		Code:      randomvalues.GetRandomRawJSONValuePtr(),
+		Markdown:  randomvalues.GetRandomRawJSONValuePtr(),
 		File:      field_type_file_config.NewFieldTypeFileConfigWithRandomValues(),
 		Image:     field_type_file_config.NewFieldTypeFileConfigWithRandomValues(),
 		Video:     field_type_file_config.NewFieldTypeFileConfigWithRandomValues(),
@@ -188,7 +188,7 @@ func NewFieldTypeConfigWithRandomValues() FieldTypeConfig {
 		Array:     field_type_array_config.NewFieldTypeArrayConfigWithRandomValues(),
 		Date:      field_type_date_config.NewFieldTypeDateConfigWithRandomValues(),
 		Datetime:  field_type_datetime_config.NewFieldTypeDatetimeConfigWithRandomValues(),
-		Time:      randomvalues.GetRandomRawJSONValue(),
+		Time:      randomvalues.GetRandomRawJSONValuePtr(),
 		Slug:      field_type_slug_config.NewFieldTypeSlugConfigWithRandomValues(),
 	}
 }

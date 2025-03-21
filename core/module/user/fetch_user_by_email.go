@@ -20,7 +20,9 @@ func (m *module) FetchUserByEmail(
 		models, err := m.repository.Queries.FetchUserByEmail(
 			ctx,
 			nemdb.FetchUserByEmailParams{
-				Email:  req.Email,
+
+				Email: req.Email,
+
 				Offset: req.Offset,
 				Limit:  req.Limit,
 			},
@@ -95,7 +97,9 @@ func (m *module) FetchUserByEmail(
 			models, err := m.repository.Queries.FetchUserByEmailOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchUserByEmailOrderedByCreatedAtASCParams{
-					Email:  req.Email,
+
+					Email: req.Email,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -119,7 +123,9 @@ func (m *module) FetchUserByEmail(
 			models, err := m.repository.Queries.FetchUserByEmailOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchUserByEmailOrderedByCreatedAtDESCParams{
-					Email:  req.Email,
+
+					Email: req.Email,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -146,7 +152,9 @@ func (m *module) FetchUserByEmail(
 			models, err := m.repository.Queries.FetchUserByEmailOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchUserByEmailOrderedByUpdatedAtASCParams{
-					Email:  req.Email,
+
+					Email: req.Email,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -170,7 +178,9 @@ func (m *module) FetchUserByEmail(
 			models, err := m.repository.Queries.FetchUserByEmailOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchUserByEmailOrderedByUpdatedAtDESCParams{
-					Email:  req.Email,
+
+					Email: req.Email,
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},

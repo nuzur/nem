@@ -7,7 +7,7 @@ import (
 )
 
 type FetchUserTeamByUserEmailRequest struct {
-	UserEmail string
+	UserEmail *string
 
 	Offset  int32
 	Limit   int32

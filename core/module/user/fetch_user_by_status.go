@@ -20,7 +20,9 @@ func (m *module) FetchUserByStatus(
 		models, err := m.repository.Queries.FetchUserByStatus(
 			ctx,
 			nemdb.FetchUserByStatusParams{
+
 				Status: req.Status.ToInt64(),
+
 				Offset: req.Offset,
 				Limit:  req.Limit,
 			},
@@ -95,7 +97,9 @@ func (m *module) FetchUserByStatus(
 			models, err := m.repository.Queries.FetchUserByStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchUserByStatusOrderedByCreatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -119,7 +123,9 @@ func (m *module) FetchUserByStatus(
 			models, err := m.repository.Queries.FetchUserByStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchUserByStatusOrderedByCreatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -146,7 +152,9 @@ func (m *module) FetchUserByStatus(
 			models, err := m.repository.Queries.FetchUserByStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchUserByStatusOrderedByUpdatedAtASCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},
@@ -170,7 +178,9 @@ func (m *module) FetchUserByStatus(
 			models, err := m.repository.Queries.FetchUserByStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchUserByStatusOrderedByUpdatedAtDESCParams{
+
 					Status: req.Status.ToInt64(),
+
 					Offset: req.Offset,
 					Limit:  req.Limit,
 				},

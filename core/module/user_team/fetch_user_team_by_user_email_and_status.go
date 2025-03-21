@@ -8,6 +8,8 @@ import (
 	"errors"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 	"github.com/nuzur/nem/monitoring"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) FetchUserTeamByUserEmailAndStatus(
@@ -20,10 +22,13 @@ func (m *module) FetchUserTeamByUserEmailAndStatus(
 		models, err := m.repository.Queries.FetchUserTeamByUserEmailAndStatus(
 			ctx,
 			nemdb.FetchUserTeamByUserEmailAndStatusParams{
-				UserEmail: req.UserEmail,
-				Status:    req.Status.ToInt64(),
-				Offset:    req.Offset,
-				Limit:     req.Limit,
+
+				UserEmail: mapper.StringPtrToSqlNullString(req.UserEmail),
+
+				Status: req.Status.ToInt64(),
+
+				Offset: req.Offset,
+				Limit:  req.Limit,
 			},
 		)
 
@@ -96,10 +101,13 @@ func (m *module) FetchUserTeamByUserEmailAndStatus(
 			models, err := m.repository.Queries.FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtASC(
 				ctx,
 				nemdb.FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtASCParams{
-					UserEmail: req.UserEmail,
-					Status:    req.Status.ToInt64(),
-					Offset:    req.Offset,
-					Limit:     req.Limit,
+
+					UserEmail: mapper.StringPtrToSqlNullString(req.UserEmail),
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -121,10 +129,13 @@ func (m *module) FetchUserTeamByUserEmailAndStatus(
 			models, err := m.repository.Queries.FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtDESC(
 				ctx,
 				nemdb.FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtDESCParams{
-					UserEmail: req.UserEmail,
-					Status:    req.Status.ToInt64(),
-					Offset:    req.Offset,
-					Limit:     req.Limit,
+
+					UserEmail: mapper.StringPtrToSqlNullString(req.UserEmail),
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -149,10 +160,13 @@ func (m *module) FetchUserTeamByUserEmailAndStatus(
 			models, err := m.repository.Queries.FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtASC(
 				ctx,
 				nemdb.FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtASCParams{
-					UserEmail: req.UserEmail,
-					Status:    req.Status.ToInt64(),
-					Offset:    req.Offset,
-					Limit:     req.Limit,
+
+					UserEmail: mapper.StringPtrToSqlNullString(req.UserEmail),
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {
@@ -174,10 +188,13 @@ func (m *module) FetchUserTeamByUserEmailAndStatus(
 			models, err := m.repository.Queries.FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtDESC(
 				ctx,
 				nemdb.FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtDESCParams{
-					UserEmail: req.UserEmail,
-					Status:    req.Status.ToInt64(),
-					Offset:    req.Offset,
-					Limit:     req.Limit,
+
+					UserEmail: mapper.StringPtrToSqlNullString(req.UserEmail),
+
+					Status: req.Status.ToInt64(),
+
+					Offset: req.Offset,
+					Limit:  req.Limit,
 				},
 			)
 			if err != nil {

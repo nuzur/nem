@@ -15,10 +15,10 @@ import (
 )
 
 type ObjectStoreS3TypeConfig struct {
-	Region string `json:"region"`
-	Key    string `json:"key"`
-	Secret string `json:"secret"`
-	Bucket string `json:"bucket"`
+	Region *string `json:"region"`
+	Key    *string `json:"key"`
+	Secret *string `json:"secret"`
+	Bucket *string `json:"bucket"`
 }
 
 func (e ObjectStoreS3TypeConfig) String() string {
@@ -96,10 +96,10 @@ func ObjectStoreS3TypeConfigSliceToJSON(e []ObjectStoreS3TypeConfig) json.RawMes
 func NewObjectStoreS3TypeConfigWithRandomValues() ObjectStoreS3TypeConfig {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return ObjectStoreS3TypeConfig{
-		Region: randomvalues.GetRandomStringValue(),
-		Key:    randomvalues.GetRandomStringValue(),
-		Secret: randomvalues.GetRandomStringValue(),
-		Bucket: randomvalues.GetRandomStringValue(),
+		Region: randomvalues.GetRandomStringValuePtr(),
+		Key:    randomvalues.GetRandomStringValuePtr(),
+		Secret: randomvalues.GetRandomStringValuePtr(),
+		Bucket: randomvalues.GetRandomStringValuePtr(),
 	}
 }
 

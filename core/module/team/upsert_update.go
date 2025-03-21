@@ -19,6 +19,8 @@ import (
 	"github.com/nuzur/nem/custom"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -160,7 +162,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Team
 
 			ObjectStores: object_store.ObjectStoreSliceToJSON(req.Team.ObjectStores),
 
-			OrganizationUUID: req.Team.OrganizationUUID.String(),
+			OrganizationUUID: mapper.StringToSqlNullString(req.Team.OrganizationUUID.String()),
 
 			DefaultEntity: entity.EntityToJSON(req.Team.DefaultEntity),
 
@@ -196,7 +198,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Team
 
 	res.ObjectStores = object_store.ObjectStoreSliceToJSON(req.Team.ObjectStores)
 
-	res.OrganizationUUID = req.Team.OrganizationUUID.String()
+	res.OrganizationUUID = mapper.StringToSqlNullString(req.Team.OrganizationUUID.String())
 
 	res.DefaultEntity = entity.EntityToJSON(req.Team.DefaultEntity)
 
