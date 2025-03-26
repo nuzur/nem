@@ -7,6 +7,7 @@ import (
 	"github.com/nuzur/nem/core/entity/mapper"
 
 	"github.com/gofrs/uuid"
+	"github.com/nuzur/nem/core/entity/change_request_data_change"
 	"github.com/nuzur/nem/core/entity/change_request_review"
 )
 
@@ -20,22 +21,19 @@ func mapModelsToEntities(models []nemdb.ChangeRequest) []main_entity.ChangeReque
 
 func mapModelToEntity(model nemdb.ChangeRequest) main_entity.ChangeRequest {
 	return main_entity.ChangeRequest{
-		UUID:          uuid.FromStringOrNil(model.UUID),
-		Version:       model.Version,
-		Title:         model.Title,
-		Description:   mapper.SqlNullStringToStringPtr(model.Description),
-		ReviewType:    main_entity.ReviewType(model.ReviewType),
-		RefUUID:       uuid.FromStringOrNil(model.RefUUID),
-		OldData:       mapper.StringToStringPtr(string(model.OldData)),
-		OldDataRef:    mapper.SqlNullStringToStringPtr(model.OldDataRef),
-		NewData:       mapper.StringToStringPtr(string(model.NewData)),
-		NewDataRef:    mapper.SqlNullStringToStringPtr(model.NewDataRef),
-		Reviews:       change_request_review.ChangeRequestReviewSliceFromJSON(model.Reviews),
-		OwnerUUID:     uuid.FromStringOrNil(model.OwnerUUID),
-		Status:        main_entity.Status(model.Status),
-		CreatedAt:     model.CreatedAt,
-		UpdatedAt:     model.UpdatedAt,
-		CreatedByUUID: uuid.FromStringOrNil(model.CreatedByUUID),
-		UpdatedByUUID: uuid.FromStringOrNil(model.UpdatedByUUID),
+		UUID:           uuid.FromStringOrNil(model.UUID),
+		Version:        model.Version,
+		Title:          model.Title,
+		Description:    mapper.SqlNullStringToStringPtr(model.Description),
+		ReviewType:     main_entity.ReviewType(model.ReviewType),
+		DataChanges:    change_request_data_change.ChangeRequestDataChangeSliceFromJSON(model.DataChanges),
+		VersionChanges: mapper.StringToStringPtr(string(model.VersionChanges)),
+		Reviews:        change_request_review.ChangeRequestReviewSliceFromJSON(model.Reviews),
+		OwnerUUID:      uuid.FromStringOrNil(model.OwnerUUID),
+		Status:         main_entity.Status(model.Status),
+		CreatedAt:      model.CreatedAt,
+		UpdatedAt:      model.UpdatedAt,
+		CreatedByUUID:  uuid.FromStringOrNil(model.CreatedByUUID),
+		UpdatedByUUID:  uuid.FromStringOrNil(model.UpdatedByUUID),
 	}
 }

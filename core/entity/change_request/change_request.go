@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/gofrs/uuid"
+	"github.com/nuzur/nem/core/entity/change_request_data_change"
 	"github.com/nuzur/nem/core/entity/change_request_review"
 	"time"
 
@@ -17,23 +18,20 @@ import (
 )
 
 type ChangeRequest struct {
-	UUID          uuid.UUID                                   `json:"uuid"`
-	Version       int64                                       `json:"version"`
-	Title         string                                      `json:"title"`
-	Description   *string                                     `json:"description"`
-	ReviewType    ReviewType                                  `json:"review_type"`
-	RefUUID       uuid.UUID                                   `json:"ref_uuid"`
-	OldData       *string                                     `json:"old_data"`
-	OldDataRef    *string                                     `json:"old_data_ref"`
-	NewData       *string                                     `json:"new_data"`
-	NewDataRef    *string                                     `json:"new_data_ref"`
-	Reviews       []change_request_review.ChangeRequestReview `json:"reviews"`
-	OwnerUUID     uuid.UUID                                   `json:"owner_uuid"`
-	Status        Status                                      `json:"status"`
-	CreatedAt     time.Time                                   `json:"created_at"`
-	UpdatedAt     time.Time                                   `json:"updated_at"`
-	CreatedByUUID uuid.UUID                                   `json:"created_by_uuid"`
-	UpdatedByUUID uuid.UUID                                   `json:"updated_by_uuid"`
+	UUID           uuid.UUID                                            `json:"uuid"`
+	Version        int64                                                `json:"version"`
+	Title          string                                               `json:"title"`
+	Description    *string                                              `json:"description"`
+	ReviewType     ReviewType                                           `json:"review_type"`
+	DataChanges    []change_request_data_change.ChangeRequestDataChange `json:"data_changes"`
+	VersionChanges *string                                              `json:"version_changes"`
+	Reviews        []change_request_review.ChangeRequestReview          `json:"reviews"`
+	OwnerUUID      uuid.UUID                                            `json:"owner_uuid"`
+	Status         Status                                               `json:"status"`
+	CreatedAt      time.Time                                            `json:"created_at"`
+	UpdatedAt      time.Time                                            `json:"updated_at"`
+	CreatedByUUID  uuid.UUID                                            `json:"created_by_uuid"`
+	UpdatedByUUID  uuid.UUID                                            `json:"updated_by_uuid"`
 }
 
 func (e ChangeRequest) String() string {
@@ -61,11 +59,8 @@ func (e ChangeRequest) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["title"] = types.StringFieldType
 	res["description"] = types.StringFieldType
 	res["review_type"] = types.SingleEnumFieldType
-	res["ref_uuid"] = types.UUIDFieldType
-	res["old_data"] = types.RawJSONFieldType
-	res["old_data_ref"] = types.StringFieldType
-	res["new_data"] = types.RawJSONFieldType
-	res["new_data_ref"] = types.StringFieldType
+	res["data_changes"] = types.MultiDependantEntityFieldType
+	res["version_changes"] = types.RawJSONFieldType
 	res["reviews"] = types.MultiDependantEntityFieldType
 	res["owner_uuid"] = types.UUIDFieldType
 	res["status"] = types.SingleEnumFieldType
@@ -79,6 +74,7 @@ func (e ChangeRequest) FieldIdentfierToTypeMap() map[string]types.FieldType {
 func (e ChangeRequest) DependantFieldIdentifierToTypeMap() map[string]map[string]types.FieldType {
 	res := make(map[string]map[string]types.FieldType)
 
+	res["data_changes"] = change_request_data_change.ChangeRequestDataChange{}.FieldIdentfierToTypeMap()
 	res["reviews"] = change_request_review.ChangeRequestReview{}.FieldIdentfierToTypeMap()
 	return res
 }
@@ -139,23 +135,20 @@ func ChangeRequestSliceToJSON(e []ChangeRequest) json.RawMessage {
 func NewChangeRequestWithRandomValues() ChangeRequest {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return ChangeRequest{
-		UUID:          randomvalues.GetRandomUUIDValue(),
-		Version:       randomvalues.GetRandomIntValue(),
-		Title:         randomvalues.GetRandomStringValue(),
-		Description:   randomvalues.GetRandomStringValuePtr(),
-		ReviewType:    randomvalues.GetRandomOptionValue[ReviewType](3),
-		RefUUID:       randomvalues.GetRandomUUIDValue(),
-		OldData:       randomvalues.GetRandomRawJSONValuePtr(),
-		OldDataRef:    randomvalues.GetRandomStringValuePtr(),
-		NewData:       randomvalues.GetRandomRawJSONValuePtr(),
-		NewDataRef:    randomvalues.GetRandomStringValuePtr(),
-		Reviews:       change_request_review.NewChangeRequestReviewSliceWithRandomValues(rand.Intn(10)),
-		OwnerUUID:     randomvalues.GetRandomUUIDValue(),
-		Status:        randomvalues.GetRandomOptionValue[Status](2),
-		CreatedAt:     randomvalues.GetRandomTimeValue(),
-		UpdatedAt:     randomvalues.GetRandomTimeValue(),
-		CreatedByUUID: randomvalues.GetRandomUUIDValue(),
-		UpdatedByUUID: randomvalues.GetRandomUUIDValue(),
+		UUID:           randomvalues.GetRandomUUIDValue(),
+		Version:        randomvalues.GetRandomIntValue(),
+		Title:          randomvalues.GetRandomStringValue(),
+		Description:    randomvalues.GetRandomStringValuePtr(),
+		ReviewType:     randomvalues.GetRandomOptionValue[ReviewType](3),
+		DataChanges:    change_request_data_change.NewChangeRequestDataChangeSliceWithRandomValues(rand.Intn(10)),
+		VersionChanges: randomvalues.GetRandomRawJSONValuePtr(),
+		Reviews:        change_request_review.NewChangeRequestReviewSliceWithRandomValues(rand.Intn(10)),
+		OwnerUUID:      randomvalues.GetRandomUUIDValue(),
+		Status:         randomvalues.GetRandomOptionValue[Status](2),
+		CreatedAt:      randomvalues.GetRandomTimeValue(),
+		UpdatedAt:      randomvalues.GetRandomTimeValue(),
+		CreatedByUUID:  randomvalues.GetRandomUUIDValue(),
+		UpdatedByUUID:  randomvalues.GetRandomUUIDValue(),
 	}
 }
 

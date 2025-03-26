@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "github.com/nuzur/nem";
+option java_outer_classname = "ChangeRequestDataChange";
+
+package nem;
+
+
+import "data_change_type_config.proto";
+
+message ChangeRequestDataChange {  
+    string uuid = 1;
+    ChangeRequestDataChangeDataChangeType data_change_type = 2;
+    DataChangeTypeConfig data_change_type_config = 3;
+    int64 order = 4;    
+}
+
+enum ChangeRequestDataChangeDataChangeType { 
+    CHANGE_REQUEST_DATA_CHANGE_DATA_CHANGE_TYPE_INVALID = 0;
+    CHANGE_REQUEST_DATA_CHANGE_DATA_CHANGE_TYPE_UPDATE_FIELD = 1;
+    CHANGE_REQUEST_DATA_CHANGE_DATA_CHANGE_TYPE_CREATE_RECORD = 2;
+    CHANGE_REQUEST_DATA_CHANGE_DATA_CHANGE_TYPE_DELETE_RECORD = 3;
+}

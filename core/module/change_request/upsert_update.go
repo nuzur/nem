@@ -8,6 +8,7 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 	"github.com/nuzur/nem/monitoring"
 
+	"github.com/nuzur/nem/core/entity/change_request_data_change"
 	"github.com/nuzur/nem/core/entity/change_request_review"
 
 	"github.com/nuzur/nem/custom"
@@ -148,15 +149,9 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 
 			ReviewType: req.ChangeRequest.ReviewType.ToInt64(),
 
-			RefUUID: req.ChangeRequest.RefUUID.String(),
+			DataChanges: change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges),
 
-			OldData: []byte(mapper.StringPtrToString(req.ChangeRequest.OldData)),
-
-			OldDataRef: mapper.StringPtrToSqlNullString(req.ChangeRequest.OldDataRef),
-
-			NewData: []byte(mapper.StringPtrToString(req.ChangeRequest.NewData)),
-
-			NewDataRef: mapper.StringPtrToSqlNullString(req.ChangeRequest.NewDataRef),
+			VersionChanges: []byte(mapper.StringPtrToString(req.ChangeRequest.VersionChanges)),
 
 			Reviews: change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews),
 
@@ -186,23 +181,13 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 
 	res.ReviewType = req.ChangeRequest.ReviewType.ToInt64()
 
-	res.RefUUID = req.ChangeRequest.RefUUID.String()
+	res.DataChanges = change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges)
 
-	res.OldData = []byte(mapper.StringPtrToString(req.ChangeRequest.OldData))
+	res.VersionChanges = []byte(mapper.StringPtrToString(req.ChangeRequest.VersionChanges))
 
-	if string(res.OldData) == "" {
-		res.OldData = []byte(`{}`)
+	if string(res.VersionChanges) == "" {
+		res.VersionChanges = []byte(`{}`)
 	}
-
-	res.OldDataRef = mapper.StringPtrToSqlNullString(req.ChangeRequest.OldDataRef)
-
-	res.NewData = []byte(mapper.StringPtrToString(req.ChangeRequest.NewData))
-
-	if string(res.NewData) == "" {
-		res.NewData = []byte(`{}`)
-	}
-
-	res.NewDataRef = mapper.StringPtrToSqlNullString(req.ChangeRequest.NewDataRef)
 
 	res.Reviews = change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews)
 

@@ -15,28 +15,25 @@ import (
 const updateChangeRequest = `-- name: UpdateChangeRequest :exec
 UPDATE change_request
 SET
-version = ?, title = ?, description = ?, review_type = ?, ref_uuid = ?, old_data = ?, old_data_ref = ?, new_data = ?, new_data_ref = ?, reviews = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, title = ?, description = ?, review_type = ?, data_changes = ?, version_changes = ?, reviews = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?
 `
 
 type UpdateChangeRequestParams struct {
-	Version       int64           `json:"version"`
-	Title         string          `json:"title"`
-	Description   sql.NullString  `json:"description"`
-	ReviewType    int64           `json:"review_type"`
-	RefUUID       string          `json:"ref_uuid"`
-	OldData       json.RawMessage `json:"old_data"`
-	OldDataRef    sql.NullString  `json:"old_data_ref"`
-	NewData       json.RawMessage `json:"new_data"`
-	NewDataRef    sql.NullString  `json:"new_data_ref"`
-	Reviews       json.RawMessage `json:"reviews"`
-	OwnerUUID     string          `json:"owner_uuid"`
-	Status        int64           `json:"status"`
-	CreatedAt     time.Time       `json:"created_at"`
-	UpdatedAt     time.Time       `json:"updated_at"`
-	CreatedByUUID string          `json:"created_by_uuid"`
-	UpdatedByUUID string          `json:"updated_by_uuid"`
-	UUID          string          `json:"uuid"`
+	Version        int64           `json:"version"`
+	Title          string          `json:"title"`
+	Description    sql.NullString  `json:"description"`
+	ReviewType     int64           `json:"review_type"`
+	DataChanges    json.RawMessage `json:"data_changes"`
+	VersionChanges json.RawMessage `json:"version_changes"`
+	Reviews        json.RawMessage `json:"reviews"`
+	OwnerUUID      string          `json:"owner_uuid"`
+	Status         int64           `json:"status"`
+	CreatedAt      time.Time       `json:"created_at"`
+	UpdatedAt      time.Time       `json:"updated_at"`
+	CreatedByUUID  string          `json:"created_by_uuid"`
+	UpdatedByUUID  string          `json:"updated_by_uuid"`
+	UUID           string          `json:"uuid"`
 }
 
 func (q *Queries) UpdateChangeRequest(ctx context.Context, arg UpdateChangeRequestParams) error {
@@ -45,11 +42,8 @@ func (q *Queries) UpdateChangeRequest(ctx context.Context, arg UpdateChangeReque
 		arg.Title,
 		arg.Description,
 		arg.ReviewType,
-		arg.RefUUID,
-		arg.OldData,
-		arg.OldDataRef,
-		arg.NewData,
-		arg.NewDataRef,
+		arg.DataChanges,
+		arg.VersionChanges,
 		arg.Reviews,
 		arg.OwnerUUID,
 		arg.Status,

@@ -145,6 +145,8 @@ func change_requestDeclarations() *filtering.Declarations {
 
 		//
 
+		//
+
 		//change_request
 
 		filtering.DeclareIdent("uuid", filtering.TypeString),
@@ -157,15 +159,7 @@ func change_requestDeclarations() *filtering.Declarations {
 
 		filtering.DeclareEnumIdent("review_type", pb.ChangeRequestReviewType(0).Type()),
 
-		filtering.DeclareIdent("ref_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("old_data", filtering.TypeString),
-
-		filtering.DeclareIdent("old_data_ref", filtering.TypeString),
-
-		filtering.DeclareIdent("new_data", filtering.TypeString),
-
-		filtering.DeclareIdent("new_data_ref", filtering.TypeString),
+		filtering.DeclareIdent("version_changes", filtering.TypeString),
 
 		filtering.DeclareIdent("owner_uuid", filtering.TypeString),
 

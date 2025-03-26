@@ -12,6 +12,7 @@ import (
 
 	"github.com/nuzur/nem/custom"
 
+	"github.com/nuzur/nem/core/entity/change_request_data_change"
 	"github.com/nuzur/nem/core/entity/change_request_review"
 
 	"time"
@@ -108,15 +109,9 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertChangeR
 
 		ReviewType: req.ChangeRequest.ReviewType.ToInt64(),
 
-		RefUUID: req.ChangeRequest.RefUUID.String(),
+		DataChanges: change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges),
 
-		OldData: []byte(mapper.StringPtrToString(req.ChangeRequest.OldData)),
-
-		OldDataRef: mapper.StringPtrToSqlNullString(req.ChangeRequest.OldDataRef),
-
-		NewData: []byte(mapper.StringPtrToString(req.ChangeRequest.NewData)),
-
-		NewDataRef: mapper.StringPtrToSqlNullString(req.ChangeRequest.NewDataRef),
+		VersionChanges: []byte(mapper.StringPtrToString(req.ChangeRequest.VersionChanges)),
 
 		Reviews: change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews),
 

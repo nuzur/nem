@@ -11,23 +11,20 @@ import (
 )
 
 type ChangeRequest struct {
-	UUID          string          `json:"uuid"`
-	Version       int64           `json:"version"`
-	Title         string          `json:"title"`
-	Description   sql.NullString  `json:"description"`
-	ReviewType    int64           `json:"review_type"`
-	RefUUID       string          `json:"ref_uuid"`
-	OldData       json.RawMessage `json:"old_data"`
-	OldDataRef    sql.NullString  `json:"old_data_ref"`
-	NewData       json.RawMessage `json:"new_data"`
-	NewDataRef    sql.NullString  `json:"new_data_ref"`
-	Reviews       json.RawMessage `json:"reviews"`
-	OwnerUUID     string          `json:"owner_uuid"`
-	Status        int64           `json:"status"`
-	CreatedAt     time.Time       `json:"created_at"`
-	UpdatedAt     time.Time       `json:"updated_at"`
-	CreatedByUUID string          `json:"created_by_uuid"`
-	UpdatedByUUID string          `json:"updated_by_uuid"`
+	UUID           string          `json:"uuid"`
+	Version        int64           `json:"version"`
+	Title          string          `json:"title"`
+	Description    sql.NullString  `json:"description"`
+	ReviewType     int64           `json:"review_type"`
+	DataChanges    json.RawMessage `json:"data_changes"`
+	VersionChanges json.RawMessage `json:"version_changes"`
+	Reviews        json.RawMessage `json:"reviews"`
+	OwnerUUID      string          `json:"owner_uuid"`
+	Status         int64           `json:"status"`
+	CreatedAt      time.Time       `json:"created_at"`
+	UpdatedAt      time.Time       `json:"updated_at"`
+	CreatedByUUID  string          `json:"created_by_uuid"`
+	UpdatedByUUID  string          `json:"updated_by_uuid"`
 }
 
 type Extension struct {

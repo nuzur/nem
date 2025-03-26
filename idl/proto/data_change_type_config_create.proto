@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "github.com/nuzur/nem";
+option java_outer_classname = "DataChangeTypeConfigCreate";
+
+package nem;
+
+
+import "data_change_field_value.proto";
+import "google/protobuf/timestamp.proto";
+
+message DataChangeTypeConfigCreate {  
+    string entity_uuid = 1;
+    repeated DataChangeFieldValue keys = 2;
+    google.protobuf.Timestamp created_at = 3;    
+}

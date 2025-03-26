@@ -17,6 +17,7 @@ sql:
           country_ios2: CountryIos2
           created_at: CreatedAt
           created_by_uuid: CreatedByUUID
+          data_changes: DataChanges
           db_schema: DbSchema
           default_entity: DefaultEntity
           deployments: Deployments
@@ -41,11 +42,7 @@ sql:
           memberships: Memberships
           metadata: Metadata
           name: Name
-          new_data: NewData
-          new_data_ref: NewDataRef
           object_stores: ObjectStores
-          old_data: OldData
-          old_data_ref: OldDataRef
           organization_uuid: OrganizationUUID
           owner_uuid: OwnerUUID
           project_extension_uuid: ProjectExtensionUUID
@@ -53,7 +50,6 @@ sql:
           project_uuid: ProjectUUID
           project_version_uuid: ProjectVersionUUID
           public: Public
-          ref_uuid: RefUUID
           relationships: Relationships
           repository: Repository
           repository_tag: RepositoryTag
@@ -80,6 +76,7 @@ sql:
           uuid: UUID
           verfied: Verfied
           version: Version
+          version_changes: VersionChanges
           visibility: Visibility
         overrides:
           - db_type: "int"            
