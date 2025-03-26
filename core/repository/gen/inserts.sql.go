@@ -14,26 +14,28 @@ import (
 
 const insertChangeRequest = `-- name: InsertChangeRequest :execresult
 INSERT INTO change_request
-(uuid,version,title,description,review_type,data_changes,version_changes,reviews,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,title,description,project_version_uuid,change_type,data_changes,version_changes,reviews,review_status,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertChangeRequestParams struct {
-	UUID           string          `json:"uuid"`
-	Version        int64           `json:"version"`
-	Title          string          `json:"title"`
-	Description    sql.NullString  `json:"description"`
-	ReviewType     int64           `json:"review_type"`
-	DataChanges    json.RawMessage `json:"data_changes"`
-	VersionChanges json.RawMessage `json:"version_changes"`
-	Reviews        json.RawMessage `json:"reviews"`
-	OwnerUUID      string          `json:"owner_uuid"`
-	Status         int64           `json:"status"`
-	CreatedAt      time.Time       `json:"created_at"`
-	UpdatedAt      time.Time       `json:"updated_at"`
-	CreatedByUUID  string          `json:"created_by_uuid"`
-	UpdatedByUUID  string          `json:"updated_by_uuid"`
+	UUID               string          `json:"uuid"`
+	Version            int64           `json:"version"`
+	Title              string          `json:"title"`
+	Description        sql.NullString  `json:"description"`
+	ProjectVersionUUID string          `json:"project_version_uuid"`
+	ChangeType         int64           `json:"change_type"`
+	DataChanges        json.RawMessage `json:"data_changes"`
+	VersionChanges     json.RawMessage `json:"version_changes"`
+	Reviews            json.RawMessage `json:"reviews"`
+	ReviewStatus       int64           `json:"review_status"`
+	OwnerUUID          string          `json:"owner_uuid"`
+	Status             int64           `json:"status"`
+	CreatedAt          time.Time       `json:"created_at"`
+	UpdatedAt          time.Time       `json:"updated_at"`
+	CreatedByUUID      string          `json:"created_by_uuid"`
+	UpdatedByUUID      string          `json:"updated_by_uuid"`
 }
 
 func (q *Queries) InsertChangeRequest(ctx context.Context, arg InsertChangeRequestParams) (sql.Result, error) {
@@ -42,10 +44,12 @@ func (q *Queries) InsertChangeRequest(ctx context.Context, arg InsertChangeReque
 		arg.Version,
 		arg.Title,
 		arg.Description,
-		arg.ReviewType,
+		arg.ProjectVersionUUID,
+		arg.ChangeType,
 		arg.DataChanges,
 		arg.VersionChanges,
 		arg.Reviews,
+		arg.ReviewStatus,
 		arg.OwnerUUID,
 		arg.Status,
 		arg.CreatedAt,

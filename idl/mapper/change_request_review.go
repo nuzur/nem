@@ -14,7 +14,7 @@ func ChangeRequestReviewToProto(e main_entity.ChangeRequestReview) *pb.ChangeReq
 		Uuid:      e.UUID.String(),
 		UserUuid:  e.UserUUID.String(),
 		Comment:   StringPtrToString(e.Comment),
-		Status:    pb.ChangeRequestReviewStatus(e.Status),
+		Response:  pb.ChangeRequestReviewResponse(e.Response),
 		CreatedAt: timestamppb.New(e.CreatedAt),
 		UpdatedAt: timestamppb.New(e.UpdatedAt),
 	}
@@ -36,7 +36,7 @@ func ChangeRequestReviewFromProto(m *pb.ChangeRequestReview) main_entity.ChangeR
 		UUID:      uuid.FromStringOrNil(m.GetUuid()),
 		UserUUID:  uuid.FromStringOrNil(m.GetUserUuid()),
 		Comment:   &m.Comment,
-		Status:    main_entity.Status(m.GetStatus()),
+		Response:  main_entity.Response(m.GetResponse()),
 		CreatedAt: m.GetCreatedAt().AsTime(),
 		UpdatedAt: m.GetUpdatedAt().AsTime(),
 	}

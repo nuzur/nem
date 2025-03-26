@@ -107,13 +107,17 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertChangeR
 
 		Description: mapper.StringPtrToSqlNullString(req.ChangeRequest.Description),
 
-		ReviewType: req.ChangeRequest.ReviewType.ToInt64(),
+		ProjectVersionUUID: req.ChangeRequest.ProjectVersionUUID.String(),
+
+		ChangeType: req.ChangeRequest.ChangeType.ToInt64(),
 
 		DataChanges: change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges),
 
 		VersionChanges: []byte(mapper.StringPtrToString(req.ChangeRequest.VersionChanges)),
 
 		Reviews: change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews),
+
+		ReviewStatus: req.ChangeRequest.ReviewStatus.ToInt64(),
 
 		OwnerUUID: req.ChangeRequest.OwnerUUID.String(),
 

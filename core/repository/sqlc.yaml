@@ -12,6 +12,7 @@ sql:
         rename:
           admin_uuids: AdminUUIDs
           base_version_uuid: BaseVersionUUID
+          change_type: ChangeType
           configuration_entity: ConfigurationEntity
           connections: Connections
           country_ios2: CountryIos2
@@ -55,7 +56,6 @@ sql:
           repository_tag: RepositoryTag
           review_configs: ReviewConfigs
           review_status: ReviewStatus
-          review_type: ReviewType
           reviews: Reviews
           roles: Roles
           services: Services

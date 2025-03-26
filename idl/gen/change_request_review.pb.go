@@ -22,72 +22,63 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ChangeRequestReviewStatus int32
+type ChangeRequestReviewResponse int32
 
 const (
-	ChangeRequestReviewStatus_CHANGE_REQUEST_REVIEW_STATUS_INVALID   ChangeRequestReviewStatus = 0
-	ChangeRequestReviewStatus_CHANGE_REQUEST_REVIEW_STATUS_DRAFT     ChangeRequestReviewStatus = 1
-	ChangeRequestReviewStatus_CHANGE_REQUEST_REVIEW_STATUS_IN_REVIEW ChangeRequestReviewStatus = 2
-	ChangeRequestReviewStatus_CHANGE_REQUEST_REVIEW_STATUS_APPROVED  ChangeRequestReviewStatus = 3
-	ChangeRequestReviewStatus_CHANGE_REQUEST_REVIEW_STATUS_REJECTED  ChangeRequestReviewStatus = 4
-	ChangeRequestReviewStatus_CHANGE_REQUEST_REVIEW_STATUS_PUBLISHED ChangeRequestReviewStatus = 5
+	ChangeRequestReviewResponse_CHANGE_REQUEST_REVIEW_RESPONSE_INVALID  ChangeRequestReviewResponse = 0
+	ChangeRequestReviewResponse_CHANGE_REQUEST_REVIEW_RESPONSE_APPROVED ChangeRequestReviewResponse = 1
+	ChangeRequestReviewResponse_CHANGE_REQUEST_REVIEW_RESPONSE_REJECTED ChangeRequestReviewResponse = 2
 )
 
-// Enum value maps for ChangeRequestReviewStatus.
+// Enum value maps for ChangeRequestReviewResponse.
 var (
-	ChangeRequestReviewStatus_name = map[int32]string{
-		0: "CHANGE_REQUEST_REVIEW_STATUS_INVALID",
-		1: "CHANGE_REQUEST_REVIEW_STATUS_DRAFT",
-		2: "CHANGE_REQUEST_REVIEW_STATUS_IN_REVIEW",
-		3: "CHANGE_REQUEST_REVIEW_STATUS_APPROVED",
-		4: "CHANGE_REQUEST_REVIEW_STATUS_REJECTED",
-		5: "CHANGE_REQUEST_REVIEW_STATUS_PUBLISHED",
+	ChangeRequestReviewResponse_name = map[int32]string{
+		0: "CHANGE_REQUEST_REVIEW_RESPONSE_INVALID",
+		1: "CHANGE_REQUEST_REVIEW_RESPONSE_APPROVED",
+		2: "CHANGE_REQUEST_REVIEW_RESPONSE_REJECTED",
 	}
-	ChangeRequestReviewStatus_value = map[string]int32{
-		"CHANGE_REQUEST_REVIEW_STATUS_INVALID":   0,
-		"CHANGE_REQUEST_REVIEW_STATUS_DRAFT":     1,
-		"CHANGE_REQUEST_REVIEW_STATUS_IN_REVIEW": 2,
-		"CHANGE_REQUEST_REVIEW_STATUS_APPROVED":  3,
-		"CHANGE_REQUEST_REVIEW_STATUS_REJECTED":  4,
-		"CHANGE_REQUEST_REVIEW_STATUS_PUBLISHED": 5,
+	ChangeRequestReviewResponse_value = map[string]int32{
+		"CHANGE_REQUEST_REVIEW_RESPONSE_INVALID":  0,
+		"CHANGE_REQUEST_REVIEW_RESPONSE_APPROVED": 1,
+		"CHANGE_REQUEST_REVIEW_RESPONSE_REJECTED": 2,
 	}
 )
 
-func (x ChangeRequestReviewStatus) Enum() *ChangeRequestReviewStatus {
-	p := new(ChangeRequestReviewStatus)
+func (x ChangeRequestReviewResponse) Enum() *ChangeRequestReviewResponse {
+	p := new(ChangeRequestReviewResponse)
 	*p = x
 	return p
 }
 
-func (x ChangeRequestReviewStatus) String() string {
+func (x ChangeRequestReviewResponse) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (ChangeRequestReviewStatus) Descriptor() protoreflect.EnumDescriptor {
+func (ChangeRequestReviewResponse) Descriptor() protoreflect.EnumDescriptor {
 	return file_change_request_review_proto_enumTypes[0].Descriptor()
 }
 
-func (ChangeRequestReviewStatus) Type() protoreflect.EnumType {
+func (ChangeRequestReviewResponse) Type() protoreflect.EnumType {
 	return &file_change_request_review_proto_enumTypes[0]
 }
 
-func (x ChangeRequestReviewStatus) Number() protoreflect.EnumNumber {
+func (x ChangeRequestReviewResponse) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ChangeRequestReviewStatus.Descriptor instead.
-func (ChangeRequestReviewStatus) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use ChangeRequestReviewResponse.Descriptor instead.
+func (ChangeRequestReviewResponse) EnumDescriptor() ([]byte, []int) {
 	return file_change_request_review_proto_rawDescGZIP(), []int{0}
 }
 
 type ChangeRequestReview struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Uuid          string                    `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	UserUuid      string                    `protobuf:"bytes,2,opt,name=user_uuid,json=userUuid,proto3" json:"user_uuid,omitempty"`
-	Comment       string                    `protobuf:"bytes,3,opt,name=comment,proto3" json:"comment,omitempty"`
-	Status        ChangeRequestReviewStatus `protobuf:"varint,4,opt,name=status,proto3,enum=nem.ChangeRequestReviewStatus" json:"status,omitempty"`
-	CreatedAt     *timestamppb.Timestamp    `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp    `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	Uuid          string                      `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	UserUuid      string                      `protobuf:"bytes,2,opt,name=user_uuid,json=userUuid,proto3" json:"user_uuid,omitempty"`
+	Comment       string                      `protobuf:"bytes,3,opt,name=comment,proto3" json:"comment,omitempty"`
+	Response      ChangeRequestReviewResponse `protobuf:"varint,4,opt,name=response,proto3,enum=nem.ChangeRequestReviewResponse" json:"response,omitempty"`
+	CreatedAt     *timestamppb.Timestamp      `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp      `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -143,11 +134,11 @@ func (x *ChangeRequestReview) GetComment() string {
 	return ""
 }
 
-func (x *ChangeRequestReview) GetStatus() ChangeRequestReviewStatus {
+func (x *ChangeRequestReview) GetResponse() ChangeRequestReviewResponse {
 	if x != nil {
-		return x.Status
+		return x.Response
 	}
-	return ChangeRequestReviewStatus_CHANGE_REQUEST_REVIEW_STATUS_INVALID
+	return ChangeRequestReviewResponse_CHANGE_REQUEST_REVIEW_RESPONSE_INVALID
 }
 
 func (x *ChangeRequestReview) GetCreatedAt() *timestamppb.Timestamp {
@@ -168,23 +159,20 @@ var File_change_request_review_proto protoreflect.FileDescriptor
 
 const file_change_request_review_proto_rawDesc = "" +
 	"\n" +
-	"\x1bchange_request_review.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8e\x02\n" +
+	"\x1bchange_request_review.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\x02\n" +
 	"\x13ChangeRequestReview\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x1b\n" +
 	"\tuser_uuid\x18\x02 \x01(\tR\buserUuid\x12\x18\n" +
-	"\acomment\x18\x03 \x01(\tR\acomment\x126\n" +
-	"\x06status\x18\x04 \x01(\x0e2\x1e.nem.ChangeRequestReviewStatusR\x06status\x129\n" +
+	"\acomment\x18\x03 \x01(\tR\acomment\x12<\n" +
+	"\bresponse\x18\x04 \x01(\x0e2 .nem.ChangeRequestReviewResponseR\bresponse\x129\n" +
 	"\n" +
 	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt*\x9b\x02\n" +
-	"\x19ChangeRequestReviewStatus\x12(\n" +
-	"$CHANGE_REQUEST_REVIEW_STATUS_INVALID\x10\x00\x12&\n" +
-	"\"CHANGE_REQUEST_REVIEW_STATUS_DRAFT\x10\x01\x12*\n" +
-	"&CHANGE_REQUEST_REVIEW_STATUS_IN_REVIEW\x10\x02\x12)\n" +
-	"%CHANGE_REQUEST_REVIEW_STATUS_APPROVED\x10\x03\x12)\n" +
-	"%CHANGE_REQUEST_REVIEW_STATUS_REJECTED\x10\x04\x12*\n" +
-	"&CHANGE_REQUEST_REVIEW_STATUS_PUBLISHED\x10\x05B:\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt*\xa3\x01\n" +
+	"\x1bChangeRequestReviewResponse\x12*\n" +
+	"&CHANGE_REQUEST_REVIEW_RESPONSE_INVALID\x10\x00\x12+\n" +
+	"'CHANGE_REQUEST_REVIEW_RESPONSE_APPROVED\x10\x01\x12+\n" +
+	"'CHANGE_REQUEST_REVIEW_RESPONSE_REJECTED\x10\x02B:\n" +
 	"\x14github.com/nuzur/nemB\x13ChangeRequestReviewP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -202,12 +190,12 @@ func file_change_request_review_proto_rawDescGZIP() []byte {
 var file_change_request_review_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_change_request_review_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_change_request_review_proto_goTypes = []any{
-	(ChangeRequestReviewStatus)(0), // 0: nem.ChangeRequestReviewStatus
-	(*ChangeRequestReview)(nil),    // 1: nem.ChangeRequestReview
-	(*timestamppb.Timestamp)(nil),  // 2: google.protobuf.Timestamp
+	(ChangeRequestReviewResponse)(0), // 0: nem.ChangeRequestReviewResponse
+	(*ChangeRequestReview)(nil),      // 1: nem.ChangeRequestReview
+	(*timestamppb.Timestamp)(nil),    // 2: google.protobuf.Timestamp
 }
 var file_change_request_review_proto_depIdxs = []int32{
-	0, // 0: nem.ChangeRequestReview.status:type_name -> nem.ChangeRequestReviewStatus
+	0, // 0: nem.ChangeRequestReview.response:type_name -> nem.ChangeRequestReviewResponse
 	2, // 1: nem.ChangeRequestReview.created_at:type_name -> google.protobuf.Timestamp
 	2, // 2: nem.ChangeRequestReview.updated_at:type_name -> google.protobuf.Timestamp
 	3, // [3:3] is the sub-list for method output_type

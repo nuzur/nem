@@ -11,20 +11,22 @@ import (
 
 func ChangeRequestToProto(e main_entity.ChangeRequest) *pb.ChangeRequest {
 	return &pb.ChangeRequest{
-		Uuid:           e.UUID.String(),
-		Version:        int64(e.Version),
-		Title:          e.Title,
-		Description:    StringPtrToString(e.Description),
-		ReviewType:     pb.ChangeRequestReviewType(e.ReviewType),
-		DataChanges:    ChangeRequestDataChangeSliceToProto(e.DataChanges),
-		VersionChanges: StringPtrToString(e.VersionChanges),
-		Reviews:        ChangeRequestReviewSliceToProto(e.Reviews),
-		OwnerUuid:      e.OwnerUUID.String(),
-		Status:         pb.ChangeRequestStatus(e.Status),
-		CreatedAt:      timestamppb.New(e.CreatedAt),
-		UpdatedAt:      timestamppb.New(e.UpdatedAt),
-		CreatedByUuid:  e.CreatedByUUID.String(),
-		UpdatedByUuid:  e.UpdatedByUUID.String(),
+		Uuid:               e.UUID.String(),
+		Version:            int64(e.Version),
+		Title:              e.Title,
+		Description:        StringPtrToString(e.Description),
+		ProjectVersionUuid: e.ProjectVersionUUID.String(),
+		ChangeType:         pb.ChangeRequestChangeType(e.ChangeType),
+		DataChanges:        ChangeRequestDataChangeSliceToProto(e.DataChanges),
+		VersionChanges:     StringPtrToString(e.VersionChanges),
+		Reviews:            ChangeRequestReviewSliceToProto(e.Reviews),
+		ReviewStatus:       pb.ChangeRequestReviewStatus(e.ReviewStatus),
+		OwnerUuid:          e.OwnerUUID.String(),
+		Status:             pb.ChangeRequestStatus(e.Status),
+		CreatedAt:          timestamppb.New(e.CreatedAt),
+		UpdatedAt:          timestamppb.New(e.UpdatedAt),
+		CreatedByUuid:      e.CreatedByUUID.String(),
+		UpdatedByUuid:      e.UpdatedByUUID.String(),
 	}
 }
 
@@ -41,20 +43,22 @@ func ChangeRequestFromProto(m *pb.ChangeRequest) main_entity.ChangeRequest {
 		return main_entity.ChangeRequest{}
 	}
 	return main_entity.ChangeRequest{
-		UUID:           uuid.FromStringOrNil(m.GetUuid()),
-		Version:        int64(m.GetVersion()),
-		Title:          m.GetTitle(),
-		Description:    &m.Description,
-		ReviewType:     main_entity.ReviewType(m.GetReviewType()),
-		DataChanges:    ChangeRequestDataChangeSliceFromProto(m.GetDataChanges()),
-		VersionChanges: &m.VersionChanges,
-		Reviews:        ChangeRequestReviewSliceFromProto(m.GetReviews()),
-		OwnerUUID:      uuid.FromStringOrNil(m.GetOwnerUuid()),
-		Status:         main_entity.Status(m.GetStatus()),
-		CreatedAt:      m.GetCreatedAt().AsTime(),
-		UpdatedAt:      m.GetUpdatedAt().AsTime(),
-		CreatedByUUID:  uuid.FromStringOrNil(m.GetCreatedByUuid()),
-		UpdatedByUUID:  uuid.FromStringOrNil(m.GetUpdatedByUuid()),
+		UUID:               uuid.FromStringOrNil(m.GetUuid()),
+		Version:            int64(m.GetVersion()),
+		Title:              m.GetTitle(),
+		Description:        &m.Description,
+		ProjectVersionUUID: uuid.FromStringOrNil(m.GetProjectVersionUuid()),
+		ChangeType:         main_entity.ChangeType(m.GetChangeType()),
+		DataChanges:        ChangeRequestDataChangeSliceFromProto(m.GetDataChanges()),
+		VersionChanges:     &m.VersionChanges,
+		Reviews:            ChangeRequestReviewSliceFromProto(m.GetReviews()),
+		ReviewStatus:       main_entity.ReviewStatus(m.GetReviewStatus()),
+		OwnerUUID:          uuid.FromStringOrNil(m.GetOwnerUuid()),
+		Status:             main_entity.Status(m.GetStatus()),
+		CreatedAt:          m.GetCreatedAt().AsTime(),
+		UpdatedAt:          m.GetUpdatedAt().AsTime(),
+		CreatedByUUID:      uuid.FromStringOrNil(m.GetCreatedByUuid()),
+		UpdatedByUUID:      uuid.FromStringOrNil(m.GetUpdatedByUuid()),
 	}
 }
 

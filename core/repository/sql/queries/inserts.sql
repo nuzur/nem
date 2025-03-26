@@ -37,9 +37,9 @@ VALUES
 
 -- name: InsertChangeRequest :execresult
 INSERT INTO change_request
-(uuid,version,title,description,review_type,data_changes,version_changes,reviews,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,title,description,project_version_uuid,change_type,data_changes,version_changes,reviews,review_status,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertProjectVersion :execresult
 INSERT INTO project_version

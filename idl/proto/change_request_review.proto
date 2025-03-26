@@ -14,16 +14,13 @@ message ChangeRequestReview {
     string uuid = 1;
     string user_uuid = 2;
     string comment = 3;
-    ChangeRequestReviewStatus status = 4;
+    ChangeRequestReviewResponse response = 4;
     google.protobuf.Timestamp created_at = 5;
     google.protobuf.Timestamp updated_at = 6;    
 }
 
-enum ChangeRequestReviewStatus { 
-    CHANGE_REQUEST_REVIEW_STATUS_INVALID = 0;
-    CHANGE_REQUEST_REVIEW_STATUS_DRAFT = 1;
-    CHANGE_REQUEST_REVIEW_STATUS_IN_REVIEW = 2;
-    CHANGE_REQUEST_REVIEW_STATUS_APPROVED = 3;
-    CHANGE_REQUEST_REVIEW_STATUS_REJECTED = 4;
-    CHANGE_REQUEST_REVIEW_STATUS_PUBLISHED = 5;
+enum ChangeRequestReviewResponse { 
+    CHANGE_REQUEST_REVIEW_RESPONSE_INVALID = 0;
+    CHANGE_REQUEST_REVIEW_RESPONSE_APPROVED = 1;
+    CHANGE_REQUEST_REVIEW_RESPONSE_REJECTED = 2;
 }

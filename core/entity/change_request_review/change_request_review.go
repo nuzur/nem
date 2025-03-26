@@ -19,7 +19,7 @@ type ChangeRequestReview struct {
 	UUID      uuid.UUID `json:"uuid"`
 	UserUUID  uuid.UUID `json:"user_uuid"`
 	Comment   *string   `json:"comment"`
-	Status    Status    `json:"status"`
+	Response  Response  `json:"response"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -39,7 +39,7 @@ func (e ChangeRequestReview) FieldIdentfierToTypeMap() map[string]types.FieldTyp
 	res["uuid"] = types.UUIDFieldType
 	res["user_uuid"] = types.UUIDFieldType
 	res["comment"] = types.StringFieldType
-	res["status"] = types.SingleEnumFieldType
+	res["response"] = types.SingleEnumFieldType
 	res["created_at"] = types.TimestampFieldType
 	res["updated_at"] = types.TimestampFieldType
 	return res
@@ -104,7 +104,7 @@ func NewChangeRequestReviewWithRandomValues() ChangeRequestReview {
 		UUID:      randomvalues.GetRandomUUIDValue(),
 		UserUUID:  randomvalues.GetRandomUUIDValue(),
 		Comment:   randomvalues.GetRandomStringValuePtr(),
-		Status:    randomvalues.GetRandomOptionValue[Status](5),
+		Response:  randomvalues.GetRandomOptionValue[Response](2),
 		CreatedAt: randomvalues.GetRandomTimeValue(),
 		UpdatedAt: randomvalues.GetRandomTimeValue(),
 	}

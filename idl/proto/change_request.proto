@@ -17,23 +17,34 @@ message ChangeRequest {
     int64 version = 2;
     string title = 3;
     string description = 4;
-    ChangeRequestReviewType review_type = 5;
-    repeated ChangeRequestDataChange data_changes = 6;
-    string version_changes = 7;
-    repeated ChangeRequestReview reviews = 8;
-    string owner_uuid = 9;
-    ChangeRequestStatus status = 10;
-    google.protobuf.Timestamp created_at = 11;
-    google.protobuf.Timestamp updated_at = 12;
-    string created_by_uuid = 13;
-    string updated_by_uuid = 14;    
+    string project_version_uuid = 5;
+    ChangeRequestChangeType change_type = 6;
+    repeated ChangeRequestDataChange data_changes = 7;
+    string version_changes = 8;
+    repeated ChangeRequestReview reviews = 9;
+    ChangeRequestReviewStatus review_status = 10;
+    string owner_uuid = 11;
+    ChangeRequestStatus status = 12;
+    google.protobuf.Timestamp created_at = 13;
+    google.protobuf.Timestamp updated_at = 14;
+    string created_by_uuid = 15;
+    string updated_by_uuid = 16;    
 }
 
-enum ChangeRequestReviewType { 
-    CHANGE_REQUEST_REVIEW_TYPE_INVALID = 0;
-    CHANGE_REQUEST_REVIEW_TYPE_PROJECT_DATA = 1;
-    CHANGE_REQUEST_REVIEW_TYPE_PROJECT_VERSION = 2;
-    CHANGE_REQUEST_REVIEW_TYPE_EXTENSION_VERSION = 3;
+enum ChangeRequestChangeType { 
+    CHANGE_REQUEST_CHANGE_TYPE_INVALID = 0;
+    CHANGE_REQUEST_CHANGE_TYPE_PROJECT_DATA = 1;
+    CHANGE_REQUEST_CHANGE_TYPE_PROJECT_VERSION = 2;
+}
+
+enum ChangeRequestReviewStatus { 
+    CHANGE_REQUEST_REVIEW_STATUS_INVALID = 0;
+    CHANGE_REQUEST_REVIEW_STATUS_DRAFT = 1;
+    CHANGE_REQUEST_REVIEW_STATUS_IN_REVIEW = 2;
+    CHANGE_REQUEST_REVIEW_STATUS_APPROVED = 3;
+    CHANGE_REQUEST_REVIEW_STATUS_REJECTED = 4;
+    CHANGE_REQUEST_REVIEW_STATUS_DISCARDED = 5;
+    CHANGE_REQUEST_REVIEW_STATUS_APPLIED = 6;
 }
 
 enum ChangeRequestStatus { 

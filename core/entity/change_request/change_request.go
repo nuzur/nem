@@ -18,20 +18,22 @@ import (
 )
 
 type ChangeRequest struct {
-	UUID           uuid.UUID                                            `json:"uuid"`
-	Version        int64                                                `json:"version"`
-	Title          string                                               `json:"title"`
-	Description    *string                                              `json:"description"`
-	ReviewType     ReviewType                                           `json:"review_type"`
-	DataChanges    []change_request_data_change.ChangeRequestDataChange `json:"data_changes"`
-	VersionChanges *string                                              `json:"version_changes"`
-	Reviews        []change_request_review.ChangeRequestReview          `json:"reviews"`
-	OwnerUUID      uuid.UUID                                            `json:"owner_uuid"`
-	Status         Status                                               `json:"status"`
-	CreatedAt      time.Time                                            `json:"created_at"`
-	UpdatedAt      time.Time                                            `json:"updated_at"`
-	CreatedByUUID  uuid.UUID                                            `json:"created_by_uuid"`
-	UpdatedByUUID  uuid.UUID                                            `json:"updated_by_uuid"`
+	UUID               uuid.UUID                                            `json:"uuid"`
+	Version            int64                                                `json:"version"`
+	Title              string                                               `json:"title"`
+	Description        *string                                              `json:"description"`
+	ProjectVersionUUID uuid.UUID                                            `json:"project_version_uuid"`
+	ChangeType         ChangeType                                           `json:"change_type"`
+	DataChanges        []change_request_data_change.ChangeRequestDataChange `json:"data_changes"`
+	VersionChanges     *string                                              `json:"version_changes"`
+	Reviews            []change_request_review.ChangeRequestReview          `json:"reviews"`
+	ReviewStatus       ReviewStatus                                         `json:"review_status"`
+	OwnerUUID          uuid.UUID                                            `json:"owner_uuid"`
+	Status             Status                                               `json:"status"`
+	CreatedAt          time.Time                                            `json:"created_at"`
+	UpdatedAt          time.Time                                            `json:"updated_at"`
+	CreatedByUUID      uuid.UUID                                            `json:"created_by_uuid"`
+	UpdatedByUUID      uuid.UUID                                            `json:"updated_by_uuid"`
 }
 
 func (e ChangeRequest) String() string {
@@ -58,10 +60,12 @@ func (e ChangeRequest) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["version"] = types.IntFieldType
 	res["title"] = types.StringFieldType
 	res["description"] = types.StringFieldType
-	res["review_type"] = types.SingleEnumFieldType
+	res["project_version_uuid"] = types.UUIDFieldType
+	res["change_type"] = types.SingleEnumFieldType
 	res["data_changes"] = types.MultiDependantEntityFieldType
 	res["version_changes"] = types.RawJSONFieldType
 	res["reviews"] = types.MultiDependantEntityFieldType
+	res["review_status"] = types.SingleEnumFieldType
 	res["owner_uuid"] = types.UUIDFieldType
 	res["status"] = types.SingleEnumFieldType
 	res["created_at"] = types.TimestampFieldType
@@ -135,20 +139,22 @@ func ChangeRequestSliceToJSON(e []ChangeRequest) json.RawMessage {
 func NewChangeRequestWithRandomValues() ChangeRequest {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return ChangeRequest{
-		UUID:           randomvalues.GetRandomUUIDValue(),
-		Version:        randomvalues.GetRandomIntValue(),
-		Title:          randomvalues.GetRandomStringValue(),
-		Description:    randomvalues.GetRandomStringValuePtr(),
-		ReviewType:     randomvalues.GetRandomOptionValue[ReviewType](3),
-		DataChanges:    change_request_data_change.NewChangeRequestDataChangeSliceWithRandomValues(rand.Intn(10)),
-		VersionChanges: randomvalues.GetRandomRawJSONValuePtr(),
-		Reviews:        change_request_review.NewChangeRequestReviewSliceWithRandomValues(rand.Intn(10)),
-		OwnerUUID:      randomvalues.GetRandomUUIDValue(),
-		Status:         randomvalues.GetRandomOptionValue[Status](2),
-		CreatedAt:      randomvalues.GetRandomTimeValue(),
-		UpdatedAt:      randomvalues.GetRandomTimeValue(),
-		CreatedByUUID:  randomvalues.GetRandomUUIDValue(),
-		UpdatedByUUID:  randomvalues.GetRandomUUIDValue(),
+		UUID:               randomvalues.GetRandomUUIDValue(),
+		Version:            randomvalues.GetRandomIntValue(),
+		Title:              randomvalues.GetRandomStringValue(),
+		Description:        randomvalues.GetRandomStringValuePtr(),
+		ProjectVersionUUID: randomvalues.GetRandomUUIDValue(),
+		ChangeType:         randomvalues.GetRandomOptionValue[ChangeType](2),
+		DataChanges:        change_request_data_change.NewChangeRequestDataChangeSliceWithRandomValues(rand.Intn(10)),
+		VersionChanges:     randomvalues.GetRandomRawJSONValuePtr(),
+		Reviews:            change_request_review.NewChangeRequestReviewSliceWithRandomValues(rand.Intn(10)),
+		ReviewStatus:       randomvalues.GetRandomOptionValue[ReviewStatus](6),
+		OwnerUUID:          randomvalues.GetRandomUUIDValue(),
+		Status:             randomvalues.GetRandomOptionValue[Status](2),
+		CreatedAt:          randomvalues.GetRandomTimeValue(),
+		UpdatedAt:          randomvalues.GetRandomTimeValue(),
+		CreatedByUUID:      randomvalues.GetRandomUUIDValue(),
+		UpdatedByUUID:      randomvalues.GetRandomUUIDValue(),
 	}
 }
 

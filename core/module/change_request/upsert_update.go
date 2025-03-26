@@ -147,13 +147,17 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 
 			Description: mapper.StringPtrToSqlNullString(req.ChangeRequest.Description),
 
-			ReviewType: req.ChangeRequest.ReviewType.ToInt64(),
+			ProjectVersionUUID: req.ChangeRequest.ProjectVersionUUID.String(),
+
+			ChangeType: req.ChangeRequest.ChangeType.ToInt64(),
 
 			DataChanges: change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges),
 
 			VersionChanges: []byte(mapper.StringPtrToString(req.ChangeRequest.VersionChanges)),
 
 			Reviews: change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews),
+
+			ReviewStatus: req.ChangeRequest.ReviewStatus.ToInt64(),
 
 			OwnerUUID: req.ChangeRequest.OwnerUUID.String(),
 
@@ -179,7 +183,9 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 
 	res.Description = mapper.StringPtrToSqlNullString(req.ChangeRequest.Description)
 
-	res.ReviewType = req.ChangeRequest.ReviewType.ToInt64()
+	res.ProjectVersionUUID = req.ChangeRequest.ProjectVersionUUID.String()
+
+	res.ChangeType = req.ChangeRequest.ChangeType.ToInt64()
 
 	res.DataChanges = change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges)
 
@@ -190,6 +196,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 	}
 
 	res.Reviews = change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews)
+
+	res.ReviewStatus = req.ChangeRequest.ReviewStatus.ToInt64()
 
 	res.OwnerUUID = req.ChangeRequest.OwnerUUID.String()
 
