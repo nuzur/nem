@@ -25,7 +25,7 @@ type DataChangeTypeConfig struct {
 	state         protoimpl.MessageState      `protogen:"open.v1"`
 	Update        *DataChangeTypeConfigUpdate `protobuf:"bytes,1,opt,name=update,proto3" json:"update,omitempty"`
 	Create        *DataChangeTypeConfigCreate `protobuf:"bytes,2,opt,name=create,proto3" json:"create,omitempty"`
-	Delete        *DataChangeTypeConfigCreate `protobuf:"bytes,3,opt,name=delete,proto3" json:"delete,omitempty"`
+	Delete        *DataChangeTypeConfigDelete `protobuf:"bytes,3,opt,name=delete,proto3" json:"delete,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -74,7 +74,7 @@ func (x *DataChangeTypeConfig) GetCreate() *DataChangeTypeConfigCreate {
 	return nil
 }
 
-func (x *DataChangeTypeConfig) GetDelete() *DataChangeTypeConfigCreate {
+func (x *DataChangeTypeConfig) GetDelete() *DataChangeTypeConfigDelete {
 	if x != nil {
 		return x.Delete
 	}
@@ -85,11 +85,11 @@ var File_data_change_type_config_proto protoreflect.FileDescriptor
 
 const file_data_change_type_config_proto_rawDesc = "" +
 	"\n" +
-	"\x1ddata_change_type_config.proto\x12\x03nem\x1a$data_change_type_config_create.proto\x1a$data_change_type_config_update.proto\"\xc1\x01\n" +
+	"\x1ddata_change_type_config.proto\x12\x03nem\x1a$data_change_type_config_create.proto\x1a$data_change_type_config_delete.proto\x1a$data_change_type_config_update.proto\"\xc1\x01\n" +
 	"\x14DataChangeTypeConfig\x127\n" +
 	"\x06update\x18\x01 \x01(\v2\x1f.nem.DataChangeTypeConfigUpdateR\x06update\x127\n" +
 	"\x06create\x18\x02 \x01(\v2\x1f.nem.DataChangeTypeConfigCreateR\x06create\x127\n" +
-	"\x06delete\x18\x03 \x01(\v2\x1f.nem.DataChangeTypeConfigCreateR\x06deleteB;\n" +
+	"\x06delete\x18\x03 \x01(\v2\x1f.nem.DataChangeTypeConfigDeleteR\x06deleteB;\n" +
 	"\x14github.com/nuzur/nemB\x14DataChangeTypeConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -109,11 +109,12 @@ var file_data_change_type_config_proto_goTypes = []any{
 	(*DataChangeTypeConfig)(nil),       // 0: nem.DataChangeTypeConfig
 	(*DataChangeTypeConfigUpdate)(nil), // 1: nem.DataChangeTypeConfigUpdate
 	(*DataChangeTypeConfigCreate)(nil), // 2: nem.DataChangeTypeConfigCreate
+	(*DataChangeTypeConfigDelete)(nil), // 3: nem.DataChangeTypeConfigDelete
 }
 var file_data_change_type_config_proto_depIdxs = []int32{
 	1, // 0: nem.DataChangeTypeConfig.update:type_name -> nem.DataChangeTypeConfigUpdate
 	2, // 1: nem.DataChangeTypeConfig.create:type_name -> nem.DataChangeTypeConfigCreate
-	2, // 2: nem.DataChangeTypeConfig.delete:type_name -> nem.DataChangeTypeConfigCreate
+	3, // 2: nem.DataChangeTypeConfig.delete:type_name -> nem.DataChangeTypeConfigDelete
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
@@ -127,6 +128,7 @@ func file_data_change_type_config_proto_init() {
 		return
 	}
 	file_data_change_type_config_create_proto_init()
+	file_data_change_type_config_delete_proto_init()
 	file_data_change_type_config_update_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

@@ -18,7 +18,7 @@ import (
 
 type DataChangeTypeConfigCreate struct {
 	EntityUUID uuid.UUID                                      `json:"entity_uuid"`
-	Keys       []data_change_field_value.DataChangeFieldValue `json:"keys"`
+	Values     []data_change_field_value.DataChangeFieldValue `json:"values"`
 	CreatedAt  time.Time                                      `json:"created_at"`
 }
 
@@ -35,7 +35,7 @@ func (e DataChangeTypeConfigCreate) FieldIdentfierToTypeMap() map[string]types.F
 	res := make(map[string]types.FieldType)
 
 	res["entity_uuid"] = types.UUIDFieldType
-	res["keys"] = types.MultiDependantEntityFieldType
+	res["values"] = types.MultiDependantEntityFieldType
 	res["created_at"] = types.TimestampFieldType
 	return res
 }
@@ -97,7 +97,7 @@ func NewDataChangeTypeConfigCreateWithRandomValues() DataChangeTypeConfigCreate 
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return DataChangeTypeConfigCreate{
 		EntityUUID: randomvalues.GetRandomUUIDValue(),
-		Keys:       data_change_field_value.NewDataChangeFieldValueSliceWithRandomValues(rand.Intn(10)),
+		Values:     data_change_field_value.NewDataChangeFieldValueSliceWithRandomValues(rand.Intn(10)),
 		CreatedAt:  randomvalues.GetRandomTimeValue(),
 	}
 }

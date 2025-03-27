@@ -12,7 +12,7 @@ import (
 func DataChangeTypeConfigCreateToProto(e main_entity.DataChangeTypeConfigCreate) *pb.DataChangeTypeConfigCreate {
 	return &pb.DataChangeTypeConfigCreate{
 		EntityUuid: e.EntityUUID.String(),
-		Keys:       DataChangeFieldValueSliceToProto(e.Keys),
+		Values:     DataChangeFieldValueSliceToProto(e.Values),
 		CreatedAt:  timestamppb.New(e.CreatedAt),
 	}
 }
@@ -31,7 +31,7 @@ func DataChangeTypeConfigCreateFromProto(m *pb.DataChangeTypeConfigCreate) main_
 	}
 	return main_entity.DataChangeTypeConfigCreate{
 		EntityUUID: uuid.FromStringOrNil(m.GetEntityUuid()),
-		Keys:       DataChangeFieldValueSliceFromProto(m.GetKeys()),
+		Values:     DataChangeFieldValueSliceFromProto(m.GetValues()),
 		CreatedAt:  m.GetCreatedAt().AsTime(),
 	}
 }

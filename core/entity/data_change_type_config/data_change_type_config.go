@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/nuzur/nem/core/entity/data_change_type_config_create"
+	"github.com/nuzur/nem/core/entity/data_change_type_config_delete"
 	"github.com/nuzur/nem/core/entity/data_change_type_config_update"
 
 	"fmt"
@@ -18,7 +19,7 @@ import (
 type DataChangeTypeConfig struct {
 	Update data_change_type_config_update.DataChangeTypeConfigUpdate `json:"update"`
 	Create data_change_type_config_create.DataChangeTypeConfigCreate `json:"create"`
-	Delete data_change_type_config_create.DataChangeTypeConfigCreate `json:"delete"`
+	Delete data_change_type_config_delete.DataChangeTypeConfigDelete `json:"delete"`
 }
 
 func (e DataChangeTypeConfig) String() string {
@@ -97,7 +98,7 @@ func NewDataChangeTypeConfigWithRandomValues() DataChangeTypeConfig {
 	return DataChangeTypeConfig{
 		Update: data_change_type_config_update.NewDataChangeTypeConfigUpdateWithRandomValues(),
 		Create: data_change_type_config_create.NewDataChangeTypeConfigCreateWithRandomValues(),
-		Delete: data_change_type_config_create.NewDataChangeTypeConfigCreateWithRandomValues(),
+		Delete: data_change_type_config_delete.NewDataChangeTypeConfigDeleteWithRandomValues(),
 	}
 }
 

@@ -9,7 +9,7 @@ func DataChangeTypeConfigToProto(e main_entity.DataChangeTypeConfig) *pb.DataCha
 	return &pb.DataChangeTypeConfig{
 		Update: DataChangeTypeConfigUpdateToProto(e.Update),
 		Create: DataChangeTypeConfigCreateToProto(e.Create),
-		Delete: DataChangeTypeConfigCreateToProto(e.Delete),
+		Delete: DataChangeTypeConfigDeleteToProto(e.Delete),
 	}
 }
 
@@ -28,7 +28,7 @@ func DataChangeTypeConfigFromProto(m *pb.DataChangeTypeConfig) main_entity.DataC
 	return main_entity.DataChangeTypeConfig{
 		Update: DataChangeTypeConfigUpdateFromProto(m.GetUpdate()),
 		Create: DataChangeTypeConfigCreateFromProto(m.GetCreate()),
-		Delete: DataChangeTypeConfigCreateFromProto(m.GetDelete()),
+		Delete: DataChangeTypeConfigDeleteFromProto(m.GetDelete()),
 	}
 }
 

@@ -25,7 +25,7 @@ const (
 type DataChangeTypeConfigCreate struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
 	EntityUuid    string                  `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	Keys          []*DataChangeFieldValue `protobuf:"bytes,2,rep,name=keys,proto3" json:"keys,omitempty"`
+	Values        []*DataChangeFieldValue `protobuf:"bytes,2,rep,name=values,proto3" json:"values,omitempty"`
 	CreatedAt     *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -68,9 +68,9 @@ func (x *DataChangeTypeConfigCreate) GetEntityUuid() string {
 	return ""
 }
 
-func (x *DataChangeTypeConfigCreate) GetKeys() []*DataChangeFieldValue {
+func (x *DataChangeTypeConfigCreate) GetValues() []*DataChangeFieldValue {
 	if x != nil {
-		return x.Keys
+		return x.Values
 	}
 	return nil
 }
@@ -86,11 +86,11 @@ var File_data_change_type_config_create_proto protoreflect.FileDescriptor
 
 const file_data_change_type_config_create_proto_rawDesc = "" +
 	"\n" +
-	"$data_change_type_config_create.proto\x12\x03nem\x1a\x1ddata_change_field_value.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa7\x01\n" +
+	"$data_change_type_config_create.proto\x12\x03nem\x1a\x1ddata_change_field_value.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xab\x01\n" +
 	"\x1aDataChangeTypeConfigCreate\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12-\n" +
-	"\x04keys\x18\x02 \x03(\v2\x19.nem.DataChangeFieldValueR\x04keys\x129\n" +
+	"entityUuid\x121\n" +
+	"\x06values\x18\x02 \x03(\v2\x19.nem.DataChangeFieldValueR\x06values\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtBA\n" +
 	"\x14github.com/nuzur/nemB\x1aDataChangeTypeConfigCreateP\x01Z\vnem/idl/genb\x06proto3"
@@ -114,7 +114,7 @@ var file_data_change_type_config_create_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),      // 2: google.protobuf.Timestamp
 }
 var file_data_change_type_config_create_proto_depIdxs = []int32{
-	1, // 0: nem.DataChangeTypeConfigCreate.keys:type_name -> nem.DataChangeFieldValue
+	1, // 0: nem.DataChangeTypeConfigCreate.values:type_name -> nem.DataChangeFieldValue
 	2, // 1: nem.DataChangeTypeConfigCreate.created_at:type_name -> google.protobuf.Timestamp
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type

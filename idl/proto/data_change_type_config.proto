@@ -9,10 +9,11 @@ package nem;
 
 
 import "data_change_type_config_create.proto";
+import "data_change_type_config_delete.proto";
 import "data_change_type_config_update.proto";
 
 message DataChangeTypeConfig {  
     DataChangeTypeConfigUpdate update = 1;
     DataChangeTypeConfigCreate create = 2;
-    DataChangeTypeConfigCreate delete = 3;    
+    DataChangeTypeConfigDelete delete = 3;    
 }
