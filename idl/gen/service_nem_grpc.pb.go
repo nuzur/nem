@@ -52,6 +52,9 @@ const (
 	Nem_ListUserConnections_FullMethodName      = "/nem.Nem/ListUserConnections"
 	Nem_CreateUserConnection_FullMethodName     = "/nem.Nem/CreateUserConnection"
 	Nem_UpdateUserConnection_FullMethodName     = "/nem.Nem/UpdateUserConnection"
+	Nem_ListUserProjectVersions_FullMethodName  = "/nem.Nem/ListUserProjectVersions"
+	Nem_CreateUserProjectVersion_FullMethodName = "/nem.Nem/CreateUserProjectVersion"
+	Nem_UpdateUserProjectVersion_FullMethodName = "/nem.Nem/UpdateUserProjectVersion"
 )
 
 // NemClient is the client API for Nem service.
@@ -102,6 +105,10 @@ type NemClient interface {
 	ListUserConnections(ctx context.Context, in *ListUserConnectionsRequest, opts ...grpc.CallOption) (*ListUserConnectionsResponse, error)
 	CreateUserConnection(ctx context.Context, in *CreateUserConnectionRequest, opts ...grpc.CallOption) (*UserConnection, error)
 	UpdateUserConnection(ctx context.Context, in *UpdateUserConnectionRequest, opts ...grpc.CallOption) (*UserConnection, error)
+	// user_project_version start
+	ListUserProjectVersions(ctx context.Context, in *ListUserProjectVersionsRequest, opts ...grpc.CallOption) (*ListUserProjectVersionsResponse, error)
+	CreateUserProjectVersion(ctx context.Context, in *CreateUserProjectVersionRequest, opts ...grpc.CallOption) (*UserProjectVersion, error)
+	UpdateUserProjectVersion(ctx context.Context, in *UpdateUserProjectVersionRequest, opts ...grpc.CallOption) (*UserProjectVersion, error)
 }
 
 type nemClient struct {
@@ -442,6 +449,36 @@ func (c *nemClient) UpdateUserConnection(ctx context.Context, in *UpdateUserConn
 	return out, nil
 }
 
+func (c *nemClient) ListUserProjectVersions(ctx context.Context, in *ListUserProjectVersionsRequest, opts ...grpc.CallOption) (*ListUserProjectVersionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUserProjectVersionsResponse)
+	err := c.cc.Invoke(ctx, Nem_ListUserProjectVersions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateUserProjectVersion(ctx context.Context, in *CreateUserProjectVersionRequest, opts ...grpc.CallOption) (*UserProjectVersion, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserProjectVersion)
+	err := c.cc.Invoke(ctx, Nem_CreateUserProjectVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateUserProjectVersion(ctx context.Context, in *UpdateUserProjectVersionRequest, opts ...grpc.CallOption) (*UserProjectVersion, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserProjectVersion)
+	err := c.cc.Invoke(ctx, Nem_UpdateUserProjectVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NemServer is the server API for Nem service.
 // All implementations must embed UnimplementedNemServer
 // for forward compatibility.
@@ -490,6 +527,10 @@ type NemServer interface {
 	ListUserConnections(context.Context, *ListUserConnectionsRequest) (*ListUserConnectionsResponse, error)
 	CreateUserConnection(context.Context, *CreateUserConnectionRequest) (*UserConnection, error)
 	UpdateUserConnection(context.Context, *UpdateUserConnectionRequest) (*UserConnection, error)
+	// user_project_version start
+	ListUserProjectVersions(context.Context, *ListUserProjectVersionsRequest) (*ListUserProjectVersionsResponse, error)
+	CreateUserProjectVersion(context.Context, *CreateUserProjectVersionRequest) (*UserProjectVersion, error)
+	UpdateUserProjectVersion(context.Context, *UpdateUserProjectVersionRequest) (*UserProjectVersion, error)
 	mustEmbedUnimplementedNemServer()
 }
 
@@ -598,6 +639,15 @@ func (UnimplementedNemServer) CreateUserConnection(context.Context, *CreateUserC
 }
 func (UnimplementedNemServer) UpdateUserConnection(context.Context, *UpdateUserConnectionRequest) (*UserConnection, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserConnection not implemented")
+}
+func (UnimplementedNemServer) ListUserProjectVersions(context.Context, *ListUserProjectVersionsRequest) (*ListUserProjectVersionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUserProjectVersions not implemented")
+}
+func (UnimplementedNemServer) CreateUserProjectVersion(context.Context, *CreateUserProjectVersionRequest) (*UserProjectVersion, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUserProjectVersion not implemented")
+}
+func (UnimplementedNemServer) UpdateUserProjectVersion(context.Context, *UpdateUserProjectVersionRequest) (*UserProjectVersion, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserProjectVersion not implemented")
 }
 func (UnimplementedNemServer) mustEmbedUnimplementedNemServer() {}
 func (UnimplementedNemServer) testEmbeddedByValue()             {}
@@ -1214,6 +1264,60 @@ func _Nem_UpdateUserConnection_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Nem_ListUserProjectVersions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserProjectVersionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListUserProjectVersions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListUserProjectVersions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListUserProjectVersions(ctx, req.(*ListUserProjectVersionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateUserProjectVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserProjectVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateUserProjectVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateUserProjectVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateUserProjectVersion(ctx, req.(*CreateUserProjectVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateUserProjectVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserProjectVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateUserProjectVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateUserProjectVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateUserProjectVersion(ctx, req.(*UpdateUserProjectVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Nem_ServiceDesc is the grpc.ServiceDesc for Nem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1352,6 +1456,18 @@ var Nem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUserConnection",
 			Handler:    _Nem_UpdateUserConnection_Handler,
+		},
+		{
+			MethodName: "ListUserProjectVersions",
+			Handler:    _Nem_ListUserProjectVersions_Handler,
+		},
+		{
+			MethodName: "CreateUserProjectVersion",
+			Handler:    _Nem_CreateUserProjectVersion_Handler,
+		},
+		{
+			MethodName: "UpdateUserProjectVersion",
+			Handler:    _Nem_UpdateUserProjectVersion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

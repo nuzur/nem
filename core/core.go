@@ -34,6 +34,8 @@ import (
 
 	"github.com/nuzur/nem/core/module/user_connection"
 
+	"github.com/nuzur/nem/core/module/user_project_version"
+
 	"github.com/nuzur/nem/core/repository"
 	"github.com/nuzur/nem/monitoring"
 
@@ -65,6 +67,8 @@ type Implementation struct {
 	extension_execution extension_execution.Module
 
 	user_connection user_connection.Module
+
+	user_project_version user_project_version.Module
 
 	monitoring *monitoring.Implementation
 
@@ -257,4 +261,16 @@ func (i Implementation) UserConnection() user_connection.Module {
 		})
 	}
 	return i.user_connection
+}
+
+func (i Implementation) UserProjectVersion() user_project_version.Module {
+	if i.user_project_version == nil {
+		i.user_project_version = user_project_version.New(coretypes.ModuleParams{
+			Repository: i.repository,
+			Monitoring: i.monitoring,
+
+			Events: i.events,
+		})
+	}
+	return i.user_project_version
 }

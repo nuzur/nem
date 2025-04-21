@@ -49,6 +49,9 @@ import (
 	"github.com/nuzur/nem/core/entity/user_connection"
 	user_connectiontypes "github.com/nuzur/nem/core/module/user_connection/types"
 
+	"github.com/nuzur/nem/core/entity/user_project_version"
+	user_project_versiontypes "github.com/nuzur/nem/core/module/user_project_version/types"
+
 	"github.com/gofrs/uuid"
 	"github.com/manifoldco/promptui"
 	"github.com/urfave/cli"
@@ -372,6 +375,21 @@ func main() {
 							fmt.Printf("error writing entity: %s, %v \n", "user_connection", err)
 						} else {
 							fmt.Printf("wrote entity: %s, %v \n", "user_connection", res)
+						}
+					}
+					c.Destroy()
+
+				case "user_project_version":
+					entities := user_project_version.NewUserProjectVersionSliceWithRandomValues(100)
+					for _, e := range entities {
+						e.UUID = uuid.Nil
+						res, err := c.UserProjectVersion().Upsert(context.Background(), user_project_versiontypes.UpsertRequest{
+							UserProjectVersion: e,
+						}, false)
+						if err != nil {
+							fmt.Printf("error writing entity: %s, %v \n", "user_project_version", err)
+						} else {
+							fmt.Printf("wrote entity: %s, %v \n", "user_project_version", res)
 						}
 					}
 					c.Destroy()

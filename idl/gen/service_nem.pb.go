@@ -2519,13 +2519,240 @@ func (x *UpdateUserConnectionRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
 	return nil
 }
 
+// user_project_version start
+type ListUserProjectVersionsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The maximum number of records to return. The service may return fewer than
+	// this value.
+	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// A page token, received from a previous call.
+	// Provide this to retrieve the subsequent page.
+	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// https://google.aip.dev/160
+	// https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+	// https://github.com/einride/aip-go
+	Filter        string `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
+	OrderBy       string `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUserProjectVersionsRequest) Reset() {
+	*x = ListUserProjectVersionsRequest{}
+	mi := &file_service_nem_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserProjectVersionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserProjectVersionsRequest) ProtoMessage() {}
+
+func (x *ListUserProjectVersionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserProjectVersionsRequest.ProtoReflect.Descriptor instead.
+func (*ListUserProjectVersionsRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *ListUserProjectVersionsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListUserProjectVersionsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListUserProjectVersionsRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListUserProjectVersionsRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
+}
+
+type ListUserProjectVersionsResponse struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	UserProjectVersions []*UserProjectVersion  `protobuf:"bytes,1,rep,name=user_project_versions,json=userProjectVersions,proto3" json:"user_project_versions,omitempty"`
+	// A token that can be sent as `page_token` to retrieve the next page.
+	// If this field is omitted, there are no subsequent pages.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUserProjectVersionsResponse) Reset() {
+	*x = ListUserProjectVersionsResponse{}
+	mi := &file_service_nem_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserProjectVersionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserProjectVersionsResponse) ProtoMessage() {}
+
+func (x *ListUserProjectVersionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserProjectVersionsResponse.ProtoReflect.Descriptor instead.
+func (*ListUserProjectVersionsResponse) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *ListUserProjectVersionsResponse) GetUserProjectVersions() []*UserProjectVersion {
+	if x != nil {
+		return x.UserProjectVersions
+	}
+	return nil
+}
+
+func (x *ListUserProjectVersionsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type CreateUserProjectVersionRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	UserProjectVersion *UserProjectVersion    `protobuf:"bytes,1,opt,name=user_project_version,json=userProjectVersion,proto3" json:"user_project_version,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *CreateUserProjectVersionRequest) Reset() {
+	*x = CreateUserProjectVersionRequest{}
+	mi := &file_service_nem_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUserProjectVersionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserProjectVersionRequest) ProtoMessage() {}
+
+func (x *CreateUserProjectVersionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserProjectVersionRequest.ProtoReflect.Descriptor instead.
+func (*CreateUserProjectVersionRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *CreateUserProjectVersionRequest) GetUserProjectVersion() *UserProjectVersion {
+	if x != nil {
+		return x.UserProjectVersion
+	}
+	return nil
+}
+
+type UpdateUserProjectVersionRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	UserProjectVersion *UserProjectVersion    `protobuf:"bytes,1,opt,name=user_project_version,json=userProjectVersion,proto3" json:"user_project_version,omitempty"`
+	// The list of fields to update.
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserProjectVersionRequest) Reset() {
+	*x = UpdateUserProjectVersionRequest{}
+	mi := &file_service_nem_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserProjectVersionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserProjectVersionRequest) ProtoMessage() {}
+
+func (x *UpdateUserProjectVersionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserProjectVersionRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserProjectVersionRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *UpdateUserProjectVersionRequest) GetUserProjectVersion() *UserProjectVersion {
+	if x != nil {
+		return x.UserProjectVersion
+	}
+	return nil
+}
+
+func (x *UpdateUserProjectVersionRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
+	}
+	return nil
+}
+
 var File_service_nem_proto protoreflect.FileDescriptor
 
 const file_service_nem_proto_rawDesc = "" +
 	"\n" +
 	"\x11service_nem.proto\x12\x03nem\x1a google/protobuf/field_mask.proto\x1a\n" +
 	"team.proto\x1a\x12organization.proto\x1a\rproject.proto\x1a\x0fextension.proto\x1a\x17extension_version.proto\x1a\n" +
-	"user.proto\x1a\x14change_request.proto\x1a\x15project_version.proto\x1a\x0fuser_team.proto\x1a\x19extension_execution.proto\x1a\x15user_connection.proto\"\x81\x01\n" +
+	"user.proto\x1a\x14change_request.proto\x1a\x15project_version.proto\x1a\x0fuser_team.proto\x1a\x19extension_execution.proto\x1a\x15user_connection.proto\x1a\x1auser_project_version.proto\"\x81\x01\n" +
 	"\x10ListTeamsRequest\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
@@ -2693,7 +2920,22 @@ const file_service_nem_proto_rawDesc = "" +
 	"\x1bUpdateUserConnectionRequest\x12<\n" +
 	"\x0fuser_connection\x18\x01 \x01(\v2\x13.nem.UserConnectionR\x0euserConnection\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask2\xb4\x13\n" +
+	"updateMask\"\x8f\x01\n" +
+	"\x1eListUserProjectVersionsRequest\x12\x1b\n" +
+	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x03 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x04 \x01(\tR\aorderBy\"\x96\x01\n" +
+	"\x1fListUserProjectVersionsResponse\x12K\n" +
+	"\x15user_project_versions\x18\x01 \x03(\v2\x17.nem.UserProjectVersionR\x13userProjectVersions\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"l\n" +
+	"\x1fCreateUserProjectVersionRequest\x12I\n" +
+	"\x14user_project_version\x18\x01 \x01(\v2\x17.nem.UserProjectVersionR\x12userProjectVersion\"\xa9\x01\n" +
+	"\x1fUpdateUserProjectVersionRequest\x12I\n" +
+	"\x14user_project_version\x18\x01 \x01(\v2\x17.nem.UserProjectVersionR\x12userProjectVersion\x12;\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"updateMask2\xd6\x15\n" +
 	"\x03Nem\x12<\n" +
 	"\tListTeams\x12\x15.nem.ListTeamsRequest\x1a\x16.nem.ListTeamsResponse\"\x00\x121\n" +
 	"\n" +
@@ -2731,7 +2973,10 @@ const file_service_nem_proto_rawDesc = "" +
 	"\x18UpdateExtensionExecution\x12$.nem.UpdateExtensionExecutionRequest\x1a\x17.nem.ExtensionExecution\"\x00\x12Z\n" +
 	"\x13ListUserConnections\x12\x1f.nem.ListUserConnectionsRequest\x1a .nem.ListUserConnectionsResponse\"\x00\x12O\n" +
 	"\x14CreateUserConnection\x12 .nem.CreateUserConnectionRequest\x1a\x13.nem.UserConnection\"\x00\x12O\n" +
-	"\x14UpdateUserConnection\x12 .nem.UpdateUserConnectionRequest\x1a\x13.nem.UserConnection\"\x00B*\n" +
+	"\x14UpdateUserConnection\x12 .nem.UpdateUserConnectionRequest\x1a\x13.nem.UserConnection\"\x00\x12f\n" +
+	"\x17ListUserProjectVersions\x12#.nem.ListUserProjectVersionsRequest\x1a$.nem.ListUserProjectVersionsResponse\"\x00\x12[\n" +
+	"\x18CreateUserProjectVersion\x12$.nem.CreateUserProjectVersionRequest\x1a\x17.nem.UserProjectVersion\"\x00\x12[\n" +
+	"\x18UpdateUserProjectVersion\x12$.nem.UpdateUserProjectVersionRequest\x1a\x17.nem.UserProjectVersion\"\x00B*\n" +
 	"\x14github.com/nuzur/nemB\x03NemP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -2746,7 +2991,7 @@ func file_service_nem_proto_rawDescGZIP() []byte {
 	return file_service_nem_proto_rawDescData
 }
 
-var file_service_nem_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
+var file_service_nem_proto_msgTypes = make([]protoimpl.MessageInfo, 48)
 var file_service_nem_proto_goTypes = []any{
 	(*ListTeamsRequest)(nil),                // 0: nem.ListTeamsRequest
 	(*ListTeamsResponse)(nil),               // 1: nem.ListTeamsResponse
@@ -2792,135 +3037,150 @@ var file_service_nem_proto_goTypes = []any{
 	(*ListUserConnectionsResponse)(nil),     // 41: nem.ListUserConnectionsResponse
 	(*CreateUserConnectionRequest)(nil),     // 42: nem.CreateUserConnectionRequest
 	(*UpdateUserConnectionRequest)(nil),     // 43: nem.UpdateUserConnectionRequest
-	(*Team)(nil),                            // 44: nem.Team
-	(*fieldmaskpb.FieldMask)(nil),           // 45: google.protobuf.FieldMask
-	(*Organization)(nil),                    // 46: nem.Organization
-	(*Project)(nil),                         // 47: nem.Project
-	(*Extension)(nil),                       // 48: nem.Extension
-	(*ExtensionVersion)(nil),                // 49: nem.ExtensionVersion
-	(*User)(nil),                            // 50: nem.User
-	(*ChangeRequest)(nil),                   // 51: nem.ChangeRequest
-	(*ProjectVersion)(nil),                  // 52: nem.ProjectVersion
-	(*UserTeam)(nil),                        // 53: nem.UserTeam
-	(*ExtensionExecution)(nil),              // 54: nem.ExtensionExecution
-	(*UserConnection)(nil),                  // 55: nem.UserConnection
+	(*ListUserProjectVersionsRequest)(nil),  // 44: nem.ListUserProjectVersionsRequest
+	(*ListUserProjectVersionsResponse)(nil), // 45: nem.ListUserProjectVersionsResponse
+	(*CreateUserProjectVersionRequest)(nil), // 46: nem.CreateUserProjectVersionRequest
+	(*UpdateUserProjectVersionRequest)(nil), // 47: nem.UpdateUserProjectVersionRequest
+	(*Team)(nil),                            // 48: nem.Team
+	(*fieldmaskpb.FieldMask)(nil),           // 49: google.protobuf.FieldMask
+	(*Organization)(nil),                    // 50: nem.Organization
+	(*Project)(nil),                         // 51: nem.Project
+	(*Extension)(nil),                       // 52: nem.Extension
+	(*ExtensionVersion)(nil),                // 53: nem.ExtensionVersion
+	(*User)(nil),                            // 54: nem.User
+	(*ChangeRequest)(nil),                   // 55: nem.ChangeRequest
+	(*ProjectVersion)(nil),                  // 56: nem.ProjectVersion
+	(*UserTeam)(nil),                        // 57: nem.UserTeam
+	(*ExtensionExecution)(nil),              // 58: nem.ExtensionExecution
+	(*UserConnection)(nil),                  // 59: nem.UserConnection
+	(*UserProjectVersion)(nil),              // 60: nem.UserProjectVersion
 }
 var file_service_nem_proto_depIdxs = []int32{
-	44, // 0: nem.ListTeamsResponse.teams:type_name -> nem.Team
-	44, // 1: nem.CreateTeamRequest.team:type_name -> nem.Team
-	44, // 2: nem.UpdateTeamRequest.team:type_name -> nem.Team
-	45, // 3: nem.UpdateTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
-	46, // 4: nem.ListOrganizationsResponse.organizations:type_name -> nem.Organization
-	46, // 5: nem.CreateOrganizationRequest.organization:type_name -> nem.Organization
-	46, // 6: nem.UpdateOrganizationRequest.organization:type_name -> nem.Organization
-	45, // 7: nem.UpdateOrganizationRequest.update_mask:type_name -> google.protobuf.FieldMask
-	47, // 8: nem.ListProjectsResponse.projects:type_name -> nem.Project
-	47, // 9: nem.CreateProjectRequest.project:type_name -> nem.Project
-	47, // 10: nem.UpdateProjectRequest.project:type_name -> nem.Project
-	45, // 11: nem.UpdateProjectRequest.update_mask:type_name -> google.protobuf.FieldMask
-	48, // 12: nem.ListExtensionsResponse.extensions:type_name -> nem.Extension
-	48, // 13: nem.CreateExtensionRequest.extension:type_name -> nem.Extension
-	48, // 14: nem.UpdateExtensionRequest.extension:type_name -> nem.Extension
-	45, // 15: nem.UpdateExtensionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	49, // 16: nem.ListExtensionVersionsResponse.extension_versions:type_name -> nem.ExtensionVersion
-	49, // 17: nem.CreateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
-	49, // 18: nem.UpdateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
-	45, // 19: nem.UpdateExtensionVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	50, // 20: nem.ListUsersResponse.users:type_name -> nem.User
-	50, // 21: nem.CreateUserRequest.user:type_name -> nem.User
-	50, // 22: nem.UpdateUserRequest.user:type_name -> nem.User
-	45, // 23: nem.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
-	51, // 24: nem.ListChangeRequestsResponse.change_requests:type_name -> nem.ChangeRequest
-	51, // 25: nem.CreateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
-	51, // 26: nem.UpdateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
-	45, // 27: nem.UpdateChangeRequestRequest.update_mask:type_name -> google.protobuf.FieldMask
-	52, // 28: nem.ListProjectVersionsResponse.project_versions:type_name -> nem.ProjectVersion
-	52, // 29: nem.CreateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
-	52, // 30: nem.UpdateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
-	45, // 31: nem.UpdateProjectVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	53, // 32: nem.ListUserTeamsResponse.user_teams:type_name -> nem.UserTeam
-	53, // 33: nem.CreateUserTeamRequest.user_team:type_name -> nem.UserTeam
-	53, // 34: nem.UpdateUserTeamRequest.user_team:type_name -> nem.UserTeam
-	45, // 35: nem.UpdateUserTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
-	54, // 36: nem.ListExtensionExecutionsResponse.extension_executions:type_name -> nem.ExtensionExecution
-	54, // 37: nem.CreateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
-	54, // 38: nem.UpdateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
-	45, // 39: nem.UpdateExtensionExecutionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	55, // 40: nem.ListUserConnectionsResponse.user_connections:type_name -> nem.UserConnection
-	55, // 41: nem.CreateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
-	55, // 42: nem.UpdateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
-	45, // 43: nem.UpdateUserConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	0,  // 44: nem.Nem.ListTeams:input_type -> nem.ListTeamsRequest
-	2,  // 45: nem.Nem.CreateTeam:input_type -> nem.CreateTeamRequest
-	3,  // 46: nem.Nem.UpdateTeam:input_type -> nem.UpdateTeamRequest
-	4,  // 47: nem.Nem.ListOrganizations:input_type -> nem.ListOrganizationsRequest
-	6,  // 48: nem.Nem.CreateOrganization:input_type -> nem.CreateOrganizationRequest
-	7,  // 49: nem.Nem.UpdateOrganization:input_type -> nem.UpdateOrganizationRequest
-	8,  // 50: nem.Nem.ListProjects:input_type -> nem.ListProjectsRequest
-	10, // 51: nem.Nem.CreateProject:input_type -> nem.CreateProjectRequest
-	11, // 52: nem.Nem.UpdateProject:input_type -> nem.UpdateProjectRequest
-	12, // 53: nem.Nem.ListExtensions:input_type -> nem.ListExtensionsRequest
-	14, // 54: nem.Nem.CreateExtension:input_type -> nem.CreateExtensionRequest
-	15, // 55: nem.Nem.UpdateExtension:input_type -> nem.UpdateExtensionRequest
-	16, // 56: nem.Nem.ListExtensionVersions:input_type -> nem.ListExtensionVersionsRequest
-	18, // 57: nem.Nem.CreateExtensionVersion:input_type -> nem.CreateExtensionVersionRequest
-	19, // 58: nem.Nem.UpdateExtensionVersion:input_type -> nem.UpdateExtensionVersionRequest
-	20, // 59: nem.Nem.ListUsers:input_type -> nem.ListUsersRequest
-	22, // 60: nem.Nem.CreateUser:input_type -> nem.CreateUserRequest
-	23, // 61: nem.Nem.UpdateUser:input_type -> nem.UpdateUserRequest
-	24, // 62: nem.Nem.ListChangeRequests:input_type -> nem.ListChangeRequestsRequest
-	26, // 63: nem.Nem.CreateChangeRequest:input_type -> nem.CreateChangeRequestRequest
-	27, // 64: nem.Nem.UpdateChangeRequest:input_type -> nem.UpdateChangeRequestRequest
-	28, // 65: nem.Nem.ListProjectVersions:input_type -> nem.ListProjectVersionsRequest
-	30, // 66: nem.Nem.CreateProjectVersion:input_type -> nem.CreateProjectVersionRequest
-	31, // 67: nem.Nem.UpdateProjectVersion:input_type -> nem.UpdateProjectVersionRequest
-	32, // 68: nem.Nem.ListUserTeams:input_type -> nem.ListUserTeamsRequest
-	34, // 69: nem.Nem.CreateUserTeam:input_type -> nem.CreateUserTeamRequest
-	35, // 70: nem.Nem.UpdateUserTeam:input_type -> nem.UpdateUserTeamRequest
-	36, // 71: nem.Nem.ListExtensionExecutions:input_type -> nem.ListExtensionExecutionsRequest
-	38, // 72: nem.Nem.CreateExtensionExecution:input_type -> nem.CreateExtensionExecutionRequest
-	39, // 73: nem.Nem.UpdateExtensionExecution:input_type -> nem.UpdateExtensionExecutionRequest
-	40, // 74: nem.Nem.ListUserConnections:input_type -> nem.ListUserConnectionsRequest
-	42, // 75: nem.Nem.CreateUserConnection:input_type -> nem.CreateUserConnectionRequest
-	43, // 76: nem.Nem.UpdateUserConnection:input_type -> nem.UpdateUserConnectionRequest
-	1,  // 77: nem.Nem.ListTeams:output_type -> nem.ListTeamsResponse
-	44, // 78: nem.Nem.CreateTeam:output_type -> nem.Team
-	44, // 79: nem.Nem.UpdateTeam:output_type -> nem.Team
-	5,  // 80: nem.Nem.ListOrganizations:output_type -> nem.ListOrganizationsResponse
-	46, // 81: nem.Nem.CreateOrganization:output_type -> nem.Organization
-	46, // 82: nem.Nem.UpdateOrganization:output_type -> nem.Organization
-	9,  // 83: nem.Nem.ListProjects:output_type -> nem.ListProjectsResponse
-	47, // 84: nem.Nem.CreateProject:output_type -> nem.Project
-	47, // 85: nem.Nem.UpdateProject:output_type -> nem.Project
-	13, // 86: nem.Nem.ListExtensions:output_type -> nem.ListExtensionsResponse
-	48, // 87: nem.Nem.CreateExtension:output_type -> nem.Extension
-	48, // 88: nem.Nem.UpdateExtension:output_type -> nem.Extension
-	17, // 89: nem.Nem.ListExtensionVersions:output_type -> nem.ListExtensionVersionsResponse
-	49, // 90: nem.Nem.CreateExtensionVersion:output_type -> nem.ExtensionVersion
-	49, // 91: nem.Nem.UpdateExtensionVersion:output_type -> nem.ExtensionVersion
-	21, // 92: nem.Nem.ListUsers:output_type -> nem.ListUsersResponse
-	50, // 93: nem.Nem.CreateUser:output_type -> nem.User
-	50, // 94: nem.Nem.UpdateUser:output_type -> nem.User
-	25, // 95: nem.Nem.ListChangeRequests:output_type -> nem.ListChangeRequestsResponse
-	51, // 96: nem.Nem.CreateChangeRequest:output_type -> nem.ChangeRequest
-	51, // 97: nem.Nem.UpdateChangeRequest:output_type -> nem.ChangeRequest
-	29, // 98: nem.Nem.ListProjectVersions:output_type -> nem.ListProjectVersionsResponse
-	52, // 99: nem.Nem.CreateProjectVersion:output_type -> nem.ProjectVersion
-	52, // 100: nem.Nem.UpdateProjectVersion:output_type -> nem.ProjectVersion
-	33, // 101: nem.Nem.ListUserTeams:output_type -> nem.ListUserTeamsResponse
-	53, // 102: nem.Nem.CreateUserTeam:output_type -> nem.UserTeam
-	53, // 103: nem.Nem.UpdateUserTeam:output_type -> nem.UserTeam
-	37, // 104: nem.Nem.ListExtensionExecutions:output_type -> nem.ListExtensionExecutionsResponse
-	54, // 105: nem.Nem.CreateExtensionExecution:output_type -> nem.ExtensionExecution
-	54, // 106: nem.Nem.UpdateExtensionExecution:output_type -> nem.ExtensionExecution
-	41, // 107: nem.Nem.ListUserConnections:output_type -> nem.ListUserConnectionsResponse
-	55, // 108: nem.Nem.CreateUserConnection:output_type -> nem.UserConnection
-	55, // 109: nem.Nem.UpdateUserConnection:output_type -> nem.UserConnection
-	77, // [77:110] is the sub-list for method output_type
-	44, // [44:77] is the sub-list for method input_type
-	44, // [44:44] is the sub-list for extension type_name
-	44, // [44:44] is the sub-list for extension extendee
-	0,  // [0:44] is the sub-list for field type_name
+	48, // 0: nem.ListTeamsResponse.teams:type_name -> nem.Team
+	48, // 1: nem.CreateTeamRequest.team:type_name -> nem.Team
+	48, // 2: nem.UpdateTeamRequest.team:type_name -> nem.Team
+	49, // 3: nem.UpdateTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
+	50, // 4: nem.ListOrganizationsResponse.organizations:type_name -> nem.Organization
+	50, // 5: nem.CreateOrganizationRequest.organization:type_name -> nem.Organization
+	50, // 6: nem.UpdateOrganizationRequest.organization:type_name -> nem.Organization
+	49, // 7: nem.UpdateOrganizationRequest.update_mask:type_name -> google.protobuf.FieldMask
+	51, // 8: nem.ListProjectsResponse.projects:type_name -> nem.Project
+	51, // 9: nem.CreateProjectRequest.project:type_name -> nem.Project
+	51, // 10: nem.UpdateProjectRequest.project:type_name -> nem.Project
+	49, // 11: nem.UpdateProjectRequest.update_mask:type_name -> google.protobuf.FieldMask
+	52, // 12: nem.ListExtensionsResponse.extensions:type_name -> nem.Extension
+	52, // 13: nem.CreateExtensionRequest.extension:type_name -> nem.Extension
+	52, // 14: nem.UpdateExtensionRequest.extension:type_name -> nem.Extension
+	49, // 15: nem.UpdateExtensionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	53, // 16: nem.ListExtensionVersionsResponse.extension_versions:type_name -> nem.ExtensionVersion
+	53, // 17: nem.CreateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
+	53, // 18: nem.UpdateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
+	49, // 19: nem.UpdateExtensionVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	54, // 20: nem.ListUsersResponse.users:type_name -> nem.User
+	54, // 21: nem.CreateUserRequest.user:type_name -> nem.User
+	54, // 22: nem.UpdateUserRequest.user:type_name -> nem.User
+	49, // 23: nem.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
+	55, // 24: nem.ListChangeRequestsResponse.change_requests:type_name -> nem.ChangeRequest
+	55, // 25: nem.CreateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
+	55, // 26: nem.UpdateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
+	49, // 27: nem.UpdateChangeRequestRequest.update_mask:type_name -> google.protobuf.FieldMask
+	56, // 28: nem.ListProjectVersionsResponse.project_versions:type_name -> nem.ProjectVersion
+	56, // 29: nem.CreateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
+	56, // 30: nem.UpdateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
+	49, // 31: nem.UpdateProjectVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	57, // 32: nem.ListUserTeamsResponse.user_teams:type_name -> nem.UserTeam
+	57, // 33: nem.CreateUserTeamRequest.user_team:type_name -> nem.UserTeam
+	57, // 34: nem.UpdateUserTeamRequest.user_team:type_name -> nem.UserTeam
+	49, // 35: nem.UpdateUserTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
+	58, // 36: nem.ListExtensionExecutionsResponse.extension_executions:type_name -> nem.ExtensionExecution
+	58, // 37: nem.CreateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
+	58, // 38: nem.UpdateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
+	49, // 39: nem.UpdateExtensionExecutionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	59, // 40: nem.ListUserConnectionsResponse.user_connections:type_name -> nem.UserConnection
+	59, // 41: nem.CreateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
+	59, // 42: nem.UpdateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
+	49, // 43: nem.UpdateUserConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	60, // 44: nem.ListUserProjectVersionsResponse.user_project_versions:type_name -> nem.UserProjectVersion
+	60, // 45: nem.CreateUserProjectVersionRequest.user_project_version:type_name -> nem.UserProjectVersion
+	60, // 46: nem.UpdateUserProjectVersionRequest.user_project_version:type_name -> nem.UserProjectVersion
+	49, // 47: nem.UpdateUserProjectVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	0,  // 48: nem.Nem.ListTeams:input_type -> nem.ListTeamsRequest
+	2,  // 49: nem.Nem.CreateTeam:input_type -> nem.CreateTeamRequest
+	3,  // 50: nem.Nem.UpdateTeam:input_type -> nem.UpdateTeamRequest
+	4,  // 51: nem.Nem.ListOrganizations:input_type -> nem.ListOrganizationsRequest
+	6,  // 52: nem.Nem.CreateOrganization:input_type -> nem.CreateOrganizationRequest
+	7,  // 53: nem.Nem.UpdateOrganization:input_type -> nem.UpdateOrganizationRequest
+	8,  // 54: nem.Nem.ListProjects:input_type -> nem.ListProjectsRequest
+	10, // 55: nem.Nem.CreateProject:input_type -> nem.CreateProjectRequest
+	11, // 56: nem.Nem.UpdateProject:input_type -> nem.UpdateProjectRequest
+	12, // 57: nem.Nem.ListExtensions:input_type -> nem.ListExtensionsRequest
+	14, // 58: nem.Nem.CreateExtension:input_type -> nem.CreateExtensionRequest
+	15, // 59: nem.Nem.UpdateExtension:input_type -> nem.UpdateExtensionRequest
+	16, // 60: nem.Nem.ListExtensionVersions:input_type -> nem.ListExtensionVersionsRequest
+	18, // 61: nem.Nem.CreateExtensionVersion:input_type -> nem.CreateExtensionVersionRequest
+	19, // 62: nem.Nem.UpdateExtensionVersion:input_type -> nem.UpdateExtensionVersionRequest
+	20, // 63: nem.Nem.ListUsers:input_type -> nem.ListUsersRequest
+	22, // 64: nem.Nem.CreateUser:input_type -> nem.CreateUserRequest
+	23, // 65: nem.Nem.UpdateUser:input_type -> nem.UpdateUserRequest
+	24, // 66: nem.Nem.ListChangeRequests:input_type -> nem.ListChangeRequestsRequest
+	26, // 67: nem.Nem.CreateChangeRequest:input_type -> nem.CreateChangeRequestRequest
+	27, // 68: nem.Nem.UpdateChangeRequest:input_type -> nem.UpdateChangeRequestRequest
+	28, // 69: nem.Nem.ListProjectVersions:input_type -> nem.ListProjectVersionsRequest
+	30, // 70: nem.Nem.CreateProjectVersion:input_type -> nem.CreateProjectVersionRequest
+	31, // 71: nem.Nem.UpdateProjectVersion:input_type -> nem.UpdateProjectVersionRequest
+	32, // 72: nem.Nem.ListUserTeams:input_type -> nem.ListUserTeamsRequest
+	34, // 73: nem.Nem.CreateUserTeam:input_type -> nem.CreateUserTeamRequest
+	35, // 74: nem.Nem.UpdateUserTeam:input_type -> nem.UpdateUserTeamRequest
+	36, // 75: nem.Nem.ListExtensionExecutions:input_type -> nem.ListExtensionExecutionsRequest
+	38, // 76: nem.Nem.CreateExtensionExecution:input_type -> nem.CreateExtensionExecutionRequest
+	39, // 77: nem.Nem.UpdateExtensionExecution:input_type -> nem.UpdateExtensionExecutionRequest
+	40, // 78: nem.Nem.ListUserConnections:input_type -> nem.ListUserConnectionsRequest
+	42, // 79: nem.Nem.CreateUserConnection:input_type -> nem.CreateUserConnectionRequest
+	43, // 80: nem.Nem.UpdateUserConnection:input_type -> nem.UpdateUserConnectionRequest
+	44, // 81: nem.Nem.ListUserProjectVersions:input_type -> nem.ListUserProjectVersionsRequest
+	46, // 82: nem.Nem.CreateUserProjectVersion:input_type -> nem.CreateUserProjectVersionRequest
+	47, // 83: nem.Nem.UpdateUserProjectVersion:input_type -> nem.UpdateUserProjectVersionRequest
+	1,  // 84: nem.Nem.ListTeams:output_type -> nem.ListTeamsResponse
+	48, // 85: nem.Nem.CreateTeam:output_type -> nem.Team
+	48, // 86: nem.Nem.UpdateTeam:output_type -> nem.Team
+	5,  // 87: nem.Nem.ListOrganizations:output_type -> nem.ListOrganizationsResponse
+	50, // 88: nem.Nem.CreateOrganization:output_type -> nem.Organization
+	50, // 89: nem.Nem.UpdateOrganization:output_type -> nem.Organization
+	9,  // 90: nem.Nem.ListProjects:output_type -> nem.ListProjectsResponse
+	51, // 91: nem.Nem.CreateProject:output_type -> nem.Project
+	51, // 92: nem.Nem.UpdateProject:output_type -> nem.Project
+	13, // 93: nem.Nem.ListExtensions:output_type -> nem.ListExtensionsResponse
+	52, // 94: nem.Nem.CreateExtension:output_type -> nem.Extension
+	52, // 95: nem.Nem.UpdateExtension:output_type -> nem.Extension
+	17, // 96: nem.Nem.ListExtensionVersions:output_type -> nem.ListExtensionVersionsResponse
+	53, // 97: nem.Nem.CreateExtensionVersion:output_type -> nem.ExtensionVersion
+	53, // 98: nem.Nem.UpdateExtensionVersion:output_type -> nem.ExtensionVersion
+	21, // 99: nem.Nem.ListUsers:output_type -> nem.ListUsersResponse
+	54, // 100: nem.Nem.CreateUser:output_type -> nem.User
+	54, // 101: nem.Nem.UpdateUser:output_type -> nem.User
+	25, // 102: nem.Nem.ListChangeRequests:output_type -> nem.ListChangeRequestsResponse
+	55, // 103: nem.Nem.CreateChangeRequest:output_type -> nem.ChangeRequest
+	55, // 104: nem.Nem.UpdateChangeRequest:output_type -> nem.ChangeRequest
+	29, // 105: nem.Nem.ListProjectVersions:output_type -> nem.ListProjectVersionsResponse
+	56, // 106: nem.Nem.CreateProjectVersion:output_type -> nem.ProjectVersion
+	56, // 107: nem.Nem.UpdateProjectVersion:output_type -> nem.ProjectVersion
+	33, // 108: nem.Nem.ListUserTeams:output_type -> nem.ListUserTeamsResponse
+	57, // 109: nem.Nem.CreateUserTeam:output_type -> nem.UserTeam
+	57, // 110: nem.Nem.UpdateUserTeam:output_type -> nem.UserTeam
+	37, // 111: nem.Nem.ListExtensionExecutions:output_type -> nem.ListExtensionExecutionsResponse
+	58, // 112: nem.Nem.CreateExtensionExecution:output_type -> nem.ExtensionExecution
+	58, // 113: nem.Nem.UpdateExtensionExecution:output_type -> nem.ExtensionExecution
+	41, // 114: nem.Nem.ListUserConnections:output_type -> nem.ListUserConnectionsResponse
+	59, // 115: nem.Nem.CreateUserConnection:output_type -> nem.UserConnection
+	59, // 116: nem.Nem.UpdateUserConnection:output_type -> nem.UserConnection
+	45, // 117: nem.Nem.ListUserProjectVersions:output_type -> nem.ListUserProjectVersionsResponse
+	60, // 118: nem.Nem.CreateUserProjectVersion:output_type -> nem.UserProjectVersion
+	60, // 119: nem.Nem.UpdateUserProjectVersion:output_type -> nem.UserProjectVersion
+	84, // [84:120] is the sub-list for method output_type
+	48, // [48:84] is the sub-list for method input_type
+	48, // [48:48] is the sub-list for extension type_name
+	48, // [48:48] is the sub-list for extension extendee
+	0,  // [0:48] is the sub-list for field type_name
 }
 
 func init() { file_service_nem_proto_init() }
@@ -2939,13 +3199,14 @@ func file_service_nem_proto_init() {
 	file_user_team_proto_init()
 	file_extension_execution_proto_init()
 	file_user_connection_proto_init()
+	file_user_project_version_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_service_nem_proto_rawDesc), len(file_service_nem_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   44,
+			NumMessages:   48,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

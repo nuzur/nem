@@ -64,3 +64,9 @@ INSERT INTO user_connection
 (uuid,user_uuid,project_uuid,project_version_uuid,type,type_config,db_schema,executions,status,created_at,updated_at)
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?);
+
+-- name: InsertUserProjectVersion :execresult
+INSERT INTO user_project_version
+(uuid,version,project_version_uuid,user_uuid,data,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+VALUES
+(?,?,?,?,?,?,?,?,?,?);

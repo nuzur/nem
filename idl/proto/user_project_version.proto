@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "github.com/nuzur/nem";
+option java_outer_classname = "UserProjectVersion";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message UserProjectVersion {  
+    string uuid = 1;
+    int64 version = 2;
+    string project_version_uuid = 3;
+    string user_uuid = 4;
+    string data = 5;
+    UserProjectVersionStatus status = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+    string created_by_uuid = 9;
+    string updated_by_uuid = 10;    
+}
+
+enum UserProjectVersionStatus { 
+    USER_PROJECT_VERSION_STATUS_INVALID = 0;
+    USER_PROJECT_VERSION_STATUS_ACTIVE = 1;
+    USER_PROJECT_VERSION_STATUS_DISABLED = 2;
+}

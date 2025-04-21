@@ -65,3 +65,9 @@ SET
 user_uuid = ?, project_uuid = ?, project_version_uuid = ?, type = ?, type_config = ?, db_schema = ?, executions = ?, status = ?, created_at = ?, updated_at = ?
 WHERE uuid = ?;
 
+-- name: UpdateUserProjectVersion :exec
+UPDATE user_project_version
+SET
+version = ?, project_version_uuid = ?, user_uuid = ?, data = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+WHERE uuid = ?;
+

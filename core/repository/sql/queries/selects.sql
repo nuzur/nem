@@ -4579,3 +4579,72 @@ WHERE
 
 
 
+
+
+
+-- name: FetchUserProjectVersionByUUID :many
+SELECT * FROM user_project_version
+WHERE 
+     uuid = ?  
+    ;
+
+
+-- name: FetchUserProjectVersionByUUIDForUpdate :many
+SELECT * FROM user_project_version
+WHERE 
+     uuid = ?      
+FOR UPDATE;
+
+
+-- name: FetchUserProjectVersionByStatus :many
+SELECT * FROM user_project_version
+WHERE 
+     status = ?  
+    LIMIT ?, ?;
+
+
+
+
+
+    
+
+    
+    
+-- name: FetchUserProjectVersionByStatusOrderedByCreatedAtASC :many
+SELECT * FROM user_project_version
+WHERE 
+     status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectVersionByStatusOrderedByCreatedAtDESC :many
+SELECT * FROM user_project_version
+WHERE 
+     status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserProjectVersionByStatusOrderedByUpdatedAtASC :many
+SELECT * FROM user_project_version
+WHERE 
+     status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectVersionByStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM user_project_version
+WHERE 
+     status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+
+
+
+
+
+

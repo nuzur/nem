@@ -18,6 +18,7 @@ sql:
           country_ios2: CountryIos2
           created_at: CreatedAt
           created_by_uuid: CreatedByUUID
+          data: Data
           data_changes: DataChanges
           db_schema: DbSchema
           default_entity: DefaultEntity
