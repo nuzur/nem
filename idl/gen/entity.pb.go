@@ -121,22 +121,23 @@ func (EntityType) EnumDescriptor() ([]byte, []int) {
 }
 
 type Entity struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	Version       int64                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
-	Identifier    string                 `protobuf:"bytes,3,opt,name=identifier,proto3" json:"identifier,omitempty"`
-	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Fields        []*Field               `protobuf:"bytes,5,rep,name=fields,proto3" json:"fields,omitempty"`
-	Type          EntityType             `protobuf:"varint,6,opt,name=type,proto3,enum=nem.EntityType" json:"type,omitempty"`
-	TypeConfig    *EntityTypeConfig      `protobuf:"bytes,7,opt,name=type_config,json=typeConfig,proto3" json:"type_config,omitempty"`
-	Render        *ElementRender         `protobuf:"bytes,8,opt,name=render,proto3" json:"render,omitempty"`
-	Status        EntityStatus           `protobuf:"varint,9,opt,name=status,proto3,enum=nem.EntityStatus" json:"status,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CreatedByUuid string                 `protobuf:"bytes,12,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
-	UpdatedByUuid string                 `protobuf:"bytes,13,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState      `protogen:"open.v1"`
+	Uuid                 string                      `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Version              int64                       `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
+	Identifier           string                      `protobuf:"bytes,3,opt,name=identifier,proto3" json:"identifier,omitempty"`
+	Description          string                      `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Fields               []*Field                    `protobuf:"bytes,5,rep,name=fields,proto3" json:"fields,omitempty"`
+	Type                 EntityType                  `protobuf:"varint,6,opt,name=type,proto3,enum=nem.EntityType" json:"type,omitempty"`
+	TypeConfig           *EntityTypeConfig           `protobuf:"bytes,7,opt,name=type_config,json=typeConfig,proto3" json:"type_config,omitempty"`
+	Render               *ElementRender              `protobuf:"bytes,8,opt,name=render,proto3" json:"render,omitempty"`
+	Status               EntityStatus                `protobuf:"varint,9,opt,name=status,proto3,enum=nem.EntityStatus" json:"status,omitempty"`
+	CreatedAt            *timestamppb.Timestamp      `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            *timestamppb.Timestamp      `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedByUuid        string                      `protobuf:"bytes,12,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
+	UpdatedByUuid        string                      `protobuf:"bytes,13,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	DataManagementConfig *EntityDataManagementConfig `protobuf:"bytes,14,opt,name=data_management_config,json=dataManagementConfig,proto3" json:"data_management_config,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Entity) Reset() {
@@ -260,11 +261,18 @@ func (x *Entity) GetUpdatedByUuid() string {
 	return ""
 }
 
+func (x *Entity) GetDataManagementConfig() *EntityDataManagementConfig {
+	if x != nil {
+		return x.DataManagementConfig
+	}
+	return nil
+}
+
 var File_entity_proto protoreflect.FileDescriptor
 
 const file_entity_proto_rawDesc = "" +
 	"\n" +
-	"\fentity.proto\x12\x03nem\x1a\x14element_render.proto\x1a\x18entity_type_config.proto\x1a\vfield.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x96\x04\n" +
+	"\fentity.proto\x12\x03nem\x1a\x14element_render.proto\x1a#entity_data_management_config.proto\x1a\x18entity_type_config.proto\x1a\vfield.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xed\x04\n" +
 	"\x06Entity\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x1e\n" +
@@ -285,7 +293,8 @@ const file_entity_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
 	"\x0fcreated_by_uuid\x18\f \x01(\tR\rcreatedByUuid\x12&\n" +
-	"\x0fupdated_by_uuid\x18\r \x01(\tR\rupdatedByUuid*_\n" +
+	"\x0fupdated_by_uuid\x18\r \x01(\tR\rupdatedByUuid\x12U\n" +
+	"\x16data_management_config\x18\x0e \x01(\v2\x1f.nem.EntityDataManagementConfigR\x14dataManagementConfig*_\n" +
 	"\fEntityStatus\x12\x19\n" +
 	"\x15ENTITY_STATUS_INVALID\x10\x00\x12\x18\n" +
 	"\x14ENTITY_STATUS_ACTIVE\x10\x01\x12\x1a\n" +
@@ -312,13 +321,14 @@ func file_entity_proto_rawDescGZIP() []byte {
 var file_entity_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_entity_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_entity_proto_goTypes = []any{
-	(EntityStatus)(0),             // 0: nem.EntityStatus
-	(EntityType)(0),               // 1: nem.EntityType
-	(*Entity)(nil),                // 2: nem.Entity
-	(*Field)(nil),                 // 3: nem.Field
-	(*EntityTypeConfig)(nil),      // 4: nem.EntityTypeConfig
-	(*ElementRender)(nil),         // 5: nem.ElementRender
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(EntityStatus)(0),                  // 0: nem.EntityStatus
+	(EntityType)(0),                    // 1: nem.EntityType
+	(*Entity)(nil),                     // 2: nem.Entity
+	(*Field)(nil),                      // 3: nem.Field
+	(*EntityTypeConfig)(nil),           // 4: nem.EntityTypeConfig
+	(*ElementRender)(nil),              // 5: nem.ElementRender
+	(*timestamppb.Timestamp)(nil),      // 6: google.protobuf.Timestamp
+	(*EntityDataManagementConfig)(nil), // 7: nem.EntityDataManagementConfig
 }
 var file_entity_proto_depIdxs = []int32{
 	3, // 0: nem.Entity.fields:type_name -> nem.Field
@@ -328,11 +338,12 @@ var file_entity_proto_depIdxs = []int32{
 	0, // 4: nem.Entity.status:type_name -> nem.EntityStatus
 	6, // 5: nem.Entity.created_at:type_name -> google.protobuf.Timestamp
 	6, // 6: nem.Entity.updated_at:type_name -> google.protobuf.Timestamp
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	7, // 7: nem.Entity.data_management_config:type_name -> nem.EntityDataManagementConfig
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_entity_proto_init() }
@@ -341,6 +352,7 @@ func file_entity_proto_init() {
 		return
 	}
 	file_element_render_proto_init()
+	file_entity_data_management_config_proto_init()
 	file_entity_type_config_proto_init()
 	file_field_proto_init()
 	type x struct{}

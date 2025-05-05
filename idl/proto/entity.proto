@@ -9,6 +9,7 @@ package nem;
 
 
 import "element_render.proto";
+import "entity_data_management_config.proto";
 import "entity_type_config.proto";
 import "field.proto";
 import "google/protobuf/timestamp.proto";
@@ -26,7 +27,8 @@ message Entity {
     google.protobuf.Timestamp created_at = 10;
     google.protobuf.Timestamp updated_at = 11;
     string created_by_uuid = 12;
-    string updated_by_uuid = 13;    
+    string updated_by_uuid = 13;
+    EntityDataManagementConfig data_management_config = 14;    
 }
 
 enum EntityStatus { 

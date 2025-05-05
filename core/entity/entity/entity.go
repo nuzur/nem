@@ -5,6 +5,7 @@ import (
 
 	"github.com/gofrs/uuid"
 	"github.com/nuzur/nem/core/entity/element_render"
+	"github.com/nuzur/nem/core/entity/entity_data_management_config"
 	"github.com/nuzur/nem/core/entity/entity_type_config"
 	"github.com/nuzur/nem/core/entity/field"
 	"time"
@@ -19,19 +20,20 @@ import (
 )
 
 type Entity struct {
-	UUID          uuid.UUID                           `json:"uuid"`
-	Version       int64                               `json:"version"`
-	Identifier    string                              `json:"identifier"`
-	Description   *string                             `json:"description"`
-	Fields        []field.Field                       `json:"fields"`
-	Type          Type                                `json:"type"`
-	TypeConfig    entity_type_config.EntityTypeConfig `json:"type_config"`
-	Render        element_render.ElementRender        `json:"render"`
-	Status        Status                              `json:"status"`
-	CreatedAt     time.Time                           `json:"created_at"`
-	UpdatedAt     time.Time                           `json:"updated_at"`
-	CreatedByUUID uuid.UUID                           `json:"created_by_uuid"`
-	UpdatedByUUID uuid.UUID                           `json:"updated_by_uuid"`
+	UUID                 uuid.UUID                                                `json:"uuid"`
+	Version              int64                                                    `json:"version"`
+	Identifier           string                                                   `json:"identifier"`
+	Description          *string                                                  `json:"description"`
+	Fields               []field.Field                                            `json:"fields"`
+	Type                 Type                                                     `json:"type"`
+	TypeConfig           entity_type_config.EntityTypeConfig                      `json:"type_config"`
+	Render               element_render.ElementRender                             `json:"render"`
+	Status               Status                                                   `json:"status"`
+	CreatedAt            time.Time                                                `json:"created_at"`
+	UpdatedAt            time.Time                                                `json:"updated_at"`
+	CreatedByUUID        uuid.UUID                                                `json:"created_by_uuid"`
+	UpdatedByUUID        uuid.UUID                                                `json:"updated_by_uuid"`
+	DataManagementConfig entity_data_management_config.EntityDataManagementConfig `json:"data_management_config"`
 }
 
 func (e Entity) String() string {
@@ -59,6 +61,7 @@ func (e Entity) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["updated_at"] = types.TimestampFieldType
 	res["created_by_uuid"] = types.UUIDFieldType
 	res["updated_by_uuid"] = types.UUIDFieldType
+	res["data_management_config"] = types.SingleDependantEntityFieldType
 	return res
 }
 
@@ -118,19 +121,20 @@ func EntitySliceToJSON(e []Entity) json.RawMessage {
 func NewEntityWithRandomValues() Entity {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return Entity{
-		UUID:          randomvalues.GetRandomUUIDValue(),
-		Version:       randomvalues.GetRandomIntValue(),
-		Identifier:    randomvalues.GetRandomStringValue(),
-		Description:   randomvalues.GetRandomStringValuePtr(),
-		Fields:        field.NewFieldSliceWithRandomValues(rand.Intn(10)),
-		Type:          randomvalues.GetRandomOptionValue[Type](2),
-		TypeConfig:    entity_type_config.NewEntityTypeConfigWithRandomValues(),
-		Render:        element_render.NewElementRenderWithRandomValues(),
-		Status:        randomvalues.GetRandomOptionValue[Status](2),
-		CreatedAt:     randomvalues.GetRandomTimeValue(),
-		UpdatedAt:     randomvalues.GetRandomTimeValue(),
-		CreatedByUUID: randomvalues.GetRandomUUIDValue(),
-		UpdatedByUUID: randomvalues.GetRandomUUIDValue(),
+		UUID:                 randomvalues.GetRandomUUIDValue(),
+		Version:              randomvalues.GetRandomIntValue(),
+		Identifier:           randomvalues.GetRandomStringValue(),
+		Description:          randomvalues.GetRandomStringValuePtr(),
+		Fields:               field.NewFieldSliceWithRandomValues(rand.Intn(10)),
+		Type:                 randomvalues.GetRandomOptionValue[Type](2),
+		TypeConfig:           entity_type_config.NewEntityTypeConfigWithRandomValues(),
+		Render:               element_render.NewElementRenderWithRandomValues(),
+		Status:               randomvalues.GetRandomOptionValue[Status](2),
+		CreatedAt:            randomvalues.GetRandomTimeValue(),
+		UpdatedAt:            randomvalues.GetRandomTimeValue(),
+		CreatedByUUID:        randomvalues.GetRandomUUIDValue(),
+		UpdatedByUUID:        randomvalues.GetRandomUUIDValue(),
+		DataManagementConfig: entity_data_management_config.NewEntityDataManagementConfigWithRandomValues(),
 	}
 }
 
