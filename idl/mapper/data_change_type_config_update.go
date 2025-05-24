@@ -11,12 +11,10 @@ import (
 
 func DataChangeTypeConfigUpdateToProto(e main_entity.DataChangeTypeConfigUpdate) *pb.DataChangeTypeConfigUpdate {
 	return &pb.DataChangeTypeConfigUpdate{
-		EntityUuid:   e.EntityUUID.String(),
-		FieldUuid:    e.FieldUUID.String(),
-		CurrentValue: e.CurrentValue,
-		NewValue:     e.NewValue,
-		Keys:         DataChangeFieldValueSliceToProto(e.Keys),
-		CreatedAt:    timestamppb.New(e.CreatedAt),
+		EntityUuid: e.EntityUUID.String(),
+		Fields:     DataChangeTypeConfigUpdateFieldSliceToProto(e.Fields),
+		Keys:       DataChangeFieldValueSliceToProto(e.Keys),
+		CreatedAt:  timestamppb.New(e.CreatedAt),
 	}
 }
 
@@ -33,12 +31,10 @@ func DataChangeTypeConfigUpdateFromProto(m *pb.DataChangeTypeConfigUpdate) main_
 		return main_entity.DataChangeTypeConfigUpdate{}
 	}
 	return main_entity.DataChangeTypeConfigUpdate{
-		EntityUUID:   uuid.FromStringOrNil(m.GetEntityUuid()),
-		FieldUUID:    uuid.FromStringOrNil(m.GetFieldUuid()),
-		CurrentValue: m.GetCurrentValue(),
-		NewValue:     m.GetNewValue(),
-		Keys:         DataChangeFieldValueSliceFromProto(m.GetKeys()),
-		CreatedAt:    m.GetCreatedAt().AsTime(),
+		EntityUUID: uuid.FromStringOrNil(m.GetEntityUuid()),
+		Fields:     DataChangeTypeConfigUpdateFieldSliceFromProto(m.GetFields()),
+		Keys:       DataChangeFieldValueSliceFromProto(m.GetKeys()),
+		CreatedAt:  m.GetCreatedAt().AsTime(),
 	}
 }
 

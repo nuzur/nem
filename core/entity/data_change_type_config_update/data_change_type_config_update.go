@@ -5,6 +5,7 @@ import (
 
 	"github.com/gofrs/uuid"
 	"github.com/nuzur/nem/core/entity/data_change_field_value"
+	"github.com/nuzur/nem/core/entity/data_change_type_config_update_field"
 	"time"
 
 	"fmt"
@@ -17,12 +18,10 @@ import (
 )
 
 type DataChangeTypeConfigUpdate struct {
-	EntityUUID   uuid.UUID                                      `json:"entity_uuid"`
-	FieldUUID    uuid.UUID                                      `json:"field_uuid"`
-	CurrentValue string                                         `json:"current_value"`
-	NewValue     string                                         `json:"new_value"`
-	Keys         []data_change_field_value.DataChangeFieldValue `json:"keys"`
-	CreatedAt    time.Time                                      `json:"created_at"`
+	EntityUUID uuid.UUID                                                              `json:"entity_uuid"`
+	Fields     []data_change_type_config_update_field.DataChangeTypeConfigUpdateField `json:"fields"`
+	Keys       []data_change_field_value.DataChangeFieldValue                         `json:"keys"`
+	CreatedAt  time.Time                                                              `json:"created_at"`
 }
 
 func (e DataChangeTypeConfigUpdate) String() string {
@@ -38,9 +37,7 @@ func (e DataChangeTypeConfigUpdate) FieldIdentfierToTypeMap() map[string]types.F
 	res := make(map[string]types.FieldType)
 
 	res["entity_uuid"] = types.UUIDFieldType
-	res["field_uuid"] = types.UUIDFieldType
-	res["current_value"] = types.StringFieldType
-	res["new_value"] = types.StringFieldType
+	res["fields"] = types.MultiDependantEntityFieldType
 	res["keys"] = types.MultiDependantEntityFieldType
 	res["created_at"] = types.TimestampFieldType
 	return res
@@ -102,12 +99,10 @@ func DataChangeTypeConfigUpdateSliceToJSON(e []DataChangeTypeConfigUpdate) json.
 func NewDataChangeTypeConfigUpdateWithRandomValues() DataChangeTypeConfigUpdate {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return DataChangeTypeConfigUpdate{
-		EntityUUID:   randomvalues.GetRandomUUIDValue(),
-		FieldUUID:    randomvalues.GetRandomUUIDValue(),
-		CurrentValue: randomvalues.GetRandomStringValue(),
-		NewValue:     randomvalues.GetRandomStringValue(),
-		Keys:         data_change_field_value.NewDataChangeFieldValueSliceWithRandomValues(rand.Intn(10)),
-		CreatedAt:    randomvalues.GetRandomTimeValue(),
+		EntityUUID: randomvalues.GetRandomUUIDValue(),
+		Fields:     data_change_type_config_update_field.NewDataChangeTypeConfigUpdateFieldSliceWithRandomValues(rand.Intn(10)),
+		Keys:       data_change_field_value.NewDataChangeFieldValueSliceWithRandomValues(rand.Intn(10)),
+		CreatedAt:  randomvalues.GetRandomTimeValue(),
 	}
 }
 

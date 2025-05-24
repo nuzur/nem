@@ -23,13 +23,11 @@ const (
 )
 
 type DataChangeTypeConfigUpdate struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	EntityUuid    string                  `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	FieldUuid     string                  `protobuf:"bytes,2,opt,name=field_uuid,json=fieldUuid,proto3" json:"field_uuid,omitempty"`
-	CurrentValue  string                  `protobuf:"bytes,3,opt,name=current_value,json=currentValue,proto3" json:"current_value,omitempty"`
-	NewValue      string                  `protobuf:"bytes,4,opt,name=new_value,json=newValue,proto3" json:"new_value,omitempty"`
-	Keys          []*DataChangeFieldValue `protobuf:"bytes,5,rep,name=keys,proto3" json:"keys,omitempty"`
-	CreatedAt     *timestamppb.Timestamp  `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	state         protoimpl.MessageState             `protogen:"open.v1"`
+	EntityUuid    string                             `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
+	Fields        []*DataChangeTypeConfigUpdateField `protobuf:"bytes,2,rep,name=fields,proto3" json:"fields,omitempty"`
+	Keys          []*DataChangeFieldValue            `protobuf:"bytes,3,rep,name=keys,proto3" json:"keys,omitempty"`
+	CreatedAt     *timestamppb.Timestamp             `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -71,25 +69,11 @@ func (x *DataChangeTypeConfigUpdate) GetEntityUuid() string {
 	return ""
 }
 
-func (x *DataChangeTypeConfigUpdate) GetFieldUuid() string {
+func (x *DataChangeTypeConfigUpdate) GetFields() []*DataChangeTypeConfigUpdateField {
 	if x != nil {
-		return x.FieldUuid
+		return x.Fields
 	}
-	return ""
-}
-
-func (x *DataChangeTypeConfigUpdate) GetCurrentValue() string {
-	if x != nil {
-		return x.CurrentValue
-	}
-	return ""
-}
-
-func (x *DataChangeTypeConfigUpdate) GetNewValue() string {
-	if x != nil {
-		return x.NewValue
-	}
-	return ""
+	return nil
 }
 
 func (x *DataChangeTypeConfigUpdate) GetKeys() []*DataChangeFieldValue {
@@ -110,17 +94,14 @@ var File_data_change_type_config_update_proto protoreflect.FileDescriptor
 
 const file_data_change_type_config_update_proto_rawDesc = "" +
 	"\n" +
-	"$data_change_type_config_update.proto\x12\x03nem\x1a\x1ddata_change_field_value.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x88\x02\n" +
+	"$data_change_type_config_update.proto\x12\x03nem\x1a\x1ddata_change_field_value.proto\x1a*data_change_type_config_update_field.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe5\x01\n" +
 	"\x1aDataChangeTypeConfigUpdate\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
-	"entityUuid\x12\x1d\n" +
+	"entityUuid\x12<\n" +
+	"\x06fields\x18\x02 \x03(\v2$.nem.DataChangeTypeConfigUpdateFieldR\x06fields\x12-\n" +
+	"\x04keys\x18\x03 \x03(\v2\x19.nem.DataChangeFieldValueR\x04keys\x129\n" +
 	"\n" +
-	"field_uuid\x18\x02 \x01(\tR\tfieldUuid\x12#\n" +
-	"\rcurrent_value\x18\x03 \x01(\tR\fcurrentValue\x12\x1b\n" +
-	"\tnew_value\x18\x04 \x01(\tR\bnewValue\x12-\n" +
-	"\x04keys\x18\x05 \x03(\v2\x19.nem.DataChangeFieldValueR\x04keys\x129\n" +
-	"\n" +
-	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtBA\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtBA\n" +
 	"\x14github.com/nuzur/nemB\x1aDataChangeTypeConfigUpdateP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -137,18 +118,20 @@ func file_data_change_type_config_update_proto_rawDescGZIP() []byte {
 
 var file_data_change_type_config_update_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_data_change_type_config_update_proto_goTypes = []any{
-	(*DataChangeTypeConfigUpdate)(nil), // 0: nem.DataChangeTypeConfigUpdate
-	(*DataChangeFieldValue)(nil),       // 1: nem.DataChangeFieldValue
-	(*timestamppb.Timestamp)(nil),      // 2: google.protobuf.Timestamp
+	(*DataChangeTypeConfigUpdate)(nil),      // 0: nem.DataChangeTypeConfigUpdate
+	(*DataChangeTypeConfigUpdateField)(nil), // 1: nem.DataChangeTypeConfigUpdateField
+	(*DataChangeFieldValue)(nil),            // 2: nem.DataChangeFieldValue
+	(*timestamppb.Timestamp)(nil),           // 3: google.protobuf.Timestamp
 }
 var file_data_change_type_config_update_proto_depIdxs = []int32{
-	1, // 0: nem.DataChangeTypeConfigUpdate.keys:type_name -> nem.DataChangeFieldValue
-	2, // 1: nem.DataChangeTypeConfigUpdate.created_at:type_name -> google.protobuf.Timestamp
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	1, // 0: nem.DataChangeTypeConfigUpdate.fields:type_name -> nem.DataChangeTypeConfigUpdateField
+	2, // 1: nem.DataChangeTypeConfigUpdate.keys:type_name -> nem.DataChangeFieldValue
+	3, // 2: nem.DataChangeTypeConfigUpdate.created_at:type_name -> google.protobuf.Timestamp
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_data_change_type_config_update_proto_init() }
@@ -157,6 +140,7 @@ func file_data_change_type_config_update_proto_init() {
 		return
 	}
 	file_data_change_field_value_proto_init()
+	file_data_change_type_config_update_field_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

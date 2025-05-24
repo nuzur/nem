@@ -9,13 +9,12 @@ package nem;
 
 
 import "data_change_field_value.proto";
+import "data_change_type_config_update_field.proto";
 import "google/protobuf/timestamp.proto";
 
 message DataChangeTypeConfigUpdate {  
     string entity_uuid = 1;
-    string field_uuid = 2;
-    string current_value = 3;
-    string new_value = 4;
-    repeated DataChangeFieldValue keys = 5;
-    google.protobuf.Timestamp created_at = 6;    
+    repeated DataChangeTypeConfigUpdateField fields = 2;
+    repeated DataChangeFieldValue keys = 3;
+    google.protobuf.Timestamp created_at = 4;    
 }
