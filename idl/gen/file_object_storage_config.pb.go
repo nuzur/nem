@@ -24,6 +24,7 @@ const (
 type FileObjectStorageConfig struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	ObjectStoreUuid string                 `protobuf:"bytes,1,opt,name=object_store_uuid,json=objectStoreUuid,proto3" json:"object_store_uuid,omitempty"`
+	Path            string                 `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -65,13 +66,21 @@ func (x *FileObjectStorageConfig) GetObjectStoreUuid() string {
 	return ""
 }
 
+func (x *FileObjectStorageConfig) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
 var File_file_object_storage_config_proto protoreflect.FileDescriptor
 
 const file_file_object_storage_config_proto_rawDesc = "" +
 	"\n" +
-	" file_object_storage_config.proto\x12\x03nem\"E\n" +
+	" file_object_storage_config.proto\x12\x03nem\"Y\n" +
 	"\x17FileObjectStorageConfig\x12*\n" +
-	"\x11object_store_uuid\x18\x01 \x01(\tR\x0fobjectStoreUuidB>\n" +
+	"\x11object_store_uuid\x18\x01 \x01(\tR\x0fobjectStoreUuid\x12\x12\n" +
+	"\x04path\x18\x02 \x01(\tR\x04pathB>\n" +
 	"\x14github.com/nuzur/nemB\x17FileObjectStorageConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

@@ -10,5 +10,6 @@ package nem;
 
 
 message FileObjectStorageConfig {  
-    string object_store_uuid = 1;    
+    string object_store_uuid = 1;
+    string path = 2;    
 }

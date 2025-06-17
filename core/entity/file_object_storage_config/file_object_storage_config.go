@@ -18,6 +18,7 @@ import (
 
 type FileObjectStorageConfig struct {
 	ObjectStoreUUID uuid.UUID `json:"object_store_uuid"`
+	Path            *string   `json:"path"`
 }
 
 func (e FileObjectStorageConfig) String() string {
@@ -33,6 +34,7 @@ func (e FileObjectStorageConfig) FieldIdentfierToTypeMap() map[string]types.Fiel
 	res := make(map[string]types.FieldType)
 
 	res["object_store_uuid"] = types.UUIDFieldType
+	res["path"] = types.StringFieldType
 	return res
 }
 
@@ -93,6 +95,7 @@ func NewFileObjectStorageConfigWithRandomValues() FileObjectStorageConfig {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return FileObjectStorageConfig{
 		ObjectStoreUUID: randomvalues.GetRandomUUIDValue(),
+		Path:            randomvalues.GetRandomStringValuePtr(),
 	}
 }
 

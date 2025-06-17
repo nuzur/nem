@@ -14,7 +14,7 @@ require (
 	github.com/mklfarha/sarama-fx v0.0.0-20240712204309-870a2cc36bbf
 	github.com/skeema/skeema v1.12.2
 	github.com/sqlc-dev/sqlc v1.29.0
-	github.com/urfave/cli v1.22.16
+	github.com/urfave/cli v1.22.17
 	go.einride.tech/aip v0.68.1
 	go.uber.org/config v1.4.0
 	go.uber.org/fx v1.23.0
@@ -36,7 +36,7 @@ require (
 	github.com/agnivade/levenshtein v1.2.0 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.6 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.7 // indirect
 	github.com/cubicdaiya/gonp v1.0.4 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect

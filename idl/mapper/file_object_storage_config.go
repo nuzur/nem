@@ -10,6 +10,7 @@ import (
 func FileObjectStorageConfigToProto(e main_entity.FileObjectStorageConfig) *pb.FileObjectStorageConfig {
 	return &pb.FileObjectStorageConfig{
 		ObjectStoreUuid: e.ObjectStoreUUID.String(),
+		Path:            StringPtrToString(e.Path),
 	}
 }
 
@@ -27,6 +28,7 @@ func FileObjectStorageConfigFromProto(m *pb.FileObjectStorageConfig) main_entity
 	}
 	return main_entity.FileObjectStorageConfig{
 		ObjectStoreUUID: uuid.FromStringOrNil(m.GetObjectStoreUuid()),
+		Path:            &m.Path,
 	}
 }
 
