@@ -154,6 +154,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Proj
 
 			TeamUUID: req.Project.TeamUUID.String(),
 
+			AccessType: req.Project.AccessType.ToInt64(),
+
 			ProjectExtensions: project_extension.ProjectExtensionSliceToJSON(req.Project.ProjectExtensions),
 
 			Status: req.Project.Status.ToInt64(),
@@ -185,6 +187,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Proj
 	res.OwnerUUID = req.Project.OwnerUUID.String()
 
 	res.TeamUUID = req.Project.TeamUUID.String()
+
+	res.AccessType = req.Project.AccessType.ToInt64()
 
 	res.ProjectExtensions = project_extension.ProjectExtensionSliceToJSON(req.Project.ProjectExtensions)
 

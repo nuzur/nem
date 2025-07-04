@@ -16,16 +16,18 @@ import (
 )
 
 type UserTeam struct {
-	UUID          uuid.UUID `json:"uuid"`
-	UserUUID      uuid.UUID `json:"user_uuid"`
-	UserEmail     *string   `json:"user_email"`
-	TeamUUID      uuid.UUID `json:"team_uuid"`
-	Roles         []Role    `json:"roles"`
-	Status        Status    `json:"status"`
-	CreatedAt     time.Time `json:"created_at"`
-	UpdatedAt     time.Time `json:"updated_at"`
-	CreatedByUUID uuid.UUID `json:"created_by_uuid"`
-	UpdatedByUUID uuid.UUID `json:"updated_by_uuid"`
+	UUID                    uuid.UUID `json:"uuid"`
+	UserUUID                uuid.UUID `json:"user_uuid"`
+	UserEmail               *string   `json:"user_email"`
+	TeamUUID                uuid.UUID `json:"team_uuid"`
+	Role                    Role      `json:"role"`
+	ReviewRequiredStructure bool      `json:"review_required_structure"`
+	ReviewRequiredData      bool      `json:"review_required_data"`
+	Status                  Status    `json:"status"`
+	CreatedAt               time.Time `json:"created_at"`
+	UpdatedAt               time.Time `json:"updated_at"`
+	CreatedByUUID           uuid.UUID `json:"created_by_uuid"`
+	UpdatedByUUID           uuid.UUID `json:"updated_by_uuid"`
 }
 
 func (e UserTeam) String() string {
@@ -52,7 +54,9 @@ func (e UserTeam) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["user_uuid"] = types.UUIDFieldType
 	res["user_email"] = types.StringFieldType
 	res["team_uuid"] = types.UUIDFieldType
-	res["roles"] = types.MultiEnumFieldType
+	res["role"] = types.SingleEnumFieldType
+	res["review_required_structure"] = types.BooleanFieldType
+	res["review_required_data"] = types.BooleanFieldType
 	res["status"] = types.SingleEnumFieldType
 	res["created_at"] = types.TimestampFieldType
 	res["updated_at"] = types.TimestampFieldType
@@ -123,16 +127,18 @@ func UserTeamSliceToJSON(e []UserTeam) json.RawMessage {
 func NewUserTeamWithRandomValues() UserTeam {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return UserTeam{
-		UUID:          randomvalues.GetRandomUUIDValue(),
-		UserUUID:      randomvalues.GetRandomUUIDValue(),
-		UserEmail:     randomvalues.GetRandomStringValuePtr(),
-		TeamUUID:      randomvalues.GetRandomUUIDValue(),
-		Roles:         randomvalues.GetRandomOptionsValues[Role](5),
-		Status:        randomvalues.GetRandomOptionValue[Status](3),
-		CreatedAt:     randomvalues.GetRandomTimeValue(),
-		UpdatedAt:     randomvalues.GetRandomTimeValue(),
-		CreatedByUUID: randomvalues.GetRandomUUIDValue(),
-		UpdatedByUUID: randomvalues.GetRandomUUIDValue(),
+		UUID:                    randomvalues.GetRandomUUIDValue(),
+		UserUUID:                randomvalues.GetRandomUUIDValue(),
+		UserEmail:               randomvalues.GetRandomStringValuePtr(),
+		TeamUUID:                randomvalues.GetRandomUUIDValue(),
+		Role:                    randomvalues.GetRandomOptionValue[Role](5),
+		ReviewRequiredStructure: randomvalues.GetRandomBoolValue(),
+		ReviewRequiredData:      randomvalues.GetRandomBoolValue(),
+		Status:                  randomvalues.GetRandomOptionValue[Status](3),
+		CreatedAt:               randomvalues.GetRandomTimeValue(),
+		UpdatedAt:               randomvalues.GetRandomTimeValue(),
+		CreatedByUUID:           randomvalues.GetRandomUUIDValue(),
+		UpdatedByUUID:           randomvalues.GetRandomUUIDValue(),
 	}
 }
 

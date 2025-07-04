@@ -8,8 +8,6 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 	"github.com/nuzur/nem/monitoring"
 
-	main_entity "github.com/nuzur/nem/core/entity/user_team"
-
 	"github.com/nuzur/nem/custom"
 
 	"github.com/nuzur/nem/core/entity/mapper"
@@ -128,7 +126,11 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.User
 
 			TeamUUID: req.UserTeam.TeamUUID.String(),
 
-			Roles: main_entity.RoleSliceToJSON(req.UserTeam.Roles),
+			Role: req.UserTeam.Role.ToInt64(),
+
+			ReviewRequiredStructure: req.UserTeam.ReviewRequiredStructure,
+
+			ReviewRequiredData: req.UserTeam.ReviewRequiredData,
 
 			Status: req.UserTeam.Status.ToInt64(),
 
@@ -152,7 +154,11 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.User
 
 	res.TeamUUID = req.UserTeam.TeamUUID.String()
 
-	res.Roles = main_entity.RoleSliceToJSON(req.UserTeam.Roles)
+	res.Role = req.UserTeam.Role.ToInt64()
+
+	res.ReviewRequiredStructure = req.UserTeam.ReviewRequiredStructure
+
+	res.ReviewRequiredData = req.UserTeam.ReviewRequiredData
 
 	res.Status = req.UserTeam.Status.ToInt64()
 

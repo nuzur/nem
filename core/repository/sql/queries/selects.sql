@@ -4648,3 +4648,72 @@ WHERE
 
 
 
+
+
+
+-- name: FetchUserProjectByUUID :many
+SELECT * FROM user_project
+WHERE 
+     uuid = ?  
+    ;
+
+
+-- name: FetchUserProjectByUUIDForUpdate :many
+SELECT * FROM user_project
+WHERE 
+     uuid = ?      
+FOR UPDATE;
+
+
+-- name: FetchUserProjectByStatus :many
+SELECT * FROM user_project
+WHERE 
+     status = ?  
+    LIMIT ?, ?;
+
+
+
+
+
+    
+
+    
+    
+-- name: FetchUserProjectByStatusOrderedByCreatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByStatusOrderedByCreatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserProjectByStatusOrderedByUpdatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+
+
+
+
+
+

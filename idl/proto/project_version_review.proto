@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "github.com/nuzur/nem";
+option java_outer_classname = "ProjectVersionReview";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message ProjectVersionReview {  
+    string uuid = 1;
+    string user_uuid = 2;
+    string comment = 3;
+    ProjectVersionReviewResponse response = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;    
+}
+
+enum ProjectVersionReviewResponse { 
+    PROJECT_VERSION_REVIEW_RESPONSE_INVALID = 0;
+    PROJECT_VERSION_REVIEW_RESPONSE_APPROVED = 1;
+    PROJECT_VERSION_REVIEW_RESPONSE_REJECTED = 2;
+}

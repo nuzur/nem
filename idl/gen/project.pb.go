@@ -22,6 +22,55 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ProjectAccessType int32
+
+const (
+	ProjectAccessType_PROJECT_ACCESS_TYPE_INVALID ProjectAccessType = 0
+	ProjectAccessType_PROJECT_ACCESS_TYPE_INHERIT ProjectAccessType = 1
+	ProjectAccessType_PROJECT_ACCESS_TYPE_CUSTOM  ProjectAccessType = 2
+)
+
+// Enum value maps for ProjectAccessType.
+var (
+	ProjectAccessType_name = map[int32]string{
+		0: "PROJECT_ACCESS_TYPE_INVALID",
+		1: "PROJECT_ACCESS_TYPE_INHERIT",
+		2: "PROJECT_ACCESS_TYPE_CUSTOM",
+	}
+	ProjectAccessType_value = map[string]int32{
+		"PROJECT_ACCESS_TYPE_INVALID": 0,
+		"PROJECT_ACCESS_TYPE_INHERIT": 1,
+		"PROJECT_ACCESS_TYPE_CUSTOM":  2,
+	}
+)
+
+func (x ProjectAccessType) Enum() *ProjectAccessType {
+	p := new(ProjectAccessType)
+	*p = x
+	return p
+}
+
+func (x ProjectAccessType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ProjectAccessType) Descriptor() protoreflect.EnumDescriptor {
+	return file_project_proto_enumTypes[0].Descriptor()
+}
+
+func (ProjectAccessType) Type() protoreflect.EnumType {
+	return &file_project_proto_enumTypes[0]
+}
+
+func (x ProjectAccessType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ProjectAccessType.Descriptor instead.
+func (ProjectAccessType) EnumDescriptor() ([]byte, []int) {
+	return file_project_proto_rawDescGZIP(), []int{0}
+}
+
 type ProjectStatus int32
 
 const (
@@ -55,11 +104,11 @@ func (x ProjectStatus) String() string {
 }
 
 func (ProjectStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_project_proto_enumTypes[0].Descriptor()
+	return file_project_proto_enumTypes[1].Descriptor()
 }
 
 func (ProjectStatus) Type() protoreflect.EnumType {
-	return &file_project_proto_enumTypes[0]
+	return &file_project_proto_enumTypes[1]
 }
 
 func (x ProjectStatus) Number() protoreflect.EnumNumber {
@@ -68,7 +117,7 @@ func (x ProjectStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ProjectStatus.Descriptor instead.
 func (ProjectStatus) EnumDescriptor() ([]byte, []int) {
-	return file_project_proto_rawDescGZIP(), []int{0}
+	return file_project_proto_rawDescGZIP(), []int{1}
 }
 
 type Project struct {
@@ -81,12 +130,13 @@ type Project struct {
 	Url               string                 `protobuf:"bytes,6,opt,name=url,proto3" json:"url,omitempty"`
 	OwnerUuid         string                 `protobuf:"bytes,7,opt,name=owner_uuid,json=ownerUuid,proto3" json:"owner_uuid,omitempty"`
 	TeamUuid          string                 `protobuf:"bytes,8,opt,name=team_uuid,json=teamUuid,proto3" json:"team_uuid,omitempty"`
-	ProjectExtensions []*ProjectExtension    `protobuf:"bytes,9,rep,name=project_extensions,json=projectExtensions,proto3" json:"project_extensions,omitempty"`
-	Status            ProjectStatus          `protobuf:"varint,10,opt,name=status,proto3,enum=nem.ProjectStatus" json:"status,omitempty"`
-	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CreatedByUuid     string                 `protobuf:"bytes,13,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
-	UpdatedByUuid     string                 `protobuf:"bytes,14,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	AccessType        ProjectAccessType      `protobuf:"varint,9,opt,name=access_type,json=accessType,proto3,enum=nem.ProjectAccessType" json:"access_type,omitempty"`
+	ProjectExtensions []*ProjectExtension    `protobuf:"bytes,10,rep,name=project_extensions,json=projectExtensions,proto3" json:"project_extensions,omitempty"`
+	Status            ProjectStatus          `protobuf:"varint,11,opt,name=status,proto3,enum=nem.ProjectStatus" json:"status,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedByUuid     string                 `protobuf:"bytes,14,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
+	UpdatedByUuid     string                 `protobuf:"bytes,15,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -177,6 +227,13 @@ func (x *Project) GetTeamUuid() string {
 	return ""
 }
 
+func (x *Project) GetAccessType() ProjectAccessType {
+	if x != nil {
+		return x.AccessType
+	}
+	return ProjectAccessType_PROJECT_ACCESS_TYPE_INVALID
+}
+
 func (x *Project) GetProjectExtensions() []*ProjectExtension {
 	if x != nil {
 		return x.ProjectExtensions
@@ -223,7 +280,7 @@ var File_project_proto protoreflect.FileDescriptor
 
 const file_project_proto_rawDesc = "" +
 	"\n" +
-	"\rproject.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17project_extension.proto\"\x87\x04\n" +
+	"\rproject.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17project_extension.proto\"\xc0\x04\n" +
 	"\aProject\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x12\n" +
@@ -233,16 +290,22 @@ const file_project_proto_rawDesc = "" +
 	"\x03url\x18\x06 \x01(\tR\x03url\x12\x1d\n" +
 	"\n" +
 	"owner_uuid\x18\a \x01(\tR\townerUuid\x12\x1b\n" +
-	"\tteam_uuid\x18\b \x01(\tR\bteamUuid\x12D\n" +
-	"\x12project_extensions\x18\t \x03(\v2\x15.nem.ProjectExtensionR\x11projectExtensions\x12*\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2\x12.nem.ProjectStatusR\x06status\x129\n" +
+	"\tteam_uuid\x18\b \x01(\tR\bteamUuid\x127\n" +
+	"\vaccess_type\x18\t \x01(\x0e2\x16.nem.ProjectAccessTypeR\n" +
+	"accessType\x12D\n" +
+	"\x12project_extensions\x18\n" +
+	" \x03(\v2\x15.nem.ProjectExtensionR\x11projectExtensions\x12*\n" +
+	"\x06status\x18\v \x01(\x0e2\x12.nem.ProjectStatusR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
-	"\x0fcreated_by_uuid\x18\r \x01(\tR\rcreatedByUuid\x12&\n" +
-	"\x0fupdated_by_uuid\x18\x0e \x01(\tR\rupdatedByUuid*c\n" +
+	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
+	"\x0fcreated_by_uuid\x18\x0e \x01(\tR\rcreatedByUuid\x12&\n" +
+	"\x0fupdated_by_uuid\x18\x0f \x01(\tR\rupdatedByUuid*u\n" +
+	"\x11ProjectAccessType\x12\x1f\n" +
+	"\x1bPROJECT_ACCESS_TYPE_INVALID\x10\x00\x12\x1f\n" +
+	"\x1bPROJECT_ACCESS_TYPE_INHERIT\x10\x01\x12\x1e\n" +
+	"\x1aPROJECT_ACCESS_TYPE_CUSTOM\x10\x02*c\n" +
 	"\rProjectStatus\x12\x1a\n" +
 	"\x16PROJECT_STATUS_INVALID\x10\x00\x12\x19\n" +
 	"\x15PROJECT_STATUS_ACTIVE\x10\x01\x12\x1b\n" +
@@ -261,24 +324,26 @@ func file_project_proto_rawDescGZIP() []byte {
 	return file_project_proto_rawDescData
 }
 
-var file_project_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_project_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_project_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_project_proto_goTypes = []any{
-	(ProjectStatus)(0),            // 0: nem.ProjectStatus
-	(*Project)(nil),               // 1: nem.Project
-	(*ProjectExtension)(nil),      // 2: nem.ProjectExtension
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(ProjectAccessType)(0),        // 0: nem.ProjectAccessType
+	(ProjectStatus)(0),            // 1: nem.ProjectStatus
+	(*Project)(nil),               // 2: nem.Project
+	(*ProjectExtension)(nil),      // 3: nem.ProjectExtension
+	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
 }
 var file_project_proto_depIdxs = []int32{
-	2, // 0: nem.Project.project_extensions:type_name -> nem.ProjectExtension
-	0, // 1: nem.Project.status:type_name -> nem.ProjectStatus
-	3, // 2: nem.Project.created_at:type_name -> google.protobuf.Timestamp
-	3, // 3: nem.Project.updated_at:type_name -> google.protobuf.Timestamp
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	0, // 0: nem.Project.access_type:type_name -> nem.ProjectAccessType
+	3, // 1: nem.Project.project_extensions:type_name -> nem.ProjectExtension
+	1, // 2: nem.Project.status:type_name -> nem.ProjectStatus
+	4, // 3: nem.Project.created_at:type_name -> google.protobuf.Timestamp
+	4, // 4: nem.Project.updated_at:type_name -> google.protobuf.Timestamp
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_project_proto_init() }
@@ -292,7 +357,7 @@ func file_project_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_project_proto_rawDesc), len(file_project_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -133,19 +133,21 @@ func (UserTeamStatus) EnumDescriptor() ([]byte, []int) {
 }
 
 type UserTeam struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	UserUuid      string                 `protobuf:"bytes,2,opt,name=user_uuid,json=userUuid,proto3" json:"user_uuid,omitempty"`
-	UserEmail     string                 `protobuf:"bytes,3,opt,name=user_email,json=userEmail,proto3" json:"user_email,omitempty"`
-	TeamUuid      string                 `protobuf:"bytes,4,opt,name=team_uuid,json=teamUuid,proto3" json:"team_uuid,omitempty"`
-	Roles         []UserTeamRole         `protobuf:"varint,5,rep,packed,name=roles,proto3,enum=nem.UserTeamRole" json:"roles,omitempty"`
-	Status        UserTeamStatus         `protobuf:"varint,6,opt,name=status,proto3,enum=nem.UserTeamStatus" json:"status,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CreatedByUuid string                 `protobuf:"bytes,9,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
-	UpdatedByUuid string                 `protobuf:"bytes,10,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	Uuid                    string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	UserUuid                string                 `protobuf:"bytes,2,opt,name=user_uuid,json=userUuid,proto3" json:"user_uuid,omitempty"`
+	UserEmail               string                 `protobuf:"bytes,3,opt,name=user_email,json=userEmail,proto3" json:"user_email,omitempty"`
+	TeamUuid                string                 `protobuf:"bytes,4,opt,name=team_uuid,json=teamUuid,proto3" json:"team_uuid,omitempty"`
+	Role                    UserTeamRole           `protobuf:"varint,5,opt,name=role,proto3,enum=nem.UserTeamRole" json:"role,omitempty"`
+	ReviewRequiredStructure bool                   `protobuf:"varint,6,opt,name=review_required_structure,json=reviewRequiredStructure,proto3" json:"review_required_structure,omitempty"`
+	ReviewRequiredData      bool                   `protobuf:"varint,7,opt,name=review_required_data,json=reviewRequiredData,proto3" json:"review_required_data,omitempty"`
+	Status                  UserTeamStatus         `protobuf:"varint,8,opt,name=status,proto3,enum=nem.UserTeamStatus" json:"status,omitempty"`
+	CreatedAt               *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt               *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedByUuid           string                 `protobuf:"bytes,11,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
+	UpdatedByUuid           string                 `protobuf:"bytes,12,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *UserTeam) Reset() {
@@ -206,11 +208,25 @@ func (x *UserTeam) GetTeamUuid() string {
 	return ""
 }
 
-func (x *UserTeam) GetRoles() []UserTeamRole {
+func (x *UserTeam) GetRole() UserTeamRole {
 	if x != nil {
-		return x.Roles
+		return x.Role
 	}
-	return nil
+	return UserTeamRole_USER_TEAM_ROLE_INVALID
+}
+
+func (x *UserTeam) GetReviewRequiredStructure() bool {
+	if x != nil {
+		return x.ReviewRequiredStructure
+	}
+	return false
+}
+
+func (x *UserTeam) GetReviewRequiredData() bool {
+	if x != nil {
+		return x.ReviewRequiredData
+	}
+	return false
 }
 
 func (x *UserTeam) GetStatus() UserTeamStatus {
@@ -252,22 +268,24 @@ var File_user_team_proto protoreflect.FileDescriptor
 
 const file_user_team_proto_rawDesc = "" +
 	"\n" +
-	"\x0fuser_team.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\"\x93\x03\n" +
+	"\x0fuser_team.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\"\xff\x03\n" +
 	"\bUserTeam\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x1b\n" +
 	"\tuser_uuid\x18\x02 \x01(\tR\buserUuid\x12\x1d\n" +
 	"\n" +
 	"user_email\x18\x03 \x01(\tR\tuserEmail\x12\x1b\n" +
-	"\tteam_uuid\x18\x04 \x01(\tR\bteamUuid\x12'\n" +
-	"\x05roles\x18\x05 \x03(\x0e2\x11.nem.UserTeamRoleR\x05roles\x12+\n" +
-	"\x06status\x18\x06 \x01(\x0e2\x13.nem.UserTeamStatusR\x06status\x129\n" +
+	"\tteam_uuid\x18\x04 \x01(\tR\bteamUuid\x12%\n" +
+	"\x04role\x18\x05 \x01(\x0e2\x11.nem.UserTeamRoleR\x04role\x12:\n" +
+	"\x19review_required_structure\x18\x06 \x01(\bR\x17reviewRequiredStructure\x120\n" +
+	"\x14review_required_data\x18\a \x01(\bR\x12reviewRequiredData\x12+\n" +
+	"\x06status\x18\b \x01(\x0e2\x13.nem.UserTeamStatusR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
-	"\x0fcreated_by_uuid\x18\t \x01(\tR\rcreatedByUuid\x12&\n" +
-	"\x0fupdated_by_uuid\x18\n" +
-	" \x01(\tR\rupdatedByUuid*\xbf\x01\n" +
+	"updated_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
+	"\x0fcreated_by_uuid\x18\v \x01(\tR\rcreatedByUuid\x12&\n" +
+	"\x0fupdated_by_uuid\x18\f \x01(\tR\rupdatedByUuid*\xbf\x01\n" +
 	"\fUserTeamRole\x12\x1a\n" +
 	"\x16USER_TEAM_ROLE_INVALID\x10\x00\x12\x18\n" +
 	"\x14USER_TEAM_ROLE_ADMIN\x10\x01\x12\x1c\n" +
@@ -303,7 +321,7 @@ var file_user_team_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
 }
 var file_user_team_proto_depIdxs = []int32{
-	0, // 0: nem.UserTeam.roles:type_name -> nem.UserTeamRole
+	0, // 0: nem.UserTeam.role:type_name -> nem.UserTeamRole
 	1, // 1: nem.UserTeam.status:type_name -> nem.UserTeamStatus
 	3, // 2: nem.UserTeam.created_at:type_name -> google.protobuf.Timestamp
 	3, // 3: nem.UserTeam.updated_at:type_name -> google.protobuf.Timestamp

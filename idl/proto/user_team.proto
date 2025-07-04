@@ -15,12 +15,14 @@ message UserTeam {
     string user_uuid = 2;
     string user_email = 3;
     string team_uuid = 4;
-    repeated UserTeamRole roles = 5;
-    UserTeamStatus status = 6;
-    google.protobuf.Timestamp created_at = 7;
-    google.protobuf.Timestamp updated_at = 8;
-    string created_by_uuid = 9;
-    string updated_by_uuid = 10;    
+    UserTeamRole role = 5;
+    bool review_required_structure = 6;
+    bool review_required_data = 7;
+    UserTeamStatus status = 8;
+    google.protobuf.Timestamp created_at = 9;
+    google.protobuf.Timestamp updated_at = 10;
+    string created_by_uuid = 11;
+    string updated_by_uuid = 12;    
 }
 
 enum UserTeamRole { 

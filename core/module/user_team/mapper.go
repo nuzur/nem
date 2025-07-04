@@ -19,15 +19,17 @@ func mapModelsToEntities(models []nemdb.UserTeam) []main_entity.UserTeam {
 
 func mapModelToEntity(model nemdb.UserTeam) main_entity.UserTeam {
 	return main_entity.UserTeam{
-		UUID:          uuid.FromStringOrNil(model.UUID),
-		UserUUID:      uuid.FromStringOrNil(mapper.SqlNullStringToString(model.UserUUID)),
-		UserEmail:     mapper.SqlNullStringToStringPtr(model.UserEmail),
-		TeamUUID:      uuid.FromStringOrNil(model.TeamUUID),
-		Roles:         main_entity.JSONToRoleSlice(model.Roles),
-		Status:        main_entity.Status(model.Status),
-		CreatedAt:     model.CreatedAt,
-		UpdatedAt:     model.UpdatedAt,
-		CreatedByUUID: uuid.FromStringOrNil(model.CreatedByUUID),
-		UpdatedByUUID: uuid.FromStringOrNil(model.UpdatedByUUID),
+		UUID:                    uuid.FromStringOrNil(model.UUID),
+		UserUUID:                uuid.FromStringOrNil(mapper.SqlNullStringToString(model.UserUUID)),
+		UserEmail:               mapper.SqlNullStringToStringPtr(model.UserEmail),
+		TeamUUID:                uuid.FromStringOrNil(model.TeamUUID),
+		Role:                    main_entity.Role(model.Role),
+		ReviewRequiredStructure: model.ReviewRequiredStructure,
+		ReviewRequiredData:      model.ReviewRequiredData,
+		Status:                  main_entity.Status(model.Status),
+		CreatedAt:               model.CreatedAt,
+		UpdatedAt:               model.UpdatedAt,
+		CreatedByUUID:           uuid.FromStringOrNil(model.CreatedByUUID),
+		UpdatedByUUID:           uuid.FromStringOrNil(model.UpdatedByUUID),
 	}
 }

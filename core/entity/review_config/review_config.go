@@ -16,15 +16,15 @@ import (
 )
 
 type ReviewConfig struct {
-	UUID          uuid.UUID  `json:"uuid"`
-	Types         []Type     `json:"types"`
-	UserRoles     []UserRole `json:"user_roles"`
-	MinReviews    int64      `json:"min_reviews"`
-	Status        Status     `json:"status"`
-	CreatedAt     time.Time  `json:"created_at"`
-	UpdatedAt     time.Time  `json:"updated_at"`
-	CreatedByUUID uuid.UUID  `json:"created_by_uuid"`
-	UpdatedByUUID uuid.UUID  `json:"updated_by_uuid"`
+	UUID            uuid.UUID        `json:"uuid"`
+	ReviewUserRoles []ReviewUserRole `json:"review_user_roles"`
+	ReviewUserUUIDs []uuid.UUID      `json:"review_user_uuids"`
+	MinReviews      int64            `json:"min_reviews"`
+	Status          Status           `json:"status"`
+	CreatedAt       time.Time        `json:"created_at"`
+	UpdatedAt       time.Time        `json:"updated_at"`
+	CreatedByUUID   uuid.UUID        `json:"created_by_uuid"`
+	UpdatedByUUID   uuid.UUID        `json:"updated_by_uuid"`
 }
 
 func (e ReviewConfig) String() string {
@@ -40,8 +40,8 @@ func (e ReviewConfig) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 
 	res["uuid"] = types.UUIDFieldType
-	res["types"] = types.MultiEnumFieldType
-	res["user_roles"] = types.MultiEnumFieldType
+	res["review_user_roles"] = types.MultiEnumFieldType
+	res["review_user_uuids"] = types.ArrayFieldType
 	res["min_reviews"] = types.IntFieldType
 	res["status"] = types.SingleEnumFieldType
 	res["created_at"] = types.TimestampFieldType
@@ -54,6 +54,7 @@ func (e ReviewConfig) FieldIdentfierToTypeMap() map[string]types.FieldType {
 func (e ReviewConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 
+	res["review_user_uuids"] = types.UUIDFieldType
 	return res
 }
 
@@ -107,15 +108,15 @@ func ReviewConfigSliceToJSON(e []ReviewConfig) json.RawMessage {
 func NewReviewConfigWithRandomValues() ReviewConfig {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return ReviewConfig{
-		UUID:          randomvalues.GetRandomUUIDValue(),
-		Types:         randomvalues.GetRandomOptionsValues[Type](3),
-		UserRoles:     randomvalues.GetRandomOptionsValues[UserRole](5),
-		MinReviews:    randomvalues.GetRandomIntValue(),
-		Status:        randomvalues.GetRandomOptionValue[Status](2),
-		CreatedAt:     randomvalues.GetRandomTimeValue(),
-		UpdatedAt:     randomvalues.GetRandomTimeValue(),
-		CreatedByUUID: randomvalues.GetRandomUUIDValue(),
-		UpdatedByUUID: randomvalues.GetRandomUUIDValue(),
+		UUID:            randomvalues.GetRandomUUIDValue(),
+		ReviewUserRoles: randomvalues.GetRandomOptionsValues[ReviewUserRole](5),
+		ReviewUserUUIDs: []uuid.UUID{},
+		MinReviews:      randomvalues.GetRandomIntValue(),
+		Status:          randomvalues.GetRandomOptionValue[Status](2),
+		CreatedAt:       randomvalues.GetRandomTimeValue(),
+		UpdatedAt:       randomvalues.GetRandomTimeValue(),
+		CreatedByUUID:   randomvalues.GetRandomUUIDValue(),
+		UpdatedByUUID:   randomvalues.GetRandomUUIDValue(),
 	}
 }
 

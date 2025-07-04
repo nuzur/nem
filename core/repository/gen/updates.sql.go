@@ -239,7 +239,7 @@ func (q *Queries) UpdateOrganization(ctx context.Context, arg UpdateOrganization
 const updateProject = `-- name: UpdateProject :exec
 UPDATE project
 SET
-version = ?, name = ?, description = ?, tags = ?, url = ?, owner_uuid = ?, team_uuid = ?, project_extensions = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, name = ?, description = ?, tags = ?, url = ?, owner_uuid = ?, team_uuid = ?, access_type = ?, project_extensions = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?
 `
 
@@ -251,6 +251,7 @@ type UpdateProjectParams struct {
 	URL               sql.NullString  `json:"url"`
 	OwnerUUID         string          `json:"owner_uuid"`
 	TeamUUID          string          `json:"team_uuid"`
+	AccessType        int64           `json:"access_type"`
 	ProjectExtensions json.RawMessage `json:"project_extensions"`
 	Status            int64           `json:"status"`
 	CreatedAt         time.Time       `json:"created_at"`
@@ -269,6 +270,7 @@ func (q *Queries) UpdateProject(ctx context.Context, arg UpdateProjectParams) er
 		arg.URL,
 		arg.OwnerUUID,
 		arg.TeamUUID,
+		arg.AccessType,
 		arg.ProjectExtensions,
 		arg.Status,
 		arg.CreatedAt,
@@ -283,7 +285,7 @@ func (q *Queries) UpdateProject(ctx context.Context, arg UpdateProjectParams) er
 const updateProjectVersion = `-- name: UpdateProjectVersion :exec
 UPDATE project_version
 SET
-version = ?, identifier = ?, description = ?, project_uuid = ?, entities = ?, relationships = ?, enums = ?, services = ?, base_version_uuid = ?, review_status = ?, deployments = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, identifier = ?, description = ?, project_uuid = ?, entities = ?, relationships = ?, enums = ?, services = ?, base_version_uuid = ?, review_status = ?, reviews = ?, deployments = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?
 `
 
@@ -298,6 +300,7 @@ type UpdateProjectVersionParams struct {
 	Services        json.RawMessage `json:"services"`
 	BaseVersionUUID sql.NullString  `json:"base_version_uuid"`
 	ReviewStatus    int64           `json:"review_status"`
+	Reviews         json.RawMessage `json:"reviews"`
 	Deployments     json.RawMessage `json:"deployments"`
 	Status          int64           `json:"status"`
 	CreatedAt       time.Time       `json:"created_at"`
@@ -319,6 +322,7 @@ func (q *Queries) UpdateProjectVersion(ctx context.Context, arg UpdateProjectVer
 		arg.Services,
 		arg.BaseVersionUUID,
 		arg.ReviewStatus,
+		arg.Reviews,
 		arg.Deployments,
 		arg.Status,
 		arg.CreatedAt,
@@ -456,6 +460,46 @@ func (q *Queries) UpdateUserConnection(ctx context.Context, arg UpdateUserConnec
 	return err
 }
 
+const updateUserProject = `-- name: UpdateUserProject :exec
+UPDATE user_project
+SET
+user_uuid = ?, user_email = ?, project_uuid = ?, role = ?, review_required_structure = ?, review_required_data = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+WHERE uuid = ?
+`
+
+type UpdateUserProjectParams struct {
+	UserUUID                sql.NullString `json:"user_uuid"`
+	UserEmail               sql.NullString `json:"user_email"`
+	ProjectUUID             string         `json:"project_uuid"`
+	Role                    int64          `json:"role"`
+	ReviewRequiredStructure bool           `json:"review_required_structure"`
+	ReviewRequiredData      bool           `json:"review_required_data"`
+	Status                  int64          `json:"status"`
+	CreatedAt               time.Time      `json:"created_at"`
+	UpdatedAt               time.Time      `json:"updated_at"`
+	CreatedByUUID           string         `json:"created_by_uuid"`
+	UpdatedByUUID           string         `json:"updated_by_uuid"`
+	UUID                    string         `json:"uuid"`
+}
+
+func (q *Queries) UpdateUserProject(ctx context.Context, arg UpdateUserProjectParams) error {
+	_, err := q.db.ExecContext(ctx, updateUserProject,
+		arg.UserUUID,
+		arg.UserEmail,
+		arg.ProjectUUID,
+		arg.Role,
+		arg.ReviewRequiredStructure,
+		arg.ReviewRequiredData,
+		arg.Status,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+		arg.UUID,
+	)
+	return err
+}
+
 const updateUserProjectVersion = `-- name: UpdateUserProjectVersion :exec
 UPDATE user_project_version
 SET
@@ -495,21 +539,23 @@ func (q *Queries) UpdateUserProjectVersion(ctx context.Context, arg UpdateUserPr
 const updateUserTeam = `-- name: UpdateUserTeam :exec
 UPDATE user_team
 SET
-user_uuid = ?, user_email = ?, team_uuid = ?, roles = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+user_uuid = ?, user_email = ?, team_uuid = ?, role = ?, review_required_structure = ?, review_required_data = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?
 `
 
 type UpdateUserTeamParams struct {
-	UserUUID      sql.NullString  `json:"user_uuid"`
-	UserEmail     sql.NullString  `json:"user_email"`
-	TeamUUID      string          `json:"team_uuid"`
-	Roles         json.RawMessage `json:"roles"`
-	Status        int64           `json:"status"`
-	CreatedAt     time.Time       `json:"created_at"`
-	UpdatedAt     time.Time       `json:"updated_at"`
-	CreatedByUUID string          `json:"created_by_uuid"`
-	UpdatedByUUID string          `json:"updated_by_uuid"`
-	UUID          string          `json:"uuid"`
+	UserUUID                sql.NullString `json:"user_uuid"`
+	UserEmail               sql.NullString `json:"user_email"`
+	TeamUUID                string         `json:"team_uuid"`
+	Role                    int64          `json:"role"`
+	ReviewRequiredStructure bool           `json:"review_required_structure"`
+	ReviewRequiredData      bool           `json:"review_required_data"`
+	Status                  int64          `json:"status"`
+	CreatedAt               time.Time      `json:"created_at"`
+	UpdatedAt               time.Time      `json:"updated_at"`
+	CreatedByUUID           string         `json:"created_by_uuid"`
+	UpdatedByUUID           string         `json:"updated_by_uuid"`
+	UUID                    string         `json:"uuid"`
 }
 
 func (q *Queries) UpdateUserTeam(ctx context.Context, arg UpdateUserTeamParams) error {
@@ -517,7 +563,9 @@ func (q *Queries) UpdateUserTeam(ctx context.Context, arg UpdateUserTeamParams) 
 		arg.UserUUID,
 		arg.UserEmail,
 		arg.TeamUUID,
-		arg.Roles,
+		arg.Role,
+		arg.ReviewRequiredStructure,
+		arg.ReviewRequiredData,
 		arg.Status,
 		arg.CreatedAt,
 		arg.UpdatedAt,

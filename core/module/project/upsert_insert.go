@@ -114,6 +114,8 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertProject
 
 		TeamUUID: req.Project.TeamUUID.String(),
 
+		AccessType: req.Project.AccessType.ToInt64(),
+
 		ProjectExtensions: project_extension.ProjectExtensionSliceToJSON(req.Project.ProjectExtensions),
 
 		Status: req.Project.Status.ToInt64(),

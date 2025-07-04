@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `url` VARCHAR(255)   ,
   `owner_uuid` CHAR(36) NOT NULL  ,
   `team_uuid` CHAR(36) NOT NULL  ,
+  `access_type` INT NOT NULL  ,
   `project_extensions` JSON   ,
   `status` INT NOT NULL  ,
   `created_at` DATETIME NOT NULL  default CURRENT_TIMESTAMP,

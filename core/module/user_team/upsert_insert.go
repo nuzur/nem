@@ -12,8 +12,6 @@ import (
 
 	"github.com/nuzur/nem/custom"
 
-	main_entity "github.com/nuzur/nem/core/entity/user_team"
-
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
@@ -102,7 +100,11 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertUserTea
 
 		TeamUUID: req.UserTeam.TeamUUID.String(),
 
-		Roles: main_entity.RoleSliceToJSON(req.UserTeam.Roles),
+		Role: req.UserTeam.Role.ToInt64(),
+
+		ReviewRequiredStructure: req.UserTeam.ReviewRequiredStructure,
+
+		ReviewRequiredData: req.UserTeam.ReviewRequiredData,
 
 		Status: req.UserTeam.Status.ToInt64(),
 

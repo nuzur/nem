@@ -11,15 +11,15 @@ import (
 
 func ReviewConfigToProto(e main_entity.ReviewConfig) *pb.ReviewConfig {
 	return &pb.ReviewConfig{
-		Uuid:          e.UUID.String(),
-		Types:         ReviewConfigTypeSliceToProto(e.Types),
-		UserRoles:     ReviewConfigUserRoleSliceToProto(e.UserRoles),
-		MinReviews:    int64(e.MinReviews),
-		Status:        pb.ReviewConfigStatus(e.Status),
-		CreatedAt:     timestamppb.New(e.CreatedAt),
-		UpdatedAt:     timestamppb.New(e.UpdatedAt),
-		CreatedByUuid: e.CreatedByUUID.String(),
-		UpdatedByUuid: e.UpdatedByUUID.String(),
+		Uuid:            e.UUID.String(),
+		ReviewUserRoles: ReviewConfigReviewUserRoleSliceToProto(e.ReviewUserRoles),
+		ReviewUserUuids: UUIDSliceToStringSlice(e.ReviewUserUUIDs),
+		MinReviews:      int64(e.MinReviews),
+		Status:          pb.ReviewConfigStatus(e.Status),
+		CreatedAt:       timestamppb.New(e.CreatedAt),
+		UpdatedAt:       timestamppb.New(e.UpdatedAt),
+		CreatedByUuid:   e.CreatedByUUID.String(),
+		UpdatedByUuid:   e.UpdatedByUUID.String(),
 	}
 }
 
@@ -36,15 +36,15 @@ func ReviewConfigFromProto(m *pb.ReviewConfig) main_entity.ReviewConfig {
 		return main_entity.ReviewConfig{}
 	}
 	return main_entity.ReviewConfig{
-		UUID:          uuid.FromStringOrNil(m.GetUuid()),
-		Types:         ReviewConfigTypeSliceFromProto(m.GetTypes()),
-		UserRoles:     ReviewConfigUserRoleSliceFromProto(m.GetUserRoles()),
-		MinReviews:    int64(m.GetMinReviews()),
-		Status:        main_entity.Status(m.GetStatus()),
-		CreatedAt:     m.GetCreatedAt().AsTime(),
-		UpdatedAt:     m.GetUpdatedAt().AsTime(),
-		CreatedByUUID: uuid.FromStringOrNil(m.GetCreatedByUuid()),
-		UpdatedByUUID: uuid.FromStringOrNil(m.GetUpdatedByUuid()),
+		UUID:            uuid.FromStringOrNil(m.GetUuid()),
+		ReviewUserRoles: ReviewConfigReviewUserRoleSliceFromProto(m.GetReviewUserRoles()),
+		ReviewUserUUIDs: StringSliceToUUIDSlice(m.GetReviewUserUuids()),
+		MinReviews:      int64(m.GetMinReviews()),
+		Status:          main_entity.Status(m.GetStatus()),
+		CreatedAt:       m.GetCreatedAt().AsTime(),
+		UpdatedAt:       m.GetUpdatedAt().AsTime(),
+		CreatedByUUID:   uuid.FromStringOrNil(m.GetCreatedByUuid()),
+		UpdatedByUUID:   uuid.FromStringOrNil(m.GetUpdatedByUuid()),
 	}
 }
 
@@ -59,32 +59,17 @@ func ReviewConfigSliceFromProto(es []*pb.ReviewConfig) []main_entity.ReviewConfi
 	return res
 }
 
-func ReviewConfigTypeSliceToProto(s []main_entity.Type) []pb.ReviewConfigType {
-	res := []pb.ReviewConfigType{}
+func ReviewConfigReviewUserRoleSliceToProto(s []main_entity.ReviewUserRole) []pb.ReviewConfigReviewUserRole {
+	res := []pb.ReviewConfigReviewUserRole{}
 	for _, e := range s {
-		res = append(res, pb.ReviewConfigType(e))
+		res = append(res, pb.ReviewConfigReviewUserRole(e))
 	}
 	return res
 }
-func ReviewConfigTypeSliceFromProto(s []pb.ReviewConfigType) []main_entity.Type {
-	res := []main_entity.Type{}
+func ReviewConfigReviewUserRoleSliceFromProto(s []pb.ReviewConfigReviewUserRole) []main_entity.ReviewUserRole {
+	res := []main_entity.ReviewUserRole{}
 	for _, e := range s {
-		res = append(res, main_entity.Type(e))
-	}
-	return res
-}
-
-func ReviewConfigUserRoleSliceToProto(s []main_entity.UserRole) []pb.ReviewConfigUserRole {
-	res := []pb.ReviewConfigUserRole{}
-	for _, e := range s {
-		res = append(res, pb.ReviewConfigUserRole(e))
-	}
-	return res
-}
-func ReviewConfigUserRoleSliceFromProto(s []pb.ReviewConfigUserRole) []main_entity.UserRole {
-	res := []main_entity.UserRole{}
-	for _, e := range s {
-		res = append(res, main_entity.UserRole(e))
+		res = append(res, main_entity.ReviewUserRole(e))
 	}
 	return res
 }

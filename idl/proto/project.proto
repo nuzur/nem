@@ -20,12 +20,19 @@ message Project {
     string url = 6;
     string owner_uuid = 7;
     string team_uuid = 8;
-    repeated ProjectExtension project_extensions = 9;
-    ProjectStatus status = 10;
-    google.protobuf.Timestamp created_at = 11;
-    google.protobuf.Timestamp updated_at = 12;
-    string created_by_uuid = 13;
-    string updated_by_uuid = 14;    
+    ProjectAccessType access_type = 9;
+    repeated ProjectExtension project_extensions = 10;
+    ProjectStatus status = 11;
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+    string created_by_uuid = 14;
+    string updated_by_uuid = 15;    
+}
+
+enum ProjectAccessType { 
+    PROJECT_ACCESS_TYPE_INVALID = 0;
+    PROJECT_ACCESS_TYPE_INHERIT = 1;
+    PROJECT_ACCESS_TYPE_CUSTOM = 2;
 }
 
 enum ProjectStatus { 

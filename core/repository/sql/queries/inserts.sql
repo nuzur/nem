@@ -13,9 +13,9 @@ VALUES
 
 -- name: InsertProject :execresult
 INSERT INTO project
-(uuid,version,name,description,tags,url,owner_uuid,team_uuid,project_extensions,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,name,description,tags,url,owner_uuid,team_uuid,access_type,project_extensions,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertExtension :execresult
 INSERT INTO extension
@@ -43,15 +43,15 @@ VALUES
 
 -- name: InsertProjectVersion :execresult
 INSERT INTO project_version
-(uuid,version,identifier,description,project_uuid,entities,relationships,enums,services,base_version_uuid,review_status,deployments,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,identifier,description,project_uuid,entities,relationships,enums,services,base_version_uuid,review_status,reviews,deployments,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertUserTeam :execresult
 INSERT INTO user_team
-(uuid,user_uuid,user_email,team_uuid,roles,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,user_uuid,user_email,team_uuid,role,review_required_structure,review_required_data,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertExtensionExecution :execresult
 INSERT INTO extension_execution
@@ -70,3 +70,9 @@ INSERT INTO user_project_version
 (uuid,version,project_version_uuid,user_uuid,data,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
 (?,?,?,?,?,?,?,?,?,?);
+
+-- name: InsertUserProject :execresult
+INSERT INTO user_project
+(uuid,user_uuid,user_email,project_uuid,role,review_required_structure,review_required_data,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?);

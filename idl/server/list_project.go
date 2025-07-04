@@ -183,6 +183,8 @@ func projectDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("team_uuid", filtering.TypeString),
 
+		filtering.DeclareEnumIdent("access_type", pb.ProjectAccessType(0).Type()),
+
 		filtering.DeclareEnumIdent("status", pb.ProjectStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),

@@ -165,9 +165,9 @@ func teamDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("review_config.uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("review_config.types", pb.ReviewConfigType(0).Type()),
+		filtering.DeclareEnumIdent("review_config.review_user_roles", pb.ReviewConfigReviewUserRole(0).Type()),
 
-		filtering.DeclareEnumIdent("review_config.user_roles", pb.ReviewConfigUserRole(0).Type()),
+		filtering.DeclareIdent("review_config.review_user_uuids", filtering.TypeString),
 
 		filtering.DeclareIdent("review_config.min_reviews", filtering.TypeInt),
 

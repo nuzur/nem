@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `project_version` (
   `services` JSON NOT NULL  ,
   `base_version_uuid` CHAR(36)   ,
   `review_status` INT NOT NULL  ,
+  `reviews` JSON   ,
   `deployments` JSON   ,
   `status` INT NOT NULL  ,
   `created_at` DATETIME NOT NULL  default CURRENT_TIMESTAMP,

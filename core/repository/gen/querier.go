@@ -520,6 +520,13 @@ type Querier interface {
 	FetchUserConnectionByStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserConnectionByStatusOrderedByUpdatedAtDESCParams) ([]UserConnection, error)
 	FetchUserConnectionByUUID(ctx context.Context, uuid string) ([]UserConnection, error)
 	FetchUserConnectionByUUIDForUpdate(ctx context.Context, uuid string) ([]UserConnection, error)
+	FetchUserProjectByStatus(ctx context.Context, arg FetchUserProjectByStatusParams) ([]UserProject, error)
+	FetchUserProjectByStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectByStatusOrderedByCreatedAtASCParams) ([]UserProject, error)
+	FetchUserProjectByStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectByStatusOrderedByCreatedAtDESCParams) ([]UserProject, error)
+	FetchUserProjectByStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectByStatusOrderedByUpdatedAtASCParams) ([]UserProject, error)
+	FetchUserProjectByStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectByStatusOrderedByUpdatedAtDESCParams) ([]UserProject, error)
+	FetchUserProjectByUUID(ctx context.Context, uuid string) ([]UserProject, error)
+	FetchUserProjectByUUIDForUpdate(ctx context.Context, uuid string) ([]UserProject, error)
 	FetchUserProjectVersionByStatus(ctx context.Context, arg FetchUserProjectVersionByStatusParams) ([]UserProjectVersion, error)
 	FetchUserProjectVersionByStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectVersionByStatusOrderedByCreatedAtASCParams) ([]UserProjectVersion, error)
 	FetchUserProjectVersionByStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectVersionByStatusOrderedByCreatedAtDESCParams) ([]UserProjectVersion, error)
@@ -554,6 +561,7 @@ type Querier interface {
 	InsertTeam(ctx context.Context, arg InsertTeamParams) (sql.Result, error)
 	InsertUser(ctx context.Context, arg InsertUserParams) (sql.Result, error)
 	InsertUserConnection(ctx context.Context, arg InsertUserConnectionParams) (sql.Result, error)
+	InsertUserProject(ctx context.Context, arg InsertUserProjectParams) (sql.Result, error)
 	InsertUserProjectVersion(ctx context.Context, arg InsertUserProjectVersionParams) (sql.Result, error)
 	InsertUserTeam(ctx context.Context, arg InsertUserTeamParams) (sql.Result, error)
 	SearchChangeRequest(ctx context.Context, arg SearchChangeRequestParams) ([]ChangeRequest, error)
@@ -572,6 +580,7 @@ type Querier interface {
 	UpdateTeam(ctx context.Context, arg UpdateTeamParams) error
 	UpdateUser(ctx context.Context, arg UpdateUserParams) error
 	UpdateUserConnection(ctx context.Context, arg UpdateUserConnectionParams) error
+	UpdateUserProject(ctx context.Context, arg UpdateUserProjectParams) error
 	UpdateUserProjectVersion(ctx context.Context, arg UpdateUserProjectVersionParams) error
 	UpdateUserTeam(ctx context.Context, arg UpdateUserTeamParams) error
 }

@@ -23437,7 +23437,7 @@ func (q *Queries) FetchOrganizationByVersionOrderedByUpdatedAtDESC(ctx context.C
 }
 
 const fetchProjectByName = `-- name: FetchProjectByName :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      name = ?  
     LIMIT ?, ?
@@ -23467,6 +23467,7 @@ func (q *Queries) FetchProjectByName(ctx context.Context, arg FetchProjectByName
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -23488,7 +23489,7 @@ func (q *Queries) FetchProjectByName(ctx context.Context, arg FetchProjectByName
 }
 
 const fetchProjectByNameAndStatus = `-- name: FetchProjectByNameAndStatus :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      name = ? AND status = ?  
     LIMIT ?, ?
@@ -23524,6 +23525,7 @@ func (q *Queries) FetchProjectByNameAndStatus(ctx context.Context, arg FetchProj
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -23545,7 +23547,7 @@ func (q *Queries) FetchProjectByNameAndStatus(ctx context.Context, arg FetchProj
 }
 
 const fetchProjectByNameAndStatusOrderedByCreatedAtASC = `-- name: FetchProjectByNameAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      name = ? AND status = ?  
     ORDER BY created_at ASC
@@ -23582,6 +23584,7 @@ func (q *Queries) FetchProjectByNameAndStatusOrderedByCreatedAtASC(ctx context.C
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -23603,7 +23606,7 @@ func (q *Queries) FetchProjectByNameAndStatusOrderedByCreatedAtASC(ctx context.C
 }
 
 const fetchProjectByNameAndStatusOrderedByCreatedAtDESC = `-- name: FetchProjectByNameAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      name = ? AND status = ?  
     ORDER BY created_at DESC
@@ -23640,6 +23643,7 @@ func (q *Queries) FetchProjectByNameAndStatusOrderedByCreatedAtDESC(ctx context.
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -23661,7 +23665,7 @@ func (q *Queries) FetchProjectByNameAndStatusOrderedByCreatedAtDESC(ctx context.
 }
 
 const fetchProjectByNameAndStatusOrderedByUpdatedAtASC = `-- name: FetchProjectByNameAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      name = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -23698,6 +23702,7 @@ func (q *Queries) FetchProjectByNameAndStatusOrderedByUpdatedAtASC(ctx context.C
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -23719,7 +23724,7 @@ func (q *Queries) FetchProjectByNameAndStatusOrderedByUpdatedAtASC(ctx context.C
 }
 
 const fetchProjectByNameAndStatusOrderedByUpdatedAtDESC = `-- name: FetchProjectByNameAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      name = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -23756,6 +23761,7 @@ func (q *Queries) FetchProjectByNameAndStatusOrderedByUpdatedAtDESC(ctx context.
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -23777,7 +23783,7 @@ func (q *Queries) FetchProjectByNameAndStatusOrderedByUpdatedAtDESC(ctx context.
 }
 
 const fetchProjectByNameOrderedByCreatedAtASC = `-- name: FetchProjectByNameOrderedByCreatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      name = ?  
     ORDER BY created_at ASC
@@ -23808,6 +23814,7 @@ func (q *Queries) FetchProjectByNameOrderedByCreatedAtASC(ctx context.Context, a
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -23829,7 +23836,7 @@ func (q *Queries) FetchProjectByNameOrderedByCreatedAtASC(ctx context.Context, a
 }
 
 const fetchProjectByNameOrderedByCreatedAtDESC = `-- name: FetchProjectByNameOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      name = ?  
     ORDER BY created_at DESC
@@ -23860,6 +23867,7 @@ func (q *Queries) FetchProjectByNameOrderedByCreatedAtDESC(ctx context.Context, 
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -23881,7 +23889,7 @@ func (q *Queries) FetchProjectByNameOrderedByCreatedAtDESC(ctx context.Context, 
 }
 
 const fetchProjectByNameOrderedByUpdatedAtASC = `-- name: FetchProjectByNameOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      name = ?  
     ORDER BY updated_at ASC
@@ -23912,6 +23920,7 @@ func (q *Queries) FetchProjectByNameOrderedByUpdatedAtASC(ctx context.Context, a
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -23933,7 +23942,7 @@ func (q *Queries) FetchProjectByNameOrderedByUpdatedAtASC(ctx context.Context, a
 }
 
 const fetchProjectByNameOrderedByUpdatedAtDESC = `-- name: FetchProjectByNameOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      name = ?  
     ORDER BY updated_at DESC
@@ -23964,6 +23973,7 @@ func (q *Queries) FetchProjectByNameOrderedByUpdatedAtDESC(ctx context.Context, 
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -23985,7 +23995,7 @@ func (q *Queries) FetchProjectByNameOrderedByUpdatedAtDESC(ctx context.Context, 
 }
 
 const fetchProjectByStatus = `-- name: FetchProjectByStatus :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      status = ?  
     LIMIT ?, ?
@@ -24015,6 +24025,7 @@ func (q *Queries) FetchProjectByStatus(ctx context.Context, arg FetchProjectBySt
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24036,7 +24047,7 @@ func (q *Queries) FetchProjectByStatus(ctx context.Context, arg FetchProjectBySt
 }
 
 const fetchProjectByStatusOrderedByCreatedAtASC = `-- name: FetchProjectByStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      status = ?  
     ORDER BY created_at ASC
@@ -24067,6 +24078,7 @@ func (q *Queries) FetchProjectByStatusOrderedByCreatedAtASC(ctx context.Context,
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24088,7 +24100,7 @@ func (q *Queries) FetchProjectByStatusOrderedByCreatedAtASC(ctx context.Context,
 }
 
 const fetchProjectByStatusOrderedByCreatedAtDESC = `-- name: FetchProjectByStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      status = ?  
     ORDER BY created_at DESC
@@ -24119,6 +24131,7 @@ func (q *Queries) FetchProjectByStatusOrderedByCreatedAtDESC(ctx context.Context
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24140,7 +24153,7 @@ func (q *Queries) FetchProjectByStatusOrderedByCreatedAtDESC(ctx context.Context
 }
 
 const fetchProjectByStatusOrderedByUpdatedAtASC = `-- name: FetchProjectByStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      status = ?  
     ORDER BY updated_at ASC
@@ -24171,6 +24184,7 @@ func (q *Queries) FetchProjectByStatusOrderedByUpdatedAtASC(ctx context.Context,
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24192,7 +24206,7 @@ func (q *Queries) FetchProjectByStatusOrderedByUpdatedAtASC(ctx context.Context,
 }
 
 const fetchProjectByStatusOrderedByUpdatedAtDESC = `-- name: FetchProjectByStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      status = ?  
     ORDER BY updated_at DESC
@@ -24223,6 +24237,7 @@ func (q *Queries) FetchProjectByStatusOrderedByUpdatedAtDESC(ctx context.Context
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24244,7 +24259,7 @@ func (q *Queries) FetchProjectByStatusOrderedByUpdatedAtDESC(ctx context.Context
 }
 
 const fetchProjectByUUID = `-- name: FetchProjectByUUID :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      uuid = ?
 `
@@ -24267,6 +24282,7 @@ func (q *Queries) FetchProjectByUUID(ctx context.Context, uuid string) ([]Projec
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24288,7 +24304,7 @@ func (q *Queries) FetchProjectByUUID(ctx context.Context, uuid string) ([]Projec
 }
 
 const fetchProjectByUUIDForUpdate = `-- name: FetchProjectByUUIDForUpdate :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      uuid = ?      
 FOR UPDATE
@@ -24312,6 +24328,7 @@ func (q *Queries) FetchProjectByUUIDForUpdate(ctx context.Context, uuid string) 
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24333,7 +24350,7 @@ func (q *Queries) FetchProjectByUUIDForUpdate(ctx context.Context, uuid string) 
 }
 
 const fetchProjectByVersion = `-- name: FetchProjectByVersion :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ?  
     LIMIT ?, ?
@@ -24363,6 +24380,7 @@ func (q *Queries) FetchProjectByVersion(ctx context.Context, arg FetchProjectByV
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24384,7 +24402,7 @@ func (q *Queries) FetchProjectByVersion(ctx context.Context, arg FetchProjectByV
 }
 
 const fetchProjectByVersionAndName = `-- name: FetchProjectByVersionAndName :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND name = ?  
     LIMIT ?, ?
@@ -24420,6 +24438,7 @@ func (q *Queries) FetchProjectByVersionAndName(ctx context.Context, arg FetchPro
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24441,7 +24460,7 @@ func (q *Queries) FetchProjectByVersionAndName(ctx context.Context, arg FetchPro
 }
 
 const fetchProjectByVersionAndNameAndStatus = `-- name: FetchProjectByVersionAndNameAndStatus :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND name = ? AND status = ?  
     LIMIT ?, ?
@@ -24479,6 +24498,7 @@ func (q *Queries) FetchProjectByVersionAndNameAndStatus(ctx context.Context, arg
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24500,7 +24520,7 @@ func (q *Queries) FetchProjectByVersionAndNameAndStatus(ctx context.Context, arg
 }
 
 const fetchProjectByVersionAndNameAndStatusOrderedByCreatedAtASC = `-- name: FetchProjectByVersionAndNameAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND name = ? AND status = ?  
     ORDER BY created_at ASC
@@ -24539,6 +24559,7 @@ func (q *Queries) FetchProjectByVersionAndNameAndStatusOrderedByCreatedAtASC(ctx
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24560,7 +24581,7 @@ func (q *Queries) FetchProjectByVersionAndNameAndStatusOrderedByCreatedAtASC(ctx
 }
 
 const fetchProjectByVersionAndNameAndStatusOrderedByCreatedAtDESC = `-- name: FetchProjectByVersionAndNameAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND name = ? AND status = ?  
     ORDER BY created_at DESC
@@ -24599,6 +24620,7 @@ func (q *Queries) FetchProjectByVersionAndNameAndStatusOrderedByCreatedAtDESC(ct
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24620,7 +24642,7 @@ func (q *Queries) FetchProjectByVersionAndNameAndStatusOrderedByCreatedAtDESC(ct
 }
 
 const fetchProjectByVersionAndNameAndStatusOrderedByUpdatedAtASC = `-- name: FetchProjectByVersionAndNameAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND name = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -24659,6 +24681,7 @@ func (q *Queries) FetchProjectByVersionAndNameAndStatusOrderedByUpdatedAtASC(ctx
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24680,7 +24703,7 @@ func (q *Queries) FetchProjectByVersionAndNameAndStatusOrderedByUpdatedAtASC(ctx
 }
 
 const fetchProjectByVersionAndNameAndStatusOrderedByUpdatedAtDESC = `-- name: FetchProjectByVersionAndNameAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND name = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -24719,6 +24742,7 @@ func (q *Queries) FetchProjectByVersionAndNameAndStatusOrderedByUpdatedAtDESC(ct
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24740,7 +24764,7 @@ func (q *Queries) FetchProjectByVersionAndNameAndStatusOrderedByUpdatedAtDESC(ct
 }
 
 const fetchProjectByVersionAndNameOrderedByCreatedAtASC = `-- name: FetchProjectByVersionAndNameOrderedByCreatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND name = ?  
     ORDER BY created_at ASC
@@ -24777,6 +24801,7 @@ func (q *Queries) FetchProjectByVersionAndNameOrderedByCreatedAtASC(ctx context.
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24798,7 +24823,7 @@ func (q *Queries) FetchProjectByVersionAndNameOrderedByCreatedAtASC(ctx context.
 }
 
 const fetchProjectByVersionAndNameOrderedByCreatedAtDESC = `-- name: FetchProjectByVersionAndNameOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND name = ?  
     ORDER BY created_at DESC
@@ -24835,6 +24860,7 @@ func (q *Queries) FetchProjectByVersionAndNameOrderedByCreatedAtDESC(ctx context
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24856,7 +24882,7 @@ func (q *Queries) FetchProjectByVersionAndNameOrderedByCreatedAtDESC(ctx context
 }
 
 const fetchProjectByVersionAndNameOrderedByUpdatedAtASC = `-- name: FetchProjectByVersionAndNameOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND name = ?  
     ORDER BY updated_at ASC
@@ -24893,6 +24919,7 @@ func (q *Queries) FetchProjectByVersionAndNameOrderedByUpdatedAtASC(ctx context.
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24914,7 +24941,7 @@ func (q *Queries) FetchProjectByVersionAndNameOrderedByUpdatedAtASC(ctx context.
 }
 
 const fetchProjectByVersionAndNameOrderedByUpdatedAtDESC = `-- name: FetchProjectByVersionAndNameOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND name = ?  
     ORDER BY updated_at DESC
@@ -24951,6 +24978,7 @@ func (q *Queries) FetchProjectByVersionAndNameOrderedByUpdatedAtDESC(ctx context
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -24972,7 +25000,7 @@ func (q *Queries) FetchProjectByVersionAndNameOrderedByUpdatedAtDESC(ctx context
 }
 
 const fetchProjectByVersionAndStatus = `-- name: FetchProjectByVersionAndStatus :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND status = ?  
     LIMIT ?, ?
@@ -25008,6 +25036,7 @@ func (q *Queries) FetchProjectByVersionAndStatus(ctx context.Context, arg FetchP
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -25029,7 +25058,7 @@ func (q *Queries) FetchProjectByVersionAndStatus(ctx context.Context, arg FetchP
 }
 
 const fetchProjectByVersionAndStatusOrderedByCreatedAtASC = `-- name: FetchProjectByVersionAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND status = ?  
     ORDER BY created_at ASC
@@ -25066,6 +25095,7 @@ func (q *Queries) FetchProjectByVersionAndStatusOrderedByCreatedAtASC(ctx contex
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -25087,7 +25117,7 @@ func (q *Queries) FetchProjectByVersionAndStatusOrderedByCreatedAtASC(ctx contex
 }
 
 const fetchProjectByVersionAndStatusOrderedByCreatedAtDESC = `-- name: FetchProjectByVersionAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND status = ?  
     ORDER BY created_at DESC
@@ -25124,6 +25154,7 @@ func (q *Queries) FetchProjectByVersionAndStatusOrderedByCreatedAtDESC(ctx conte
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -25145,7 +25176,7 @@ func (q *Queries) FetchProjectByVersionAndStatusOrderedByCreatedAtDESC(ctx conte
 }
 
 const fetchProjectByVersionAndStatusOrderedByUpdatedAtASC = `-- name: FetchProjectByVersionAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -25182,6 +25213,7 @@ func (q *Queries) FetchProjectByVersionAndStatusOrderedByUpdatedAtASC(ctx contex
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -25203,7 +25235,7 @@ func (q *Queries) FetchProjectByVersionAndStatusOrderedByUpdatedAtASC(ctx contex
 }
 
 const fetchProjectByVersionAndStatusOrderedByUpdatedAtDESC = `-- name: FetchProjectByVersionAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -25240,6 +25272,7 @@ func (q *Queries) FetchProjectByVersionAndStatusOrderedByUpdatedAtDESC(ctx conte
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -25261,7 +25294,7 @@ func (q *Queries) FetchProjectByVersionAndStatusOrderedByUpdatedAtDESC(ctx conte
 }
 
 const fetchProjectByVersionOrderedByCreatedAtASC = `-- name: FetchProjectByVersionOrderedByCreatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ?  
     ORDER BY created_at ASC
@@ -25292,6 +25325,7 @@ func (q *Queries) FetchProjectByVersionOrderedByCreatedAtASC(ctx context.Context
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -25313,7 +25347,7 @@ func (q *Queries) FetchProjectByVersionOrderedByCreatedAtASC(ctx context.Context
 }
 
 const fetchProjectByVersionOrderedByCreatedAtDESC = `-- name: FetchProjectByVersionOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ?  
     ORDER BY created_at DESC
@@ -25344,6 +25378,7 @@ func (q *Queries) FetchProjectByVersionOrderedByCreatedAtDESC(ctx context.Contex
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -25365,7 +25400,7 @@ func (q *Queries) FetchProjectByVersionOrderedByCreatedAtDESC(ctx context.Contex
 }
 
 const fetchProjectByVersionOrderedByUpdatedAtASC = `-- name: FetchProjectByVersionOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ?  
     ORDER BY updated_at ASC
@@ -25396,6 +25431,7 @@ func (q *Queries) FetchProjectByVersionOrderedByUpdatedAtASC(ctx context.Context
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -25417,7 +25453,7 @@ func (q *Queries) FetchProjectByVersionOrderedByUpdatedAtASC(ctx context.Context
 }
 
 const fetchProjectByVersionOrderedByUpdatedAtDESC = `-- name: FetchProjectByVersionOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
      version = ?  
     ORDER BY updated_at DESC
@@ -25448,6 +25484,7 @@ func (q *Queries) FetchProjectByVersionOrderedByUpdatedAtDESC(ctx context.Contex
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -25469,7 +25506,7 @@ func (q *Queries) FetchProjectByVersionOrderedByUpdatedAtDESC(ctx context.Contex
 }
 
 const fetchProjectVersionByReviewStatus = `-- name: FetchProjectVersionByReviewStatus :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      review_status = ?  
     LIMIT ?, ?
@@ -25502,6 +25539,7 @@ func (q *Queries) FetchProjectVersionByReviewStatus(ctx context.Context, arg Fet
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -25523,7 +25561,7 @@ func (q *Queries) FetchProjectVersionByReviewStatus(ctx context.Context, arg Fet
 }
 
 const fetchProjectVersionByReviewStatusAndStatus = `-- name: FetchProjectVersionByReviewStatusAndStatus :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      review_status = ? AND status = ?  
     LIMIT ?, ?
@@ -25562,6 +25600,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusAndStatus(ctx context.Context
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -25583,7 +25622,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusAndStatus(ctx context.Context
 }
 
 const fetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtASC = `-- name: FetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      review_status = ? AND status = ?  
     ORDER BY created_at ASC
@@ -25623,6 +25662,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtAS
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -25644,7 +25684,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtAS
 }
 
 const fetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      review_status = ? AND status = ?  
     ORDER BY created_at DESC
@@ -25684,6 +25724,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtDE
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -25705,7 +25746,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusAndStatusOrderedByCreatedAtDE
 }
 
 const fetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      review_status = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -25745,6 +25786,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtAS
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -25766,7 +25808,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtAS
 }
 
 const fetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      review_status = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -25806,6 +25848,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtDE
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -25827,7 +25870,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusAndStatusOrderedByUpdatedAtDE
 }
 
 const fetchProjectVersionByReviewStatusOrderedByCreatedAtASC = `-- name: FetchProjectVersionByReviewStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      review_status = ?  
     ORDER BY created_at ASC
@@ -25861,6 +25904,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusOrderedByCreatedAtASC(ctx con
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -25882,7 +25926,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusOrderedByCreatedAtASC(ctx con
 }
 
 const fetchProjectVersionByReviewStatusOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByReviewStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      review_status = ?  
     ORDER BY created_at DESC
@@ -25916,6 +25960,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusOrderedByCreatedAtDESC(ctx co
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -25937,7 +25982,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusOrderedByCreatedAtDESC(ctx co
 }
 
 const fetchProjectVersionByReviewStatusOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByReviewStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      review_status = ?  
     ORDER BY updated_at ASC
@@ -25971,6 +26016,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusOrderedByUpdatedAtASC(ctx con
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -25992,7 +26038,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusOrderedByUpdatedAtASC(ctx con
 }
 
 const fetchProjectVersionByReviewStatusOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByReviewStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      review_status = ?  
     ORDER BY updated_at DESC
@@ -26026,6 +26072,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusOrderedByUpdatedAtDESC(ctx co
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26047,7 +26094,7 @@ func (q *Queries) FetchProjectVersionByReviewStatusOrderedByUpdatedAtDESC(ctx co
 }
 
 const fetchProjectVersionByStatus = `-- name: FetchProjectVersionByStatus :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      status = ?  
     LIMIT ?, ?
@@ -26080,6 +26127,7 @@ func (q *Queries) FetchProjectVersionByStatus(ctx context.Context, arg FetchProj
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26101,7 +26149,7 @@ func (q *Queries) FetchProjectVersionByStatus(ctx context.Context, arg FetchProj
 }
 
 const fetchProjectVersionByStatusOrderedByCreatedAtASC = `-- name: FetchProjectVersionByStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      status = ?  
     ORDER BY created_at ASC
@@ -26135,6 +26183,7 @@ func (q *Queries) FetchProjectVersionByStatusOrderedByCreatedAtASC(ctx context.C
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26156,7 +26205,7 @@ func (q *Queries) FetchProjectVersionByStatusOrderedByCreatedAtASC(ctx context.C
 }
 
 const fetchProjectVersionByStatusOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      status = ?  
     ORDER BY created_at DESC
@@ -26190,6 +26239,7 @@ func (q *Queries) FetchProjectVersionByStatusOrderedByCreatedAtDESC(ctx context.
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26211,7 +26261,7 @@ func (q *Queries) FetchProjectVersionByStatusOrderedByCreatedAtDESC(ctx context.
 }
 
 const fetchProjectVersionByStatusOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      status = ?  
     ORDER BY updated_at ASC
@@ -26245,6 +26295,7 @@ func (q *Queries) FetchProjectVersionByStatusOrderedByUpdatedAtASC(ctx context.C
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26266,7 +26317,7 @@ func (q *Queries) FetchProjectVersionByStatusOrderedByUpdatedAtASC(ctx context.C
 }
 
 const fetchProjectVersionByStatusOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      status = ?  
     ORDER BY updated_at DESC
@@ -26300,6 +26351,7 @@ func (q *Queries) FetchProjectVersionByStatusOrderedByUpdatedAtDESC(ctx context.
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26321,7 +26373,7 @@ func (q *Queries) FetchProjectVersionByStatusOrderedByUpdatedAtDESC(ctx context.
 }
 
 const fetchProjectVersionByUUID = `-- name: FetchProjectVersionByUUID :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      uuid = ?
 `
@@ -26347,6 +26399,7 @@ func (q *Queries) FetchProjectVersionByUUID(ctx context.Context, uuid string) ([
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26368,7 +26421,7 @@ func (q *Queries) FetchProjectVersionByUUID(ctx context.Context, uuid string) ([
 }
 
 const fetchProjectVersionByUUIDForUpdate = `-- name: FetchProjectVersionByUUIDForUpdate :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      uuid = ?      
 FOR UPDATE
@@ -26395,6 +26448,7 @@ func (q *Queries) FetchProjectVersionByUUIDForUpdate(ctx context.Context, uuid s
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26416,7 +26470,7 @@ func (q *Queries) FetchProjectVersionByUUIDForUpdate(ctx context.Context, uuid s
 }
 
 const fetchProjectVersionByVersion = `-- name: FetchProjectVersionByVersion :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ?  
     LIMIT ?, ?
@@ -26449,6 +26503,7 @@ func (q *Queries) FetchProjectVersionByVersion(ctx context.Context, arg FetchPro
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26470,7 +26525,7 @@ func (q *Queries) FetchProjectVersionByVersion(ctx context.Context, arg FetchPro
 }
 
 const fetchProjectVersionByVersionAndReviewStatus = `-- name: FetchProjectVersionByVersionAndReviewStatus :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND review_status = ?  
     LIMIT ?, ?
@@ -26509,6 +26564,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatus(ctx context.Contex
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26530,7 +26586,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatus(ctx context.Contex
 }
 
 const fetchProjectVersionByVersionAndReviewStatusAndStatus = `-- name: FetchProjectVersionByVersionAndReviewStatusAndStatus :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND review_status = ? AND status = ?  
     LIMIT ?, ?
@@ -26571,6 +26627,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusAndStatus(ctx conte
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26592,7 +26649,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusAndStatus(ctx conte
 }
 
 const fetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByCreatedAtASC = `-- name: FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND review_status = ? AND status = ?  
     ORDER BY created_at ASC
@@ -26634,6 +26691,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByC
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26655,7 +26713,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByC
 }
 
 const fetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND review_status = ? AND status = ?  
     ORDER BY created_at DESC
@@ -26697,6 +26755,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByC
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26718,7 +26777,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByC
 }
 
 const fetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND review_status = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -26760,6 +26819,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByU
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26781,7 +26841,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByU
 }
 
 const fetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND review_status = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -26823,6 +26883,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByU
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26844,7 +26905,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusAndStatusOrderedByU
 }
 
 const fetchProjectVersionByVersionAndReviewStatusOrderedByCreatedAtASC = `-- name: FetchProjectVersionByVersionAndReviewStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND review_status = ?  
     ORDER BY created_at ASC
@@ -26884,6 +26945,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusOrderedByCreatedAtA
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26905,7 +26967,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusOrderedByCreatedAtA
 }
 
 const fetchProjectVersionByVersionAndReviewStatusOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByVersionAndReviewStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND review_status = ?  
     ORDER BY created_at DESC
@@ -26945,6 +27007,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusOrderedByCreatedAtD
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -26966,7 +27029,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusOrderedByCreatedAtD
 }
 
 const fetchProjectVersionByVersionAndReviewStatusOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByVersionAndReviewStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND review_status = ?  
     ORDER BY updated_at ASC
@@ -27006,6 +27069,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusOrderedByUpdatedAtA
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -27027,7 +27091,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusOrderedByUpdatedAtA
 }
 
 const fetchProjectVersionByVersionAndReviewStatusOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByVersionAndReviewStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND review_status = ?  
     ORDER BY updated_at DESC
@@ -27067,6 +27131,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusOrderedByUpdatedAtD
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -27088,7 +27153,7 @@ func (q *Queries) FetchProjectVersionByVersionAndReviewStatusOrderedByUpdatedAtD
 }
 
 const fetchProjectVersionByVersionAndStatus = `-- name: FetchProjectVersionByVersionAndStatus :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND status = ?  
     LIMIT ?, ?
@@ -27127,6 +27192,7 @@ func (q *Queries) FetchProjectVersionByVersionAndStatus(ctx context.Context, arg
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -27148,7 +27214,7 @@ func (q *Queries) FetchProjectVersionByVersionAndStatus(ctx context.Context, arg
 }
 
 const fetchProjectVersionByVersionAndStatusOrderedByCreatedAtASC = `-- name: FetchProjectVersionByVersionAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND status = ?  
     ORDER BY created_at ASC
@@ -27188,6 +27254,7 @@ func (q *Queries) FetchProjectVersionByVersionAndStatusOrderedByCreatedAtASC(ctx
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -27209,7 +27276,7 @@ func (q *Queries) FetchProjectVersionByVersionAndStatusOrderedByCreatedAtASC(ctx
 }
 
 const fetchProjectVersionByVersionAndStatusOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByVersionAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND status = ?  
     ORDER BY created_at DESC
@@ -27249,6 +27316,7 @@ func (q *Queries) FetchProjectVersionByVersionAndStatusOrderedByCreatedAtDESC(ct
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -27270,7 +27338,7 @@ func (q *Queries) FetchProjectVersionByVersionAndStatusOrderedByCreatedAtDESC(ct
 }
 
 const fetchProjectVersionByVersionAndStatusOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByVersionAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -27310,6 +27378,7 @@ func (q *Queries) FetchProjectVersionByVersionAndStatusOrderedByUpdatedAtASC(ctx
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -27331,7 +27400,7 @@ func (q *Queries) FetchProjectVersionByVersionAndStatusOrderedByUpdatedAtASC(ctx
 }
 
 const fetchProjectVersionByVersionAndStatusOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByVersionAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -27371,6 +27440,7 @@ func (q *Queries) FetchProjectVersionByVersionAndStatusOrderedByUpdatedAtDESC(ct
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -27392,7 +27462,7 @@ func (q *Queries) FetchProjectVersionByVersionAndStatusOrderedByUpdatedAtDESC(ct
 }
 
 const fetchProjectVersionByVersionOrderedByCreatedAtASC = `-- name: FetchProjectVersionByVersionOrderedByCreatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ?  
     ORDER BY created_at ASC
@@ -27426,6 +27496,7 @@ func (q *Queries) FetchProjectVersionByVersionOrderedByCreatedAtASC(ctx context.
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -27447,7 +27518,7 @@ func (q *Queries) FetchProjectVersionByVersionOrderedByCreatedAtASC(ctx context.
 }
 
 const fetchProjectVersionByVersionOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByVersionOrderedByCreatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ?  
     ORDER BY created_at DESC
@@ -27481,6 +27552,7 @@ func (q *Queries) FetchProjectVersionByVersionOrderedByCreatedAtDESC(ctx context
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -27502,7 +27574,7 @@ func (q *Queries) FetchProjectVersionByVersionOrderedByCreatedAtDESC(ctx context
 }
 
 const fetchProjectVersionByVersionOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByVersionOrderedByUpdatedAtASC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ?  
     ORDER BY updated_at ASC
@@ -27536,6 +27608,7 @@ func (q *Queries) FetchProjectVersionByVersionOrderedByUpdatedAtASC(ctx context.
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -27557,7 +27630,7 @@ func (q *Queries) FetchProjectVersionByVersionOrderedByUpdatedAtASC(ctx context.
 }
 
 const fetchProjectVersionByVersionOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByVersionOrderedByUpdatedAtDESC :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
      version = ?  
     ORDER BY updated_at DESC
@@ -27591,6 +27664,7 @@ func (q *Queries) FetchProjectVersionByVersionOrderedByUpdatedAtDESC(ctx context
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,
@@ -30826,6 +30900,340 @@ func (q *Queries) FetchUserConnectionByUUIDForUpdate(ctx context.Context, uuid s
 	return items, nil
 }
 
+const fetchUserProjectByStatus = `-- name: FetchUserProjectByStatus :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     status = ?  
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByStatusParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByStatus(ctx context.Context, arg FetchUserProjectByStatusParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByStatus, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByStatusOrderedByCreatedAtASC = `-- name: FetchUserProjectByStatusOrderedByCreatedAtASC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByStatusOrderedByCreatedAtASCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectByStatusOrderedByCreatedAtASCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByStatusOrderedByCreatedAtASC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByStatusOrderedByCreatedAtDESC = `-- name: FetchUserProjectByStatusOrderedByCreatedAtDESC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByStatusOrderedByCreatedAtDESCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectByStatusOrderedByCreatedAtDESCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByStatusOrderedByCreatedAtDESC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByStatusOrderedByUpdatedAtASC = `-- name: FetchUserProjectByStatusOrderedByUpdatedAtASC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByStatusOrderedByUpdatedAtASCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectByStatusOrderedByUpdatedAtASCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByStatusOrderedByUpdatedAtASC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByStatusOrderedByUpdatedAtDESC = `-- name: FetchUserProjectByStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByStatusOrderedByUpdatedAtDESCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectByStatusOrderedByUpdatedAtDESCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByStatusOrderedByUpdatedAtDESC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUUID = `-- name: FetchUserProjectByUUID :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     uuid = ?
+`
+
+func (q *Queries) FetchUserProjectByUUID(ctx context.Context, uuid string) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUUID, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUUIDForUpdate = `-- name: FetchUserProjectByUUIDForUpdate :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     uuid = ?      
+FOR UPDATE
+`
+
+func (q *Queries) FetchUserProjectByUUIDForUpdate(ctx context.Context, uuid string) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const fetchUserProjectVersionByStatus = `-- name: FetchUserProjectVersionByStatus :many
 SELECT uuid, version, project_version_uuid, user_uuid, data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project_version
 WHERE 
@@ -31147,7 +31555,7 @@ func (q *Queries) FetchUserProjectVersionByUUIDForUpdate(ctx context.Context, uu
 }
 
 const fetchUserTeamByStatus = `-- name: FetchUserTeamByStatus :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      status = ?  
     LIMIT ?, ?
@@ -31173,7 +31581,9 @@ func (q *Queries) FetchUserTeamByStatus(ctx context.Context, arg FetchUserTeamBy
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31194,7 +31604,7 @@ func (q *Queries) FetchUserTeamByStatus(ctx context.Context, arg FetchUserTeamBy
 }
 
 const fetchUserTeamByStatusOrderedByCreatedAtASC = `-- name: FetchUserTeamByStatusOrderedByCreatedAtASC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      status = ?  
     ORDER BY created_at ASC
@@ -31221,7 +31631,9 @@ func (q *Queries) FetchUserTeamByStatusOrderedByCreatedAtASC(ctx context.Context
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31242,7 +31654,7 @@ func (q *Queries) FetchUserTeamByStatusOrderedByCreatedAtASC(ctx context.Context
 }
 
 const fetchUserTeamByStatusOrderedByCreatedAtDESC = `-- name: FetchUserTeamByStatusOrderedByCreatedAtDESC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      status = ?  
     ORDER BY created_at DESC
@@ -31269,7 +31681,9 @@ func (q *Queries) FetchUserTeamByStatusOrderedByCreatedAtDESC(ctx context.Contex
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31290,7 +31704,7 @@ func (q *Queries) FetchUserTeamByStatusOrderedByCreatedAtDESC(ctx context.Contex
 }
 
 const fetchUserTeamByStatusOrderedByUpdatedAtASC = `-- name: FetchUserTeamByStatusOrderedByUpdatedAtASC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      status = ?  
     ORDER BY updated_at ASC
@@ -31317,7 +31731,9 @@ func (q *Queries) FetchUserTeamByStatusOrderedByUpdatedAtASC(ctx context.Context
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31338,7 +31754,7 @@ func (q *Queries) FetchUserTeamByStatusOrderedByUpdatedAtASC(ctx context.Context
 }
 
 const fetchUserTeamByStatusOrderedByUpdatedAtDESC = `-- name: FetchUserTeamByStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      status = ?  
     ORDER BY updated_at DESC
@@ -31365,7 +31781,9 @@ func (q *Queries) FetchUserTeamByStatusOrderedByUpdatedAtDESC(ctx context.Contex
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31386,7 +31804,7 @@ func (q *Queries) FetchUserTeamByStatusOrderedByUpdatedAtDESC(ctx context.Contex
 }
 
 const fetchUserTeamByUUID = `-- name: FetchUserTeamByUUID :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      uuid = ?
 `
@@ -31405,7 +31823,9 @@ func (q *Queries) FetchUserTeamByUUID(ctx context.Context, uuid string) ([]UserT
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31426,7 +31846,7 @@ func (q *Queries) FetchUserTeamByUUID(ctx context.Context, uuid string) ([]UserT
 }
 
 const fetchUserTeamByUUIDForUpdate = `-- name: FetchUserTeamByUUIDForUpdate :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      uuid = ?      
 FOR UPDATE
@@ -31446,7 +31866,9 @@ func (q *Queries) FetchUserTeamByUUIDForUpdate(ctx context.Context, uuid string)
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31467,7 +31889,7 @@ func (q *Queries) FetchUserTeamByUUIDForUpdate(ctx context.Context, uuid string)
 }
 
 const fetchUserTeamByUserEmail = `-- name: FetchUserTeamByUserEmail :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      user_email = ?  
     LIMIT ?, ?
@@ -31493,7 +31915,9 @@ func (q *Queries) FetchUserTeamByUserEmail(ctx context.Context, arg FetchUserTea
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31514,7 +31938,7 @@ func (q *Queries) FetchUserTeamByUserEmail(ctx context.Context, arg FetchUserTea
 }
 
 const fetchUserTeamByUserEmailAndStatus = `-- name: FetchUserTeamByUserEmailAndStatus :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      user_email = ? AND status = ?  
     LIMIT ?, ?
@@ -31546,7 +31970,9 @@ func (q *Queries) FetchUserTeamByUserEmailAndStatus(ctx context.Context, arg Fet
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31567,7 +31993,7 @@ func (q *Queries) FetchUserTeamByUserEmailAndStatus(ctx context.Context, arg Fet
 }
 
 const fetchUserTeamByUserEmailAndStatusOrderedByCreatedAtASC = `-- name: FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      user_email = ? AND status = ?  
     ORDER BY created_at ASC
@@ -31600,7 +32026,9 @@ func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtASC(ctx con
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31621,7 +32049,7 @@ func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtASC(ctx con
 }
 
 const fetchUserTeamByUserEmailAndStatusOrderedByCreatedAtDESC = `-- name: FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      user_email = ? AND status = ?  
     ORDER BY created_at DESC
@@ -31654,7 +32082,9 @@ func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtDESC(ctx co
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31675,7 +32105,7 @@ func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByCreatedAtDESC(ctx co
 }
 
 const fetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtASC = `-- name: FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      user_email = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -31708,7 +32138,9 @@ func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtASC(ctx con
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31729,7 +32161,7 @@ func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtASC(ctx con
 }
 
 const fetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtDESC = `-- name: FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      user_email = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -31762,7 +32194,9 @@ func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtDESC(ctx co
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31783,7 +32217,7 @@ func (q *Queries) FetchUserTeamByUserEmailAndStatusOrderedByUpdatedAtDESC(ctx co
 }
 
 const fetchUserTeamByUserEmailOrderedByCreatedAtASC = `-- name: FetchUserTeamByUserEmailOrderedByCreatedAtASC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      user_email = ?  
     ORDER BY created_at ASC
@@ -31810,7 +32244,9 @@ func (q *Queries) FetchUserTeamByUserEmailOrderedByCreatedAtASC(ctx context.Cont
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31831,7 +32267,7 @@ func (q *Queries) FetchUserTeamByUserEmailOrderedByCreatedAtASC(ctx context.Cont
 }
 
 const fetchUserTeamByUserEmailOrderedByCreatedAtDESC = `-- name: FetchUserTeamByUserEmailOrderedByCreatedAtDESC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      user_email = ?  
     ORDER BY created_at DESC
@@ -31858,7 +32294,9 @@ func (q *Queries) FetchUserTeamByUserEmailOrderedByCreatedAtDESC(ctx context.Con
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31879,7 +32317,7 @@ func (q *Queries) FetchUserTeamByUserEmailOrderedByCreatedAtDESC(ctx context.Con
 }
 
 const fetchUserTeamByUserEmailOrderedByUpdatedAtASC = `-- name: FetchUserTeamByUserEmailOrderedByUpdatedAtASC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      user_email = ?  
     ORDER BY updated_at ASC
@@ -31906,7 +32344,9 @@ func (q *Queries) FetchUserTeamByUserEmailOrderedByUpdatedAtASC(ctx context.Cont
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31927,7 +32367,7 @@ func (q *Queries) FetchUserTeamByUserEmailOrderedByUpdatedAtASC(ctx context.Cont
 }
 
 const fetchUserTeamByUserEmailOrderedByUpdatedAtDESC = `-- name: FetchUserTeamByUserEmailOrderedByUpdatedAtDESC :many
-SELECT uuid, user_uuid, user_email, team_uuid, roles, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
+SELECT uuid, user_uuid, user_email, team_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_team
 WHERE 
      user_email = ?  
     ORDER BY updated_at DESC
@@ -31954,7 +32394,9 @@ func (q *Queries) FetchUserTeamByUserEmailOrderedByUpdatedAtDESC(ctx context.Con
 			&i.UserUUID,
 			&i.UserEmail,
 			&i.TeamUUID,
-			&i.Roles,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -32148,7 +32590,7 @@ func (q *Queries) SearchOrganization(ctx context.Context, arg SearchOrganization
 }
 
 const searchProject = `-- name: SearchProject :many
-SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
+SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
     name like ? OR
     
@@ -32186,6 +32628,7 @@ func (q *Queries) SearchProject(ctx context.Context, arg SearchProjectParams) ([
 			&i.URL,
 			&i.OwnerUUID,
 			&i.TeamUUID,
+			&i.AccessType,
 			&i.ProjectExtensions,
 			&i.Status,
 			&i.CreatedAt,
@@ -32207,7 +32650,7 @@ func (q *Queries) SearchProject(ctx context.Context, arg SearchProjectParams) ([
 }
 
 const searchProjectVersion = `-- name: SearchProjectVersion :many
-SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
+SELECT uuid, version, identifier, description, project_uuid, entities, relationships, enums, services, base_version_uuid, review_status, reviews, deployments, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project_version
 WHERE 
     description like ? 
     LIMIT ?, ?
@@ -32240,6 +32683,7 @@ func (q *Queries) SearchProjectVersion(ctx context.Context, arg SearchProjectVer
 			&i.Services,
 			&i.BaseVersionUUID,
 			&i.ReviewStatus,
+			&i.Reviews,
 			&i.Deployments,
 			&i.Status,
 			&i.CreatedAt,

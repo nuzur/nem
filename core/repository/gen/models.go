@@ -106,6 +106,7 @@ type Project struct {
 	URL               sql.NullString  `json:"url"`
 	OwnerUUID         string          `json:"owner_uuid"`
 	TeamUUID          string          `json:"team_uuid"`
+	AccessType        int64           `json:"access_type"`
 	ProjectExtensions json.RawMessage `json:"project_extensions"`
 	Status            int64           `json:"status"`
 	CreatedAt         time.Time       `json:"created_at"`
@@ -126,6 +127,7 @@ type ProjectVersion struct {
 	Services        json.RawMessage `json:"services"`
 	BaseVersionUUID sql.NullString  `json:"base_version_uuid"`
 	ReviewStatus    int64           `json:"review_status"`
+	Reviews         json.RawMessage `json:"reviews"`
 	Deployments     json.RawMessage `json:"deployments"`
 	Status          int64           `json:"status"`
 	CreatedAt       time.Time       `json:"created_at"`
@@ -182,6 +184,21 @@ type UserConnection struct {
 	UpdatedAt          time.Time       `json:"updated_at"`
 }
 
+type UserProject struct {
+	UUID                    string         `json:"uuid"`
+	UserUUID                sql.NullString `json:"user_uuid"`
+	UserEmail               sql.NullString `json:"user_email"`
+	ProjectUUID             string         `json:"project_uuid"`
+	Role                    int64          `json:"role"`
+	ReviewRequiredStructure bool           `json:"review_required_structure"`
+	ReviewRequiredData      bool           `json:"review_required_data"`
+	Status                  int64          `json:"status"`
+	CreatedAt               time.Time      `json:"created_at"`
+	UpdatedAt               time.Time      `json:"updated_at"`
+	CreatedByUUID           string         `json:"created_by_uuid"`
+	UpdatedByUUID           string         `json:"updated_by_uuid"`
+}
+
 type UserProjectVersion struct {
 	UUID               string          `json:"uuid"`
 	Version            int64           `json:"version"`
@@ -196,14 +213,16 @@ type UserProjectVersion struct {
 }
 
 type UserTeam struct {
-	UUID          string          `json:"uuid"`
-	UserUUID      sql.NullString  `json:"user_uuid"`
-	UserEmail     sql.NullString  `json:"user_email"`
-	TeamUUID      string          `json:"team_uuid"`
-	Roles         json.RawMessage `json:"roles"`
-	Status        int64           `json:"status"`
-	CreatedAt     time.Time       `json:"created_at"`
-	UpdatedAt     time.Time       `json:"updated_at"`
-	CreatedByUUID string          `json:"created_by_uuid"`
-	UpdatedByUUID string          `json:"updated_by_uuid"`
+	UUID                    string         `json:"uuid"`
+	UserUUID                sql.NullString `json:"user_uuid"`
+	UserEmail               sql.NullString `json:"user_email"`
+	TeamUUID                string         `json:"team_uuid"`
+	Role                    int64          `json:"role"`
+	ReviewRequiredStructure bool           `json:"review_required_structure"`
+	ReviewRequiredData      bool           `json:"review_required_data"`
+	Status                  int64          `json:"status"`
+	CreatedAt               time.Time      `json:"created_at"`
+	UpdatedAt               time.Time      `json:"updated_at"`
+	CreatedByUUID           string         `json:"created_by_uuid"`
+	UpdatedByUUID           string         `json:"updated_by_uuid"`
 }

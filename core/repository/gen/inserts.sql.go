@@ -233,9 +233,9 @@ func (q *Queries) InsertOrganization(ctx context.Context, arg InsertOrganization
 
 const insertProject = `-- name: InsertProject :execresult
 INSERT INTO project
-(uuid,version,name,description,tags,url,owner_uuid,team_uuid,project_extensions,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,name,description,tags,url,owner_uuid,team_uuid,access_type,project_extensions,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertProjectParams struct {
@@ -247,6 +247,7 @@ type InsertProjectParams struct {
 	URL               sql.NullString  `json:"url"`
 	OwnerUUID         string          `json:"owner_uuid"`
 	TeamUUID          string          `json:"team_uuid"`
+	AccessType        int64           `json:"access_type"`
 	ProjectExtensions json.RawMessage `json:"project_extensions"`
 	Status            int64           `json:"status"`
 	CreatedAt         time.Time       `json:"created_at"`
@@ -265,6 +266,7 @@ func (q *Queries) InsertProject(ctx context.Context, arg InsertProjectParams) (s
 		arg.URL,
 		arg.OwnerUUID,
 		arg.TeamUUID,
+		arg.AccessType,
 		arg.ProjectExtensions,
 		arg.Status,
 		arg.CreatedAt,
@@ -276,9 +278,9 @@ func (q *Queries) InsertProject(ctx context.Context, arg InsertProjectParams) (s
 
 const insertProjectVersion = `-- name: InsertProjectVersion :execresult
 INSERT INTO project_version
-(uuid,version,identifier,description,project_uuid,entities,relationships,enums,services,base_version_uuid,review_status,deployments,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,identifier,description,project_uuid,entities,relationships,enums,services,base_version_uuid,review_status,reviews,deployments,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertProjectVersionParams struct {
@@ -293,6 +295,7 @@ type InsertProjectVersionParams struct {
 	Services        json.RawMessage `json:"services"`
 	BaseVersionUUID sql.NullString  `json:"base_version_uuid"`
 	ReviewStatus    int64           `json:"review_status"`
+	Reviews         json.RawMessage `json:"reviews"`
 	Deployments     json.RawMessage `json:"deployments"`
 	Status          int64           `json:"status"`
 	CreatedAt       time.Time       `json:"created_at"`
@@ -314,6 +317,7 @@ func (q *Queries) InsertProjectVersion(ctx context.Context, arg InsertProjectVer
 		arg.Services,
 		arg.BaseVersionUUID,
 		arg.ReviewStatus,
+		arg.Reviews,
 		arg.Deployments,
 		arg.Status,
 		arg.CreatedAt,
@@ -446,6 +450,45 @@ func (q *Queries) InsertUserConnection(ctx context.Context, arg InsertUserConnec
 	)
 }
 
+const insertUserProject = `-- name: InsertUserProject :execresult
+INSERT INTO user_project
+(uuid,user_uuid,user_email,project_uuid,role,review_required_structure,review_required_data,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?)
+`
+
+type InsertUserProjectParams struct {
+	UUID                    string         `json:"uuid"`
+	UserUUID                sql.NullString `json:"user_uuid"`
+	UserEmail               sql.NullString `json:"user_email"`
+	ProjectUUID             string         `json:"project_uuid"`
+	Role                    int64          `json:"role"`
+	ReviewRequiredStructure bool           `json:"review_required_structure"`
+	ReviewRequiredData      bool           `json:"review_required_data"`
+	Status                  int64          `json:"status"`
+	CreatedAt               time.Time      `json:"created_at"`
+	UpdatedAt               time.Time      `json:"updated_at"`
+	CreatedByUUID           string         `json:"created_by_uuid"`
+	UpdatedByUUID           string         `json:"updated_by_uuid"`
+}
+
+func (q *Queries) InsertUserProject(ctx context.Context, arg InsertUserProjectParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, insertUserProject,
+		arg.UUID,
+		arg.UserUUID,
+		arg.UserEmail,
+		arg.ProjectUUID,
+		arg.Role,
+		arg.ReviewRequiredStructure,
+		arg.ReviewRequiredData,
+		arg.Status,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+	)
+}
+
 const insertUserProjectVersion = `-- name: InsertUserProjectVersion :execresult
 INSERT INTO user_project_version
 (uuid,version,project_version_uuid,user_uuid,data,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
@@ -483,22 +526,24 @@ func (q *Queries) InsertUserProjectVersion(ctx context.Context, arg InsertUserPr
 
 const insertUserTeam = `-- name: InsertUserTeam :execresult
 INSERT INTO user_team
-(uuid,user_uuid,user_email,team_uuid,roles,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,user_uuid,user_email,team_uuid,role,review_required_structure,review_required_data,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertUserTeamParams struct {
-	UUID          string          `json:"uuid"`
-	UserUUID      sql.NullString  `json:"user_uuid"`
-	UserEmail     sql.NullString  `json:"user_email"`
-	TeamUUID      string          `json:"team_uuid"`
-	Roles         json.RawMessage `json:"roles"`
-	Status        int64           `json:"status"`
-	CreatedAt     time.Time       `json:"created_at"`
-	UpdatedAt     time.Time       `json:"updated_at"`
-	CreatedByUUID string          `json:"created_by_uuid"`
-	UpdatedByUUID string          `json:"updated_by_uuid"`
+	UUID                    string         `json:"uuid"`
+	UserUUID                sql.NullString `json:"user_uuid"`
+	UserEmail               sql.NullString `json:"user_email"`
+	TeamUUID                string         `json:"team_uuid"`
+	Role                    int64          `json:"role"`
+	ReviewRequiredStructure bool           `json:"review_required_structure"`
+	ReviewRequiredData      bool           `json:"review_required_data"`
+	Status                  int64          `json:"status"`
+	CreatedAt               time.Time      `json:"created_at"`
+	UpdatedAt               time.Time      `json:"updated_at"`
+	CreatedByUUID           string         `json:"created_by_uuid"`
+	UpdatedByUUID           string         `json:"updated_by_uuid"`
 }
 
 func (q *Queries) InsertUserTeam(ctx context.Context, arg InsertUserTeamParams) (sql.Result, error) {
@@ -507,7 +552,9 @@ func (q *Queries) InsertUserTeam(ctx context.Context, arg InsertUserTeamParams) 
 		arg.UserUUID,
 		arg.UserEmail,
 		arg.TeamUUID,
-		arg.Roles,
+		arg.Role,
+		arg.ReviewRequiredStructure,
+		arg.ReviewRequiredData,
 		arg.Status,
 		arg.CreatedAt,
 		arg.UpdatedAt,

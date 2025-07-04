@@ -28,6 +28,7 @@ func mapModelToEntity(model nemdb.Project) main_entity.Project {
 		URL:               mapper.SqlNullStringToStringPtr(model.URL),
 		OwnerUUID:         uuid.FromStringOrNil(model.OwnerUUID),
 		TeamUUID:          uuid.FromStringOrNil(model.TeamUUID),
+		AccessType:        main_entity.AccessType(model.AccessType),
 		ProjectExtensions: project_extension.ProjectExtensionSliceFromJSON(model.ProjectExtensions),
 		Status:            main_entity.Status(model.Status),
 		CreatedAt:         model.CreatedAt,

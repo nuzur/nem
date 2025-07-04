@@ -153,7 +153,11 @@ func user_teamDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("team_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("roles", pb.UserTeamRole(0).Type()),
+		filtering.DeclareEnumIdent("role", pb.UserTeamRole(0).Type()),
+
+		filtering.DeclareIdent("review_required_structure", filtering.TypeBool),
+
+		filtering.DeclareIdent("review_required_data", filtering.TypeBool),
 
 		filtering.DeclareEnumIdent("status", pb.UserTeamStatus(0).Type()),
 

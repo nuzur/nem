@@ -25,6 +25,7 @@ type Project struct {
 	URL               *string                              `json:"url"`
 	OwnerUUID         uuid.UUID                            `json:"owner_uuid"`
 	TeamUUID          uuid.UUID                            `json:"team_uuid"`
+	AccessType        AccessType                           `json:"access_type"`
 	ProjectExtensions []project_extension.ProjectExtension `json:"project_extensions"`
 	Status            Status                               `json:"status"`
 	CreatedAt         time.Time                            `json:"created_at"`
@@ -61,6 +62,7 @@ func (e Project) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["url"] = types.StringFieldType
 	res["owner_uuid"] = types.UUIDFieldType
 	res["team_uuid"] = types.UUIDFieldType
+	res["access_type"] = types.SingleEnumFieldType
 	res["project_extensions"] = types.MultiDependantEntityFieldType
 	res["status"] = types.SingleEnumFieldType
 	res["created_at"] = types.TimestampFieldType
@@ -142,6 +144,7 @@ func NewProjectWithRandomValues() Project {
 		URL:               randomvalues.GetRandomStringValuePtr(),
 		OwnerUUID:         randomvalues.GetRandomUUIDValue(),
 		TeamUUID:          randomvalues.GetRandomUUIDValue(),
+		AccessType:        randomvalues.GetRandomOptionValue[AccessType](2),
 		ProjectExtensions: project_extension.NewProjectExtensionSliceWithRandomValues(rand.Intn(10)),
 		Status:            randomvalues.GetRandomOptionValue[Status](2),
 		CreatedAt:         randomvalues.GetRandomTimeValue(),

@@ -22,6 +22,64 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ReviewConfigReviewUserRole int32
+
+const (
+	ReviewConfigReviewUserRole_REVIEW_CONFIG_REVIEW_USER_ROLE_INVALID      ReviewConfigReviewUserRole = 0
+	ReviewConfigReviewUserRole_REVIEW_CONFIG_REVIEW_USER_ROLE_ADMIN        ReviewConfigReviewUserRole = 1
+	ReviewConfigReviewUserRole_REVIEW_CONFIG_REVIEW_USER_ROLE_DEVELOPER    ReviewConfigReviewUserRole = 2
+	ReviewConfigReviewUserRole_REVIEW_CONFIG_REVIEW_USER_ROLE_DATA_MANAGER ReviewConfigReviewUserRole = 3
+	ReviewConfigReviewUserRole_REVIEW_CONFIG_REVIEW_USER_ROLE_DATA_ANALYST ReviewConfigReviewUserRole = 4
+	ReviewConfigReviewUserRole_REVIEW_CONFIG_REVIEW_USER_ROLE_VIEWER       ReviewConfigReviewUserRole = 5
+)
+
+// Enum value maps for ReviewConfigReviewUserRole.
+var (
+	ReviewConfigReviewUserRole_name = map[int32]string{
+		0: "REVIEW_CONFIG_REVIEW_USER_ROLE_INVALID",
+		1: "REVIEW_CONFIG_REVIEW_USER_ROLE_ADMIN",
+		2: "REVIEW_CONFIG_REVIEW_USER_ROLE_DEVELOPER",
+		3: "REVIEW_CONFIG_REVIEW_USER_ROLE_DATA_MANAGER",
+		4: "REVIEW_CONFIG_REVIEW_USER_ROLE_DATA_ANALYST",
+		5: "REVIEW_CONFIG_REVIEW_USER_ROLE_VIEWER",
+	}
+	ReviewConfigReviewUserRole_value = map[string]int32{
+		"REVIEW_CONFIG_REVIEW_USER_ROLE_INVALID":      0,
+		"REVIEW_CONFIG_REVIEW_USER_ROLE_ADMIN":        1,
+		"REVIEW_CONFIG_REVIEW_USER_ROLE_DEVELOPER":    2,
+		"REVIEW_CONFIG_REVIEW_USER_ROLE_DATA_MANAGER": 3,
+		"REVIEW_CONFIG_REVIEW_USER_ROLE_DATA_ANALYST": 4,
+		"REVIEW_CONFIG_REVIEW_USER_ROLE_VIEWER":       5,
+	}
+)
+
+func (x ReviewConfigReviewUserRole) Enum() *ReviewConfigReviewUserRole {
+	p := new(ReviewConfigReviewUserRole)
+	*p = x
+	return p
+}
+
+func (x ReviewConfigReviewUserRole) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ReviewConfigReviewUserRole) Descriptor() protoreflect.EnumDescriptor {
+	return file_review_config_proto_enumTypes[0].Descriptor()
+}
+
+func (ReviewConfigReviewUserRole) Type() protoreflect.EnumType {
+	return &file_review_config_proto_enumTypes[0]
+}
+
+func (x ReviewConfigReviewUserRole) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ReviewConfigReviewUserRole.Descriptor instead.
+func (ReviewConfigReviewUserRole) EnumDescriptor() ([]byte, []int) {
+	return file_review_config_proto_rawDescGZIP(), []int{0}
+}
+
 type ReviewConfigStatus int32
 
 const (
@@ -55,11 +113,11 @@ func (x ReviewConfigStatus) String() string {
 }
 
 func (ReviewConfigStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_review_config_proto_enumTypes[0].Descriptor()
+	return file_review_config_proto_enumTypes[1].Descriptor()
 }
 
 func (ReviewConfigStatus) Type() protoreflect.EnumType {
-	return &file_review_config_proto_enumTypes[0]
+	return &file_review_config_proto_enumTypes[1]
 }
 
 func (x ReviewConfigStatus) Number() protoreflect.EnumNumber {
@@ -68,132 +126,22 @@ func (x ReviewConfigStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ReviewConfigStatus.Descriptor instead.
 func (ReviewConfigStatus) EnumDescriptor() ([]byte, []int) {
-	return file_review_config_proto_rawDescGZIP(), []int{0}
-}
-
-type ReviewConfigType int32
-
-const (
-	ReviewConfigType_REVIEW_CONFIG_TYPE_INVALID           ReviewConfigType = 0
-	ReviewConfigType_REVIEW_CONFIG_TYPE_DEFAULT           ReviewConfigType = 1
-	ReviewConfigType_REVIEW_CONFIG_TYPE_PROJECT_VERSION   ReviewConfigType = 2
-	ReviewConfigType_REVIEW_CONFIG_TYPE_EXTENSION_VERSION ReviewConfigType = 3
-)
-
-// Enum value maps for ReviewConfigType.
-var (
-	ReviewConfigType_name = map[int32]string{
-		0: "REVIEW_CONFIG_TYPE_INVALID",
-		1: "REVIEW_CONFIG_TYPE_DEFAULT",
-		2: "REVIEW_CONFIG_TYPE_PROJECT_VERSION",
-		3: "REVIEW_CONFIG_TYPE_EXTENSION_VERSION",
-	}
-	ReviewConfigType_value = map[string]int32{
-		"REVIEW_CONFIG_TYPE_INVALID":           0,
-		"REVIEW_CONFIG_TYPE_DEFAULT":           1,
-		"REVIEW_CONFIG_TYPE_PROJECT_VERSION":   2,
-		"REVIEW_CONFIG_TYPE_EXTENSION_VERSION": 3,
-	}
-)
-
-func (x ReviewConfigType) Enum() *ReviewConfigType {
-	p := new(ReviewConfigType)
-	*p = x
-	return p
-}
-
-func (x ReviewConfigType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ReviewConfigType) Descriptor() protoreflect.EnumDescriptor {
-	return file_review_config_proto_enumTypes[1].Descriptor()
-}
-
-func (ReviewConfigType) Type() protoreflect.EnumType {
-	return &file_review_config_proto_enumTypes[1]
-}
-
-func (x ReviewConfigType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ReviewConfigType.Descriptor instead.
-func (ReviewConfigType) EnumDescriptor() ([]byte, []int) {
 	return file_review_config_proto_rawDescGZIP(), []int{1}
 }
 
-type ReviewConfigUserRole int32
-
-const (
-	ReviewConfigUserRole_REVIEW_CONFIG_USER_ROLE_INVALID      ReviewConfigUserRole = 0
-	ReviewConfigUserRole_REVIEW_CONFIG_USER_ROLE_ADMIN        ReviewConfigUserRole = 1
-	ReviewConfigUserRole_REVIEW_CONFIG_USER_ROLE_DEVELOPER    ReviewConfigUserRole = 2
-	ReviewConfigUserRole_REVIEW_CONFIG_USER_ROLE_DATA_MANAGER ReviewConfigUserRole = 3
-	ReviewConfigUserRole_REVIEW_CONFIG_USER_ROLE_DATA_ANALYST ReviewConfigUserRole = 4
-	ReviewConfigUserRole_REVIEW_CONFIG_USER_ROLE_VIEWER       ReviewConfigUserRole = 5
-)
-
-// Enum value maps for ReviewConfigUserRole.
-var (
-	ReviewConfigUserRole_name = map[int32]string{
-		0: "REVIEW_CONFIG_USER_ROLE_INVALID",
-		1: "REVIEW_CONFIG_USER_ROLE_ADMIN",
-		2: "REVIEW_CONFIG_USER_ROLE_DEVELOPER",
-		3: "REVIEW_CONFIG_USER_ROLE_DATA_MANAGER",
-		4: "REVIEW_CONFIG_USER_ROLE_DATA_ANALYST",
-		5: "REVIEW_CONFIG_USER_ROLE_VIEWER",
-	}
-	ReviewConfigUserRole_value = map[string]int32{
-		"REVIEW_CONFIG_USER_ROLE_INVALID":      0,
-		"REVIEW_CONFIG_USER_ROLE_ADMIN":        1,
-		"REVIEW_CONFIG_USER_ROLE_DEVELOPER":    2,
-		"REVIEW_CONFIG_USER_ROLE_DATA_MANAGER": 3,
-		"REVIEW_CONFIG_USER_ROLE_DATA_ANALYST": 4,
-		"REVIEW_CONFIG_USER_ROLE_VIEWER":       5,
-	}
-)
-
-func (x ReviewConfigUserRole) Enum() *ReviewConfigUserRole {
-	p := new(ReviewConfigUserRole)
-	*p = x
-	return p
-}
-
-func (x ReviewConfigUserRole) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ReviewConfigUserRole) Descriptor() protoreflect.EnumDescriptor {
-	return file_review_config_proto_enumTypes[2].Descriptor()
-}
-
-func (ReviewConfigUserRole) Type() protoreflect.EnumType {
-	return &file_review_config_proto_enumTypes[2]
-}
-
-func (x ReviewConfigUserRole) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ReviewConfigUserRole.Descriptor instead.
-func (ReviewConfigUserRole) EnumDescriptor() ([]byte, []int) {
-	return file_review_config_proto_rawDescGZIP(), []int{2}
-}
-
 type ReviewConfig struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	Types         []ReviewConfigType     `protobuf:"varint,2,rep,packed,name=types,proto3,enum=nem.ReviewConfigType" json:"types,omitempty"`
-	UserRoles     []ReviewConfigUserRole `protobuf:"varint,3,rep,packed,name=user_roles,json=userRoles,proto3,enum=nem.ReviewConfigUserRole" json:"user_roles,omitempty"`
-	MinReviews    int64                  `protobuf:"varint,4,opt,name=min_reviews,json=minReviews,proto3" json:"min_reviews,omitempty"`
-	Status        ReviewConfigStatus     `protobuf:"varint,5,opt,name=status,proto3,enum=nem.ReviewConfigStatus" json:"status,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CreatedByUuid string                 `protobuf:"bytes,8,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
-	UpdatedByUuid string                 `protobuf:"bytes,9,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState       `protogen:"open.v1"`
+	Uuid            string                       `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	ReviewUserRoles []ReviewConfigReviewUserRole `protobuf:"varint,2,rep,packed,name=review_user_roles,json=reviewUserRoles,proto3,enum=nem.ReviewConfigReviewUserRole" json:"review_user_roles,omitempty"`
+	ReviewUserUuids []string                     `protobuf:"bytes,3,rep,name=review_user_uuids,json=reviewUserUuids,proto3" json:"review_user_uuids,omitempty"`
+	MinReviews      int64                        `protobuf:"varint,4,opt,name=min_reviews,json=minReviews,proto3" json:"min_reviews,omitempty"`
+	Status          ReviewConfigStatus           `protobuf:"varint,5,opt,name=status,proto3,enum=nem.ReviewConfigStatus" json:"status,omitempty"`
+	CreatedAt       *timestamppb.Timestamp       `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt       *timestamppb.Timestamp       `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedByUuid   string                       `protobuf:"bytes,8,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
+	UpdatedByUuid   string                       `protobuf:"bytes,9,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ReviewConfig) Reset() {
@@ -233,16 +181,16 @@ func (x *ReviewConfig) GetUuid() string {
 	return ""
 }
 
-func (x *ReviewConfig) GetTypes() []ReviewConfigType {
+func (x *ReviewConfig) GetReviewUserRoles() []ReviewConfigReviewUserRole {
 	if x != nil {
-		return x.Types
+		return x.ReviewUserRoles
 	}
 	return nil
 }
 
-func (x *ReviewConfig) GetUserRoles() []ReviewConfigUserRole {
+func (x *ReviewConfig) GetReviewUserUuids() []string {
 	if x != nil {
-		return x.UserRoles
+		return x.ReviewUserUuids
 	}
 	return nil
 }
@@ -293,12 +241,11 @@ var File_review_config_proto protoreflect.FileDescriptor
 
 const file_review_config_proto_rawDesc = "" +
 	"\n" +
-	"\x13review_config.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa1\x03\n" +
+	"\x13review_config.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb3\x03\n" +
 	"\fReviewConfig\x12\x12\n" +
-	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12+\n" +
-	"\x05types\x18\x02 \x03(\x0e2\x15.nem.ReviewConfigTypeR\x05types\x128\n" +
-	"\n" +
-	"user_roles\x18\x03 \x03(\x0e2\x19.nem.ReviewConfigUserRoleR\tuserRoles\x12\x1f\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12K\n" +
+	"\x11review_user_roles\x18\x02 \x03(\x0e2\x1f.nem.ReviewConfigReviewUserRoleR\x0freviewUserRoles\x12*\n" +
+	"\x11review_user_uuids\x18\x03 \x03(\tR\x0freviewUserUuids\x12\x1f\n" +
 	"\vmin_reviews\x18\x04 \x01(\x03R\n" +
 	"minReviews\x12/\n" +
 	"\x06status\x18\x05 \x01(\x0e2\x17.nem.ReviewConfigStatusR\x06status\x129\n" +
@@ -307,23 +254,18 @@ const file_review_config_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
 	"\x0fcreated_by_uuid\x18\b \x01(\tR\rcreatedByUuid\x12&\n" +
-	"\x0fupdated_by_uuid\x18\t \x01(\tR\rupdatedByUuid*z\n" +
+	"\x0fupdated_by_uuid\x18\t \x01(\tR\rupdatedByUuid*\xad\x02\n" +
+	"\x1aReviewConfigReviewUserRole\x12*\n" +
+	"&REVIEW_CONFIG_REVIEW_USER_ROLE_INVALID\x10\x00\x12(\n" +
+	"$REVIEW_CONFIG_REVIEW_USER_ROLE_ADMIN\x10\x01\x12,\n" +
+	"(REVIEW_CONFIG_REVIEW_USER_ROLE_DEVELOPER\x10\x02\x12/\n" +
+	"+REVIEW_CONFIG_REVIEW_USER_ROLE_DATA_MANAGER\x10\x03\x12/\n" +
+	"+REVIEW_CONFIG_REVIEW_USER_ROLE_DATA_ANALYST\x10\x04\x12)\n" +
+	"%REVIEW_CONFIG_REVIEW_USER_ROLE_VIEWER\x10\x05*z\n" +
 	"\x12ReviewConfigStatus\x12 \n" +
 	"\x1cREVIEW_CONFIG_STATUS_INVALID\x10\x00\x12\x1f\n" +
 	"\x1bREVIEW_CONFIG_STATUS_ACTIVE\x10\x01\x12!\n" +
-	"\x1dREVIEW_CONFIG_STATUS_DISABLED\x10\x02*\xa4\x01\n" +
-	"\x10ReviewConfigType\x12\x1e\n" +
-	"\x1aREVIEW_CONFIG_TYPE_INVALID\x10\x00\x12\x1e\n" +
-	"\x1aREVIEW_CONFIG_TYPE_DEFAULT\x10\x01\x12&\n" +
-	"\"REVIEW_CONFIG_TYPE_PROJECT_VERSION\x10\x02\x12(\n" +
-	"$REVIEW_CONFIG_TYPE_EXTENSION_VERSION\x10\x03*\xfd\x01\n" +
-	"\x14ReviewConfigUserRole\x12#\n" +
-	"\x1fREVIEW_CONFIG_USER_ROLE_INVALID\x10\x00\x12!\n" +
-	"\x1dREVIEW_CONFIG_USER_ROLE_ADMIN\x10\x01\x12%\n" +
-	"!REVIEW_CONFIG_USER_ROLE_DEVELOPER\x10\x02\x12(\n" +
-	"$REVIEW_CONFIG_USER_ROLE_DATA_MANAGER\x10\x03\x12(\n" +
-	"$REVIEW_CONFIG_USER_ROLE_DATA_ANALYST\x10\x04\x12\"\n" +
-	"\x1eREVIEW_CONFIG_USER_ROLE_VIEWER\x10\x05B3\n" +
+	"\x1dREVIEW_CONFIG_STATUS_DISABLED\x10\x02B3\n" +
 	"\x14github.com/nuzur/nemB\fReviewConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -338,26 +280,24 @@ func file_review_config_proto_rawDescGZIP() []byte {
 	return file_review_config_proto_rawDescData
 }
 
-var file_review_config_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_review_config_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_review_config_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_review_config_proto_goTypes = []any{
-	(ReviewConfigStatus)(0),       // 0: nem.ReviewConfigStatus
-	(ReviewConfigType)(0),         // 1: nem.ReviewConfigType
-	(ReviewConfigUserRole)(0),     // 2: nem.ReviewConfigUserRole
-	(*ReviewConfig)(nil),          // 3: nem.ReviewConfig
-	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	(ReviewConfigReviewUserRole)(0), // 0: nem.ReviewConfigReviewUserRole
+	(ReviewConfigStatus)(0),         // 1: nem.ReviewConfigStatus
+	(*ReviewConfig)(nil),            // 2: nem.ReviewConfig
+	(*timestamppb.Timestamp)(nil),   // 3: google.protobuf.Timestamp
 }
 var file_review_config_proto_depIdxs = []int32{
-	1, // 0: nem.ReviewConfig.types:type_name -> nem.ReviewConfigType
-	2, // 1: nem.ReviewConfig.user_roles:type_name -> nem.ReviewConfigUserRole
-	0, // 2: nem.ReviewConfig.status:type_name -> nem.ReviewConfigStatus
-	4, // 3: nem.ReviewConfig.created_at:type_name -> google.protobuf.Timestamp
-	4, // 4: nem.ReviewConfig.updated_at:type_name -> google.protobuf.Timestamp
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	0, // 0: nem.ReviewConfig.review_user_roles:type_name -> nem.ReviewConfigReviewUserRole
+	1, // 1: nem.ReviewConfig.status:type_name -> nem.ReviewConfigStatus
+	3, // 2: nem.ReviewConfig.created_at:type_name -> google.protobuf.Timestamp
+	3, // 3: nem.ReviewConfig.updated_at:type_name -> google.protobuf.Timestamp
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_review_config_proto_init() }
@@ -370,7 +310,7 @@ func file_review_config_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_review_config_proto_rawDesc), len(file_review_config_proto_rawDesc)),
-			NumEnums:      3,
+			NumEnums:      2,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
