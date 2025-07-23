@@ -15,6 +15,7 @@ type ChangeRequest struct {
 	Version            int64           `json:"version"`
 	Title              string          `json:"title"`
 	Description        sql.NullString  `json:"description"`
+	ProjectUUID        string          `json:"project_uuid"`
 	ProjectVersionUUID string          `json:"project_version_uuid"`
 	ChangeType         int64           `json:"change_type"`
 	DataChanges        json.RawMessage `json:"data_changes"`

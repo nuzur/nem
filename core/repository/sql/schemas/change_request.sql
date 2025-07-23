@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `change_request` (
   `version` INT NOT NULL  ,
   `title` VARCHAR(255) NOT NULL  ,
   `description` VARCHAR(255)   ,
+  `project_uuid` CHAR(36) NOT NULL  ,
   `project_version_uuid` CHAR(36) NOT NULL  ,
   `change_type` INT NOT NULL  ,
   `data_changes` JSON   ,
@@ -18,6 +19,9 @@ CREATE TABLE IF NOT EXISTS `change_request` (
   `updated_by_uuid` CHAR(36) NOT NULL  ,  
   PRIMARY KEY (`uuid`),
   INDEX `version` (`version` ASC),
+  INDEX `project_uuid` (`project_uuid` ASC),
+  INDEX `project_version_uuid` (`project_version_uuid` ASC),
+  INDEX `owner_uuid` (`owner_uuid` ASC),
   INDEX `status` (`status` ASC),
   INDEX `created_at` (`created_at` ASC),
   INDEX `updated_at` (`updated_at` ASC))  

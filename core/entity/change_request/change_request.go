@@ -22,6 +22,7 @@ type ChangeRequest struct {
 	Version            int64                                                `json:"version"`
 	Title              string                                               `json:"title"`
 	Description        *string                                              `json:"description"`
+	ProjectUUID        uuid.UUID                                            `json:"project_uuid"`
 	ProjectVersionUUID uuid.UUID                                            `json:"project_version_uuid"`
 	ChangeType         ChangeType                                           `json:"change_type"`
 	DataChanges        []change_request_data_change.ChangeRequestDataChange `json:"data_changes"`
@@ -60,6 +61,7 @@ func (e ChangeRequest) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["version"] = types.IntFieldType
 	res["title"] = types.StringFieldType
 	res["description"] = types.StringFieldType
+	res["project_uuid"] = types.UUIDFieldType
 	res["project_version_uuid"] = types.UUIDFieldType
 	res["change_type"] = types.SingleEnumFieldType
 	res["data_changes"] = types.MultiDependantEntityFieldType
@@ -143,6 +145,7 @@ func NewChangeRequestWithRandomValues() ChangeRequest {
 		Version:            randomvalues.GetRandomIntValue(),
 		Title:              randomvalues.GetRandomStringValue(),
 		Description:        randomvalues.GetRandomStringValuePtr(),
+		ProjectUUID:        randomvalues.GetRandomUUIDValue(),
 		ProjectVersionUUID: randomvalues.GetRandomUUIDValue(),
 		ChangeType:         randomvalues.GetRandomOptionValue[ChangeType](2),
 		DataChanges:        change_request_data_change.NewChangeRequestDataChangeSliceWithRandomValues(rand.Intn(10)),

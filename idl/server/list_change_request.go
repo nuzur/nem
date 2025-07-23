@@ -157,6 +157,8 @@ func change_requestDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("description", filtering.TypeString),
 
+		filtering.DeclareIdent("project_uuid", filtering.TypeString),
+
 		filtering.DeclareIdent("project_version_uuid", filtering.TypeString),
 
 		filtering.DeclareEnumIdent("change_type", pb.ChangeRequestChangeType(0).Type()),

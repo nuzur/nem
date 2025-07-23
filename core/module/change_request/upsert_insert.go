@@ -107,6 +107,8 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertChangeR
 
 		Description: mapper.StringPtrToSqlNullString(req.ChangeRequest.Description),
 
+		ProjectUUID: req.ChangeRequest.ProjectUUID.String(),
+
 		ProjectVersionUUID: req.ChangeRequest.ProjectVersionUUID.String(),
 
 		ChangeType: req.ChangeRequest.ChangeType.ToInt64(),

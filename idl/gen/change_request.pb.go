@@ -187,18 +187,19 @@ type ChangeRequest struct {
 	Version            int64                      `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
 	Title              string                     `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	Description        string                     `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	ProjectVersionUuid string                     `protobuf:"bytes,5,opt,name=project_version_uuid,json=projectVersionUuid,proto3" json:"project_version_uuid,omitempty"`
-	ChangeType         ChangeRequestChangeType    `protobuf:"varint,6,opt,name=change_type,json=changeType,proto3,enum=nem.ChangeRequestChangeType" json:"change_type,omitempty"`
-	DataChanges        []*ChangeRequestDataChange `protobuf:"bytes,7,rep,name=data_changes,json=dataChanges,proto3" json:"data_changes,omitempty"`
-	VersionChanges     string                     `protobuf:"bytes,8,opt,name=version_changes,json=versionChanges,proto3" json:"version_changes,omitempty"`
-	Reviews            []*ChangeRequestReview     `protobuf:"bytes,9,rep,name=reviews,proto3" json:"reviews,omitempty"`
-	ReviewStatus       ChangeRequestReviewStatus  `protobuf:"varint,10,opt,name=review_status,json=reviewStatus,proto3,enum=nem.ChangeRequestReviewStatus" json:"review_status,omitempty"`
-	OwnerUuid          string                     `protobuf:"bytes,11,opt,name=owner_uuid,json=ownerUuid,proto3" json:"owner_uuid,omitempty"`
-	Status             ChangeRequestStatus        `protobuf:"varint,12,opt,name=status,proto3,enum=nem.ChangeRequestStatus" json:"status,omitempty"`
-	CreatedAt          *timestamppb.Timestamp     `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt          *timestamppb.Timestamp     `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CreatedByUuid      string                     `protobuf:"bytes,15,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
-	UpdatedByUuid      string                     `protobuf:"bytes,16,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	ProjectUuid        string                     `protobuf:"bytes,5,opt,name=project_uuid,json=projectUuid,proto3" json:"project_uuid,omitempty"`
+	ProjectVersionUuid string                     `protobuf:"bytes,6,opt,name=project_version_uuid,json=projectVersionUuid,proto3" json:"project_version_uuid,omitempty"`
+	ChangeType         ChangeRequestChangeType    `protobuf:"varint,7,opt,name=change_type,json=changeType,proto3,enum=nem.ChangeRequestChangeType" json:"change_type,omitempty"`
+	DataChanges        []*ChangeRequestDataChange `protobuf:"bytes,8,rep,name=data_changes,json=dataChanges,proto3" json:"data_changes,omitempty"`
+	VersionChanges     string                     `protobuf:"bytes,9,opt,name=version_changes,json=versionChanges,proto3" json:"version_changes,omitempty"`
+	Reviews            []*ChangeRequestReview     `protobuf:"bytes,10,rep,name=reviews,proto3" json:"reviews,omitempty"`
+	ReviewStatus       ChangeRequestReviewStatus  `protobuf:"varint,11,opt,name=review_status,json=reviewStatus,proto3,enum=nem.ChangeRequestReviewStatus" json:"review_status,omitempty"`
+	OwnerUuid          string                     `protobuf:"bytes,12,opt,name=owner_uuid,json=ownerUuid,proto3" json:"owner_uuid,omitempty"`
+	Status             ChangeRequestStatus        `protobuf:"varint,13,opt,name=status,proto3,enum=nem.ChangeRequestStatus" json:"status,omitempty"`
+	CreatedAt          *timestamppb.Timestamp     `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt          *timestamppb.Timestamp     `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedByUuid      string                     `protobuf:"bytes,16,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
+	UpdatedByUuid      string                     `protobuf:"bytes,17,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -257,6 +258,13 @@ func (x *ChangeRequest) GetTitle() string {
 func (x *ChangeRequest) GetDescription() string {
 	if x != nil {
 		return x.Description
+	}
+	return ""
+}
+
+func (x *ChangeRequest) GetProjectUuid() string {
+	if x != nil {
+		return x.ProjectUuid
 	}
 	return ""
 }
@@ -349,29 +357,30 @@ var File_change_request_proto protoreflect.FileDescriptor
 
 const file_change_request_proto_rawDesc = "" +
 	"\n" +
-	"\x14change_request.proto\x12\x03nem\x1a change_request_data_change.proto\x1a\x1bchange_request_review.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe0\x05\n" +
+	"\x14change_request.proto\x12\x03nem\x1a change_request_data_change.proto\x1a\x1bchange_request_review.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x83\x06\n" +
 	"\rChangeRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\x120\n" +
-	"\x14project_version_uuid\x18\x05 \x01(\tR\x12projectVersionUuid\x12=\n" +
-	"\vchange_type\x18\x06 \x01(\x0e2\x1c.nem.ChangeRequestChangeTypeR\n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12!\n" +
+	"\fproject_uuid\x18\x05 \x01(\tR\vprojectUuid\x120\n" +
+	"\x14project_version_uuid\x18\x06 \x01(\tR\x12projectVersionUuid\x12=\n" +
+	"\vchange_type\x18\a \x01(\x0e2\x1c.nem.ChangeRequestChangeTypeR\n" +
 	"changeType\x12?\n" +
-	"\fdata_changes\x18\a \x03(\v2\x1c.nem.ChangeRequestDataChangeR\vdataChanges\x12'\n" +
-	"\x0fversion_changes\x18\b \x01(\tR\x0eversionChanges\x122\n" +
-	"\areviews\x18\t \x03(\v2\x18.nem.ChangeRequestReviewR\areviews\x12C\n" +
-	"\rreview_status\x18\n" +
-	" \x01(\x0e2\x1e.nem.ChangeRequestReviewStatusR\freviewStatus\x12\x1d\n" +
+	"\fdata_changes\x18\b \x03(\v2\x1c.nem.ChangeRequestDataChangeR\vdataChanges\x12'\n" +
+	"\x0fversion_changes\x18\t \x01(\tR\x0eversionChanges\x122\n" +
+	"\areviews\x18\n" +
+	" \x03(\v2\x18.nem.ChangeRequestReviewR\areviews\x12C\n" +
+	"\rreview_status\x18\v \x01(\x0e2\x1e.nem.ChangeRequestReviewStatusR\freviewStatus\x12\x1d\n" +
 	"\n" +
-	"owner_uuid\x18\v \x01(\tR\townerUuid\x120\n" +
-	"\x06status\x18\f \x01(\x0e2\x18.nem.ChangeRequestStatusR\x06status\x129\n" +
+	"owner_uuid\x18\f \x01(\tR\townerUuid\x120\n" +
+	"\x06status\x18\r \x01(\x0e2\x18.nem.ChangeRequestStatusR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
-	"\x0fcreated_by_uuid\x18\x0f \x01(\tR\rcreatedByUuid\x12&\n" +
-	"\x0fupdated_by_uuid\x18\x10 \x01(\tR\rupdatedByUuid*\x9e\x01\n" +
+	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
+	"\x0fcreated_by_uuid\x18\x10 \x01(\tR\rcreatedByUuid\x12&\n" +
+	"\x0fupdated_by_uuid\x18\x11 \x01(\tR\rupdatedByUuid*\x9e\x01\n" +
 	"\x17ChangeRequestChangeType\x12&\n" +
 	"\"CHANGE_REQUEST_CHANGE_TYPE_INVALID\x10\x00\x12+\n" +
 	"'CHANGE_REQUEST_CHANGE_TYPE_PROJECT_DATA\x10\x01\x12.\n" +

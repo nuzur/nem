@@ -147,6 +147,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 
 			Description: mapper.StringPtrToSqlNullString(req.ChangeRequest.Description),
 
+			ProjectUUID: req.ChangeRequest.ProjectUUID.String(),
+
 			ProjectVersionUUID: req.ChangeRequest.ProjectVersionUUID.String(),
 
 			ChangeType: req.ChangeRequest.ChangeType.ToInt64(),
@@ -182,6 +184,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 	res.Title = req.ChangeRequest.Title
 
 	res.Description = mapper.StringPtrToSqlNullString(req.ChangeRequest.Description)
+
+	res.ProjectUUID = req.ChangeRequest.ProjectUUID.String()
 
 	res.ProjectVersionUUID = req.ChangeRequest.ProjectVersionUUID.String()
 

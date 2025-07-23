@@ -15,7 +15,7 @@ import (
 const updateChangeRequest = `-- name: UpdateChangeRequest :exec
 UPDATE change_request
 SET
-version = ?, title = ?, description = ?, project_version_uuid = ?, change_type = ?, data_changes = ?, version_changes = ?, reviews = ?, review_status = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, title = ?, description = ?, project_uuid = ?, project_version_uuid = ?, change_type = ?, data_changes = ?, version_changes = ?, reviews = ?, review_status = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?
 `
 
@@ -23,6 +23,7 @@ type UpdateChangeRequestParams struct {
 	Version            int64           `json:"version"`
 	Title              string          `json:"title"`
 	Description        sql.NullString  `json:"description"`
+	ProjectUUID        string          `json:"project_uuid"`
 	ProjectVersionUUID string          `json:"project_version_uuid"`
 	ChangeType         int64           `json:"change_type"`
 	DataChanges        json.RawMessage `json:"data_changes"`
@@ -43,6 +44,7 @@ func (q *Queries) UpdateChangeRequest(ctx context.Context, arg UpdateChangeReque
 		arg.Version,
 		arg.Title,
 		arg.Description,
+		arg.ProjectUUID,
 		arg.ProjectVersionUUID,
 		arg.ChangeType,
 		arg.DataChanges,

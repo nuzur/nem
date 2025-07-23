@@ -25,6 +25,7 @@ func mapModelToEntity(model nemdb.ChangeRequest) main_entity.ChangeRequest {
 		Version:            model.Version,
 		Title:              model.Title,
 		Description:        mapper.SqlNullStringToStringPtr(model.Description),
+		ProjectUUID:        uuid.FromStringOrNil(model.ProjectUUID),
 		ProjectVersionUUID: uuid.FromStringOrNil(model.ProjectVersionUUID),
 		ChangeType:         main_entity.ChangeType(model.ChangeType),
 		DataChanges:        change_request_data_change.ChangeRequestDataChangeSliceFromJSON(model.DataChanges),
