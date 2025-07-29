@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `user_project` (
   INDEX `user_uuid` (`user_uuid` ASC),
   INDEX `user_email` (`user_email` ASC),
   INDEX `project_uuid` (`project_uuid` ASC),
+  INDEX `role` (`role` ASC),
   INDEX `status` (`status` ASC),
   INDEX `created_at` (`created_at` ASC),
   INDEX `updated_at` (`updated_at` ASC))  

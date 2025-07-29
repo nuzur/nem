@@ -14,8 +14,12 @@ import (
 type Module interface {
 	FetchUserTeamByUUID(ctx context.Context, req types.FetchUserTeamByUUIDRequest, opts ...Option) (types.FetchUserTeamByUUIDResponse, error)
 	FetchUserTeamByUserEmail(ctx context.Context, req types.FetchUserTeamByUserEmailRequest, opts ...Option) (types.FetchUserTeamByUserEmailResponse, error)
+	FetchUserTeamByRole(ctx context.Context, req types.FetchUserTeamByRoleRequest, opts ...Option) (types.FetchUserTeamByRoleResponse, error)
+	FetchUserTeamByUserEmailAndRole(ctx context.Context, req types.FetchUserTeamByUserEmailAndRoleRequest, opts ...Option) (types.FetchUserTeamByUserEmailAndRoleResponse, error)
 	FetchUserTeamByStatus(ctx context.Context, req types.FetchUserTeamByStatusRequest, opts ...Option) (types.FetchUserTeamByStatusResponse, error)
 	FetchUserTeamByUserEmailAndStatus(ctx context.Context, req types.FetchUserTeamByUserEmailAndStatusRequest, opts ...Option) (types.FetchUserTeamByUserEmailAndStatusResponse, error)
+	FetchUserTeamByRoleAndStatus(ctx context.Context, req types.FetchUserTeamByRoleAndStatusRequest, opts ...Option) (types.FetchUserTeamByRoleAndStatusResponse, error)
+	FetchUserTeamByUserEmailAndRoleAndStatus(ctx context.Context, req types.FetchUserTeamByUserEmailAndRoleAndStatusRequest, opts ...Option) (types.FetchUserTeamByUserEmailAndRoleAndStatusResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)
 

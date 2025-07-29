@@ -4313,6 +4313,22 @@ WHERE
 
 
 
+-- name: FetchUserTeamByRole :many
+SELECT * FROM user_team
+WHERE 
+     role = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchUserTeamByUserEmailAndRole :many
+SELECT * FROM user_team
+WHERE 
+     user_email = ? AND role = ?  
+    LIMIT ?, ?;
+
+
+
 -- name: FetchUserTeamByStatus :many
 SELECT * FROM user_team
 WHERE 
@@ -4325,6 +4341,22 @@ WHERE
 SELECT * FROM user_team
 WHERE 
      user_email = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchUserTeamByRoleAndStatus :many
+SELECT * FROM user_team
+WHERE 
+     role = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchUserTeamByUserEmailAndRoleAndStatus :many
+SELECT * FROM user_team
+WHERE 
+     user_email = ? AND role = ? AND status = ?  
     LIMIT ?, ?;
 
 
@@ -4361,6 +4393,74 @@ WHERE
 SELECT * FROM user_team
 WHERE 
      user_email = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchUserTeamByRoleOrderedByCreatedAtASC :many
+SELECT * FROM user_team
+WHERE 
+     role = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserTeamByRoleOrderedByCreatedAtDESC :many
+SELECT * FROM user_team
+WHERE 
+     role = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserTeamByRoleOrderedByUpdatedAtASC :many
+SELECT * FROM user_team
+WHERE 
+     role = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserTeamByRoleOrderedByUpdatedAtDESC :many
+SELECT * FROM user_team
+WHERE 
+     role = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchUserTeamByUserEmailAndRoleOrderedByCreatedAtASC :many
+SELECT * FROM user_team
+WHERE 
+     user_email = ? AND role = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserTeamByUserEmailAndRoleOrderedByCreatedAtDESC :many
+SELECT * FROM user_team
+WHERE 
+     user_email = ? AND role = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserTeamByUserEmailAndRoleOrderedByUpdatedAtASC :many
+SELECT * FROM user_team
+WHERE 
+     user_email = ? AND role = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserTeamByUserEmailAndRoleOrderedByUpdatedAtDESC :many
+SELECT * FROM user_team
+WHERE 
+     user_email = ? AND role = ?  
     ORDER BY updated_at DESC
     LIMIT ?, ?;
 
@@ -4429,6 +4529,74 @@ WHERE
 SELECT * FROM user_team
 WHERE 
      user_email = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchUserTeamByRoleAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM user_team
+WHERE 
+     role = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserTeamByRoleAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM user_team
+WHERE 
+     role = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserTeamByRoleAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM user_team
+WHERE 
+     role = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserTeamByRoleAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM user_team
+WHERE 
+     role = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchUserTeamByUserEmailAndRoleAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM user_team
+WHERE 
+     user_email = ? AND role = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserTeamByUserEmailAndRoleAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM user_team
+WHERE 
+     user_email = ? AND role = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserTeamByUserEmailAndRoleAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM user_team
+WHERE 
+     user_email = ? AND role = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserTeamByUserEmailAndRoleAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM user_team
+WHERE 
+     user_email = ? AND role = ? AND status = ?  
     ORDER BY updated_at DESC
     LIMIT ?, ?;
 
@@ -4673,6 +4841,22 @@ WHERE
 
 
 
+-- name: FetchUserProjectByRole :many
+SELECT * FROM user_project
+WHERE 
+     role = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchUserProjectByUserEmailAndRole :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND role = ?  
+    LIMIT ?, ?;
+
+
+
 -- name: FetchUserProjectByStatus :many
 SELECT * FROM user_project
 WHERE 
@@ -4685,6 +4869,22 @@ WHERE
 SELECT * FROM user_project
 WHERE 
      user_email = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchUserProjectByRoleAndStatus :many
+SELECT * FROM user_project
+WHERE 
+     role = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchUserProjectByUserEmailAndRoleAndStatus :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND role = ? AND status = ?  
     LIMIT ?, ?;
 
 
@@ -4721,6 +4921,74 @@ WHERE
 SELECT * FROM user_project
 WHERE 
      user_email = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchUserProjectByRoleOrderedByCreatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     role = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByRoleOrderedByCreatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     role = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserProjectByRoleOrderedByUpdatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     role = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByRoleOrderedByUpdatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     role = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchUserProjectByUserEmailAndRoleOrderedByCreatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND role = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByUserEmailAndRoleOrderedByCreatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND role = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserProjectByUserEmailAndRoleOrderedByUpdatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND role = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByUserEmailAndRoleOrderedByUpdatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND role = ?  
     ORDER BY updated_at DESC
     LIMIT ?, ?;
 
@@ -4789,6 +5057,74 @@ WHERE
 SELECT * FROM user_project
 WHERE 
      user_email = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchUserProjectByRoleAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     role = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByRoleAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     role = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserProjectByRoleAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     role = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByRoleAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     role = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchUserProjectByUserEmailAndRoleAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND role = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByUserEmailAndRoleAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND role = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserProjectByUserEmailAndRoleAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND role = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByUserEmailAndRoleAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND role = ? AND status = ?  
     ORDER BY updated_at DESC
     LIMIT ?, ?;
 
