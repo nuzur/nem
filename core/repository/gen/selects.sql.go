@@ -10,6 +10,1780 @@ import (
 	"database/sql"
 )
 
+const fetchChangeRequestByChangeType = `-- name: FetchChangeRequestByChangeType :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeParams struct {
+	ChangeType int64 `json:"change_type"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeType(ctx context.Context, arg FetchChangeRequestByChangeTypeParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeType, arg.ChangeType, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndReviewStatus = `-- name: FetchChangeRequestByChangeTypeAndReviewStatus :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND review_status = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndReviewStatusParams struct {
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatus(ctx context.Context, arg FetchChangeRequestByChangeTypeAndReviewStatusParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndReviewStatus,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndReviewStatusAndStatus = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatus :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND review_status = ? AND status = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndReviewStatusAndStatusParams struct {
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatus(ctx context.Context, arg FetchChangeRequestByChangeTypeAndReviewStatusAndStatusParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndReviewStatusAndStatus,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASCParams struct {
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESCParams struct {
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASCParams struct {
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESCParams struct {
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND review_status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtASCParams struct {
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtASC,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND review_status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtDESCParams struct {
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtDESC,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND review_status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtASCParams struct {
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtASC,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND review_status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtDESCParams struct {
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtDESC,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndStatus = `-- name: FetchChangeRequestByChangeTypeAndStatus :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND status = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndStatusParams struct {
+	ChangeType int64 `json:"change_type"`
+	Status     int64 `json:"status"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndStatus(ctx context.Context, arg FetchChangeRequestByChangeTypeAndStatusParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndStatus,
+		arg.ChangeType,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtASCParams struct {
+	ChangeType int64 `json:"change_type"`
+	Status     int64 `json:"status"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtASC,
+		arg.ChangeType,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtDESCParams struct {
+	ChangeType int64 `json:"change_type"`
+	Status     int64 `json:"status"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtDESC,
+		arg.ChangeType,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtASCParams struct {
+	ChangeType int64 `json:"change_type"`
+	Status     int64 `json:"status"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtASC,
+		arg.ChangeType,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtDESCParams struct {
+	ChangeType int64 `json:"change_type"`
+	Status     int64 `json:"status"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtDESC,
+		arg.ChangeType,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeOrderedByCreatedAtASCParams struct {
+	ChangeType int64 `json:"change_type"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByChangeTypeOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeOrderedByCreatedAtASC, arg.ChangeType, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeOrderedByCreatedAtDESCParams struct {
+	ChangeType int64 `json:"change_type"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByChangeTypeOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeOrderedByCreatedAtDESC, arg.ChangeType, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeOrderedByUpdatedAtASCParams struct {
+	ChangeType int64 `json:"change_type"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByChangeTypeOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeOrderedByUpdatedAtASC, arg.ChangeType, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     change_type = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESCParams struct {
+	ChangeType int64 `json:"change_type"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC, arg.ChangeType, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByReviewStatus = `-- name: FetchChangeRequestByReviewStatus :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     review_status = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByReviewStatusParams struct {
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByReviewStatus(ctx context.Context, arg FetchChangeRequestByReviewStatusParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByReviewStatus, arg.ReviewStatus, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByReviewStatusAndStatus = `-- name: FetchChangeRequestByReviewStatusAndStatus :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     review_status = ? AND status = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByReviewStatusAndStatusParams struct {
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByReviewStatusAndStatus(ctx context.Context, arg FetchChangeRequestByReviewStatusAndStatusParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByReviewStatusAndStatus,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     review_status = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtASCParams struct {
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtASC,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     review_status = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtDESCParams struct {
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtDESC,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     review_status = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtASCParams struct {
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtASC,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     review_status = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtDESCParams struct {
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtDESC,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByReviewStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByReviewStatusOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     review_status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByReviewStatusOrderedByCreatedAtASCParams struct {
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByReviewStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByReviewStatusOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByReviewStatusOrderedByCreatedAtASC, arg.ReviewStatus, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByReviewStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByReviewStatusOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     review_status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByReviewStatusOrderedByCreatedAtDESCParams struct {
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByReviewStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByReviewStatusOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByReviewStatusOrderedByCreatedAtDESC, arg.ReviewStatus, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByReviewStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByReviewStatusOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     review_status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByReviewStatusOrderedByUpdatedAtASCParams struct {
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByReviewStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByReviewStatusOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByReviewStatusOrderedByUpdatedAtASC, arg.ReviewStatus, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     review_status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESCParams struct {
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC, arg.ReviewStatus, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const fetchChangeRequestByStatus = `-- name: FetchChangeRequestByStatus :many
 SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
 WHERE 
@@ -394,6 +2168,1880 @@ type FetchChangeRequestByVersionParams struct {
 
 func (q *Queries) FetchChangeRequestByVersion(ctx context.Context, arg FetchChangeRequestByVersionParams) ([]ChangeRequest, error) {
 	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersion, arg.Version, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeType = `-- name: FetchChangeRequestByVersionAndChangeType :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeParams struct {
+	Version    int64 `json:"version"`
+	ChangeType int64 `json:"change_type"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeType(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeType,
+		arg.Version,
+		arg.ChangeType,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndReviewStatus = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatus :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndReviewStatusParams struct {
+	Version      int64 `json:"version"`
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatus(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndReviewStatusParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndReviewStatus,
+		arg.Version,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatus = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatus :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ? AND status = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusParams struct {
+	Version      int64 `json:"version"`
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatus(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatus,
+		arg.Version,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASCParams struct {
+	Version      int64 `json:"version"`
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC,
+		arg.Version,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESCParams struct {
+	Version      int64 `json:"version"`
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC,
+		arg.Version,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASCParams struct {
+	Version      int64 `json:"version"`
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC,
+		arg.Version,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESCParams struct {
+	Version      int64 `json:"version"`
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC,
+		arg.Version,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtASCParams struct {
+	Version      int64 `json:"version"`
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtASC,
+		arg.Version,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtDESCParams struct {
+	Version      int64 `json:"version"`
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtDESC,
+		arg.Version,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtASCParams struct {
+	Version      int64 `json:"version"`
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtASC,
+		arg.Version,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtDESCParams struct {
+	Version      int64 `json:"version"`
+	ChangeType   int64 `json:"change_type"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtDESC,
+		arg.Version,
+		arg.ChangeType,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndStatus = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatus :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND status = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndStatusParams struct {
+	Version    int64 `json:"version"`
+	ChangeType int64 `json:"change_type"`
+	Status     int64 `json:"status"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatus(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndStatusParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndStatus,
+		arg.Version,
+		arg.ChangeType,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtASCParams struct {
+	Version    int64 `json:"version"`
+	ChangeType int64 `json:"change_type"`
+	Status     int64 `json:"status"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtASC,
+		arg.Version,
+		arg.ChangeType,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtDESCParams struct {
+	Version    int64 `json:"version"`
+	ChangeType int64 `json:"change_type"`
+	Status     int64 `json:"status"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtDESC,
+		arg.Version,
+		arg.ChangeType,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtASCParams struct {
+	Version    int64 `json:"version"`
+	ChangeType int64 `json:"change_type"`
+	Status     int64 `json:"status"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtASC,
+		arg.Version,
+		arg.ChangeType,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtDESCParams struct {
+	Version    int64 `json:"version"`
+	ChangeType int64 `json:"change_type"`
+	Status     int64 `json:"status"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtDESC,
+		arg.Version,
+		arg.ChangeType,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtASCParams struct {
+	Version    int64 `json:"version"`
+	ChangeType int64 `json:"change_type"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtASC,
+		arg.Version,
+		arg.ChangeType,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtDESCParams struct {
+	Version    int64 `json:"version"`
+	ChangeType int64 `json:"change_type"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtDESC,
+		arg.Version,
+		arg.ChangeType,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtASCParams struct {
+	Version    int64 `json:"version"`
+	ChangeType int64 `json:"change_type"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtASC,
+		arg.Version,
+		arg.ChangeType,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND change_type = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtDESCParams struct {
+	Version    int64 `json:"version"`
+	ChangeType int64 `json:"change_type"`
+	Offset     int32 `json:"offset"`
+	Limit      int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtDESC,
+		arg.Version,
+		arg.ChangeType,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndReviewStatus = `-- name: FetchChangeRequestByVersionAndReviewStatus :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND review_status = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndReviewStatusParams struct {
+	Version      int64 `json:"version"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndReviewStatus(ctx context.Context, arg FetchChangeRequestByVersionAndReviewStatusParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndReviewStatus,
+		arg.Version,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndReviewStatusAndStatus = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatus :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND review_status = ? AND status = ?  
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndReviewStatusAndStatusParams struct {
+	Version      int64 `json:"version"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatus(ctx context.Context, arg FetchChangeRequestByVersionAndReviewStatusAndStatusParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndReviewStatusAndStatus,
+		arg.Version,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtASCParams struct {
+	Version      int64 `json:"version"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtASC,
+		arg.Version,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtDESCParams struct {
+	Version      int64 `json:"version"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtDESC,
+		arg.Version,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND review_status = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtASCParams struct {
+	Version      int64 `json:"version"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtASC,
+		arg.Version,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND review_status = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtDESCParams struct {
+	Version      int64 `json:"version"`
+	ReviewStatus int64 `json:"review_status"`
+	Status       int64 `json:"status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtDESC,
+		arg.Version,
+		arg.ReviewStatus,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND review_status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtASCParams struct {
+	Version      int64 `json:"version"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtASC,
+		arg.Version,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND review_status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtDESCParams struct {
+	Version      int64 `json:"version"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtDESC,
+		arg.Version,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtASC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND review_status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtASCParams struct {
+	Version      int64 `json:"version"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtASC,
+		arg.Version,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.VersionChanges,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, version_changes, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
+WHERE 
+     version = ? AND review_status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtDESCParams struct {
+	Version      int64 `json:"version"`
+	ReviewStatus int64 `json:"review_status"`
+	Offset       int32 `json:"offset"`
+	Limit        int32 `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtDESC,
+		arg.Version,
+		arg.ReviewStatus,
+		arg.Offset,
+		arg.Limit,
+	)
 	if err != nil {
 		return nil, err
 	}

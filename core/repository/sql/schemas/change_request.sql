@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS `change_request` (
   INDEX `version` (`version` ASC),
   INDEX `project_uuid` (`project_uuid` ASC),
   INDEX `project_version_uuid` (`project_version_uuid` ASC),
+  INDEX `change_type` (`change_type` ASC),
+  INDEX `review_status` (`review_status` ASC),
   INDEX `owner_uuid` (`owner_uuid` ASC),
   INDEX `status` (`status` ASC),
   INDEX `created_at` (`created_at` ASC),

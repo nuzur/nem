@@ -3825,6 +3825,54 @@ WHERE
 
 
 
+-- name: FetchChangeRequestByChangeType :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchChangeRequestByVersionAndChangeType :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchChangeRequestByReviewStatus :many
+SELECT * FROM change_request
+WHERE 
+     review_status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchChangeRequestByVersionAndReviewStatus :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND review_status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchChangeRequestByChangeTypeAndReviewStatus :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND review_status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatus :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ?  
+    LIMIT ?, ?;
+
+
+
 -- name: FetchChangeRequestByStatus :many
 SELECT * FROM change_request
 WHERE 
@@ -3837,6 +3885,54 @@ WHERE
 SELECT * FROM change_request
 WHERE 
      version = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchChangeRequestByChangeTypeAndStatus :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchChangeRequestByVersionAndChangeTypeAndStatus :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchChangeRequestByReviewStatusAndStatus :many
+SELECT * FROM change_request
+WHERE 
+     review_status = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchChangeRequestByVersionAndReviewStatusAndStatus :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND review_status = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatus :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND review_status = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatus :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ? AND status = ?  
     LIMIT ?, ?;
 
 
@@ -3873,6 +3969,210 @@ WHERE
 SELECT * FROM change_request
 WHERE 
      version = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByChangeTypeOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByChangeTypeOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByChangeTypeOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByReviewStatusOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     review_status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByReviewStatusOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     review_status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByReviewStatusOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     review_status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     review_status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND review_status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND review_status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND review_status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND review_status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND review_status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND review_status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND review_status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND review_status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ?  
     ORDER BY updated_at DESC
     LIMIT ?, ?;
 
@@ -3941,6 +4241,210 @@ WHERE
 SELECT * FROM change_request
 WHERE 
      version = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     review_status = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     review_status = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     review_status = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     review_status = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND review_status = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND review_status = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM change_request
+WHERE 
+     version = ? AND change_type = ? AND review_status = ? AND status = ?  
     ORDER BY updated_at DESC
     LIMIT ?, ?;
 
