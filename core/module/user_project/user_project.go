@@ -13,7 +13,9 @@ import (
 
 type Module interface {
 	FetchUserProjectByUUID(ctx context.Context, req types.FetchUserProjectByUUIDRequest, opts ...Option) (types.FetchUserProjectByUUIDResponse, error)
+	FetchUserProjectByUserEmail(ctx context.Context, req types.FetchUserProjectByUserEmailRequest, opts ...Option) (types.FetchUserProjectByUserEmailResponse, error)
 	FetchUserProjectByStatus(ctx context.Context, req types.FetchUserProjectByStatusRequest, opts ...Option) (types.FetchUserProjectByStatusResponse, error)
+	FetchUserProjectByUserEmailAndStatus(ctx context.Context, req types.FetchUserProjectByUserEmailAndStatusRequest, opts ...Option) (types.FetchUserProjectByUserEmailAndStatusResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)
 

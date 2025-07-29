@@ -18,6 +18,8 @@ CREATE TABLE IF NOT EXISTS `project` (
   PRIMARY KEY (`uuid`),
   INDEX `version` (`version` ASC),
   INDEX `name` (`name` ASC),
+  INDEX `owner_uuid` (`owner_uuid` ASC),
+  INDEX `team_uuid` (`team_uuid` ASC),
   INDEX `status` (`status` ASC),
   INDEX `created_at` (`created_at` ASC),
   INDEX `updated_at` (`updated_at` ASC),

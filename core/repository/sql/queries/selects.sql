@@ -4665,6 +4665,14 @@ WHERE
 FOR UPDATE;
 
 
+-- name: FetchUserProjectByUserEmail :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ?  
+    LIMIT ?, ?;
+
+
+
 -- name: FetchUserProjectByStatus :many
 SELECT * FROM user_project
 WHERE 
@@ -4673,8 +4681,50 @@ WHERE
 
 
 
+-- name: FetchUserProjectByUserEmailAndStatus :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND status = ?  
+    LIMIT ?, ?;
 
 
+
+
+
+    
+
+    
+    
+-- name: FetchUserProjectByUserEmailOrderedByCreatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByUserEmailOrderedByCreatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserProjectByUserEmailOrderedByUpdatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByUserEmailOrderedByUpdatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
     
 
     
@@ -4705,6 +4755,40 @@ WHERE
 SELECT * FROM user_project
 WHERE 
      status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchUserProjectByUserEmailAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByUserEmailAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM user_project
+WHERE 
+     user_email = ? AND status = ?  
     ORDER BY updated_at DESC
     LIMIT ?, ?;
 

@@ -31251,6 +31251,534 @@ func (q *Queries) FetchUserProjectByUUIDForUpdate(ctx context.Context, uuid stri
 	return items, nil
 }
 
+const fetchUserProjectByUserEmail = `-- name: FetchUserProjectByUserEmail :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     user_email = ?  
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByUserEmailParams struct {
+	UserEmail sql.NullString `json:"user_email"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByUserEmail(ctx context.Context, arg FetchUserProjectByUserEmailParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserEmail, arg.UserEmail, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUserEmailAndStatus = `-- name: FetchUserProjectByUserEmailAndStatus :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     user_email = ? AND status = ?  
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByUserEmailAndStatusParams struct {
+	UserEmail sql.NullString `json:"user_email"`
+	Status    int64          `json:"status"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByUserEmailAndStatus(ctx context.Context, arg FetchUserProjectByUserEmailAndStatusParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserEmailAndStatus,
+		arg.UserEmail,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUserEmailAndStatusOrderedByCreatedAtASC = `-- name: FetchUserProjectByUserEmailAndStatusOrderedByCreatedAtASC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     user_email = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByUserEmailAndStatusOrderedByCreatedAtASCParams struct {
+	UserEmail sql.NullString `json:"user_email"`
+	Status    int64          `json:"status"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByUserEmailAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectByUserEmailAndStatusOrderedByCreatedAtASCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserEmailAndStatusOrderedByCreatedAtASC,
+		arg.UserEmail,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUserEmailAndStatusOrderedByCreatedAtDESC = `-- name: FetchUserProjectByUserEmailAndStatusOrderedByCreatedAtDESC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     user_email = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByUserEmailAndStatusOrderedByCreatedAtDESCParams struct {
+	UserEmail sql.NullString `json:"user_email"`
+	Status    int64          `json:"status"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByUserEmailAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectByUserEmailAndStatusOrderedByCreatedAtDESCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserEmailAndStatusOrderedByCreatedAtDESC,
+		arg.UserEmail,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtASC = `-- name: FetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtASC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     user_email = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtASCParams struct {
+	UserEmail sql.NullString `json:"user_email"`
+	Status    int64          `json:"status"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtASCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtASC,
+		arg.UserEmail,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtDESC = `-- name: FetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     user_email = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtDESCParams struct {
+	UserEmail sql.NullString `json:"user_email"`
+	Status    int64          `json:"status"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtDESCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserEmailAndStatusOrderedByUpdatedAtDESC,
+		arg.UserEmail,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUserEmailOrderedByCreatedAtASC = `-- name: FetchUserProjectByUserEmailOrderedByCreatedAtASC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     user_email = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByUserEmailOrderedByCreatedAtASCParams struct {
+	UserEmail sql.NullString `json:"user_email"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByUserEmailOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectByUserEmailOrderedByCreatedAtASCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserEmailOrderedByCreatedAtASC, arg.UserEmail, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUserEmailOrderedByCreatedAtDESC = `-- name: FetchUserProjectByUserEmailOrderedByCreatedAtDESC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     user_email = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByUserEmailOrderedByCreatedAtDESCParams struct {
+	UserEmail sql.NullString `json:"user_email"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByUserEmailOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectByUserEmailOrderedByCreatedAtDESCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserEmailOrderedByCreatedAtDESC, arg.UserEmail, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUserEmailOrderedByUpdatedAtASC = `-- name: FetchUserProjectByUserEmailOrderedByUpdatedAtASC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     user_email = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByUserEmailOrderedByUpdatedAtASCParams struct {
+	UserEmail sql.NullString `json:"user_email"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByUserEmailOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectByUserEmailOrderedByUpdatedAtASCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserEmailOrderedByUpdatedAtASC, arg.UserEmail, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUserEmailOrderedByUpdatedAtDESC = `-- name: FetchUserProjectByUserEmailOrderedByUpdatedAtDESC :many
+SELECT uuid, user_uuid, user_email, project_uuid, role, review_required_structure, review_required_data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project
+WHERE 
+     user_email = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchUserProjectByUserEmailOrderedByUpdatedAtDESCParams struct {
+	UserEmail sql.NullString `json:"user_email"`
+	Offset    int32          `json:"offset"`
+	Limit     int32          `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectByUserEmailOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectByUserEmailOrderedByUpdatedAtDESCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserEmailOrderedByUpdatedAtDESC, arg.UserEmail, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const fetchUserProjectVersionByStatus = `-- name: FetchUserProjectVersionByStatus :many
 SELECT uuid, version, project_version_uuid, user_uuid, data, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM user_project_version
 WHERE 
