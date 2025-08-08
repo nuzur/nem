@@ -19,7 +19,6 @@ type ChangeRequest struct {
 	ProjectVersionUUID string          `json:"project_version_uuid"`
 	ChangeType         int64           `json:"change_type"`
 	DataChanges        json.RawMessage `json:"data_changes"`
-	VersionChanges     json.RawMessage `json:"version_changes"`
 	Reviews            json.RawMessage `json:"reviews"`
 	ReviewStatus       int64           `json:"review_status"`
 	OwnerUUID          string          `json:"owner_uuid"`
@@ -128,7 +127,6 @@ type ProjectVersion struct {
 	Services        json.RawMessage `json:"services"`
 	BaseVersionUUID sql.NullString  `json:"base_version_uuid"`
 	ReviewStatus    int64           `json:"review_status"`
-	Reviews         json.RawMessage `json:"reviews"`
 	Deployments     json.RawMessage `json:"deployments"`
 	Status          int64           `json:"status"`
 	CreatedAt       time.Time       `json:"created_at"`

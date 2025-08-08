@@ -15,7 +15,7 @@ import (
 const updateChangeRequest = `-- name: UpdateChangeRequest :exec
 UPDATE change_request
 SET
-version = ?, title = ?, description = ?, project_uuid = ?, project_version_uuid = ?, change_type = ?, data_changes = ?, version_changes = ?, reviews = ?, review_status = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, title = ?, description = ?, project_uuid = ?, project_version_uuid = ?, change_type = ?, data_changes = ?, reviews = ?, review_status = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?
 `
 
@@ -27,7 +27,6 @@ type UpdateChangeRequestParams struct {
 	ProjectVersionUUID string          `json:"project_version_uuid"`
 	ChangeType         int64           `json:"change_type"`
 	DataChanges        json.RawMessage `json:"data_changes"`
-	VersionChanges     json.RawMessage `json:"version_changes"`
 	Reviews            json.RawMessage `json:"reviews"`
 	ReviewStatus       int64           `json:"review_status"`
 	OwnerUUID          string          `json:"owner_uuid"`
@@ -48,7 +47,6 @@ func (q *Queries) UpdateChangeRequest(ctx context.Context, arg UpdateChangeReque
 		arg.ProjectVersionUUID,
 		arg.ChangeType,
 		arg.DataChanges,
-		arg.VersionChanges,
 		arg.Reviews,
 		arg.ReviewStatus,
 		arg.OwnerUUID,
@@ -287,7 +285,7 @@ func (q *Queries) UpdateProject(ctx context.Context, arg UpdateProjectParams) er
 const updateProjectVersion = `-- name: UpdateProjectVersion :exec
 UPDATE project_version
 SET
-version = ?, identifier = ?, description = ?, project_uuid = ?, entities = ?, relationships = ?, enums = ?, services = ?, base_version_uuid = ?, review_status = ?, reviews = ?, deployments = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, identifier = ?, description = ?, project_uuid = ?, entities = ?, relationships = ?, enums = ?, services = ?, base_version_uuid = ?, review_status = ?, deployments = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?
 `
 
@@ -302,7 +300,6 @@ type UpdateProjectVersionParams struct {
 	Services        json.RawMessage `json:"services"`
 	BaseVersionUUID sql.NullString  `json:"base_version_uuid"`
 	ReviewStatus    int64           `json:"review_status"`
-	Reviews         json.RawMessage `json:"reviews"`
 	Deployments     json.RawMessage `json:"deployments"`
 	Status          int64           `json:"status"`
 	CreatedAt       time.Time       `json:"created_at"`
@@ -324,7 +321,6 @@ func (q *Queries) UpdateProjectVersion(ctx context.Context, arg UpdateProjectVer
 		arg.Services,
 		arg.BaseVersionUUID,
 		arg.ReviewStatus,
-		arg.Reviews,
 		arg.Deployments,
 		arg.Status,
 		arg.CreatedAt,

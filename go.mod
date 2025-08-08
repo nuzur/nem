@@ -6,7 +6,7 @@ require (
 	github.com/99designs/gqlgen v0.17.64
 	github.com/DataDog/datadog-go/v5 v5.6.0
 	github.com/Nerzal/gocloak/v13 v13.9.0
-	github.com/aws/aws-sdk-go v1.55.7
+	github.com/aws/aws-sdk-go v1.55.8
 	github.com/dmarkham/enumer v1.5.10
 	github.com/go-sql-driver/mysql v1.9.2
 	github.com/gofrs/uuid v4.4.0+incompatible

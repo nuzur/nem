@@ -115,8 +115,6 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertChangeR
 
 		DataChanges: change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges),
 
-		VersionChanges: []byte(mapper.StringPtrToString(req.ChangeRequest.VersionChanges)),
-
 		Reviews: change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews),
 
 		ReviewStatus: req.ChangeRequest.ReviewStatus.ToInt64(),

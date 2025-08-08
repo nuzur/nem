@@ -21,15 +21,14 @@ message ChangeRequest {
     string project_version_uuid = 6;
     ChangeRequestChangeType change_type = 7;
     repeated ChangeRequestDataChange data_changes = 8;
-    string version_changes = 9;
-    repeated ChangeRequestReview reviews = 10;
-    ChangeRequestReviewStatus review_status = 11;
-    string owner_uuid = 12;
-    ChangeRequestStatus status = 13;
-    google.protobuf.Timestamp created_at = 14;
-    google.protobuf.Timestamp updated_at = 15;
-    string created_by_uuid = 16;
-    string updated_by_uuid = 17;    
+    repeated ChangeRequestReview reviews = 9;
+    ChangeRequestReviewStatus review_status = 10;
+    string owner_uuid = 11;
+    ChangeRequestStatus status = 12;
+    google.protobuf.Timestamp created_at = 13;
+    google.protobuf.Timestamp updated_at = 14;
+    string created_by_uuid = 15;
+    string updated_by_uuid = 16;    
 }
 
 enum ChangeRequestChangeType { 

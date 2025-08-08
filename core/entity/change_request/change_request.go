@@ -26,7 +26,6 @@ type ChangeRequest struct {
 	ProjectVersionUUID uuid.UUID                                            `json:"project_version_uuid"`
 	ChangeType         ChangeType                                           `json:"change_type"`
 	DataChanges        []change_request_data_change.ChangeRequestDataChange `json:"data_changes"`
-	VersionChanges     *string                                              `json:"version_changes"`
 	Reviews            []change_request_review.ChangeRequestReview          `json:"reviews"`
 	ReviewStatus       ReviewStatus                                         `json:"review_status"`
 	OwnerUUID          uuid.UUID                                            `json:"owner_uuid"`
@@ -65,7 +64,6 @@ func (e ChangeRequest) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["project_version_uuid"] = types.UUIDFieldType
 	res["change_type"] = types.SingleEnumFieldType
 	res["data_changes"] = types.MultiDependantEntityFieldType
-	res["version_changes"] = types.RawJSONFieldType
 	res["reviews"] = types.MultiDependantEntityFieldType
 	res["review_status"] = types.SingleEnumFieldType
 	res["owner_uuid"] = types.UUIDFieldType
@@ -149,7 +147,6 @@ func NewChangeRequestWithRandomValues() ChangeRequest {
 		ProjectVersionUUID: randomvalues.GetRandomUUIDValue(),
 		ChangeType:         randomvalues.GetRandomOptionValue[ChangeType](2),
 		DataChanges:        change_request_data_change.NewChangeRequestDataChangeSliceWithRandomValues(rand.Intn(10)),
-		VersionChanges:     randomvalues.GetRandomRawJSONValuePtr(),
 		Reviews:            change_request_review.NewChangeRequestReviewSliceWithRandomValues(rand.Intn(10)),
 		ReviewStatus:       randomvalues.GetRandomOptionValue[ReviewStatus](6),
 		OwnerUUID:          randomvalues.GetRandomUUIDValue(),

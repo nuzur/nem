@@ -80,7 +80,6 @@ sql:
           uuid: UUID
           verfied: Verfied
           version: Version
-          version_changes: VersionChanges
           visibility: Visibility
         overrides:
           - db_type: "int"            

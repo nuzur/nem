@@ -37,15 +37,15 @@ VALUES
 
 -- name: InsertChangeRequest :execresult
 INSERT INTO change_request
-(uuid,version,title,description,project_uuid,project_version_uuid,change_type,data_changes,version_changes,reviews,review_status,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,title,description,project_uuid,project_version_uuid,change_type,data_changes,reviews,review_status,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertProjectVersion :execresult
 INSERT INTO project_version
-(uuid,version,identifier,description,project_uuid,entities,relationships,enums,services,base_version_uuid,review_status,reviews,deployments,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,identifier,description,project_uuid,entities,relationships,enums,services,base_version_uuid,review_status,deployments,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertUserTeam :execresult
 INSERT INTO user_team

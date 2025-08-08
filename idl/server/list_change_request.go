@@ -163,8 +163,6 @@ func change_requestDeclarations() *filtering.Declarations {
 
 		filtering.DeclareEnumIdent("change_type", pb.ChangeRequestChangeType(0).Type()),
 
-		filtering.DeclareIdent("version_changes", filtering.TypeString),
-
 		filtering.DeclareEnumIdent("review_status", pb.ChangeRequestReviewStatus(0).Type()),
 
 		filtering.DeclareIdent("owner_uuid", filtering.TypeString),

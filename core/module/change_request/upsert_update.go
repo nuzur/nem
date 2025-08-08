@@ -155,8 +155,6 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 
 			DataChanges: change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges),
 
-			VersionChanges: []byte(mapper.StringPtrToString(req.ChangeRequest.VersionChanges)),
-
 			Reviews: change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews),
 
 			ReviewStatus: req.ChangeRequest.ReviewStatus.ToInt64(),
@@ -192,12 +190,6 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 	res.ChangeType = req.ChangeRequest.ChangeType.ToInt64()
 
 	res.DataChanges = change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges)
-
-	res.VersionChanges = []byte(mapper.StringPtrToString(req.ChangeRequest.VersionChanges))
-
-	if string(res.VersionChanges) == "" {
-		res.VersionChanges = []byte(`{}`)
-	}
 
 	res.Reviews = change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews)
 

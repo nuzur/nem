@@ -38,13 +38,13 @@ WHERE uuid = ?;
 -- name: UpdateChangeRequest :exec
 UPDATE change_request
 SET
-version = ?, title = ?, description = ?, project_uuid = ?, project_version_uuid = ?, change_type = ?, data_changes = ?, version_changes = ?, reviews = ?, review_status = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, title = ?, description = ?, project_uuid = ?, project_version_uuid = ?, change_type = ?, data_changes = ?, reviews = ?, review_status = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?;
 
 -- name: UpdateProjectVersion :exec
 UPDATE project_version
 SET
-version = ?, identifier = ?, description = ?, project_uuid = ?, entities = ?, relationships = ?, enums = ?, services = ?, base_version_uuid = ?, review_status = ?, reviews = ?, deployments = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, identifier = ?, description = ?, project_uuid = ?, entities = ?, relationships = ?, enums = ?, services = ?, base_version_uuid = ?, review_status = ?, deployments = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?;
 
 -- name: UpdateUserTeam :exec

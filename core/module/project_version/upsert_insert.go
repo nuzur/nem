@@ -15,7 +15,6 @@ import (
 	"github.com/nuzur/nem/core/entity/entity"
 	"github.com/nuzur/nem/core/entity/enum"
 	"github.com/nuzur/nem/core/entity/project_version_deployment"
-	"github.com/nuzur/nem/core/entity/project_version_review"
 	"github.com/nuzur/nem/core/entity/relationship"
 	"github.com/nuzur/nem/core/entity/service"
 
@@ -124,8 +123,6 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertProject
 		BaseVersionUUID: mapper.StringToSqlNullString(req.ProjectVersion.BaseVersionUUID.String()),
 
 		ReviewStatus: req.ProjectVersion.ReviewStatus.ToInt64(),
-
-		Reviews: project_version_review.ProjectVersionReviewSliceToJSON(req.ProjectVersion.Reviews),
 
 		Deployments: project_version_deployment.ProjectVersionDeploymentSliceToJSON(req.ProjectVersion.Deployments),
 

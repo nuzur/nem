@@ -29,7 +29,6 @@ func mapModelToEntity(model nemdb.ChangeRequest) main_entity.ChangeRequest {
 		ProjectVersionUUID: uuid.FromStringOrNil(model.ProjectVersionUUID),
 		ChangeType:         main_entity.ChangeType(model.ChangeType),
 		DataChanges:        change_request_data_change.ChangeRequestDataChangeSliceFromJSON(model.DataChanges),
-		VersionChanges:     mapper.StringToStringPtr(string(model.VersionChanges)),
 		Reviews:            change_request_review.ChangeRequestReviewSliceFromJSON(model.Reviews),
 		ReviewStatus:       main_entity.ReviewStatus(model.ReviewStatus),
 		OwnerUUID:          uuid.FromStringOrNil(model.OwnerUUID),

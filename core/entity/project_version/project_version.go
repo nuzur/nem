@@ -7,7 +7,6 @@ import (
 	"github.com/nuzur/nem/core/entity/entity"
 	"github.com/nuzur/nem/core/entity/enum"
 	"github.com/nuzur/nem/core/entity/project_version_deployment"
-	"github.com/nuzur/nem/core/entity/project_version_review"
 	"github.com/nuzur/nem/core/entity/relationship"
 	"github.com/nuzur/nem/core/entity/service"
 	"time"
@@ -33,7 +32,6 @@ type ProjectVersion struct {
 	Services        []service.Service                                     `json:"services"`
 	BaseVersionUUID uuid.UUID                                             `json:"base_version_uuid"`
 	ReviewStatus    ReviewStatus                                          `json:"review_status"`
-	Reviews         []project_version_review.ProjectVersionReview         `json:"reviews"`
 	Deployments     []project_version_deployment.ProjectVersionDeployment `json:"deployments"`
 	Status          Status                                                `json:"status"`
 	CreatedAt       time.Time                                             `json:"created_at"`
@@ -73,7 +71,6 @@ func (e ProjectVersion) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["services"] = types.MultiDependantEntityFieldType
 	res["base_version_uuid"] = types.UUIDFieldType
 	res["review_status"] = types.SingleEnumFieldType
-	res["reviews"] = types.MultiDependantEntityFieldType
 	res["deployments"] = types.MultiDependantEntityFieldType
 	res["status"] = types.SingleEnumFieldType
 	res["created_at"] = types.TimestampFieldType
@@ -90,7 +87,6 @@ func (e ProjectVersion) DependantFieldIdentifierToTypeMap() map[string]map[strin
 	res["relationships"] = relationship.Relationship{}.FieldIdentfierToTypeMap()
 	res["enums"] = enum.Enum{}.FieldIdentfierToTypeMap()
 	res["services"] = service.Service{}.FieldIdentfierToTypeMap()
-	res["reviews"] = project_version_review.ProjectVersionReview{}.FieldIdentfierToTypeMap()
 	res["deployments"] = project_version_deployment.ProjectVersionDeployment{}.FieldIdentfierToTypeMap()
 	return res
 }
@@ -162,7 +158,6 @@ func NewProjectVersionWithRandomValues() ProjectVersion {
 		Services:        service.NewServiceSliceWithRandomValues(rand.Intn(10)),
 		BaseVersionUUID: randomvalues.GetRandomUUIDValue(),
 		ReviewStatus:    randomvalues.GetRandomOptionValue[ReviewStatus](5),
-		Reviews:         project_version_review.NewProjectVersionReviewSliceWithRandomValues(rand.Intn(10)),
 		Deployments:     project_version_deployment.NewProjectVersionDeploymentSliceWithRandomValues(rand.Intn(10)),
 		Status:          randomvalues.GetRandomOptionValue[Status](2),
 		CreatedAt:       randomvalues.GetRandomTimeValue(),

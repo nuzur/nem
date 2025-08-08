@@ -12,7 +12,6 @@ import "entity.proto";
 import "enum.proto";
 import "google/protobuf/timestamp.proto";
 import "project_version_deployment.proto";
-import "project_version_review.proto";
 import "relationship.proto";
 import "service.proto";
 
@@ -28,13 +27,12 @@ message ProjectVersion {
     repeated Service services = 9;
     string base_version_uuid = 10;
     ProjectVersionReviewStatus review_status = 11;
-    repeated ProjectVersionReview reviews = 12;
-    repeated ProjectVersionDeployment deployments = 13;
-    ProjectVersionStatus status = 14;
-    google.protobuf.Timestamp created_at = 15;
-    google.protobuf.Timestamp updated_at = 16;
-    string created_by_uuid = 17;
-    string updated_by_uuid = 18;    
+    repeated ProjectVersionDeployment deployments = 12;
+    ProjectVersionStatus status = 13;
+    google.protobuf.Timestamp created_at = 14;
+    google.protobuf.Timestamp updated_at = 15;
+    string created_by_uuid = 16;
+    string updated_by_uuid = 17;    
 }
 
 enum ProjectVersionReviewStatus { 
