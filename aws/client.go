@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/nuzur/nem/config"
+	"go.uber.org/fx"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -20,8 +21,14 @@ type AWSClient struct {
 	config  *config.AWS
 }
 
-func New(config *config.AWS) (*AWSClient, error) {
-	awsConfig := config
+type Params struct {
+	fx.In
+
+	Config *config.AWS `optional:"true"`
+}
+
+func New(param Params) (*AWSClient, error) {
+	awsConfig := param.Config
 	if awsConfig == nil {
 		awsConfigProvider, err := getAwsConfigFromProvider()
 		if err != nil {
