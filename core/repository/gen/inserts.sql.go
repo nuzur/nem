@@ -20,23 +20,23 @@ VALUES
 `
 
 type InsertChangeRequestParams struct {
-	UUID               string          `json:"uuid"`
-	Version            int64           `json:"version"`
-	Title              string          `json:"title"`
-	Description        sql.NullString  `json:"description"`
-	ProjectUUID        string          `json:"project_uuid"`
-	ProjectVersionUUID string          `json:"project_version_uuid"`
-	ChangeType         int64           `json:"change_type"`
-	DataChanges        json.RawMessage `json:"data_changes"`
-	Metadata           json.RawMessage `json:"metadata"`
-	Reviews            json.RawMessage `json:"reviews"`
-	ReviewStatus       int64           `json:"review_status"`
-	OwnerUUID          string          `json:"owner_uuid"`
-	Status             int64           `json:"status"`
-	CreatedAt          time.Time       `json:"created_at"`
-	UpdatedAt          time.Time       `json:"updated_at"`
-	CreatedByUUID      string          `json:"created_by_uuid"`
-	UpdatedByUUID      string          `json:"updated_by_uuid"`
+	UUID               string         `json:"uuid"`
+	Version            int64          `json:"version"`
+	Title              string         `json:"title"`
+	Description        sql.NullString `json:"description"`
+	ProjectUUID        string         `json:"project_uuid"`
+	ProjectVersionUUID string         `json:"project_version_uuid"`
+	ChangeType         int64          `json:"change_type"`
+	DataChanges        []byte         `json:"data_changes"`
+	Metadata           []byte         `json:"metadata"`
+	Reviews            []byte         `json:"reviews"`
+	ReviewStatus       int64          `json:"review_status"`
+	OwnerUUID          string         `json:"owner_uuid"`
+	Status             int64          `json:"status"`
+	CreatedAt          time.Time      `json:"created_at"`
+	UpdatedAt          time.Time      `json:"updated_at"`
+	CreatedByUUID      string         `json:"created_by_uuid"`
+	UpdatedByUUID      string         `json:"updated_by_uuid"`
 }
 
 func (q *Queries) InsertChangeRequest(ctx context.Context, arg InsertChangeRequestParams) (sql.Result, error) {
@@ -69,25 +69,25 @@ VALUES
 `
 
 type InsertExtensionParams struct {
-	UUID              string          `json:"uuid"`
-	Version           int64           `json:"version"`
-	Identifier        string          `json:"identifier"`
-	DisplayName       sql.NullString  `json:"display_name"`
-	DisplayAuthorName sql.NullString  `json:"display_author_name"`
-	Description       sql.NullString  `json:"description"`
-	URL               sql.NullString  `json:"url"`
-	Verfied           bool            `json:"verfied"`
-	Repository        string          `json:"repository"`
-	ExtensionType     int64           `json:"extension_type"`
-	Tags              json.RawMessage `json:"tags"`
-	Public            bool            `json:"public"`
-	Visibility        json.RawMessage `json:"visibility"`
-	Status            int64           `json:"status"`
-	OwnerUUID         string          `json:"owner_uuid"`
-	CreatedAt         time.Time       `json:"created_at"`
-	UpdatedAt         time.Time       `json:"updated_at"`
-	CreatedByUUID     string          `json:"created_by_uuid"`
-	UpdatedByUUID     string          `json:"updated_by_uuid"`
+	UUID              string         `json:"uuid"`
+	Version           int64          `json:"version"`
+	Identifier        string         `json:"identifier"`
+	DisplayName       sql.NullString `json:"display_name"`
+	DisplayAuthorName sql.NullString `json:"display_author_name"`
+	Description       sql.NullString `json:"description"`
+	URL               sql.NullString `json:"url"`
+	Verfied           bool           `json:"verfied"`
+	Repository        string         `json:"repository"`
+	ExtensionType     int64          `json:"extension_type"`
+	Tags              []byte         `json:"tags"`
+	Public            bool           `json:"public"`
+	Visibility        []byte         `json:"visibility"`
+	Status            int64          `json:"status"`
+	OwnerUUID         string         `json:"owner_uuid"`
+	CreatedAt         time.Time      `json:"created_at"`
+	UpdatedAt         time.Time      `json:"updated_at"`
+	CreatedByUUID     string         `json:"created_by_uuid"`
+	UpdatedByUUID     string         `json:"updated_by_uuid"`
 }
 
 func (q *Queries) InsertExtension(ctx context.Context, arg InsertExtensionParams) (sql.Result, error) {
@@ -122,18 +122,18 @@ VALUES
 `
 
 type InsertExtensionExecutionParams struct {
-	UUID                 string          `json:"uuid"`
-	ExtensionUUID        string          `json:"extension_uuid"`
-	ExtensionVersionUUID string          `json:"extension_version_uuid"`
-	ProjectExtensionUUID sql.NullString  `json:"project_extension_uuid"`
-	ProjectUUID          string          `json:"project_uuid"`
-	ProjectVersionUUID   string          `json:"project_version_uuid"`
-	ExecutedByUUID       string          `json:"executed_by_uuid"`
-	Metadata             json.RawMessage `json:"metadata"`
-	Status               int64           `json:"status"`
-	StatusMsg            sql.NullString  `json:"status_msg"`
-	CreatedAt            time.Time       `json:"created_at"`
-	UpdatedAt            time.Time       `json:"updated_at"`
+	UUID                 string         `json:"uuid"`
+	ExtensionUUID        string         `json:"extension_uuid"`
+	ExtensionVersionUUID string         `json:"extension_version_uuid"`
+	ProjectExtensionUUID sql.NullString `json:"project_extension_uuid"`
+	ProjectUUID          string         `json:"project_uuid"`
+	ProjectVersionUUID   string         `json:"project_version_uuid"`
+	ExecutedByUUID       string         `json:"executed_by_uuid"`
+	Metadata             []byte         `json:"metadata"`
+	Status               int64          `json:"status"`
+	StatusMsg            sql.NullString `json:"status_msg"`
+	CreatedAt            time.Time      `json:"created_at"`
+	UpdatedAt            time.Time      `json:"updated_at"`
 }
 
 func (q *Queries) InsertExtensionExecution(ctx context.Context, arg InsertExtensionExecutionParams) (sql.Result, error) {
@@ -167,7 +167,7 @@ type InsertExtensionVersionParams struct {
 	DisplayVersion      sql.NullString  `json:"display_version"`
 	Description         sql.NullString  `json:"description"`
 	RepositoryTag       string          `json:"repository_tag"`
-	ConfigurationEntity json.RawMessage `json:"configuration_entity"`
+	ConfigurationEntity []byte          `json:"configuration_entity"`
 	ExecutionMode       json.RawMessage `json:"execution_mode"`
 	ReviewStatus        int64           `json:"review_status"`
 	Status              int64           `json:"status"`
@@ -207,9 +207,9 @@ type InsertOrganizationParams struct {
 	UUID          string          `json:"uuid"`
 	Version       int64           `json:"version"`
 	Name          string          `json:"name"`
-	Domains       json.RawMessage `json:"domains"`
+	Domains       []byte          `json:"domains"`
 	AdminUUIDs    json.RawMessage `json:"admin_uuids"`
-	Memberships   json.RawMessage `json:"memberships"`
+	Memberships   []byte          `json:"memberships"`
 	Status        int64           `json:"status"`
 	CreatedAt     time.Time       `json:"created_at"`
 	UpdatedAt     time.Time       `json:"updated_at"`
@@ -241,21 +241,21 @@ VALUES
 `
 
 type InsertProjectParams struct {
-	UUID              string          `json:"uuid"`
-	Version           int64           `json:"version"`
-	Name              string          `json:"name"`
-	Description       sql.NullString  `json:"description"`
-	Tags              json.RawMessage `json:"tags"`
-	URL               sql.NullString  `json:"url"`
-	OwnerUUID         string          `json:"owner_uuid"`
-	TeamUUID          string          `json:"team_uuid"`
-	AccessType        int64           `json:"access_type"`
-	ProjectExtensions json.RawMessage `json:"project_extensions"`
-	Status            int64           `json:"status"`
-	CreatedAt         time.Time       `json:"created_at"`
-	UpdatedAt         time.Time       `json:"updated_at"`
-	CreatedByUUID     string          `json:"created_by_uuid"`
-	UpdatedByUUID     string          `json:"updated_by_uuid"`
+	UUID              string         `json:"uuid"`
+	Version           int64          `json:"version"`
+	Name              string         `json:"name"`
+	Description       sql.NullString `json:"description"`
+	Tags              []byte         `json:"tags"`
+	URL               sql.NullString `json:"url"`
+	OwnerUUID         string         `json:"owner_uuid"`
+	TeamUUID          string         `json:"team_uuid"`
+	AccessType        int64          `json:"access_type"`
+	ProjectExtensions []byte         `json:"project_extensions"`
+	Status            int64          `json:"status"`
+	CreatedAt         time.Time      `json:"created_at"`
+	UpdatedAt         time.Time      `json:"updated_at"`
+	CreatedByUUID     string         `json:"created_by_uuid"`
+	UpdatedByUUID     string         `json:"updated_by_uuid"`
 }
 
 func (q *Queries) InsertProject(ctx context.Context, arg InsertProjectParams) (sql.Result, error) {
@@ -297,7 +297,7 @@ type InsertProjectVersionParams struct {
 	Services        json.RawMessage `json:"services"`
 	BaseVersionUUID sql.NullString  `json:"base_version_uuid"`
 	ReviewStatus    int64           `json:"review_status"`
-	Deployments     json.RawMessage `json:"deployments"`
+	Deployments     []byte          `json:"deployments"`
 	Status          int64           `json:"status"`
 	CreatedAt       time.Time       `json:"created_at"`
 	UpdatedAt       time.Time       `json:"updated_at"`
@@ -335,22 +335,22 @@ VALUES
 `
 
 type InsertTeamParams struct {
-	UUID             string          `json:"uuid"`
-	Version          int64           `json:"version"`
-	Name             string          `json:"name"`
-	Enviorments      json.RawMessage `json:"enviorments"`
-	ReviewConfigs    json.RawMessage `json:"review_configs"`
-	Memberships      json.RawMessage `json:"memberships"`
-	Stores           json.RawMessage `json:"stores"`
-	Connections      json.RawMessage `json:"connections"`
-	ObjectStores     json.RawMessage `json:"object_stores"`
-	OrganizationUUID sql.NullString  `json:"organization_uuid"`
-	DefaultEntity    json.RawMessage `json:"default_entity"`
-	Status           int64           `json:"status"`
-	CreatedAt        time.Time       `json:"created_at"`
-	UpdatedAt        time.Time       `json:"updated_at"`
-	CreatedByUUID    string          `json:"created_by_uuid"`
-	UpdatedByUUID    string          `json:"updated_by_uuid"`
+	UUID             string         `json:"uuid"`
+	Version          int64          `json:"version"`
+	Name             string         `json:"name"`
+	Enviorments      []byte         `json:"enviorments"`
+	ReviewConfigs    []byte         `json:"review_configs"`
+	Memberships      []byte         `json:"memberships"`
+	Stores           []byte         `json:"stores"`
+	Connections      []byte         `json:"connections"`
+	ObjectStores     []byte         `json:"object_stores"`
+	OrganizationUUID sql.NullString `json:"organization_uuid"`
+	DefaultEntity    []byte         `json:"default_entity"`
+	Status           int64          `json:"status"`
+	CreatedAt        time.Time      `json:"created_at"`
+	UpdatedAt        time.Time      `json:"updated_at"`
+	CreatedByUUID    string         `json:"created_by_uuid"`
+	UpdatedByUUID    string         `json:"updated_by_uuid"`
 }
 
 func (q *Queries) InsertTeam(ctx context.Context, arg InsertTeamParams) (sql.Result, error) {
@@ -428,7 +428,7 @@ type InsertUserConnectionParams struct {
 	Type               int64           `json:"type"`
 	TypeConfig         json.RawMessage `json:"type_config"`
 	DbSchema           string          `json:"db_schema"`
-	Executions         json.RawMessage `json:"executions"`
+	Executions         []byte          `json:"executions"`
 	Status             int64           `json:"status"`
 	CreatedAt          time.Time       `json:"created_at"`
 	UpdatedAt          time.Time       `json:"updated_at"`
@@ -497,16 +497,16 @@ VALUES
 `
 
 type InsertUserProjectVersionParams struct {
-	UUID               string          `json:"uuid"`
-	Version            int64           `json:"version"`
-	ProjectVersionUUID string          `json:"project_version_uuid"`
-	UserUUID           string          `json:"user_uuid"`
-	Data               json.RawMessage `json:"data"`
-	Status             int64           `json:"status"`
-	CreatedAt          time.Time       `json:"created_at"`
-	UpdatedAt          time.Time       `json:"updated_at"`
-	CreatedByUUID      string          `json:"created_by_uuid"`
-	UpdatedByUUID      string          `json:"updated_by_uuid"`
+	UUID               string    `json:"uuid"`
+	Version            int64     `json:"version"`
+	ProjectVersionUUID string    `json:"project_version_uuid"`
+	UserUUID           string    `json:"user_uuid"`
+	Data               []byte    `json:"data"`
+	Status             int64     `json:"status"`
+	CreatedAt          time.Time `json:"created_at"`
+	UpdatedAt          time.Time `json:"updated_at"`
+	CreatedByUUID      string    `json:"created_by_uuid"`
+	UpdatedByUUID      string    `json:"updated_by_uuid"`
 }
 
 func (q *Queries) InsertUserProjectVersion(ctx context.Context, arg InsertUserProjectVersionParams) (sql.Result, error) {

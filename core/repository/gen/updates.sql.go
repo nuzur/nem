@@ -20,23 +20,23 @@ WHERE uuid = ?
 `
 
 type UpdateChangeRequestParams struct {
-	Version            int64           `json:"version"`
-	Title              string          `json:"title"`
-	Description        sql.NullString  `json:"description"`
-	ProjectUUID        string          `json:"project_uuid"`
-	ProjectVersionUUID string          `json:"project_version_uuid"`
-	ChangeType         int64           `json:"change_type"`
-	DataChanges        json.RawMessage `json:"data_changes"`
-	Metadata           json.RawMessage `json:"metadata"`
-	Reviews            json.RawMessage `json:"reviews"`
-	ReviewStatus       int64           `json:"review_status"`
-	OwnerUUID          string          `json:"owner_uuid"`
-	Status             int64           `json:"status"`
-	CreatedAt          time.Time       `json:"created_at"`
-	UpdatedAt          time.Time       `json:"updated_at"`
-	CreatedByUUID      string          `json:"created_by_uuid"`
-	UpdatedByUUID      string          `json:"updated_by_uuid"`
-	UUID               string          `json:"uuid"`
+	Version            int64          `json:"version"`
+	Title              string         `json:"title"`
+	Description        sql.NullString `json:"description"`
+	ProjectUUID        string         `json:"project_uuid"`
+	ProjectVersionUUID string         `json:"project_version_uuid"`
+	ChangeType         int64          `json:"change_type"`
+	DataChanges        []byte         `json:"data_changes"`
+	Metadata           []byte         `json:"metadata"`
+	Reviews            []byte         `json:"reviews"`
+	ReviewStatus       int64          `json:"review_status"`
+	OwnerUUID          string         `json:"owner_uuid"`
+	Status             int64          `json:"status"`
+	CreatedAt          time.Time      `json:"created_at"`
+	UpdatedAt          time.Time      `json:"updated_at"`
+	CreatedByUUID      string         `json:"created_by_uuid"`
+	UpdatedByUUID      string         `json:"updated_by_uuid"`
+	UUID               string         `json:"uuid"`
 }
 
 func (q *Queries) UpdateChangeRequest(ctx context.Context, arg UpdateChangeRequestParams) error {
@@ -70,25 +70,25 @@ WHERE uuid = ?
 `
 
 type UpdateExtensionParams struct {
-	Version           int64           `json:"version"`
-	Identifier        string          `json:"identifier"`
-	DisplayName       sql.NullString  `json:"display_name"`
-	DisplayAuthorName sql.NullString  `json:"display_author_name"`
-	Description       sql.NullString  `json:"description"`
-	URL               sql.NullString  `json:"url"`
-	Verfied           bool            `json:"verfied"`
-	Repository        string          `json:"repository"`
-	ExtensionType     int64           `json:"extension_type"`
-	Tags              json.RawMessage `json:"tags"`
-	Public            bool            `json:"public"`
-	Visibility        json.RawMessage `json:"visibility"`
-	Status            int64           `json:"status"`
-	OwnerUUID         string          `json:"owner_uuid"`
-	CreatedAt         time.Time       `json:"created_at"`
-	UpdatedAt         time.Time       `json:"updated_at"`
-	CreatedByUUID     string          `json:"created_by_uuid"`
-	UpdatedByUUID     string          `json:"updated_by_uuid"`
-	UUID              string          `json:"uuid"`
+	Version           int64          `json:"version"`
+	Identifier        string         `json:"identifier"`
+	DisplayName       sql.NullString `json:"display_name"`
+	DisplayAuthorName sql.NullString `json:"display_author_name"`
+	Description       sql.NullString `json:"description"`
+	URL               sql.NullString `json:"url"`
+	Verfied           bool           `json:"verfied"`
+	Repository        string         `json:"repository"`
+	ExtensionType     int64          `json:"extension_type"`
+	Tags              []byte         `json:"tags"`
+	Public            bool           `json:"public"`
+	Visibility        []byte         `json:"visibility"`
+	Status            int64          `json:"status"`
+	OwnerUUID         string         `json:"owner_uuid"`
+	CreatedAt         time.Time      `json:"created_at"`
+	UpdatedAt         time.Time      `json:"updated_at"`
+	CreatedByUUID     string         `json:"created_by_uuid"`
+	UpdatedByUUID     string         `json:"updated_by_uuid"`
+	UUID              string         `json:"uuid"`
 }
 
 func (q *Queries) UpdateExtension(ctx context.Context, arg UpdateExtensionParams) error {
@@ -124,18 +124,18 @@ WHERE uuid = ?
 `
 
 type UpdateExtensionExecutionParams struct {
-	ExtensionUUID        string          `json:"extension_uuid"`
-	ExtensionVersionUUID string          `json:"extension_version_uuid"`
-	ProjectExtensionUUID sql.NullString  `json:"project_extension_uuid"`
-	ProjectUUID          string          `json:"project_uuid"`
-	ProjectVersionUUID   string          `json:"project_version_uuid"`
-	ExecutedByUUID       string          `json:"executed_by_uuid"`
-	Metadata             json.RawMessage `json:"metadata"`
-	Status               int64           `json:"status"`
-	StatusMsg            sql.NullString  `json:"status_msg"`
-	CreatedAt            time.Time       `json:"created_at"`
-	UpdatedAt            time.Time       `json:"updated_at"`
-	UUID                 string          `json:"uuid"`
+	ExtensionUUID        string         `json:"extension_uuid"`
+	ExtensionVersionUUID string         `json:"extension_version_uuid"`
+	ProjectExtensionUUID sql.NullString `json:"project_extension_uuid"`
+	ProjectUUID          string         `json:"project_uuid"`
+	ProjectVersionUUID   string         `json:"project_version_uuid"`
+	ExecutedByUUID       string         `json:"executed_by_uuid"`
+	Metadata             []byte         `json:"metadata"`
+	Status               int64          `json:"status"`
+	StatusMsg            sql.NullString `json:"status_msg"`
+	CreatedAt            time.Time      `json:"created_at"`
+	UpdatedAt            time.Time      `json:"updated_at"`
+	UUID                 string         `json:"uuid"`
 }
 
 func (q *Queries) UpdateExtensionExecution(ctx context.Context, arg UpdateExtensionExecutionParams) error {
@@ -169,7 +169,7 @@ type UpdateExtensionVersionParams struct {
 	DisplayVersion      sql.NullString  `json:"display_version"`
 	Description         sql.NullString  `json:"description"`
 	RepositoryTag       string          `json:"repository_tag"`
-	ConfigurationEntity json.RawMessage `json:"configuration_entity"`
+	ConfigurationEntity []byte          `json:"configuration_entity"`
 	ExecutionMode       json.RawMessage `json:"execution_mode"`
 	ReviewStatus        int64           `json:"review_status"`
 	Status              int64           `json:"status"`
@@ -210,9 +210,9 @@ WHERE uuid = ?
 type UpdateOrganizationParams struct {
 	Version       int64           `json:"version"`
 	Name          string          `json:"name"`
-	Domains       json.RawMessage `json:"domains"`
+	Domains       []byte          `json:"domains"`
 	AdminUUIDs    json.RawMessage `json:"admin_uuids"`
-	Memberships   json.RawMessage `json:"memberships"`
+	Memberships   []byte          `json:"memberships"`
 	Status        int64           `json:"status"`
 	CreatedAt     time.Time       `json:"created_at"`
 	UpdatedAt     time.Time       `json:"updated_at"`
@@ -246,21 +246,21 @@ WHERE uuid = ?
 `
 
 type UpdateProjectParams struct {
-	Version           int64           `json:"version"`
-	Name              string          `json:"name"`
-	Description       sql.NullString  `json:"description"`
-	Tags              json.RawMessage `json:"tags"`
-	URL               sql.NullString  `json:"url"`
-	OwnerUUID         string          `json:"owner_uuid"`
-	TeamUUID          string          `json:"team_uuid"`
-	AccessType        int64           `json:"access_type"`
-	ProjectExtensions json.RawMessage `json:"project_extensions"`
-	Status            int64           `json:"status"`
-	CreatedAt         time.Time       `json:"created_at"`
-	UpdatedAt         time.Time       `json:"updated_at"`
-	CreatedByUUID     string          `json:"created_by_uuid"`
-	UpdatedByUUID     string          `json:"updated_by_uuid"`
-	UUID              string          `json:"uuid"`
+	Version           int64          `json:"version"`
+	Name              string         `json:"name"`
+	Description       sql.NullString `json:"description"`
+	Tags              []byte         `json:"tags"`
+	URL               sql.NullString `json:"url"`
+	OwnerUUID         string         `json:"owner_uuid"`
+	TeamUUID          string         `json:"team_uuid"`
+	AccessType        int64          `json:"access_type"`
+	ProjectExtensions []byte         `json:"project_extensions"`
+	Status            int64          `json:"status"`
+	CreatedAt         time.Time      `json:"created_at"`
+	UpdatedAt         time.Time      `json:"updated_at"`
+	CreatedByUUID     string         `json:"created_by_uuid"`
+	UpdatedByUUID     string         `json:"updated_by_uuid"`
+	UUID              string         `json:"uuid"`
 }
 
 func (q *Queries) UpdateProject(ctx context.Context, arg UpdateProjectParams) error {
@@ -302,7 +302,7 @@ type UpdateProjectVersionParams struct {
 	Services        json.RawMessage `json:"services"`
 	BaseVersionUUID sql.NullString  `json:"base_version_uuid"`
 	ReviewStatus    int64           `json:"review_status"`
-	Deployments     json.RawMessage `json:"deployments"`
+	Deployments     []byte          `json:"deployments"`
 	Status          int64           `json:"status"`
 	CreatedAt       time.Time       `json:"created_at"`
 	UpdatedAt       time.Time       `json:"updated_at"`
@@ -342,22 +342,22 @@ WHERE uuid = ?
 `
 
 type UpdateTeamParams struct {
-	Version          int64           `json:"version"`
-	Name             string          `json:"name"`
-	Enviorments      json.RawMessage `json:"enviorments"`
-	ReviewConfigs    json.RawMessage `json:"review_configs"`
-	Memberships      json.RawMessage `json:"memberships"`
-	Stores           json.RawMessage `json:"stores"`
-	Connections      json.RawMessage `json:"connections"`
-	ObjectStores     json.RawMessage `json:"object_stores"`
-	OrganizationUUID sql.NullString  `json:"organization_uuid"`
-	DefaultEntity    json.RawMessage `json:"default_entity"`
-	Status           int64           `json:"status"`
-	CreatedAt        time.Time       `json:"created_at"`
-	UpdatedAt        time.Time       `json:"updated_at"`
-	CreatedByUUID    string          `json:"created_by_uuid"`
-	UpdatedByUUID    string          `json:"updated_by_uuid"`
-	UUID             string          `json:"uuid"`
+	Version          int64          `json:"version"`
+	Name             string         `json:"name"`
+	Enviorments      []byte         `json:"enviorments"`
+	ReviewConfigs    []byte         `json:"review_configs"`
+	Memberships      []byte         `json:"memberships"`
+	Stores           []byte         `json:"stores"`
+	Connections      []byte         `json:"connections"`
+	ObjectStores     []byte         `json:"object_stores"`
+	OrganizationUUID sql.NullString `json:"organization_uuid"`
+	DefaultEntity    []byte         `json:"default_entity"`
+	Status           int64          `json:"status"`
+	CreatedAt        time.Time      `json:"created_at"`
+	UpdatedAt        time.Time      `json:"updated_at"`
+	CreatedByUUID    string         `json:"created_by_uuid"`
+	UpdatedByUUID    string         `json:"updated_by_uuid"`
+	UUID             string         `json:"uuid"`
 }
 
 func (q *Queries) UpdateTeam(ctx context.Context, arg UpdateTeamParams) error {
@@ -436,7 +436,7 @@ type UpdateUserConnectionParams struct {
 	Type               int64           `json:"type"`
 	TypeConfig         json.RawMessage `json:"type_config"`
 	DbSchema           string          `json:"db_schema"`
-	Executions         json.RawMessage `json:"executions"`
+	Executions         []byte          `json:"executions"`
 	Status             int64           `json:"status"`
 	CreatedAt          time.Time       `json:"created_at"`
 	UpdatedAt          time.Time       `json:"updated_at"`
@@ -508,16 +508,16 @@ WHERE uuid = ?
 `
 
 type UpdateUserProjectVersionParams struct {
-	Version            int64           `json:"version"`
-	ProjectVersionUUID string          `json:"project_version_uuid"`
-	UserUUID           string          `json:"user_uuid"`
-	Data               json.RawMessage `json:"data"`
-	Status             int64           `json:"status"`
-	CreatedAt          time.Time       `json:"created_at"`
-	UpdatedAt          time.Time       `json:"updated_at"`
-	CreatedByUUID      string          `json:"created_by_uuid"`
-	UpdatedByUUID      string          `json:"updated_by_uuid"`
-	UUID               string          `json:"uuid"`
+	Version            int64     `json:"version"`
+	ProjectVersionUUID string    `json:"project_version_uuid"`
+	UserUUID           string    `json:"user_uuid"`
+	Data               []byte    `json:"data"`
+	Status             int64     `json:"status"`
+	CreatedAt          time.Time `json:"created_at"`
+	UpdatedAt          time.Time `json:"updated_at"`
+	CreatedByUUID      string    `json:"created_by_uuid"`
+	UpdatedByUUID      string    `json:"updated_by_uuid"`
+	UUID               string    `json:"uuid"`
 }
 
 func (q *Queries) UpdateUserProjectVersion(ctx context.Context, arg UpdateUserProjectVersionParams) error {
