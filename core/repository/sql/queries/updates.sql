@@ -38,7 +38,7 @@ WHERE uuid = ?;
 -- name: UpdateChangeRequest :exec
 UPDATE change_request
 SET
-version = ?, title = ?, description = ?, project_uuid = ?, project_version_uuid = ?, change_type = ?, data_changes = ?, reviews = ?, review_status = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, title = ?, description = ?, project_uuid = ?, project_version_uuid = ?, change_type = ?, data_changes = ?, metadata = ?, reviews = ?, review_status = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?;
 
 -- name: UpdateProjectVersion :exec

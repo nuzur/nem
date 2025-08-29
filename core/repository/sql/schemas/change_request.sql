@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `change_request` (
   `project_version_uuid` CHAR(36) NOT NULL  ,
   `change_type` INT NOT NULL  ,
   `data_changes` JSON   ,
+  `metadata` JSON   ,
   `reviews` JSON   ,
   `review_status` INT NOT NULL  ,
   `owner_uuid` CHAR(36) NOT NULL  ,

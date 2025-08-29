@@ -5,6 +5,7 @@ import (
 
 	"github.com/gofrs/uuid"
 	"github.com/nuzur/nem/core/entity/change_request_data_change"
+	"github.com/nuzur/nem/core/entity/change_request_metadata"
 	"github.com/nuzur/nem/core/entity/change_request_review"
 	"time"
 
@@ -26,6 +27,7 @@ type ChangeRequest struct {
 	ProjectVersionUUID uuid.UUID                                            `json:"project_version_uuid"`
 	ChangeType         ChangeType                                           `json:"change_type"`
 	DataChanges        []change_request_data_change.ChangeRequestDataChange `json:"data_changes"`
+	Metadata           change_request_metadata.ChangeRequestMetadata        `json:"metadata"`
 	Reviews            []change_request_review.ChangeRequestReview          `json:"reviews"`
 	ReviewStatus       ReviewStatus                                         `json:"review_status"`
 	OwnerUUID          uuid.UUID                                            `json:"owner_uuid"`
@@ -64,6 +66,7 @@ func (e ChangeRequest) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["project_version_uuid"] = types.UUIDFieldType
 	res["change_type"] = types.SingleEnumFieldType
 	res["data_changes"] = types.MultiDependantEntityFieldType
+	res["metadata"] = types.SingleDependantEntityFieldType
 	res["reviews"] = types.MultiDependantEntityFieldType
 	res["review_status"] = types.SingleEnumFieldType
 	res["owner_uuid"] = types.UUIDFieldType
@@ -79,6 +82,7 @@ func (e ChangeRequest) DependantFieldIdentifierToTypeMap() map[string]map[string
 	res := make(map[string]map[string]types.FieldType)
 
 	res["data_changes"] = change_request_data_change.ChangeRequestDataChange{}.FieldIdentfierToTypeMap()
+	res["metadata"] = change_request_metadata.ChangeRequestMetadata{}.FieldIdentfierToTypeMap()
 	res["reviews"] = change_request_review.ChangeRequestReview{}.FieldIdentfierToTypeMap()
 	return res
 }
@@ -147,6 +151,7 @@ func NewChangeRequestWithRandomValues() ChangeRequest {
 		ProjectVersionUUID: randomvalues.GetRandomUUIDValue(),
 		ChangeType:         randomvalues.GetRandomOptionValue[ChangeType](2),
 		DataChanges:        change_request_data_change.NewChangeRequestDataChangeSliceWithRandomValues(rand.Intn(10)),
+		Metadata:           change_request_metadata.NewChangeRequestMetadataWithRandomValues(),
 		Reviews:            change_request_review.NewChangeRequestReviewSliceWithRandomValues(rand.Intn(10)),
 		ReviewStatus:       randomvalues.GetRandomOptionValue[ReviewStatus](6),
 		OwnerUUID:          randomvalues.GetRandomUUIDValue(),

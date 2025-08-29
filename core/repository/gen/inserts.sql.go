@@ -14,9 +14,9 @@ import (
 
 const insertChangeRequest = `-- name: InsertChangeRequest :execresult
 INSERT INTO change_request
-(uuid,version,title,description,project_uuid,project_version_uuid,change_type,data_changes,reviews,review_status,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,title,description,project_uuid,project_version_uuid,change_type,data_changes,metadata,reviews,review_status,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertChangeRequestParams struct {
@@ -28,6 +28,7 @@ type InsertChangeRequestParams struct {
 	ProjectVersionUUID string          `json:"project_version_uuid"`
 	ChangeType         int64           `json:"change_type"`
 	DataChanges        json.RawMessage `json:"data_changes"`
+	Metadata           json.RawMessage `json:"metadata"`
 	Reviews            json.RawMessage `json:"reviews"`
 	ReviewStatus       int64           `json:"review_status"`
 	OwnerUUID          string          `json:"owner_uuid"`
@@ -48,6 +49,7 @@ func (q *Queries) InsertChangeRequest(ctx context.Context, arg InsertChangeReque
 		arg.ProjectVersionUUID,
 		arg.ChangeType,
 		arg.DataChanges,
+		arg.Metadata,
 		arg.Reviews,
 		arg.ReviewStatus,
 		arg.OwnerUUID,

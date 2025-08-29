@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "github.com/nuzur/nem";
+option java_outer_classname = "ChangeRequestMetadataData";
+
+package nem;
+
+
+
+message ChangeRequestMetadataData {  
+    string store_uuid = 1;
+    string connection_uuid = 2;
+    string schema = 3;    
+}

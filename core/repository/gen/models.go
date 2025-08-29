@@ -19,6 +19,7 @@ type ChangeRequest struct {
 	ProjectVersionUUID string          `json:"project_version_uuid"`
 	ChangeType         int64           `json:"change_type"`
 	DataChanges        json.RawMessage `json:"data_changes"`
+	Metadata           json.RawMessage `json:"metadata"`
 	Reviews            json.RawMessage `json:"reviews"`
 	ReviewStatus       int64           `json:"review_status"`
 	OwnerUUID          string          `json:"owner_uuid"`

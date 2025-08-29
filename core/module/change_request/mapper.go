@@ -8,6 +8,7 @@ import (
 
 	"github.com/gofrs/uuid"
 	"github.com/nuzur/nem/core/entity/change_request_data_change"
+	"github.com/nuzur/nem/core/entity/change_request_metadata"
 	"github.com/nuzur/nem/core/entity/change_request_review"
 )
 
@@ -29,6 +30,7 @@ func mapModelToEntity(model nemdb.ChangeRequest) main_entity.ChangeRequest {
 		ProjectVersionUUID: uuid.FromStringOrNil(model.ProjectVersionUUID),
 		ChangeType:         main_entity.ChangeType(model.ChangeType),
 		DataChanges:        change_request_data_change.ChangeRequestDataChangeSliceFromJSON(model.DataChanges),
+		Metadata:           change_request_metadata.ChangeRequestMetadataFromJSON(model.Metadata),
 		Reviews:            change_request_review.ChangeRequestReviewSliceFromJSON(model.Reviews),
 		ReviewStatus:       main_entity.ReviewStatus(model.ReviewStatus),
 		OwnerUUID:          uuid.FromStringOrNil(model.OwnerUUID),

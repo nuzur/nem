@@ -9,6 +9,7 @@ import (
 	"github.com/nuzur/nem/monitoring"
 
 	"github.com/nuzur/nem/core/entity/change_request_data_change"
+	"github.com/nuzur/nem/core/entity/change_request_metadata"
 	"github.com/nuzur/nem/core/entity/change_request_review"
 
 	"github.com/nuzur/nem/custom"
@@ -155,6 +156,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 
 			DataChanges: change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges),
 
+			Metadata: change_request_metadata.ChangeRequestMetadataToJSON(req.ChangeRequest.Metadata),
+
 			Reviews: change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews),
 
 			ReviewStatus: req.ChangeRequest.ReviewStatus.ToInt64(),
@@ -190,6 +193,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 	res.ChangeType = req.ChangeRequest.ChangeType.ToInt64()
 
 	res.DataChanges = change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges)
+
+	res.Metadata = change_request_metadata.ChangeRequestMetadataToJSON(req.ChangeRequest.Metadata)
 
 	res.Reviews = change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews)
 
