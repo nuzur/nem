@@ -22,21 +22,20 @@ import (
 )
 
 type Team struct {
-	UUID             uuid.UUID                    `json:"uuid"`
-	Version          int64                        `json:"version"`
-	Name             string                       `json:"name"`
-	Enviorments      []enviorment.Enviorment      `json:"enviorments"`
-	ReviewConfigs    []review_config.ReviewConfig `json:"review_configs"`
-	Stores           []store.Store                `json:"stores"`
-	Connections      []connection.Connection      `json:"connections"`
-	ObjectStores     []object_store.ObjectStore   `json:"object_stores"`
-	OrganizationUUID uuid.UUID                    `json:"organization_uuid"`
-	DefaultEntity    entity.Entity                `json:"default_entity"`
-	Status           Status                       `json:"status"`
-	CreatedAt        time.Time                    `json:"created_at"`
-	UpdatedAt        time.Time                    `json:"updated_at"`
-	CreatedByUUID    uuid.UUID                    `json:"created_by_uuid"`
-	UpdatedByUUID    uuid.UUID                    `json:"updated_by_uuid"`
+	UUID          uuid.UUID                    `json:"uuid"`
+	Version       int64                        `json:"version"`
+	Name          string                       `json:"name"`
+	Enviorments   []enviorment.Enviorment      `json:"enviorments"`
+	ReviewConfigs []review_config.ReviewConfig `json:"review_configs"`
+	Stores        []store.Store                `json:"stores"`
+	Connections   []connection.Connection      `json:"connections"`
+	ObjectStores  []object_store.ObjectStore   `json:"object_stores"`
+	DefaultEntity entity.Entity                `json:"default_entity"`
+	Status        Status                       `json:"status"`
+	CreatedAt     time.Time                    `json:"created_at"`
+	UpdatedAt     time.Time                    `json:"updated_at"`
+	CreatedByUUID uuid.UUID                    `json:"created_by_uuid"`
+	UpdatedByUUID uuid.UUID                    `json:"updated_by_uuid"`
 }
 
 func (e Team) String() string {
@@ -67,7 +66,6 @@ func (e Team) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["stores"] = types.MultiDependantEntityFieldType
 	res["connections"] = types.MultiDependantEntityFieldType
 	res["object_stores"] = types.MultiDependantEntityFieldType
-	res["organization_uuid"] = types.UUIDFieldType
 	res["default_entity"] = types.SingleDependantEntityFieldType
 	res["status"] = types.SingleEnumFieldType
 	res["created_at"] = types.TimestampFieldType
@@ -145,21 +143,20 @@ func TeamSliceToJSON(e []Team) json.RawMessage {
 func NewTeamWithRandomValues() Team {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return Team{
-		UUID:             randomvalues.GetRandomUUIDValue(),
-		Version:          randomvalues.GetRandomIntValue(),
-		Name:             randomvalues.GetRandomStringValue(),
-		Enviorments:      enviorment.NewEnviormentSliceWithRandomValues(rand.Intn(10)),
-		ReviewConfigs:    review_config.NewReviewConfigSliceWithRandomValues(rand.Intn(10)),
-		Stores:           store.NewStoreSliceWithRandomValues(rand.Intn(10)),
-		Connections:      connection.NewConnectionSliceWithRandomValues(rand.Intn(10)),
-		ObjectStores:     object_store.NewObjectStoreSliceWithRandomValues(rand.Intn(10)),
-		OrganizationUUID: randomvalues.GetRandomUUIDValue(),
-		DefaultEntity:    entity.NewEntityWithRandomValues(),
-		Status:           randomvalues.GetRandomOptionValue[Status](2),
-		CreatedAt:        randomvalues.GetRandomTimeValue(),
-		UpdatedAt:        randomvalues.GetRandomTimeValue(),
-		CreatedByUUID:    randomvalues.GetRandomUUIDValue(),
-		UpdatedByUUID:    randomvalues.GetRandomUUIDValue(),
+		UUID:          randomvalues.GetRandomUUIDValue(),
+		Version:       randomvalues.GetRandomIntValue(),
+		Name:          randomvalues.GetRandomStringValue(),
+		Enviorments:   enviorment.NewEnviormentSliceWithRandomValues(rand.Intn(10)),
+		ReviewConfigs: review_config.NewReviewConfigSliceWithRandomValues(rand.Intn(10)),
+		Stores:        store.NewStoreSliceWithRandomValues(rand.Intn(10)),
+		Connections:   connection.NewConnectionSliceWithRandomValues(rand.Intn(10)),
+		ObjectStores:  object_store.NewObjectStoreSliceWithRandomValues(rand.Intn(10)),
+		DefaultEntity: entity.NewEntityWithRandomValues(),
+		Status:        randomvalues.GetRandomOptionValue[Status](2),
+		CreatedAt:     randomvalues.GetRandomTimeValue(),
+		UpdatedAt:     randomvalues.GetRandomTimeValue(),
+		CreatedByUUID: randomvalues.GetRandomUUIDValue(),
+		UpdatedByUUID: randomvalues.GetRandomUUIDValue(),
 	}
 }
 

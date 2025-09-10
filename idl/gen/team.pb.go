@@ -72,24 +72,23 @@ func (TeamStatus) EnumDescriptor() ([]byte, []int) {
 }
 
 type Team struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Uuid             string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	Version          int64                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
-	Name             string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Enviorments      []*Enviorment          `protobuf:"bytes,4,rep,name=enviorments,proto3" json:"enviorments,omitempty"`
-	ReviewConfigs    []*ReviewConfig        `protobuf:"bytes,5,rep,name=review_configs,json=reviewConfigs,proto3" json:"review_configs,omitempty"`
-	Stores           []*Store               `protobuf:"bytes,6,rep,name=stores,proto3" json:"stores,omitempty"`
-	Connections      []*Connection          `protobuf:"bytes,7,rep,name=connections,proto3" json:"connections,omitempty"`
-	ObjectStores     []*ObjectStore         `protobuf:"bytes,8,rep,name=object_stores,json=objectStores,proto3" json:"object_stores,omitempty"`
-	OrganizationUuid string                 `protobuf:"bytes,9,opt,name=organization_uuid,json=organizationUuid,proto3" json:"organization_uuid,omitempty"`
-	DefaultEntity    *Entity                `protobuf:"bytes,10,opt,name=default_entity,json=defaultEntity,proto3" json:"default_entity,omitempty"`
-	Status           TeamStatus             `protobuf:"varint,11,opt,name=status,proto3,enum=nem.TeamStatus" json:"status,omitempty"`
-	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt        *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CreatedByUuid    string                 `protobuf:"bytes,14,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
-	UpdatedByUuid    string                 `protobuf:"bytes,15,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Version       int64                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Enviorments   []*Enviorment          `protobuf:"bytes,4,rep,name=enviorments,proto3" json:"enviorments,omitempty"`
+	ReviewConfigs []*ReviewConfig        `protobuf:"bytes,5,rep,name=review_configs,json=reviewConfigs,proto3" json:"review_configs,omitempty"`
+	Stores        []*Store               `protobuf:"bytes,6,rep,name=stores,proto3" json:"stores,omitempty"`
+	Connections   []*Connection          `protobuf:"bytes,7,rep,name=connections,proto3" json:"connections,omitempty"`
+	ObjectStores  []*ObjectStore         `protobuf:"bytes,8,rep,name=object_stores,json=objectStores,proto3" json:"object_stores,omitempty"`
+	DefaultEntity *Entity                `protobuf:"bytes,9,opt,name=default_entity,json=defaultEntity,proto3" json:"default_entity,omitempty"`
+	Status        TeamStatus             `protobuf:"varint,10,opt,name=status,proto3,enum=nem.TeamStatus" json:"status,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedByUuid string                 `protobuf:"bytes,13,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
+	UpdatedByUuid string                 `protobuf:"bytes,14,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Team) Reset() {
@@ -178,13 +177,6 @@ func (x *Team) GetObjectStores() []*ObjectStore {
 	return nil
 }
 
-func (x *Team) GetOrganizationUuid() string {
-	if x != nil {
-		return x.OrganizationUuid
-	}
-	return ""
-}
-
 func (x *Team) GetDefaultEntity() *Entity {
 	if x != nil {
 		return x.DefaultEntity
@@ -232,7 +224,7 @@ var File_team_proto protoreflect.FileDescriptor
 const file_team_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"team.proto\x12\x03nem\x1a\x10connection.proto\x1a\fentity.proto\x1a\x10enviorment.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x12object_store.proto\x1a\x13review_config.proto\x1a\vstore.proto\"\x93\x05\n" +
+	"team.proto\x12\x03nem\x1a\x10connection.proto\x1a\fentity.proto\x1a\x10enviorment.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x12object_store.proto\x1a\x13review_config.proto\x1a\vstore.proto\"\xe6\x04\n" +
 	"\x04Team\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x12\n" +
@@ -242,17 +234,16 @@ const file_team_proto_rawDesc = "" +
 	"\x06stores\x18\x06 \x03(\v2\n" +
 	".nem.StoreR\x06stores\x121\n" +
 	"\vconnections\x18\a \x03(\v2\x0f.nem.ConnectionR\vconnections\x125\n" +
-	"\robject_stores\x18\b \x03(\v2\x10.nem.ObjectStoreR\fobjectStores\x12+\n" +
-	"\x11organization_uuid\x18\t \x01(\tR\x10organizationUuid\x122\n" +
-	"\x0edefault_entity\x18\n" +
-	" \x01(\v2\v.nem.EntityR\rdefaultEntity\x12'\n" +
-	"\x06status\x18\v \x01(\x0e2\x0f.nem.TeamStatusR\x06status\x129\n" +
+	"\robject_stores\x18\b \x03(\v2\x10.nem.ObjectStoreR\fobjectStores\x122\n" +
+	"\x0edefault_entity\x18\t \x01(\v2\v.nem.EntityR\rdefaultEntity\x12'\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2\x0f.nem.TeamStatusR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
-	"\x0fcreated_by_uuid\x18\x0e \x01(\tR\rcreatedByUuid\x12&\n" +
-	"\x0fupdated_by_uuid\x18\x0f \x01(\tR\rupdatedByUuid*W\n" +
+	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
+	"\x0fcreated_by_uuid\x18\r \x01(\tR\rcreatedByUuid\x12&\n" +
+	"\x0fupdated_by_uuid\x18\x0e \x01(\tR\rupdatedByUuid*W\n" +
 	"\n" +
 	"TeamStatus\x12\x17\n" +
 	"\x13TEAM_STATUS_INVALID\x10\x00\x12\x16\n" +

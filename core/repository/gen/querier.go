@@ -451,23 +451,6 @@ type Querier interface {
 	FetchMembershipByTypeOrderedByUpdatedAtDESC(ctx context.Context, arg FetchMembershipByTypeOrderedByUpdatedAtDESCParams) ([]Membership, error)
 	FetchMembershipByUUID(ctx context.Context, uuid string) ([]Membership, error)
 	FetchMembershipByUUIDForUpdate(ctx context.Context, uuid string) ([]Membership, error)
-	FetchOrganizationByStatus(ctx context.Context, arg FetchOrganizationByStatusParams) ([]Organization, error)
-	FetchOrganizationByStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchOrganizationByStatusOrderedByCreatedAtASCParams) ([]Organization, error)
-	FetchOrganizationByStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchOrganizationByStatusOrderedByCreatedAtDESCParams) ([]Organization, error)
-	FetchOrganizationByStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchOrganizationByStatusOrderedByUpdatedAtASCParams) ([]Organization, error)
-	FetchOrganizationByStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchOrganizationByStatusOrderedByUpdatedAtDESCParams) ([]Organization, error)
-	FetchOrganizationByUUID(ctx context.Context, uuid string) ([]Organization, error)
-	FetchOrganizationByUUIDForUpdate(ctx context.Context, uuid string) ([]Organization, error)
-	FetchOrganizationByVersion(ctx context.Context, arg FetchOrganizationByVersionParams) ([]Organization, error)
-	FetchOrganizationByVersionAndStatus(ctx context.Context, arg FetchOrganizationByVersionAndStatusParams) ([]Organization, error)
-	FetchOrganizationByVersionAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchOrganizationByVersionAndStatusOrderedByCreatedAtASCParams) ([]Organization, error)
-	FetchOrganizationByVersionAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchOrganizationByVersionAndStatusOrderedByCreatedAtDESCParams) ([]Organization, error)
-	FetchOrganizationByVersionAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchOrganizationByVersionAndStatusOrderedByUpdatedAtASCParams) ([]Organization, error)
-	FetchOrganizationByVersionAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchOrganizationByVersionAndStatusOrderedByUpdatedAtDESCParams) ([]Organization, error)
-	FetchOrganizationByVersionOrderedByCreatedAtASC(ctx context.Context, arg FetchOrganizationByVersionOrderedByCreatedAtASCParams) ([]Organization, error)
-	FetchOrganizationByVersionOrderedByCreatedAtDESC(ctx context.Context, arg FetchOrganizationByVersionOrderedByCreatedAtDESCParams) ([]Organization, error)
-	FetchOrganizationByVersionOrderedByUpdatedAtASC(ctx context.Context, arg FetchOrganizationByVersionOrderedByUpdatedAtASCParams) ([]Organization, error)
-	FetchOrganizationByVersionOrderedByUpdatedAtDESC(ctx context.Context, arg FetchOrganizationByVersionOrderedByUpdatedAtDESCParams) ([]Organization, error)
 	FetchProjectByName(ctx context.Context, arg FetchProjectByNameParams) ([]Project, error)
 	FetchProjectByNameAndStatus(ctx context.Context, arg FetchProjectByNameAndStatusParams) ([]Project, error)
 	FetchProjectByNameAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectByNameAndStatusOrderedByCreatedAtASCParams) ([]Project, error)
@@ -689,7 +672,6 @@ type Querier interface {
 	InsertExtensionExecution(ctx context.Context, arg InsertExtensionExecutionParams) (sql.Result, error)
 	InsertExtensionVersion(ctx context.Context, arg InsertExtensionVersionParams) (sql.Result, error)
 	InsertMembership(ctx context.Context, arg InsertMembershipParams) (sql.Result, error)
-	InsertOrganization(ctx context.Context, arg InsertOrganizationParams) (sql.Result, error)
 	InsertProject(ctx context.Context, arg InsertProjectParams) (sql.Result, error)
 	InsertProjectVersion(ctx context.Context, arg InsertProjectVersionParams) (sql.Result, error)
 	InsertTeam(ctx context.Context, arg InsertTeamParams) (sql.Result, error)
@@ -700,7 +682,6 @@ type Querier interface {
 	InsertUserTeam(ctx context.Context, arg InsertUserTeamParams) (sql.Result, error)
 	SearchChangeRequest(ctx context.Context, arg SearchChangeRequestParams) ([]ChangeRequest, error)
 	SearchExtension(ctx context.Context, arg SearchExtensionParams) ([]Extension, error)
-	SearchOrganization(ctx context.Context, arg SearchOrganizationParams) ([]Organization, error)
 	SearchProject(ctx context.Context, arg SearchProjectParams) ([]Project, error)
 	SearchProjectVersion(ctx context.Context, arg SearchProjectVersionParams) ([]ProjectVersion, error)
 	SearchTeam(ctx context.Context, arg SearchTeamParams) ([]Team, error)
@@ -709,7 +690,6 @@ type Querier interface {
 	UpdateExtensionExecution(ctx context.Context, arg UpdateExtensionExecutionParams) error
 	UpdateExtensionVersion(ctx context.Context, arg UpdateExtensionVersionParams) error
 	UpdateMembership(ctx context.Context, arg UpdateMembershipParams) error
-	UpdateOrganization(ctx context.Context, arg UpdateOrganizationParams) error
 	UpdateProject(ctx context.Context, arg UpdateProjectParams) error
 	UpdateProjectVersion(ctx context.Context, arg UpdateProjectVersionParams) error
 	UpdateTeam(ctx context.Context, arg UpdateTeamParams) error

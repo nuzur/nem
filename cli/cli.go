@@ -19,9 +19,6 @@ import (
 	"github.com/nuzur/nem/core/entity/team"
 	teamtypes "github.com/nuzur/nem/core/module/team/types"
 
-	"github.com/nuzur/nem/core/entity/organization"
-	organizationtypes "github.com/nuzur/nem/core/module/organization/types"
-
 	"github.com/nuzur/nem/core/entity/project"
 	projecttypes "github.com/nuzur/nem/core/module/project/types"
 
@@ -231,21 +228,6 @@ func main() {
 							fmt.Printf("error writing entity: %s, %v \n", "team", err)
 						} else {
 							fmt.Printf("wrote entity: %s, %v \n", "team", res)
-						}
-					}
-					c.Destroy()
-
-				case "organization":
-					entities := organization.NewOrganizationSliceWithRandomValues(100)
-					for _, e := range entities {
-						e.UUID = uuid.Nil
-						res, err := c.Organization().Upsert(context.Background(), organizationtypes.UpsertRequest{
-							Organization: e,
-						}, false)
-						if err != nil {
-							fmt.Printf("error writing entity: %s, %v \n", "organization", err)
-						} else {
-							fmt.Printf("wrote entity: %s, %v \n", "organization", res)
 						}
 					}
 					c.Destroy()

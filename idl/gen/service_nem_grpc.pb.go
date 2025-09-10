@@ -22,9 +22,6 @@ const (
 	Nem_ListTeams_FullMethodName                = "/nem.Nem/ListTeams"
 	Nem_CreateTeam_FullMethodName               = "/nem.Nem/CreateTeam"
 	Nem_UpdateTeam_FullMethodName               = "/nem.Nem/UpdateTeam"
-	Nem_ListOrganizations_FullMethodName        = "/nem.Nem/ListOrganizations"
-	Nem_CreateOrganization_FullMethodName       = "/nem.Nem/CreateOrganization"
-	Nem_UpdateOrganization_FullMethodName       = "/nem.Nem/UpdateOrganization"
 	Nem_ListProjects_FullMethodName             = "/nem.Nem/ListProjects"
 	Nem_CreateProject_FullMethodName            = "/nem.Nem/CreateProject"
 	Nem_UpdateProject_FullMethodName            = "/nem.Nem/UpdateProject"
@@ -71,10 +68,6 @@ type NemClient interface {
 	ListTeams(ctx context.Context, in *ListTeamsRequest, opts ...grpc.CallOption) (*ListTeamsResponse, error)
 	CreateTeam(ctx context.Context, in *CreateTeamRequest, opts ...grpc.CallOption) (*Team, error)
 	UpdateTeam(ctx context.Context, in *UpdateTeamRequest, opts ...grpc.CallOption) (*Team, error)
-	// organization start
-	ListOrganizations(ctx context.Context, in *ListOrganizationsRequest, opts ...grpc.CallOption) (*ListOrganizationsResponse, error)
-	CreateOrganization(ctx context.Context, in *CreateOrganizationRequest, opts ...grpc.CallOption) (*Organization, error)
-	UpdateOrganization(ctx context.Context, in *UpdateOrganizationRequest, opts ...grpc.CallOption) (*Organization, error)
 	// project start
 	ListProjects(ctx context.Context, in *ListProjectsRequest, opts ...grpc.CallOption) (*ListProjectsResponse, error)
 	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*Project, error)
@@ -157,36 +150,6 @@ func (c *nemClient) UpdateTeam(ctx context.Context, in *UpdateTeamRequest, opts 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Team)
 	err := c.cc.Invoke(ctx, Nem_UpdateTeam_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nemClient) ListOrganizations(ctx context.Context, in *ListOrganizationsRequest, opts ...grpc.CallOption) (*ListOrganizationsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListOrganizationsResponse)
-	err := c.cc.Invoke(ctx, Nem_ListOrganizations_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nemClient) CreateOrganization(ctx context.Context, in *CreateOrganizationRequest, opts ...grpc.CallOption) (*Organization, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Organization)
-	err := c.cc.Invoke(ctx, Nem_CreateOrganization_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *nemClient) UpdateOrganization(ctx context.Context, in *UpdateOrganizationRequest, opts ...grpc.CallOption) (*Organization, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Organization)
-	err := c.cc.Invoke(ctx, Nem_UpdateOrganization_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -561,10 +524,6 @@ type NemServer interface {
 	ListTeams(context.Context, *ListTeamsRequest) (*ListTeamsResponse, error)
 	CreateTeam(context.Context, *CreateTeamRequest) (*Team, error)
 	UpdateTeam(context.Context, *UpdateTeamRequest) (*Team, error)
-	// organization start
-	ListOrganizations(context.Context, *ListOrganizationsRequest) (*ListOrganizationsResponse, error)
-	CreateOrganization(context.Context, *CreateOrganizationRequest) (*Organization, error)
-	UpdateOrganization(context.Context, *UpdateOrganizationRequest) (*Organization, error)
 	// project start
 	ListProjects(context.Context, *ListProjectsRequest) (*ListProjectsResponse, error)
 	CreateProject(context.Context, *CreateProjectRequest) (*Project, error)
@@ -631,15 +590,6 @@ func (UnimplementedNemServer) CreateTeam(context.Context, *CreateTeamRequest) (*
 }
 func (UnimplementedNemServer) UpdateTeam(context.Context, *UpdateTeamRequest) (*Team, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTeam not implemented")
-}
-func (UnimplementedNemServer) ListOrganizations(context.Context, *ListOrganizationsRequest) (*ListOrganizationsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListOrganizations not implemented")
-}
-func (UnimplementedNemServer) CreateOrganization(context.Context, *CreateOrganizationRequest) (*Organization, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateOrganization not implemented")
-}
-func (UnimplementedNemServer) UpdateOrganization(context.Context, *UpdateOrganizationRequest) (*Organization, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrganization not implemented")
 }
 func (UnimplementedNemServer) ListProjects(context.Context, *ListProjectsRequest) (*ListProjectsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProjects not implemented")
@@ -820,60 +770,6 @@ func _Nem_UpdateTeam_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NemServer).UpdateTeam(ctx, req.(*UpdateTeamRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Nem_ListOrganizations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListOrganizationsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NemServer).ListOrganizations(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Nem_ListOrganizations_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NemServer).ListOrganizations(ctx, req.(*ListOrganizationsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Nem_CreateOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateOrganizationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NemServer).CreateOrganization(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Nem_CreateOrganization_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NemServer).CreateOrganization(ctx, req.(*CreateOrganizationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Nem_UpdateOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateOrganizationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NemServer).UpdateOrganization(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Nem_UpdateOrganization_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NemServer).UpdateOrganization(ctx, req.(*UpdateOrganizationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1544,18 +1440,6 @@ var Nem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateTeam",
 			Handler:    _Nem_UpdateTeam_Handler,
-		},
-		{
-			MethodName: "ListOrganizations",
-			Handler:    _Nem_ListOrganizations_Handler,
-		},
-		{
-			MethodName: "CreateOrganization",
-			Handler:    _Nem_CreateOrganization_Handler,
-		},
-		{
-			MethodName: "UpdateOrganization",
-			Handler:    _Nem_UpdateOrganization_Handler,
 		},
 		{
 			MethodName: "ListProjects",

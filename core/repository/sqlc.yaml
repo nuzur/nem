@@ -11,7 +11,6 @@ sql:
         emit_json_tags: true
         rename:
           access_type: AccessType
-          admin_uuids: AdminUUIDs
           base_version_uuid: BaseVersionUUID
           billing_metadata: BillingMetadata
           change_type: ChangeType
@@ -29,7 +28,6 @@ sql:
           display_author_name: DisplayAuthorName
           display_name: DisplayName
           display_version: DisplayVersion
-          domains: Domains
           email: Email
           entities: Entities
           enums: Enums
@@ -46,7 +44,6 @@ sql:
           metadata: Metadata
           name: Name
           object_stores: ObjectStores
-          organization_uuid: OrganizationUUID
           owner_uuid: OwnerUUID
           project_extension_uuid: ProjectExtensionUUID
           project_extensions: ProjectExtensions

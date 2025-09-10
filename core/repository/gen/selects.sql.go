@@ -27384,834 +27384,6 @@ func (q *Queries) FetchMembershipByUUIDForUpdate(ctx context.Context, uuid strin
 	return items, nil
 }
 
-const fetchOrganizationByStatus = `-- name: FetchOrganizationByStatus :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     status = ?  
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByStatusParams struct {
-	Status int64 `json:"status"`
-	Offset int32 `json:"offset"`
-	Limit  int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByStatus(ctx context.Context, arg FetchOrganizationByStatusParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByStatus, arg.Status, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByStatusOrderedByCreatedAtASC = `-- name: FetchOrganizationByStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     status = ?  
-    ORDER BY created_at ASC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByStatusOrderedByCreatedAtASCParams struct {
-	Status int64 `json:"status"`
-	Offset int32 `json:"offset"`
-	Limit  int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchOrganizationByStatusOrderedByCreatedAtASCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByStatusOrderedByCreatedAtASC, arg.Status, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByStatusOrderedByCreatedAtDESC = `-- name: FetchOrganizationByStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     status = ?  
-    ORDER BY created_at DESC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByStatusOrderedByCreatedAtDESCParams struct {
-	Status int64 `json:"status"`
-	Offset int32 `json:"offset"`
-	Limit  int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchOrganizationByStatusOrderedByCreatedAtDESCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByStatusOrderedByCreatedAtDESC, arg.Status, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByStatusOrderedByUpdatedAtASC = `-- name: FetchOrganizationByStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     status = ?  
-    ORDER BY updated_at ASC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByStatusOrderedByUpdatedAtASCParams struct {
-	Status int64 `json:"status"`
-	Offset int32 `json:"offset"`
-	Limit  int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchOrganizationByStatusOrderedByUpdatedAtASCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByStatusOrderedByUpdatedAtASC, arg.Status, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByStatusOrderedByUpdatedAtDESC = `-- name: FetchOrganizationByStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     status = ?  
-    ORDER BY updated_at DESC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByStatusOrderedByUpdatedAtDESCParams struct {
-	Status int64 `json:"status"`
-	Offset int32 `json:"offset"`
-	Limit  int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchOrganizationByStatusOrderedByUpdatedAtDESCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByStatusOrderedByUpdatedAtDESC, arg.Status, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByUUID = `-- name: FetchOrganizationByUUID :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     uuid = ?
-`
-
-func (q *Queries) FetchOrganizationByUUID(ctx context.Context, uuid string) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByUUID, uuid)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByUUIDForUpdate = `-- name: FetchOrganizationByUUIDForUpdate :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     uuid = ?      
-FOR UPDATE
-`
-
-func (q *Queries) FetchOrganizationByUUIDForUpdate(ctx context.Context, uuid string) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByUUIDForUpdate, uuid)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByVersion = `-- name: FetchOrganizationByVersion :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     version = ?  
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByVersionParams struct {
-	Version int64 `json:"version"`
-	Offset  int32 `json:"offset"`
-	Limit   int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByVersion(ctx context.Context, arg FetchOrganizationByVersionParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByVersion, arg.Version, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByVersionAndStatus = `-- name: FetchOrganizationByVersionAndStatus :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     version = ? AND status = ?  
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByVersionAndStatusParams struct {
-	Version int64 `json:"version"`
-	Status  int64 `json:"status"`
-	Offset  int32 `json:"offset"`
-	Limit   int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByVersionAndStatus(ctx context.Context, arg FetchOrganizationByVersionAndStatusParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByVersionAndStatus,
-		arg.Version,
-		arg.Status,
-		arg.Offset,
-		arg.Limit,
-	)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByVersionAndStatusOrderedByCreatedAtASC = `-- name: FetchOrganizationByVersionAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     version = ? AND status = ?  
-    ORDER BY created_at ASC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByVersionAndStatusOrderedByCreatedAtASCParams struct {
-	Version int64 `json:"version"`
-	Status  int64 `json:"status"`
-	Offset  int32 `json:"offset"`
-	Limit   int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByVersionAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchOrganizationByVersionAndStatusOrderedByCreatedAtASCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByVersionAndStatusOrderedByCreatedAtASC,
-		arg.Version,
-		arg.Status,
-		arg.Offset,
-		arg.Limit,
-	)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByVersionAndStatusOrderedByCreatedAtDESC = `-- name: FetchOrganizationByVersionAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     version = ? AND status = ?  
-    ORDER BY created_at DESC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByVersionAndStatusOrderedByCreatedAtDESCParams struct {
-	Version int64 `json:"version"`
-	Status  int64 `json:"status"`
-	Offset  int32 `json:"offset"`
-	Limit   int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByVersionAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchOrganizationByVersionAndStatusOrderedByCreatedAtDESCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByVersionAndStatusOrderedByCreatedAtDESC,
-		arg.Version,
-		arg.Status,
-		arg.Offset,
-		arg.Limit,
-	)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByVersionAndStatusOrderedByUpdatedAtASC = `-- name: FetchOrganizationByVersionAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     version = ? AND status = ?  
-    ORDER BY updated_at ASC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByVersionAndStatusOrderedByUpdatedAtASCParams struct {
-	Version int64 `json:"version"`
-	Status  int64 `json:"status"`
-	Offset  int32 `json:"offset"`
-	Limit   int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByVersionAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchOrganizationByVersionAndStatusOrderedByUpdatedAtASCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByVersionAndStatusOrderedByUpdatedAtASC,
-		arg.Version,
-		arg.Status,
-		arg.Offset,
-		arg.Limit,
-	)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByVersionAndStatusOrderedByUpdatedAtDESC = `-- name: FetchOrganizationByVersionAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     version = ? AND status = ?  
-    ORDER BY updated_at DESC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByVersionAndStatusOrderedByUpdatedAtDESCParams struct {
-	Version int64 `json:"version"`
-	Status  int64 `json:"status"`
-	Offset  int32 `json:"offset"`
-	Limit   int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByVersionAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchOrganizationByVersionAndStatusOrderedByUpdatedAtDESCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByVersionAndStatusOrderedByUpdatedAtDESC,
-		arg.Version,
-		arg.Status,
-		arg.Offset,
-		arg.Limit,
-	)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByVersionOrderedByCreatedAtASC = `-- name: FetchOrganizationByVersionOrderedByCreatedAtASC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     version = ?  
-    ORDER BY created_at ASC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByVersionOrderedByCreatedAtASCParams struct {
-	Version int64 `json:"version"`
-	Offset  int32 `json:"offset"`
-	Limit   int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByVersionOrderedByCreatedAtASC(ctx context.Context, arg FetchOrganizationByVersionOrderedByCreatedAtASCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByVersionOrderedByCreatedAtASC, arg.Version, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByVersionOrderedByCreatedAtDESC = `-- name: FetchOrganizationByVersionOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     version = ?  
-    ORDER BY created_at DESC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByVersionOrderedByCreatedAtDESCParams struct {
-	Version int64 `json:"version"`
-	Offset  int32 `json:"offset"`
-	Limit   int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByVersionOrderedByCreatedAtDESC(ctx context.Context, arg FetchOrganizationByVersionOrderedByCreatedAtDESCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByVersionOrderedByCreatedAtDESC, arg.Version, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByVersionOrderedByUpdatedAtASC = `-- name: FetchOrganizationByVersionOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     version = ?  
-    ORDER BY updated_at ASC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByVersionOrderedByUpdatedAtASCParams struct {
-	Version int64 `json:"version"`
-	Offset  int32 `json:"offset"`
-	Limit   int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByVersionOrderedByUpdatedAtASC(ctx context.Context, arg FetchOrganizationByVersionOrderedByUpdatedAtASCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByVersionOrderedByUpdatedAtASC, arg.Version, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchOrganizationByVersionOrderedByUpdatedAtDESC = `-- name: FetchOrganizationByVersionOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-     version = ?  
-    ORDER BY updated_at DESC
-    LIMIT ?, ?
-`
-
-type FetchOrganizationByVersionOrderedByUpdatedAtDESCParams struct {
-	Version int64 `json:"version"`
-	Offset  int32 `json:"offset"`
-	Limit   int32 `json:"limit"`
-}
-
-func (q *Queries) FetchOrganizationByVersionOrderedByUpdatedAtDESC(ctx context.Context, arg FetchOrganizationByVersionOrderedByUpdatedAtDESCParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, fetchOrganizationByVersionOrderedByUpdatedAtDESC, arg.Version, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
 const fetchProjectByName = `-- name: FetchProjectByName :many
 SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
@@ -32425,7 +31597,7 @@ func (q *Queries) FetchProjectVersionByVersionOrderedByUpdatedAtDESC(ctx context
 }
 
 const fetchTeamByStatus = `-- name: FetchTeamByStatus :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      status = ?  
     LIMIT ?, ?
@@ -32455,7 +31627,6 @@ func (q *Queries) FetchTeamByStatus(ctx context.Context, arg FetchTeamByStatusPa
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -32477,7 +31648,7 @@ func (q *Queries) FetchTeamByStatus(ctx context.Context, arg FetchTeamByStatusPa
 }
 
 const fetchTeamByStatusOrderedByCreatedAtASC = `-- name: FetchTeamByStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      status = ?  
     ORDER BY created_at ASC
@@ -32508,7 +31679,6 @@ func (q *Queries) FetchTeamByStatusOrderedByCreatedAtASC(ctx context.Context, ar
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -32530,7 +31700,7 @@ func (q *Queries) FetchTeamByStatusOrderedByCreatedAtASC(ctx context.Context, ar
 }
 
 const fetchTeamByStatusOrderedByCreatedAtDESC = `-- name: FetchTeamByStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      status = ?  
     ORDER BY created_at DESC
@@ -32561,7 +31731,6 @@ func (q *Queries) FetchTeamByStatusOrderedByCreatedAtDESC(ctx context.Context, a
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -32583,7 +31752,7 @@ func (q *Queries) FetchTeamByStatusOrderedByCreatedAtDESC(ctx context.Context, a
 }
 
 const fetchTeamByStatusOrderedByUpdatedAtASC = `-- name: FetchTeamByStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      status = ?  
     ORDER BY updated_at ASC
@@ -32614,7 +31783,6 @@ func (q *Queries) FetchTeamByStatusOrderedByUpdatedAtASC(ctx context.Context, ar
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -32636,7 +31804,7 @@ func (q *Queries) FetchTeamByStatusOrderedByUpdatedAtASC(ctx context.Context, ar
 }
 
 const fetchTeamByStatusOrderedByUpdatedAtDESC = `-- name: FetchTeamByStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      status = ?  
     ORDER BY updated_at DESC
@@ -32667,7 +31835,6 @@ func (q *Queries) FetchTeamByStatusOrderedByUpdatedAtDESC(ctx context.Context, a
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -32689,7 +31856,7 @@ func (q *Queries) FetchTeamByStatusOrderedByUpdatedAtDESC(ctx context.Context, a
 }
 
 const fetchTeamByUUID = `-- name: FetchTeamByUUID :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      uuid = ?
 `
@@ -32712,7 +31879,6 @@ func (q *Queries) FetchTeamByUUID(ctx context.Context, uuid string) ([]Team, err
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -32734,7 +31900,7 @@ func (q *Queries) FetchTeamByUUID(ctx context.Context, uuid string) ([]Team, err
 }
 
 const fetchTeamByUUIDForUpdate = `-- name: FetchTeamByUUIDForUpdate :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      uuid = ?      
 FOR UPDATE
@@ -32758,7 +31924,6 @@ func (q *Queries) FetchTeamByUUIDForUpdate(ctx context.Context, uuid string) ([]
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -32780,7 +31945,7 @@ func (q *Queries) FetchTeamByUUIDForUpdate(ctx context.Context, uuid string) ([]
 }
 
 const fetchTeamByVersion = `-- name: FetchTeamByVersion :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ?  
     LIMIT ?, ?
@@ -32810,7 +31975,6 @@ func (q *Queries) FetchTeamByVersion(ctx context.Context, arg FetchTeamByVersion
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -32832,7 +31996,7 @@ func (q *Queries) FetchTeamByVersion(ctx context.Context, arg FetchTeamByVersion
 }
 
 const fetchTeamByVersionAndStatus = `-- name: FetchTeamByVersionAndStatus :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ? AND status = ?  
     LIMIT ?, ?
@@ -32868,7 +32032,6 @@ func (q *Queries) FetchTeamByVersionAndStatus(ctx context.Context, arg FetchTeam
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -32890,7 +32053,7 @@ func (q *Queries) FetchTeamByVersionAndStatus(ctx context.Context, arg FetchTeam
 }
 
 const fetchTeamByVersionAndStatusOrderedByCreatedAtASC = `-- name: FetchTeamByVersionAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ? AND status = ?  
     ORDER BY created_at ASC
@@ -32927,7 +32090,6 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByCreatedAtASC(ctx context.C
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -32949,7 +32111,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByCreatedAtASC(ctx context.C
 }
 
 const fetchTeamByVersionAndStatusOrderedByCreatedAtDESC = `-- name: FetchTeamByVersionAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ? AND status = ?  
     ORDER BY created_at DESC
@@ -32986,7 +32148,6 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByCreatedAtDESC(ctx context.
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -33008,7 +32169,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByCreatedAtDESC(ctx context.
 }
 
 const fetchTeamByVersionAndStatusOrderedByUpdatedAtASC = `-- name: FetchTeamByVersionAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -33045,7 +32206,6 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByUpdatedAtASC(ctx context.C
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -33067,7 +32227,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByUpdatedAtASC(ctx context.C
 }
 
 const fetchTeamByVersionAndStatusOrderedByUpdatedAtDESC = `-- name: FetchTeamByVersionAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -33104,7 +32264,6 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByUpdatedAtDESC(ctx context.
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -33126,7 +32285,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByUpdatedAtDESC(ctx context.
 }
 
 const fetchTeamByVersionOrderedByCreatedAtASC = `-- name: FetchTeamByVersionOrderedByCreatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ?  
     ORDER BY created_at ASC
@@ -33157,7 +32316,6 @@ func (q *Queries) FetchTeamByVersionOrderedByCreatedAtASC(ctx context.Context, a
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -33179,7 +32337,7 @@ func (q *Queries) FetchTeamByVersionOrderedByCreatedAtASC(ctx context.Context, a
 }
 
 const fetchTeamByVersionOrderedByCreatedAtDESC = `-- name: FetchTeamByVersionOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ?  
     ORDER BY created_at DESC
@@ -33210,7 +32368,6 @@ func (q *Queries) FetchTeamByVersionOrderedByCreatedAtDESC(ctx context.Context, 
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -33232,7 +32389,7 @@ func (q *Queries) FetchTeamByVersionOrderedByCreatedAtDESC(ctx context.Context, 
 }
 
 const fetchTeamByVersionOrderedByUpdatedAtASC = `-- name: FetchTeamByVersionOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ?  
     ORDER BY updated_at ASC
@@ -33263,7 +32420,6 @@ func (q *Queries) FetchTeamByVersionOrderedByUpdatedAtASC(ctx context.Context, a
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -33285,7 +32441,7 @@ func (q *Queries) FetchTeamByVersionOrderedByUpdatedAtASC(ctx context.Context, a
 }
 
 const fetchTeamByVersionOrderedByUpdatedAtDESC = `-- name: FetchTeamByVersionOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ?  
     ORDER BY updated_at DESC
@@ -33316,7 +32472,6 @@ func (q *Queries) FetchTeamByVersionOrderedByUpdatedAtDESC(ctx context.Context, 
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,
@@ -39984,53 +39139,6 @@ func (q *Queries) SearchExtension(ctx context.Context, arg SearchExtensionParams
 	return items, nil
 }
 
-const searchOrganization = `-- name: SearchOrganization :many
-SELECT uuid, version, name, domains, admin_uuids, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM organization
-WHERE 
-    name like ? 
-    LIMIT ?, ?
-`
-
-type SearchOrganizationParams struct {
-	Name   string `json:"name"`
-	Offset int32  `json:"offset"`
-	Limit  int32  `json:"limit"`
-}
-
-func (q *Queries) SearchOrganization(ctx context.Context, arg SearchOrganizationParams) ([]Organization, error) {
-	rows, err := q.db.QueryContext(ctx, searchOrganization, arg.Name, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Organization
-	for rows.Next() {
-		var i Organization
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Domains,
-			&i.AdminUUIDs,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
 const searchProject = `-- name: SearchProject :many
 SELECT uuid, version, name, description, tags, url, owner_uuid, team_uuid, access_type, project_extensions, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM project
 WHERE 
@@ -40146,7 +39254,7 @@ func (q *Queries) SearchProjectVersion(ctx context.Context, arg SearchProjectVer
 }
 
 const searchTeam = `-- name: SearchTeam :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, organization_uuid, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
     name like ? 
     LIMIT ?, ?
@@ -40176,7 +39284,6 @@ func (q *Queries) SearchTeam(ctx context.Context, arg SearchTeamParams) ([]Team,
 			&i.Stores,
 			&i.Connections,
 			&i.ObjectStores,
-			&i.OrganizationUUID,
 			&i.DefaultEntity,
 			&i.Status,
 			&i.CreatedAt,

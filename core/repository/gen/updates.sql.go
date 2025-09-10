@@ -236,42 +236,6 @@ func (q *Queries) UpdateMembership(ctx context.Context, arg UpdateMembershipPara
 	return err
 }
 
-const updateOrganization = `-- name: UpdateOrganization :exec
-UPDATE organization
-SET
-version = ?, name = ?, domains = ?, admin_uuids = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
-WHERE uuid = ?
-`
-
-type UpdateOrganizationParams struct {
-	Version       int64           `json:"version"`
-	Name          string          `json:"name"`
-	Domains       []byte          `json:"domains"`
-	AdminUUIDs    json.RawMessage `json:"admin_uuids"`
-	Status        int64           `json:"status"`
-	CreatedAt     time.Time       `json:"created_at"`
-	UpdatedAt     time.Time       `json:"updated_at"`
-	CreatedByUUID string          `json:"created_by_uuid"`
-	UpdatedByUUID string          `json:"updated_by_uuid"`
-	UUID          string          `json:"uuid"`
-}
-
-func (q *Queries) UpdateOrganization(ctx context.Context, arg UpdateOrganizationParams) error {
-	_, err := q.db.ExecContext(ctx, updateOrganization,
-		arg.Version,
-		arg.Name,
-		arg.Domains,
-		arg.AdminUUIDs,
-		arg.Status,
-		arg.CreatedAt,
-		arg.UpdatedAt,
-		arg.CreatedByUUID,
-		arg.UpdatedByUUID,
-		arg.UUID,
-	)
-	return err
-}
-
 const updateProject = `-- name: UpdateProject :exec
 UPDATE project
 SET
@@ -371,26 +335,25 @@ func (q *Queries) UpdateProjectVersion(ctx context.Context, arg UpdateProjectVer
 const updateTeam = `-- name: UpdateTeam :exec
 UPDATE team
 SET
-version = ?, name = ?, enviorments = ?, review_configs = ?, stores = ?, connections = ?, object_stores = ?, organization_uuid = ?, default_entity = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, name = ?, enviorments = ?, review_configs = ?, stores = ?, connections = ?, object_stores = ?, default_entity = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?
 `
 
 type UpdateTeamParams struct {
-	Version          int64          `json:"version"`
-	Name             string         `json:"name"`
-	Enviorments      []byte         `json:"enviorments"`
-	ReviewConfigs    []byte         `json:"review_configs"`
-	Stores           []byte         `json:"stores"`
-	Connections      []byte         `json:"connections"`
-	ObjectStores     []byte         `json:"object_stores"`
-	OrganizationUUID sql.NullString `json:"organization_uuid"`
-	DefaultEntity    []byte         `json:"default_entity"`
-	Status           int64          `json:"status"`
-	CreatedAt        time.Time      `json:"created_at"`
-	UpdatedAt        time.Time      `json:"updated_at"`
-	CreatedByUUID    string         `json:"created_by_uuid"`
-	UpdatedByUUID    string         `json:"updated_by_uuid"`
-	UUID             string         `json:"uuid"`
+	Version       int64     `json:"version"`
+	Name          string    `json:"name"`
+	Enviorments   []byte    `json:"enviorments"`
+	ReviewConfigs []byte    `json:"review_configs"`
+	Stores        []byte    `json:"stores"`
+	Connections   []byte    `json:"connections"`
+	ObjectStores  []byte    `json:"object_stores"`
+	DefaultEntity []byte    `json:"default_entity"`
+	Status        int64     `json:"status"`
+	CreatedAt     time.Time `json:"created_at"`
+	UpdatedAt     time.Time `json:"updated_at"`
+	CreatedByUUID string    `json:"created_by_uuid"`
+	UpdatedByUUID string    `json:"updated_by_uuid"`
+	UUID          string    `json:"uuid"`
 }
 
 func (q *Queries) UpdateTeam(ctx context.Context, arg UpdateTeamParams) error {
@@ -402,7 +365,6 @@ func (q *Queries) UpdateTeam(ctx context.Context, arg UpdateTeamParams) error {
 		arg.Stores,
 		arg.Connections,
 		arg.ObjectStores,
-		arg.OrganizationUUID,
 		arg.DefaultEntity,
 		arg.Status,
 		arg.CreatedAt,

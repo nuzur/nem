@@ -14,8 +14,6 @@ import (
 
 	"github.com/nuzur/nem/core/module/team"
 
-	"github.com/nuzur/nem/core/module/organization"
-
 	"github.com/nuzur/nem/core/module/project"
 
 	"github.com/nuzur/nem/core/module/extension"
@@ -51,8 +49,6 @@ type Implementation struct {
 	repository *repository.Implementation
 
 	team team.Module
-
-	organization organization.Module
 
 	project project.Module
 
@@ -149,18 +145,6 @@ func (i Implementation) Team() team.Module {
 		})
 	}
 	return i.team
-}
-
-func (i Implementation) Organization() organization.Module {
-	if i.organization == nil {
-		i.organization = organization.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Monitoring: i.monitoring,
-
-			Events: i.events,
-		})
-	}
-	return i.organization
 }
 
 func (i Implementation) Project() project.Module {

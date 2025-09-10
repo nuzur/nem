@@ -11,21 +11,20 @@ import (
 
 func TeamToProto(e main_entity.Team) *pb.Team {
 	return &pb.Team{
-		Uuid:             e.UUID.String(),
-		Version:          int64(e.Version),
-		Name:             e.Name,
-		Enviorments:      EnviormentSliceToProto(e.Enviorments),
-		ReviewConfigs:    ReviewConfigSliceToProto(e.ReviewConfigs),
-		Stores:           StoreSliceToProto(e.Stores),
-		Connections:      ConnectionSliceToProto(e.Connections),
-		ObjectStores:     ObjectStoreSliceToProto(e.ObjectStores),
-		OrganizationUuid: e.OrganizationUUID.String(),
-		DefaultEntity:    EntityToProto(e.DefaultEntity),
-		Status:           pb.TeamStatus(e.Status),
-		CreatedAt:        timestamppb.New(e.CreatedAt),
-		UpdatedAt:        timestamppb.New(e.UpdatedAt),
-		CreatedByUuid:    e.CreatedByUUID.String(),
-		UpdatedByUuid:    e.UpdatedByUUID.String(),
+		Uuid:          e.UUID.String(),
+		Version:       int64(e.Version),
+		Name:          e.Name,
+		Enviorments:   EnviormentSliceToProto(e.Enviorments),
+		ReviewConfigs: ReviewConfigSliceToProto(e.ReviewConfigs),
+		Stores:        StoreSliceToProto(e.Stores),
+		Connections:   ConnectionSliceToProto(e.Connections),
+		ObjectStores:  ObjectStoreSliceToProto(e.ObjectStores),
+		DefaultEntity: EntityToProto(e.DefaultEntity),
+		Status:        pb.TeamStatus(e.Status),
+		CreatedAt:     timestamppb.New(e.CreatedAt),
+		UpdatedAt:     timestamppb.New(e.UpdatedAt),
+		CreatedByUuid: e.CreatedByUUID.String(),
+		UpdatedByUuid: e.UpdatedByUUID.String(),
 	}
 }
 
@@ -42,21 +41,20 @@ func TeamFromProto(m *pb.Team) main_entity.Team {
 		return main_entity.Team{}
 	}
 	return main_entity.Team{
-		UUID:             uuid.FromStringOrNil(m.GetUuid()),
-		Version:          int64(m.GetVersion()),
-		Name:             m.GetName(),
-		Enviorments:      EnviormentSliceFromProto(m.GetEnviorments()),
-		ReviewConfigs:    ReviewConfigSliceFromProto(m.GetReviewConfigs()),
-		Stores:           StoreSliceFromProto(m.GetStores()),
-		Connections:      ConnectionSliceFromProto(m.GetConnections()),
-		ObjectStores:     ObjectStoreSliceFromProto(m.GetObjectStores()),
-		OrganizationUUID: uuid.FromStringOrNil(m.GetOrganizationUuid()),
-		DefaultEntity:    EntityFromProto(m.GetDefaultEntity()),
-		Status:           main_entity.Status(m.GetStatus()),
-		CreatedAt:        m.GetCreatedAt().AsTime(),
-		UpdatedAt:        m.GetUpdatedAt().AsTime(),
-		CreatedByUUID:    uuid.FromStringOrNil(m.GetCreatedByUuid()),
-		UpdatedByUUID:    uuid.FromStringOrNil(m.GetUpdatedByUuid()),
+		UUID:          uuid.FromStringOrNil(m.GetUuid()),
+		Version:       int64(m.GetVersion()),
+		Name:          m.GetName(),
+		Enviorments:   EnviormentSliceFromProto(m.GetEnviorments()),
+		ReviewConfigs: ReviewConfigSliceFromProto(m.GetReviewConfigs()),
+		Stores:        StoreSliceFromProto(m.GetStores()),
+		Connections:   ConnectionSliceFromProto(m.GetConnections()),
+		ObjectStores:  ObjectStoreSliceFromProto(m.GetObjectStores()),
+		DefaultEntity: EntityFromProto(m.GetDefaultEntity()),
+		Status:        main_entity.Status(m.GetStatus()),
+		CreatedAt:     m.GetCreatedAt().AsTime(),
+		UpdatedAt:     m.GetUpdatedAt().AsTime(),
+		CreatedByUUID: uuid.FromStringOrNil(m.GetCreatedByUuid()),
+		UpdatedByUUID: uuid.FromStringOrNil(m.GetUpdatedByUuid()),
 	}
 }
 

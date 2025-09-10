@@ -97,19 +97,6 @@ type Membership struct {
 	UpdatedByUUID   string          `json:"updated_by_uuid"`
 }
 
-type Organization struct {
-	UUID          string          `json:"uuid"`
-	Version       int64           `json:"version"`
-	Name          string          `json:"name"`
-	Domains       []byte          `json:"domains"`
-	AdminUUIDs    json.RawMessage `json:"admin_uuids"`
-	Status        int64           `json:"status"`
-	CreatedAt     time.Time       `json:"created_at"`
-	UpdatedAt     time.Time       `json:"updated_at"`
-	CreatedByUUID string          `json:"created_by_uuid"`
-	UpdatedByUUID string          `json:"updated_by_uuid"`
-}
-
 type Project struct {
 	UUID              string         `json:"uuid"`
 	Version           int64          `json:"version"`
@@ -149,21 +136,20 @@ type ProjectVersion struct {
 }
 
 type Team struct {
-	UUID             string         `json:"uuid"`
-	Version          int64          `json:"version"`
-	Name             string         `json:"name"`
-	Enviorments      []byte         `json:"enviorments"`
-	ReviewConfigs    []byte         `json:"review_configs"`
-	Stores           []byte         `json:"stores"`
-	Connections      []byte         `json:"connections"`
-	ObjectStores     []byte         `json:"object_stores"`
-	OrganizationUUID sql.NullString `json:"organization_uuid"`
-	DefaultEntity    []byte         `json:"default_entity"`
-	Status           int64          `json:"status"`
-	CreatedAt        time.Time      `json:"created_at"`
-	UpdatedAt        time.Time      `json:"updated_at"`
-	CreatedByUUID    string         `json:"created_by_uuid"`
-	UpdatedByUUID    string         `json:"updated_by_uuid"`
+	UUID          string    `json:"uuid"`
+	Version       int64     `json:"version"`
+	Name          string    `json:"name"`
+	Enviorments   []byte    `json:"enviorments"`
+	ReviewConfigs []byte    `json:"review_configs"`
+	Stores        []byte    `json:"stores"`
+	Connections   []byte    `json:"connections"`
+	ObjectStores  []byte    `json:"object_stores"`
+	DefaultEntity []byte    `json:"default_entity"`
+	Status        int64     `json:"status"`
+	CreatedAt     time.Time `json:"created_at"`
+	UpdatedAt     time.Time `json:"updated_at"`
+	CreatedByUUID string    `json:"created_by_uuid"`
+	UpdatedByUUID string    `json:"updated_by_uuid"`
 }
 
 type User struct {

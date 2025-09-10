@@ -249,233 +249,6 @@ func (x *UpdateTeamRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
 	return nil
 }
 
-// organization start
-type ListOrganizationsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The maximum number of records to return. The service may return fewer than
-	// this value.
-	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// A page token, received from a previous call.
-	// Provide this to retrieve the subsequent page.
-	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// https://google.aip.dev/160
-	// https://pkg.go.dev/go.einride.tech/aip@v0.67.1
-	// https://github.com/einride/aip-go
-	Filter        string `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
-	OrderBy       string `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListOrganizationsRequest) Reset() {
-	*x = ListOrganizationsRequest{}
-	mi := &file_service_nem_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListOrganizationsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListOrganizationsRequest) ProtoMessage() {}
-
-func (x *ListOrganizationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListOrganizationsRequest.ProtoReflect.Descriptor instead.
-func (*ListOrganizationsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *ListOrganizationsRequest) GetPageSize() int32 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListOrganizationsRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-func (x *ListOrganizationsRequest) GetFilter() string {
-	if x != nil {
-		return x.Filter
-	}
-	return ""
-}
-
-func (x *ListOrganizationsRequest) GetOrderBy() string {
-	if x != nil {
-		return x.OrderBy
-	}
-	return ""
-}
-
-type ListOrganizationsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Organizations []*Organization        `protobuf:"bytes,1,rep,name=organizations,proto3" json:"organizations,omitempty"`
-	// A token that can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListOrganizationsResponse) Reset() {
-	*x = ListOrganizationsResponse{}
-	mi := &file_service_nem_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListOrganizationsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListOrganizationsResponse) ProtoMessage() {}
-
-func (x *ListOrganizationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListOrganizationsResponse.ProtoReflect.Descriptor instead.
-func (*ListOrganizationsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *ListOrganizationsResponse) GetOrganizations() []*Organization {
-	if x != nil {
-		return x.Organizations
-	}
-	return nil
-}
-
-func (x *ListOrganizationsResponse) GetNextPageToken() string {
-	if x != nil {
-		return x.NextPageToken
-	}
-	return ""
-}
-
-type CreateOrganizationRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Organization  *Organization          `protobuf:"bytes,1,opt,name=organization,proto3" json:"organization,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateOrganizationRequest) Reset() {
-	*x = CreateOrganizationRequest{}
-	mi := &file_service_nem_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateOrganizationRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateOrganizationRequest) ProtoMessage() {}
-
-func (x *CreateOrganizationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateOrganizationRequest.ProtoReflect.Descriptor instead.
-func (*CreateOrganizationRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *CreateOrganizationRequest) GetOrganization() *Organization {
-	if x != nil {
-		return x.Organization
-	}
-	return nil
-}
-
-type UpdateOrganizationRequest struct {
-	state        protoimpl.MessageState `protogen:"open.v1"`
-	Organization *Organization          `protobuf:"bytes,1,opt,name=organization,proto3" json:"organization,omitempty"`
-	// The list of fields to update.
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateOrganizationRequest) Reset() {
-	*x = UpdateOrganizationRequest{}
-	mi := &file_service_nem_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateOrganizationRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateOrganizationRequest) ProtoMessage() {}
-
-func (x *UpdateOrganizationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateOrganizationRequest.ProtoReflect.Descriptor instead.
-func (*UpdateOrganizationRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *UpdateOrganizationRequest) GetOrganization() *Organization {
-	if x != nil {
-		return x.Organization
-	}
-	return nil
-}
-
-func (x *UpdateOrganizationRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
-	if x != nil {
-		return x.UpdateMask
-	}
-	return nil
-}
-
 // project start
 type ListProjectsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -496,7 +269,7 @@ type ListProjectsRequest struct {
 
 func (x *ListProjectsRequest) Reset() {
 	*x = ListProjectsRequest{}
-	mi := &file_service_nem_proto_msgTypes[8]
+	mi := &file_service_nem_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -508,7 +281,7 @@ func (x *ListProjectsRequest) String() string {
 func (*ListProjectsRequest) ProtoMessage() {}
 
 func (x *ListProjectsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[8]
+	mi := &file_service_nem_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -521,7 +294,7 @@ func (x *ListProjectsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListProjectsRequest.ProtoReflect.Descriptor instead.
 func (*ListProjectsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{8}
+	return file_service_nem_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ListProjectsRequest) GetPageSize() int32 {
@@ -564,7 +337,7 @@ type ListProjectsResponse struct {
 
 func (x *ListProjectsResponse) Reset() {
 	*x = ListProjectsResponse{}
-	mi := &file_service_nem_proto_msgTypes[9]
+	mi := &file_service_nem_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -576,7 +349,7 @@ func (x *ListProjectsResponse) String() string {
 func (*ListProjectsResponse) ProtoMessage() {}
 
 func (x *ListProjectsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[9]
+	mi := &file_service_nem_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -589,7 +362,7 @@ func (x *ListProjectsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListProjectsResponse.ProtoReflect.Descriptor instead.
 func (*ListProjectsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{9}
+	return file_service_nem_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ListProjectsResponse) GetProjects() []*Project {
@@ -615,7 +388,7 @@ type CreateProjectRequest struct {
 
 func (x *CreateProjectRequest) Reset() {
 	*x = CreateProjectRequest{}
-	mi := &file_service_nem_proto_msgTypes[10]
+	mi := &file_service_nem_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -627,7 +400,7 @@ func (x *CreateProjectRequest) String() string {
 func (*CreateProjectRequest) ProtoMessage() {}
 
 func (x *CreateProjectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[10]
+	mi := &file_service_nem_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -640,7 +413,7 @@ func (x *CreateProjectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateProjectRequest.ProtoReflect.Descriptor instead.
 func (*CreateProjectRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{10}
+	return file_service_nem_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateProjectRequest) GetProject() *Project {
@@ -661,7 +434,7 @@ type UpdateProjectRequest struct {
 
 func (x *UpdateProjectRequest) Reset() {
 	*x = UpdateProjectRequest{}
-	mi := &file_service_nem_proto_msgTypes[11]
+	mi := &file_service_nem_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -673,7 +446,7 @@ func (x *UpdateProjectRequest) String() string {
 func (*UpdateProjectRequest) ProtoMessage() {}
 
 func (x *UpdateProjectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[11]
+	mi := &file_service_nem_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -686,7 +459,7 @@ func (x *UpdateProjectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateProjectRequest.ProtoReflect.Descriptor instead.
 func (*UpdateProjectRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{11}
+	return file_service_nem_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateProjectRequest) GetProject() *Project {
@@ -723,7 +496,7 @@ type ListExtensionsRequest struct {
 
 func (x *ListExtensionsRequest) Reset() {
 	*x = ListExtensionsRequest{}
-	mi := &file_service_nem_proto_msgTypes[12]
+	mi := &file_service_nem_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -735,7 +508,7 @@ func (x *ListExtensionsRequest) String() string {
 func (*ListExtensionsRequest) ProtoMessage() {}
 
 func (x *ListExtensionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[12]
+	mi := &file_service_nem_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -748,7 +521,7 @@ func (x *ListExtensionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListExtensionsRequest.ProtoReflect.Descriptor instead.
 func (*ListExtensionsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{12}
+	return file_service_nem_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ListExtensionsRequest) GetPageSize() int32 {
@@ -791,7 +564,7 @@ type ListExtensionsResponse struct {
 
 func (x *ListExtensionsResponse) Reset() {
 	*x = ListExtensionsResponse{}
-	mi := &file_service_nem_proto_msgTypes[13]
+	mi := &file_service_nem_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -803,7 +576,7 @@ func (x *ListExtensionsResponse) String() string {
 func (*ListExtensionsResponse) ProtoMessage() {}
 
 func (x *ListExtensionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[13]
+	mi := &file_service_nem_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -816,7 +589,7 @@ func (x *ListExtensionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListExtensionsResponse.ProtoReflect.Descriptor instead.
 func (*ListExtensionsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{13}
+	return file_service_nem_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ListExtensionsResponse) GetExtensions() []*Extension {
@@ -842,7 +615,7 @@ type CreateExtensionRequest struct {
 
 func (x *CreateExtensionRequest) Reset() {
 	*x = CreateExtensionRequest{}
-	mi := &file_service_nem_proto_msgTypes[14]
+	mi := &file_service_nem_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -854,7 +627,7 @@ func (x *CreateExtensionRequest) String() string {
 func (*CreateExtensionRequest) ProtoMessage() {}
 
 func (x *CreateExtensionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[14]
+	mi := &file_service_nem_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -867,7 +640,7 @@ func (x *CreateExtensionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateExtensionRequest.ProtoReflect.Descriptor instead.
 func (*CreateExtensionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{14}
+	return file_service_nem_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CreateExtensionRequest) GetExtension() *Extension {
@@ -888,7 +661,7 @@ type UpdateExtensionRequest struct {
 
 func (x *UpdateExtensionRequest) Reset() {
 	*x = UpdateExtensionRequest{}
-	mi := &file_service_nem_proto_msgTypes[15]
+	mi := &file_service_nem_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -900,7 +673,7 @@ func (x *UpdateExtensionRequest) String() string {
 func (*UpdateExtensionRequest) ProtoMessage() {}
 
 func (x *UpdateExtensionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[15]
+	mi := &file_service_nem_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -913,7 +686,7 @@ func (x *UpdateExtensionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateExtensionRequest.ProtoReflect.Descriptor instead.
 func (*UpdateExtensionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{15}
+	return file_service_nem_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UpdateExtensionRequest) GetExtension() *Extension {
@@ -950,7 +723,7 @@ type ListExtensionVersionsRequest struct {
 
 func (x *ListExtensionVersionsRequest) Reset() {
 	*x = ListExtensionVersionsRequest{}
-	mi := &file_service_nem_proto_msgTypes[16]
+	mi := &file_service_nem_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -962,7 +735,7 @@ func (x *ListExtensionVersionsRequest) String() string {
 func (*ListExtensionVersionsRequest) ProtoMessage() {}
 
 func (x *ListExtensionVersionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[16]
+	mi := &file_service_nem_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -975,7 +748,7 @@ func (x *ListExtensionVersionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListExtensionVersionsRequest.ProtoReflect.Descriptor instead.
 func (*ListExtensionVersionsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{16}
+	return file_service_nem_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListExtensionVersionsRequest) GetPageSize() int32 {
@@ -1018,7 +791,7 @@ type ListExtensionVersionsResponse struct {
 
 func (x *ListExtensionVersionsResponse) Reset() {
 	*x = ListExtensionVersionsResponse{}
-	mi := &file_service_nem_proto_msgTypes[17]
+	mi := &file_service_nem_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1030,7 +803,7 @@ func (x *ListExtensionVersionsResponse) String() string {
 func (*ListExtensionVersionsResponse) ProtoMessage() {}
 
 func (x *ListExtensionVersionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[17]
+	mi := &file_service_nem_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1043,7 +816,7 @@ func (x *ListExtensionVersionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListExtensionVersionsResponse.ProtoReflect.Descriptor instead.
 func (*ListExtensionVersionsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{17}
+	return file_service_nem_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListExtensionVersionsResponse) GetExtensionVersions() []*ExtensionVersion {
@@ -1069,7 +842,7 @@ type CreateExtensionVersionRequest struct {
 
 func (x *CreateExtensionVersionRequest) Reset() {
 	*x = CreateExtensionVersionRequest{}
-	mi := &file_service_nem_proto_msgTypes[18]
+	mi := &file_service_nem_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1081,7 +854,7 @@ func (x *CreateExtensionVersionRequest) String() string {
 func (*CreateExtensionVersionRequest) ProtoMessage() {}
 
 func (x *CreateExtensionVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[18]
+	mi := &file_service_nem_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1094,7 +867,7 @@ func (x *CreateExtensionVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateExtensionVersionRequest.ProtoReflect.Descriptor instead.
 func (*CreateExtensionVersionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{18}
+	return file_service_nem_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CreateExtensionVersionRequest) GetExtensionVersion() *ExtensionVersion {
@@ -1115,7 +888,7 @@ type UpdateExtensionVersionRequest struct {
 
 func (x *UpdateExtensionVersionRequest) Reset() {
 	*x = UpdateExtensionVersionRequest{}
-	mi := &file_service_nem_proto_msgTypes[19]
+	mi := &file_service_nem_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1127,7 +900,7 @@ func (x *UpdateExtensionVersionRequest) String() string {
 func (*UpdateExtensionVersionRequest) ProtoMessage() {}
 
 func (x *UpdateExtensionVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[19]
+	mi := &file_service_nem_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1140,7 +913,7 @@ func (x *UpdateExtensionVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateExtensionVersionRequest.ProtoReflect.Descriptor instead.
 func (*UpdateExtensionVersionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{19}
+	return file_service_nem_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *UpdateExtensionVersionRequest) GetExtensionVersion() *ExtensionVersion {
@@ -1177,7 +950,7 @@ type ListUsersRequest struct {
 
 func (x *ListUsersRequest) Reset() {
 	*x = ListUsersRequest{}
-	mi := &file_service_nem_proto_msgTypes[20]
+	mi := &file_service_nem_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1189,7 +962,7 @@ func (x *ListUsersRequest) String() string {
 func (*ListUsersRequest) ProtoMessage() {}
 
 func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[20]
+	mi := &file_service_nem_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1202,7 +975,7 @@ func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUsersRequest.ProtoReflect.Descriptor instead.
 func (*ListUsersRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{20}
+	return file_service_nem_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ListUsersRequest) GetPageSize() int32 {
@@ -1245,7 +1018,7 @@ type ListUsersResponse struct {
 
 func (x *ListUsersResponse) Reset() {
 	*x = ListUsersResponse{}
-	mi := &file_service_nem_proto_msgTypes[21]
+	mi := &file_service_nem_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1257,7 +1030,7 @@ func (x *ListUsersResponse) String() string {
 func (*ListUsersResponse) ProtoMessage() {}
 
 func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[21]
+	mi := &file_service_nem_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1270,7 +1043,7 @@ func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUsersResponse.ProtoReflect.Descriptor instead.
 func (*ListUsersResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{21}
+	return file_service_nem_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListUsersResponse) GetUsers() []*User {
@@ -1296,7 +1069,7 @@ type CreateUserRequest struct {
 
 func (x *CreateUserRequest) Reset() {
 	*x = CreateUserRequest{}
-	mi := &file_service_nem_proto_msgTypes[22]
+	mi := &file_service_nem_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1308,7 +1081,7 @@ func (x *CreateUserRequest) String() string {
 func (*CreateUserRequest) ProtoMessage() {}
 
 func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[22]
+	mi := &file_service_nem_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1321,7 +1094,7 @@ func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserRequest.ProtoReflect.Descriptor instead.
 func (*CreateUserRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{22}
+	return file_service_nem_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *CreateUserRequest) GetUser() *User {
@@ -1342,7 +1115,7 @@ type UpdateUserRequest struct {
 
 func (x *UpdateUserRequest) Reset() {
 	*x = UpdateUserRequest{}
-	mi := &file_service_nem_proto_msgTypes[23]
+	mi := &file_service_nem_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1354,7 +1127,7 @@ func (x *UpdateUserRequest) String() string {
 func (*UpdateUserRequest) ProtoMessage() {}
 
 func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[23]
+	mi := &file_service_nem_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1367,7 +1140,7 @@ func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{23}
+	return file_service_nem_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UpdateUserRequest) GetUser() *User {
@@ -1404,7 +1177,7 @@ type ListChangeRequestsRequest struct {
 
 func (x *ListChangeRequestsRequest) Reset() {
 	*x = ListChangeRequestsRequest{}
-	mi := &file_service_nem_proto_msgTypes[24]
+	mi := &file_service_nem_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1416,7 +1189,7 @@ func (x *ListChangeRequestsRequest) String() string {
 func (*ListChangeRequestsRequest) ProtoMessage() {}
 
 func (x *ListChangeRequestsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[24]
+	mi := &file_service_nem_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1429,7 +1202,7 @@ func (x *ListChangeRequestsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListChangeRequestsRequest.ProtoReflect.Descriptor instead.
 func (*ListChangeRequestsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{24}
+	return file_service_nem_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ListChangeRequestsRequest) GetPageSize() int32 {
@@ -1472,7 +1245,7 @@ type ListChangeRequestsResponse struct {
 
 func (x *ListChangeRequestsResponse) Reset() {
 	*x = ListChangeRequestsResponse{}
-	mi := &file_service_nem_proto_msgTypes[25]
+	mi := &file_service_nem_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1484,7 +1257,7 @@ func (x *ListChangeRequestsResponse) String() string {
 func (*ListChangeRequestsResponse) ProtoMessage() {}
 
 func (x *ListChangeRequestsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[25]
+	mi := &file_service_nem_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1497,7 +1270,7 @@ func (x *ListChangeRequestsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListChangeRequestsResponse.ProtoReflect.Descriptor instead.
 func (*ListChangeRequestsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{25}
+	return file_service_nem_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListChangeRequestsResponse) GetChangeRequests() []*ChangeRequest {
@@ -1523,7 +1296,7 @@ type CreateChangeRequestRequest struct {
 
 func (x *CreateChangeRequestRequest) Reset() {
 	*x = CreateChangeRequestRequest{}
-	mi := &file_service_nem_proto_msgTypes[26]
+	mi := &file_service_nem_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1535,7 +1308,7 @@ func (x *CreateChangeRequestRequest) String() string {
 func (*CreateChangeRequestRequest) ProtoMessage() {}
 
 func (x *CreateChangeRequestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[26]
+	mi := &file_service_nem_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1548,7 +1321,7 @@ func (x *CreateChangeRequestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateChangeRequestRequest.ProtoReflect.Descriptor instead.
 func (*CreateChangeRequestRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{26}
+	return file_service_nem_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *CreateChangeRequestRequest) GetChangeRequest() *ChangeRequest {
@@ -1569,7 +1342,7 @@ type UpdateChangeRequestRequest struct {
 
 func (x *UpdateChangeRequestRequest) Reset() {
 	*x = UpdateChangeRequestRequest{}
-	mi := &file_service_nem_proto_msgTypes[27]
+	mi := &file_service_nem_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1581,7 +1354,7 @@ func (x *UpdateChangeRequestRequest) String() string {
 func (*UpdateChangeRequestRequest) ProtoMessage() {}
 
 func (x *UpdateChangeRequestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[27]
+	mi := &file_service_nem_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1594,7 +1367,7 @@ func (x *UpdateChangeRequestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateChangeRequestRequest.ProtoReflect.Descriptor instead.
 func (*UpdateChangeRequestRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{27}
+	return file_service_nem_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *UpdateChangeRequestRequest) GetChangeRequest() *ChangeRequest {
@@ -1631,7 +1404,7 @@ type ListProjectVersionsRequest struct {
 
 func (x *ListProjectVersionsRequest) Reset() {
 	*x = ListProjectVersionsRequest{}
-	mi := &file_service_nem_proto_msgTypes[28]
+	mi := &file_service_nem_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1643,7 +1416,7 @@ func (x *ListProjectVersionsRequest) String() string {
 func (*ListProjectVersionsRequest) ProtoMessage() {}
 
 func (x *ListProjectVersionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[28]
+	mi := &file_service_nem_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1656,7 +1429,7 @@ func (x *ListProjectVersionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListProjectVersionsRequest.ProtoReflect.Descriptor instead.
 func (*ListProjectVersionsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{28}
+	return file_service_nem_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListProjectVersionsRequest) GetPageSize() int32 {
@@ -1699,7 +1472,7 @@ type ListProjectVersionsResponse struct {
 
 func (x *ListProjectVersionsResponse) Reset() {
 	*x = ListProjectVersionsResponse{}
-	mi := &file_service_nem_proto_msgTypes[29]
+	mi := &file_service_nem_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1711,7 +1484,7 @@ func (x *ListProjectVersionsResponse) String() string {
 func (*ListProjectVersionsResponse) ProtoMessage() {}
 
 func (x *ListProjectVersionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[29]
+	mi := &file_service_nem_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1724,7 +1497,7 @@ func (x *ListProjectVersionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListProjectVersionsResponse.ProtoReflect.Descriptor instead.
 func (*ListProjectVersionsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{29}
+	return file_service_nem_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListProjectVersionsResponse) GetProjectVersions() []*ProjectVersion {
@@ -1750,7 +1523,7 @@ type CreateProjectVersionRequest struct {
 
 func (x *CreateProjectVersionRequest) Reset() {
 	*x = CreateProjectVersionRequest{}
-	mi := &file_service_nem_proto_msgTypes[30]
+	mi := &file_service_nem_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1762,7 +1535,7 @@ func (x *CreateProjectVersionRequest) String() string {
 func (*CreateProjectVersionRequest) ProtoMessage() {}
 
 func (x *CreateProjectVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[30]
+	mi := &file_service_nem_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1775,7 +1548,7 @@ func (x *CreateProjectVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateProjectVersionRequest.ProtoReflect.Descriptor instead.
 func (*CreateProjectVersionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{30}
+	return file_service_nem_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *CreateProjectVersionRequest) GetProjectVersion() *ProjectVersion {
@@ -1796,7 +1569,7 @@ type UpdateProjectVersionRequest struct {
 
 func (x *UpdateProjectVersionRequest) Reset() {
 	*x = UpdateProjectVersionRequest{}
-	mi := &file_service_nem_proto_msgTypes[31]
+	mi := &file_service_nem_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1808,7 +1581,7 @@ func (x *UpdateProjectVersionRequest) String() string {
 func (*UpdateProjectVersionRequest) ProtoMessage() {}
 
 func (x *UpdateProjectVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[31]
+	mi := &file_service_nem_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1821,7 +1594,7 @@ func (x *UpdateProjectVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateProjectVersionRequest.ProtoReflect.Descriptor instead.
 func (*UpdateProjectVersionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{31}
+	return file_service_nem_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *UpdateProjectVersionRequest) GetProjectVersion() *ProjectVersion {
@@ -1858,7 +1631,7 @@ type ListUserTeamsRequest struct {
 
 func (x *ListUserTeamsRequest) Reset() {
 	*x = ListUserTeamsRequest{}
-	mi := &file_service_nem_proto_msgTypes[32]
+	mi := &file_service_nem_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1870,7 +1643,7 @@ func (x *ListUserTeamsRequest) String() string {
 func (*ListUserTeamsRequest) ProtoMessage() {}
 
 func (x *ListUserTeamsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[32]
+	mi := &file_service_nem_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1883,7 +1656,7 @@ func (x *ListUserTeamsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserTeamsRequest.ProtoReflect.Descriptor instead.
 func (*ListUserTeamsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{32}
+	return file_service_nem_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ListUserTeamsRequest) GetPageSize() int32 {
@@ -1926,7 +1699,7 @@ type ListUserTeamsResponse struct {
 
 func (x *ListUserTeamsResponse) Reset() {
 	*x = ListUserTeamsResponse{}
-	mi := &file_service_nem_proto_msgTypes[33]
+	mi := &file_service_nem_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1938,7 +1711,7 @@ func (x *ListUserTeamsResponse) String() string {
 func (*ListUserTeamsResponse) ProtoMessage() {}
 
 func (x *ListUserTeamsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[33]
+	mi := &file_service_nem_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1951,7 +1724,7 @@ func (x *ListUserTeamsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserTeamsResponse.ProtoReflect.Descriptor instead.
 func (*ListUserTeamsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{33}
+	return file_service_nem_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ListUserTeamsResponse) GetUserTeams() []*UserTeam {
@@ -1977,7 +1750,7 @@ type CreateUserTeamRequest struct {
 
 func (x *CreateUserTeamRequest) Reset() {
 	*x = CreateUserTeamRequest{}
-	mi := &file_service_nem_proto_msgTypes[34]
+	mi := &file_service_nem_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1989,7 +1762,7 @@ func (x *CreateUserTeamRequest) String() string {
 func (*CreateUserTeamRequest) ProtoMessage() {}
 
 func (x *CreateUserTeamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[34]
+	mi := &file_service_nem_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2002,7 +1775,7 @@ func (x *CreateUserTeamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserTeamRequest.ProtoReflect.Descriptor instead.
 func (*CreateUserTeamRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{34}
+	return file_service_nem_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *CreateUserTeamRequest) GetUserTeam() *UserTeam {
@@ -2023,7 +1796,7 @@ type UpdateUserTeamRequest struct {
 
 func (x *UpdateUserTeamRequest) Reset() {
 	*x = UpdateUserTeamRequest{}
-	mi := &file_service_nem_proto_msgTypes[35]
+	mi := &file_service_nem_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2035,7 +1808,7 @@ func (x *UpdateUserTeamRequest) String() string {
 func (*UpdateUserTeamRequest) ProtoMessage() {}
 
 func (x *UpdateUserTeamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[35]
+	mi := &file_service_nem_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2048,7 +1821,7 @@ func (x *UpdateUserTeamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserTeamRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserTeamRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{35}
+	return file_service_nem_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *UpdateUserTeamRequest) GetUserTeam() *UserTeam {
@@ -2085,7 +1858,7 @@ type ListExtensionExecutionsRequest struct {
 
 func (x *ListExtensionExecutionsRequest) Reset() {
 	*x = ListExtensionExecutionsRequest{}
-	mi := &file_service_nem_proto_msgTypes[36]
+	mi := &file_service_nem_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2097,7 +1870,7 @@ func (x *ListExtensionExecutionsRequest) String() string {
 func (*ListExtensionExecutionsRequest) ProtoMessage() {}
 
 func (x *ListExtensionExecutionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[36]
+	mi := &file_service_nem_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2110,7 +1883,7 @@ func (x *ListExtensionExecutionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListExtensionExecutionsRequest.ProtoReflect.Descriptor instead.
 func (*ListExtensionExecutionsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{36}
+	return file_service_nem_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *ListExtensionExecutionsRequest) GetPageSize() int32 {
@@ -2153,7 +1926,7 @@ type ListExtensionExecutionsResponse struct {
 
 func (x *ListExtensionExecutionsResponse) Reset() {
 	*x = ListExtensionExecutionsResponse{}
-	mi := &file_service_nem_proto_msgTypes[37]
+	mi := &file_service_nem_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2165,7 +1938,7 @@ func (x *ListExtensionExecutionsResponse) String() string {
 func (*ListExtensionExecutionsResponse) ProtoMessage() {}
 
 func (x *ListExtensionExecutionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[37]
+	mi := &file_service_nem_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2178,7 +1951,7 @@ func (x *ListExtensionExecutionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListExtensionExecutionsResponse.ProtoReflect.Descriptor instead.
 func (*ListExtensionExecutionsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{37}
+	return file_service_nem_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ListExtensionExecutionsResponse) GetExtensionExecutions() []*ExtensionExecution {
@@ -2204,7 +1977,7 @@ type CreateExtensionExecutionRequest struct {
 
 func (x *CreateExtensionExecutionRequest) Reset() {
 	*x = CreateExtensionExecutionRequest{}
-	mi := &file_service_nem_proto_msgTypes[38]
+	mi := &file_service_nem_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2216,7 +1989,7 @@ func (x *CreateExtensionExecutionRequest) String() string {
 func (*CreateExtensionExecutionRequest) ProtoMessage() {}
 
 func (x *CreateExtensionExecutionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[38]
+	mi := &file_service_nem_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2229,7 +2002,7 @@ func (x *CreateExtensionExecutionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateExtensionExecutionRequest.ProtoReflect.Descriptor instead.
 func (*CreateExtensionExecutionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{38}
+	return file_service_nem_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *CreateExtensionExecutionRequest) GetExtensionExecution() *ExtensionExecution {
@@ -2250,7 +2023,7 @@ type UpdateExtensionExecutionRequest struct {
 
 func (x *UpdateExtensionExecutionRequest) Reset() {
 	*x = UpdateExtensionExecutionRequest{}
-	mi := &file_service_nem_proto_msgTypes[39]
+	mi := &file_service_nem_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2262,7 +2035,7 @@ func (x *UpdateExtensionExecutionRequest) String() string {
 func (*UpdateExtensionExecutionRequest) ProtoMessage() {}
 
 func (x *UpdateExtensionExecutionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[39]
+	mi := &file_service_nem_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2275,7 +2048,7 @@ func (x *UpdateExtensionExecutionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateExtensionExecutionRequest.ProtoReflect.Descriptor instead.
 func (*UpdateExtensionExecutionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{39}
+	return file_service_nem_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *UpdateExtensionExecutionRequest) GetExtensionExecution() *ExtensionExecution {
@@ -2312,7 +2085,7 @@ type ListUserConnectionsRequest struct {
 
 func (x *ListUserConnectionsRequest) Reset() {
 	*x = ListUserConnectionsRequest{}
-	mi := &file_service_nem_proto_msgTypes[40]
+	mi := &file_service_nem_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2324,7 +2097,7 @@ func (x *ListUserConnectionsRequest) String() string {
 func (*ListUserConnectionsRequest) ProtoMessage() {}
 
 func (x *ListUserConnectionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[40]
+	mi := &file_service_nem_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2337,7 +2110,7 @@ func (x *ListUserConnectionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserConnectionsRequest.ProtoReflect.Descriptor instead.
 func (*ListUserConnectionsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{40}
+	return file_service_nem_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ListUserConnectionsRequest) GetPageSize() int32 {
@@ -2380,7 +2153,7 @@ type ListUserConnectionsResponse struct {
 
 func (x *ListUserConnectionsResponse) Reset() {
 	*x = ListUserConnectionsResponse{}
-	mi := &file_service_nem_proto_msgTypes[41]
+	mi := &file_service_nem_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2392,7 +2165,7 @@ func (x *ListUserConnectionsResponse) String() string {
 func (*ListUserConnectionsResponse) ProtoMessage() {}
 
 func (x *ListUserConnectionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[41]
+	mi := &file_service_nem_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2405,7 +2178,7 @@ func (x *ListUserConnectionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserConnectionsResponse.ProtoReflect.Descriptor instead.
 func (*ListUserConnectionsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{41}
+	return file_service_nem_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *ListUserConnectionsResponse) GetUserConnections() []*UserConnection {
@@ -2431,7 +2204,7 @@ type CreateUserConnectionRequest struct {
 
 func (x *CreateUserConnectionRequest) Reset() {
 	*x = CreateUserConnectionRequest{}
-	mi := &file_service_nem_proto_msgTypes[42]
+	mi := &file_service_nem_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2443,7 +2216,7 @@ func (x *CreateUserConnectionRequest) String() string {
 func (*CreateUserConnectionRequest) ProtoMessage() {}
 
 func (x *CreateUserConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[42]
+	mi := &file_service_nem_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2456,7 +2229,7 @@ func (x *CreateUserConnectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserConnectionRequest.ProtoReflect.Descriptor instead.
 func (*CreateUserConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{42}
+	return file_service_nem_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *CreateUserConnectionRequest) GetUserConnection() *UserConnection {
@@ -2477,7 +2250,7 @@ type UpdateUserConnectionRequest struct {
 
 func (x *UpdateUserConnectionRequest) Reset() {
 	*x = UpdateUserConnectionRequest{}
-	mi := &file_service_nem_proto_msgTypes[43]
+	mi := &file_service_nem_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2489,7 +2262,7 @@ func (x *UpdateUserConnectionRequest) String() string {
 func (*UpdateUserConnectionRequest) ProtoMessage() {}
 
 func (x *UpdateUserConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[43]
+	mi := &file_service_nem_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2502,7 +2275,7 @@ func (x *UpdateUserConnectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserConnectionRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{43}
+	return file_service_nem_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *UpdateUserConnectionRequest) GetUserConnection() *UserConnection {
@@ -2539,7 +2312,7 @@ type ListUserProjectVersionsRequest struct {
 
 func (x *ListUserProjectVersionsRequest) Reset() {
 	*x = ListUserProjectVersionsRequest{}
-	mi := &file_service_nem_proto_msgTypes[44]
+	mi := &file_service_nem_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2551,7 +2324,7 @@ func (x *ListUserProjectVersionsRequest) String() string {
 func (*ListUserProjectVersionsRequest) ProtoMessage() {}
 
 func (x *ListUserProjectVersionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[44]
+	mi := &file_service_nem_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2564,7 +2337,7 @@ func (x *ListUserProjectVersionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserProjectVersionsRequest.ProtoReflect.Descriptor instead.
 func (*ListUserProjectVersionsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{44}
+	return file_service_nem_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *ListUserProjectVersionsRequest) GetPageSize() int32 {
@@ -2607,7 +2380,7 @@ type ListUserProjectVersionsResponse struct {
 
 func (x *ListUserProjectVersionsResponse) Reset() {
 	*x = ListUserProjectVersionsResponse{}
-	mi := &file_service_nem_proto_msgTypes[45]
+	mi := &file_service_nem_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2619,7 +2392,7 @@ func (x *ListUserProjectVersionsResponse) String() string {
 func (*ListUserProjectVersionsResponse) ProtoMessage() {}
 
 func (x *ListUserProjectVersionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[45]
+	mi := &file_service_nem_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2632,7 +2405,7 @@ func (x *ListUserProjectVersionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserProjectVersionsResponse.ProtoReflect.Descriptor instead.
 func (*ListUserProjectVersionsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{45}
+	return file_service_nem_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *ListUserProjectVersionsResponse) GetUserProjectVersions() []*UserProjectVersion {
@@ -2658,7 +2431,7 @@ type CreateUserProjectVersionRequest struct {
 
 func (x *CreateUserProjectVersionRequest) Reset() {
 	*x = CreateUserProjectVersionRequest{}
-	mi := &file_service_nem_proto_msgTypes[46]
+	mi := &file_service_nem_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2670,7 +2443,7 @@ func (x *CreateUserProjectVersionRequest) String() string {
 func (*CreateUserProjectVersionRequest) ProtoMessage() {}
 
 func (x *CreateUserProjectVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[46]
+	mi := &file_service_nem_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2683,7 +2456,7 @@ func (x *CreateUserProjectVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserProjectVersionRequest.ProtoReflect.Descriptor instead.
 func (*CreateUserProjectVersionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{46}
+	return file_service_nem_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *CreateUserProjectVersionRequest) GetUserProjectVersion() *UserProjectVersion {
@@ -2704,7 +2477,7 @@ type UpdateUserProjectVersionRequest struct {
 
 func (x *UpdateUserProjectVersionRequest) Reset() {
 	*x = UpdateUserProjectVersionRequest{}
-	mi := &file_service_nem_proto_msgTypes[47]
+	mi := &file_service_nem_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2716,7 +2489,7 @@ func (x *UpdateUserProjectVersionRequest) String() string {
 func (*UpdateUserProjectVersionRequest) ProtoMessage() {}
 
 func (x *UpdateUserProjectVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[47]
+	mi := &file_service_nem_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2729,7 +2502,7 @@ func (x *UpdateUserProjectVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserProjectVersionRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserProjectVersionRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{47}
+	return file_service_nem_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *UpdateUserProjectVersionRequest) GetUserProjectVersion() *UserProjectVersion {
@@ -2766,7 +2539,7 @@ type ListUserProjectsRequest struct {
 
 func (x *ListUserProjectsRequest) Reset() {
 	*x = ListUserProjectsRequest{}
-	mi := &file_service_nem_proto_msgTypes[48]
+	mi := &file_service_nem_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2778,7 +2551,7 @@ func (x *ListUserProjectsRequest) String() string {
 func (*ListUserProjectsRequest) ProtoMessage() {}
 
 func (x *ListUserProjectsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[48]
+	mi := &file_service_nem_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2791,7 +2564,7 @@ func (x *ListUserProjectsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserProjectsRequest.ProtoReflect.Descriptor instead.
 func (*ListUserProjectsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{48}
+	return file_service_nem_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *ListUserProjectsRequest) GetPageSize() int32 {
@@ -2834,7 +2607,7 @@ type ListUserProjectsResponse struct {
 
 func (x *ListUserProjectsResponse) Reset() {
 	*x = ListUserProjectsResponse{}
-	mi := &file_service_nem_proto_msgTypes[49]
+	mi := &file_service_nem_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2846,7 +2619,7 @@ func (x *ListUserProjectsResponse) String() string {
 func (*ListUserProjectsResponse) ProtoMessage() {}
 
 func (x *ListUserProjectsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[49]
+	mi := &file_service_nem_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2859,7 +2632,7 @@ func (x *ListUserProjectsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserProjectsResponse.ProtoReflect.Descriptor instead.
 func (*ListUserProjectsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{49}
+	return file_service_nem_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *ListUserProjectsResponse) GetUserProjects() []*UserProject {
@@ -2885,7 +2658,7 @@ type CreateUserProjectRequest struct {
 
 func (x *CreateUserProjectRequest) Reset() {
 	*x = CreateUserProjectRequest{}
-	mi := &file_service_nem_proto_msgTypes[50]
+	mi := &file_service_nem_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2897,7 +2670,7 @@ func (x *CreateUserProjectRequest) String() string {
 func (*CreateUserProjectRequest) ProtoMessage() {}
 
 func (x *CreateUserProjectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[50]
+	mi := &file_service_nem_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2910,7 +2683,7 @@ func (x *CreateUserProjectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserProjectRequest.ProtoReflect.Descriptor instead.
 func (*CreateUserProjectRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{50}
+	return file_service_nem_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *CreateUserProjectRequest) GetUserProject() *UserProject {
@@ -2931,7 +2704,7 @@ type UpdateUserProjectRequest struct {
 
 func (x *UpdateUserProjectRequest) Reset() {
 	*x = UpdateUserProjectRequest{}
-	mi := &file_service_nem_proto_msgTypes[51]
+	mi := &file_service_nem_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2943,7 +2716,7 @@ func (x *UpdateUserProjectRequest) String() string {
 func (*UpdateUserProjectRequest) ProtoMessage() {}
 
 func (x *UpdateUserProjectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[51]
+	mi := &file_service_nem_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2956,7 +2729,7 @@ func (x *UpdateUserProjectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserProjectRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserProjectRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{51}
+	return file_service_nem_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *UpdateUserProjectRequest) GetUserProject() *UserProject {
@@ -2993,7 +2766,7 @@ type ListMembershipsRequest struct {
 
 func (x *ListMembershipsRequest) Reset() {
 	*x = ListMembershipsRequest{}
-	mi := &file_service_nem_proto_msgTypes[52]
+	mi := &file_service_nem_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3005,7 +2778,7 @@ func (x *ListMembershipsRequest) String() string {
 func (*ListMembershipsRequest) ProtoMessage() {}
 
 func (x *ListMembershipsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[52]
+	mi := &file_service_nem_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3018,7 +2791,7 @@ func (x *ListMembershipsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMembershipsRequest.ProtoReflect.Descriptor instead.
 func (*ListMembershipsRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{52}
+	return file_service_nem_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *ListMembershipsRequest) GetPageSize() int32 {
@@ -3061,7 +2834,7 @@ type ListMembershipsResponse struct {
 
 func (x *ListMembershipsResponse) Reset() {
 	*x = ListMembershipsResponse{}
-	mi := &file_service_nem_proto_msgTypes[53]
+	mi := &file_service_nem_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3073,7 +2846,7 @@ func (x *ListMembershipsResponse) String() string {
 func (*ListMembershipsResponse) ProtoMessage() {}
 
 func (x *ListMembershipsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[53]
+	mi := &file_service_nem_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3086,7 +2859,7 @@ func (x *ListMembershipsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMembershipsResponse.ProtoReflect.Descriptor instead.
 func (*ListMembershipsResponse) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{53}
+	return file_service_nem_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *ListMembershipsResponse) GetMemberships() []*Membership {
@@ -3112,7 +2885,7 @@ type CreateMembershipRequest struct {
 
 func (x *CreateMembershipRequest) Reset() {
 	*x = CreateMembershipRequest{}
-	mi := &file_service_nem_proto_msgTypes[54]
+	mi := &file_service_nem_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3124,7 +2897,7 @@ func (x *CreateMembershipRequest) String() string {
 func (*CreateMembershipRequest) ProtoMessage() {}
 
 func (x *CreateMembershipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[54]
+	mi := &file_service_nem_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3137,7 +2910,7 @@ func (x *CreateMembershipRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMembershipRequest.ProtoReflect.Descriptor instead.
 func (*CreateMembershipRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{54}
+	return file_service_nem_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *CreateMembershipRequest) GetMembership() *Membership {
@@ -3158,7 +2931,7 @@ type UpdateMembershipRequest struct {
 
 func (x *UpdateMembershipRequest) Reset() {
 	*x = UpdateMembershipRequest{}
-	mi := &file_service_nem_proto_msgTypes[55]
+	mi := &file_service_nem_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3170,7 +2943,7 @@ func (x *UpdateMembershipRequest) String() string {
 func (*UpdateMembershipRequest) ProtoMessage() {}
 
 func (x *UpdateMembershipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_nem_proto_msgTypes[55]
+	mi := &file_service_nem_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3183,7 +2956,7 @@ func (x *UpdateMembershipRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMembershipRequest.ProtoReflect.Descriptor instead.
 func (*UpdateMembershipRequest) Descriptor() ([]byte, []int) {
-	return file_service_nem_proto_rawDescGZIP(), []int{55}
+	return file_service_nem_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *UpdateMembershipRequest) GetMembership() *Membership {
@@ -3205,7 +2978,7 @@ var File_service_nem_proto protoreflect.FileDescriptor
 const file_service_nem_proto_rawDesc = "" +
 	"\n" +
 	"\x11service_nem.proto\x12\x03nem\x1a google/protobuf/field_mask.proto\x1a\n" +
-	"team.proto\x1a\x12organization.proto\x1a\rproject.proto\x1a\x0fextension.proto\x1a\x17extension_version.proto\x1a\n" +
+	"team.proto\x1a\rproject.proto\x1a\x0fextension.proto\x1a\x17extension_version.proto\x1a\n" +
 	"user.proto\x1a\x14change_request.proto\x1a\x15project_version.proto\x1a\x0fuser_team.proto\x1a\x19extension_execution.proto\x1a\x15user_connection.proto\x1a\x1auser_project_version.proto\x1a\x12user_project.proto\x1a\x10membership.proto\"\x81\x01\n" +
 	"\x10ListTeamsRequest\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
@@ -3220,21 +2993,6 @@ const file_service_nem_proto_rawDesc = "" +
 	"\x04team\x18\x01 \x01(\v2\t.nem.TeamR\x04team\"o\n" +
 	"\x11UpdateTeamRequest\x12\x1d\n" +
 	"\x04team\x18\x01 \x01(\v2\t.nem.TeamR\x04team\x12;\n" +
-	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\"\x89\x01\n" +
-	"\x18ListOrganizationsRequest\x12\x1b\n" +
-	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
-	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\x12\x16\n" +
-	"\x06filter\x18\x03 \x01(\tR\x06filter\x12\x19\n" +
-	"\border_by\x18\x04 \x01(\tR\aorderBy\"|\n" +
-	"\x19ListOrganizationsResponse\x127\n" +
-	"\rorganizations\x18\x01 \x03(\v2\x11.nem.OrganizationR\rorganizations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"R\n" +
-	"\x19CreateOrganizationRequest\x125\n" +
-	"\forganization\x18\x01 \x01(\v2\x11.nem.OrganizationR\forganization\"\x8f\x01\n" +
-	"\x19UpdateOrganizationRequest\x125\n" +
-	"\forganization\x18\x01 \x01(\v2\x11.nem.OrganizationR\forganization\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\"\x84\x01\n" +
 	"\x13ListProjectsRequest\x12\x1b\n" +
@@ -3423,16 +3181,13 @@ const file_service_nem_proto_rawDesc = "" +
 	"membership\x18\x01 \x01(\v2\x0f.nem.MembershipR\n" +
 	"membership\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask2\x93\x19\n" +
+	"updateMask2\xa7\x17\n" +
 	"\x03Nem\x12<\n" +
 	"\tListTeams\x12\x15.nem.ListTeamsRequest\x1a\x16.nem.ListTeamsResponse\"\x00\x121\n" +
 	"\n" +
 	"CreateTeam\x12\x16.nem.CreateTeamRequest\x1a\t.nem.Team\"\x00\x121\n" +
 	"\n" +
-	"UpdateTeam\x12\x16.nem.UpdateTeamRequest\x1a\t.nem.Team\"\x00\x12T\n" +
-	"\x11ListOrganizations\x12\x1d.nem.ListOrganizationsRequest\x1a\x1e.nem.ListOrganizationsResponse\"\x00\x12I\n" +
-	"\x12CreateOrganization\x12\x1e.nem.CreateOrganizationRequest\x1a\x11.nem.Organization\"\x00\x12I\n" +
-	"\x12UpdateOrganization\x12\x1e.nem.UpdateOrganizationRequest\x1a\x11.nem.Organization\"\x00\x12E\n" +
+	"UpdateTeam\x12\x16.nem.UpdateTeamRequest\x1a\t.nem.Team\"\x00\x12E\n" +
 	"\fListProjects\x12\x18.nem.ListProjectsRequest\x1a\x19.nem.ListProjectsResponse\"\x00\x12:\n" +
 	"\rCreateProject\x12\x19.nem.CreateProjectRequest\x1a\f.nem.Project\"\x00\x12:\n" +
 	"\rUpdateProject\x12\x19.nem.UpdateProjectRequest\x1a\f.nem.Project\"\x00\x12K\n" +
@@ -3485,226 +3240,211 @@ func file_service_nem_proto_rawDescGZIP() []byte {
 	return file_service_nem_proto_rawDescData
 }
 
-var file_service_nem_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
+var file_service_nem_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
 var file_service_nem_proto_goTypes = []any{
 	(*ListTeamsRequest)(nil),                // 0: nem.ListTeamsRequest
 	(*ListTeamsResponse)(nil),               // 1: nem.ListTeamsResponse
 	(*CreateTeamRequest)(nil),               // 2: nem.CreateTeamRequest
 	(*UpdateTeamRequest)(nil),               // 3: nem.UpdateTeamRequest
-	(*ListOrganizationsRequest)(nil),        // 4: nem.ListOrganizationsRequest
-	(*ListOrganizationsResponse)(nil),       // 5: nem.ListOrganizationsResponse
-	(*CreateOrganizationRequest)(nil),       // 6: nem.CreateOrganizationRequest
-	(*UpdateOrganizationRequest)(nil),       // 7: nem.UpdateOrganizationRequest
-	(*ListProjectsRequest)(nil),             // 8: nem.ListProjectsRequest
-	(*ListProjectsResponse)(nil),            // 9: nem.ListProjectsResponse
-	(*CreateProjectRequest)(nil),            // 10: nem.CreateProjectRequest
-	(*UpdateProjectRequest)(nil),            // 11: nem.UpdateProjectRequest
-	(*ListExtensionsRequest)(nil),           // 12: nem.ListExtensionsRequest
-	(*ListExtensionsResponse)(nil),          // 13: nem.ListExtensionsResponse
-	(*CreateExtensionRequest)(nil),          // 14: nem.CreateExtensionRequest
-	(*UpdateExtensionRequest)(nil),          // 15: nem.UpdateExtensionRequest
-	(*ListExtensionVersionsRequest)(nil),    // 16: nem.ListExtensionVersionsRequest
-	(*ListExtensionVersionsResponse)(nil),   // 17: nem.ListExtensionVersionsResponse
-	(*CreateExtensionVersionRequest)(nil),   // 18: nem.CreateExtensionVersionRequest
-	(*UpdateExtensionVersionRequest)(nil),   // 19: nem.UpdateExtensionVersionRequest
-	(*ListUsersRequest)(nil),                // 20: nem.ListUsersRequest
-	(*ListUsersResponse)(nil),               // 21: nem.ListUsersResponse
-	(*CreateUserRequest)(nil),               // 22: nem.CreateUserRequest
-	(*UpdateUserRequest)(nil),               // 23: nem.UpdateUserRequest
-	(*ListChangeRequestsRequest)(nil),       // 24: nem.ListChangeRequestsRequest
-	(*ListChangeRequestsResponse)(nil),      // 25: nem.ListChangeRequestsResponse
-	(*CreateChangeRequestRequest)(nil),      // 26: nem.CreateChangeRequestRequest
-	(*UpdateChangeRequestRequest)(nil),      // 27: nem.UpdateChangeRequestRequest
-	(*ListProjectVersionsRequest)(nil),      // 28: nem.ListProjectVersionsRequest
-	(*ListProjectVersionsResponse)(nil),     // 29: nem.ListProjectVersionsResponse
-	(*CreateProjectVersionRequest)(nil),     // 30: nem.CreateProjectVersionRequest
-	(*UpdateProjectVersionRequest)(nil),     // 31: nem.UpdateProjectVersionRequest
-	(*ListUserTeamsRequest)(nil),            // 32: nem.ListUserTeamsRequest
-	(*ListUserTeamsResponse)(nil),           // 33: nem.ListUserTeamsResponse
-	(*CreateUserTeamRequest)(nil),           // 34: nem.CreateUserTeamRequest
-	(*UpdateUserTeamRequest)(nil),           // 35: nem.UpdateUserTeamRequest
-	(*ListExtensionExecutionsRequest)(nil),  // 36: nem.ListExtensionExecutionsRequest
-	(*ListExtensionExecutionsResponse)(nil), // 37: nem.ListExtensionExecutionsResponse
-	(*CreateExtensionExecutionRequest)(nil), // 38: nem.CreateExtensionExecutionRequest
-	(*UpdateExtensionExecutionRequest)(nil), // 39: nem.UpdateExtensionExecutionRequest
-	(*ListUserConnectionsRequest)(nil),      // 40: nem.ListUserConnectionsRequest
-	(*ListUserConnectionsResponse)(nil),     // 41: nem.ListUserConnectionsResponse
-	(*CreateUserConnectionRequest)(nil),     // 42: nem.CreateUserConnectionRequest
-	(*UpdateUserConnectionRequest)(nil),     // 43: nem.UpdateUserConnectionRequest
-	(*ListUserProjectVersionsRequest)(nil),  // 44: nem.ListUserProjectVersionsRequest
-	(*ListUserProjectVersionsResponse)(nil), // 45: nem.ListUserProjectVersionsResponse
-	(*CreateUserProjectVersionRequest)(nil), // 46: nem.CreateUserProjectVersionRequest
-	(*UpdateUserProjectVersionRequest)(nil), // 47: nem.UpdateUserProjectVersionRequest
-	(*ListUserProjectsRequest)(nil),         // 48: nem.ListUserProjectsRequest
-	(*ListUserProjectsResponse)(nil),        // 49: nem.ListUserProjectsResponse
-	(*CreateUserProjectRequest)(nil),        // 50: nem.CreateUserProjectRequest
-	(*UpdateUserProjectRequest)(nil),        // 51: nem.UpdateUserProjectRequest
-	(*ListMembershipsRequest)(nil),          // 52: nem.ListMembershipsRequest
-	(*ListMembershipsResponse)(nil),         // 53: nem.ListMembershipsResponse
-	(*CreateMembershipRequest)(nil),         // 54: nem.CreateMembershipRequest
-	(*UpdateMembershipRequest)(nil),         // 55: nem.UpdateMembershipRequest
-	(*Team)(nil),                            // 56: nem.Team
-	(*fieldmaskpb.FieldMask)(nil),           // 57: google.protobuf.FieldMask
-	(*Organization)(nil),                    // 58: nem.Organization
-	(*Project)(nil),                         // 59: nem.Project
-	(*Extension)(nil),                       // 60: nem.Extension
-	(*ExtensionVersion)(nil),                // 61: nem.ExtensionVersion
-	(*User)(nil),                            // 62: nem.User
-	(*ChangeRequest)(nil),                   // 63: nem.ChangeRequest
-	(*ProjectVersion)(nil),                  // 64: nem.ProjectVersion
-	(*UserTeam)(nil),                        // 65: nem.UserTeam
-	(*ExtensionExecution)(nil),              // 66: nem.ExtensionExecution
-	(*UserConnection)(nil),                  // 67: nem.UserConnection
-	(*UserProjectVersion)(nil),              // 68: nem.UserProjectVersion
-	(*UserProject)(nil),                     // 69: nem.UserProject
-	(*Membership)(nil),                      // 70: nem.Membership
+	(*ListProjectsRequest)(nil),             // 4: nem.ListProjectsRequest
+	(*ListProjectsResponse)(nil),            // 5: nem.ListProjectsResponse
+	(*CreateProjectRequest)(nil),            // 6: nem.CreateProjectRequest
+	(*UpdateProjectRequest)(nil),            // 7: nem.UpdateProjectRequest
+	(*ListExtensionsRequest)(nil),           // 8: nem.ListExtensionsRequest
+	(*ListExtensionsResponse)(nil),          // 9: nem.ListExtensionsResponse
+	(*CreateExtensionRequest)(nil),          // 10: nem.CreateExtensionRequest
+	(*UpdateExtensionRequest)(nil),          // 11: nem.UpdateExtensionRequest
+	(*ListExtensionVersionsRequest)(nil),    // 12: nem.ListExtensionVersionsRequest
+	(*ListExtensionVersionsResponse)(nil),   // 13: nem.ListExtensionVersionsResponse
+	(*CreateExtensionVersionRequest)(nil),   // 14: nem.CreateExtensionVersionRequest
+	(*UpdateExtensionVersionRequest)(nil),   // 15: nem.UpdateExtensionVersionRequest
+	(*ListUsersRequest)(nil),                // 16: nem.ListUsersRequest
+	(*ListUsersResponse)(nil),               // 17: nem.ListUsersResponse
+	(*CreateUserRequest)(nil),               // 18: nem.CreateUserRequest
+	(*UpdateUserRequest)(nil),               // 19: nem.UpdateUserRequest
+	(*ListChangeRequestsRequest)(nil),       // 20: nem.ListChangeRequestsRequest
+	(*ListChangeRequestsResponse)(nil),      // 21: nem.ListChangeRequestsResponse
+	(*CreateChangeRequestRequest)(nil),      // 22: nem.CreateChangeRequestRequest
+	(*UpdateChangeRequestRequest)(nil),      // 23: nem.UpdateChangeRequestRequest
+	(*ListProjectVersionsRequest)(nil),      // 24: nem.ListProjectVersionsRequest
+	(*ListProjectVersionsResponse)(nil),     // 25: nem.ListProjectVersionsResponse
+	(*CreateProjectVersionRequest)(nil),     // 26: nem.CreateProjectVersionRequest
+	(*UpdateProjectVersionRequest)(nil),     // 27: nem.UpdateProjectVersionRequest
+	(*ListUserTeamsRequest)(nil),            // 28: nem.ListUserTeamsRequest
+	(*ListUserTeamsResponse)(nil),           // 29: nem.ListUserTeamsResponse
+	(*CreateUserTeamRequest)(nil),           // 30: nem.CreateUserTeamRequest
+	(*UpdateUserTeamRequest)(nil),           // 31: nem.UpdateUserTeamRequest
+	(*ListExtensionExecutionsRequest)(nil),  // 32: nem.ListExtensionExecutionsRequest
+	(*ListExtensionExecutionsResponse)(nil), // 33: nem.ListExtensionExecutionsResponse
+	(*CreateExtensionExecutionRequest)(nil), // 34: nem.CreateExtensionExecutionRequest
+	(*UpdateExtensionExecutionRequest)(nil), // 35: nem.UpdateExtensionExecutionRequest
+	(*ListUserConnectionsRequest)(nil),      // 36: nem.ListUserConnectionsRequest
+	(*ListUserConnectionsResponse)(nil),     // 37: nem.ListUserConnectionsResponse
+	(*CreateUserConnectionRequest)(nil),     // 38: nem.CreateUserConnectionRequest
+	(*UpdateUserConnectionRequest)(nil),     // 39: nem.UpdateUserConnectionRequest
+	(*ListUserProjectVersionsRequest)(nil),  // 40: nem.ListUserProjectVersionsRequest
+	(*ListUserProjectVersionsResponse)(nil), // 41: nem.ListUserProjectVersionsResponse
+	(*CreateUserProjectVersionRequest)(nil), // 42: nem.CreateUserProjectVersionRequest
+	(*UpdateUserProjectVersionRequest)(nil), // 43: nem.UpdateUserProjectVersionRequest
+	(*ListUserProjectsRequest)(nil),         // 44: nem.ListUserProjectsRequest
+	(*ListUserProjectsResponse)(nil),        // 45: nem.ListUserProjectsResponse
+	(*CreateUserProjectRequest)(nil),        // 46: nem.CreateUserProjectRequest
+	(*UpdateUserProjectRequest)(nil),        // 47: nem.UpdateUserProjectRequest
+	(*ListMembershipsRequest)(nil),          // 48: nem.ListMembershipsRequest
+	(*ListMembershipsResponse)(nil),         // 49: nem.ListMembershipsResponse
+	(*CreateMembershipRequest)(nil),         // 50: nem.CreateMembershipRequest
+	(*UpdateMembershipRequest)(nil),         // 51: nem.UpdateMembershipRequest
+	(*Team)(nil),                            // 52: nem.Team
+	(*fieldmaskpb.FieldMask)(nil),           // 53: google.protobuf.FieldMask
+	(*Project)(nil),                         // 54: nem.Project
+	(*Extension)(nil),                       // 55: nem.Extension
+	(*ExtensionVersion)(nil),                // 56: nem.ExtensionVersion
+	(*User)(nil),                            // 57: nem.User
+	(*ChangeRequest)(nil),                   // 58: nem.ChangeRequest
+	(*ProjectVersion)(nil),                  // 59: nem.ProjectVersion
+	(*UserTeam)(nil),                        // 60: nem.UserTeam
+	(*ExtensionExecution)(nil),              // 61: nem.ExtensionExecution
+	(*UserConnection)(nil),                  // 62: nem.UserConnection
+	(*UserProjectVersion)(nil),              // 63: nem.UserProjectVersion
+	(*UserProject)(nil),                     // 64: nem.UserProject
+	(*Membership)(nil),                      // 65: nem.Membership
 }
 var file_service_nem_proto_depIdxs = []int32{
-	56, // 0: nem.ListTeamsResponse.teams:type_name -> nem.Team
-	56, // 1: nem.CreateTeamRequest.team:type_name -> nem.Team
-	56, // 2: nem.UpdateTeamRequest.team:type_name -> nem.Team
-	57, // 3: nem.UpdateTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
-	58, // 4: nem.ListOrganizationsResponse.organizations:type_name -> nem.Organization
-	58, // 5: nem.CreateOrganizationRequest.organization:type_name -> nem.Organization
-	58, // 6: nem.UpdateOrganizationRequest.organization:type_name -> nem.Organization
-	57, // 7: nem.UpdateOrganizationRequest.update_mask:type_name -> google.protobuf.FieldMask
-	59, // 8: nem.ListProjectsResponse.projects:type_name -> nem.Project
-	59, // 9: nem.CreateProjectRequest.project:type_name -> nem.Project
-	59, // 10: nem.UpdateProjectRequest.project:type_name -> nem.Project
-	57, // 11: nem.UpdateProjectRequest.update_mask:type_name -> google.protobuf.FieldMask
-	60, // 12: nem.ListExtensionsResponse.extensions:type_name -> nem.Extension
-	60, // 13: nem.CreateExtensionRequest.extension:type_name -> nem.Extension
-	60, // 14: nem.UpdateExtensionRequest.extension:type_name -> nem.Extension
-	57, // 15: nem.UpdateExtensionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	61, // 16: nem.ListExtensionVersionsResponse.extension_versions:type_name -> nem.ExtensionVersion
-	61, // 17: nem.CreateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
-	61, // 18: nem.UpdateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
-	57, // 19: nem.UpdateExtensionVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	62, // 20: nem.ListUsersResponse.users:type_name -> nem.User
-	62, // 21: nem.CreateUserRequest.user:type_name -> nem.User
-	62, // 22: nem.UpdateUserRequest.user:type_name -> nem.User
-	57, // 23: nem.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
-	63, // 24: nem.ListChangeRequestsResponse.change_requests:type_name -> nem.ChangeRequest
-	63, // 25: nem.CreateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
-	63, // 26: nem.UpdateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
-	57, // 27: nem.UpdateChangeRequestRequest.update_mask:type_name -> google.protobuf.FieldMask
-	64, // 28: nem.ListProjectVersionsResponse.project_versions:type_name -> nem.ProjectVersion
-	64, // 29: nem.CreateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
-	64, // 30: nem.UpdateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
-	57, // 31: nem.UpdateProjectVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	65, // 32: nem.ListUserTeamsResponse.user_teams:type_name -> nem.UserTeam
-	65, // 33: nem.CreateUserTeamRequest.user_team:type_name -> nem.UserTeam
-	65, // 34: nem.UpdateUserTeamRequest.user_team:type_name -> nem.UserTeam
-	57, // 35: nem.UpdateUserTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
-	66, // 36: nem.ListExtensionExecutionsResponse.extension_executions:type_name -> nem.ExtensionExecution
-	66, // 37: nem.CreateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
-	66, // 38: nem.UpdateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
-	57, // 39: nem.UpdateExtensionExecutionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	67, // 40: nem.ListUserConnectionsResponse.user_connections:type_name -> nem.UserConnection
-	67, // 41: nem.CreateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
-	67, // 42: nem.UpdateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
-	57, // 43: nem.UpdateUserConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	68, // 44: nem.ListUserProjectVersionsResponse.user_project_versions:type_name -> nem.UserProjectVersion
-	68, // 45: nem.CreateUserProjectVersionRequest.user_project_version:type_name -> nem.UserProjectVersion
-	68, // 46: nem.UpdateUserProjectVersionRequest.user_project_version:type_name -> nem.UserProjectVersion
-	57, // 47: nem.UpdateUserProjectVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	69, // 48: nem.ListUserProjectsResponse.user_projects:type_name -> nem.UserProject
-	69, // 49: nem.CreateUserProjectRequest.user_project:type_name -> nem.UserProject
-	69, // 50: nem.UpdateUserProjectRequest.user_project:type_name -> nem.UserProject
-	57, // 51: nem.UpdateUserProjectRequest.update_mask:type_name -> google.protobuf.FieldMask
-	70, // 52: nem.ListMembershipsResponse.memberships:type_name -> nem.Membership
-	70, // 53: nem.CreateMembershipRequest.membership:type_name -> nem.Membership
-	70, // 54: nem.UpdateMembershipRequest.membership:type_name -> nem.Membership
-	57, // 55: nem.UpdateMembershipRequest.update_mask:type_name -> google.protobuf.FieldMask
-	0,  // 56: nem.Nem.ListTeams:input_type -> nem.ListTeamsRequest
-	2,  // 57: nem.Nem.CreateTeam:input_type -> nem.CreateTeamRequest
-	3,  // 58: nem.Nem.UpdateTeam:input_type -> nem.UpdateTeamRequest
-	4,  // 59: nem.Nem.ListOrganizations:input_type -> nem.ListOrganizationsRequest
-	6,  // 60: nem.Nem.CreateOrganization:input_type -> nem.CreateOrganizationRequest
-	7,  // 61: nem.Nem.UpdateOrganization:input_type -> nem.UpdateOrganizationRequest
-	8,  // 62: nem.Nem.ListProjects:input_type -> nem.ListProjectsRequest
-	10, // 63: nem.Nem.CreateProject:input_type -> nem.CreateProjectRequest
-	11, // 64: nem.Nem.UpdateProject:input_type -> nem.UpdateProjectRequest
-	12, // 65: nem.Nem.ListExtensions:input_type -> nem.ListExtensionsRequest
-	14, // 66: nem.Nem.CreateExtension:input_type -> nem.CreateExtensionRequest
-	15, // 67: nem.Nem.UpdateExtension:input_type -> nem.UpdateExtensionRequest
-	16, // 68: nem.Nem.ListExtensionVersions:input_type -> nem.ListExtensionVersionsRequest
-	18, // 69: nem.Nem.CreateExtensionVersion:input_type -> nem.CreateExtensionVersionRequest
-	19, // 70: nem.Nem.UpdateExtensionVersion:input_type -> nem.UpdateExtensionVersionRequest
-	20, // 71: nem.Nem.ListUsers:input_type -> nem.ListUsersRequest
-	22, // 72: nem.Nem.CreateUser:input_type -> nem.CreateUserRequest
-	23, // 73: nem.Nem.UpdateUser:input_type -> nem.UpdateUserRequest
-	24, // 74: nem.Nem.ListChangeRequests:input_type -> nem.ListChangeRequestsRequest
-	26, // 75: nem.Nem.CreateChangeRequest:input_type -> nem.CreateChangeRequestRequest
-	27, // 76: nem.Nem.UpdateChangeRequest:input_type -> nem.UpdateChangeRequestRequest
-	28, // 77: nem.Nem.ListProjectVersions:input_type -> nem.ListProjectVersionsRequest
-	30, // 78: nem.Nem.CreateProjectVersion:input_type -> nem.CreateProjectVersionRequest
-	31, // 79: nem.Nem.UpdateProjectVersion:input_type -> nem.UpdateProjectVersionRequest
-	32, // 80: nem.Nem.ListUserTeams:input_type -> nem.ListUserTeamsRequest
-	34, // 81: nem.Nem.CreateUserTeam:input_type -> nem.CreateUserTeamRequest
-	35, // 82: nem.Nem.UpdateUserTeam:input_type -> nem.UpdateUserTeamRequest
-	36, // 83: nem.Nem.ListExtensionExecutions:input_type -> nem.ListExtensionExecutionsRequest
-	38, // 84: nem.Nem.CreateExtensionExecution:input_type -> nem.CreateExtensionExecutionRequest
-	39, // 85: nem.Nem.UpdateExtensionExecution:input_type -> nem.UpdateExtensionExecutionRequest
-	40, // 86: nem.Nem.ListUserConnections:input_type -> nem.ListUserConnectionsRequest
-	42, // 87: nem.Nem.CreateUserConnection:input_type -> nem.CreateUserConnectionRequest
-	43, // 88: nem.Nem.UpdateUserConnection:input_type -> nem.UpdateUserConnectionRequest
-	44, // 89: nem.Nem.ListUserProjectVersions:input_type -> nem.ListUserProjectVersionsRequest
-	46, // 90: nem.Nem.CreateUserProjectVersion:input_type -> nem.CreateUserProjectVersionRequest
-	47, // 91: nem.Nem.UpdateUserProjectVersion:input_type -> nem.UpdateUserProjectVersionRequest
-	48, // 92: nem.Nem.ListUserProjects:input_type -> nem.ListUserProjectsRequest
-	50, // 93: nem.Nem.CreateUserProject:input_type -> nem.CreateUserProjectRequest
-	51, // 94: nem.Nem.UpdateUserProject:input_type -> nem.UpdateUserProjectRequest
-	52, // 95: nem.Nem.ListMemberships:input_type -> nem.ListMembershipsRequest
-	54, // 96: nem.Nem.CreateMembership:input_type -> nem.CreateMembershipRequest
-	55, // 97: nem.Nem.UpdateMembership:input_type -> nem.UpdateMembershipRequest
-	1,  // 98: nem.Nem.ListTeams:output_type -> nem.ListTeamsResponse
-	56, // 99: nem.Nem.CreateTeam:output_type -> nem.Team
-	56, // 100: nem.Nem.UpdateTeam:output_type -> nem.Team
-	5,  // 101: nem.Nem.ListOrganizations:output_type -> nem.ListOrganizationsResponse
-	58, // 102: nem.Nem.CreateOrganization:output_type -> nem.Organization
-	58, // 103: nem.Nem.UpdateOrganization:output_type -> nem.Organization
-	9,  // 104: nem.Nem.ListProjects:output_type -> nem.ListProjectsResponse
-	59, // 105: nem.Nem.CreateProject:output_type -> nem.Project
-	59, // 106: nem.Nem.UpdateProject:output_type -> nem.Project
-	13, // 107: nem.Nem.ListExtensions:output_type -> nem.ListExtensionsResponse
-	60, // 108: nem.Nem.CreateExtension:output_type -> nem.Extension
-	60, // 109: nem.Nem.UpdateExtension:output_type -> nem.Extension
-	17, // 110: nem.Nem.ListExtensionVersions:output_type -> nem.ListExtensionVersionsResponse
-	61, // 111: nem.Nem.CreateExtensionVersion:output_type -> nem.ExtensionVersion
-	61, // 112: nem.Nem.UpdateExtensionVersion:output_type -> nem.ExtensionVersion
-	21, // 113: nem.Nem.ListUsers:output_type -> nem.ListUsersResponse
-	62, // 114: nem.Nem.CreateUser:output_type -> nem.User
-	62, // 115: nem.Nem.UpdateUser:output_type -> nem.User
-	25, // 116: nem.Nem.ListChangeRequests:output_type -> nem.ListChangeRequestsResponse
-	63, // 117: nem.Nem.CreateChangeRequest:output_type -> nem.ChangeRequest
-	63, // 118: nem.Nem.UpdateChangeRequest:output_type -> nem.ChangeRequest
-	29, // 119: nem.Nem.ListProjectVersions:output_type -> nem.ListProjectVersionsResponse
-	64, // 120: nem.Nem.CreateProjectVersion:output_type -> nem.ProjectVersion
-	64, // 121: nem.Nem.UpdateProjectVersion:output_type -> nem.ProjectVersion
-	33, // 122: nem.Nem.ListUserTeams:output_type -> nem.ListUserTeamsResponse
-	65, // 123: nem.Nem.CreateUserTeam:output_type -> nem.UserTeam
-	65, // 124: nem.Nem.UpdateUserTeam:output_type -> nem.UserTeam
-	37, // 125: nem.Nem.ListExtensionExecutions:output_type -> nem.ListExtensionExecutionsResponse
-	66, // 126: nem.Nem.CreateExtensionExecution:output_type -> nem.ExtensionExecution
-	66, // 127: nem.Nem.UpdateExtensionExecution:output_type -> nem.ExtensionExecution
-	41, // 128: nem.Nem.ListUserConnections:output_type -> nem.ListUserConnectionsResponse
-	67, // 129: nem.Nem.CreateUserConnection:output_type -> nem.UserConnection
-	67, // 130: nem.Nem.UpdateUserConnection:output_type -> nem.UserConnection
-	45, // 131: nem.Nem.ListUserProjectVersions:output_type -> nem.ListUserProjectVersionsResponse
-	68, // 132: nem.Nem.CreateUserProjectVersion:output_type -> nem.UserProjectVersion
-	68, // 133: nem.Nem.UpdateUserProjectVersion:output_type -> nem.UserProjectVersion
-	49, // 134: nem.Nem.ListUserProjects:output_type -> nem.ListUserProjectsResponse
-	69, // 135: nem.Nem.CreateUserProject:output_type -> nem.UserProject
-	69, // 136: nem.Nem.UpdateUserProject:output_type -> nem.UserProject
-	53, // 137: nem.Nem.ListMemberships:output_type -> nem.ListMembershipsResponse
-	70, // 138: nem.Nem.CreateMembership:output_type -> nem.Membership
-	70, // 139: nem.Nem.UpdateMembership:output_type -> nem.Membership
-	98, // [98:140] is the sub-list for method output_type
-	56, // [56:98] is the sub-list for method input_type
-	56, // [56:56] is the sub-list for extension type_name
-	56, // [56:56] is the sub-list for extension extendee
-	0,  // [0:56] is the sub-list for field type_name
+	52, // 0: nem.ListTeamsResponse.teams:type_name -> nem.Team
+	52, // 1: nem.CreateTeamRequest.team:type_name -> nem.Team
+	52, // 2: nem.UpdateTeamRequest.team:type_name -> nem.Team
+	53, // 3: nem.UpdateTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
+	54, // 4: nem.ListProjectsResponse.projects:type_name -> nem.Project
+	54, // 5: nem.CreateProjectRequest.project:type_name -> nem.Project
+	54, // 6: nem.UpdateProjectRequest.project:type_name -> nem.Project
+	53, // 7: nem.UpdateProjectRequest.update_mask:type_name -> google.protobuf.FieldMask
+	55, // 8: nem.ListExtensionsResponse.extensions:type_name -> nem.Extension
+	55, // 9: nem.CreateExtensionRequest.extension:type_name -> nem.Extension
+	55, // 10: nem.UpdateExtensionRequest.extension:type_name -> nem.Extension
+	53, // 11: nem.UpdateExtensionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	56, // 12: nem.ListExtensionVersionsResponse.extension_versions:type_name -> nem.ExtensionVersion
+	56, // 13: nem.CreateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
+	56, // 14: nem.UpdateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
+	53, // 15: nem.UpdateExtensionVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	57, // 16: nem.ListUsersResponse.users:type_name -> nem.User
+	57, // 17: nem.CreateUserRequest.user:type_name -> nem.User
+	57, // 18: nem.UpdateUserRequest.user:type_name -> nem.User
+	53, // 19: nem.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
+	58, // 20: nem.ListChangeRequestsResponse.change_requests:type_name -> nem.ChangeRequest
+	58, // 21: nem.CreateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
+	58, // 22: nem.UpdateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
+	53, // 23: nem.UpdateChangeRequestRequest.update_mask:type_name -> google.protobuf.FieldMask
+	59, // 24: nem.ListProjectVersionsResponse.project_versions:type_name -> nem.ProjectVersion
+	59, // 25: nem.CreateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
+	59, // 26: nem.UpdateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
+	53, // 27: nem.UpdateProjectVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	60, // 28: nem.ListUserTeamsResponse.user_teams:type_name -> nem.UserTeam
+	60, // 29: nem.CreateUserTeamRequest.user_team:type_name -> nem.UserTeam
+	60, // 30: nem.UpdateUserTeamRequest.user_team:type_name -> nem.UserTeam
+	53, // 31: nem.UpdateUserTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
+	61, // 32: nem.ListExtensionExecutionsResponse.extension_executions:type_name -> nem.ExtensionExecution
+	61, // 33: nem.CreateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
+	61, // 34: nem.UpdateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
+	53, // 35: nem.UpdateExtensionExecutionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	62, // 36: nem.ListUserConnectionsResponse.user_connections:type_name -> nem.UserConnection
+	62, // 37: nem.CreateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
+	62, // 38: nem.UpdateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
+	53, // 39: nem.UpdateUserConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	63, // 40: nem.ListUserProjectVersionsResponse.user_project_versions:type_name -> nem.UserProjectVersion
+	63, // 41: nem.CreateUserProjectVersionRequest.user_project_version:type_name -> nem.UserProjectVersion
+	63, // 42: nem.UpdateUserProjectVersionRequest.user_project_version:type_name -> nem.UserProjectVersion
+	53, // 43: nem.UpdateUserProjectVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	64, // 44: nem.ListUserProjectsResponse.user_projects:type_name -> nem.UserProject
+	64, // 45: nem.CreateUserProjectRequest.user_project:type_name -> nem.UserProject
+	64, // 46: nem.UpdateUserProjectRequest.user_project:type_name -> nem.UserProject
+	53, // 47: nem.UpdateUserProjectRequest.update_mask:type_name -> google.protobuf.FieldMask
+	65, // 48: nem.ListMembershipsResponse.memberships:type_name -> nem.Membership
+	65, // 49: nem.CreateMembershipRequest.membership:type_name -> nem.Membership
+	65, // 50: nem.UpdateMembershipRequest.membership:type_name -> nem.Membership
+	53, // 51: nem.UpdateMembershipRequest.update_mask:type_name -> google.protobuf.FieldMask
+	0,  // 52: nem.Nem.ListTeams:input_type -> nem.ListTeamsRequest
+	2,  // 53: nem.Nem.CreateTeam:input_type -> nem.CreateTeamRequest
+	3,  // 54: nem.Nem.UpdateTeam:input_type -> nem.UpdateTeamRequest
+	4,  // 55: nem.Nem.ListProjects:input_type -> nem.ListProjectsRequest
+	6,  // 56: nem.Nem.CreateProject:input_type -> nem.CreateProjectRequest
+	7,  // 57: nem.Nem.UpdateProject:input_type -> nem.UpdateProjectRequest
+	8,  // 58: nem.Nem.ListExtensions:input_type -> nem.ListExtensionsRequest
+	10, // 59: nem.Nem.CreateExtension:input_type -> nem.CreateExtensionRequest
+	11, // 60: nem.Nem.UpdateExtension:input_type -> nem.UpdateExtensionRequest
+	12, // 61: nem.Nem.ListExtensionVersions:input_type -> nem.ListExtensionVersionsRequest
+	14, // 62: nem.Nem.CreateExtensionVersion:input_type -> nem.CreateExtensionVersionRequest
+	15, // 63: nem.Nem.UpdateExtensionVersion:input_type -> nem.UpdateExtensionVersionRequest
+	16, // 64: nem.Nem.ListUsers:input_type -> nem.ListUsersRequest
+	18, // 65: nem.Nem.CreateUser:input_type -> nem.CreateUserRequest
+	19, // 66: nem.Nem.UpdateUser:input_type -> nem.UpdateUserRequest
+	20, // 67: nem.Nem.ListChangeRequests:input_type -> nem.ListChangeRequestsRequest
+	22, // 68: nem.Nem.CreateChangeRequest:input_type -> nem.CreateChangeRequestRequest
+	23, // 69: nem.Nem.UpdateChangeRequest:input_type -> nem.UpdateChangeRequestRequest
+	24, // 70: nem.Nem.ListProjectVersions:input_type -> nem.ListProjectVersionsRequest
+	26, // 71: nem.Nem.CreateProjectVersion:input_type -> nem.CreateProjectVersionRequest
+	27, // 72: nem.Nem.UpdateProjectVersion:input_type -> nem.UpdateProjectVersionRequest
+	28, // 73: nem.Nem.ListUserTeams:input_type -> nem.ListUserTeamsRequest
+	30, // 74: nem.Nem.CreateUserTeam:input_type -> nem.CreateUserTeamRequest
+	31, // 75: nem.Nem.UpdateUserTeam:input_type -> nem.UpdateUserTeamRequest
+	32, // 76: nem.Nem.ListExtensionExecutions:input_type -> nem.ListExtensionExecutionsRequest
+	34, // 77: nem.Nem.CreateExtensionExecution:input_type -> nem.CreateExtensionExecutionRequest
+	35, // 78: nem.Nem.UpdateExtensionExecution:input_type -> nem.UpdateExtensionExecutionRequest
+	36, // 79: nem.Nem.ListUserConnections:input_type -> nem.ListUserConnectionsRequest
+	38, // 80: nem.Nem.CreateUserConnection:input_type -> nem.CreateUserConnectionRequest
+	39, // 81: nem.Nem.UpdateUserConnection:input_type -> nem.UpdateUserConnectionRequest
+	40, // 82: nem.Nem.ListUserProjectVersions:input_type -> nem.ListUserProjectVersionsRequest
+	42, // 83: nem.Nem.CreateUserProjectVersion:input_type -> nem.CreateUserProjectVersionRequest
+	43, // 84: nem.Nem.UpdateUserProjectVersion:input_type -> nem.UpdateUserProjectVersionRequest
+	44, // 85: nem.Nem.ListUserProjects:input_type -> nem.ListUserProjectsRequest
+	46, // 86: nem.Nem.CreateUserProject:input_type -> nem.CreateUserProjectRequest
+	47, // 87: nem.Nem.UpdateUserProject:input_type -> nem.UpdateUserProjectRequest
+	48, // 88: nem.Nem.ListMemberships:input_type -> nem.ListMembershipsRequest
+	50, // 89: nem.Nem.CreateMembership:input_type -> nem.CreateMembershipRequest
+	51, // 90: nem.Nem.UpdateMembership:input_type -> nem.UpdateMembershipRequest
+	1,  // 91: nem.Nem.ListTeams:output_type -> nem.ListTeamsResponse
+	52, // 92: nem.Nem.CreateTeam:output_type -> nem.Team
+	52, // 93: nem.Nem.UpdateTeam:output_type -> nem.Team
+	5,  // 94: nem.Nem.ListProjects:output_type -> nem.ListProjectsResponse
+	54, // 95: nem.Nem.CreateProject:output_type -> nem.Project
+	54, // 96: nem.Nem.UpdateProject:output_type -> nem.Project
+	9,  // 97: nem.Nem.ListExtensions:output_type -> nem.ListExtensionsResponse
+	55, // 98: nem.Nem.CreateExtension:output_type -> nem.Extension
+	55, // 99: nem.Nem.UpdateExtension:output_type -> nem.Extension
+	13, // 100: nem.Nem.ListExtensionVersions:output_type -> nem.ListExtensionVersionsResponse
+	56, // 101: nem.Nem.CreateExtensionVersion:output_type -> nem.ExtensionVersion
+	56, // 102: nem.Nem.UpdateExtensionVersion:output_type -> nem.ExtensionVersion
+	17, // 103: nem.Nem.ListUsers:output_type -> nem.ListUsersResponse
+	57, // 104: nem.Nem.CreateUser:output_type -> nem.User
+	57, // 105: nem.Nem.UpdateUser:output_type -> nem.User
+	21, // 106: nem.Nem.ListChangeRequests:output_type -> nem.ListChangeRequestsResponse
+	58, // 107: nem.Nem.CreateChangeRequest:output_type -> nem.ChangeRequest
+	58, // 108: nem.Nem.UpdateChangeRequest:output_type -> nem.ChangeRequest
+	25, // 109: nem.Nem.ListProjectVersions:output_type -> nem.ListProjectVersionsResponse
+	59, // 110: nem.Nem.CreateProjectVersion:output_type -> nem.ProjectVersion
+	59, // 111: nem.Nem.UpdateProjectVersion:output_type -> nem.ProjectVersion
+	29, // 112: nem.Nem.ListUserTeams:output_type -> nem.ListUserTeamsResponse
+	60, // 113: nem.Nem.CreateUserTeam:output_type -> nem.UserTeam
+	60, // 114: nem.Nem.UpdateUserTeam:output_type -> nem.UserTeam
+	33, // 115: nem.Nem.ListExtensionExecutions:output_type -> nem.ListExtensionExecutionsResponse
+	61, // 116: nem.Nem.CreateExtensionExecution:output_type -> nem.ExtensionExecution
+	61, // 117: nem.Nem.UpdateExtensionExecution:output_type -> nem.ExtensionExecution
+	37, // 118: nem.Nem.ListUserConnections:output_type -> nem.ListUserConnectionsResponse
+	62, // 119: nem.Nem.CreateUserConnection:output_type -> nem.UserConnection
+	62, // 120: nem.Nem.UpdateUserConnection:output_type -> nem.UserConnection
+	41, // 121: nem.Nem.ListUserProjectVersions:output_type -> nem.ListUserProjectVersionsResponse
+	63, // 122: nem.Nem.CreateUserProjectVersion:output_type -> nem.UserProjectVersion
+	63, // 123: nem.Nem.UpdateUserProjectVersion:output_type -> nem.UserProjectVersion
+	45, // 124: nem.Nem.ListUserProjects:output_type -> nem.ListUserProjectsResponse
+	64, // 125: nem.Nem.CreateUserProject:output_type -> nem.UserProject
+	64, // 126: nem.Nem.UpdateUserProject:output_type -> nem.UserProject
+	49, // 127: nem.Nem.ListMemberships:output_type -> nem.ListMembershipsResponse
+	65, // 128: nem.Nem.CreateMembership:output_type -> nem.Membership
+	65, // 129: nem.Nem.UpdateMembership:output_type -> nem.Membership
+	91, // [91:130] is the sub-list for method output_type
+	52, // [52:91] is the sub-list for method input_type
+	52, // [52:52] is the sub-list for extension type_name
+	52, // [52:52] is the sub-list for extension extendee
+	0,  // [0:52] is the sub-list for field type_name
 }
 
 func init() { file_service_nem_proto_init() }
@@ -3713,7 +3453,6 @@ func file_service_nem_proto_init() {
 		return
 	}
 	file_team_proto_init()
-	file_organization_proto_init()
 	file_project_proto_init()
 	file_extension_proto_init()
 	file_extension_version_proto_init()
@@ -3732,7 +3471,7 @@ func file_service_nem_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_service_nem_proto_rawDesc), len(file_service_nem_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   56,
+			NumMessages:   52,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

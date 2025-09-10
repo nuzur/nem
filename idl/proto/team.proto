@@ -25,13 +25,12 @@ message Team {
     repeated Store stores = 6;
     repeated Connection connections = 7;
     repeated ObjectStore object_stores = 8;
-    string organization_uuid = 9;
-    Entity default_entity = 10;
-    TeamStatus status = 11;
-    google.protobuf.Timestamp created_at = 12;
-    google.protobuf.Timestamp updated_at = 13;
-    string created_by_uuid = 14;
-    string updated_by_uuid = 15;    
+    Entity default_entity = 9;
+    TeamStatus status = 10;
+    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp updated_at = 12;
+    string created_by_uuid = 13;
+    string updated_by_uuid = 14;    
 }
 
 enum TeamStatus { 
