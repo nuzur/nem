@@ -145,6 +145,7 @@ type Team struct {
 	Connections   []byte    `json:"connections"`
 	ObjectStores  []byte    `json:"object_stores"`
 	DefaultEntity []byte    `json:"default_entity"`
+	OwnerUUID     string    `json:"owner_uuid"`
 	Status        int64     `json:"status"`
 	CreatedAt     time.Time `json:"created_at"`
 	UpdatedAt     time.Time `json:"updated_at"`

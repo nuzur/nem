@@ -119,6 +119,8 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertTeamPar
 
 		DefaultEntity: entity.EntityToJSON(req.Team.DefaultEntity),
 
+		OwnerUUID: req.Team.OwnerUUID.String(),
+
 		Status: req.Team.Status.ToInt64(),
 
 		CreatedAt: custom.Now(),

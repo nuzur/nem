@@ -32,6 +32,7 @@ func mapModelToEntity(model nemdb.Team) main_entity.Team {
 		Connections:   connection.ConnectionSliceFromJSON(model.Connections),
 		ObjectStores:  object_store.ObjectStoreSliceFromJSON(model.ObjectStores),
 		DefaultEntity: entity.EntityFromJSON(model.DefaultEntity),
+		OwnerUUID:     uuid.FromStringOrNil(model.OwnerUUID),
 		Status:        main_entity.Status(model.Status),
 		CreatedAt:     model.CreatedAt,
 		UpdatedAt:     model.UpdatedAt,

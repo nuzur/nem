@@ -327,9 +327,9 @@ func (q *Queries) InsertProjectVersion(ctx context.Context, arg InsertProjectVer
 
 const insertTeam = `-- name: InsertTeam :execresult
 INSERT INTO team
-(uuid,version,name,enviorments,review_configs,stores,connections,object_stores,default_entity,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,name,enviorments,review_configs,stores,connections,object_stores,default_entity,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertTeamParams struct {
@@ -342,6 +342,7 @@ type InsertTeamParams struct {
 	Connections   []byte    `json:"connections"`
 	ObjectStores  []byte    `json:"object_stores"`
 	DefaultEntity []byte    `json:"default_entity"`
+	OwnerUUID     string    `json:"owner_uuid"`
 	Status        int64     `json:"status"`
 	CreatedAt     time.Time `json:"created_at"`
 	UpdatedAt     time.Time `json:"updated_at"`
@@ -360,6 +361,7 @@ func (q *Queries) InsertTeam(ctx context.Context, arg InsertTeamParams) (sql.Res
 		arg.Connections,
 		arg.ObjectStores,
 		arg.DefaultEntity,
+		arg.OwnerUUID,
 		arg.Status,
 		arg.CreatedAt,
 		arg.UpdatedAt,

@@ -2,7 +2,7 @@
 -- name: UpdateTeam :exec
 UPDATE team
 SET
-version = ?, name = ?, enviorments = ?, review_configs = ?, stores = ?, connections = ?, object_stores = ?, default_entity = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, name = ?, enviorments = ?, review_configs = ?, stores = ?, connections = ?, object_stores = ?, default_entity = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?;
 
 -- name: UpdateProject :exec

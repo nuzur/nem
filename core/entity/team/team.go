@@ -31,6 +31,7 @@ type Team struct {
 	Connections   []connection.Connection      `json:"connections"`
 	ObjectStores  []object_store.ObjectStore   `json:"object_stores"`
 	DefaultEntity entity.Entity                `json:"default_entity"`
+	OwnerUUID     uuid.UUID                    `json:"owner_uuid"`
 	Status        Status                       `json:"status"`
 	CreatedAt     time.Time                    `json:"created_at"`
 	UpdatedAt     time.Time                    `json:"updated_at"`
@@ -67,6 +68,7 @@ func (e Team) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["connections"] = types.MultiDependantEntityFieldType
 	res["object_stores"] = types.MultiDependantEntityFieldType
 	res["default_entity"] = types.SingleDependantEntityFieldType
+	res["owner_uuid"] = types.UUIDFieldType
 	res["status"] = types.SingleEnumFieldType
 	res["created_at"] = types.TimestampFieldType
 	res["updated_at"] = types.TimestampFieldType
@@ -152,6 +154,7 @@ func NewTeamWithRandomValues() Team {
 		Connections:   connection.NewConnectionSliceWithRandomValues(rand.Intn(10)),
 		ObjectStores:  object_store.NewObjectStoreSliceWithRandomValues(rand.Intn(10)),
 		DefaultEntity: entity.NewEntityWithRandomValues(),
+		OwnerUUID:     randomvalues.GetRandomUUIDValue(),
 		Status:        randomvalues.GetRandomOptionValue[Status](2),
 		CreatedAt:     randomvalues.GetRandomTimeValue(),
 		UpdatedAt:     randomvalues.GetRandomTimeValue(),

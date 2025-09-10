@@ -159,6 +159,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Team
 
 			DefaultEntity: entity.EntityToJSON(req.Team.DefaultEntity),
 
+			OwnerUUID: req.Team.OwnerUUID.String(),
+
 			Status: req.Team.Status.ToInt64(),
 
 			CreatedAt: existing.CreatedAt,
@@ -190,6 +192,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Team
 	res.ObjectStores = object_store.ObjectStoreSliceToJSON(req.Team.ObjectStores)
 
 	res.DefaultEntity = entity.EntityToJSON(req.Team.DefaultEntity)
+
+	res.OwnerUUID = req.Team.OwnerUUID.String()
 
 	res.Status = req.Team.Status.ToInt64()
 

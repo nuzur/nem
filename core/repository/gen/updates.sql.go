@@ -335,7 +335,7 @@ func (q *Queries) UpdateProjectVersion(ctx context.Context, arg UpdateProjectVer
 const updateTeam = `-- name: UpdateTeam :exec
 UPDATE team
 SET
-version = ?, name = ?, enviorments = ?, review_configs = ?, stores = ?, connections = ?, object_stores = ?, default_entity = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, name = ?, enviorments = ?, review_configs = ?, stores = ?, connections = ?, object_stores = ?, default_entity = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?
 `
 
@@ -348,6 +348,7 @@ type UpdateTeamParams struct {
 	Connections   []byte    `json:"connections"`
 	ObjectStores  []byte    `json:"object_stores"`
 	DefaultEntity []byte    `json:"default_entity"`
+	OwnerUUID     string    `json:"owner_uuid"`
 	Status        int64     `json:"status"`
 	CreatedAt     time.Time `json:"created_at"`
 	UpdatedAt     time.Time `json:"updated_at"`
@@ -366,6 +367,7 @@ func (q *Queries) UpdateTeam(ctx context.Context, arg UpdateTeamParams) error {
 		arg.Connections,
 		arg.ObjectStores,
 		arg.DefaultEntity,
+		arg.OwnerUUID,
 		arg.Status,
 		arg.CreatedAt,
 		arg.UpdatedAt,

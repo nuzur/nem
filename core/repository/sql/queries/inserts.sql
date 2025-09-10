@@ -1,9 +1,9 @@
 
 -- name: InsertTeam :execresult
 INSERT INTO team
-(uuid,version,name,enviorments,review_configs,stores,connections,object_stores,default_entity,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,name,enviorments,review_configs,stores,connections,object_stores,default_entity,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertProject :execresult
 INSERT INTO project

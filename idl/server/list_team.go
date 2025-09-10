@@ -255,6 +255,8 @@ func teamDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("name", filtering.TypeString),
 
+		filtering.DeclareIdent("owner_uuid", filtering.TypeString),
+
 		filtering.DeclareEnumIdent("status", pb.TeamStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),

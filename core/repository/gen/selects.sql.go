@@ -31597,7 +31597,7 @@ func (q *Queries) FetchProjectVersionByVersionOrderedByUpdatedAtDESC(ctx context
 }
 
 const fetchTeamByStatus = `-- name: FetchTeamByStatus :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      status = ?  
     LIMIT ?, ?
@@ -31628,6 +31628,7 @@ func (q *Queries) FetchTeamByStatus(ctx context.Context, arg FetchTeamByStatusPa
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31648,7 +31649,7 @@ func (q *Queries) FetchTeamByStatus(ctx context.Context, arg FetchTeamByStatusPa
 }
 
 const fetchTeamByStatusOrderedByCreatedAtASC = `-- name: FetchTeamByStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      status = ?  
     ORDER BY created_at ASC
@@ -31680,6 +31681,7 @@ func (q *Queries) FetchTeamByStatusOrderedByCreatedAtASC(ctx context.Context, ar
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31700,7 +31702,7 @@ func (q *Queries) FetchTeamByStatusOrderedByCreatedAtASC(ctx context.Context, ar
 }
 
 const fetchTeamByStatusOrderedByCreatedAtDESC = `-- name: FetchTeamByStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      status = ?  
     ORDER BY created_at DESC
@@ -31732,6 +31734,7 @@ func (q *Queries) FetchTeamByStatusOrderedByCreatedAtDESC(ctx context.Context, a
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31752,7 +31755,7 @@ func (q *Queries) FetchTeamByStatusOrderedByCreatedAtDESC(ctx context.Context, a
 }
 
 const fetchTeamByStatusOrderedByUpdatedAtASC = `-- name: FetchTeamByStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      status = ?  
     ORDER BY updated_at ASC
@@ -31784,6 +31787,7 @@ func (q *Queries) FetchTeamByStatusOrderedByUpdatedAtASC(ctx context.Context, ar
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31804,7 +31808,7 @@ func (q *Queries) FetchTeamByStatusOrderedByUpdatedAtASC(ctx context.Context, ar
 }
 
 const fetchTeamByStatusOrderedByUpdatedAtDESC = `-- name: FetchTeamByStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      status = ?  
     ORDER BY updated_at DESC
@@ -31836,6 +31840,7 @@ func (q *Queries) FetchTeamByStatusOrderedByUpdatedAtDESC(ctx context.Context, a
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31856,7 +31861,7 @@ func (q *Queries) FetchTeamByStatusOrderedByUpdatedAtDESC(ctx context.Context, a
 }
 
 const fetchTeamByUUID = `-- name: FetchTeamByUUID :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      uuid = ?
 `
@@ -31880,6 +31885,7 @@ func (q *Queries) FetchTeamByUUID(ctx context.Context, uuid string) ([]Team, err
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31900,7 +31906,7 @@ func (q *Queries) FetchTeamByUUID(ctx context.Context, uuid string) ([]Team, err
 }
 
 const fetchTeamByUUIDForUpdate = `-- name: FetchTeamByUUIDForUpdate :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      uuid = ?      
 FOR UPDATE
@@ -31925,6 +31931,7 @@ func (q *Queries) FetchTeamByUUIDForUpdate(ctx context.Context, uuid string) ([]
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31945,7 +31952,7 @@ func (q *Queries) FetchTeamByUUIDForUpdate(ctx context.Context, uuid string) ([]
 }
 
 const fetchTeamByVersion = `-- name: FetchTeamByVersion :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ?  
     LIMIT ?, ?
@@ -31976,6 +31983,7 @@ func (q *Queries) FetchTeamByVersion(ctx context.Context, arg FetchTeamByVersion
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -31996,7 +32004,7 @@ func (q *Queries) FetchTeamByVersion(ctx context.Context, arg FetchTeamByVersion
 }
 
 const fetchTeamByVersionAndStatus = `-- name: FetchTeamByVersionAndStatus :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ? AND status = ?  
     LIMIT ?, ?
@@ -32033,6 +32041,7 @@ func (q *Queries) FetchTeamByVersionAndStatus(ctx context.Context, arg FetchTeam
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -32053,7 +32062,7 @@ func (q *Queries) FetchTeamByVersionAndStatus(ctx context.Context, arg FetchTeam
 }
 
 const fetchTeamByVersionAndStatusOrderedByCreatedAtASC = `-- name: FetchTeamByVersionAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ? AND status = ?  
     ORDER BY created_at ASC
@@ -32091,6 +32100,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByCreatedAtASC(ctx context.C
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -32111,7 +32121,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByCreatedAtASC(ctx context.C
 }
 
 const fetchTeamByVersionAndStatusOrderedByCreatedAtDESC = `-- name: FetchTeamByVersionAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ? AND status = ?  
     ORDER BY created_at DESC
@@ -32149,6 +32159,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByCreatedAtDESC(ctx context.
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -32169,7 +32180,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByCreatedAtDESC(ctx context.
 }
 
 const fetchTeamByVersionAndStatusOrderedByUpdatedAtASC = `-- name: FetchTeamByVersionAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -32207,6 +32218,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByUpdatedAtASC(ctx context.C
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -32227,7 +32239,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByUpdatedAtASC(ctx context.C
 }
 
 const fetchTeamByVersionAndStatusOrderedByUpdatedAtDESC = `-- name: FetchTeamByVersionAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -32265,6 +32277,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByUpdatedAtDESC(ctx context.
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -32285,7 +32298,7 @@ func (q *Queries) FetchTeamByVersionAndStatusOrderedByUpdatedAtDESC(ctx context.
 }
 
 const fetchTeamByVersionOrderedByCreatedAtASC = `-- name: FetchTeamByVersionOrderedByCreatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ?  
     ORDER BY created_at ASC
@@ -32317,6 +32330,7 @@ func (q *Queries) FetchTeamByVersionOrderedByCreatedAtASC(ctx context.Context, a
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -32337,7 +32351,7 @@ func (q *Queries) FetchTeamByVersionOrderedByCreatedAtASC(ctx context.Context, a
 }
 
 const fetchTeamByVersionOrderedByCreatedAtDESC = `-- name: FetchTeamByVersionOrderedByCreatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ?  
     ORDER BY created_at DESC
@@ -32369,6 +32383,7 @@ func (q *Queries) FetchTeamByVersionOrderedByCreatedAtDESC(ctx context.Context, 
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -32389,7 +32404,7 @@ func (q *Queries) FetchTeamByVersionOrderedByCreatedAtDESC(ctx context.Context, 
 }
 
 const fetchTeamByVersionOrderedByUpdatedAtASC = `-- name: FetchTeamByVersionOrderedByUpdatedAtASC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ?  
     ORDER BY updated_at ASC
@@ -32421,6 +32436,7 @@ func (q *Queries) FetchTeamByVersionOrderedByUpdatedAtASC(ctx context.Context, a
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -32441,7 +32457,7 @@ func (q *Queries) FetchTeamByVersionOrderedByUpdatedAtASC(ctx context.Context, a
 }
 
 const fetchTeamByVersionOrderedByUpdatedAtDESC = `-- name: FetchTeamByVersionOrderedByUpdatedAtDESC :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
      version = ?  
     ORDER BY updated_at DESC
@@ -32473,6 +32489,7 @@ func (q *Queries) FetchTeamByVersionOrderedByUpdatedAtDESC(ctx context.Context, 
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -39254,7 +39271,7 @@ func (q *Queries) SearchProjectVersion(ctx context.Context, arg SearchProjectVer
 }
 
 const searchTeam = `-- name: SearchTeam :many
-SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
+SELECT uuid, version, name, enviorments, review_configs, stores, connections, object_stores, default_entity, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM team
 WHERE 
     name like ? 
     LIMIT ?, ?
@@ -39285,6 +39302,7 @@ func (q *Queries) SearchTeam(ctx context.Context, arg SearchTeamParams) ([]Team,
 			&i.Connections,
 			&i.ObjectStores,
 			&i.DefaultEntity,
+			&i.OwnerUUID,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
