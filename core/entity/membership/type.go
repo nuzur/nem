@@ -10,10 +10,7 @@ type Type int64
 
 const (
 	TYPE_INVALID Type = iota
-	TYPE_FREE
-	TYPE_SMALL
-	TYPE_MEDIUM
-	TYPE_ENTERPRISE
+	TYPE_PRO
 )
 
 func (e Type) ToInt64() int64 {
@@ -22,14 +19,8 @@ func (e Type) ToInt64() int64 {
 
 func TypeFromString(in string) Type {
 	switch in {
-	case "free":
-		return TYPE_FREE
-	case "small":
-		return TYPE_SMALL
-	case "medium":
-		return TYPE_MEDIUM
-	case "enterprise":
-		return TYPE_ENTERPRISE
+	case "pro":
+		return TYPE_PRO
 	}
 	return TYPE_INVALID
 }
@@ -43,14 +34,8 @@ func TypeFromPointerString(in *string) Type {
 
 func (e Type) String() string {
 	switch e {
-	case TYPE_FREE:
-		return "free"
-	case TYPE_SMALL:
-		return "small"
-	case TYPE_MEDIUM:
-		return "medium"
-	case TYPE_ENTERPRISE:
-		return "enterprise"
+	case TYPE_PRO:
+		return "pro"
 	}
 
 	return "invalid"

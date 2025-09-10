@@ -10,7 +10,6 @@ import (
 	"github.com/nuzur/nem/core/entity/connection"
 	"github.com/nuzur/nem/core/entity/entity"
 	"github.com/nuzur/nem/core/entity/enviorment"
-	"github.com/nuzur/nem/core/entity/membership"
 	"github.com/nuzur/nem/core/entity/object_store"
 	"github.com/nuzur/nem/core/entity/review_config"
 	"github.com/nuzur/nem/core/entity/store"
@@ -31,7 +30,6 @@ func mapModelToEntity(model nemdb.Team) main_entity.Team {
 		Name:             model.Name,
 		Enviorments:      enviorment.EnviormentSliceFromJSON(model.Enviorments),
 		ReviewConfigs:    review_config.ReviewConfigSliceFromJSON(model.ReviewConfigs),
-		Memberships:      membership.MembershipSliceFromJSON(model.Memberships),
 		Stores:           store.StoreSliceFromJSON(model.Stores),
 		Connections:      connection.ConnectionSliceFromJSON(model.Connections),
 		ObjectStores:     object_store.ObjectStoreSliceFromJSON(model.ObjectStores),

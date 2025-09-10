@@ -2,13 +2,13 @@
 -- name: UpdateTeam :exec
 UPDATE team
 SET
-version = ?, name = ?, enviorments = ?, review_configs = ?, memberships = ?, stores = ?, connections = ?, object_stores = ?, organization_uuid = ?, default_entity = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, name = ?, enviorments = ?, review_configs = ?, stores = ?, connections = ?, object_stores = ?, organization_uuid = ?, default_entity = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?;
 
 -- name: UpdateOrganization :exec
 UPDATE organization
 SET
-version = ?, name = ?, domains = ?, admin_uuids = ?, memberships = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, name = ?, domains = ?, admin_uuids = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?;
 
 -- name: UpdateProject :exec
@@ -75,5 +75,11 @@ WHERE uuid = ?;
 UPDATE user_project
 SET
 user_uuid = ?, user_email = ?, project_uuid = ?, role = ?, review_required_structure = ?, review_required_data = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+WHERE uuid = ?;
+
+-- name: UpdateMembership :exec
+UPDATE membership
+SET
+owner_uuid = ?, type = ?, start_date = ?, billing_metadata = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?;
 

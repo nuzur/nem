@@ -38,6 +38,8 @@ import (
 
 	"github.com/nuzur/nem/core/module/user_project"
 
+	"github.com/nuzur/nem/core/module/membership"
+
 	"github.com/nuzur/nem/core/repository"
 	"github.com/nuzur/nem/monitoring"
 
@@ -73,6 +75,8 @@ type Implementation struct {
 	user_project_version user_project_version.Module
 
 	user_project user_project.Module
+
+	membership membership.Module
 
 	monitoring *monitoring.Implementation
 
@@ -289,4 +293,16 @@ func (i Implementation) UserProject() user_project.Module {
 		})
 	}
 	return i.user_project
+}
+
+func (i Implementation) Membership() membership.Module {
+	if i.membership == nil {
+		i.membership = membership.New(coretypes.ModuleParams{
+			Repository: i.repository,
+			Monitoring: i.monitoring,
+
+			Events: i.events,
+		})
+	}
+	return i.membership
 }

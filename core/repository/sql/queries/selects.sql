@@ -5641,3 +5641,201 @@ WHERE
 
 
 
+
+
+
+-- name: FetchMembershipByUUID :many
+SELECT * FROM membership
+WHERE 
+     uuid = ?  
+    ;
+
+
+-- name: FetchMembershipByUUIDForUpdate :many
+SELECT * FROM membership
+WHERE 
+     uuid = ?      
+FOR UPDATE;
+
+
+-- name: FetchMembershipByType :many
+SELECT * FROM membership
+WHERE 
+     type = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchMembershipByStatus :many
+SELECT * FROM membership
+WHERE 
+     status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchMembershipByTypeAndStatus :many
+SELECT * FROM membership
+WHERE 
+     type = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+
+
+    
+
+    
+    
+-- name: FetchMembershipByTypeOrderedByStartDateASC :many
+SELECT * FROM membership
+WHERE 
+     type = ?  
+    ORDER BY start_date ASC
+    LIMIT ?, ?;
+
+-- name: FetchMembershipByTypeOrderedByStartDateDESC :many
+SELECT * FROM membership
+WHERE 
+     type = ?  
+    ORDER BY start_date DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchMembershipByTypeOrderedByCreatedAtASC :many
+SELECT * FROM membership
+WHERE 
+     type = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchMembershipByTypeOrderedByCreatedAtDESC :many
+SELECT * FROM membership
+WHERE 
+     type = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchMembershipByTypeOrderedByUpdatedAtASC :many
+SELECT * FROM membership
+WHERE 
+     type = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchMembershipByTypeOrderedByUpdatedAtDESC :many
+SELECT * FROM membership
+WHERE 
+     type = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchMembershipByStatusOrderedByStartDateASC :many
+SELECT * FROM membership
+WHERE 
+     status = ?  
+    ORDER BY start_date ASC
+    LIMIT ?, ?;
+
+-- name: FetchMembershipByStatusOrderedByStartDateDESC :many
+SELECT * FROM membership
+WHERE 
+     status = ?  
+    ORDER BY start_date DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchMembershipByStatusOrderedByCreatedAtASC :many
+SELECT * FROM membership
+WHERE 
+     status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchMembershipByStatusOrderedByCreatedAtDESC :many
+SELECT * FROM membership
+WHERE 
+     status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchMembershipByStatusOrderedByUpdatedAtASC :many
+SELECT * FROM membership
+WHERE 
+     status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchMembershipByStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM membership
+WHERE 
+     status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchMembershipByTypeAndStatusOrderedByStartDateASC :many
+SELECT * FROM membership
+WHERE 
+     type = ? AND status = ?  
+    ORDER BY start_date ASC
+    LIMIT ?, ?;
+
+-- name: FetchMembershipByTypeAndStatusOrderedByStartDateDESC :many
+SELECT * FROM membership
+WHERE 
+     type = ? AND status = ?  
+    ORDER BY start_date DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchMembershipByTypeAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM membership
+WHERE 
+     type = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchMembershipByTypeAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM membership
+WHERE 
+     type = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchMembershipByTypeAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM membership
+WHERE 
+     type = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchMembershipByTypeAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM membership
+WHERE 
+     type = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+
+
+
+
+
+

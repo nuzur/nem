@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS `organization` (
   `name` VARCHAR(255) NOT NULL  ,
   `domains` JSON   ,
   `admin_uuids` JSON NOT NULL  ,
-  `memberships` JSON   ,
   `status` INT NOT NULL  ,
   `created_at` DATETIME NOT NULL  default CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL  default CURRENT_TIMESTAMP,

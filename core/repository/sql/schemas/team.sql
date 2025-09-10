@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS `team` (
   `name` VARCHAR(255) NOT NULL  ,
   `enviorments` JSON   ,
   `review_configs` JSON   ,
-  `memberships` JSON   ,
   `stores` JSON   ,
   `connections` JSON   ,
   `object_stores` JSON   ,

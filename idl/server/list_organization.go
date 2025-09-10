@@ -143,8 +143,6 @@ func organizationDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("true", filtering.TypeBool),
 		filtering.DeclareIdent("false", filtering.TypeBool),
 
-		//
-
 		//organization
 
 		filtering.DeclareIdent("uuid", filtering.TypeString),

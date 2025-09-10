@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 
 	"github.com/gofrs/uuid"
-	"github.com/nuzur/nem/core/entity/membership"
 	"time"
 
 	"fmt"
@@ -17,17 +16,16 @@ import (
 )
 
 type Organization struct {
-	UUID          uuid.UUID               `json:"uuid"`
-	Version       int64                   `json:"version"`
-	Name          string                  `json:"name"`
-	Domains       []string                `json:"domains"`
-	AdminUUIDs    []uuid.UUID             `json:"admin_uuids"`
-	Memberships   []membership.Membership `json:"memberships"`
-	Status        Status                  `json:"status"`
-	CreatedAt     time.Time               `json:"created_at"`
-	UpdatedAt     time.Time               `json:"updated_at"`
-	CreatedByUUID uuid.UUID               `json:"created_by_uuid"`
-	UpdatedByUUID uuid.UUID               `json:"updated_by_uuid"`
+	UUID          uuid.UUID   `json:"uuid"`
+	Version       int64       `json:"version"`
+	Name          string      `json:"name"`
+	Domains       []string    `json:"domains"`
+	AdminUUIDs    []uuid.UUID `json:"admin_uuids"`
+	Status        Status      `json:"status"`
+	CreatedAt     time.Time   `json:"created_at"`
+	UpdatedAt     time.Time   `json:"updated_at"`
+	CreatedByUUID uuid.UUID   `json:"created_by_uuid"`
+	UpdatedByUUID uuid.UUID   `json:"updated_by_uuid"`
 }
 
 func (e Organization) String() string {
@@ -55,7 +53,6 @@ func (e Organization) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["name"] = types.StringFieldType
 	res["domains"] = types.ArrayFieldType
 	res["admin_uuids"] = types.ArrayFieldType
-	res["memberships"] = types.MultiDependantEntityFieldType
 	res["status"] = types.SingleEnumFieldType
 	res["created_at"] = types.TimestampFieldType
 	res["updated_at"] = types.TimestampFieldType
@@ -67,7 +64,6 @@ func (e Organization) FieldIdentfierToTypeMap() map[string]types.FieldType {
 func (e Organization) DependantFieldIdentifierToTypeMap() map[string]map[string]types.FieldType {
 	res := make(map[string]map[string]types.FieldType)
 
-	res["memberships"] = membership.Membership{}.FieldIdentfierToTypeMap()
 	return res
 }
 
@@ -134,7 +130,6 @@ func NewOrganizationWithRandomValues() Organization {
 		Name:          randomvalues.GetRandomStringValue(),
 		Domains:       []string{},
 		AdminUUIDs:    []uuid.UUID{},
-		Memberships:   membership.NewMembershipSliceWithRandomValues(rand.Intn(10)),
 		Status:        randomvalues.GetRandomOptionValue[Status](2),
 		CreatedAt:     randomvalues.GetRandomTimeValue(),
 		UpdatedAt:     randomvalues.GetRandomTimeValue(),

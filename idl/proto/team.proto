@@ -12,7 +12,6 @@ import "connection.proto";
 import "entity.proto";
 import "enviorment.proto";
 import "google/protobuf/timestamp.proto";
-import "membership.proto";
 import "object_store.proto";
 import "review_config.proto";
 import "store.proto";
@@ -23,17 +22,16 @@ message Team {
     string name = 3;
     repeated Enviorment enviorments = 4;
     repeated ReviewConfig review_configs = 5;
-    repeated Membership memberships = 6;
-    repeated Store stores = 7;
-    repeated Connection connections = 8;
-    repeated ObjectStore object_stores = 9;
-    string organization_uuid = 10;
-    Entity default_entity = 11;
-    TeamStatus status = 12;
-    google.protobuf.Timestamp created_at = 13;
-    google.protobuf.Timestamp updated_at = 14;
-    string created_by_uuid = 15;
-    string updated_by_uuid = 16;    
+    repeated Store stores = 6;
+    repeated Connection connections = 7;
+    repeated ObjectStore object_stores = 8;
+    string organization_uuid = 9;
+    Entity default_entity = 10;
+    TeamStatus status = 11;
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+    string created_by_uuid = 14;
+    string updated_by_uuid = 15;    
 }
 
 enum TeamStatus { 

@@ -11,7 +11,6 @@ import (
 	"github.com/nuzur/nem/core/entity/connection"
 	"github.com/nuzur/nem/core/entity/entity"
 	"github.com/nuzur/nem/core/entity/enviorment"
-	"github.com/nuzur/nem/core/entity/membership"
 	"github.com/nuzur/nem/core/entity/object_store"
 	"github.com/nuzur/nem/core/entity/review_config"
 	"github.com/nuzur/nem/core/entity/store"
@@ -154,8 +153,6 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Team
 
 			ReviewConfigs: review_config.ReviewConfigSliceToJSON(req.Team.ReviewConfigs),
 
-			Memberships: membership.MembershipSliceToJSON(req.Team.Memberships),
-
 			Stores: store.StoreSliceToJSON(req.Team.Stores),
 
 			Connections: connection.ConnectionSliceToJSON(req.Team.Connections),
@@ -189,8 +186,6 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Team
 	res.Enviorments = enviorment.EnviormentSliceToJSON(req.Team.Enviorments)
 
 	res.ReviewConfigs = review_config.ReviewConfigSliceToJSON(req.Team.ReviewConfigs)
-
-	res.Memberships = membership.MembershipSliceToJSON(req.Team.Memberships)
 
 	res.Stores = store.StoreSliceToJSON(req.Team.Stores)
 

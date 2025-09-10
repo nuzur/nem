@@ -35,6 +35,8 @@ import "user_project_version.proto";
 
 import "user_project.proto";
 
+import "membership.proto";
+
 
 service Nem {    
     
@@ -115,6 +117,12 @@ service Nem {
     rpc CreateUserProject(CreateUserProjectRequest) returns (UserProject) {}
     rpc UpdateUserProject(UpdateUserProjectRequest) returns (UserProject) {}
     // user_project end
+    
+    // membership start
+    rpc ListMemberships(ListMembershipsRequest) returns (ListMembershipsResponse){}
+    rpc CreateMembership(CreateMembershipRequest) returns (Membership) {}
+    rpc UpdateMembership(UpdateMembershipRequest) returns (Membership) {}
+    // membership end
     
 }
 
@@ -612,3 +620,41 @@ message UpdateUserProjectRequest {
     google.protobuf.FieldMask update_mask = 2;
 }
 // user_project end
+
+// membership start
+message ListMembershipsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListMembershipsResponse {
+    repeated Membership memberships = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateMembershipRequest {
+    Membership membership = 1;
+}
+
+message UpdateMembershipRequest {
+   
+    Membership membership = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// membership end

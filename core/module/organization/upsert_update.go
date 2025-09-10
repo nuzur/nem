@@ -8,8 +8,6 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 	"github.com/nuzur/nem/monitoring"
 
-	"github.com/nuzur/nem/core/entity/membership"
-
 	"github.com/nuzur/nem/custom"
 
 	"time"
@@ -148,8 +146,6 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Orga
 
 			AdminUUIDs: mapper.SliceToJSON(req.Organization.AdminUUIDs),
 
-			Memberships: membership.MembershipSliceToJSON(req.Organization.Memberships),
-
 			Status: req.Organization.Status.ToInt64(),
 
 			CreatedAt: existing.CreatedAt,
@@ -173,8 +169,6 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Orga
 	res.Domains = mapper.SliceToJSON(req.Organization.Domains)
 
 	res.AdminUUIDs = mapper.SliceToJSON(req.Organization.AdminUUIDs)
-
-	res.Memberships = membership.MembershipSliceToJSON(req.Organization.Memberships)
 
 	res.Status = req.Organization.Status.ToInt64()
 

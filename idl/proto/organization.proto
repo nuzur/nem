@@ -9,7 +9,6 @@ package nem;
 
 
 import "google/protobuf/timestamp.proto";
-import "membership.proto";
 
 message Organization {  
     string uuid = 1;
@@ -17,12 +16,11 @@ message Organization {
     string name = 3;
     repeated string domains = 4;
     repeated string admin_uuids = 5;
-    repeated Membership memberships = 6;
-    OrganizationStatus status = 7;
-    google.protobuf.Timestamp created_at = 8;
-    google.protobuf.Timestamp updated_at = 9;
-    string created_by_uuid = 10;
-    string updated_by_uuid = 11;    
+    OrganizationStatus status = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+    string created_by_uuid = 9;
+    string updated_by_uuid = 10;    
 }
 
 enum OrganizationStatus { 

@@ -58,6 +58,9 @@ const (
 	Nem_ListUserProjects_FullMethodName         = "/nem.Nem/ListUserProjects"
 	Nem_CreateUserProject_FullMethodName        = "/nem.Nem/CreateUserProject"
 	Nem_UpdateUserProject_FullMethodName        = "/nem.Nem/UpdateUserProject"
+	Nem_ListMemberships_FullMethodName          = "/nem.Nem/ListMemberships"
+	Nem_CreateMembership_FullMethodName         = "/nem.Nem/CreateMembership"
+	Nem_UpdateMembership_FullMethodName         = "/nem.Nem/UpdateMembership"
 )
 
 // NemClient is the client API for Nem service.
@@ -116,6 +119,10 @@ type NemClient interface {
 	ListUserProjects(ctx context.Context, in *ListUserProjectsRequest, opts ...grpc.CallOption) (*ListUserProjectsResponse, error)
 	CreateUserProject(ctx context.Context, in *CreateUserProjectRequest, opts ...grpc.CallOption) (*UserProject, error)
 	UpdateUserProject(ctx context.Context, in *UpdateUserProjectRequest, opts ...grpc.CallOption) (*UserProject, error)
+	// membership start
+	ListMemberships(ctx context.Context, in *ListMembershipsRequest, opts ...grpc.CallOption) (*ListMembershipsResponse, error)
+	CreateMembership(ctx context.Context, in *CreateMembershipRequest, opts ...grpc.CallOption) (*Membership, error)
+	UpdateMembership(ctx context.Context, in *UpdateMembershipRequest, opts ...grpc.CallOption) (*Membership, error)
 }
 
 type nemClient struct {
@@ -516,6 +523,36 @@ func (c *nemClient) UpdateUserProject(ctx context.Context, in *UpdateUserProject
 	return out, nil
 }
 
+func (c *nemClient) ListMemberships(ctx context.Context, in *ListMembershipsRequest, opts ...grpc.CallOption) (*ListMembershipsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListMembershipsResponse)
+	err := c.cc.Invoke(ctx, Nem_ListMemberships_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateMembership(ctx context.Context, in *CreateMembershipRequest, opts ...grpc.CallOption) (*Membership, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Membership)
+	err := c.cc.Invoke(ctx, Nem_CreateMembership_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateMembership(ctx context.Context, in *UpdateMembershipRequest, opts ...grpc.CallOption) (*Membership, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Membership)
+	err := c.cc.Invoke(ctx, Nem_UpdateMembership_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NemServer is the server API for Nem service.
 // All implementations must embed UnimplementedNemServer
 // for forward compatibility.
@@ -572,6 +609,10 @@ type NemServer interface {
 	ListUserProjects(context.Context, *ListUserProjectsRequest) (*ListUserProjectsResponse, error)
 	CreateUserProject(context.Context, *CreateUserProjectRequest) (*UserProject, error)
 	UpdateUserProject(context.Context, *UpdateUserProjectRequest) (*UserProject, error)
+	// membership start
+	ListMemberships(context.Context, *ListMembershipsRequest) (*ListMembershipsResponse, error)
+	CreateMembership(context.Context, *CreateMembershipRequest) (*Membership, error)
+	UpdateMembership(context.Context, *UpdateMembershipRequest) (*Membership, error)
 	mustEmbedUnimplementedNemServer()
 }
 
@@ -698,6 +739,15 @@ func (UnimplementedNemServer) CreateUserProject(context.Context, *CreateUserProj
 }
 func (UnimplementedNemServer) UpdateUserProject(context.Context, *UpdateUserProjectRequest) (*UserProject, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserProject not implemented")
+}
+func (UnimplementedNemServer) ListMemberships(context.Context, *ListMembershipsRequest) (*ListMembershipsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMemberships not implemented")
+}
+func (UnimplementedNemServer) CreateMembership(context.Context, *CreateMembershipRequest) (*Membership, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateMembership not implemented")
+}
+func (UnimplementedNemServer) UpdateMembership(context.Context, *UpdateMembershipRequest) (*Membership, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMembership not implemented")
 }
 func (UnimplementedNemServer) mustEmbedUnimplementedNemServer() {}
 func (UnimplementedNemServer) testEmbeddedByValue()             {}
@@ -1422,6 +1472,60 @@ func _Nem_UpdateUserProject_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Nem_ListMemberships_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMembershipsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListMemberships(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListMemberships_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListMemberships(ctx, req.(*ListMembershipsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateMembership_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateMembershipRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateMembership(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateMembership_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateMembership(ctx, req.(*CreateMembershipRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateMembership_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMembershipRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateMembership(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateMembership_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateMembership(ctx, req.(*UpdateMembershipRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Nem_ServiceDesc is the grpc.ServiceDesc for Nem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1584,6 +1688,18 @@ var Nem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUserProject",
 			Handler:    _Nem_UpdateUserProject_Handler,
+		},
+		{
+			MethodName: "ListMemberships",
+			Handler:    _Nem_ListMemberships_Handler,
+		},
+		{
+			MethodName: "CreateMembership",
+			Handler:    _Nem_CreateMembership_Handler,
+		},
+		{
+			MethodName: "UpdateMembership",
+			Handler:    _Nem_UpdateMembership_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

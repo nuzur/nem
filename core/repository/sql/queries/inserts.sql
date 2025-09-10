@@ -1,15 +1,15 @@
 
 -- name: InsertTeam :execresult
 INSERT INTO team
-(uuid,version,name,enviorments,review_configs,memberships,stores,connections,object_stores,organization_uuid,default_entity,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,name,enviorments,review_configs,stores,connections,object_stores,organization_uuid,default_entity,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertOrganization :execresult
 INSERT INTO organization
-(uuid,version,name,domains,admin_uuids,memberships,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,name,domains,admin_uuids,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertProject :execresult
 INSERT INTO project
@@ -76,3 +76,9 @@ INSERT INTO user_project
 (uuid,user_uuid,user_email,project_uuid,role,review_required_structure,review_required_data,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?);
+
+-- name: InsertMembership :execresult
+INSERT INTO membership
+(uuid,owner_uuid,type,start_date,billing_metadata,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+VALUES
+(?,?,?,?,?,?,?,?,?,?);

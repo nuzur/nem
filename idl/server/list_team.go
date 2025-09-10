@@ -181,26 +181,6 @@ func teamDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("review_config.updated_by_uuid", filtering.TypeString),
 
-		//membership
-
-		filtering.DeclareIdent("membership.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("membership.owner_uuid", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("membership.type", pb.MembershipType(0).Type()),
-
-		filtering.DeclareIdent("membership.metadata", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("membership.status", pb.MembershipStatus(0).Type()),
-
-		filtering.DeclareIdent("membership.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("membership.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("membership.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("membership.updated_by_uuid", filtering.TypeString),
-
 		//store
 
 		filtering.DeclareIdent("store.uuid", filtering.TypeString),

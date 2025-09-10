@@ -7,7 +7,6 @@ import (
 	"github.com/nuzur/nem/core/entity/mapper"
 
 	"github.com/gofrs/uuid"
-	"github.com/nuzur/nem/core/entity/membership"
 )
 
 func mapModelsToEntities(models []nemdb.Organization) []main_entity.Organization {
@@ -25,7 +24,6 @@ func mapModelToEntity(model nemdb.Organization) main_entity.Organization {
 		Name:          model.Name,
 		Domains:       mapper.JSONToStringSlice(model.Domains),
 		AdminUUIDs:    mapper.JSONToUUIDSlice(model.AdminUUIDs),
-		Memberships:   membership.MembershipSliceFromJSON(model.Memberships),
 		Status:        main_entity.Status(model.Status),
 		CreatedAt:     model.CreatedAt,
 		UpdatedAt:     model.UpdatedAt,

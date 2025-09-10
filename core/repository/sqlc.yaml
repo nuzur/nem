@@ -13,6 +13,7 @@ sql:
           access_type: AccessType
           admin_uuids: AdminUUIDs
           base_version_uuid: BaseVersionUUID
+          billing_metadata: BillingMetadata
           change_type: ChangeType
           configuration_entity: ConfigurationEntity
           connections: Connections
@@ -42,7 +43,6 @@ sql:
           identifier: Identifier
           last_name: LastName
           locale: Locale
-          memberships: Memberships
           metadata: Metadata
           name: Name
           object_stores: ObjectStores
@@ -63,6 +63,7 @@ sql:
           reviews: Reviews
           role: Role
           services: Services
+          start_date: StartDate
           status: Status
           status_msg: StatusMsg
           stores: Stores

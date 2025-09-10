@@ -7,7 +7,6 @@ import (
 	"github.com/nuzur/nem/core/entity/connection"
 	"github.com/nuzur/nem/core/entity/entity"
 	"github.com/nuzur/nem/core/entity/enviorment"
-	"github.com/nuzur/nem/core/entity/membership"
 	"github.com/nuzur/nem/core/entity/object_store"
 	"github.com/nuzur/nem/core/entity/review_config"
 	"github.com/nuzur/nem/core/entity/store"
@@ -28,7 +27,6 @@ type Team struct {
 	Name             string                       `json:"name"`
 	Enviorments      []enviorment.Enviorment      `json:"enviorments"`
 	ReviewConfigs    []review_config.ReviewConfig `json:"review_configs"`
-	Memberships      []membership.Membership      `json:"memberships"`
 	Stores           []store.Store                `json:"stores"`
 	Connections      []connection.Connection      `json:"connections"`
 	ObjectStores     []object_store.ObjectStore   `json:"object_stores"`
@@ -66,7 +64,6 @@ func (e Team) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["name"] = types.StringFieldType
 	res["enviorments"] = types.MultiDependantEntityFieldType
 	res["review_configs"] = types.MultiDependantEntityFieldType
-	res["memberships"] = types.MultiDependantEntityFieldType
 	res["stores"] = types.MultiDependantEntityFieldType
 	res["connections"] = types.MultiDependantEntityFieldType
 	res["object_stores"] = types.MultiDependantEntityFieldType
@@ -85,7 +82,6 @@ func (e Team) DependantFieldIdentifierToTypeMap() map[string]map[string]types.Fi
 
 	res["enviorments"] = enviorment.Enviorment{}.FieldIdentfierToTypeMap()
 	res["review_configs"] = review_config.ReviewConfig{}.FieldIdentfierToTypeMap()
-	res["memberships"] = membership.Membership{}.FieldIdentfierToTypeMap()
 	res["stores"] = store.Store{}.FieldIdentfierToTypeMap()
 	res["connections"] = connection.Connection{}.FieldIdentfierToTypeMap()
 	res["object_stores"] = object_store.ObjectStore{}.FieldIdentfierToTypeMap()
@@ -154,7 +150,6 @@ func NewTeamWithRandomValues() Team {
 		Name:             randomvalues.GetRandomStringValue(),
 		Enviorments:      enviorment.NewEnviormentSliceWithRandomValues(rand.Intn(10)),
 		ReviewConfigs:    review_config.NewReviewConfigSliceWithRandomValues(rand.Intn(10)),
-		Memberships:      membership.NewMembershipSliceWithRandomValues(rand.Intn(10)),
 		Stores:           store.NewStoreSliceWithRandomValues(rand.Intn(10)),
 		Connections:      connection.NewConnectionSliceWithRandomValues(rand.Intn(10)),
 		ObjectStores:     object_store.NewObjectStoreSliceWithRandomValues(rand.Intn(10)),

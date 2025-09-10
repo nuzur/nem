@@ -16,15 +16,16 @@ import (
 )
 
 type Membership struct {
-	UUID          uuid.UUID `json:"uuid"`
-	OwnerUUID     uuid.UUID `json:"owner_uuid"`
-	Type          Type      `json:"type"`
-	Metadata      *string   `json:"metadata"`
-	Status        Status    `json:"status"`
-	CreatedAt     time.Time `json:"created_at"`
-	UpdatedAt     time.Time `json:"updated_at"`
-	CreatedByUUID uuid.UUID `json:"created_by_uuid"`
-	UpdatedByUUID uuid.UUID `json:"updated_by_uuid"`
+	UUID            uuid.UUID `json:"uuid"`
+	OwnerUUID       uuid.UUID `json:"owner_uuid"`
+	Type            Type      `json:"type"`
+	StartDate       time.Time `json:"start_date"`
+	BillingMetadata string    `json:"billing_metadata"`
+	Status          Status    `json:"status"`
+	CreatedAt       time.Time `json:"created_at"`
+	UpdatedAt       time.Time `json:"updated_at"`
+	CreatedByUUID   uuid.UUID `json:"created_by_uuid"`
+	UpdatedByUUID   uuid.UUID `json:"updated_by_uuid"`
 }
 
 func (e Membership) String() string {
@@ -36,18 +37,33 @@ func (e Membership) EntityIdentifier() string {
 	return "membership"
 }
 
+func (e Membership) PrimaryKeyIdentifier() string {
+	return "uuid"
+}
+
+func (e Membership) PrimaryKeyValue() string {
+	return e.UUID.String()
+}
+
 func (e Membership) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 
 	res["uuid"] = types.UUIDFieldType
 	res["owner_uuid"] = types.UUIDFieldType
 	res["type"] = types.SingleEnumFieldType
-	res["metadata"] = types.StringFieldType
+	res["start_date"] = types.TimestampFieldType
+	res["billing_metadata"] = types.RawJSONFieldType
 	res["status"] = types.SingleEnumFieldType
 	res["created_at"] = types.TimestampFieldType
 	res["updated_at"] = types.TimestampFieldType
 	res["created_by_uuid"] = types.UUIDFieldType
 	res["updated_by_uuid"] = types.UUIDFieldType
+	return res
+}
+
+func (e Membership) DependantFieldIdentifierToTypeMap() map[string]map[string]types.FieldType {
+	res := make(map[string]map[string]types.FieldType)
+
 	return res
 }
 
@@ -58,7 +74,7 @@ func (e Membership) ArrayFieldIdentifierToType() map[string]types.FieldType {
 }
 
 func (e Membership) IsDependant() bool {
-	return true
+	return false
 }
 
 func MembershipFromJSON(data json.RawMessage) Membership {
@@ -107,15 +123,16 @@ func MembershipSliceToJSON(e []Membership) json.RawMessage {
 func NewMembershipWithRandomValues() Membership {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return Membership{
-		UUID:          randomvalues.GetRandomUUIDValue(),
-		OwnerUUID:     randomvalues.GetRandomUUIDValue(),
-		Type:          randomvalues.GetRandomOptionValue[Type](4),
-		Metadata:      randomvalues.GetRandomStringValuePtr(),
-		Status:        randomvalues.GetRandomOptionValue[Status](2),
-		CreatedAt:     randomvalues.GetRandomTimeValue(),
-		UpdatedAt:     randomvalues.GetRandomTimeValue(),
-		CreatedByUUID: randomvalues.GetRandomUUIDValue(),
-		UpdatedByUUID: randomvalues.GetRandomUUIDValue(),
+		UUID:            randomvalues.GetRandomUUIDValue(),
+		OwnerUUID:       randomvalues.GetRandomUUIDValue(),
+		Type:            randomvalues.GetRandomOptionValue[Type](1),
+		StartDate:       randomvalues.GetRandomTimeValue(),
+		BillingMetadata: randomvalues.GetRandomRawJSONValue(),
+		Status:          randomvalues.GetRandomOptionValue[Status](2),
+		CreatedAt:       randomvalues.GetRandomTimeValue(),
+		UpdatedAt:       randomvalues.GetRandomTimeValue(),
+		CreatedByUUID:   randomvalues.GetRandomUUIDValue(),
+		UpdatedByUUID:   randomvalues.GetRandomUUIDValue(),
 	}
 }
 

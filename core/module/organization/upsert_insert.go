@@ -12,8 +12,6 @@ import (
 
 	"github.com/nuzur/nem/custom"
 
-	"github.com/nuzur/nem/core/entity/membership"
-
 	"time"
 
 	"github.com/nuzur/nem/core/entity/mapper"
@@ -107,8 +105,6 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertOrganiz
 		Domains: mapper.SliceToJSON(req.Organization.Domains),
 
 		AdminUUIDs: mapper.SliceToJSON(req.Organization.AdminUUIDs),
-
-		Memberships: membership.MembershipSliceToJSON(req.Organization.Memberships),
 
 		Status: req.Organization.Status.ToInt64(),
 

@@ -14,12 +14,13 @@ message Membership {
     string uuid = 1;
     string owner_uuid = 2;
     MembershipType type = 3;
-    string metadata = 4;
-    MembershipStatus status = 5;
-    google.protobuf.Timestamp created_at = 6;
-    google.protobuf.Timestamp updated_at = 7;
-    string created_by_uuid = 8;
-    string updated_by_uuid = 9;    
+    google.protobuf.Timestamp start_date = 4;
+    string billing_metadata = 5;
+    MembershipStatus status = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+    string created_by_uuid = 9;
+    string updated_by_uuid = 10;    
 }
 
 enum MembershipStatus { 
@@ -30,8 +31,5 @@ enum MembershipStatus {
 
 enum MembershipType { 
     MEMBERSHIP_TYPE_INVALID = 0;
-    MEMBERSHIP_TYPE_FREE = 1;
-    MEMBERSHIP_TYPE_SMALL = 2;
-    MEMBERSHIP_TYPE_MEDIUM = 3;
-    MEMBERSHIP_TYPE_ENTERPRISE = 4;
+    MEMBERSHIP_TYPE_PRO = 1;
 }
