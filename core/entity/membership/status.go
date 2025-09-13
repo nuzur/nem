@@ -10,7 +10,11 @@ type Status int64
 
 const (
 	STATUS_INVALID Status = iota
+	STATUS_TRIAL
 	STATUS_ACTIVE
+	STATUS_PAST_DUE
+	STATUS_CANCELED
+	STATUS_UNPAID
 	STATUS_DISABLED
 )
 
@@ -20,8 +24,16 @@ func (e Status) ToInt64() int64 {
 
 func StatusFromString(in string) Status {
 	switch in {
+	case "trial":
+		return STATUS_TRIAL
 	case "active":
 		return STATUS_ACTIVE
+	case "past_due":
+		return STATUS_PAST_DUE
+	case "canceled":
+		return STATUS_CANCELED
+	case "unpaid":
+		return STATUS_UNPAID
 	case "disabled":
 		return STATUS_DISABLED
 	}
@@ -37,8 +49,16 @@ func StatusFromPointerString(in *string) Status {
 
 func (e Status) String() string {
 	switch e {
+	case STATUS_TRIAL:
+		return "trial"
 	case STATUS_ACTIVE:
 		return "active"
+	case STATUS_PAST_DUE:
+		return "past_due"
+	case STATUS_CANCELED:
+		return "canceled"
+	case STATUS_UNPAID:
+		return "unpaid"
 	case STATUS_DISABLED:
 		return "disabled"
 	}

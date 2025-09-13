@@ -26,21 +26,33 @@ type MembershipStatus int32
 
 const (
 	MembershipStatus_MEMBERSHIP_STATUS_INVALID  MembershipStatus = 0
-	MembershipStatus_MEMBERSHIP_STATUS_ACTIVE   MembershipStatus = 1
-	MembershipStatus_MEMBERSHIP_STATUS_DISABLED MembershipStatus = 2
+	MembershipStatus_MEMBERSHIP_STATUS_TRIAL    MembershipStatus = 1
+	MembershipStatus_MEMBERSHIP_STATUS_ACTIVE   MembershipStatus = 2
+	MembershipStatus_MEMBERSHIP_STATUS_PAST_DUE MembershipStatus = 3
+	MembershipStatus_MEMBERSHIP_STATUS_CANCELED MembershipStatus = 4
+	MembershipStatus_MEMBERSHIP_STATUS_UNPAID   MembershipStatus = 5
+	MembershipStatus_MEMBERSHIP_STATUS_DISABLED MembershipStatus = 6
 )
 
 // Enum value maps for MembershipStatus.
 var (
 	MembershipStatus_name = map[int32]string{
 		0: "MEMBERSHIP_STATUS_INVALID",
-		1: "MEMBERSHIP_STATUS_ACTIVE",
-		2: "MEMBERSHIP_STATUS_DISABLED",
+		1: "MEMBERSHIP_STATUS_TRIAL",
+		2: "MEMBERSHIP_STATUS_ACTIVE",
+		3: "MEMBERSHIP_STATUS_PAST_DUE",
+		4: "MEMBERSHIP_STATUS_CANCELED",
+		5: "MEMBERSHIP_STATUS_UNPAID",
+		6: "MEMBERSHIP_STATUS_DISABLED",
 	}
 	MembershipStatus_value = map[string]int32{
 		"MEMBERSHIP_STATUS_INVALID":  0,
-		"MEMBERSHIP_STATUS_ACTIVE":   1,
-		"MEMBERSHIP_STATUS_DISABLED": 2,
+		"MEMBERSHIP_STATUS_TRIAL":    1,
+		"MEMBERSHIP_STATUS_ACTIVE":   2,
+		"MEMBERSHIP_STATUS_PAST_DUE": 3,
+		"MEMBERSHIP_STATUS_CANCELED": 4,
+		"MEMBERSHIP_STATUS_UNPAID":   5,
+		"MEMBERSHIP_STATUS_DISABLED": 6,
 	}
 )
 
@@ -254,11 +266,15 @@ const file_membership_proto_rawDesc = "" +
 	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
 	"\x0fcreated_by_uuid\x18\t \x01(\tR\rcreatedByUuid\x12&\n" +
 	"\x0fupdated_by_uuid\x18\n" +
-	" \x01(\tR\rupdatedByUuid*o\n" +
+	" \x01(\tR\rupdatedByUuid*\xea\x01\n" +
 	"\x10MembershipStatus\x12\x1d\n" +
-	"\x19MEMBERSHIP_STATUS_INVALID\x10\x00\x12\x1c\n" +
-	"\x18MEMBERSHIP_STATUS_ACTIVE\x10\x01\x12\x1e\n" +
-	"\x1aMEMBERSHIP_STATUS_DISABLED\x10\x02*F\n" +
+	"\x19MEMBERSHIP_STATUS_INVALID\x10\x00\x12\x1b\n" +
+	"\x17MEMBERSHIP_STATUS_TRIAL\x10\x01\x12\x1c\n" +
+	"\x18MEMBERSHIP_STATUS_ACTIVE\x10\x02\x12\x1e\n" +
+	"\x1aMEMBERSHIP_STATUS_PAST_DUE\x10\x03\x12\x1e\n" +
+	"\x1aMEMBERSHIP_STATUS_CANCELED\x10\x04\x12\x1c\n" +
+	"\x18MEMBERSHIP_STATUS_UNPAID\x10\x05\x12\x1e\n" +
+	"\x1aMEMBERSHIP_STATUS_DISABLED\x10\x06*F\n" +
 	"\x0eMembershipType\x12\x1b\n" +
 	"\x17MEMBERSHIP_TYPE_INVALID\x10\x00\x12\x17\n" +
 	"\x13MEMBERSHIP_TYPE_PRO\x10\x01B1\n" +

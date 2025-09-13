@@ -128,7 +128,7 @@ func NewMembershipWithRandomValues() Membership {
 		Type:            randomvalues.GetRandomOptionValue[Type](1),
 		StartDate:       randomvalues.GetRandomTimeValue(),
 		BillingMetadata: randomvalues.GetRandomRawJSONValue(),
-		Status:          randomvalues.GetRandomOptionValue[Status](2),
+		Status:          randomvalues.GetRandomOptionValue[Status](6),
 		CreatedAt:       randomvalues.GetRandomTimeValue(),
 		UpdatedAt:       randomvalues.GetRandomTimeValue(),
 		CreatedByUUID:   randomvalues.GetRandomUUIDValue(),
