@@ -3,6 +3,7 @@ package keycloak
 import (
 	"context"
 	"errors"
+
 	"github.com/Nerzal/gocloak/v13"
 	"github.com/gofrs/uuid"
 	base "github.com/nuzur/nem/auth"
@@ -20,6 +21,10 @@ func New(params Params) (base.Interface, error) {
 		client: gocloak.NewClient(config.Hostname),
 	}
 	return &i, nil
+}
+
+func (i *Implementation) GetClient() *gocloak.GoCloak {
+	return i.client
 }
 
 func (i *Implementation) GetUserID(ctx context.Context, token string) (uuid.UUID, error) {
@@ -57,4 +62,20 @@ func (i *Implementation) GetUserByEmail(ctx context.Context, email string) (*goc
 		return nil, errors.New("user not found")
 	}
 	return res[0], nil
+}
+
+func (i *Implementation) CreateUser(ctx context.Context, user gocloak.User) (string, error) {
+	jwt, err := i.client.LoginClient(ctx, i.config.ClientID, i.config.ClientSecret, i.config.Realm)
+	if err != nil {
+		return "", err
+	}
+	return i.client.CreateUser(ctx, jwt.AccessToken, i.config.Realm, user)
+}
+
+func (i *Implementation) UpdateUser(ctx context.Context, user gocloak.User) error {
+	jwt, err := i.client.LoginClient(ctx, i.config.ClientID, i.config.ClientSecret, i.config.Realm)
+	if err != nil {
+		return err
+	}
+	return i.client.UpdateUser(ctx, jwt.AccessToken, i.config.Realm, user)
 }
