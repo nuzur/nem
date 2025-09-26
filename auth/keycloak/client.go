@@ -3,7 +3,6 @@ package keycloak
 import (
 	"context"
 	"errors"
-
 	"github.com/Nerzal/gocloak/v13"
 	"github.com/gofrs/uuid"
 	base "github.com/nuzur/nem/auth"
