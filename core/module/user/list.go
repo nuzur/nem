@@ -7,6 +7,7 @@ import (
 	"github.com/nuzur/nem/core/module/user/types"
 	repogen "github.com/nuzur/nem/core/repository/gen"
 	"github.com/nuzur/nem/monitoring"
+	"slices"
 )
 
 func (m *module) List(ctx context.Context,
@@ -70,20 +71,177 @@ func (m *module) List(ctx context.Context,
 	var items []repogen.User
 	for rows.Next() {
 		var i repogen.User
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Identifier,
-			&i.Name,
-			&i.LastName,
-			&i.Email,
-			&i.UserType,
-			&i.CountryIos2,
-			&i.Locale,
-			&i.Metadata,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-		); err != nil {
+		fields := []any{}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "uuid") {
+				fields = append(fields, &i.UUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "uuid") {
+				fields = append(fields, &i.UUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.UUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "identifier") {
+				fields = append(fields, &i.Identifier)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "identifier") {
+				fields = append(fields, &i.Identifier)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.Identifier)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "name") {
+				fields = append(fields, &i.Name)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "name") {
+				fields = append(fields, &i.Name)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.Name)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "last_name") {
+				fields = append(fields, &i.LastName)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "last_name") {
+				fields = append(fields, &i.LastName)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.LastName)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "email") {
+				fields = append(fields, &i.Email)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "email") {
+				fields = append(fields, &i.Email)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.Email)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "user_type") {
+				fields = append(fields, &i.UserType)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "user_type") {
+				fields = append(fields, &i.UserType)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.UserType)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "country_ios2") {
+				fields = append(fields, &i.CountryIos2)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "country_ios2") {
+				fields = append(fields, &i.CountryIos2)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.CountryIos2)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "locale") {
+				fields = append(fields, &i.Locale)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "locale") {
+				fields = append(fields, &i.Locale)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.Locale)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "metadata") {
+				fields = append(fields, &i.Metadata)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "metadata") {
+				fields = append(fields, &i.Metadata)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.Metadata)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "status") {
+				fields = append(fields, &i.Status)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "status") {
+				fields = append(fields, &i.Status)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.Status)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "created_at") {
+				fields = append(fields, &i.CreatedAt)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "created_at") {
+				fields = append(fields, &i.CreatedAt)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.CreatedAt)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "updated_at") {
+				fields = append(fields, &i.UpdatedAt)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "updated_at") {
+				fields = append(fields, &i.UpdatedAt)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.UpdatedAt)
+		}
+
+		if err := rows.Scan(fields...); err != nil {
 			m.monitoring.Emit(monitoring.EmitRequest{
 				ActionIdentifier: "list_user_scan",
 				Message:          "error in scanning rows for ListUser",

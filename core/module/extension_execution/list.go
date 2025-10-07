@@ -7,6 +7,7 @@ import (
 	"github.com/nuzur/nem/core/module/extension_execution/types"
 	repogen "github.com/nuzur/nem/core/repository/gen"
 	"github.com/nuzur/nem/monitoring"
+	"slices"
 )
 
 func (m *module) List(ctx context.Context,
@@ -70,20 +71,177 @@ func (m *module) List(ctx context.Context,
 	var items []repogen.ExtensionExecution
 	for rows.Next() {
 		var i repogen.ExtensionExecution
-		if err := rows.Scan(
-			&i.UUID,
-			&i.ExtensionUUID,
-			&i.ExtensionVersionUUID,
-			&i.ProjectExtensionUUID,
-			&i.ProjectUUID,
-			&i.ProjectVersionUUID,
-			&i.ExecutedByUUID,
-			&i.Metadata,
-			&i.Status,
-			&i.StatusMsg,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-		); err != nil {
+		fields := []any{}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "uuid") {
+				fields = append(fields, &i.UUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "uuid") {
+				fields = append(fields, &i.UUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.UUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "extension_uuid") {
+				fields = append(fields, &i.ExtensionUUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "extension_uuid") {
+				fields = append(fields, &i.ExtensionUUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.ExtensionUUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "extension_version_uuid") {
+				fields = append(fields, &i.ExtensionVersionUUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "extension_version_uuid") {
+				fields = append(fields, &i.ExtensionVersionUUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.ExtensionVersionUUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "project_extension_uuid") {
+				fields = append(fields, &i.ProjectExtensionUUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "project_extension_uuid") {
+				fields = append(fields, &i.ProjectExtensionUUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.ProjectExtensionUUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "project_uuid") {
+				fields = append(fields, &i.ProjectUUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "project_uuid") {
+				fields = append(fields, &i.ProjectUUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.ProjectUUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "project_version_uuid") {
+				fields = append(fields, &i.ProjectVersionUUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "project_version_uuid") {
+				fields = append(fields, &i.ProjectVersionUUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.ProjectVersionUUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "executed_by_uuid") {
+				fields = append(fields, &i.ExecutedByUUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "executed_by_uuid") {
+				fields = append(fields, &i.ExecutedByUUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.ExecutedByUUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "metadata") {
+				fields = append(fields, &i.Metadata)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "metadata") {
+				fields = append(fields, &i.Metadata)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.Metadata)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "status") {
+				fields = append(fields, &i.Status)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "status") {
+				fields = append(fields, &i.Status)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.Status)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "status_msg") {
+				fields = append(fields, &i.StatusMsg)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "status_msg") {
+				fields = append(fields, &i.StatusMsg)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.StatusMsg)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "created_at") {
+				fields = append(fields, &i.CreatedAt)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "created_at") {
+				fields = append(fields, &i.CreatedAt)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.CreatedAt)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "updated_at") {
+				fields = append(fields, &i.UpdatedAt)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "updated_at") {
+				fields = append(fields, &i.UpdatedAt)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.UpdatedAt)
+		}
+
+		if err := rows.Scan(fields...); err != nil {
 			m.monitoring.Emit(monitoring.EmitRequest{
 				ActionIdentifier: "list_extension_execution_scan",
 				Message:          "error in scanning rows for ListExtensionExecution",

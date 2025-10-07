@@ -7,6 +7,7 @@ import (
 	"github.com/nuzur/nem/core/module/user_project_version/types"
 	repogen "github.com/nuzur/nem/core/repository/gen"
 	"github.com/nuzur/nem/monitoring"
+	"slices"
 )
 
 func (m *module) List(ctx context.Context,
@@ -70,18 +71,149 @@ func (m *module) List(ctx context.Context,
 	var items []repogen.UserProjectVersion
 	for rows.Next() {
 		var i repogen.UserProjectVersion
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.ProjectVersionUUID,
-			&i.UserUUID,
-			&i.Data,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
+		fields := []any{}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "uuid") {
+				fields = append(fields, &i.UUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "uuid") {
+				fields = append(fields, &i.UUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.UUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "version") {
+				fields = append(fields, &i.Version)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "version") {
+				fields = append(fields, &i.Version)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.Version)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "project_version_uuid") {
+				fields = append(fields, &i.ProjectVersionUUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "project_version_uuid") {
+				fields = append(fields, &i.ProjectVersionUUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.ProjectVersionUUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "user_uuid") {
+				fields = append(fields, &i.UserUUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "user_uuid") {
+				fields = append(fields, &i.UserUUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.UserUUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "data") {
+				fields = append(fields, &i.Data)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "data") {
+				fields = append(fields, &i.Data)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.Data)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "status") {
+				fields = append(fields, &i.Status)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "status") {
+				fields = append(fields, &i.Status)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.Status)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "created_at") {
+				fields = append(fields, &i.CreatedAt)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "created_at") {
+				fields = append(fields, &i.CreatedAt)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.CreatedAt)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "updated_at") {
+				fields = append(fields, &i.UpdatedAt)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "updated_at") {
+				fields = append(fields, &i.UpdatedAt)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.UpdatedAt)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "created_by_uuid") {
+				fields = append(fields, &i.CreatedByUUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "created_by_uuid") {
+				fields = append(fields, &i.CreatedByUUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.CreatedByUUID)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "updated_by_uuid") {
+				fields = append(fields, &i.UpdatedByUUID)
+				continue
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "updated_by_uuid") {
+				fields = append(fields, &i.UpdatedByUUID)
+				continue
+			}
+		} else {
+			fields = append(fields, &i.UpdatedByUUID)
+		}
+
+		if err := rows.Scan(fields...); err != nil {
 			m.monitoring.Emit(monitoring.EmitRequest{
 				ActionIdentifier: "list_user_project_version_scan",
 				Message:          "error in scanning rows for ListUserProjectVersion",
