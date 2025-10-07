@@ -76,16 +76,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "uuid") {
 				fields = append(fields, &i.UUID)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "uuid") {
 				fields = append(fields, &i.UUID)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else {
 			fields = append(fields, &i.UUID)
@@ -94,16 +88,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "user_uuid") {
 				fields = append(fields, &i.UserUUID)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "user_uuid") {
 				fields = append(fields, &i.UserUUID)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else {
 			fields = append(fields, &i.UserUUID)
@@ -112,16 +100,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "project_uuid") {
 				fields = append(fields, &i.ProjectUUID)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "project_uuid") {
 				fields = append(fields, &i.ProjectUUID)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else {
 			fields = append(fields, &i.ProjectUUID)
@@ -130,16 +112,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "project_version_uuid") {
 				fields = append(fields, &i.ProjectVersionUUID)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "project_version_uuid") {
 				fields = append(fields, &i.ProjectVersionUUID)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else {
 			fields = append(fields, &i.ProjectVersionUUID)
@@ -148,16 +124,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "type") {
 				fields = append(fields, &i.Type)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "type") {
 				fields = append(fields, &i.Type)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else {
 			fields = append(fields, &i.Type)
@@ -166,16 +136,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "type_config") {
 				fields = append(fields, &i.TypeConfig)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "type_config") {
 				fields = append(fields, &i.TypeConfig)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else {
 			fields = append(fields, &i.TypeConfig)
@@ -184,16 +148,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "db_schema") {
 				fields = append(fields, &i.DbSchema)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "db_schema") {
 				fields = append(fields, &i.DbSchema)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else {
 			fields = append(fields, &i.DbSchema)
@@ -202,16 +160,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "executions") {
 				fields = append(fields, &i.Executions)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "executions") {
 				fields = append(fields, &i.Executions)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else {
 			fields = append(fields, &i.Executions)
@@ -220,16 +172,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "status") {
 				fields = append(fields, &i.Status)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "status") {
 				fields = append(fields, &i.Status)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else {
 			fields = append(fields, &i.Status)
@@ -238,16 +184,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "created_at") {
 				fields = append(fields, &i.CreatedAt)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "created_at") {
 				fields = append(fields, &i.CreatedAt)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else {
 			fields = append(fields, &i.CreatedAt)
@@ -256,16 +196,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "updated_at") {
 				fields = append(fields, &i.UpdatedAt)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "updated_at") {
 				fields = append(fields, &i.UpdatedAt)
-			} else {
-				var skip interface{}
-				fields = append(fields, &skip)
 			}
 		} else {
 			fields = append(fields, &i.UpdatedAt)
