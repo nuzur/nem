@@ -23,7 +23,44 @@ func (i *Implementation) BuildListEntityQuery(
 	request ListRequest,
 	entity ListEntity,
 	onlyCount bool,
+	includeColumns []string,
+	excludeColumns []string,
 ) (string, error) {
+
+	columnsFinal := fmt.Sprintf("%s.*", entity.EntityIdentifier())
+	if len(includeColumns) > 0 && len(excludeColumns) > 0 {
+		return "", errors.New("cannot use includeColumns and excludeColumns at the same time")
+	}
+	if len(includeColumns) > 0 {
+		columns := []string{}
+		fieldMap := entity.FieldIdentfierToTypeMap()
+		for _, c := range includeColumns {
+			if _, found := fieldMap[c]; found {
+				columns = append(columns, fmt.Sprintf("%s.%s", entity.EntityIdentifier(), c))
+			}
+		}
+		if len(columns) > 0 {
+			columnsFinal = strings.Join(columns, ", ")
+		}
+	} else if len(excludeColumns) > 0 {
+		columns := []string{}
+		fieldMap := entity.FieldIdentfierToTypeMap()
+		for c, _ := range fieldMap {
+			found := false
+			for _, ex := range excludeColumns {
+				if ex == c {
+					found = true
+					break
+				}
+			}
+			if !found {
+				columns = append(columns, fmt.Sprintf("%s.%s", entity.EntityIdentifier(), c))
+			}
+		}
+		if len(columns) > 0 {
+			columnsFinal = strings.Join(columns, ", ")
+		}
+	}
 
 	if request.GetFilter().CheckedExpr == nil || request.GetFilter().CheckedExpr.Expr == nil {
 		if onlyCount {
@@ -35,8 +72,8 @@ func (i *Implementation) BuildListEntityQuery(
 			), nil
 		} else {
 			return fmt.Sprintf(
-				"SELECT DISTINCT %s.* FROM %s limit 10",
-				entity.EntityIdentifier(),
+				"SELECT DISTINCT %s FROM %s limit 10",
+				columnsFinal,
 				entity.EntityIdentifier(),
 			), nil
 		}
@@ -80,8 +117,8 @@ func (i *Implementation) BuildListEntityQuery(
 			), nil
 		}
 		return fmt.Sprintf(
-			"SELECT DISTINCT %s.* FROM %s %s %s WHERE %s %s %s",
-			entity.EntityIdentifier(),
+			"SELECT DISTINCT %s FROM %s %s %s WHERE %s %s %s",
+			columnsFinal,
 			entity.EntityIdentifier(),
 			request.GetJoinParams().JoinStatement,
 			jsonTablesFinal,
@@ -101,8 +138,8 @@ func (i *Implementation) BuildListEntityQuery(
 		), nil
 	}
 	return fmt.Sprintf(
-		"SELECT DISTINCT %s.* FROM %s %s WHERE %s %s %s",
-		entity.EntityIdentifier(),
+		"SELECT DISTINCT %s FROM %s %s WHERE %s %s %s",
+		columnsFinal,
 		entity.EntityIdentifier(),
 		jsonTablesFinal,
 		whereClause,

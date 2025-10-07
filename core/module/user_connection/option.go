@@ -13,7 +13,9 @@ type optionFunc func(*config)
 func (f optionFunc) apply(c *config) { f(c) }
 
 type config struct {
-	SQLTx *sql.Tx
+	SQLTx              *sql.Tx
+	ListIncludeColumns []string
+	ListExcludeColumns []string
 }
 
 func applyAllOptions(opts []Option) config {
@@ -27,5 +29,17 @@ func applyAllOptions(opts []Option) config {
 func WithSQLTransaction(tx *sql.Tx) optionFunc {
 	return func(c *config) {
 		c.SQLTx = tx
+	}
+}
+
+func WithListIncludeColumns(columns []string) optionFunc {
+	return func(c *config) {
+		c.ListIncludeColumns = columns
+	}
+}
+
+func WithListExcludeColumns(columns []string) optionFunc {
+	return func(c *config) {
+		c.ListExcludeColumns = columns
 	}
 }

@@ -12,11 +12,15 @@ import (
 func (m *module) List(ctx context.Context,
 	request types.ListRequest,
 	opts ...Option) (types.ListResponse, error) {
+
+	optConfig := applyAllOptions(opts)
 	query, err := m.repository.BuildListEntityQuery(
 		ctx,
 		request,
 		main_entity.ProjectVersion{},
-		false)
+		false,
+		optConfig.ListIncludeColumns,
+		optConfig.ListExcludeColumns)
 	if err != nil {
 		m.monitoring.Emit(monitoring.EmitRequest{
 			ActionIdentifier: "list_project_version_query",
@@ -30,13 +34,11 @@ func (m *module) List(ctx context.Context,
 		return types.ListResponse{}, err
 	}
 
-	//fmt.Printf("query: %s \n", query)
-
 	// increase sort buffer size
 	// TODO make this configurable
 	txn, _ := m.repository.DB.Begin()
 	defer txn.Commit()
-	bufferRows, err := txn.QueryContext(ctx, "SET sort_buffer_size=2000000")
+	bufferRows, err := txn.QueryContext(ctx, "SET sort_buffer_size=5000000")
 	if err != nil {
 		m.monitoring.Emit(monitoring.EmitRequest{
 			ActionIdentifier: "list_project_version_sort_buffer",
@@ -161,7 +163,7 @@ func (m *module) List(ctx context.Context,
 func (m *module) ListCount(ctx context.Context,
 	request types.ListRequest,
 	opts ...Option) (int64, error) {
-	query, err := m.repository.BuildListEntityQuery(ctx, request, main_entity.ProjectVersion{}, true)
+	query, err := m.repository.BuildListEntityQuery(ctx, request, main_entity.ProjectVersion{}, true, nil, nil)
 	if err != nil {
 		return -1, err
 	}
