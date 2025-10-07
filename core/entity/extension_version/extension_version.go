@@ -69,6 +69,26 @@ func (e ExtensionVersion) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e ExtensionVersion) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "version")
+	res = append(res, "extension_uuid")
+	res = append(res, "display_version")
+	res = append(res, "description")
+	res = append(res, "repository_tag")
+	res = append(res, "configuration_entity")
+	res = append(res, "execution_mode")
+	res = append(res, "review_status")
+	res = append(res, "status")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+	res = append(res, "created_by_uuid")
+	res = append(res, "updated_by_uuid")
+
+	return res
+}
+
 func (e ExtensionVersion) DependantFieldIdentifierToTypeMap() map[string]map[string]types.FieldType {
 	res := make(map[string]map[string]types.FieldType)
 

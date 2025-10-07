@@ -40,6 +40,16 @@ func (e FieldTypeDatetimeConfig) FieldIdentfierToTypeMap() map[string]types.Fiel
 	return res
 }
 
+func (e FieldTypeDatetimeConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "enforce_future")
+	res = append(res, "enforce_past")
+	res = append(res, "display_timezone")
+	res = append(res, "storage_timezone")
+
+	return res
+}
+
 func (e FieldTypeDatetimeConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

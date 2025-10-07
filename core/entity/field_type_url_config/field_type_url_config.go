@@ -40,6 +40,16 @@ func (e FieldTypeURLConfig) FieldIdentfierToTypeMap() map[string]types.FieldType
 	return res
 }
 
+func (e FieldTypeURLConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "allow_domains")
+	res = append(res, "exclude_domains")
+	res = append(res, "https_required")
+	res = append(res, "allowed_extensions")
+
+	return res
+}
+
 func (e FieldTypeURLConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

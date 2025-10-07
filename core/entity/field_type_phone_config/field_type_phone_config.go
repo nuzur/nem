@@ -34,6 +34,14 @@ func (e FieldTypePhoneConfig) FieldIdentfierToTypeMap() map[string]types.FieldTy
 	return res
 }
 
+func (e FieldTypePhoneConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "allow_countries")
+	res = append(res, "exclude_countries")
+
+	return res
+}
+
 func (e FieldTypePhoneConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

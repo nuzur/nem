@@ -77,6 +77,27 @@ func (e Team) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e Team) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "version")
+	res = append(res, "name")
+	res = append(res, "enviorments")
+	res = append(res, "review_configs")
+	res = append(res, "stores")
+	res = append(res, "connections")
+	res = append(res, "object_stores")
+	res = append(res, "default_entity")
+	res = append(res, "owner_uuid")
+	res = append(res, "status")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+	res = append(res, "created_by_uuid")
+	res = append(res, "updated_by_uuid")
+
+	return res
+}
+
 func (e Team) DependantFieldIdentifierToTypeMap() map[string]map[string]types.FieldType {
 	res := make(map[string]map[string]types.FieldType)
 

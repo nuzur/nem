@@ -42,6 +42,17 @@ func (e ElementRender) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e ElementRender) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "x")
+	res = append(res, "y")
+	res = append(res, "width")
+	res = append(res, "height")
+	res = append(res, "collapsed")
+
+	return res
+}
+
 func (e ElementRender) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

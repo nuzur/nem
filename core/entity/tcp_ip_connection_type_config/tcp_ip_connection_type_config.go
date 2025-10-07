@@ -40,6 +40,16 @@ func (e TcpIpConnectionTypeConfig) FieldIdentfierToTypeMap() map[string]types.Fi
 	return res
 }
 
+func (e TcpIpConnectionTypeConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "hostname")
+	res = append(res, "port")
+	res = append(res, "username")
+	res = append(res, "password")
+
+	return res
+}
+
 func (e TcpIpConnectionTypeConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

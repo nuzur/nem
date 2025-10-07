@@ -34,6 +34,14 @@ func (e FieldTypeEmailConfig) FieldIdentfierToTypeMap() map[string]types.FieldTy
 	return res
 }
 
+func (e FieldTypeEmailConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "allow_domains")
+	res = append(res, "exclude_domains")
+
+	return res
+}
+
 func (e FieldTypeEmailConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

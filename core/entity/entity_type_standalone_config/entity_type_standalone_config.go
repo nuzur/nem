@@ -44,6 +44,16 @@ func (e EntityTypeStandaloneConfig) FieldIdentfierToTypeMap() map[string]types.F
 	return res
 }
 
+func (e EntityTypeStandaloneConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "store_uuid")
+	res = append(res, "versioned")
+	res = append(res, "version_config")
+	res = append(res, "indexes")
+
+	return res
+}
+
 func (e EntityTypeStandaloneConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

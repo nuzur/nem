@@ -65,6 +65,23 @@ func (e UserConnection) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e UserConnection) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "user_uuid")
+	res = append(res, "project_uuid")
+	res = append(res, "project_version_uuid")
+	res = append(res, "type")
+	res = append(res, "type_config")
+	res = append(res, "db_schema")
+	res = append(res, "executions")
+	res = append(res, "status")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+
+	return res
+}
+
 func (e UserConnection) DependantFieldIdentifierToTypeMap() map[string]map[string]types.FieldType {
 	res := make(map[string]map[string]types.FieldType)
 

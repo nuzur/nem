@@ -36,6 +36,14 @@ func (e FieldTypeTextConfig) FieldIdentfierToTypeMap() map[string]types.FieldTyp
 	return res
 }
 
+func (e FieldTypeTextConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "min_size")
+	res = append(res, "max_size")
+
+	return res
+}
+
 func (e FieldTypeTextConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

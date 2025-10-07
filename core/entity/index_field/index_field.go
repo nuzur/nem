@@ -42,6 +42,16 @@ func (e IndexField) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e IndexField) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "field_uuid")
+	res = append(res, "priority")
+	res = append(res, "order")
+	res = append(res, "length")
+
+	return res
+}
+
 func (e IndexField) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

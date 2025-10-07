@@ -38,6 +38,14 @@ func (e DataChangeFieldValue) FieldIdentfierToTypeMap() map[string]types.FieldTy
 	return res
 }
 
+func (e DataChangeFieldValue) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "field_uuid")
+	res = append(res, "value")
+
+	return res
+}
+
 func (e DataChangeFieldValue) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

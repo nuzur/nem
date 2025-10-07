@@ -48,6 +48,19 @@ func (e RelationshipNode) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e RelationshipNode) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "type")
+	res = append(res, "type_config")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+	res = append(res, "created_by_uuid")
+	res = append(res, "updated_by_uuid")
+
+	return res
+}
+
 func (e RelationshipNode) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

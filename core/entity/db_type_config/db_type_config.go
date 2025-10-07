@@ -37,6 +37,14 @@ func (e DbTypeConfig) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e DbTypeConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "postgres")
+	res = append(res, "mysql")
+
+	return res
+}
+
 func (e DbTypeConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

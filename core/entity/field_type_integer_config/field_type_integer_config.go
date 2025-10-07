@@ -46,6 +46,19 @@ func (e FieldTypeIntegerConfig) FieldIdentfierToTypeMap() map[string]types.Field
 	return res
 }
 
+func (e FieldTypeIntegerConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "size")
+	res = append(res, "min_value")
+	res = append(res, "min_value_inclusive")
+	res = append(res, "max_value")
+	res = append(res, "max_value_inclusive")
+	res = append(res, "allow_negatives")
+	res = append(res, "enable_limits")
+
+	return res
+}
+
 func (e FieldTypeIntegerConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

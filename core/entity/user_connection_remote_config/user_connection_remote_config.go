@@ -40,6 +40,15 @@ func (e UserConnectionRemoteConfig) FieldIdentfierToTypeMap() map[string]types.F
 	return res
 }
 
+func (e UserConnectionRemoteConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "team_uuid")
+	res = append(res, "store_uuid")
+	res = append(res, "connection_uuid")
+
+	return res
+}
+
 func (e UserConnectionRemoteConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

@@ -49,6 +49,20 @@ func (e UserConnectionExecution) FieldIdentfierToTypeMap() map[string]types.Fiel
 	return res
 }
 
+func (e UserConnectionExecution) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "status")
+	res = append(res, "results_path")
+	res = append(res, "num_results")
+	res = append(res, "started_at")
+	res = append(res, "finished_at")
+	res = append(res, "estimated_time")
+	res = append(res, "user_msg")
+
+	return res
+}
+
 func (e UserConnectionExecution) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

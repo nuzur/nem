@@ -36,6 +36,14 @@ func (e UserConnectionLocalConfig) FieldIdentfierToTypeMap() map[string]types.Fi
 	return res
 }
 
+func (e UserConnectionLocalConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "ip_address")
+	res = append(res, "db_type")
+
+	return res
+}
+
 func (e UserConnectionLocalConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

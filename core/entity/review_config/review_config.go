@@ -51,6 +51,21 @@ func (e ReviewConfig) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e ReviewConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "review_user_roles")
+	res = append(res, "review_user_uuids")
+	res = append(res, "min_reviews")
+	res = append(res, "status")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+	res = append(res, "created_by_uuid")
+	res = append(res, "updated_by_uuid")
+
+	return res
+}
+
 func (e ReviewConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

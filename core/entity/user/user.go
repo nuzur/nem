@@ -65,6 +65,24 @@ func (e User) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e User) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "identifier")
+	res = append(res, "name")
+	res = append(res, "last_name")
+	res = append(res, "email")
+	res = append(res, "user_type")
+	res = append(res, "country_ios2")
+	res = append(res, "locale")
+	res = append(res, "metadata")
+	res = append(res, "status")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+
+	return res
+}
+
 func (e User) DependantFieldIdentifierToTypeMap() map[string]map[string]types.FieldType {
 	res := make(map[string]map[string]types.FieldType)
 

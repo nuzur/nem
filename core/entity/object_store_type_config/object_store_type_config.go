@@ -34,6 +34,13 @@ func (e ObjectStoreTypeConfig) FieldIdentfierToTypeMap() map[string]types.FieldT
 	return res
 }
 
+func (e ObjectStoreTypeConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "s3")
+
+	return res
+}
+
 func (e ObjectStoreTypeConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

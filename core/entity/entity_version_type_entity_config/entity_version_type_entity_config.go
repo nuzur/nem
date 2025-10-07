@@ -40,6 +40,15 @@ func (e EntityVersionTypeEntityConfig) FieldIdentfierToTypeMap() map[string]type
 	return res
 }
 
+func (e EntityVersionTypeEntityConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "entity_uuid")
+	res = append(res, "version_field_uuid")
+	res = append(res, "append_only")
+
+	return res
+}
+
 func (e EntityVersionTypeEntityConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

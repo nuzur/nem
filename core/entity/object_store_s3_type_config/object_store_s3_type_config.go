@@ -40,6 +40,16 @@ func (e ObjectStoreS3TypeConfig) FieldIdentfierToTypeMap() map[string]types.Fiel
 	return res
 }
 
+func (e ObjectStoreS3TypeConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "region")
+	res = append(res, "key")
+	res = append(res, "secret")
+	res = append(res, "bucket")
+
+	return res
+}
+
 func (e ObjectStoreS3TypeConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

@@ -53,6 +53,22 @@ func (e Visibility) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e Visibility) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "description")
+	res = append(res, "organization_uuids")
+	res = append(res, "team_uuids")
+	res = append(res, "user_uuids")
+	res = append(res, "roles")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+	res = append(res, "created_by_uuid")
+	res = append(res, "updated_by_uuid")
+
+	return res
+}
+
 func (e Visibility) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

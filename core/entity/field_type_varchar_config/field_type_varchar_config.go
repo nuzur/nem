@@ -38,6 +38,15 @@ func (e FieldTypeVarcharConfig) FieldIdentfierToTypeMap() map[string]types.Field
 	return res
 }
 
+func (e FieldTypeVarcharConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "min_size")
+	res = append(res, "max_size")
+	res = append(res, "regex_validation")
+
+	return res
+}
+
 func (e FieldTypeVarcharConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

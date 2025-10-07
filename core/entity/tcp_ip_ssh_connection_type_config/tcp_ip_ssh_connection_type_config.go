@@ -50,6 +50,21 @@ func (e TcpIpSshConnectionTypeConfig) FieldIdentfierToTypeMap() map[string]types
 	return res
 }
 
+func (e TcpIpSshConnectionTypeConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "ssh_hostname")
+	res = append(res, "ssh_username")
+	res = append(res, "ssh_password")
+	res = append(res, "ssh_key_file")
+	res = append(res, "use_ssh_key_file")
+	res = append(res, "hostname")
+	res = append(res, "port")
+	res = append(res, "username")
+	res = append(res, "password")
+
+	return res
+}
+
 func (e TcpIpSshConnectionTypeConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

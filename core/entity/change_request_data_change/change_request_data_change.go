@@ -43,6 +43,16 @@ func (e ChangeRequestDataChange) FieldIdentfierToTypeMap() map[string]types.Fiel
 	return res
 }
 
+func (e ChangeRequestDataChange) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "data_change_type")
+	res = append(res, "data_change_type_config")
+	res = append(res, "order")
+
+	return res
+}
+
 func (e ChangeRequestDataChange) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

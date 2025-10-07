@@ -36,6 +36,14 @@ func (e EntityTypeDependentConfig) FieldIdentfierToTypeMap() map[string]types.Fi
 	return res
 }
 
+func (e EntityTypeDependentConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "service_source_uuids")
+	res = append(res, "entity_source_uuids")
+
+	return res
+}
+
 func (e EntityTypeDependentConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

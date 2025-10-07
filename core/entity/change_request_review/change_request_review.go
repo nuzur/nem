@@ -45,6 +45,18 @@ func (e ChangeRequestReview) FieldIdentfierToTypeMap() map[string]types.FieldTyp
 	return res
 }
 
+func (e ChangeRequestReview) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "user_uuid")
+	res = append(res, "comment")
+	res = append(res, "response")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+
+	return res
+}
+
 func (e ChangeRequestReview) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

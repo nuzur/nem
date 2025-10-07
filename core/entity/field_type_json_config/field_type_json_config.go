@@ -36,6 +36,14 @@ func (e FieldTypeJSONConfig) FieldIdentfierToTypeMap() map[string]types.FieldTyp
 	return res
 }
 
+func (e FieldTypeJSONConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "enforce_schema_validation")
+	res = append(res, "json_schema")
+
+	return res
+}
+
 func (e FieldTypeJSONConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

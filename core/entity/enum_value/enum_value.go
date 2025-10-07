@@ -38,6 +38,15 @@ func (e EnumValue) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e EnumValue) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "identifier")
+	res = append(res, "display")
+	res = append(res, "numeric_value")
+
+	return res
+}
+
 func (e EnumValue) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

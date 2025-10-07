@@ -38,6 +38,14 @@ func (e ProjectVersionDeployment) FieldIdentfierToTypeMap() map[string]types.Fie
 	return res
 }
 
+func (e ProjectVersionDeployment) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "enviroment_uuid")
+	res = append(res, "status")
+
+	return res
+}
+
 func (e ProjectVersionDeployment) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

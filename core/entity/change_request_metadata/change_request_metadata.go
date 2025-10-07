@@ -34,6 +34,13 @@ func (e ChangeRequestMetadata) FieldIdentfierToTypeMap() map[string]types.FieldT
 	return res
 }
 
+func (e ChangeRequestMetadata) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "data")
+
+	return res
+}
+
 func (e ChangeRequestMetadata) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

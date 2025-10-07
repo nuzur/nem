@@ -65,6 +65,27 @@ func (e Connection) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e Connection) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "version")
+	res = append(res, "store_uuid")
+	res = append(res, "enviorment_uuid")
+	res = append(res, "identifier")
+	res = append(res, "db_type")
+	res = append(res, "db_type_config")
+	res = append(res, "db_version")
+	res = append(res, "type")
+	res = append(res, "type_config")
+	res = append(res, "status")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+	res = append(res, "created_by_uuid")
+	res = append(res, "updated_by_uuid")
+
+	return res
+}
+
 func (e Connection) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

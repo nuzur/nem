@@ -40,6 +40,15 @@ func (e DataChangeTypeConfig) FieldIdentfierToTypeMap() map[string]types.FieldTy
 	return res
 }
 
+func (e DataChangeTypeConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "update")
+	res = append(res, "create")
+	res = append(res, "delete")
+
+	return res
+}
+
 func (e DataChangeTypeConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

@@ -37,6 +37,14 @@ func (e UserConnectionTypeConfig) FieldIdentfierToTypeMap() map[string]types.Fie
 	return res
 }
 
+func (e UserConnectionTypeConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "local")
+	res = append(res, "remote")
+
+	return res
+}
+
 func (e UserConnectionTypeConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

@@ -38,6 +38,14 @@ func (e FileObjectStorageConfig) FieldIdentfierToTypeMap() map[string]types.Fiel
 	return res
 }
 
+func (e FileObjectStorageConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "object_store_uuid")
+	res = append(res, "path")
+
+	return res
+}
+
 func (e FileObjectStorageConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

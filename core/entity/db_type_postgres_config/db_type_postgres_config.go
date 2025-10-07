@@ -36,6 +36,14 @@ func (e DbTypePostgresConfig) FieldIdentfierToTypeMap() map[string]types.FieldTy
 	return res
 }
 
+func (e DbTypePostgresConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "database")
+	res = append(res, "sslmode")
+
+	return res
+}
+
 func (e DbTypePostgresConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

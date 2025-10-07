@@ -40,6 +40,15 @@ func (e DataChangeTypeConfigDelete) FieldIdentfierToTypeMap() map[string]types.F
 	return res
 }
 
+func (e DataChangeTypeConfigDelete) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "entity_uuid")
+	res = append(res, "keys")
+	res = append(res, "created_at")
+
+	return res
+}
+
 func (e DataChangeTypeConfigDelete) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

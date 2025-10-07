@@ -46,6 +46,18 @@ func (e FieldTypeEncryptedConfig) FieldIdentfierToTypeMap() map[string]types.Fie
 	return res
 }
 
+func (e FieldTypeEncryptedConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "min_size")
+	res = append(res, "max_size")
+	res = append(res, "regex_validation")
+	res = append(res, "encryption_type")
+	res = append(res, "use_salt")
+	res = append(res, "salt_field_uuids")
+
+	return res
+}
+
 func (e FieldTypeEncryptedConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

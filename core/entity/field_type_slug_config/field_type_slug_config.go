@@ -42,6 +42,16 @@ func (e FieldTypeSlugConfig) FieldIdentfierToTypeMap() map[string]types.FieldTyp
 	return res
 }
 
+func (e FieldTypeSlugConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "min_size")
+	res = append(res, "max_size")
+	res = append(res, "regex_validation")
+	res = append(res, "based_on_field_uuids")
+
+	return res
+}
+
 func (e FieldTypeSlugConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

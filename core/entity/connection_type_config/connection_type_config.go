@@ -37,6 +37,14 @@ func (e ConnectionTypeConfig) FieldIdentfierToTypeMap() map[string]types.FieldTy
 	return res
 }
 
+func (e ConnectionTypeConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "tcp_ip")
+	res = append(res, "tcp_ip_ssh")
+
+	return res
+}
+
 func (e ConnectionTypeConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

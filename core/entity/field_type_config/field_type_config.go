@@ -106,6 +106,40 @@ func (e FieldTypeConfig) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e FieldTypeConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "integer")
+	res = append(res, "float")
+	res = append(res, "decimal")
+	res = append(res, "boolean")
+	res = append(res, "char")
+	res = append(res, "varchar")
+	res = append(res, "text")
+	res = append(res, "encrypted")
+	res = append(res, "email")
+	res = append(res, "phone")
+	res = append(res, "url")
+	res = append(res, "location")
+	res = append(res, "color")
+	res = append(res, "rich_text")
+	res = append(res, "code")
+	res = append(res, "markdown")
+	res = append(res, "file")
+	res = append(res, "image")
+	res = append(res, "video")
+	res = append(res, "audio")
+	res = append(res, "enum")
+	res = append(res, "json")
+	res = append(res, "array")
+	res = append(res, "date")
+	res = append(res, "datetime")
+	res = append(res, "time")
+	res = append(res, "slug")
+
+	return res
+}
+
 func (e FieldTypeConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

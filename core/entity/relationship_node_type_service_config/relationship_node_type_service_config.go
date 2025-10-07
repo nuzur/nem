@@ -36,6 +36,13 @@ func (e RelationshipNodeTypeServiceConfig) FieldIdentfierToTypeMap() map[string]
 	return res
 }
 
+func (e RelationshipNodeTypeServiceConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "service_uuid")
+
+	return res
+}
+
 func (e RelationshipNodeTypeServiceConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

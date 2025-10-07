@@ -34,6 +34,13 @@ func (e EntityDataManagementConfig) FieldIdentfierToTypeMap() map[string]types.F
 	return res
 }
 
+func (e EntityDataManagementConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "list_display_fields")
+
+	return res
+}
+
 func (e EntityDataManagementConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

@@ -38,6 +38,14 @@ func (e FieldTypeEnumConfig) FieldIdentfierToTypeMap() map[string]types.FieldTyp
 	return res
 }
 
+func (e FieldTypeEnumConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "enum_uuid")
+	res = append(res, "allow_multiple")
+
+	return res
+}
+
 func (e FieldTypeEnumConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

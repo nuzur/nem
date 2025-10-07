@@ -54,6 +54,22 @@ func (e Enum) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e Enum) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "version")
+	res = append(res, "identifier")
+	res = append(res, "static_values")
+	res = append(res, "remote_values")
+	res = append(res, "status")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+	res = append(res, "created_by_uuid")
+	res = append(res, "updated_by_uuid")
+
+	return res
+}
+
 func (e Enum) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

@@ -34,6 +34,13 @@ func (e DbTypeMysqlConfig) FieldIdentfierToTypeMap() map[string]types.FieldType 
 	return res
 }
 
+func (e DbTypeMysqlConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "params")
+
+	return res
+}
+
 func (e DbTypeMysqlConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

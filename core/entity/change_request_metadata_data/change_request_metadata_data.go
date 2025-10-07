@@ -40,6 +40,15 @@ func (e ChangeRequestMetadataData) FieldIdentfierToTypeMap() map[string]types.Fi
 	return res
 }
 
+func (e ChangeRequestMetadataData) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "store_uuid")
+	res = append(res, "connection_uuid")
+	res = append(res, "schema")
+
+	return res
+}
+
 func (e ChangeRequestMetadataData) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

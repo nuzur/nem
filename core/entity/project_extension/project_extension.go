@@ -53,6 +53,22 @@ func (e ProjectExtension) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e ProjectExtension) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "extension_uuid")
+	res = append(res, "extension_version_uuid")
+	res = append(res, "configuration_entity_values")
+	res = append(res, "blocking")
+	res = append(res, "status")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+	res = append(res, "created_by_uuid")
+	res = append(res, "updated_by_uuid")
+
+	return res
+}
+
 func (e ProjectExtension) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

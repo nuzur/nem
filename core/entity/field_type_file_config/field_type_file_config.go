@@ -46,6 +46,18 @@ func (e FieldTypeFileConfig) FieldIdentfierToTypeMap() map[string]types.FieldTyp
 	return res
 }
 
+func (e FieldTypeFileConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "storage_type")
+	res = append(res, "storage_config")
+	res = append(res, "allowed_extensions")
+	res = append(res, "max_size")
+	res = append(res, "allow_multiple")
+	res = append(res, "max_files")
+
+	return res
+}
+
 func (e FieldTypeFileConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

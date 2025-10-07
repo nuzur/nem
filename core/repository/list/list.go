@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"slices"
 	"strings"
 
 	entitytypes "github.com/nuzur/nem/core/entity/types"
@@ -44,16 +45,9 @@ func (i *Implementation) BuildListEntityQuery(
 		}
 	} else if len(excludeColumns) > 0 {
 		columns := []string{}
-		fieldMap := entity.FieldIdentfierToTypeMap()
-		for c, _ := range fieldMap {
-			found := false
-			for _, ex := range excludeColumns {
-				if ex == c {
-					found = true
-					break
-				}
-			}
-			if !found {
+		fields := entity.OrderedFieldIdentifiers()
+		for _, c := range fields {
+			if !slices.Contains(excludeColumns, c) {
 				columns = append(columns, fmt.Sprintf("%s.%s", entity.EntityIdentifier(), c))
 			}
 		}

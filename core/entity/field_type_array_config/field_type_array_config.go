@@ -44,6 +44,17 @@ func (e FieldTypeArrayConfig) FieldIdentfierToTypeMap() map[string]types.FieldTy
 	return res
 }
 
+func (e FieldTypeArrayConfig) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "min_elements")
+	res = append(res, "max_elements")
+	res = append(res, "enforce_unique")
+	res = append(res, "type")
+	res = append(res, "type_config")
+
+	return res
+}
+
 func (e FieldTypeArrayConfig) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 

@@ -49,6 +49,20 @@ func (e Enviorment) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	return res
 }
 
+func (e Enviorment) OrderedFieldIdentifiers() []string {
+	res := []string{}
+	res = append(res, "uuid")
+	res = append(res, "identifier")
+	res = append(res, "critical")
+	res = append(res, "status")
+	res = append(res, "created_at")
+	res = append(res, "updated_at")
+	res = append(res, "created_by_uuid")
+	res = append(res, "updated_by_uuid")
+
+	return res
+}
+
 func (e Enviorment) ArrayFieldIdentifierToType() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 
