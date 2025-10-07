@@ -76,12 +76,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "uuid") {
 				fields = append(fields, &i.UUID)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "uuid") {
 				fields = append(fields, &i.UUID)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.UUID)
@@ -90,12 +88,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "extension_uuid") {
 				fields = append(fields, &i.ExtensionUUID)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "extension_uuid") {
 				fields = append(fields, &i.ExtensionUUID)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.ExtensionUUID)
@@ -104,12 +100,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "extension_version_uuid") {
 				fields = append(fields, &i.ExtensionVersionUUID)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "extension_version_uuid") {
 				fields = append(fields, &i.ExtensionVersionUUID)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.ExtensionVersionUUID)
@@ -118,12 +112,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "project_extension_uuid") {
 				fields = append(fields, &i.ProjectExtensionUUID)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "project_extension_uuid") {
 				fields = append(fields, &i.ProjectExtensionUUID)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.ProjectExtensionUUID)
@@ -132,12 +124,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "project_uuid") {
 				fields = append(fields, &i.ProjectUUID)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "project_uuid") {
 				fields = append(fields, &i.ProjectUUID)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.ProjectUUID)
@@ -146,12 +136,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "project_version_uuid") {
 				fields = append(fields, &i.ProjectVersionUUID)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "project_version_uuid") {
 				fields = append(fields, &i.ProjectVersionUUID)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.ProjectVersionUUID)
@@ -160,12 +148,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "executed_by_uuid") {
 				fields = append(fields, &i.ExecutedByUUID)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "executed_by_uuid") {
 				fields = append(fields, &i.ExecutedByUUID)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.ExecutedByUUID)
@@ -174,12 +160,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "metadata") {
 				fields = append(fields, &i.Metadata)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "metadata") {
 				fields = append(fields, &i.Metadata)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.Metadata)
@@ -188,12 +172,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "status") {
 				fields = append(fields, &i.Status)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "status") {
 				fields = append(fields, &i.Status)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.Status)
@@ -202,12 +184,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "status_msg") {
 				fields = append(fields, &i.StatusMsg)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "status_msg") {
 				fields = append(fields, &i.StatusMsg)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.StatusMsg)
@@ -216,12 +196,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "created_at") {
 				fields = append(fields, &i.CreatedAt)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "created_at") {
 				fields = append(fields, &i.CreatedAt)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.CreatedAt)
@@ -230,12 +208,10 @@ func (m *module) List(ctx context.Context,
 		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "updated_at") {
 				fields = append(fields, &i.UpdatedAt)
-				continue
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
 			if !slices.Contains(optConfig.ListExcludeColumns, "updated_at") {
 				fields = append(fields, &i.UpdatedAt)
-				continue
 			}
 		} else {
 			fields = append(fields, &i.UpdatedAt)
