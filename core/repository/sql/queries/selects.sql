@@ -5680,3 +5680,324 @@ WHERE
 
 
 
+
+
+
+-- name: FetchAiUsageByUUID :many
+SELECT * FROM ai_usage
+WHERE 
+     uuid = ?  
+    ;
+
+
+-- name: FetchAiUsageByUUIDForUpdate :many
+SELECT * FROM ai_usage
+WHERE 
+     uuid = ?      
+FOR UPDATE;
+
+
+-- name: FetchAiUsageByContext :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchAiUsageByProvider :many
+SELECT * FROM ai_usage
+WHERE 
+     provider = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchAiUsageByContextAndProvider :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND provider = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchAiUsageByStatus :many
+SELECT * FROM ai_usage
+WHERE 
+     status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchAiUsageByContextAndStatus :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchAiUsageByProviderAndStatus :many
+SELECT * FROM ai_usage
+WHERE 
+     provider = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchAiUsageByContextAndProviderAndStatus :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND provider = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+
+
+    
+
+    
+    
+-- name: FetchAiUsageByContextOrderedByCreatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByContextOrderedByCreatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchAiUsageByContextOrderedByUpdatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByContextOrderedByUpdatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchAiUsageByProviderOrderedByCreatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     provider = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByProviderOrderedByCreatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     provider = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchAiUsageByProviderOrderedByUpdatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     provider = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByProviderOrderedByUpdatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     provider = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchAiUsageByContextAndProviderOrderedByCreatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND provider = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByContextAndProviderOrderedByCreatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND provider = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchAiUsageByContextAndProviderOrderedByUpdatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND provider = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByContextAndProviderOrderedByUpdatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND provider = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchAiUsageByStatusOrderedByCreatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByStatusOrderedByCreatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchAiUsageByStatusOrderedByUpdatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchAiUsageByContextAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByContextAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchAiUsageByContextAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByContextAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchAiUsageByProviderAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     provider = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByProviderAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     provider = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchAiUsageByProviderAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     provider = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByProviderAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     provider = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND provider = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND provider = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND provider = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM ai_usage
+WHERE 
+     context = ? AND provider = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+
+
+
+
+
+

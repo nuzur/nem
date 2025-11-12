@@ -55,6 +55,9 @@ import (
 	"github.com/nuzur/nem/core/entity/membership"
 	membershiptypes "github.com/nuzur/nem/core/module/membership/types"
 
+	"github.com/nuzur/nem/core/entity/ai_usage"
+	ai_usagetypes "github.com/nuzur/nem/core/module/ai_usage/types"
+
 	"github.com/gofrs/uuid"
 	"github.com/manifoldco/promptui"
 	"github.com/urfave/cli"
@@ -408,6 +411,21 @@ func main() {
 							fmt.Printf("error writing entity: %s, %v \n", "membership", err)
 						} else {
 							fmt.Printf("wrote entity: %s, %v \n", "membership", res)
+						}
+					}
+					c.Destroy()
+
+				case "ai_usage":
+					entities := ai_usage.NewAiUsageSliceWithRandomValues(100)
+					for _, e := range entities {
+						e.UUID = uuid.Nil
+						res, err := c.AiUsage().Upsert(context.Background(), ai_usagetypes.UpsertRequest{
+							AiUsage: e,
+						}, false)
+						if err != nil {
+							fmt.Printf("error writing entity: %s, %v \n", "ai_usage", err)
+						} else {
+							fmt.Printf("wrote entity: %s, %v \n", "ai_usage", res)
 						}
 					}
 					c.Destroy()

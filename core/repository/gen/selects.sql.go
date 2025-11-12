@@ -10,6 +10,2038 @@ import (
 	"database/sql"
 )
 
+const fetchAiUsageByContext = `-- name: FetchAiUsageByContext :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ?  
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextParams struct {
+	Context int64 `json:"context"`
+	Offset  int32 `json:"offset"`
+	Limit   int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContext(ctx context.Context, arg FetchAiUsageByContextParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContext, arg.Context, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndProvider = `-- name: FetchAiUsageByContextAndProvider :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND provider = ?  
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndProviderParams struct {
+	Context  int64 `json:"context"`
+	Provider int64 `json:"provider"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndProvider(ctx context.Context, arg FetchAiUsageByContextAndProviderParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndProvider,
+		arg.Context,
+		arg.Provider,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndProviderAndStatus = `-- name: FetchAiUsageByContextAndProviderAndStatus :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND provider = ? AND status = ?  
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndProviderAndStatusParams struct {
+	Context  int64 `json:"context"`
+	Provider int64 `json:"provider"`
+	Status   int64 `json:"status"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndProviderAndStatus(ctx context.Context, arg FetchAiUsageByContextAndProviderAndStatusParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndProviderAndStatus,
+		arg.Context,
+		arg.Provider,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtASC = `-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND provider = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtASCParams struct {
+	Context  int64 `json:"context"`
+	Provider int64 `json:"provider"`
+	Status   int64 `json:"status"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtASC,
+		arg.Context,
+		arg.Provider,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtDESC = `-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND provider = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtDESCParams struct {
+	Context  int64 `json:"context"`
+	Provider int64 `json:"provider"`
+	Status   int64 `json:"status"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtDESC,
+		arg.Context,
+		arg.Provider,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtASC = `-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND provider = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtASCParams struct {
+	Context  int64 `json:"context"`
+	Provider int64 `json:"provider"`
+	Status   int64 `json:"status"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtASC,
+		arg.Context,
+		arg.Provider,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND provider = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtDESCParams struct {
+	Context  int64 `json:"context"`
+	Provider int64 `json:"provider"`
+	Status   int64 `json:"status"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtDESC,
+		arg.Context,
+		arg.Provider,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndProviderOrderedByCreatedAtASC = `-- name: FetchAiUsageByContextAndProviderOrderedByCreatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND provider = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndProviderOrderedByCreatedAtASCParams struct {
+	Context  int64 `json:"context"`
+	Provider int64 `json:"provider"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndProviderOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByContextAndProviderOrderedByCreatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndProviderOrderedByCreatedAtASC,
+		arg.Context,
+		arg.Provider,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndProviderOrderedByCreatedAtDESC = `-- name: FetchAiUsageByContextAndProviderOrderedByCreatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND provider = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndProviderOrderedByCreatedAtDESCParams struct {
+	Context  int64 `json:"context"`
+	Provider int64 `json:"provider"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndProviderOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByContextAndProviderOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndProviderOrderedByCreatedAtDESC,
+		arg.Context,
+		arg.Provider,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndProviderOrderedByUpdatedAtASC = `-- name: FetchAiUsageByContextAndProviderOrderedByUpdatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND provider = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndProviderOrderedByUpdatedAtASCParams struct {
+	Context  int64 `json:"context"`
+	Provider int64 `json:"provider"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndProviderOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByContextAndProviderOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndProviderOrderedByUpdatedAtASC,
+		arg.Context,
+		arg.Provider,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndProviderOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByContextAndProviderOrderedByUpdatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND provider = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndProviderOrderedByUpdatedAtDESCParams struct {
+	Context  int64 `json:"context"`
+	Provider int64 `json:"provider"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndProviderOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByContextAndProviderOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndProviderOrderedByUpdatedAtDESC,
+		arg.Context,
+		arg.Provider,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndStatus = `-- name: FetchAiUsageByContextAndStatus :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND status = ?  
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndStatusParams struct {
+	Context int64 `json:"context"`
+	Status  int64 `json:"status"`
+	Offset  int32 `json:"offset"`
+	Limit   int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndStatus(ctx context.Context, arg FetchAiUsageByContextAndStatusParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndStatus,
+		arg.Context,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndStatusOrderedByCreatedAtASC = `-- name: FetchAiUsageByContextAndStatusOrderedByCreatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndStatusOrderedByCreatedAtASCParams struct {
+	Context int64 `json:"context"`
+	Status  int64 `json:"status"`
+	Offset  int32 `json:"offset"`
+	Limit   int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByContextAndStatusOrderedByCreatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndStatusOrderedByCreatedAtASC,
+		arg.Context,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndStatusOrderedByCreatedAtDESC = `-- name: FetchAiUsageByContextAndStatusOrderedByCreatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndStatusOrderedByCreatedAtDESCParams struct {
+	Context int64 `json:"context"`
+	Status  int64 `json:"status"`
+	Offset  int32 `json:"offset"`
+	Limit   int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByContextAndStatusOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndStatusOrderedByCreatedAtDESC,
+		arg.Context,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndStatusOrderedByUpdatedAtASC = `-- name: FetchAiUsageByContextAndStatusOrderedByUpdatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndStatusOrderedByUpdatedAtASCParams struct {
+	Context int64 `json:"context"`
+	Status  int64 `json:"status"`
+	Offset  int32 `json:"offset"`
+	Limit   int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByContextAndStatusOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndStatusOrderedByUpdatedAtASC,
+		arg.Context,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextAndStatusOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByContextAndStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextAndStatusOrderedByUpdatedAtDESCParams struct {
+	Context int64 `json:"context"`
+	Status  int64 `json:"status"`
+	Offset  int32 `json:"offset"`
+	Limit   int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByContextAndStatusOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextAndStatusOrderedByUpdatedAtDESC,
+		arg.Context,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextOrderedByCreatedAtASC = `-- name: FetchAiUsageByContextOrderedByCreatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextOrderedByCreatedAtASCParams struct {
+	Context int64 `json:"context"`
+	Offset  int32 `json:"offset"`
+	Limit   int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByContextOrderedByCreatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextOrderedByCreatedAtASC, arg.Context, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextOrderedByCreatedAtDESC = `-- name: FetchAiUsageByContextOrderedByCreatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextOrderedByCreatedAtDESCParams struct {
+	Context int64 `json:"context"`
+	Offset  int32 `json:"offset"`
+	Limit   int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByContextOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextOrderedByCreatedAtDESC, arg.Context, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextOrderedByUpdatedAtASC = `-- name: FetchAiUsageByContextOrderedByUpdatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextOrderedByUpdatedAtASCParams struct {
+	Context int64 `json:"context"`
+	Offset  int32 `json:"offset"`
+	Limit   int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByContextOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextOrderedByUpdatedAtASC, arg.Context, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByContextOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByContextOrderedByUpdatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     context = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByContextOrderedByUpdatedAtDESCParams struct {
+	Context int64 `json:"context"`
+	Offset  int32 `json:"offset"`
+	Limit   int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByContextOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByContextOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByContextOrderedByUpdatedAtDESC, arg.Context, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByProvider = `-- name: FetchAiUsageByProvider :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     provider = ?  
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByProviderParams struct {
+	Provider int64 `json:"provider"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByProvider(ctx context.Context, arg FetchAiUsageByProviderParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProvider, arg.Provider, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByProviderAndStatus = `-- name: FetchAiUsageByProviderAndStatus :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     provider = ? AND status = ?  
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByProviderAndStatusParams struct {
+	Provider int64 `json:"provider"`
+	Status   int64 `json:"status"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByProviderAndStatus(ctx context.Context, arg FetchAiUsageByProviderAndStatusParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProviderAndStatus,
+		arg.Provider,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByProviderAndStatusOrderedByCreatedAtASC = `-- name: FetchAiUsageByProviderAndStatusOrderedByCreatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     provider = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByProviderAndStatusOrderedByCreatedAtASCParams struct {
+	Provider int64 `json:"provider"`
+	Status   int64 `json:"status"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByProviderAndStatusOrderedByCreatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProviderAndStatusOrderedByCreatedAtASC,
+		arg.Provider,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByProviderAndStatusOrderedByCreatedAtDESC = `-- name: FetchAiUsageByProviderAndStatusOrderedByCreatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     provider = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByProviderAndStatusOrderedByCreatedAtDESCParams struct {
+	Provider int64 `json:"provider"`
+	Status   int64 `json:"status"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByProviderAndStatusOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProviderAndStatusOrderedByCreatedAtDESC,
+		arg.Provider,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByProviderAndStatusOrderedByUpdatedAtASC = `-- name: FetchAiUsageByProviderAndStatusOrderedByUpdatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     provider = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByProviderAndStatusOrderedByUpdatedAtASCParams struct {
+	Provider int64 `json:"provider"`
+	Status   int64 `json:"status"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByProviderAndStatusOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProviderAndStatusOrderedByUpdatedAtASC,
+		arg.Provider,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByProviderAndStatusOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByProviderAndStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     provider = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByProviderAndStatusOrderedByUpdatedAtDESCParams struct {
+	Provider int64 `json:"provider"`
+	Status   int64 `json:"status"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByProviderAndStatusOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProviderAndStatusOrderedByUpdatedAtDESC,
+		arg.Provider,
+		arg.Status,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByProviderOrderedByCreatedAtASC = `-- name: FetchAiUsageByProviderOrderedByCreatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     provider = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByProviderOrderedByCreatedAtASCParams struct {
+	Provider int64 `json:"provider"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByProviderOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByProviderOrderedByCreatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProviderOrderedByCreatedAtASC, arg.Provider, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByProviderOrderedByCreatedAtDESC = `-- name: FetchAiUsageByProviderOrderedByCreatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     provider = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByProviderOrderedByCreatedAtDESCParams struct {
+	Provider int64 `json:"provider"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByProviderOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByProviderOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProviderOrderedByCreatedAtDESC, arg.Provider, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByProviderOrderedByUpdatedAtASC = `-- name: FetchAiUsageByProviderOrderedByUpdatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     provider = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByProviderOrderedByUpdatedAtASCParams struct {
+	Provider int64 `json:"provider"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByProviderOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByProviderOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProviderOrderedByUpdatedAtASC, arg.Provider, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByProviderOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByProviderOrderedByUpdatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     provider = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByProviderOrderedByUpdatedAtDESCParams struct {
+	Provider int64 `json:"provider"`
+	Offset   int32 `json:"offset"`
+	Limit    int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByProviderOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByProviderOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProviderOrderedByUpdatedAtDESC, arg.Provider, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByStatus = `-- name: FetchAiUsageByStatus :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     status = ?  
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByStatusParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByStatus(ctx context.Context, arg FetchAiUsageByStatusParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByStatus, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByStatusOrderedByCreatedAtASC = `-- name: FetchAiUsageByStatusOrderedByCreatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByStatusOrderedByCreatedAtASCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByStatusOrderedByCreatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByStatusOrderedByCreatedAtASC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByStatusOrderedByCreatedAtDESC = `-- name: FetchAiUsageByStatusOrderedByCreatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByStatusOrderedByCreatedAtDESCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByStatusOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByStatusOrderedByCreatedAtDESC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByStatusOrderedByUpdatedAtASC = `-- name: FetchAiUsageByStatusOrderedByUpdatedAtASC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByStatusOrderedByUpdatedAtASCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByStatusOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByStatusOrderedByUpdatedAtASC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByStatusOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByStatusOrderedByUpdatedAtDESC :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?
+`
+
+type FetchAiUsageByStatusOrderedByUpdatedAtDESCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByStatusOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByStatusOrderedByUpdatedAtDESC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByUUID = `-- name: FetchAiUsageByUUID :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     uuid = ?
+`
+
+func (q *Queries) FetchAiUsageByUUID(ctx context.Context, uuid string) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUUID, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByUUIDForUpdate = `-- name: FetchAiUsageByUUIDForUpdate :many
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+WHERE 
+     uuid = ?      
+FOR UPDATE
+`
+
+func (q *Queries) FetchAiUsageByUUIDForUpdate(ctx context.Context, uuid string) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.Tokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const fetchChangeRequestByChangeType = `-- name: FetchChangeRequestByChangeType :many
 SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM change_request
 WHERE 

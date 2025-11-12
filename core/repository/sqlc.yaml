@@ -16,6 +16,7 @@ sql:
           change_type: ChangeType
           configuration_entity: ConfigurationEntity
           connections: Connections
+          context: Context
           country_ios2: CountryIos2
           created_at: CreatedAt
           created_by_uuid: CreatedByUUID
@@ -49,6 +50,7 @@ sql:
           project_extensions: ProjectExtensions
           project_uuid: ProjectUUID
           project_version_uuid: ProjectVersionUUID
+          provider: Provider
           public: Public
           relationships: Relationships
           repository: Repository
@@ -63,16 +65,19 @@ sql:
           start_date: StartDate
           status: Status
           status_msg: StatusMsg
+          step: Step
           stores: Stores
           tags: Tags
           team_uuid: TeamUUID
           title: Title
+          tokens: Tokens
           type: Type
           type_config: TypeConfig
           updated_at: UpdatedAt
           updated_by_uuid: UpdatedByUUID
           url: URL
           user_email: UserEmail
+          user_prompt: UserPrompt
           user_type: UserType
           user_uuid: UserUUID
           uuid: UUID

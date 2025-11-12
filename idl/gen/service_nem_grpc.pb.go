@@ -58,6 +58,9 @@ const (
 	Nem_ListMemberships_FullMethodName          = "/nem.Nem/ListMemberships"
 	Nem_CreateMembership_FullMethodName         = "/nem.Nem/CreateMembership"
 	Nem_UpdateMembership_FullMethodName         = "/nem.Nem/UpdateMembership"
+	Nem_ListAiUsages_FullMethodName             = "/nem.Nem/ListAiUsages"
+	Nem_CreateAiUsage_FullMethodName            = "/nem.Nem/CreateAiUsage"
+	Nem_UpdateAiUsage_FullMethodName            = "/nem.Nem/UpdateAiUsage"
 )
 
 // NemClient is the client API for Nem service.
@@ -116,6 +119,10 @@ type NemClient interface {
 	ListMemberships(ctx context.Context, in *ListMembershipsRequest, opts ...grpc.CallOption) (*ListMembershipsResponse, error)
 	CreateMembership(ctx context.Context, in *CreateMembershipRequest, opts ...grpc.CallOption) (*Membership, error)
 	UpdateMembership(ctx context.Context, in *UpdateMembershipRequest, opts ...grpc.CallOption) (*Membership, error)
+	// ai_usage start
+	ListAiUsages(ctx context.Context, in *ListAiUsagesRequest, opts ...grpc.CallOption) (*ListAiUsagesResponse, error)
+	CreateAiUsage(ctx context.Context, in *CreateAiUsageRequest, opts ...grpc.CallOption) (*AiUsage, error)
+	UpdateAiUsage(ctx context.Context, in *UpdateAiUsageRequest, opts ...grpc.CallOption) (*AiUsage, error)
 }
 
 type nemClient struct {
@@ -516,6 +523,36 @@ func (c *nemClient) UpdateMembership(ctx context.Context, in *UpdateMembershipRe
 	return out, nil
 }
 
+func (c *nemClient) ListAiUsages(ctx context.Context, in *ListAiUsagesRequest, opts ...grpc.CallOption) (*ListAiUsagesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAiUsagesResponse)
+	err := c.cc.Invoke(ctx, Nem_ListAiUsages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateAiUsage(ctx context.Context, in *CreateAiUsageRequest, opts ...grpc.CallOption) (*AiUsage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AiUsage)
+	err := c.cc.Invoke(ctx, Nem_CreateAiUsage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateAiUsage(ctx context.Context, in *UpdateAiUsageRequest, opts ...grpc.CallOption) (*AiUsage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AiUsage)
+	err := c.cc.Invoke(ctx, Nem_UpdateAiUsage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NemServer is the server API for Nem service.
 // All implementations must embed UnimplementedNemServer
 // for forward compatibility.
@@ -572,6 +609,10 @@ type NemServer interface {
 	ListMemberships(context.Context, *ListMembershipsRequest) (*ListMembershipsResponse, error)
 	CreateMembership(context.Context, *CreateMembershipRequest) (*Membership, error)
 	UpdateMembership(context.Context, *UpdateMembershipRequest) (*Membership, error)
+	// ai_usage start
+	ListAiUsages(context.Context, *ListAiUsagesRequest) (*ListAiUsagesResponse, error)
+	CreateAiUsage(context.Context, *CreateAiUsageRequest) (*AiUsage, error)
+	UpdateAiUsage(context.Context, *UpdateAiUsageRequest) (*AiUsage, error)
 	mustEmbedUnimplementedNemServer()
 }
 
@@ -698,6 +739,15 @@ func (UnimplementedNemServer) CreateMembership(context.Context, *CreateMembershi
 }
 func (UnimplementedNemServer) UpdateMembership(context.Context, *UpdateMembershipRequest) (*Membership, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMembership not implemented")
+}
+func (UnimplementedNemServer) ListAiUsages(context.Context, *ListAiUsagesRequest) (*ListAiUsagesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAiUsages not implemented")
+}
+func (UnimplementedNemServer) CreateAiUsage(context.Context, *CreateAiUsageRequest) (*AiUsage, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAiUsage not implemented")
+}
+func (UnimplementedNemServer) UpdateAiUsage(context.Context, *UpdateAiUsageRequest) (*AiUsage, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAiUsage not implemented")
 }
 func (UnimplementedNemServer) mustEmbedUnimplementedNemServer() {}
 func (UnimplementedNemServer) testEmbeddedByValue()             {}
@@ -1422,6 +1472,60 @@ func _Nem_UpdateMembership_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Nem_ListAiUsages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAiUsagesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListAiUsages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListAiUsages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListAiUsages(ctx, req.(*ListAiUsagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateAiUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAiUsageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateAiUsage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateAiUsage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateAiUsage(ctx, req.(*CreateAiUsageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateAiUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAiUsageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateAiUsage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateAiUsage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateAiUsage(ctx, req.(*UpdateAiUsageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Nem_ServiceDesc is the grpc.ServiceDesc for Nem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1584,6 +1688,18 @@ var Nem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateMembership",
 			Handler:    _Nem_UpdateMembership_Handler,
+		},
+		{
+			MethodName: "ListAiUsages",
+			Handler:    _Nem_ListAiUsages_Handler,
+		},
+		{
+			MethodName: "CreateAiUsage",
+			Handler:    _Nem_CreateAiUsage_Handler,
+		},
+		{
+			MethodName: "UpdateAiUsage",
+			Handler:    _Nem_UpdateAiUsage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "github.com/nuzur/nem";
+option java_outer_classname = "AiUsage";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+
+message AiUsage {  
+    string uuid = 1;
+    string user_uuid = 2;
+    string project_uuid = 3;
+    string project_version_uuid = 4;
+    string user_prompt = 5;
+    string step = 6;
+    AiUsageContext context = 7;
+    AiUsageProvider provider = 8;
+    int64 tokens = 9;
+    AiUsageStatus status = 10;
+    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp updated_at = 12;
+    string created_by_uuid = 13;
+    string updated_by_uuid = 14;    
+}
+
+enum AiUsageContext { 
+    AI_USAGE_CONTEXT_INVALID = 0;
+    AI_USAGE_CONTEXT_EDITOR_ASSISTANT = 1;
+    AI_USAGE_CONTEXT_DATA_MANAGER = 2;
+    AI_USAGE_CONTEXT_EDITOR_LAYOUT = 3;
+}
+
+enum AiUsageProvider { 
+    AI_USAGE_PROVIDER_INVALID = 0;
+    AI_USAGE_PROVIDER_CLAUDE = 1;
+}
+
+enum AiUsageStatus { 
+    AI_USAGE_STATUS_INVALID = 0;
+    AI_USAGE_STATUS_ACTIVE = 1;
+    AI_USAGE_STATUS_DISABLED = 2;
+}

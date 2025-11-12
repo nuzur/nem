@@ -1,0 +1,26 @@
+
+CREATE TABLE IF NOT EXISTS `ai_usage` ( 
+  `uuid` CHAR(36) NOT NULL  ,
+  `user_uuid` CHAR(36) NOT NULL  ,
+  `project_uuid` CHAR(36) NOT NULL  ,
+  `project_version_uuid` CHAR(36) NOT NULL  ,
+  `user_prompt` VARCHAR(255) NOT NULL  ,
+  `step` VARCHAR(255) NOT NULL  ,
+  `context` INT NOT NULL  ,
+  `provider` INT NOT NULL  ,
+  `tokens` INT NOT NULL  ,
+  `status` INT NOT NULL  ,
+  `created_at` DATETIME NOT NULL  default CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL  default CURRENT_TIMESTAMP,
+  `created_by_uuid` CHAR(36) NOT NULL  ,
+  `updated_by_uuid` CHAR(36) NOT NULL  ,  
+  PRIMARY KEY (`uuid`),
+  INDEX `user_uuid` (`user_uuid` ASC),
+  INDEX `project_uuid` (`project_uuid` ASC),
+  INDEX `project_version_uuid` (`project_version_uuid` ASC),
+  INDEX `context` (`context` ASC),
+  INDEX `provider` (`provider` ASC),
+  INDEX `status` (`status` ASC),
+  INDEX `created_at` (`created_at` ASC),
+  INDEX `updated_at` (`updated_at` ASC))  
+ENGINE = InnoDB;

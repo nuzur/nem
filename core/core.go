@@ -38,6 +38,8 @@ import (
 
 	"github.com/nuzur/nem/core/module/membership"
 
+	"github.com/nuzur/nem/core/module/ai_usage"
+
 	"github.com/nuzur/nem/core/repository"
 	"github.com/nuzur/nem/monitoring"
 
@@ -73,6 +75,8 @@ type Implementation struct {
 	user_project user_project.Module
 
 	membership membership.Module
+
+	ai_usage ai_usage.Module
 
 	monitoring *monitoring.Implementation
 
@@ -289,4 +293,16 @@ func (i Implementation) Membership() membership.Module {
 		})
 	}
 	return i.membership
+}
+
+func (i Implementation) AiUsage() ai_usage.Module {
+	if i.ai_usage == nil {
+		i.ai_usage = ai_usage.New(coretypes.ModuleParams{
+			Repository: i.repository,
+			Monitoring: i.monitoring,
+
+			Events: i.events,
+		})
+	}
+	return i.ai_usage
 }

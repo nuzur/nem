@@ -12,6 +12,49 @@ import (
 	"time"
 )
 
+const insertAiUsage = `-- name: InsertAiUsage :execresult
+INSERT INTO ai_usage
+(uuid,user_uuid,project_uuid,project_version_uuid,user_prompt,step,context,provider,tokens,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+`
+
+type InsertAiUsageParams struct {
+	UUID               string    `json:"uuid"`
+	UserUUID           string    `json:"user_uuid"`
+	ProjectUUID        string    `json:"project_uuid"`
+	ProjectVersionUUID string    `json:"project_version_uuid"`
+	UserPrompt         string    `json:"user_prompt"`
+	Step               string    `json:"step"`
+	Context            int64     `json:"context"`
+	Provider           int64     `json:"provider"`
+	Tokens             int64     `json:"tokens"`
+	Status             int64     `json:"status"`
+	CreatedAt          time.Time `json:"created_at"`
+	UpdatedAt          time.Time `json:"updated_at"`
+	CreatedByUUID      string    `json:"created_by_uuid"`
+	UpdatedByUUID      string    `json:"updated_by_uuid"`
+}
+
+func (q *Queries) InsertAiUsage(ctx context.Context, arg InsertAiUsageParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, insertAiUsage,
+		arg.UUID,
+		arg.UserUUID,
+		arg.ProjectUUID,
+		arg.ProjectVersionUUID,
+		arg.UserPrompt,
+		arg.Step,
+		arg.Context,
+		arg.Provider,
+		arg.Tokens,
+		arg.Status,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+	)
+}
+
 const insertChangeRequest = `-- name: InsertChangeRequest :execresult
 INSERT INTO change_request
 (uuid,version,title,description,project_uuid,project_version_uuid,change_type,data_changes,metadata,reviews,review_status,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
