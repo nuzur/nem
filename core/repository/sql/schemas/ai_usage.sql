@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `ai_usage` (
   `step` VARCHAR(255) NOT NULL  ,
   `context` INT NOT NULL  ,
   `provider` INT NOT NULL  ,
-  `input_tokens` INT   ,
+  `input_tokens` INT NOT NULL  ,
   `output_tokens` INT NOT NULL  ,
   `status` INT NOT NULL  ,
   `created_at` DATETIME NOT NULL  default CURRENT_TIMESTAMP,
