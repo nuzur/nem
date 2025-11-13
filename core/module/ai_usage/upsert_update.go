@@ -132,7 +132,9 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.AiUs
 
 			Provider: req.AiUsage.Provider.ToInt64(),
 
-			Tokens: req.AiUsage.Tokens,
+			InputTokens: req.AiUsage.InputTokens,
+
+			OutputTokens: req.AiUsage.OutputTokens,
 
 			Status: req.AiUsage.Status.ToInt64(),
 
@@ -164,7 +166,9 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.AiUs
 
 	res.Provider = req.AiUsage.Provider.ToInt64()
 
-	res.Tokens = req.AiUsage.Tokens
+	res.InputTokens = req.AiUsage.InputTokens
+
+	res.OutputTokens = req.AiUsage.OutputTokens
 
 	res.Status = req.AiUsage.Status.ToInt64()
 

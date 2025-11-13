@@ -106,7 +106,9 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertAiUsage
 
 		Provider: req.AiUsage.Provider.ToInt64(),
 
-		Tokens: req.AiUsage.Tokens,
+		InputTokens: req.AiUsage.InputTokens,
+
+		OutputTokens: req.AiUsage.OutputTokens,
 
 		Status: req.AiUsage.Status.ToInt64(),
 

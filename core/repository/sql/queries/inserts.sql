@@ -79,6 +79,6 @@ VALUES
 
 -- name: InsertAiUsage :execresult
 INSERT INTO ai_usage
-(uuid,user_uuid,project_uuid,project_version_uuid,user_prompt,step,context,provider,tokens,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,user_uuid,project_uuid,project_version_uuid,user_prompt,step,context,provider,input_tokens,output_tokens,status,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);

@@ -170,15 +170,27 @@ func (m *module) List(ctx context.Context,
 		}
 
 		if len(optConfig.ListIncludeColumns) > 0 {
-			if slices.Contains(optConfig.ListIncludeColumns, "tokens") {
-				fields = append(fields, &i.Tokens)
+			if slices.Contains(optConfig.ListIncludeColumns, "input_tokens") {
+				fields = append(fields, &i.InputTokens)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
-			if !slices.Contains(optConfig.ListExcludeColumns, "tokens") {
-				fields = append(fields, &i.Tokens)
+			if !slices.Contains(optConfig.ListExcludeColumns, "input_tokens") {
+				fields = append(fields, &i.InputTokens)
 			}
 		} else {
-			fields = append(fields, &i.Tokens)
+			fields = append(fields, &i.InputTokens)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "output_tokens") {
+				fields = append(fields, &i.OutputTokens)
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "output_tokens") {
+				fields = append(fields, &i.OutputTokens)
+			}
+		} else {
+			fields = append(fields, &i.OutputTokens)
 		}
 
 		if len(optConfig.ListIncludeColumns) > 0 {

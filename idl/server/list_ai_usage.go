@@ -161,7 +161,9 @@ func ai_usageDeclarations() *filtering.Declarations {
 
 		filtering.DeclareEnumIdent("provider", pb.AiUsageProvider(0).Type()),
 
-		filtering.DeclareIdent("tokens", filtering.TypeInt),
+		filtering.DeclareIdent("input_tokens", filtering.TypeInt),
+
+		filtering.DeclareIdent("output_tokens", filtering.TypeInt),
 
 		filtering.DeclareEnumIdent("status", pb.AiUsageStatus(0).Type()),
 

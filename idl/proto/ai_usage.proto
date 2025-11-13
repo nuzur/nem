@@ -19,12 +19,13 @@ message AiUsage {
     string step = 6;
     AiUsageContext context = 7;
     AiUsageProvider provider = 8;
-    int64 tokens = 9;
-    AiUsageStatus status = 10;
-    google.protobuf.Timestamp created_at = 11;
-    google.protobuf.Timestamp updated_at = 12;
-    string created_by_uuid = 13;
-    string updated_by_uuid = 14;    
+    int64 input_tokens = 9;
+    int64 output_tokens = 10;
+    AiUsageStatus status = 11;
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+    string created_by_uuid = 14;
+    string updated_by_uuid = 15;    
 }
 
 enum AiUsageContext { 

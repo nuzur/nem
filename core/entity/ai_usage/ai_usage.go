@@ -24,7 +24,8 @@ type AiUsage struct {
 	Step               string    `json:"step"`
 	Context            Context   `json:"context"`
 	Provider           Provider  `json:"provider"`
-	Tokens             int64     `json:"tokens"`
+	InputTokens        int64     `json:"input_tokens"`
+	OutputTokens       int64     `json:"output_tokens"`
 	Status             Status    `json:"status"`
 	CreatedAt          time.Time `json:"created_at"`
 	UpdatedAt          time.Time `json:"updated_at"`
@@ -60,7 +61,8 @@ func (e AiUsage) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["step"] = types.StringFieldType
 	res["context"] = types.SingleEnumFieldType
 	res["provider"] = types.SingleEnumFieldType
-	res["tokens"] = types.IntFieldType
+	res["input_tokens"] = types.IntFieldType
+	res["output_tokens"] = types.IntFieldType
 	res["status"] = types.SingleEnumFieldType
 	res["created_at"] = types.TimestampFieldType
 	res["updated_at"] = types.TimestampFieldType
@@ -79,7 +81,8 @@ func (e AiUsage) OrderedFieldIdentifiers() []string {
 	res = append(res, "step")
 	res = append(res, "context")
 	res = append(res, "provider")
-	res = append(res, "tokens")
+	res = append(res, "input_tokens")
+	res = append(res, "output_tokens")
 	res = append(res, "status")
 	res = append(res, "created_at")
 	res = append(res, "updated_at")
@@ -159,7 +162,8 @@ func NewAiUsageWithRandomValues() AiUsage {
 		Step:               randomvalues.GetRandomStringValue(),
 		Context:            randomvalues.GetRandomOptionValue[Context](3),
 		Provider:           randomvalues.GetRandomOptionValue[Provider](1),
-		Tokens:             randomvalues.GetRandomIntValue(),
+		InputTokens:        randomvalues.GetRandomIntValue(),
+		OutputTokens:       randomvalues.GetRandomIntValue(),
 		Status:             randomvalues.GetRandomOptionValue[Status](2),
 		CreatedAt:          randomvalues.GetRandomTimeValue(),
 		UpdatedAt:          randomvalues.GetRandomTimeValue(),

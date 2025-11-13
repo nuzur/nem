@@ -11,20 +11,21 @@ import (
 )
 
 type AiUsage struct {
-	UUID               string    `json:"uuid"`
-	UserUUID           string    `json:"user_uuid"`
-	ProjectUUID        string    `json:"project_uuid"`
-	ProjectVersionUUID string    `json:"project_version_uuid"`
-	UserPrompt         string    `json:"user_prompt"`
-	Step               string    `json:"step"`
-	Context            int64     `json:"context"`
-	Provider           int64     `json:"provider"`
-	Tokens             int64     `json:"tokens"`
-	Status             int64     `json:"status"`
-	CreatedAt          time.Time `json:"created_at"`
-	UpdatedAt          time.Time `json:"updated_at"`
-	CreatedByUUID      string    `json:"created_by_uuid"`
-	UpdatedByUUID      string    `json:"updated_by_uuid"`
+	UUID               string        `json:"uuid"`
+	UserUUID           string        `json:"user_uuid"`
+	ProjectUUID        string        `json:"project_uuid"`
+	ProjectVersionUUID string        `json:"project_version_uuid"`
+	UserPrompt         string        `json:"user_prompt"`
+	Step               string        `json:"step"`
+	Context            int64         `json:"context"`
+	Provider           int64         `json:"provider"`
+	InputTokens        sql.NullInt32 `json:"input_tokens"`
+	OutputTokens       int64         `json:"output_tokens"`
+	Status             int64         `json:"status"`
+	CreatedAt          time.Time     `json:"created_at"`
+	UpdatedAt          time.Time     `json:"updated_at"`
+	CreatedByUUID      string        `json:"created_by_uuid"`
+	UpdatedByUUID      string        `json:"updated_by_uuid"`
 }
 
 type ChangeRequest struct {

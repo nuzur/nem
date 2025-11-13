@@ -179,12 +179,13 @@ type AiUsage struct {
 	Step               string                 `protobuf:"bytes,6,opt,name=step,proto3" json:"step,omitempty"`
 	Context            AiUsageContext         `protobuf:"varint,7,opt,name=context,proto3,enum=nem.AiUsageContext" json:"context,omitempty"`
 	Provider           AiUsageProvider        `protobuf:"varint,8,opt,name=provider,proto3,enum=nem.AiUsageProvider" json:"provider,omitempty"`
-	Tokens             int64                  `protobuf:"varint,9,opt,name=tokens,proto3" json:"tokens,omitempty"`
-	Status             AiUsageStatus          `protobuf:"varint,10,opt,name=status,proto3,enum=nem.AiUsageStatus" json:"status,omitempty"`
-	CreatedAt          *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt          *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CreatedByUuid      string                 `protobuf:"bytes,13,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
-	UpdatedByUuid      string                 `protobuf:"bytes,14,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	InputTokens        int64                  `protobuf:"varint,9,opt,name=input_tokens,json=inputTokens,proto3" json:"input_tokens,omitempty"`
+	OutputTokens       int64                  `protobuf:"varint,10,opt,name=output_tokens,json=outputTokens,proto3" json:"output_tokens,omitempty"`
+	Status             AiUsageStatus          `protobuf:"varint,11,opt,name=status,proto3,enum=nem.AiUsageStatus" json:"status,omitempty"`
+	CreatedAt          *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt          *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedByUuid      string                 `protobuf:"bytes,14,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
+	UpdatedByUuid      string                 `protobuf:"bytes,15,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -275,9 +276,16 @@ func (x *AiUsage) GetProvider() AiUsageProvider {
 	return AiUsageProvider_AI_USAGE_PROVIDER_INVALID
 }
 
-func (x *AiUsage) GetTokens() int64 {
+func (x *AiUsage) GetInputTokens() int64 {
 	if x != nil {
-		return x.Tokens
+		return x.InputTokens
+	}
+	return 0
+}
+
+func (x *AiUsage) GetOutputTokens() int64 {
+	if x != nil {
+		return x.OutputTokens
 	}
 	return 0
 }
@@ -321,7 +329,7 @@ var File_ai_usage_proto protoreflect.FileDescriptor
 
 const file_ai_usage_proto_rawDesc = "" +
 	"\n" +
-	"\x0eai_usage.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\"\xaf\x04\n" +
+	"\x0eai_usage.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\"\xdf\x04\n" +
 	"\aAiUsage\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x1b\n" +
 	"\tuser_uuid\x18\x02 \x01(\tR\buserUuid\x12!\n" +
@@ -331,16 +339,17 @@ const file_ai_usage_proto_rawDesc = "" +
 	"userPrompt\x12\x12\n" +
 	"\x04step\x18\x06 \x01(\tR\x04step\x12-\n" +
 	"\acontext\x18\a \x01(\x0e2\x13.nem.AiUsageContextR\acontext\x120\n" +
-	"\bprovider\x18\b \x01(\x0e2\x14.nem.AiUsageProviderR\bprovider\x12\x16\n" +
-	"\x06tokens\x18\t \x01(\x03R\x06tokens\x12*\n" +
-	"\x06status\x18\n" +
-	" \x01(\x0e2\x12.nem.AiUsageStatusR\x06status\x129\n" +
+	"\bprovider\x18\b \x01(\x0e2\x14.nem.AiUsageProviderR\bprovider\x12!\n" +
+	"\finput_tokens\x18\t \x01(\x03R\vinputTokens\x12#\n" +
+	"\routput_tokens\x18\n" +
+	" \x01(\x03R\foutputTokens\x12*\n" +
+	"\x06status\x18\v \x01(\x0e2\x12.nem.AiUsageStatusR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
-	"\x0fcreated_by_uuid\x18\r \x01(\tR\rcreatedByUuid\x12&\n" +
-	"\x0fupdated_by_uuid\x18\x0e \x01(\tR\rupdatedByUuid*\x9c\x01\n" +
+	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
+	"\x0fcreated_by_uuid\x18\x0e \x01(\tR\rcreatedByUuid\x12&\n" +
+	"\x0fupdated_by_uuid\x18\x0f \x01(\tR\rupdatedByUuid*\x9c\x01\n" +
 	"\x0eAiUsageContext\x12\x1c\n" +
 	"\x18AI_USAGE_CONTEXT_INVALID\x10\x00\x12%\n" +
 	"!AI_USAGE_CONTEXT_EDITOR_ASSISTANT\x10\x01\x12!\n" +

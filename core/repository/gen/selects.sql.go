@@ -11,7 +11,7 @@ import (
 )
 
 const fetchAiUsageByContext = `-- name: FetchAiUsageByContext :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ?  
     LIMIT ?, ?
@@ -41,7 +41,8 @@ func (q *Queries) FetchAiUsageByContext(ctx context.Context, arg FetchAiUsageByC
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -62,7 +63,7 @@ func (q *Queries) FetchAiUsageByContext(ctx context.Context, arg FetchAiUsageByC
 }
 
 const fetchAiUsageByContextAndProvider = `-- name: FetchAiUsageByContextAndProvider :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND provider = ?  
     LIMIT ?, ?
@@ -98,7 +99,8 @@ func (q *Queries) FetchAiUsageByContextAndProvider(ctx context.Context, arg Fetc
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -119,7 +121,7 @@ func (q *Queries) FetchAiUsageByContextAndProvider(ctx context.Context, arg Fetc
 }
 
 const fetchAiUsageByContextAndProviderAndStatus = `-- name: FetchAiUsageByContextAndProviderAndStatus :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND provider = ? AND status = ?  
     LIMIT ?, ?
@@ -157,7 +159,8 @@ func (q *Queries) FetchAiUsageByContextAndProviderAndStatus(ctx context.Context,
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -178,7 +181,7 @@ func (q *Queries) FetchAiUsageByContextAndProviderAndStatus(ctx context.Context,
 }
 
 const fetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtASC = `-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND provider = ? AND status = ?  
     ORDER BY created_at ASC
@@ -217,7 +220,8 @@ func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtASC
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -238,7 +242,7 @@ func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtASC
 }
 
 const fetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtDESC = `-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND provider = ? AND status = ?  
     ORDER BY created_at DESC
@@ -277,7 +281,8 @@ func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtDES
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -298,7 +303,7 @@ func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByCreatedAtDES
 }
 
 const fetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtASC = `-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND provider = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -337,7 +342,8 @@ func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtASC
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -358,7 +364,7 @@ func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtASC
 }
 
 const fetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND provider = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -397,7 +403,8 @@ func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtDES
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -418,7 +425,7 @@ func (q *Queries) FetchAiUsageByContextAndProviderAndStatusOrderedByUpdatedAtDES
 }
 
 const fetchAiUsageByContextAndProviderOrderedByCreatedAtASC = `-- name: FetchAiUsageByContextAndProviderOrderedByCreatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND provider = ?  
     ORDER BY created_at ASC
@@ -455,7 +462,8 @@ func (q *Queries) FetchAiUsageByContextAndProviderOrderedByCreatedAtASC(ctx cont
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -476,7 +484,7 @@ func (q *Queries) FetchAiUsageByContextAndProviderOrderedByCreatedAtASC(ctx cont
 }
 
 const fetchAiUsageByContextAndProviderOrderedByCreatedAtDESC = `-- name: FetchAiUsageByContextAndProviderOrderedByCreatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND provider = ?  
     ORDER BY created_at DESC
@@ -513,7 +521,8 @@ func (q *Queries) FetchAiUsageByContextAndProviderOrderedByCreatedAtDESC(ctx con
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -534,7 +543,7 @@ func (q *Queries) FetchAiUsageByContextAndProviderOrderedByCreatedAtDESC(ctx con
 }
 
 const fetchAiUsageByContextAndProviderOrderedByUpdatedAtASC = `-- name: FetchAiUsageByContextAndProviderOrderedByUpdatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND provider = ?  
     ORDER BY updated_at ASC
@@ -571,7 +580,8 @@ func (q *Queries) FetchAiUsageByContextAndProviderOrderedByUpdatedAtASC(ctx cont
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -592,7 +602,7 @@ func (q *Queries) FetchAiUsageByContextAndProviderOrderedByUpdatedAtASC(ctx cont
 }
 
 const fetchAiUsageByContextAndProviderOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByContextAndProviderOrderedByUpdatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND provider = ?  
     ORDER BY updated_at DESC
@@ -629,7 +639,8 @@ func (q *Queries) FetchAiUsageByContextAndProviderOrderedByUpdatedAtDESC(ctx con
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -650,7 +661,7 @@ func (q *Queries) FetchAiUsageByContextAndProviderOrderedByUpdatedAtDESC(ctx con
 }
 
 const fetchAiUsageByContextAndStatus = `-- name: FetchAiUsageByContextAndStatus :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND status = ?  
     LIMIT ?, ?
@@ -686,7 +697,8 @@ func (q *Queries) FetchAiUsageByContextAndStatus(ctx context.Context, arg FetchA
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -707,7 +719,7 @@ func (q *Queries) FetchAiUsageByContextAndStatus(ctx context.Context, arg FetchA
 }
 
 const fetchAiUsageByContextAndStatusOrderedByCreatedAtASC = `-- name: FetchAiUsageByContextAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND status = ?  
     ORDER BY created_at ASC
@@ -744,7 +756,8 @@ func (q *Queries) FetchAiUsageByContextAndStatusOrderedByCreatedAtASC(ctx contex
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -765,7 +778,7 @@ func (q *Queries) FetchAiUsageByContextAndStatusOrderedByCreatedAtASC(ctx contex
 }
 
 const fetchAiUsageByContextAndStatusOrderedByCreatedAtDESC = `-- name: FetchAiUsageByContextAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND status = ?  
     ORDER BY created_at DESC
@@ -802,7 +815,8 @@ func (q *Queries) FetchAiUsageByContextAndStatusOrderedByCreatedAtDESC(ctx conte
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -823,7 +837,7 @@ func (q *Queries) FetchAiUsageByContextAndStatusOrderedByCreatedAtDESC(ctx conte
 }
 
 const fetchAiUsageByContextAndStatusOrderedByUpdatedAtASC = `-- name: FetchAiUsageByContextAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -860,7 +874,8 @@ func (q *Queries) FetchAiUsageByContextAndStatusOrderedByUpdatedAtASC(ctx contex
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -881,7 +896,7 @@ func (q *Queries) FetchAiUsageByContextAndStatusOrderedByUpdatedAtASC(ctx contex
 }
 
 const fetchAiUsageByContextAndStatusOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByContextAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -918,7 +933,8 @@ func (q *Queries) FetchAiUsageByContextAndStatusOrderedByUpdatedAtDESC(ctx conte
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -939,7 +955,7 @@ func (q *Queries) FetchAiUsageByContextAndStatusOrderedByUpdatedAtDESC(ctx conte
 }
 
 const fetchAiUsageByContextOrderedByCreatedAtASC = `-- name: FetchAiUsageByContextOrderedByCreatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ?  
     ORDER BY created_at ASC
@@ -970,7 +986,8 @@ func (q *Queries) FetchAiUsageByContextOrderedByCreatedAtASC(ctx context.Context
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -991,7 +1008,7 @@ func (q *Queries) FetchAiUsageByContextOrderedByCreatedAtASC(ctx context.Context
 }
 
 const fetchAiUsageByContextOrderedByCreatedAtDESC = `-- name: FetchAiUsageByContextOrderedByCreatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ?  
     ORDER BY created_at DESC
@@ -1022,7 +1039,8 @@ func (q *Queries) FetchAiUsageByContextOrderedByCreatedAtDESC(ctx context.Contex
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1043,7 +1061,7 @@ func (q *Queries) FetchAiUsageByContextOrderedByCreatedAtDESC(ctx context.Contex
 }
 
 const fetchAiUsageByContextOrderedByUpdatedAtASC = `-- name: FetchAiUsageByContextOrderedByUpdatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ?  
     ORDER BY updated_at ASC
@@ -1074,7 +1092,8 @@ func (q *Queries) FetchAiUsageByContextOrderedByUpdatedAtASC(ctx context.Context
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1095,7 +1114,7 @@ func (q *Queries) FetchAiUsageByContextOrderedByUpdatedAtASC(ctx context.Context
 }
 
 const fetchAiUsageByContextOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByContextOrderedByUpdatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      context = ?  
     ORDER BY updated_at DESC
@@ -1126,7 +1145,8 @@ func (q *Queries) FetchAiUsageByContextOrderedByUpdatedAtDESC(ctx context.Contex
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1147,7 +1167,7 @@ func (q *Queries) FetchAiUsageByContextOrderedByUpdatedAtDESC(ctx context.Contex
 }
 
 const fetchAiUsageByProvider = `-- name: FetchAiUsageByProvider :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      provider = ?  
     LIMIT ?, ?
@@ -1177,7 +1197,8 @@ func (q *Queries) FetchAiUsageByProvider(ctx context.Context, arg FetchAiUsageBy
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1198,7 +1219,7 @@ func (q *Queries) FetchAiUsageByProvider(ctx context.Context, arg FetchAiUsageBy
 }
 
 const fetchAiUsageByProviderAndStatus = `-- name: FetchAiUsageByProviderAndStatus :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      provider = ? AND status = ?  
     LIMIT ?, ?
@@ -1234,7 +1255,8 @@ func (q *Queries) FetchAiUsageByProviderAndStatus(ctx context.Context, arg Fetch
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1255,7 +1277,7 @@ func (q *Queries) FetchAiUsageByProviderAndStatus(ctx context.Context, arg Fetch
 }
 
 const fetchAiUsageByProviderAndStatusOrderedByCreatedAtASC = `-- name: FetchAiUsageByProviderAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      provider = ? AND status = ?  
     ORDER BY created_at ASC
@@ -1292,7 +1314,8 @@ func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByCreatedAtASC(ctx conte
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1313,7 +1336,7 @@ func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByCreatedAtASC(ctx conte
 }
 
 const fetchAiUsageByProviderAndStatusOrderedByCreatedAtDESC = `-- name: FetchAiUsageByProviderAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      provider = ? AND status = ?  
     ORDER BY created_at DESC
@@ -1350,7 +1373,8 @@ func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByCreatedAtDESC(ctx cont
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1371,7 +1395,7 @@ func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByCreatedAtDESC(ctx cont
 }
 
 const fetchAiUsageByProviderAndStatusOrderedByUpdatedAtASC = `-- name: FetchAiUsageByProviderAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      provider = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -1408,7 +1432,8 @@ func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByUpdatedAtASC(ctx conte
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1429,7 +1454,7 @@ func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByUpdatedAtASC(ctx conte
 }
 
 const fetchAiUsageByProviderAndStatusOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByProviderAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      provider = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -1466,7 +1491,8 @@ func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByUpdatedAtDESC(ctx cont
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1487,7 +1513,7 @@ func (q *Queries) FetchAiUsageByProviderAndStatusOrderedByUpdatedAtDESC(ctx cont
 }
 
 const fetchAiUsageByProviderOrderedByCreatedAtASC = `-- name: FetchAiUsageByProviderOrderedByCreatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      provider = ?  
     ORDER BY created_at ASC
@@ -1518,7 +1544,8 @@ func (q *Queries) FetchAiUsageByProviderOrderedByCreatedAtASC(ctx context.Contex
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1539,7 +1566,7 @@ func (q *Queries) FetchAiUsageByProviderOrderedByCreatedAtASC(ctx context.Contex
 }
 
 const fetchAiUsageByProviderOrderedByCreatedAtDESC = `-- name: FetchAiUsageByProviderOrderedByCreatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      provider = ?  
     ORDER BY created_at DESC
@@ -1570,7 +1597,8 @@ func (q *Queries) FetchAiUsageByProviderOrderedByCreatedAtDESC(ctx context.Conte
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1591,7 +1619,7 @@ func (q *Queries) FetchAiUsageByProviderOrderedByCreatedAtDESC(ctx context.Conte
 }
 
 const fetchAiUsageByProviderOrderedByUpdatedAtASC = `-- name: FetchAiUsageByProviderOrderedByUpdatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      provider = ?  
     ORDER BY updated_at ASC
@@ -1622,7 +1650,8 @@ func (q *Queries) FetchAiUsageByProviderOrderedByUpdatedAtASC(ctx context.Contex
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1643,7 +1672,7 @@ func (q *Queries) FetchAiUsageByProviderOrderedByUpdatedAtASC(ctx context.Contex
 }
 
 const fetchAiUsageByProviderOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByProviderOrderedByUpdatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      provider = ?  
     ORDER BY updated_at DESC
@@ -1674,7 +1703,8 @@ func (q *Queries) FetchAiUsageByProviderOrderedByUpdatedAtDESC(ctx context.Conte
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1695,7 +1725,7 @@ func (q *Queries) FetchAiUsageByProviderOrderedByUpdatedAtDESC(ctx context.Conte
 }
 
 const fetchAiUsageByStatus = `-- name: FetchAiUsageByStatus :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      status = ?  
     LIMIT ?, ?
@@ -1725,7 +1755,8 @@ func (q *Queries) FetchAiUsageByStatus(ctx context.Context, arg FetchAiUsageBySt
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1746,7 +1777,7 @@ func (q *Queries) FetchAiUsageByStatus(ctx context.Context, arg FetchAiUsageBySt
 }
 
 const fetchAiUsageByStatusOrderedByCreatedAtASC = `-- name: FetchAiUsageByStatusOrderedByCreatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      status = ?  
     ORDER BY created_at ASC
@@ -1777,7 +1808,8 @@ func (q *Queries) FetchAiUsageByStatusOrderedByCreatedAtASC(ctx context.Context,
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1798,7 +1830,7 @@ func (q *Queries) FetchAiUsageByStatusOrderedByCreatedAtASC(ctx context.Context,
 }
 
 const fetchAiUsageByStatusOrderedByCreatedAtDESC = `-- name: FetchAiUsageByStatusOrderedByCreatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      status = ?  
     ORDER BY created_at DESC
@@ -1829,7 +1861,8 @@ func (q *Queries) FetchAiUsageByStatusOrderedByCreatedAtDESC(ctx context.Context
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1850,7 +1883,7 @@ func (q *Queries) FetchAiUsageByStatusOrderedByCreatedAtDESC(ctx context.Context
 }
 
 const fetchAiUsageByStatusOrderedByUpdatedAtASC = `-- name: FetchAiUsageByStatusOrderedByUpdatedAtASC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      status = ?  
     ORDER BY updated_at ASC
@@ -1881,7 +1914,8 @@ func (q *Queries) FetchAiUsageByStatusOrderedByUpdatedAtASC(ctx context.Context,
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1902,7 +1936,7 @@ func (q *Queries) FetchAiUsageByStatusOrderedByUpdatedAtASC(ctx context.Context,
 }
 
 const fetchAiUsageByStatusOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      status = ?  
     ORDER BY updated_at DESC
@@ -1933,7 +1967,8 @@ func (q *Queries) FetchAiUsageByStatusOrderedByUpdatedAtDESC(ctx context.Context
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1954,7 +1989,7 @@ func (q *Queries) FetchAiUsageByStatusOrderedByUpdatedAtDESC(ctx context.Context
 }
 
 const fetchAiUsageByUUID = `-- name: FetchAiUsageByUUID :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      uuid = ?
 `
@@ -1977,7 +2012,8 @@ func (q *Queries) FetchAiUsageByUUID(ctx context.Context, uuid string) ([]AiUsag
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
@@ -1998,7 +2034,7 @@ func (q *Queries) FetchAiUsageByUUID(ctx context.Context, uuid string) ([]AiUsag
 }
 
 const fetchAiUsageByUUIDForUpdate = `-- name: FetchAiUsageByUUIDForUpdate :many
-SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
+SELECT uuid, user_uuid, project_uuid, project_version_uuid, user_prompt, step, context, provider, input_tokens, output_tokens, status, created_at, updated_at, created_by_uuid, updated_by_uuid FROM ai_usage
 WHERE 
      uuid = ?      
 FOR UPDATE
@@ -2022,7 +2058,8 @@ func (q *Queries) FetchAiUsageByUUIDForUpdate(ctx context.Context, uuid string) 
 			&i.Step,
 			&i.Context,
 			&i.Provider,
-			&i.Tokens,
+			&i.InputTokens,
+			&i.OutputTokens,
 			&i.Status,
 			&i.CreatedAt,
 			&i.UpdatedAt,
