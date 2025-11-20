@@ -2,7 +2,7 @@ package project
 
 import (
 	"context"
-	//"fmt"
+	"fmt"
 	main_entity "github.com/nuzur/nem/core/entity/project"
 	"github.com/nuzur/nem/core/module/project/types"
 	repogen "github.com/nuzur/nem/core/repository/gen"
@@ -65,6 +65,7 @@ func (m *module) List(ctx context.Context,
 			ExtraData:        map[string]string{"query": query},
 			Error:            err,
 		})
+		fmt.Printf("error in executing query for ListProject: %v \n %v\n", query, err)
 		return types.ListResponse{}, err
 	}
 	defer rows.Close()

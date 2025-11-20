@@ -2,7 +2,7 @@ package user_connection
 
 import (
 	"context"
-	//"fmt"
+	"fmt"
 	main_entity "github.com/nuzur/nem/core/entity/user_connection"
 	"github.com/nuzur/nem/core/module/user_connection/types"
 	repogen "github.com/nuzur/nem/core/repository/gen"
@@ -65,6 +65,7 @@ func (m *module) List(ctx context.Context,
 			ExtraData:        map[string]string{"query": query},
 			Error:            err,
 		})
+		fmt.Printf("error in executing query for ListUserConnection: %v \n %v\n", query, err)
 		return types.ListResponse{}, err
 	}
 	defer rows.Close()

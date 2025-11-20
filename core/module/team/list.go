@@ -2,7 +2,7 @@ package team
 
 import (
 	"context"
-	//"fmt"
+	"fmt"
 	main_entity "github.com/nuzur/nem/core/entity/team"
 	"github.com/nuzur/nem/core/module/team/types"
 	repogen "github.com/nuzur/nem/core/repository/gen"
@@ -65,6 +65,7 @@ func (m *module) List(ctx context.Context,
 			ExtraData:        map[string]string{"query": query},
 			Error:            err,
 		})
+		fmt.Printf("error in executing query for ListTeam: %v \n %v\n", query, err)
 		return types.ListResponse{}, err
 	}
 	defer rows.Close()

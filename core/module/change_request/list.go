@@ -2,7 +2,7 @@ package change_request
 
 import (
 	"context"
-	//"fmt"
+	"fmt"
 	main_entity "github.com/nuzur/nem/core/entity/change_request"
 	"github.com/nuzur/nem/core/module/change_request/types"
 	repogen "github.com/nuzur/nem/core/repository/gen"
@@ -65,6 +65,7 @@ func (m *module) List(ctx context.Context,
 			ExtraData:        map[string]string{"query": query},
 			Error:            err,
 		})
+		fmt.Printf("error in executing query for ListChangeRequest: %v \n %v\n", query, err)
 		return types.ListResponse{}, err
 	}
 	defer rows.Close()

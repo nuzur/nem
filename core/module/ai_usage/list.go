@@ -2,7 +2,7 @@ package ai_usage
 
 import (
 	"context"
-	//"fmt"
+	"fmt"
 	main_entity "github.com/nuzur/nem/core/entity/ai_usage"
 	"github.com/nuzur/nem/core/module/ai_usage/types"
 	repogen "github.com/nuzur/nem/core/repository/gen"
@@ -65,6 +65,7 @@ func (m *module) List(ctx context.Context,
 			ExtraData:        map[string]string{"query": query},
 			Error:            err,
 		})
+		fmt.Printf("error in executing query for ListAiUsage: %v \n %v\n", query, err)
 		return types.ListResponse{}, err
 	}
 	defer rows.Close()
