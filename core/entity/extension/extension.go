@@ -24,10 +24,11 @@ type Extension struct {
 	DisplayAuthorName *string                 `json:"display_author_name"`
 	Description       *string                 `json:"description"`
 	URL               *string                 `json:"url"`
-	Verfied           bool                    `json:"verfied"`
+	Verified          bool                    `json:"verified"`
 	Repository        string                  `json:"repository"`
 	ExtensionType     ExtensionType           `json:"extension_type"`
 	Tags              []string                `json:"tags"`
+	Pro               bool                    `json:"pro"`
 	Public            bool                    `json:"public"`
 	Visibility        []visibility.Visibility `json:"visibility"`
 	Status            Status                  `json:"status"`
@@ -65,10 +66,11 @@ func (e Extension) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["display_author_name"] = types.StringFieldType
 	res["description"] = types.StringFieldType
 	res["url"] = types.StringFieldType
-	res["verfied"] = types.BooleanFieldType
+	res["verified"] = types.BooleanFieldType
 	res["repository"] = types.StringFieldType
 	res["extension_type"] = types.SingleEnumFieldType
 	res["tags"] = types.ArrayFieldType
+	res["pro"] = types.BooleanFieldType
 	res["public"] = types.BooleanFieldType
 	res["visibility"] = types.MultiDependantEntityFieldType
 	res["status"] = types.SingleEnumFieldType
@@ -89,10 +91,11 @@ func (e Extension) OrderedFieldIdentifiers() []string {
 	res = append(res, "display_author_name")
 	res = append(res, "description")
 	res = append(res, "url")
-	res = append(res, "verfied")
+	res = append(res, "verified")
 	res = append(res, "repository")
 	res = append(res, "extension_type")
 	res = append(res, "tags")
+	res = append(res, "pro")
 	res = append(res, "public")
 	res = append(res, "visibility")
 	res = append(res, "status")
@@ -176,10 +179,11 @@ func NewExtensionWithRandomValues() Extension {
 		DisplayAuthorName: randomvalues.GetRandomStringValuePtr(),
 		Description:       randomvalues.GetRandomStringValuePtr(),
 		URL:               randomvalues.GetRandomStringValuePtr(),
-		Verfied:           randomvalues.GetRandomBoolValue(),
+		Verified:          randomvalues.GetRandomBoolValue(),
 		Repository:        randomvalues.GetRandomStringValue(),
 		ExtensionType:     randomvalues.GetRandomOptionValue[ExtensionType](3),
 		Tags:              []string{},
+		Pro:               randomvalues.GetRandomBoolValue(),
 		Public:            randomvalues.GetRandomBoolValue(),
 		Visibility:        visibility.NewVisibilitySliceWithRandomValues(rand.Intn(10)),
 		Status:            randomvalues.GetRandomOptionValue[Status](2),

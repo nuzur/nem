@@ -56,10 +56,11 @@ type Extension struct {
 	DisplayAuthorName sql.NullString `json:"display_author_name"`
 	Description       sql.NullString `json:"description"`
 	URL               sql.NullString `json:"url"`
-	Verfied           bool           `json:"verfied"`
+	Verified          bool           `json:"verified"`
 	Repository        string         `json:"repository"`
 	ExtensionType     int64          `json:"extension_type"`
 	Tags              []byte         `json:"tags"`
+	Pro               bool           `json:"pro"`
 	Public            bool           `json:"public"`
 	Visibility        []byte         `json:"visibility"`
 	Status            int64          `json:"status"`

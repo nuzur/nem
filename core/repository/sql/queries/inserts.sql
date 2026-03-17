@@ -13,9 +13,9 @@ VALUES
 
 -- name: InsertExtension :execresult
 INSERT INTO extension
-(uuid,version,identifier,display_name,display_author_name,description,url,verfied,repository,extension_type,tags,public,visibility,status,owner_uuid,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,version,identifier,display_name,display_author_name,description,url,verified,repository,extension_type,tags,pro,public,visibility,status,owner_uuid,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertExtensionVersion :execresult
 INSERT INTO extension_version

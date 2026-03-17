@@ -112,13 +112,15 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertExtensi
 
 		URL: mapper.StringPtrToSqlNullString(req.Extension.URL),
 
-		Verfied: req.Extension.Verfied,
+		Verified: req.Extension.Verified,
 
 		Repository: req.Extension.Repository,
 
 		ExtensionType: req.Extension.ExtensionType.ToInt64(),
 
 		Tags: mapper.SliceToJSON(req.Extension.Tags),
+
+		Pro: req.Extension.Pro,
 
 		Public: req.Extension.Public,
 

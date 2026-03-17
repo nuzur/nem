@@ -19,18 +19,19 @@ message Extension {
     string display_author_name = 5;
     string description = 6;
     string url = 7;
-    bool verfied = 8;
+    bool verified = 8;
     string repository = 9;
     ExtensionExtensionType extension_type = 10;
     repeated string tags = 11;
-    bool public = 12;
-    repeated Visibility visibility = 13;
-    ExtensionStatus status = 14;
-    string owner_uuid = 15;
-    google.protobuf.Timestamp created_at = 16;
-    google.protobuf.Timestamp updated_at = 17;
-    string created_by_uuid = 18;
-    string updated_by_uuid = 19;    
+    bool pro = 12;
+    bool public = 13;
+    repeated Visibility visibility = 14;
+    ExtensionStatus status = 15;
+    string owner_uuid = 16;
+    google.protobuf.Timestamp created_at = 17;
+    google.protobuf.Timestamp updated_at = 18;
+    string created_by_uuid = 19;
+    string updated_by_uuid = 20;    
 }
 
 enum ExtensionExtensionType { 

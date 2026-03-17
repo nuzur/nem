@@ -14,7 +14,7 @@ WHERE uuid = ?;
 -- name: UpdateExtension :exec
 UPDATE extension
 SET
-version = ?, identifier = ?, display_name = ?, display_author_name = ?, description = ?, url = ?, verfied = ?, repository = ?, extension_type = ?, tags = ?, public = ?, visibility = ?, status = ?, owner_uuid = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, identifier = ?, display_name = ?, display_author_name = ?, description = ?, url = ?, verified = ?, repository = ?, extension_type = ?, tags = ?, pro = ?, public = ?, visibility = ?, status = ?, owner_uuid = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?;
 
 -- name: UpdateExtensionVersion :exec

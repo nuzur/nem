@@ -48,6 +48,7 @@ sql:
           object_stores: ObjectStores
           output_tokens: OutputTokens
           owner_uuid: OwnerUUID
+          pro: Pro
           project_extension_uuid: ProjectExtensionUUID
           project_extensions: ProjectExtensions
           project_uuid: ProjectUUID
@@ -82,7 +83,7 @@ sql:
           user_type: UserType
           user_uuid: UserUUID
           uuid: UUID
-          verfied: Verfied
+          verified: Verified
           version: Version
           visibility: Visibility
         overrides:

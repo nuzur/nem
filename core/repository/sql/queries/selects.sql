@@ -623,6 +623,134 @@ WHERE
 
 
 
+-- name: FetchExtensionByPro :many
+SELECT * FROM extension
+WHERE 
+     pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndPro :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndPro :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndPro :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByRepositoryAndPro :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndRepositoryAndPro :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndPro :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndPro :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByExtensionTypeAndPro :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndPro :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndPro :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndPro :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndPro :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndPro :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndPro :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndPro :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    LIMIT ?, ?;
+
+
+
 -- name: FetchExtensionByPublic :many
 SELECT * FROM extension
 WHERE 
@@ -747,6 +875,134 @@ WHERE
 SELECT * FROM extension
 WHERE 
      version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByRepositoryAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndRepositoryAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByExtensionTypeAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndPublic :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
     LIMIT ?, ?;
 
 
@@ -879,6 +1135,134 @@ WHERE
 
 
 
+-- name: FetchExtensionByProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByRepositoryAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndRepositoryAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByExtensionTypeAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
 -- name: FetchExtensionByPublicAndStatus :many
 SELECT * FROM extension
 WHERE 
@@ -1003,6 +1387,134 @@ WHERE
 SELECT * FROM extension
 WHERE 
      version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByRepositoryAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndRepositoryAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByExtensionTypeAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    LIMIT ?, ?;
+
+
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndPublicAndStatus :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
     LIMIT ?, ?;
 
 
@@ -1515,6 +2027,550 @@ WHERE
 SELECT * FROM extension
 WHERE 
      version = ? AND identifier = ? AND repository = ? AND extension_type = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByRepositoryAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByRepositoryAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndRepositoryAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndRepositoryAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndRepositoryAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndRepositoryAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByExtensionTypeAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByExtensionTypeAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByExtensionTypeAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByExtensionTypeAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndExtensionTypeAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndExtensionTypeAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ?  
     ORDER BY updated_at DESC
     LIMIT ?, ?;
 
@@ -2067,6 +3123,550 @@ WHERE
 
     
     
+-- name: FetchExtensionByProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByRepositoryAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByRepositoryAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndRepositoryAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndRepositoryAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByExtensionTypeAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByExtensionTypeAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByExtensionTypeAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByExtensionTypeAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndPublicOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndPublicOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndPublicOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndPublicOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
 -- name: FetchExtensionByStatusOrderedByCreatedAtASC :many
 SELECT * FROM extension
 WHERE 
@@ -2611,6 +4211,550 @@ WHERE
 
     
     
+-- name: FetchExtensionByProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByRepositoryAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByRepositoryAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndRepositoryAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndRepositoryAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByExtensionTypeAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByExtensionTypeAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByExtensionTypeAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByExtensionTypeAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
 -- name: FetchExtensionByPublicAndStatusOrderedByCreatedAtASC :many
 SELECT * FROM extension
 WHERE 
@@ -3147,6 +5291,550 @@ WHERE
 SELECT * FROM extension
 WHERE 
      version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByRepositoryAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByRepositoryAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndRepositoryAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndRepositoryAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByIdentifierAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+    
+    
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByCreatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtASC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchExtensionByVersionAndIdentifierAndRepositoryAndExtensionTypeAndProAndPublicAndStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM extension
+WHERE 
+     version = ? AND identifier = ? AND repository = ? AND extension_type = ? AND pro = ? AND public = ? AND status = ?  
     ORDER BY updated_at DESC
     LIMIT ?, ?;
 

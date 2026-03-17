@@ -152,13 +152,15 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 			URL: mapper.StringPtrToSqlNullString(req.Extension.URL),
 
-			Verfied: req.Extension.Verfied,
+			Verified: req.Extension.Verified,
 
 			Repository: req.Extension.Repository,
 
 			ExtensionType: req.Extension.ExtensionType.ToInt64(),
 
 			Tags: mapper.SliceToJSON(req.Extension.Tags),
+
+			Pro: req.Extension.Pro,
 
 			Public: req.Extension.Public,
 
@@ -194,13 +196,15 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 	res.URL = mapper.StringPtrToSqlNullString(req.Extension.URL)
 
-	res.Verfied = req.Extension.Verfied
+	res.Verified = req.Extension.Verified
 
 	res.Repository = req.Extension.Repository
 
 	res.ExtensionType = req.Extension.ExtensionType.ToInt64()
 
 	res.Tags = mapper.SliceToJSON(req.Extension.Tags)
+
+	res.Pro = req.Extension.Pro
 
 	res.Public = req.Extension.Public
 

@@ -159,15 +159,15 @@ func (m *module) List(ctx context.Context,
 		}
 
 		if len(optConfig.ListIncludeColumns) > 0 {
-			if slices.Contains(optConfig.ListIncludeColumns, "verfied") {
-				fields = append(fields, &i.Verfied)
+			if slices.Contains(optConfig.ListIncludeColumns, "verified") {
+				fields = append(fields, &i.Verified)
 			}
 		} else if len(optConfig.ListExcludeColumns) > 0 {
-			if !slices.Contains(optConfig.ListExcludeColumns, "verfied") {
-				fields = append(fields, &i.Verfied)
+			if !slices.Contains(optConfig.ListExcludeColumns, "verified") {
+				fields = append(fields, &i.Verified)
 			}
 		} else {
-			fields = append(fields, &i.Verfied)
+			fields = append(fields, &i.Verified)
 		}
 
 		if len(optConfig.ListIncludeColumns) > 0 {
@@ -204,6 +204,18 @@ func (m *module) List(ctx context.Context,
 			}
 		} else {
 			fields = append(fields, &i.Tags)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "pro") {
+				fields = append(fields, &i.Pro)
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "pro") {
+				fields = append(fields, &i.Pro)
+			}
+		} else {
+			fields = append(fields, &i.Pro)
 		}
 
 		if len(optConfig.ListIncludeColumns) > 0 {

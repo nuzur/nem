@@ -111,7 +111,7 @@ func (q *Queries) UpdateChangeRequest(ctx context.Context, arg UpdateChangeReque
 const updateExtension = `-- name: UpdateExtension :exec
 UPDATE extension
 SET
-version = ?, identifier = ?, display_name = ?, display_author_name = ?, description = ?, url = ?, verfied = ?, repository = ?, extension_type = ?, tags = ?, public = ?, visibility = ?, status = ?, owner_uuid = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+version = ?, identifier = ?, display_name = ?, display_author_name = ?, description = ?, url = ?, verified = ?, repository = ?, extension_type = ?, tags = ?, pro = ?, public = ?, visibility = ?, status = ?, owner_uuid = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?
 `
 
@@ -122,10 +122,11 @@ type UpdateExtensionParams struct {
 	DisplayAuthorName sql.NullString `json:"display_author_name"`
 	Description       sql.NullString `json:"description"`
 	URL               sql.NullString `json:"url"`
-	Verfied           bool           `json:"verfied"`
+	Verified          bool           `json:"verified"`
 	Repository        string         `json:"repository"`
 	ExtensionType     int64          `json:"extension_type"`
 	Tags              []byte         `json:"tags"`
+	Pro               bool           `json:"pro"`
 	Public            bool           `json:"public"`
 	Visibility        []byte         `json:"visibility"`
 	Status            int64          `json:"status"`
@@ -145,10 +146,11 @@ func (q *Queries) UpdateExtension(ctx context.Context, arg UpdateExtensionParams
 		arg.DisplayAuthorName,
 		arg.Description,
 		arg.URL,
-		arg.Verfied,
+		arg.Verified,
 		arg.Repository,
 		arg.ExtensionType,
 		arg.Tags,
+		arg.Pro,
 		arg.Public,
 		arg.Visibility,
 		arg.Status,

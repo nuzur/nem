@@ -181,13 +181,15 @@ func extensionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("url", filtering.TypeString),
 
-		filtering.DeclareIdent("verfied", filtering.TypeBool),
+		filtering.DeclareIdent("verified", filtering.TypeBool),
 
 		filtering.DeclareIdent("repository", filtering.TypeString),
 
 		filtering.DeclareEnumIdent("extension_type", pb.ExtensionExtensionType(0).Type()),
 
 		filtering.DeclareIdent("tags", filtering.TypeString),
+
+		filtering.DeclareIdent("pro", filtering.TypeBool),
 
 		filtering.DeclareIdent("public", filtering.TypeBool),
 
