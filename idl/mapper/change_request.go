@@ -28,6 +28,7 @@ func ChangeRequestToProto(e main_entity.ChangeRequest) *pb.ChangeRequest {
 		UpdatedAt:          timestamppb.New(e.UpdatedAt),
 		CreatedByUuid:      e.CreatedByUUID.String(),
 		UpdatedByUuid:      e.UpdatedByUUID.String(),
+		AiGenerated:        e.AiGenerated,
 	}
 }
 
@@ -61,6 +62,7 @@ func ChangeRequestFromProto(m *pb.ChangeRequest) main_entity.ChangeRequest {
 		UpdatedAt:          m.GetUpdatedAt().AsTime(),
 		CreatedByUUID:      uuid.FromStringOrNil(m.GetCreatedByUuid()),
 		UpdatedByUUID:      uuid.FromStringOrNil(m.GetUpdatedByUuid()),
+		AiGenerated:        m.GetAiGenerated(),
 	}
 }
 

@@ -133,6 +133,8 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertChangeR
 		CreatedByUUID: req.ChangeRequest.CreatedByUUID.String(),
 
 		UpdatedByUUID: req.ChangeRequest.UpdatedByUUID.String(),
+
+		AiGenerated: req.ChangeRequest.AiGenerated,
 	}
 }
 

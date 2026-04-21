@@ -173,6 +173,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 			CreatedByUUID: req.ChangeRequest.CreatedByUUID.String(),
 
 			UpdatedByUUID: req.ChangeRequest.UpdatedByUUID.String(),
+
+			AiGenerated: req.ChangeRequest.AiGenerated,
 		}
 	}
 
@@ -211,6 +213,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 	res.CreatedByUUID = req.ChangeRequest.CreatedByUUID.String()
 
 	res.UpdatedByUUID = req.ChangeRequest.UpdatedByUUID.String()
+
+	res.AiGenerated = req.ChangeRequest.AiGenerated
 
 	return res
 

@@ -36,6 +36,7 @@ type ChangeRequest struct {
 	UpdatedAt          time.Time                                            `json:"updated_at"`
 	CreatedByUUID      uuid.UUID                                            `json:"created_by_uuid"`
 	UpdatedByUUID      uuid.UUID                                            `json:"updated_by_uuid"`
+	AiGenerated        bool                                                 `json:"ai_generated"`
 }
 
 func (e ChangeRequest) String() string {
@@ -75,6 +76,7 @@ func (e ChangeRequest) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["updated_at"] = types.TimestampFieldType
 	res["created_by_uuid"] = types.UUIDFieldType
 	res["updated_by_uuid"] = types.UUIDFieldType
+	res["ai_generated"] = types.BooleanFieldType
 	return res
 }
 
@@ -97,6 +99,7 @@ func (e ChangeRequest) OrderedFieldIdentifiers() []string {
 	res = append(res, "updated_at")
 	res = append(res, "created_by_uuid")
 	res = append(res, "updated_by_uuid")
+	res = append(res, "ai_generated")
 
 	return res
 }
@@ -183,6 +186,7 @@ func NewChangeRequestWithRandomValues() ChangeRequest {
 		UpdatedAt:          randomvalues.GetRandomTimeValue(),
 		CreatedByUUID:      randomvalues.GetRandomUUIDValue(),
 		UpdatedByUUID:      randomvalues.GetRandomUUIDValue(),
+		AiGenerated:        randomvalues.GetRandomBoolValue(),
 	}
 }
 

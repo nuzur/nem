@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS `change_request` (
   `created_at` DATETIME NOT NULL  default CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL  default CURRENT_TIMESTAMP,
   `created_by_uuid` CHAR(36) NOT NULL  ,
-  `updated_by_uuid` CHAR(36) NOT NULL  ,  
+  `updated_by_uuid` CHAR(36) NOT NULL  ,
+  `ai_generated` TINYINT(1) NOT NULL  ,  
   PRIMARY KEY (`uuid`),
   INDEX `version` (`version` ASC),
   INDEX `project_uuid` (`project_uuid` ASC),
@@ -26,5 +27,6 @@ CREATE TABLE IF NOT EXISTS `change_request` (
   INDEX `owner_uuid` (`owner_uuid` ASC),
   INDEX `status` (`status` ASC),
   INDEX `created_at` (`created_at` ASC),
-  INDEX `updated_at` (`updated_at` ASC))  
+  INDEX `updated_at` (`updated_at` ASC),
+  INDEX `ai_generated` (`ai_generated` ASC))  
 ENGINE = InnoDB;

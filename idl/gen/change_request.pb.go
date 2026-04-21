@@ -200,6 +200,7 @@ type ChangeRequest struct {
 	UpdatedAt          *timestamppb.Timestamp     `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	CreatedByUuid      string                     `protobuf:"bytes,16,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
 	UpdatedByUuid      string                     `protobuf:"bytes,17,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	AiGenerated        bool                       `protobuf:"varint,18,opt,name=ai_generated,json=aiGenerated,proto3" json:"ai_generated,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -353,11 +354,18 @@ func (x *ChangeRequest) GetUpdatedByUuid() string {
 	return ""
 }
 
+func (x *ChangeRequest) GetAiGenerated() bool {
+	if x != nil {
+		return x.AiGenerated
+	}
+	return false
+}
+
 var File_change_request_proto protoreflect.FileDescriptor
 
 const file_change_request_proto_rawDesc = "" +
 	"\n" +
-	"\x14change_request.proto\x12\x03nem\x1a change_request_data_change.proto\x1a\x1dchange_request_metadata.proto\x1a\x1bchange_request_review.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x92\x06\n" +
+	"\x14change_request.proto\x12\x03nem\x1a change_request_data_change.proto\x1a\x1dchange_request_metadata.proto\x1a\x1bchange_request_review.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb5\x06\n" +
 	"\rChangeRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x14\n" +
@@ -380,7 +388,8 @@ const file_change_request_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
 	"\x0fcreated_by_uuid\x18\x10 \x01(\tR\rcreatedByUuid\x12&\n" +
-	"\x0fupdated_by_uuid\x18\x11 \x01(\tR\rupdatedByUuid*\x9e\x01\n" +
+	"\x0fupdated_by_uuid\x18\x11 \x01(\tR\rupdatedByUuid\x12!\n" +
+	"\fai_generated\x18\x12 \x01(\bR\vaiGenerated*\x9e\x01\n" +
 	"\x17ChangeRequestChangeType\x12&\n" +
 	"\"CHANGE_REQUEST_CHANGE_TYPE_INVALID\x10\x00\x12+\n" +
 	"'CHANGE_REQUEST_CHANGE_TYPE_PROJECT_DATA\x10\x01\x12.\n" +

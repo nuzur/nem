@@ -39,5 +39,6 @@ func mapModelToEntity(model nemdb.ChangeRequest) main_entity.ChangeRequest {
 		UpdatedAt:          model.UpdatedAt,
 		CreatedByUUID:      uuid.FromStringOrNil(model.CreatedByUUID),
 		UpdatedByUUID:      uuid.FromStringOrNil(model.UpdatedByUUID),
+		AiGenerated:        model.AiGenerated,
 	}
 }

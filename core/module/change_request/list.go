@@ -278,6 +278,18 @@ func (m *module) List(ctx context.Context,
 			fields = append(fields, &i.UpdatedByUUID)
 		}
 
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "ai_generated") {
+				fields = append(fields, &i.AiGenerated)
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "ai_generated") {
+				fields = append(fields, &i.AiGenerated)
+			}
+		} else {
+			fields = append(fields, &i.AiGenerated)
+		}
+
 		if err := rows.Scan(fields...); err != nil {
 			m.monitoring.Emit(monitoring.EmitRequest{
 				ActionIdentifier: "list_change_request_scan",

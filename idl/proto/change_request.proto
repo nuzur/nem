@@ -30,7 +30,8 @@ message ChangeRequest {
     google.protobuf.Timestamp created_at = 14;
     google.protobuf.Timestamp updated_at = 15;
     string created_by_uuid = 16;
-    string updated_by_uuid = 17;    
+    string updated_by_uuid = 17;
+    bool ai_generated = 18;    
 }
 
 enum ChangeRequestChangeType { 
