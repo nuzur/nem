@@ -10,12 +10,6 @@ package nem;
 
 
 message UserConnectionLocalConfig {  
-    string ip_address = 1;
-    UserConnectionLocalConfigDbType db_type = 2;    
-}
-
-enum UserConnectionLocalConfigDbType { 
-    USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_INVALID = 0;
-    USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_MYSQL = 1;
-    USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_POSTGRES = 2;
+    string local_agent_uuid = 1;
+    string local_agent_connection_uuid = 2;    
 }

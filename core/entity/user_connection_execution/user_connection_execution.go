@@ -16,14 +16,14 @@ import (
 )
 
 type UserConnectionExecution struct {
-	UUID          uuid.UUID `json:"uuid"`
-	Status        Status    `json:"status"`
-	ResultsPath   *string   `json:"results_path"`
-	NumResults    int64     `json:"num_results"`
-	StartedAt     time.Time `json:"started_at"`
-	FinishedAt    time.Time `json:"finished_at"`
-	EstimatedTime *string   `json:"estimated_time"`
-	UserMsg       *string   `json:"user_msg"`
+	UUID          uuid.UUID  `json:"uuid"`
+	Status        Status     `json:"status"`
+	ResultsPath   *string    `json:"results_path"`
+	NumResults    int64      `json:"num_results"`
+	StartedAt     *time.Time `json:"started_at"`
+	FinishedAt    *time.Time `json:"finished_at"`
+	EstimatedTime *string    `json:"estimated_time"`
+	UserMsg       *string    `json:"user_msg"`
 }
 
 func (e UserConnectionExecution) String() string {
@@ -123,8 +123,8 @@ func NewUserConnectionExecutionWithRandomValues() UserConnectionExecution {
 		Status:        randomvalues.GetRandomOptionValue[Status](3),
 		ResultsPath:   randomvalues.GetRandomStringValuePtr(),
 		NumResults:    randomvalues.GetRandomIntValue(),
-		StartedAt:     randomvalues.GetRandomTimeValue(),
-		FinishedAt:    randomvalues.GetRandomTimeValue(),
+		StartedAt:     randomvalues.GetRandomTimeValuePtr(),
+		FinishedAt:    randomvalues.GetRandomTimeValuePtr(),
 		EstimatedTime: randomvalues.GetRandomStringValuePtr(),
 		UserMsg:       randomvalues.GetRandomStringValuePtr(),
 	}

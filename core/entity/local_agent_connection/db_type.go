@@ -1,4 +1,4 @@
-package user_connection_local_config
+package local_agent_connection
 
 import (
 	"encoding/json"

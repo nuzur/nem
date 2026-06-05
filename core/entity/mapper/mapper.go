@@ -129,3 +129,20 @@ func StringPtrToString(s *string) string {
 func StringToStringPtr(s string) *string {
 	return &s
 }
+
+func SqlNullTimeToTimePtr(t sql.NullTime) *time.Time {
+	if t.Valid {
+		return &t.Time
+	}
+	return nil
+}
+
+func TimePtrToSqlNullTime(t *time.Time) sql.NullTime {
+	if t == nil {
+		return sql.NullTime{}
+	}
+	return sql.NullTime{
+		Time:  *t,
+		Valid: true,
+	}
+}

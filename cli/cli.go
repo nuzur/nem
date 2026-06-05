@@ -58,6 +58,9 @@ import (
 	"github.com/nuzur/nem/core/entity/ai_usage"
 	ai_usagetypes "github.com/nuzur/nem/core/module/ai_usage/types"
 
+	"github.com/nuzur/nem/core/entity/local_agent"
+	local_agenttypes "github.com/nuzur/nem/core/module/local_agent/types"
+
 	"github.com/gofrs/uuid"
 	"github.com/manifoldco/promptui"
 	"github.com/urfave/cli"
@@ -426,6 +429,21 @@ func main() {
 							fmt.Printf("error writing entity: %s, %v \n", "ai_usage", err)
 						} else {
 							fmt.Printf("wrote entity: %s, %v \n", "ai_usage", res)
+						}
+					}
+					c.Destroy()
+
+				case "local_agent":
+					entities := local_agent.NewLocalAgentSliceWithRandomValues(100)
+					for _, e := range entities {
+						e.UUID = uuid.Nil
+						res, err := c.LocalAgent().Upsert(context.Background(), local_agenttypes.UpsertRequest{
+							LocalAgent: e,
+						}, false)
+						if err != nil {
+							fmt.Printf("error writing entity: %s, %v \n", "local_agent", err)
+						} else {
+							fmt.Printf("wrote entity: %s, %v \n", "local_agent", res)
 						}
 					}
 					c.Destroy()

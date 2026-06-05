@@ -15,6 +15,7 @@ sql:
           base_version_uuid: BaseVersionUUID
           billing_metadata: BillingMetadata
           change_type: ChangeType
+          cli_version: CliVersion
           configuration_entity: ConfigurationEntity
           connections: Connections
           context: Context
@@ -43,10 +44,13 @@ sql:
           identifier: Identifier
           input_tokens: InputTokens
           last_name: LastName
+          last_seen_at: LastSeenAt
           locale: Locale
+          machine_name: MachineName
           metadata: Metadata
           name: Name
           object_stores: ObjectStores
+          os: Os
           output_tokens: OutputTokens
           owner_uuid: OwnerUUID
           pro: Pro
@@ -64,6 +68,7 @@ sql:
           review_required_structure: ReviewRequiredStructure
           review_status: ReviewStatus
           reviews: Reviews
+          revoked_at: RevokedAt
           role: Role
           services: Services
           start_date: StartDate

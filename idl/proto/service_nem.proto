@@ -37,6 +37,8 @@ import "membership.proto";
 
 import "ai_usage.proto";
 
+import "local_agent.proto";
+
 
 service Nem {    
     
@@ -123,6 +125,12 @@ service Nem {
     rpc CreateAiUsage(CreateAiUsageRequest) returns (AiUsage) {}
     rpc UpdateAiUsage(UpdateAiUsageRequest) returns (AiUsage) {}
     // ai_usage end
+    
+    // local_agent start
+    rpc ListLocalAgents(ListLocalAgentsRequest) returns (ListLocalAgentsResponse){}
+    rpc CreateLocalAgent(CreateLocalAgentRequest) returns (LocalAgent) {}
+    rpc UpdateLocalAgent(UpdateLocalAgentRequest) returns (LocalAgent) {}
+    // local_agent end
     
 }
 
@@ -658,3 +666,41 @@ message UpdateAiUsageRequest {
     google.protobuf.FieldMask update_mask = 2;
 }
 // ai_usage end
+
+// local_agent start
+message ListLocalAgentsRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;    
+}
+
+message ListLocalAgentsResponse {
+    repeated LocalAgent local_agents = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateLocalAgentRequest {
+    LocalAgent local_agent = 1;
+}
+
+message UpdateLocalAgentRequest {
+   
+    LocalAgent local_agent = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// local_agent end

@@ -3,12 +3,14 @@ package mapper
 import (
 	main_entity "github.com/nuzur/nem/core/entity/user_connection_local_config"
 	pb "github.com/nuzur/nem/idl/gen"
+
+	"github.com/gofrs/uuid"
 )
 
 func UserConnectionLocalConfigToProto(e main_entity.UserConnectionLocalConfig) *pb.UserConnectionLocalConfig {
 	return &pb.UserConnectionLocalConfig{
-		IpAddress: StringPtrToString(e.IpAddress),
-		DbType:    pb.UserConnectionLocalConfigDbType(e.DbType),
+		LocalAgentUuid:           e.LocalAgentUUID.String(),
+		LocalAgentConnectionUuid: e.LocalAgentConnectionUUID.String(),
 	}
 }
 
@@ -25,8 +27,8 @@ func UserConnectionLocalConfigFromProto(m *pb.UserConnectionLocalConfig) main_en
 		return main_entity.UserConnectionLocalConfig{}
 	}
 	return main_entity.UserConnectionLocalConfig{
-		IpAddress: &m.IpAddress,
-		DbType:    main_entity.DbType(m.GetDbType()),
+		LocalAgentUUID:           uuid.FromStringOrNil(m.GetLocalAgentUuid()),
+		LocalAgentConnectionUUID: uuid.FromStringOrNil(m.GetLocalAgentConnectionUuid()),
 	}
 }
 

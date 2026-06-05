@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "github.com/nuzur/nem";
+option java_outer_classname = "LocalAgent";
+
+package nem;
+
+
+import "google/protobuf/timestamp.proto";
+import "local_agent_connection.proto";
+
+message LocalAgent {  
+    string uuid = 1;
+    string user_uuid = 2;
+    string machine_name = 3;
+    string os = 4;
+    string cli_version = 5;
+    repeated LocalAgentConnection connections = 6;
+    LocalAgentStatus status = 7;
+    google.protobuf.Timestamp last_seen_at = 8;
+    google.protobuf.Timestamp revoked_at = 9;
+    google.protobuf.Timestamp created_at = 10;
+    google.protobuf.Timestamp updated_at = 11;
+    string created_by_uuid = 12;
+    string updated_by_uuid = 13;    
+}
+
+enum LocalAgentStatus { 
+    LOCAL_AGENT_STATUS_INVALID = 0;
+    LOCAL_AGENT_STATUS_ONLINE = 1;
+    LOCAL_AGENT_STATUS_OFFLINE = 2;
+    LOCAL_AGENT_STATUS_REVOKED = 3;
+}

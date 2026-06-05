@@ -40,6 +40,8 @@ import (
 
 	"github.com/nuzur/nem/core/module/ai_usage"
 
+	"github.com/nuzur/nem/core/module/local_agent"
+
 	"github.com/nuzur/nem/core/repository"
 	"github.com/nuzur/nem/monitoring"
 
@@ -77,6 +79,8 @@ type Implementation struct {
 	membership membership.Module
 
 	ai_usage ai_usage.Module
+
+	local_agent local_agent.Module
 
 	monitoring *monitoring.Implementation
 
@@ -305,4 +309,16 @@ func (i Implementation) AiUsage() ai_usage.Module {
 		})
 	}
 	return i.ai_usage
+}
+
+func (i Implementation) LocalAgent() local_agent.Module {
+	if i.local_agent == nil {
+		i.local_agent = local_agent.New(coretypes.ModuleParams{
+			Repository: i.repository,
+			Monitoring: i.monitoring,
+
+			Events: i.events,
+		})
+	}
+	return i.local_agent
 }

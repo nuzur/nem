@@ -3,6 +3,8 @@ package user_connection_local_config
 import (
 	"encoding/json"
 
+	"github.com/gofrs/uuid"
+
 	"fmt"
 
 	"github.com/nuzur/nem/core/entity/types"
@@ -15,8 +17,8 @@ import (
 )
 
 type UserConnectionLocalConfig struct {
-	IpAddress *string `json:"ip_address"`
-	DbType    DbType  `json:"db_type"`
+	LocalAgentUUID           uuid.UUID `json:"local_agent_uuid"`
+	LocalAgentConnectionUUID uuid.UUID `json:"local_agent_connection_uuid"`
 }
 
 func (e UserConnectionLocalConfig) String() string {
@@ -31,15 +33,15 @@ func (e UserConnectionLocalConfig) EntityIdentifier() string {
 func (e UserConnectionLocalConfig) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res := make(map[string]types.FieldType)
 
-	res["ip_address"] = types.StringFieldType
-	res["db_type"] = types.SingleEnumFieldType
+	res["local_agent_uuid"] = types.UUIDFieldType
+	res["local_agent_connection_uuid"] = types.UUIDFieldType
 	return res
 }
 
 func (e UserConnectionLocalConfig) OrderedFieldIdentifiers() []string {
 	res := []string{}
-	res = append(res, "ip_address")
-	res = append(res, "db_type")
+	res = append(res, "local_agent_uuid")
+	res = append(res, "local_agent_connection_uuid")
 
 	return res
 }
@@ -100,8 +102,8 @@ func UserConnectionLocalConfigSliceToJSON(e []UserConnectionLocalConfig) json.Ra
 func NewUserConnectionLocalConfigWithRandomValues() UserConnectionLocalConfig {
 	rand.New(rand.NewSource((time.Now().UnixNano())))
 	return UserConnectionLocalConfig{
-		IpAddress: randomvalues.GetRandomStringValuePtr(),
-		DbType:    randomvalues.GetRandomOptionValue[DbType](2),
+		LocalAgentUUID:           randomvalues.GetRandomUUIDValue(),
+		LocalAgentConnectionUUID: randomvalues.GetRandomUUIDValue(),
 	}
 }
 

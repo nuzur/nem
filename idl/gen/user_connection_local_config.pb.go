@@ -21,61 +21,12 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type UserConnectionLocalConfigDbType int32
-
-const (
-	UserConnectionLocalConfigDbType_USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_INVALID  UserConnectionLocalConfigDbType = 0
-	UserConnectionLocalConfigDbType_USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_MYSQL    UserConnectionLocalConfigDbType = 1
-	UserConnectionLocalConfigDbType_USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_POSTGRES UserConnectionLocalConfigDbType = 2
-)
-
-// Enum value maps for UserConnectionLocalConfigDbType.
-var (
-	UserConnectionLocalConfigDbType_name = map[int32]string{
-		0: "USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_INVALID",
-		1: "USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_MYSQL",
-		2: "USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_POSTGRES",
-	}
-	UserConnectionLocalConfigDbType_value = map[string]int32{
-		"USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_INVALID":  0,
-		"USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_MYSQL":    1,
-		"USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_POSTGRES": 2,
-	}
-)
-
-func (x UserConnectionLocalConfigDbType) Enum() *UserConnectionLocalConfigDbType {
-	p := new(UserConnectionLocalConfigDbType)
-	*p = x
-	return p
-}
-
-func (x UserConnectionLocalConfigDbType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (UserConnectionLocalConfigDbType) Descriptor() protoreflect.EnumDescriptor {
-	return file_user_connection_local_config_proto_enumTypes[0].Descriptor()
-}
-
-func (UserConnectionLocalConfigDbType) Type() protoreflect.EnumType {
-	return &file_user_connection_local_config_proto_enumTypes[0]
-}
-
-func (x UserConnectionLocalConfigDbType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use UserConnectionLocalConfigDbType.Descriptor instead.
-func (UserConnectionLocalConfigDbType) EnumDescriptor() ([]byte, []int) {
-	return file_user_connection_local_config_proto_rawDescGZIP(), []int{0}
-}
-
 type UserConnectionLocalConfig struct {
-	state         protoimpl.MessageState          `protogen:"open.v1"`
-	IpAddress     string                          `protobuf:"bytes,1,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
-	DbType        UserConnectionLocalConfigDbType `protobuf:"varint,2,opt,name=db_type,json=dbType,proto3,enum=nem.UserConnectionLocalConfigDbType" json:"db_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	LocalAgentUuid           string                 `protobuf:"bytes,1,opt,name=local_agent_uuid,json=localAgentUuid,proto3" json:"local_agent_uuid,omitempty"`
+	LocalAgentConnectionUuid string                 `protobuf:"bytes,2,opt,name=local_agent_connection_uuid,json=localAgentConnectionUuid,proto3" json:"local_agent_connection_uuid,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *UserConnectionLocalConfig) Reset() {
@@ -108,33 +59,28 @@ func (*UserConnectionLocalConfig) Descriptor() ([]byte, []int) {
 	return file_user_connection_local_config_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *UserConnectionLocalConfig) GetIpAddress() string {
+func (x *UserConnectionLocalConfig) GetLocalAgentUuid() string {
 	if x != nil {
-		return x.IpAddress
+		return x.LocalAgentUuid
 	}
 	return ""
 }
 
-func (x *UserConnectionLocalConfig) GetDbType() UserConnectionLocalConfigDbType {
+func (x *UserConnectionLocalConfig) GetLocalAgentConnectionUuid() string {
 	if x != nil {
-		return x.DbType
+		return x.LocalAgentConnectionUuid
 	}
-	return UserConnectionLocalConfigDbType_USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_INVALID
+	return ""
 }
 
 var File_user_connection_local_config_proto protoreflect.FileDescriptor
 
 const file_user_connection_local_config_proto_rawDesc = "" +
 	"\n" +
-	"\"user_connection_local_config.proto\x12\x03nem\"y\n" +
-	"\x19UserConnectionLocalConfig\x12\x1d\n" +
-	"\n" +
-	"ip_address\x18\x01 \x01(\tR\tipAddress\x12=\n" +
-	"\adb_type\x18\x02 \x01(\x0e2$.nem.UserConnectionLocalConfigDbTypeR\x06dbType*\xb6\x01\n" +
-	"\x1fUserConnectionLocalConfigDbType\x120\n" +
-	",USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_INVALID\x10\x00\x12.\n" +
-	"*USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_MYSQL\x10\x01\x121\n" +
-	"-USER_CONNECTION_LOCAL_CONFIG_DB_TYPE_POSTGRES\x10\x02B@\n" +
+	"\"user_connection_local_config.proto\x12\x03nem\"\x84\x01\n" +
+	"\x19UserConnectionLocalConfig\x12(\n" +
+	"\x10local_agent_uuid\x18\x01 \x01(\tR\x0elocalAgentUuid\x12=\n" +
+	"\x1blocal_agent_connection_uuid\x18\x02 \x01(\tR\x18localAgentConnectionUuidB@\n" +
 	"\x14github.com/nuzur/nemB\x19UserConnectionLocalConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -149,19 +95,16 @@ func file_user_connection_local_config_proto_rawDescGZIP() []byte {
 	return file_user_connection_local_config_proto_rawDescData
 }
 
-var file_user_connection_local_config_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_user_connection_local_config_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_user_connection_local_config_proto_goTypes = []any{
-	(UserConnectionLocalConfigDbType)(0), // 0: nem.UserConnectionLocalConfigDbType
-	(*UserConnectionLocalConfig)(nil),    // 1: nem.UserConnectionLocalConfig
+	(*UserConnectionLocalConfig)(nil), // 0: nem.UserConnectionLocalConfig
 }
 var file_user_connection_local_config_proto_depIdxs = []int32{
-	0, // 0: nem.UserConnectionLocalConfig.db_type:type_name -> nem.UserConnectionLocalConfigDbType
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0, // [0:0] is the sub-list for method output_type
+	0, // [0:0] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_user_connection_local_config_proto_init() }
@@ -174,14 +117,13 @@ func file_user_connection_local_config_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_connection_local_config_proto_rawDesc), len(file_user_connection_local_config_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      0,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_user_connection_local_config_proto_goTypes,
 		DependencyIndexes: file_user_connection_local_config_proto_depIdxs,
-		EnumInfos:         file_user_connection_local_config_proto_enumTypes,
 		MessageInfos:      file_user_connection_local_config_proto_msgTypes,
 	}.Build()
 	File_user_connection_local_config_proto = out.File

@@ -9361,3 +9361,102 @@ WHERE
 
 
 
+
+
+
+-- name: FetchLocalAgentByUUID :many
+SELECT * FROM local_agent
+WHERE 
+     uuid = ?  
+    ;
+
+
+-- name: FetchLocalAgentByUUIDForUpdate :many
+SELECT * FROM local_agent
+WHERE 
+     uuid = ?      
+FOR UPDATE;
+
+
+-- name: FetchLocalAgentByStatus :many
+SELECT * FROM local_agent
+WHERE 
+     status = ?  
+    LIMIT ?, ?;
+
+
+
+
+
+    
+
+    
+    
+-- name: FetchLocalAgentByStatusOrderedByLastSeenAtASC :many
+SELECT * FROM local_agent
+WHERE 
+     status = ?  
+    ORDER BY last_seen_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchLocalAgentByStatusOrderedByLastSeenAtDESC :many
+SELECT * FROM local_agent
+WHERE 
+     status = ?  
+    ORDER BY last_seen_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchLocalAgentByStatusOrderedByRevokedAtASC :many
+SELECT * FROM local_agent
+WHERE 
+     status = ?  
+    ORDER BY revoked_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchLocalAgentByStatusOrderedByRevokedAtDESC :many
+SELECT * FROM local_agent
+WHERE 
+     status = ?  
+    ORDER BY revoked_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchLocalAgentByStatusOrderedByCreatedAtASC :many
+SELECT * FROM local_agent
+WHERE 
+     status = ?  
+    ORDER BY created_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchLocalAgentByStatusOrderedByCreatedAtDESC :many
+SELECT * FROM local_agent
+WHERE 
+     status = ?  
+    ORDER BY created_at DESC
+    LIMIT ?, ?;
+
+        
+-- name: FetchLocalAgentByStatusOrderedByUpdatedAtASC :many
+SELECT * FROM local_agent
+WHERE 
+     status = ?  
+    ORDER BY updated_at ASC
+    LIMIT ?, ?;
+
+-- name: FetchLocalAgentByStatusOrderedByUpdatedAtDESC :many
+SELECT * FROM local_agent
+WHERE 
+     status = ?  
+    ORDER BY updated_at DESC
+    LIMIT ?, ?;
+
+        
+    
+
+
+
+
+
+
+

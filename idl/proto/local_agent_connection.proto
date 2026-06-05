@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = "nem/idl/gen";
+option java_multiple_files = true;
+option java_package = "github.com/nuzur/nem";
+option java_outer_classname = "LocalAgentConnection";
+
+package nem;
+
+
+
+message LocalAgentConnection {  
+    string uuid = 1;
+    string name = 2;
+    LocalAgentConnectionDbType db_type = 3;
+    string default_schema = 4;    
+}
+
+enum LocalAgentConnectionDbType { 
+    LOCAL_AGENT_CONNECTION_DB_TYPE_INVALID = 0;
+    LOCAL_AGENT_CONNECTION_DB_TYPE_MYSQL = 1;
+    LOCAL_AGENT_CONNECTION_DB_TYPE_POSTGRES = 2;
+}

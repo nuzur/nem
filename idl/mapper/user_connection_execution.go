@@ -5,8 +5,6 @@ import (
 	pb "github.com/nuzur/nem/idl/gen"
 
 	"github.com/gofrs/uuid"
-
-	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func UserConnectionExecutionToProto(e main_entity.UserConnectionExecution) *pb.UserConnectionExecution {
@@ -15,8 +13,8 @@ func UserConnectionExecutionToProto(e main_entity.UserConnectionExecution) *pb.U
 		Status:        pb.UserConnectionExecutionStatus(e.Status),
 		ResultsPath:   StringPtrToString(e.ResultsPath),
 		NumResults:    int64(e.NumResults),
-		StartedAt:     timestamppb.New(e.StartedAt),
-		FinishedAt:    timestamppb.New(e.FinishedAt),
+		StartedAt:     TimePtrToTimestamppb(e.StartedAt),
+		FinishedAt:    TimePtrToTimestamppb(e.FinishedAt),
 		EstimatedTime: StringPtrToString(e.EstimatedTime),
 		UserMsg:       StringPtrToString(e.UserMsg),
 	}
@@ -39,8 +37,8 @@ func UserConnectionExecutionFromProto(m *pb.UserConnectionExecution) main_entity
 		Status:        main_entity.Status(m.GetStatus()),
 		ResultsPath:   &m.ResultsPath,
 		NumResults:    int64(m.GetNumResults()),
-		StartedAt:     m.GetStartedAt().AsTime(),
-		FinishedAt:    m.GetFinishedAt().AsTime(),
+		StartedAt:     TimestamppbToTimePtr(m.GetStartedAt()),
+		FinishedAt:    TimestamppbToTimePtr(m.GetFinishedAt()),
 		EstimatedTime: &m.EstimatedTime,
 		UserMsg:       &m.UserMsg,
 	}
