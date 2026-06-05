@@ -78,17 +78,18 @@ type LocalAgent struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
 	Uuid          string                  `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	UserUuid      string                  `protobuf:"bytes,2,opt,name=user_uuid,json=userUuid,proto3" json:"user_uuid,omitempty"`
-	MachineName   string                  `protobuf:"bytes,3,opt,name=machine_name,json=machineName,proto3" json:"machine_name,omitempty"`
-	Os            string                  `protobuf:"bytes,4,opt,name=os,proto3" json:"os,omitempty"`
-	CliVersion    string                  `protobuf:"bytes,5,opt,name=cli_version,json=cliVersion,proto3" json:"cli_version,omitempty"`
-	Connections   []*LocalAgentConnection `protobuf:"bytes,6,rep,name=connections,proto3" json:"connections,omitempty"`
-	Status        LocalAgentStatus        `protobuf:"varint,7,opt,name=status,proto3,enum=nem.LocalAgentStatus" json:"status,omitempty"`
-	LastSeenAt    *timestamppb.Timestamp  `protobuf:"bytes,8,opt,name=last_seen_at,json=lastSeenAt,proto3" json:"last_seen_at,omitempty"`
-	RevokedAt     *timestamppb.Timestamp  `protobuf:"bytes,9,opt,name=revoked_at,json=revokedAt,proto3" json:"revoked_at,omitempty"`
-	CreatedAt     *timestamppb.Timestamp  `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp  `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CreatedByUuid string                  `protobuf:"bytes,12,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
-	UpdatedByUuid string                  `protobuf:"bytes,13,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	TokenHash     string                  `protobuf:"bytes,3,opt,name=token_hash,json=tokenHash,proto3" json:"token_hash,omitempty"`
+	MachineName   string                  `protobuf:"bytes,4,opt,name=machine_name,json=machineName,proto3" json:"machine_name,omitempty"`
+	Os            string                  `protobuf:"bytes,5,opt,name=os,proto3" json:"os,omitempty"`
+	CliVersion    string                  `protobuf:"bytes,6,opt,name=cli_version,json=cliVersion,proto3" json:"cli_version,omitempty"`
+	Connections   []*LocalAgentConnection `protobuf:"bytes,7,rep,name=connections,proto3" json:"connections,omitempty"`
+	Status        LocalAgentStatus        `protobuf:"varint,8,opt,name=status,proto3,enum=nem.LocalAgentStatus" json:"status,omitempty"`
+	LastSeenAt    *timestamppb.Timestamp  `protobuf:"bytes,9,opt,name=last_seen_at,json=lastSeenAt,proto3" json:"last_seen_at,omitempty"`
+	RevokedAt     *timestamppb.Timestamp  `protobuf:"bytes,10,opt,name=revoked_at,json=revokedAt,proto3" json:"revoked_at,omitempty"`
+	CreatedAt     *timestamppb.Timestamp  `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp  `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedByUuid string                  `protobuf:"bytes,13,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
+	UpdatedByUuid string                  `protobuf:"bytes,14,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -133,6 +134,13 @@ func (x *LocalAgent) GetUuid() string {
 func (x *LocalAgent) GetUserUuid() string {
 	if x != nil {
 		return x.UserUuid
+	}
+	return ""
+}
+
+func (x *LocalAgent) GetTokenHash() string {
+	if x != nil {
+		return x.TokenHash
 	}
 	return ""
 }
@@ -218,28 +226,30 @@ var File_local_agent_proto protoreflect.FileDescriptor
 
 const file_local_agent_proto_rawDesc = "" +
 	"\n" +
-	"\x11local_agent.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1clocal_agent_connection.proto\"\xbc\x04\n" +
+	"\x11local_agent.proto\x12\x03nem\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1clocal_agent_connection.proto\"\xdb\x04\n" +
 	"\n" +
 	"LocalAgent\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x1b\n" +
-	"\tuser_uuid\x18\x02 \x01(\tR\buserUuid\x12!\n" +
-	"\fmachine_name\x18\x03 \x01(\tR\vmachineName\x12\x0e\n" +
-	"\x02os\x18\x04 \x01(\tR\x02os\x12\x1f\n" +
-	"\vcli_version\x18\x05 \x01(\tR\n" +
+	"\tuser_uuid\x18\x02 \x01(\tR\buserUuid\x12\x1d\n" +
+	"\n" +
+	"token_hash\x18\x03 \x01(\tR\ttokenHash\x12!\n" +
+	"\fmachine_name\x18\x04 \x01(\tR\vmachineName\x12\x0e\n" +
+	"\x02os\x18\x05 \x01(\tR\x02os\x12\x1f\n" +
+	"\vcli_version\x18\x06 \x01(\tR\n" +
 	"cliVersion\x12;\n" +
-	"\vconnections\x18\x06 \x03(\v2\x19.nem.LocalAgentConnectionR\vconnections\x12-\n" +
-	"\x06status\x18\a \x01(\x0e2\x15.nem.LocalAgentStatusR\x06status\x12<\n" +
-	"\flast_seen_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"\vconnections\x18\a \x03(\v2\x19.nem.LocalAgentConnectionR\vconnections\x12-\n" +
+	"\x06status\x18\b \x01(\x0e2\x15.nem.LocalAgentStatusR\x06status\x12<\n" +
+	"\flast_seen_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"lastSeenAt\x129\n" +
 	"\n" +
-	"revoked_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\trevokedAt\x129\n" +
+	"revoked_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\trevokedAt\x129\n" +
 	"\n" +
-	"created_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
-	"\x0fcreated_by_uuid\x18\f \x01(\tR\rcreatedByUuid\x12&\n" +
-	"\x0fupdated_by_uuid\x18\r \x01(\tR\rupdatedByUuid*\x91\x01\n" +
+	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
+	"\x0fcreated_by_uuid\x18\r \x01(\tR\rcreatedByUuid\x12&\n" +
+	"\x0fupdated_by_uuid\x18\x0e \x01(\tR\rupdatedByUuid*\x91\x01\n" +
 	"\x10LocalAgentStatus\x12\x1e\n" +
 	"\x1aLOCAL_AGENT_STATUS_INVALID\x10\x00\x12\x1d\n" +
 	"\x19LOCAL_AGENT_STATUS_ONLINE\x10\x01\x12\x1e\n" +

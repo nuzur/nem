@@ -253,12 +253,13 @@ func (q *Queries) UpdateExtensionVersion(ctx context.Context, arg UpdateExtensio
 const updateLocalAgent = `-- name: UpdateLocalAgent :exec
 UPDATE local_agent
 SET
-user_uuid = ?, machine_name = ?, os = ?, cli_version = ?, connections = ?, status = ?, last_seen_at = ?, revoked_at = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
+user_uuid = ?, token_hash = ?, machine_name = ?, os = ?, cli_version = ?, connections = ?, status = ?, last_seen_at = ?, revoked_at = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?
 WHERE uuid = ?
 `
 
 type UpdateLocalAgentParams struct {
 	UserUUID      string         `json:"user_uuid"`
+	TokenHash     sql.NullString `json:"token_hash"`
 	MachineName   sql.NullString `json:"machine_name"`
 	Os            sql.NullString `json:"os"`
 	CliVersion    sql.NullString `json:"cli_version"`
@@ -276,6 +277,7 @@ type UpdateLocalAgentParams struct {
 func (q *Queries) UpdateLocalAgent(ctx context.Context, arg UpdateLocalAgentParams) error {
 	_, err := q.db.ExecContext(ctx, updateLocalAgent,
 		arg.UserUUID,
+		arg.TokenHash,
 		arg.MachineName,
 		arg.Os,
 		arg.CliVersion,

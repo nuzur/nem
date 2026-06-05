@@ -79,6 +79,7 @@ sql:
           tags: Tags
           team_uuid: TeamUUID
           title: Title
+          token_hash: TokenHash
           type: Type
           type_config: TypeConfig
           updated_at: UpdatedAt

@@ -22,6 +22,7 @@ func mapModelToEntity(model nemdb.LocalAgent) main_entity.LocalAgent {
 	return main_entity.LocalAgent{
 		UUID:          uuid.FromStringOrNil(model.UUID),
 		UserUUID:      uuid.FromStringOrNil(model.UserUUID),
+		TokenHash:     mapper.SqlNullStringToStringPtr(model.TokenHash),
 		MachineName:   mapper.SqlNullStringToStringPtr(model.MachineName),
 		Os:            mapper.SqlNullStringToStringPtr(model.Os),
 		CliVersion:    mapper.SqlNullStringToStringPtr(model.CliVersion),

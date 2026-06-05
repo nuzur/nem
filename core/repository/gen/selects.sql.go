@@ -55480,7 +55480,7 @@ func (q *Queries) FetchExtensionVersionByVersionOrderedByUpdatedAtDESC(ctx conte
 }
 
 const fetchLocalAgentByStatus = `-- name: FetchLocalAgentByStatus :many
-SELECT uuid, user_uuid, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
+SELECT uuid, user_uuid, token_hash, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
 WHERE 
      status = ?  
     LIMIT ?, ?
@@ -55504,6 +55504,7 @@ func (q *Queries) FetchLocalAgentByStatus(ctx context.Context, arg FetchLocalAge
 		if err := rows.Scan(
 			&i.UUID,
 			&i.UserUUID,
+			&i.TokenHash,
 			&i.MachineName,
 			&i.Os,
 			&i.CliVersion,
@@ -55530,7 +55531,7 @@ func (q *Queries) FetchLocalAgentByStatus(ctx context.Context, arg FetchLocalAge
 }
 
 const fetchLocalAgentByStatusOrderedByCreatedAtASC = `-- name: FetchLocalAgentByStatusOrderedByCreatedAtASC :many
-SELECT uuid, user_uuid, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
+SELECT uuid, user_uuid, token_hash, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
 WHERE 
      status = ?  
     ORDER BY created_at ASC
@@ -55555,6 +55556,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByCreatedAtASC(ctx context.Conte
 		if err := rows.Scan(
 			&i.UUID,
 			&i.UserUUID,
+			&i.TokenHash,
 			&i.MachineName,
 			&i.Os,
 			&i.CliVersion,
@@ -55581,7 +55583,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByCreatedAtASC(ctx context.Conte
 }
 
 const fetchLocalAgentByStatusOrderedByCreatedAtDESC = `-- name: FetchLocalAgentByStatusOrderedByCreatedAtDESC :many
-SELECT uuid, user_uuid, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
+SELECT uuid, user_uuid, token_hash, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
 WHERE 
      status = ?  
     ORDER BY created_at DESC
@@ -55606,6 +55608,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByCreatedAtDESC(ctx context.Cont
 		if err := rows.Scan(
 			&i.UUID,
 			&i.UserUUID,
+			&i.TokenHash,
 			&i.MachineName,
 			&i.Os,
 			&i.CliVersion,
@@ -55632,7 +55635,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByCreatedAtDESC(ctx context.Cont
 }
 
 const fetchLocalAgentByStatusOrderedByLastSeenAtASC = `-- name: FetchLocalAgentByStatusOrderedByLastSeenAtASC :many
-SELECT uuid, user_uuid, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
+SELECT uuid, user_uuid, token_hash, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
 WHERE 
      status = ?  
     ORDER BY last_seen_at ASC
@@ -55657,6 +55660,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByLastSeenAtASC(ctx context.Cont
 		if err := rows.Scan(
 			&i.UUID,
 			&i.UserUUID,
+			&i.TokenHash,
 			&i.MachineName,
 			&i.Os,
 			&i.CliVersion,
@@ -55683,7 +55687,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByLastSeenAtASC(ctx context.Cont
 }
 
 const fetchLocalAgentByStatusOrderedByLastSeenAtDESC = `-- name: FetchLocalAgentByStatusOrderedByLastSeenAtDESC :many
-SELECT uuid, user_uuid, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
+SELECT uuid, user_uuid, token_hash, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
 WHERE 
      status = ?  
     ORDER BY last_seen_at DESC
@@ -55708,6 +55712,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByLastSeenAtDESC(ctx context.Con
 		if err := rows.Scan(
 			&i.UUID,
 			&i.UserUUID,
+			&i.TokenHash,
 			&i.MachineName,
 			&i.Os,
 			&i.CliVersion,
@@ -55734,7 +55739,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByLastSeenAtDESC(ctx context.Con
 }
 
 const fetchLocalAgentByStatusOrderedByRevokedAtASC = `-- name: FetchLocalAgentByStatusOrderedByRevokedAtASC :many
-SELECT uuid, user_uuid, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
+SELECT uuid, user_uuid, token_hash, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
 WHERE 
      status = ?  
     ORDER BY revoked_at ASC
@@ -55759,6 +55764,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByRevokedAtASC(ctx context.Conte
 		if err := rows.Scan(
 			&i.UUID,
 			&i.UserUUID,
+			&i.TokenHash,
 			&i.MachineName,
 			&i.Os,
 			&i.CliVersion,
@@ -55785,7 +55791,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByRevokedAtASC(ctx context.Conte
 }
 
 const fetchLocalAgentByStatusOrderedByRevokedAtDESC = `-- name: FetchLocalAgentByStatusOrderedByRevokedAtDESC :many
-SELECT uuid, user_uuid, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
+SELECT uuid, user_uuid, token_hash, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
 WHERE 
      status = ?  
     ORDER BY revoked_at DESC
@@ -55810,6 +55816,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByRevokedAtDESC(ctx context.Cont
 		if err := rows.Scan(
 			&i.UUID,
 			&i.UserUUID,
+			&i.TokenHash,
 			&i.MachineName,
 			&i.Os,
 			&i.CliVersion,
@@ -55836,7 +55843,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByRevokedAtDESC(ctx context.Cont
 }
 
 const fetchLocalAgentByStatusOrderedByUpdatedAtASC = `-- name: FetchLocalAgentByStatusOrderedByUpdatedAtASC :many
-SELECT uuid, user_uuid, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
+SELECT uuid, user_uuid, token_hash, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
 WHERE 
      status = ?  
     ORDER BY updated_at ASC
@@ -55861,6 +55868,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByUpdatedAtASC(ctx context.Conte
 		if err := rows.Scan(
 			&i.UUID,
 			&i.UserUUID,
+			&i.TokenHash,
 			&i.MachineName,
 			&i.Os,
 			&i.CliVersion,
@@ -55887,7 +55895,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByUpdatedAtASC(ctx context.Conte
 }
 
 const fetchLocalAgentByStatusOrderedByUpdatedAtDESC = `-- name: FetchLocalAgentByStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, user_uuid, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
+SELECT uuid, user_uuid, token_hash, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
 WHERE 
      status = ?  
     ORDER BY updated_at DESC
@@ -55912,6 +55920,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByUpdatedAtDESC(ctx context.Cont
 		if err := rows.Scan(
 			&i.UUID,
 			&i.UserUUID,
+			&i.TokenHash,
 			&i.MachineName,
 			&i.Os,
 			&i.CliVersion,
@@ -55938,7 +55947,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByUpdatedAtDESC(ctx context.Cont
 }
 
 const fetchLocalAgentByUUID = `-- name: FetchLocalAgentByUUID :many
-SELECT uuid, user_uuid, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
+SELECT uuid, user_uuid, token_hash, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
 WHERE 
      uuid = ?
 `
@@ -55955,6 +55964,7 @@ func (q *Queries) FetchLocalAgentByUUID(ctx context.Context, uuid string) ([]Loc
 		if err := rows.Scan(
 			&i.UUID,
 			&i.UserUUID,
+			&i.TokenHash,
 			&i.MachineName,
 			&i.Os,
 			&i.CliVersion,
@@ -55981,7 +55991,7 @@ func (q *Queries) FetchLocalAgentByUUID(ctx context.Context, uuid string) ([]Loc
 }
 
 const fetchLocalAgentByUUIDForUpdate = `-- name: FetchLocalAgentByUUIDForUpdate :many
-SELECT uuid, user_uuid, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
+SELECT uuid, user_uuid, token_hash, machine_name, os, cli_version, connections, status, last_seen_at, revoked_at, created_at, updated_at, created_by_uuid, updated_by_uuid FROM local_agent
 WHERE 
      uuid = ?      
 FOR UPDATE
@@ -55999,6 +56009,7 @@ func (q *Queries) FetchLocalAgentByUUIDForUpdate(ctx context.Context, uuid strin
 		if err := rows.Scan(
 			&i.UUID,
 			&i.UserUUID,
+			&i.TokenHash,
 			&i.MachineName,
 			&i.Os,
 			&i.CliVersion,

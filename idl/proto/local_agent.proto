@@ -14,17 +14,18 @@ import "local_agent_connection.proto";
 message LocalAgent {  
     string uuid = 1;
     string user_uuid = 2;
-    string machine_name = 3;
-    string os = 4;
-    string cli_version = 5;
-    repeated LocalAgentConnection connections = 6;
-    LocalAgentStatus status = 7;
-    google.protobuf.Timestamp last_seen_at = 8;
-    google.protobuf.Timestamp revoked_at = 9;
-    google.protobuf.Timestamp created_at = 10;
-    google.protobuf.Timestamp updated_at = 11;
-    string created_by_uuid = 12;
-    string updated_by_uuid = 13;    
+    string token_hash = 3;
+    string machine_name = 4;
+    string os = 5;
+    string cli_version = 6;
+    repeated LocalAgentConnection connections = 7;
+    LocalAgentStatus status = 8;
+    google.protobuf.Timestamp last_seen_at = 9;
+    google.protobuf.Timestamp revoked_at = 10;
+    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp updated_at = 12;
+    string created_by_uuid = 13;
+    string updated_by_uuid = 14;    
 }
 
 enum LocalAgentStatus { 

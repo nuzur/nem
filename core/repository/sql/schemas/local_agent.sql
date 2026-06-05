@@ -2,6 +2,7 @@
 CREATE TABLE IF NOT EXISTS `local_agent` ( 
   `uuid` CHAR(36) NOT NULL  ,
   `user_uuid` CHAR(36) NOT NULL  ,
+  `token_hash` VARCHAR(255)   ,
   `machine_name` VARCHAR(255)   ,
   `os` VARCHAR(255)   ,
   `cli_version` VARCHAR(255)   ,

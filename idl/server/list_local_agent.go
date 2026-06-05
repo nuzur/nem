@@ -151,6 +151,8 @@ func local_agentDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("user_uuid", filtering.TypeString),
 
+		filtering.DeclareIdent("token_hash", filtering.TypeString),
+
 		filtering.DeclareIdent("machine_name", filtering.TypeString),
 
 		filtering.DeclareIdent("os", filtering.TypeString),

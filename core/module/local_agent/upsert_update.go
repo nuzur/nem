@@ -124,6 +124,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Loca
 
 			UserUUID: req.LocalAgent.UserUUID.String(),
 
+			TokenHash: mapper.StringPtrToSqlNullString(req.LocalAgent.TokenHash),
+
 			MachineName: mapper.StringPtrToSqlNullString(req.LocalAgent.MachineName),
 
 			Os: mapper.StringPtrToSqlNullString(req.LocalAgent.Os),
@@ -153,6 +155,8 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Loca
 	res.UUID = req.LocalAgent.UUID.String()
 
 	res.UserUUID = req.LocalAgent.UserUUID.String()
+
+	res.TokenHash = mapper.StringPtrToSqlNullString(req.LocalAgent.TokenHash)
 
 	res.MachineName = mapper.StringPtrToSqlNullString(req.LocalAgent.MachineName)
 

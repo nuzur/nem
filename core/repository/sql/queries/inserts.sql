@@ -85,6 +85,6 @@ VALUES
 
 -- name: InsertLocalAgent :execresult
 INSERT INTO local_agent
-(uuid,user_uuid,machine_name,os,cli_version,connections,status,last_seen_at,revoked_at,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,user_uuid,token_hash,machine_name,os,cli_version,connections,status,last_seen_at,revoked_at,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?);

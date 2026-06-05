@@ -19,6 +19,7 @@ import (
 type LocalAgent struct {
 	UUID          uuid.UUID                                     `json:"uuid"`
 	UserUUID      uuid.UUID                                     `json:"user_uuid"`
+	TokenHash     *string                                       `json:"token_hash"`
 	MachineName   *string                                       `json:"machine_name"`
 	Os            *string                                       `json:"os"`
 	CliVersion    *string                                       `json:"cli_version"`
@@ -54,6 +55,7 @@ func (e LocalAgent) FieldIdentfierToTypeMap() map[string]types.FieldType {
 
 	res["uuid"] = types.UUIDFieldType
 	res["user_uuid"] = types.UUIDFieldType
+	res["token_hash"] = types.StringFieldType
 	res["machine_name"] = types.StringFieldType
 	res["os"] = types.StringFieldType
 	res["cli_version"] = types.StringFieldType
@@ -72,6 +74,7 @@ func (e LocalAgent) OrderedFieldIdentifiers() []string {
 	res := []string{}
 	res = append(res, "uuid")
 	res = append(res, "user_uuid")
+	res = append(res, "token_hash")
 	res = append(res, "machine_name")
 	res = append(res, "os")
 	res = append(res, "cli_version")
@@ -152,6 +155,7 @@ func NewLocalAgentWithRandomValues() LocalAgent {
 	return LocalAgent{
 		UUID:          randomvalues.GetRandomUUIDValue(),
 		UserUUID:      randomvalues.GetRandomUUIDValue(),
+		TokenHash:     randomvalues.GetRandomStringValuePtr(),
 		MachineName:   randomvalues.GetRandomStringValuePtr(),
 		Os:            randomvalues.GetRandomStringValuePtr(),
 		CliVersion:    randomvalues.GetRandomStringValuePtr(),

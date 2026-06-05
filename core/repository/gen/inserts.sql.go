@@ -247,14 +247,15 @@ func (q *Queries) InsertExtensionVersion(ctx context.Context, arg InsertExtensio
 
 const insertLocalAgent = `-- name: InsertLocalAgent :execresult
 INSERT INTO local_agent
-(uuid,user_uuid,machine_name,os,cli_version,connections,status,last_seen_at,revoked_at,created_at,updated_at,created_by_uuid,updated_by_uuid)
+(uuid,user_uuid,token_hash,machine_name,os,cli_version,connections,status,last_seen_at,revoked_at,created_at,updated_at,created_by_uuid,updated_by_uuid)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertLocalAgentParams struct {
 	UUID          string         `json:"uuid"`
 	UserUUID      string         `json:"user_uuid"`
+	TokenHash     sql.NullString `json:"token_hash"`
 	MachineName   sql.NullString `json:"machine_name"`
 	Os            sql.NullString `json:"os"`
 	CliVersion    sql.NullString `json:"cli_version"`
@@ -272,6 +273,7 @@ func (q *Queries) InsertLocalAgent(ctx context.Context, arg InsertLocalAgentPara
 	return q.db.ExecContext(ctx, insertLocalAgent,
 		arg.UUID,
 		arg.UserUUID,
+		arg.TokenHash,
 		arg.MachineName,
 		arg.Os,
 		arg.CliVersion,

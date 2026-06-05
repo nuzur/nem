@@ -98,6 +98,8 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertLocalAg
 
 		UserUUID: req.LocalAgent.UserUUID.String(),
 
+		TokenHash: mapper.StringPtrToSqlNullString(req.LocalAgent.TokenHash),
+
 		MachineName: mapper.StringPtrToSqlNullString(req.LocalAgent.MachineName),
 
 		Os: mapper.StringPtrToSqlNullString(req.LocalAgent.Os),

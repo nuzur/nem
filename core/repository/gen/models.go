@@ -107,6 +107,7 @@ type ExtensionVersion struct {
 type LocalAgent struct {
 	UUID          string         `json:"uuid"`
 	UserUUID      string         `json:"user_uuid"`
+	TokenHash     sql.NullString `json:"token_hash"`
 	MachineName   sql.NullString `json:"machine_name"`
 	Os            sql.NullString `json:"os"`
 	CliVersion    sql.NullString `json:"cli_version"`

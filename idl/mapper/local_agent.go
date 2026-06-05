@@ -13,6 +13,7 @@ func LocalAgentToProto(e main_entity.LocalAgent) *pb.LocalAgent {
 	return &pb.LocalAgent{
 		Uuid:          e.UUID.String(),
 		UserUuid:      e.UserUUID.String(),
+		TokenHash:     StringPtrToString(e.TokenHash),
 		MachineName:   StringPtrToString(e.MachineName),
 		Os:            StringPtrToString(e.Os),
 		CliVersion:    StringPtrToString(e.CliVersion),
@@ -42,6 +43,7 @@ func LocalAgentFromProto(m *pb.LocalAgent) main_entity.LocalAgent {
 	return main_entity.LocalAgent{
 		UUID:          uuid.FromStringOrNil(m.GetUuid()),
 		UserUUID:      uuid.FromStringOrNil(m.GetUserUuid()),
+		TokenHash:     &m.TokenHash,
 		MachineName:   &m.MachineName,
 		Os:            &m.Os,
 		CliVersion:    &m.CliVersion,

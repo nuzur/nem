@@ -99,6 +99,18 @@ func (m *module) List(ctx context.Context,
 		}
 
 		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "token_hash") {
+				fields = append(fields, &i.TokenHash)
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "token_hash") {
+				fields = append(fields, &i.TokenHash)
+			}
+		} else {
+			fields = append(fields, &i.TokenHash)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
 			if slices.Contains(optConfig.ListIncludeColumns, "machine_name") {
 				fields = append(fields, &i.MachineName)
 			}
