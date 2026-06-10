@@ -70,6 +70,8 @@ sql:
           reviews: Reviews
           revoked_at: RevokedAt
           role: Role
+          scope: Scope
+          scope_config: ScopeConfig
           services: Services
           start_date: StartDate
           status: Status

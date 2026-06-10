@@ -59,9 +59,9 @@ func (q *Queries) InsertAiUsage(ctx context.Context, arg InsertAiUsageParams) (s
 
 const insertChangeRequest = `-- name: InsertChangeRequest :execresult
 INSERT INTO change_request
-(uuid,version,title,description,project_uuid,project_version_uuid,change_type,data_changes,metadata,reviews,review_status,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid,ai_generated)
+(uuid,version,title,description,project_uuid,project_version_uuid,change_type,data_changes,metadata,reviews,review_status,owner_uuid,status,created_at,updated_at,created_by_uuid,updated_by_uuid,ai_generated,scope,scope_config)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertChangeRequestParams struct {
@@ -83,6 +83,8 @@ type InsertChangeRequestParams struct {
 	CreatedByUUID      string         `json:"created_by_uuid"`
 	UpdatedByUUID      string         `json:"updated_by_uuid"`
 	AiGenerated        bool           `json:"ai_generated"`
+	Scope              sql.NullInt32  `json:"scope"`
+	ScopeConfig        []byte         `json:"scope_config"`
 }
 
 func (q *Queries) InsertChangeRequest(ctx context.Context, arg InsertChangeRequestParams) (sql.Result, error) {
@@ -105,6 +107,8 @@ func (q *Queries) InsertChangeRequest(ctx context.Context, arg InsertChangeReque
 		arg.CreatedByUUID,
 		arg.UpdatedByUUID,
 		arg.AiGenerated,
+		arg.Scope,
+		arg.ScopeConfig,
 	)
 }
 

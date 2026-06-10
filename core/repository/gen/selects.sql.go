@@ -2080,7 +2080,7 @@ func (q *Queries) FetchAiUsageByUUIDForUpdate(ctx context.Context, uuid string) 
 }
 
 const fetchChangeRequestByAiGenerated = `-- name: FetchChangeRequestByAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      ai_generated = ?  
     LIMIT ?, ?
@@ -2120,6 +2120,8 @@ func (q *Queries) FetchChangeRequestByAiGenerated(ctx context.Context, arg Fetch
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2135,7 +2137,7 @@ func (q *Queries) FetchChangeRequestByAiGenerated(ctx context.Context, arg Fetch
 }
 
 const fetchChangeRequestByAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      ai_generated = ?  
     ORDER BY created_at ASC
@@ -2176,6 +2178,8 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByCreatedAtASC(ctx conte
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2191,7 +2195,7 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByCreatedAtASC(ctx conte
 }
 
 const fetchChangeRequestByAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      ai_generated = ?  
     ORDER BY created_at DESC
@@ -2232,6 +2236,8 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByCreatedAtDESC(ctx cont
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2247,7 +2253,7 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByCreatedAtDESC(ctx cont
 }
 
 const fetchChangeRequestByAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      ai_generated = ?  
     ORDER BY updated_at ASC
@@ -2288,6 +2294,8 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByUpdatedAtASC(ctx conte
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2303,7 +2311,7 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByUpdatedAtASC(ctx conte
 }
 
 const fetchChangeRequestByAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      ai_generated = ?  
     ORDER BY updated_at DESC
@@ -2344,6 +2352,8 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByUpdatedAtDESC(ctx cont
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2359,7 +2369,7 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByUpdatedAtDESC(ctx cont
 }
 
 const fetchChangeRequestByChangeType = `-- name: FetchChangeRequestByChangeType :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ?  
     LIMIT ?, ?
@@ -2399,6 +2409,8 @@ func (q *Queries) FetchChangeRequestByChangeType(ctx context.Context, arg FetchC
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2414,7 +2426,7 @@ func (q *Queries) FetchChangeRequestByChangeType(ctx context.Context, arg FetchC
 }
 
 const fetchChangeRequestByChangeTypeAndAiGenerated = `-- name: FetchChangeRequestByChangeTypeAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -2460,6 +2472,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndAiGenerated(ctx context.Conte
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2475,7 +2489,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndAiGenerated(ctx context.Conte
 }
 
 const fetchChangeRequestByChangeTypeAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -2522,6 +2536,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByCreatedAt
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2537,7 +2553,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByCreatedAt
 }
 
 const fetchChangeRequestByChangeTypeAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -2584,6 +2600,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByCreatedAt
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2599,7 +2617,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByCreatedAt
 }
 
 const fetchChangeRequestByChangeTypeAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -2646,6 +2664,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByUpdatedAt
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2661,7 +2681,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByUpdatedAt
 }
 
 const fetchChangeRequestByChangeTypeAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -2708,6 +2728,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByUpdatedAt
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2723,7 +2745,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndAiGeneratedOrderedByUpdatedAt
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatus = `-- name: FetchChangeRequestByChangeTypeAndReviewStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ?  
     LIMIT ?, ?
@@ -2769,6 +2791,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatus(ctx context.Cont
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2784,7 +2808,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatus(ctx context.Cont
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndAiGenerated = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -2832,6 +2856,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndAiGenerated(ct
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2847,7 +2873,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndAiGenerated(ct
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -2896,6 +2922,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrd
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2911,7 +2939,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrd
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -2960,6 +2988,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrd
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -2975,7 +3005,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrd
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -3024,6 +3054,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrd
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3039,7 +3071,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrd
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -3088,6 +3120,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrd
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3103,7 +3137,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndAiGeneratedOrd
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndStatus = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND status = ?  
     LIMIT ?, ?
@@ -3151,6 +3185,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatus(ctx con
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3166,7 +3202,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatus(ctx con
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGenerated = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -3216,6 +3252,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGen
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3231,7 +3269,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGen
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -3282,6 +3320,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGen
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3297,7 +3337,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGen
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -3348,6 +3388,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGen
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3363,7 +3405,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGen
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -3414,6 +3456,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGen
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3429,7 +3473,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGen
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -3480,6 +3524,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGen
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3495,7 +3541,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusAndAiGen
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND status = ?  
     ORDER BY created_at ASC
@@ -3544,6 +3590,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedB
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3559,7 +3607,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedB
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND status = ?  
     ORDER BY created_at DESC
@@ -3608,6 +3656,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedB
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3623,7 +3673,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedB
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -3672,6 +3722,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedB
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3687,7 +3739,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedB
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -3736,6 +3788,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedB
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3751,7 +3805,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusAndStatusOrderedB
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ?  
     ORDER BY created_at ASC
@@ -3798,6 +3852,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedA
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3813,7 +3869,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedA
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ?  
     ORDER BY created_at DESC
@@ -3860,6 +3916,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedA
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3875,7 +3933,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByCreatedA
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ?  
     ORDER BY updated_at ASC
@@ -3922,6 +3980,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedA
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3937,7 +3997,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedA
 }
 
 const fetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND review_status = ?  
     ORDER BY updated_at DESC
@@ -3984,6 +4044,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedA
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -3999,7 +4061,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndReviewStatusOrderedByUpdatedA
 }
 
 const fetchChangeRequestByChangeTypeAndStatus = `-- name: FetchChangeRequestByChangeTypeAndStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND status = ?  
     LIMIT ?, ?
@@ -4045,6 +4107,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatus(ctx context.Context, a
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4060,7 +4124,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatus(ctx context.Context, a
 }
 
 const fetchChangeRequestByChangeTypeAndStatusAndAiGenerated = `-- name: FetchChangeRequestByChangeTypeAndStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -4108,6 +4172,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusAndAiGenerated(ctx cont
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4123,7 +4189,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusAndAiGenerated(ctx cont
 }
 
 const fetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -4172,6 +4238,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedBy
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4187,7 +4255,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedBy
 }
 
 const fetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -4236,6 +4304,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedBy
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4251,7 +4321,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedBy
 }
 
 const fetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -4300,6 +4370,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedBy
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4315,7 +4387,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedBy
 }
 
 const fetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -4364,6 +4436,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedBy
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4379,7 +4453,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusAndAiGeneratedOrderedBy
 }
 
 const fetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND status = ?  
     ORDER BY created_at ASC
@@ -4426,6 +4500,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtASC(c
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4441,7 +4517,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtASC(c
 }
 
 const fetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND status = ?  
     ORDER BY created_at DESC
@@ -4488,6 +4564,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtDESC(
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4503,7 +4581,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByCreatedAtDESC(
 }
 
 const fetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -4550,6 +4628,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtASC(c
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4565,7 +4645,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtASC(c
 }
 
 const fetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -4612,6 +4692,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtDESC(
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4627,7 +4709,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeAndStatusOrderedByUpdatedAtDESC(
 }
 
 const fetchChangeRequestByChangeTypeOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ?  
     ORDER BY created_at ASC
@@ -4668,6 +4750,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByCreatedAtASC(ctx contex
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4683,7 +4767,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByCreatedAtASC(ctx contex
 }
 
 const fetchChangeRequestByChangeTypeOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ?  
     ORDER BY created_at DESC
@@ -4724,6 +4808,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByCreatedAtDESC(ctx conte
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4739,7 +4825,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByCreatedAtDESC(ctx conte
 }
 
 const fetchChangeRequestByChangeTypeOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ?  
     ORDER BY updated_at ASC
@@ -4780,6 +4866,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByUpdatedAtASC(ctx contex
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4795,7 +4883,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByUpdatedAtASC(ctx contex
 }
 
 const fetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      change_type = ?  
     ORDER BY updated_at DESC
@@ -4836,6 +4924,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC(ctx conte
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4851,7 +4941,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC(ctx conte
 }
 
 const fetchChangeRequestByReviewStatus = `-- name: FetchChangeRequestByReviewStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ?  
     LIMIT ?, ?
@@ -4891,6 +4981,8 @@ func (q *Queries) FetchChangeRequestByReviewStatus(ctx context.Context, arg Fetc
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4906,7 +4998,7 @@ func (q *Queries) FetchChangeRequestByReviewStatus(ctx context.Context, arg Fetc
 }
 
 const fetchChangeRequestByReviewStatusAndAiGenerated = `-- name: FetchChangeRequestByReviewStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -4952,6 +5044,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndAiGenerated(ctx context.Con
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -4967,7 +5061,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndAiGenerated(ctx context.Con
 }
 
 const fetchChangeRequestByReviewStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -5014,6 +5108,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByCreated
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5029,7 +5125,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByCreated
 }
 
 const fetchChangeRequestByReviewStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -5076,6 +5172,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByCreated
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5091,7 +5189,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByCreated
 }
 
 const fetchChangeRequestByReviewStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -5138,6 +5236,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByUpdated
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5153,7 +5253,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByUpdated
 }
 
 const fetchChangeRequestByReviewStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -5200,6 +5300,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByUpdated
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5215,7 +5317,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndAiGeneratedOrderedByUpdated
 }
 
 const fetchChangeRequestByReviewStatusAndStatus = `-- name: FetchChangeRequestByReviewStatusAndStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND status = ?  
     LIMIT ?, ?
@@ -5261,6 +5363,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatus(ctx context.Context,
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5276,7 +5380,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatus(ctx context.Context,
 }
 
 const fetchChangeRequestByReviewStatusAndStatusAndAiGenerated = `-- name: FetchChangeRequestByReviewStatusAndStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -5324,6 +5428,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusAndAiGenerated(ctx co
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5339,7 +5445,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusAndAiGenerated(ctx co
 }
 
 const fetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -5388,6 +5494,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrdered
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5403,7 +5511,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrdered
 }
 
 const fetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -5452,6 +5560,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrdered
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5467,7 +5577,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrdered
 }
 
 const fetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -5516,6 +5626,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrdered
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5531,7 +5643,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrdered
 }
 
 const fetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -5580,6 +5692,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrdered
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5595,7 +5709,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusAndAiGeneratedOrdered
 }
 
 const fetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND status = ?  
     ORDER BY created_at ASC
@@ -5642,6 +5756,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtASC
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5657,7 +5773,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtASC
 }
 
 const fetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND status = ?  
     ORDER BY created_at DESC
@@ -5704,6 +5820,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtDES
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5719,7 +5837,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByCreatedAtDES
 }
 
 const fetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -5766,6 +5884,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtASC
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5781,7 +5901,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtASC
 }
 
 const fetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -5828,6 +5948,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtDES
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5843,7 +5965,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusAndStatusOrderedByUpdatedAtDES
 }
 
 const fetchChangeRequestByReviewStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByReviewStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ?  
     ORDER BY created_at ASC
@@ -5884,6 +6006,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByCreatedAtASC(ctx cont
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5899,7 +6023,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByCreatedAtASC(ctx cont
 }
 
 const fetchChangeRequestByReviewStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByReviewStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ?  
     ORDER BY created_at DESC
@@ -5940,6 +6064,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByCreatedAtDESC(ctx con
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -5955,7 +6081,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByCreatedAtDESC(ctx con
 }
 
 const fetchChangeRequestByReviewStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByReviewStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ?  
     ORDER BY updated_at ASC
@@ -5996,6 +6122,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByUpdatedAtASC(ctx cont
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6011,7 +6139,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByUpdatedAtASC(ctx cont
 }
 
 const fetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      review_status = ?  
     ORDER BY updated_at DESC
@@ -6052,6 +6180,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC(ctx con
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6067,7 +6197,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC(ctx con
 }
 
 const fetchChangeRequestByStatus = `-- name: FetchChangeRequestByStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      status = ?  
     LIMIT ?, ?
@@ -6107,6 +6237,8 @@ func (q *Queries) FetchChangeRequestByStatus(ctx context.Context, arg FetchChang
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6122,7 +6254,7 @@ func (q *Queries) FetchChangeRequestByStatus(ctx context.Context, arg FetchChang
 }
 
 const fetchChangeRequestByStatusAndAiGenerated = `-- name: FetchChangeRequestByStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -6168,6 +6300,8 @@ func (q *Queries) FetchChangeRequestByStatusAndAiGenerated(ctx context.Context, 
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6183,7 +6317,7 @@ func (q *Queries) FetchChangeRequestByStatusAndAiGenerated(ctx context.Context, 
 }
 
 const fetchChangeRequestByStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -6230,6 +6364,8 @@ func (q *Queries) FetchChangeRequestByStatusAndAiGeneratedOrderedByCreatedAtASC(
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6245,7 +6381,7 @@ func (q *Queries) FetchChangeRequestByStatusAndAiGeneratedOrderedByCreatedAtASC(
 }
 
 const fetchChangeRequestByStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -6292,6 +6428,8 @@ func (q *Queries) FetchChangeRequestByStatusAndAiGeneratedOrderedByCreatedAtDESC
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6307,7 +6445,7 @@ func (q *Queries) FetchChangeRequestByStatusAndAiGeneratedOrderedByCreatedAtDESC
 }
 
 const fetchChangeRequestByStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -6354,6 +6492,8 @@ func (q *Queries) FetchChangeRequestByStatusAndAiGeneratedOrderedByUpdatedAtASC(
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6369,7 +6509,7 @@ func (q *Queries) FetchChangeRequestByStatusAndAiGeneratedOrderedByUpdatedAtASC(
 }
 
 const fetchChangeRequestByStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -6416,6 +6556,8 @@ func (q *Queries) FetchChangeRequestByStatusAndAiGeneratedOrderedByUpdatedAtDESC
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6431,7 +6573,7 @@ func (q *Queries) FetchChangeRequestByStatusAndAiGeneratedOrderedByUpdatedAtDESC
 }
 
 const fetchChangeRequestByStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      status = ?  
     ORDER BY created_at ASC
@@ -6472,6 +6614,8 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByCreatedAtASC(ctx context.Co
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6487,7 +6631,7 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByCreatedAtASC(ctx context.Co
 }
 
 const fetchChangeRequestByStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      status = ?  
     ORDER BY created_at DESC
@@ -6528,6 +6672,8 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByCreatedAtDESC(ctx context.C
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6543,7 +6689,7 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByCreatedAtDESC(ctx context.C
 }
 
 const fetchChangeRequestByStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      status = ?  
     ORDER BY updated_at ASC
@@ -6584,6 +6730,8 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByUpdatedAtASC(ctx context.Co
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6599,7 +6747,7 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByUpdatedAtASC(ctx context.Co
 }
 
 const fetchChangeRequestByStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      status = ?  
     ORDER BY updated_at DESC
@@ -6640,6 +6788,8 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByUpdatedAtDESC(ctx context.C
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6655,7 +6805,7 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByUpdatedAtDESC(ctx context.C
 }
 
 const fetchChangeRequestByUUID = `-- name: FetchChangeRequestByUUID :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      uuid = ?
 `
@@ -6688,6 +6838,8 @@ func (q *Queries) FetchChangeRequestByUUID(ctx context.Context, uuid string) ([]
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6703,7 +6855,7 @@ func (q *Queries) FetchChangeRequestByUUID(ctx context.Context, uuid string) ([]
 }
 
 const fetchChangeRequestByUUIDForUpdate = `-- name: FetchChangeRequestByUUIDForUpdate :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      uuid = ?      
 FOR UPDATE
@@ -6737,6 +6889,8 @@ func (q *Queries) FetchChangeRequestByUUIDForUpdate(ctx context.Context, uuid st
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6752,7 +6906,7 @@ func (q *Queries) FetchChangeRequestByUUIDForUpdate(ctx context.Context, uuid st
 }
 
 const fetchChangeRequestByVersion = `-- name: FetchChangeRequestByVersion :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ?  
     LIMIT ?, ?
@@ -6792,6 +6946,8 @@ func (q *Queries) FetchChangeRequestByVersion(ctx context.Context, arg FetchChan
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6807,7 +6963,7 @@ func (q *Queries) FetchChangeRequestByVersion(ctx context.Context, arg FetchChan
 }
 
 const fetchChangeRequestByVersionAndAiGenerated = `-- name: FetchChangeRequestByVersionAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -6853,6 +7009,8 @@ func (q *Queries) FetchChangeRequestByVersionAndAiGenerated(ctx context.Context,
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6868,7 +7026,7 @@ func (q *Queries) FetchChangeRequestByVersionAndAiGenerated(ctx context.Context,
 }
 
 const fetchChangeRequestByVersionAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -6915,6 +7073,8 @@ func (q *Queries) FetchChangeRequestByVersionAndAiGeneratedOrderedByCreatedAtASC
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6930,7 +7090,7 @@ func (q *Queries) FetchChangeRequestByVersionAndAiGeneratedOrderedByCreatedAtASC
 }
 
 const fetchChangeRequestByVersionAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -6977,6 +7137,8 @@ func (q *Queries) FetchChangeRequestByVersionAndAiGeneratedOrderedByCreatedAtDES
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -6992,7 +7154,7 @@ func (q *Queries) FetchChangeRequestByVersionAndAiGeneratedOrderedByCreatedAtDES
 }
 
 const fetchChangeRequestByVersionAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -7039,6 +7201,8 @@ func (q *Queries) FetchChangeRequestByVersionAndAiGeneratedOrderedByUpdatedAtASC
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7054,7 +7218,7 @@ func (q *Queries) FetchChangeRequestByVersionAndAiGeneratedOrderedByUpdatedAtASC
 }
 
 const fetchChangeRequestByVersionAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -7101,6 +7265,8 @@ func (q *Queries) FetchChangeRequestByVersionAndAiGeneratedOrderedByUpdatedAtDES
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7116,7 +7282,7 @@ func (q *Queries) FetchChangeRequestByVersionAndAiGeneratedOrderedByUpdatedAtDES
 }
 
 const fetchChangeRequestByVersionAndChangeType = `-- name: FetchChangeRequestByVersionAndChangeType :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ?  
     LIMIT ?, ?
@@ -7162,6 +7328,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeType(ctx context.Context, 
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7177,7 +7345,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeType(ctx context.Context, 
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndAiGenerated = `-- name: FetchChangeRequestByVersionAndChangeTypeAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -7225,6 +7393,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndAiGenerated(ctx con
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7240,7 +7410,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndAiGenerated(ctx con
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -7289,6 +7459,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedB
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7304,7 +7476,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedB
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -7353,6 +7525,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedB
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7368,7 +7542,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedB
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -7417,6 +7591,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedB
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7432,7 +7608,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedB
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -7481,6 +7657,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedB
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7496,7 +7674,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndAiGeneratedOrderedB
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatus = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ?  
     LIMIT ?, ?
@@ -7544,6 +7722,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatus(ctx co
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7559,7 +7739,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatus(ctx co
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGenerated = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -7609,6 +7789,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGe
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7624,7 +7806,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGe
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -7675,6 +7857,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGe
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7690,7 +7874,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGe
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -7741,6 +7925,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGe
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7756,7 +7942,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGe
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -7807,6 +7993,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGe
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7822,7 +8010,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGe
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -7873,6 +8061,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGe
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7888,7 +8078,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndAiGe
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatus = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND status = ?  
     LIMIT ?, ?
@@ -7938,6 +8128,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -7953,7 +8145,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusAndAiGenerated = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -8005,6 +8197,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8020,7 +8214,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -8073,6 +8267,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8088,7 +8284,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -8141,6 +8337,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8156,7 +8354,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -8209,6 +8407,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8224,7 +8424,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -8277,6 +8477,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8292,7 +8494,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND status = ?  
     ORDER BY created_at ASC
@@ -8343,6 +8545,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8358,7 +8562,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND status = ?  
     ORDER BY created_at DESC
@@ -8409,6 +8613,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8424,7 +8630,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -8475,6 +8681,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8490,7 +8698,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -8541,6 +8749,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8556,7 +8766,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusAndStat
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ?  
     ORDER BY created_at ASC
@@ -8605,6 +8815,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrdered
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8620,7 +8832,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrdered
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ?  
     ORDER BY created_at DESC
@@ -8669,6 +8881,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrdered
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8684,7 +8898,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrdered
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ?  
     ORDER BY updated_at ASC
@@ -8733,6 +8947,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrdered
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8748,7 +8964,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrdered
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND review_status = ?  
     ORDER BY updated_at DESC
@@ -8797,6 +9013,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrdered
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8812,7 +9030,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndReviewStatusOrdered
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndStatus = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND status = ?  
     LIMIT ?, ?
@@ -8860,6 +9078,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatus(ctx context.
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8875,7 +9095,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatus(ctx context.
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerated = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -8925,6 +9145,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerate
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -8940,7 +9162,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerate
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -8991,6 +9213,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerate
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9006,7 +9230,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerate
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -9057,6 +9281,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerate
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9072,7 +9298,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerate
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -9123,6 +9349,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerate
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9138,7 +9366,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerate
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -9189,6 +9417,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerate
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9204,7 +9434,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusAndAiGenerate
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND status = ?  
     ORDER BY created_at ASC
@@ -9253,6 +9483,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCrea
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9268,7 +9500,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCrea
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND status = ?  
     ORDER BY created_at DESC
@@ -9317,6 +9549,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCrea
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9332,7 +9566,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByCrea
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -9381,6 +9615,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpda
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9396,7 +9632,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpda
 }
 
 const fetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -9445,6 +9681,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpda
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9460,7 +9698,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeAndStatusOrderedByUpda
 }
 
 const fetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ?  
     ORDER BY created_at ASC
@@ -9507,6 +9745,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtASC(
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9522,7 +9762,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtASC(
 }
 
 const fetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ?  
     ORDER BY created_at DESC
@@ -9569,6 +9809,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtDESC
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9584,7 +9826,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByCreatedAtDESC
 }
 
 const fetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ?  
     ORDER BY updated_at ASC
@@ -9631,6 +9873,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtASC(
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9646,7 +9890,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtASC(
 }
 
 const fetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND change_type = ?  
     ORDER BY updated_at DESC
@@ -9693,6 +9937,8 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtDESC
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9708,7 +9954,7 @@ func (q *Queries) FetchChangeRequestByVersionAndChangeTypeOrderedByUpdatedAtDESC
 }
 
 const fetchChangeRequestByVersionAndReviewStatus = `-- name: FetchChangeRequestByVersionAndReviewStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ?  
     LIMIT ?, ?
@@ -9754,6 +10000,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatus(ctx context.Context
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9769,7 +10017,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatus(ctx context.Context
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndAiGenerated = `-- name: FetchChangeRequestByVersionAndReviewStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -9817,6 +10065,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndAiGenerated(ctx c
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9832,7 +10082,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndAiGenerated(ctx c
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -9881,6 +10131,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrdere
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9896,7 +10148,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrdere
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -9945,6 +10197,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrdere
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -9960,7 +10214,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrdere
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -10009,6 +10263,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrdere
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10024,7 +10280,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrdere
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -10073,6 +10329,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrdere
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10088,7 +10346,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndAiGeneratedOrdere
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndStatus = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND status = ?  
     LIMIT ?, ?
@@ -10136,6 +10394,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatus(ctx contex
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10151,7 +10411,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatus(ctx contex
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenerated = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -10201,6 +10461,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenera
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10216,7 +10478,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenera
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -10267,6 +10529,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenera
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10282,7 +10546,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenera
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -10333,6 +10597,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenera
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10348,7 +10614,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenera
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -10399,6 +10665,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenera
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10414,7 +10682,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenera
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -10465,6 +10733,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenera
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10480,7 +10750,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusAndAiGenera
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND status = ?  
     ORDER BY created_at ASC
@@ -10529,6 +10799,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCr
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10544,7 +10816,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCr
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND status = ?  
     ORDER BY created_at DESC
@@ -10593,6 +10865,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCr
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10608,7 +10882,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByCr
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -10657,6 +10931,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUp
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10672,7 +10948,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUp
 }
 
 const fetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -10721,6 +10997,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUp
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10736,7 +11014,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusAndStatusOrderedByUp
 }
 
 const fetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ?  
     ORDER BY created_at ASC
@@ -10783,6 +11061,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtAS
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10798,7 +11078,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtAS
 }
 
 const fetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ?  
     ORDER BY created_at DESC
@@ -10845,6 +11125,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtDE
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10860,7 +11142,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByCreatedAtDE
 }
 
 const fetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ?  
     ORDER BY updated_at ASC
@@ -10907,6 +11189,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtAS
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10922,7 +11206,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtAS
 }
 
 const fetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND review_status = ?  
     ORDER BY updated_at DESC
@@ -10969,6 +11253,8 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtDE
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -10984,7 +11270,7 @@ func (q *Queries) FetchChangeRequestByVersionAndReviewStatusOrderedByUpdatedAtDE
 }
 
 const fetchChangeRequestByVersionAndStatus = `-- name: FetchChangeRequestByVersionAndStatus :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND status = ?  
     LIMIT ?, ?
@@ -11030,6 +11316,8 @@ func (q *Queries) FetchChangeRequestByVersionAndStatus(ctx context.Context, arg 
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11045,7 +11333,7 @@ func (q *Queries) FetchChangeRequestByVersionAndStatus(ctx context.Context, arg 
 }
 
 const fetchChangeRequestByVersionAndStatusAndAiGenerated = `-- name: FetchChangeRequestByVersionAndStatusAndAiGenerated :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND status = ? AND ai_generated = ?  
     LIMIT ?, ?
@@ -11093,6 +11381,8 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusAndAiGenerated(ctx context
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11108,7 +11398,7 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusAndAiGenerated(ctx context
 }
 
 const fetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at ASC
@@ -11157,6 +11447,8 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByCre
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11172,7 +11464,7 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByCre
 }
 
 const fetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND status = ? AND ai_generated = ?  
     ORDER BY created_at DESC
@@ -11221,6 +11513,8 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByCre
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11236,7 +11530,7 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByCre
 }
 
 const fetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at ASC
@@ -11285,6 +11579,8 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByUpd
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11300,7 +11596,7 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByUpd
 }
 
 const fetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND status = ? AND ai_generated = ?  
     ORDER BY updated_at DESC
@@ -11349,6 +11645,8 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByUpd
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11364,7 +11662,7 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusAndAiGeneratedOrderedByUpd
 }
 
 const fetchChangeRequestByVersionAndStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionAndStatusOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND status = ?  
     ORDER BY created_at ASC
@@ -11411,6 +11709,8 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusOrderedByCreatedAtASC(ctx 
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11426,7 +11726,7 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusOrderedByCreatedAtASC(ctx 
 }
 
 const fetchChangeRequestByVersionAndStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionAndStatusOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND status = ?  
     ORDER BY created_at DESC
@@ -11473,6 +11773,8 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusOrderedByCreatedAtDESC(ctx
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11488,7 +11790,7 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusOrderedByCreatedAtDESC(ctx
 }
 
 const fetchChangeRequestByVersionAndStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionAndStatusOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND status = ?  
     ORDER BY updated_at ASC
@@ -11535,6 +11837,8 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusOrderedByUpdatedAtASC(ctx 
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11550,7 +11854,7 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusOrderedByUpdatedAtASC(ctx 
 }
 
 const fetchChangeRequestByVersionAndStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionAndStatusOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ? AND status = ?  
     ORDER BY updated_at DESC
@@ -11597,6 +11901,8 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusOrderedByUpdatedAtDESC(ctx
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11612,7 +11918,7 @@ func (q *Queries) FetchChangeRequestByVersionAndStatusOrderedByUpdatedAtDESC(ctx
 }
 
 const fetchChangeRequestByVersionOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionOrderedByCreatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ?  
     ORDER BY created_at ASC
@@ -11653,6 +11959,8 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByCreatedAtASC(ctx context.C
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11668,7 +11976,7 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByCreatedAtASC(ctx context.C
 }
 
 const fetchChangeRequestByVersionOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionOrderedByCreatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ?  
     ORDER BY created_at DESC
@@ -11709,6 +12017,8 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByCreatedAtDESC(ctx context.
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11724,7 +12034,7 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByCreatedAtDESC(ctx context.
 }
 
 const fetchChangeRequestByVersionOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionOrderedByUpdatedAtASC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ?  
     ORDER BY updated_at ASC
@@ -11765,6 +12075,8 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByUpdatedAtASC(ctx context.C
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -11780,7 +12092,7 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByUpdatedAtASC(ctx context.C
 }
 
 const fetchChangeRequestByVersionOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionOrderedByUpdatedAtDESC :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
      version = ?  
     ORDER BY updated_at DESC
@@ -11821,6 +12133,8 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByUpdatedAtDESC(ctx context.
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}
@@ -68810,7 +69124,7 @@ func (q *Queries) FetchUserTeamByUserEmailOrderedByUpdatedAtDESC(ctx context.Con
 }
 
 const searchChangeRequest = `-- name: SearchChangeRequest :many
-SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated FROM change_request
+SELECT uuid, version, title, description, project_uuid, project_version_uuid, change_type, data_changes, metadata, reviews, review_status, owner_uuid, status, created_at, updated_at, created_by_uuid, updated_by_uuid, ai_generated, scope, scope_config FROM change_request
 WHERE 
     title like ? OR
     
@@ -68858,6 +69172,8 @@ func (q *Queries) SearchChangeRequest(ctx context.Context, arg SearchChangeReque
 			&i.CreatedByUUID,
 			&i.UpdatedByUUID,
 			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
 		); err != nil {
 			return nil, err
 		}

@@ -149,6 +149,8 @@ func change_requestDeclarations() *filtering.Declarations {
 
 		//
 
+		//
+
 		//change_request
 
 		filtering.DeclareIdent("uuid", filtering.TypeString),
@@ -180,6 +182,8 @@ func change_requestDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("updated_by_uuid", filtering.TypeString),
 
 		filtering.DeclareIdent("ai_generated", filtering.TypeBool),
+
+		filtering.DeclareEnumIdent("scope", pb.ChangeRequestScope(0).Type()),
 	)
 	if err != nil {
 		fmt.Printf("error creating declarions:%v", err)

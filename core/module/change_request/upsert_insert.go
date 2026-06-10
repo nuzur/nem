@@ -15,6 +15,7 @@ import (
 	"github.com/nuzur/nem/core/entity/change_request_data_change"
 	"github.com/nuzur/nem/core/entity/change_request_metadata"
 	"github.com/nuzur/nem/core/entity/change_request_review"
+	"github.com/nuzur/nem/core/entity/change_request_scope_config"
 
 	"time"
 
@@ -135,6 +136,10 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertChangeR
 		UpdatedByUUID: req.ChangeRequest.UpdatedByUUID.String(),
 
 		AiGenerated: req.ChangeRequest.AiGenerated,
+
+		Scope: req.ChangeRequest.Scope.ToSqlNullInt32(),
+
+		ScopeConfig: change_request_scope_config.ChangeRequestScopeConfigToJSON(req.ChangeRequest.ScopeConfig),
 	}
 }
 

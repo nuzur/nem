@@ -1,6 +1,7 @@
 package index_field
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 )
@@ -16,6 +17,13 @@ const (
 
 func (e Order) ToInt64() int64 {
 	return int64(e)
+}
+
+func (e Order) ToSqlNullInt32() sql.NullInt32 {
+	return sql.NullInt32{
+		Int32: int32(e),
+		Valid: true,
+	}
 }
 
 func OrderFromString(in string) Order {

@@ -1,6 +1,7 @@
 package change_request_data_change
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 )
@@ -17,6 +18,13 @@ const (
 
 func (e DataChangeType) ToInt64() int64 {
 	return int64(e)
+}
+
+func (e DataChangeType) ToSqlNullInt32() sql.NullInt32 {
+	return sql.NullInt32{
+		Int32: int32(e),
+		Valid: true,
+	}
 }
 
 func DataChangeTypeFromString(in string) DataChangeType {

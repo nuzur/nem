@@ -61,7 +61,7 @@ func (q *Queries) UpdateAiUsage(ctx context.Context, arg UpdateAiUsageParams) er
 const updateChangeRequest = `-- name: UpdateChangeRequest :exec
 UPDATE change_request
 SET
-version = ?, title = ?, description = ?, project_uuid = ?, project_version_uuid = ?, change_type = ?, data_changes = ?, metadata = ?, reviews = ?, review_status = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?, ai_generated = ?
+version = ?, title = ?, description = ?, project_uuid = ?, project_version_uuid = ?, change_type = ?, data_changes = ?, metadata = ?, reviews = ?, review_status = ?, owner_uuid = ?, status = ?, created_at = ?, updated_at = ?, created_by_uuid = ?, updated_by_uuid = ?, ai_generated = ?, scope = ?, scope_config = ?
 WHERE uuid = ?
 `
 
@@ -83,6 +83,8 @@ type UpdateChangeRequestParams struct {
 	CreatedByUUID      string         `json:"created_by_uuid"`
 	UpdatedByUUID      string         `json:"updated_by_uuid"`
 	AiGenerated        bool           `json:"ai_generated"`
+	Scope              sql.NullInt32  `json:"scope"`
+	ScopeConfig        []byte         `json:"scope_config"`
 	UUID               string         `json:"uuid"`
 }
 
@@ -105,6 +107,8 @@ func (q *Queries) UpdateChangeRequest(ctx context.Context, arg UpdateChangeReque
 		arg.CreatedByUUID,
 		arg.UpdatedByUUID,
 		arg.AiGenerated,
+		arg.Scope,
+		arg.ScopeConfig,
 		arg.UUID,
 	)
 	return err

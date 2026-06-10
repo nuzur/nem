@@ -1,6 +1,7 @@
 package db_type_postgres_config
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 )
@@ -20,6 +21,13 @@ const (
 
 func (e Sslmode) ToInt64() int64 {
 	return int64(e)
+}
+
+func (e Sslmode) ToSqlNullInt32() sql.NullInt32 {
+	return sql.NullInt32{
+		Int32: int32(e),
+		Valid: true,
+	}
 }
 
 func SslmodeFromString(in string) Sslmode {

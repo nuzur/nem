@@ -1,6 +1,7 @@
 package field_type_decimal_config
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 )
@@ -16,6 +17,13 @@ const (
 
 func (e Separator) ToInt64() int64 {
 	return int64(e)
+}
+
+func (e Separator) ToSqlNullInt32() sql.NullInt32 {
+	return sql.NullInt32{
+		Int32: int32(e),
+		Valid: true,
+	}
 }
 
 func SeparatorFromString(in string) Separator {

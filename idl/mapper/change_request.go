@@ -29,6 +29,8 @@ func ChangeRequestToProto(e main_entity.ChangeRequest) *pb.ChangeRequest {
 		CreatedByUuid:      e.CreatedByUUID.String(),
 		UpdatedByUuid:      e.UpdatedByUUID.String(),
 		AiGenerated:        e.AiGenerated,
+		Scope:              pb.ChangeRequestScope(e.Scope),
+		ScopeConfig:        ChangeRequestScopeConfigToProto(e.ScopeConfig),
 	}
 }
 
@@ -63,6 +65,8 @@ func ChangeRequestFromProto(m *pb.ChangeRequest) main_entity.ChangeRequest {
 		CreatedByUUID:      uuid.FromStringOrNil(m.GetCreatedByUuid()),
 		UpdatedByUUID:      uuid.FromStringOrNil(m.GetUpdatedByUuid()),
 		AiGenerated:        m.GetAiGenerated(),
+		Scope:              main_entity.Scope(m.GetScope()),
+		ScopeConfig:        ChangeRequestScopeConfigFromProto(m.GetScopeConfig()),
 	}
 }
 

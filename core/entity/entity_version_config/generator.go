@@ -1,6 +1,7 @@
 package entity_version_config
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 )
@@ -15,6 +16,13 @@ const (
 
 func (e Generator) ToInt64() int64 {
 	return int64(e)
+}
+
+func (e Generator) ToSqlNullInt32() sql.NullInt32 {
+	return sql.NullInt32{
+		Int32: int32(e),
+		Valid: true,
+	}
 }
 
 func GeneratorFromString(in string) Generator {

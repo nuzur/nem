@@ -7,6 +7,7 @@ import (
 	"github.com/nuzur/nem/core/entity/change_request_data_change"
 	"github.com/nuzur/nem/core/entity/change_request_metadata"
 	"github.com/nuzur/nem/core/entity/change_request_review"
+	"github.com/nuzur/nem/core/entity/change_request_scope_config"
 	"time"
 
 	"fmt"
@@ -37,6 +38,8 @@ type ChangeRequest struct {
 	CreatedByUUID      uuid.UUID                                            `json:"created_by_uuid"`
 	UpdatedByUUID      uuid.UUID                                            `json:"updated_by_uuid"`
 	AiGenerated        bool                                                 `json:"ai_generated"`
+	Scope              Scope                                                `json:"scope"`
+	ScopeConfig        change_request_scope_config.ChangeRequestScopeConfig `json:"scope_config"`
 }
 
 func (e ChangeRequest) String() string {
@@ -77,6 +80,8 @@ func (e ChangeRequest) FieldIdentfierToTypeMap() map[string]types.FieldType {
 	res["created_by_uuid"] = types.UUIDFieldType
 	res["updated_by_uuid"] = types.UUIDFieldType
 	res["ai_generated"] = types.BooleanFieldType
+	res["scope"] = types.SingleEnumFieldType
+	res["scope_config"] = types.SingleDependantEntityFieldType
 	return res
 }
 
@@ -100,6 +105,8 @@ func (e ChangeRequest) OrderedFieldIdentifiers() []string {
 	res = append(res, "created_by_uuid")
 	res = append(res, "updated_by_uuid")
 	res = append(res, "ai_generated")
+	res = append(res, "scope")
+	res = append(res, "scope_config")
 
 	return res
 }
@@ -110,6 +117,7 @@ func (e ChangeRequest) DependantFieldIdentifierToTypeMap() map[string]map[string
 	res["data_changes"] = change_request_data_change.ChangeRequestDataChange{}.FieldIdentfierToTypeMap()
 	res["metadata"] = change_request_metadata.ChangeRequestMetadata{}.FieldIdentfierToTypeMap()
 	res["reviews"] = change_request_review.ChangeRequestReview{}.FieldIdentfierToTypeMap()
+	res["scope_config"] = change_request_scope_config.ChangeRequestScopeConfig{}.FieldIdentfierToTypeMap()
 	return res
 }
 
@@ -187,6 +195,8 @@ func NewChangeRequestWithRandomValues() ChangeRequest {
 		CreatedByUUID:      randomvalues.GetRandomUUIDValue(),
 		UpdatedByUUID:      randomvalues.GetRandomUUIDValue(),
 		AiGenerated:        randomvalues.GetRandomBoolValue(),
+		Scope:              randomvalues.GetRandomOptionValue[Scope](2),
+		ScopeConfig:        change_request_scope_config.NewChangeRequestScopeConfigWithRandomValues(),
 	}
 }
 

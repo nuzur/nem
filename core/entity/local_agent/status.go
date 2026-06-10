@@ -1,6 +1,7 @@
 package local_agent
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 )
@@ -17,6 +18,13 @@ const (
 
 func (e Status) ToInt64() int64 {
 	return int64(e)
+}
+
+func (e Status) ToSqlNullInt32() sql.NullInt32 {
+	return sql.NullInt32{
+		Int32: int32(e),
+		Valid: true,
+	}
 }
 
 func StatusFromString(in string) Status {

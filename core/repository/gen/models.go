@@ -47,6 +47,8 @@ type ChangeRequest struct {
 	CreatedByUUID      string         `json:"created_by_uuid"`
 	UpdatedByUUID      string         `json:"updated_by_uuid"`
 	AiGenerated        bool           `json:"ai_generated"`
+	Scope              sql.NullInt32  `json:"scope"`
+	ScopeConfig        []byte         `json:"scope_config"`
 }
 
 type Extension struct {

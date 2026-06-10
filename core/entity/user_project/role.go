@@ -1,6 +1,7 @@
 package user_project
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 )
@@ -19,6 +20,13 @@ const (
 
 func (e Role) ToInt64() int64 {
 	return int64(e)
+}
+
+func (e Role) ToSqlNullInt32() sql.NullInt32 {
+	return sql.NullInt32{
+		Int32: int32(e),
+		Valid: true,
+	}
 }
 
 func RoleFromString(in string) Role {

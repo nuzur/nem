@@ -11,6 +11,7 @@ package nem;
 import "change_request_data_change.proto";
 import "change_request_metadata.proto";
 import "change_request_review.proto";
+import "change_request_scope_config.proto";
 import "google/protobuf/timestamp.proto";
 
 message ChangeRequest {  
@@ -31,7 +32,9 @@ message ChangeRequest {
     google.protobuf.Timestamp updated_at = 15;
     string created_by_uuid = 16;
     string updated_by_uuid = 17;
-    bool ai_generated = 18;    
+    bool ai_generated = 18;
+    ChangeRequestScope scope = 19;
+    ChangeRequestScopeConfig scope_config = 20;    
 }
 
 enum ChangeRequestChangeType { 
@@ -48,6 +51,12 @@ enum ChangeRequestReviewStatus {
     CHANGE_REQUEST_REVIEW_STATUS_REJECTED = 4;
     CHANGE_REQUEST_REVIEW_STATUS_DISCARDED = 5;
     CHANGE_REQUEST_REVIEW_STATUS_APPLIED = 6;
+}
+
+enum ChangeRequestScope { 
+    CHANGE_REQUEST_SCOPE_INVALID = 0;
+    CHANGE_REQUEST_SCOPE_LOCAL = 1;
+    CHANGE_REQUEST_SCOPE_REMOTE = 2;
 }
 
 enum ChangeRequestStatus { 

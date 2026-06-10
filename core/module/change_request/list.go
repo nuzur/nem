@@ -290,6 +290,30 @@ func (m *module) List(ctx context.Context,
 			fields = append(fields, &i.AiGenerated)
 		}
 
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "scope") {
+				fields = append(fields, &i.Scope)
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "scope") {
+				fields = append(fields, &i.Scope)
+			}
+		} else {
+			fields = append(fields, &i.Scope)
+		}
+
+		if len(optConfig.ListIncludeColumns) > 0 {
+			if slices.Contains(optConfig.ListIncludeColumns, "scope_config") {
+				fields = append(fields, &i.ScopeConfig)
+			}
+		} else if len(optConfig.ListExcludeColumns) > 0 {
+			if !slices.Contains(optConfig.ListExcludeColumns, "scope_config") {
+				fields = append(fields, &i.ScopeConfig)
+			}
+		} else {
+			fields = append(fields, &i.ScopeConfig)
+		}
+
 		if err := rows.Scan(fields...); err != nil {
 			m.monitoring.Emit(monitoring.EmitRequest{
 				ActionIdentifier: "list_change_request_scan",

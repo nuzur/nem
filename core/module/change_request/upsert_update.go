@@ -11,6 +11,7 @@ import (
 	"github.com/nuzur/nem/core/entity/change_request_data_change"
 	"github.com/nuzur/nem/core/entity/change_request_metadata"
 	"github.com/nuzur/nem/core/entity/change_request_review"
+	"github.com/nuzur/nem/core/entity/change_request_scope_config"
 
 	"github.com/nuzur/nem/custom"
 
@@ -175,6 +176,10 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 			UpdatedByUUID: req.ChangeRequest.UpdatedByUUID.String(),
 
 			AiGenerated: req.ChangeRequest.AiGenerated,
+
+			Scope: req.ChangeRequest.Scope.ToSqlNullInt32(),
+
+			ScopeConfig: change_request_scope_config.ChangeRequestScopeConfigToJSON(req.ChangeRequest.ScopeConfig),
 		}
 	}
 
@@ -215,6 +220,10 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Chan
 	res.UpdatedByUUID = req.ChangeRequest.UpdatedByUUID.String()
 
 	res.AiGenerated = req.ChangeRequest.AiGenerated
+
+	res.Scope = req.ChangeRequest.Scope.ToSqlNullInt32()
+
+	res.ScopeConfig = change_request_scope_config.ChangeRequestScopeConfigToJSON(req.ChangeRequest.ScopeConfig)
 
 	return res
 

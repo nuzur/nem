@@ -10,6 +10,7 @@ import (
 	"github.com/nuzur/nem/core/entity/change_request_data_change"
 	"github.com/nuzur/nem/core/entity/change_request_metadata"
 	"github.com/nuzur/nem/core/entity/change_request_review"
+	"github.com/nuzur/nem/core/entity/change_request_scope_config"
 )
 
 func mapModelsToEntities(models []nemdb.ChangeRequest) []main_entity.ChangeRequest {
@@ -40,5 +41,7 @@ func mapModelToEntity(model nemdb.ChangeRequest) main_entity.ChangeRequest {
 		CreatedByUUID:      uuid.FromStringOrNil(model.CreatedByUUID),
 		UpdatedByUUID:      uuid.FromStringOrNil(model.UpdatedByUUID),
 		AiGenerated:        model.AiGenerated,
+		Scope:              main_entity.Scope(model.Scope.Int32),
+		ScopeConfig:        change_request_scope_config.ChangeRequestScopeConfigFromJSON(model.ScopeConfig),
 	}
 }

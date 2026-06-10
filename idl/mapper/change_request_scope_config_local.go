@@ -1,0 +1,44 @@
+package mapper
+
+import (
+	main_entity "github.com/nuzur/nem/core/entity/change_request_scope_config_local"
+	pb "github.com/nuzur/nem/idl/gen"
+
+	"github.com/gofrs/uuid"
+)
+
+func ChangeRequestScopeConfigLocalToProto(e main_entity.ChangeRequestScopeConfigLocal) *pb.ChangeRequestScopeConfigLocal {
+	return &pb.ChangeRequestScopeConfigLocal{
+		AgentUuid:           e.AgentUUID.String(),
+		AgentConnectionUuid: e.AgentConnectionUUID.String(),
+	}
+}
+
+func ChangeRequestScopeConfigLocalSliceToProto(es []main_entity.ChangeRequestScopeConfigLocal) []*pb.ChangeRequestScopeConfigLocal {
+	res := []*pb.ChangeRequestScopeConfigLocal{}
+	for _, e := range es {
+		res = append(res, ChangeRequestScopeConfigLocalToProto(e))
+	}
+	return res
+}
+
+func ChangeRequestScopeConfigLocalFromProto(m *pb.ChangeRequestScopeConfigLocal) main_entity.ChangeRequestScopeConfigLocal {
+	if m == nil {
+		return main_entity.ChangeRequestScopeConfigLocal{}
+	}
+	return main_entity.ChangeRequestScopeConfigLocal{
+		AgentUUID:           uuid.FromStringOrNil(m.GetAgentUuid()),
+		AgentConnectionUUID: uuid.FromStringOrNil(m.GetAgentConnectionUuid()),
+	}
+}
+
+func ChangeRequestScopeConfigLocalSliceFromProto(es []*pb.ChangeRequestScopeConfigLocal) []main_entity.ChangeRequestScopeConfigLocal {
+	if es == nil {
+		return []main_entity.ChangeRequestScopeConfigLocal{}
+	}
+	res := []main_entity.ChangeRequestScopeConfigLocal{}
+	for _, e := range es {
+		res = append(res, ChangeRequestScopeConfigLocalFromProto(e))
+	}
+	return res
+}
