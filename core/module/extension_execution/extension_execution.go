@@ -7,8 +7,6 @@ import (
 	coretypes "github.com/nuzur/nem/core/types"
 	"github.com/nuzur/nem/monitoring"
 	"sync"
-
-	"github.com/nuzur/nem/core/events"
 )
 
 type Module interface {
@@ -26,15 +24,11 @@ type module struct {
 	mu         sync.Mutex
 	repository *repository.Implementation
 	monitoring *monitoring.Implementation
-
-	events *events.Implementation
 }
 
 func New(params coretypes.ModuleParams) Module {
 	return &module{
 		repository: params.Repository,
 		monitoring: params.Monitoring,
-
-		events: params.Events,
 	}
 }

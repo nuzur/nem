@@ -44,8 +44,6 @@ import (
 
 	"github.com/nuzur/nem/core/repository"
 	"github.com/nuzur/nem/monitoring"
-
-	"github.com/nuzur/nem/core/events"
 )
 
 type Implementation struct {
@@ -83,8 +81,6 @@ type Implementation struct {
 	local_agent local_agent.Module
 
 	monitoring *monitoring.Implementation
-
-	events *events.Implementation
 }
 
 type Params struct {
@@ -92,8 +88,6 @@ type Params struct {
 	Provider   config.Provider
 	Lifecycle  fx.Lifecycle
 	Monitoring *monitoring.Implementation
-
-	Events *events.Implementation
 }
 
 func New(params Params) (*Implementation, error) {
@@ -130,8 +124,6 @@ func New(params Params) (*Implementation, error) {
 		db:         db,
 		repository: repository,
 		monitoring: params.Monitoring,
-
-		events: params.Events,
 	}, nil
 }
 
@@ -148,8 +140,6 @@ func (i Implementation) Team() team.Module {
 		i.team = team.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.team
@@ -160,8 +150,6 @@ func (i Implementation) Project() project.Module {
 		i.project = project.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.project
@@ -172,8 +160,6 @@ func (i Implementation) Extension() extension.Module {
 		i.extension = extension.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.extension
@@ -184,8 +170,6 @@ func (i Implementation) ExtensionVersion() extension_version.Module {
 		i.extension_version = extension_version.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.extension_version
@@ -196,8 +180,6 @@ func (i Implementation) User() user.Module {
 		i.user = user.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.user
@@ -208,8 +190,6 @@ func (i Implementation) ChangeRequest() change_request.Module {
 		i.change_request = change_request.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.change_request
@@ -220,8 +200,6 @@ func (i Implementation) ProjectVersion() project_version.Module {
 		i.project_version = project_version.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.project_version
@@ -232,8 +210,6 @@ func (i Implementation) UserTeam() user_team.Module {
 		i.user_team = user_team.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.user_team
@@ -244,8 +220,6 @@ func (i Implementation) ExtensionExecution() extension_execution.Module {
 		i.extension_execution = extension_execution.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.extension_execution
@@ -256,8 +230,6 @@ func (i Implementation) UserConnection() user_connection.Module {
 		i.user_connection = user_connection.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.user_connection
@@ -268,8 +240,6 @@ func (i Implementation) UserProjectVersion() user_project_version.Module {
 		i.user_project_version = user_project_version.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.user_project_version
@@ -280,8 +250,6 @@ func (i Implementation) UserProject() user_project.Module {
 		i.user_project = user_project.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.user_project
@@ -292,8 +260,6 @@ func (i Implementation) Membership() membership.Module {
 		i.membership = membership.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.membership
@@ -304,8 +270,6 @@ func (i Implementation) AiUsage() ai_usage.Module {
 		i.ai_usage = ai_usage.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.ai_usage
@@ -316,8 +280,6 @@ func (i Implementation) LocalAgent() local_agent.Module {
 		i.local_agent = local_agent.New(coretypes.ModuleParams{
 			Repository: i.repository,
 			Monitoring: i.monitoring,
-
-			Events: i.events,
 		})
 	}
 	return i.local_agent

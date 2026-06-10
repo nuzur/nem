@@ -100,11 +100,6 @@ func (m *module) Update(
 		return types.UpsertResponse{}, err
 	}
 
-	err = m.publishUpdateEvent(ctx, req, qtx, req.ExtensionVersion.UUID.String(), existing)
-	if err != nil {
-		return types.UpsertResponse{}, err
-	}
-
 	if createdTx {
 		err := tx.Commit()
 		if err != nil {
@@ -204,48 +199,4 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest, existing nemdb.Exte
 
 	return res
 
-}
-
-func (m *module) publishUpdateEvent(ctx context.Context,
-	req types.UpsertRequest,
-	qtx *nemdb.Queries,
-	id string,
-	existing []nemdb.ExtensionVersion) error {
-
-	if m.events == nil {
-		return nil
-	}
-	fetched, err := qtx.FetchExtensionVersionByUUID(ctx, id)
-	if err != nil {
-		m.monitoring.Emit(monitoring.EmitRequest{
-			ActionIdentifier: "upsert_extension_version",
-			Message:          "error fetching after UpsertExtensionVersion - with uuid",
-			EntityIdentifier: "extension_version",
-			Layer:            monitoring.RepositoryServiceLayer,
-			Type:             monitoring.EmitTypeError,
-			Data:             req,
-			Error:            err,
-		})
-		return err
-	}
-
-	fetchedEntities := mapModelsToEntities(fetched)
-	if len(fetchedEntities) != 1 {
-		return errors.New("error mapping to entity")
-	}
-	existingEntities := mapModelsToEntities(existing)
-	err = m.events.ProduceEntityUpdated(fetchedEntities[0], existingEntities[0])
-	if err != nil {
-		m.monitoring.Emit(monitoring.EmitRequest{
-			ActionIdentifier: "upsert_extension_version",
-			Message:          "error producing insert event for UpsertExtensionVersion - with uuid",
-			EntityIdentifier: "extension_version",
-			Layer:            monitoring.RepositoryServiceLayer,
-			Type:             monitoring.EmitTypeError,
-			Data:             req,
-			Error:            err,
-		})
-		return err
-	}
-	return nil
 }

@@ -15,15 +15,6 @@ auth:
     client_secret: sbUlCIJxP2qNs3R1VxzcfILUDbdAwSZx
 
 
-events:
-  enabled: true
-kafka:  
-  version: 3.6.0 
-  brokers:   
-    - localhost:9092     
-  topics:   
-    - test 
-
 
 db:
   - name: nuzur-entities 

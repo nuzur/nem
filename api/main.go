@@ -11,10 +11,6 @@ import (
 	auth "github.com/nuzur/nem/auth/keycloak"
 
 	"github.com/nuzur/nem/monitoring"
-
-	"github.com/nuzur/nem/core/events"
-
-	saramafx "github.com/mklfarha/sarama-fx"
 )
 
 func main() {
@@ -25,9 +21,8 @@ func main() {
 			core.New,
 			monitoring.New,
 			auth.New,
-			events.New,
 		),
-		saramafx.Module,
+
 		fx.Invoke(httpServer),
 		fx.Invoke(pbserver.New),
 	).Run()

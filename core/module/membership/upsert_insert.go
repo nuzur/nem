@@ -3,8 +3,6 @@ package membership
 import (
 	"context"
 
-	"errors"
-
 	"github.com/gofrs/uuid"
 	"github.com/nuzur/nem/core/module/membership/types"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
@@ -50,11 +48,6 @@ func (m *module) Insert(
 			Data:             req,
 			Error:            err,
 		})
-		return types.UpsertResponse{}, err
-	}
-
-	err = m.publishInsertEvent(ctx, req, qtx, params.UUID)
-	if err != nil {
 		return types.UpsertResponse{}, err
 	}
 
@@ -110,47 +103,4 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertMembers
 
 		UpdatedByUUID: req.Membership.UpdatedByUUID.String(),
 	}
-}
-
-func (m *module) publishInsertEvent(ctx context.Context,
-	req types.UpsertRequest,
-	qtx *nemdb.Queries,
-	id string) error {
-
-	if m.events == nil {
-		return nil
-	}
-
-	fetched, err := qtx.FetchMembershipByUUID(ctx, id)
-	if err != nil {
-		m.monitoring.Emit(monitoring.EmitRequest{
-			ActionIdentifier: "upsert_membership",
-			Message:          "error fetching after UpsertMembership - no uuid",
-			EntityIdentifier: "membership",
-			Layer:            monitoring.RepositoryServiceLayer,
-			Type:             monitoring.EmitTypeError,
-			Data:             req,
-			Error:            err,
-		})
-		return err
-	}
-
-	fetchedEntities := mapModelsToEntities(fetched)
-	if len(fetchedEntities) != 1 {
-		return errors.New("error mapping to entity")
-	}
-	err = m.events.ProduceEntityInserted(fetchedEntities[0])
-	if err != nil {
-		m.monitoring.Emit(monitoring.EmitRequest{
-			ActionIdentifier: "upsert_membership",
-			Message:          "error producing insert event for UpsertMembership - no uuid",
-			EntityIdentifier: "membership",
-			Layer:            monitoring.RepositoryServiceLayer,
-			Type:             monitoring.EmitTypeError,
-			Data:             req,
-			Error:            err,
-		})
-		return err
-	}
-	return nil
 }
