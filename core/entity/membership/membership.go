@@ -141,7 +141,7 @@ func NewMembershipWithRandomValues() Membership {
 	return Membership{
 		UUID:            randomvalues.GetRandomUUIDValue(),
 		OwnerUUID:       randomvalues.GetRandomUUIDValue(),
-		Type:            randomvalues.GetRandomOptionValue[Type](1),
+		Type:            randomvalues.GetRandomOptionValue[Type](3),
 		StartDate:       randomvalues.GetRandomTimeValue(),
 		BillingMetadata: randomvalues.GetRandomRawJSONValue(),
 		Status:          randomvalues.GetRandomOptionValue[Status](6),

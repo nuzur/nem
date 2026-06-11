@@ -11,7 +11,9 @@ type Type int64
 
 const (
 	TYPE_INVALID Type = iota
+	TYPE_STARTER
 	TYPE_PRO
+	TYPE_ENTERPRISE
 )
 
 func (e Type) ToInt64() int64 {
@@ -27,8 +29,12 @@ func (e Type) ToSqlNullInt32() sql.NullInt32 {
 
 func TypeFromString(in string) Type {
 	switch in {
+	case "starter":
+		return TYPE_STARTER
 	case "pro":
 		return TYPE_PRO
+	case "enterprise":
+		return TYPE_ENTERPRISE
 	}
 	return TYPE_INVALID
 }
@@ -42,8 +48,12 @@ func TypeFromPointerString(in *string) Type {
 
 func (e Type) String() string {
 	switch e {
+	case TYPE_STARTER:
+		return "starter"
 	case TYPE_PRO:
 		return "pro"
+	case TYPE_ENTERPRISE:
+		return "enterprise"
 	}
 
 	return "invalid"

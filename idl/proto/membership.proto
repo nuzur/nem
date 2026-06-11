@@ -35,5 +35,7 @@ enum MembershipStatus {
 
 enum MembershipType { 
     MEMBERSHIP_TYPE_INVALID = 0;
-    MEMBERSHIP_TYPE_PRO = 1;
+    MEMBERSHIP_TYPE_STARTER = 1;
+    MEMBERSHIP_TYPE_PRO = 2;
+    MEMBERSHIP_TYPE_ENTERPRISE = 3;
 }

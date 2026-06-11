@@ -86,19 +86,25 @@ func (MembershipStatus) EnumDescriptor() ([]byte, []int) {
 type MembershipType int32
 
 const (
-	MembershipType_MEMBERSHIP_TYPE_INVALID MembershipType = 0
-	MembershipType_MEMBERSHIP_TYPE_PRO     MembershipType = 1
+	MembershipType_MEMBERSHIP_TYPE_INVALID    MembershipType = 0
+	MembershipType_MEMBERSHIP_TYPE_STARTER    MembershipType = 1
+	MembershipType_MEMBERSHIP_TYPE_PRO        MembershipType = 2
+	MembershipType_MEMBERSHIP_TYPE_ENTERPRISE MembershipType = 3
 )
 
 // Enum value maps for MembershipType.
 var (
 	MembershipType_name = map[int32]string{
 		0: "MEMBERSHIP_TYPE_INVALID",
-		1: "MEMBERSHIP_TYPE_PRO",
+		1: "MEMBERSHIP_TYPE_STARTER",
+		2: "MEMBERSHIP_TYPE_PRO",
+		3: "MEMBERSHIP_TYPE_ENTERPRISE",
 	}
 	MembershipType_value = map[string]int32{
-		"MEMBERSHIP_TYPE_INVALID": 0,
-		"MEMBERSHIP_TYPE_PRO":     1,
+		"MEMBERSHIP_TYPE_INVALID":    0,
+		"MEMBERSHIP_TYPE_STARTER":    1,
+		"MEMBERSHIP_TYPE_PRO":        2,
+		"MEMBERSHIP_TYPE_ENTERPRISE": 3,
 	}
 )
 
@@ -274,10 +280,12 @@ const file_membership_proto_rawDesc = "" +
 	"\x1aMEMBERSHIP_STATUS_PAST_DUE\x10\x03\x12\x1e\n" +
 	"\x1aMEMBERSHIP_STATUS_CANCELED\x10\x04\x12\x1c\n" +
 	"\x18MEMBERSHIP_STATUS_UNPAID\x10\x05\x12\x1e\n" +
-	"\x1aMEMBERSHIP_STATUS_DISABLED\x10\x06*F\n" +
+	"\x1aMEMBERSHIP_STATUS_DISABLED\x10\x06*\x83\x01\n" +
 	"\x0eMembershipType\x12\x1b\n" +
-	"\x17MEMBERSHIP_TYPE_INVALID\x10\x00\x12\x17\n" +
-	"\x13MEMBERSHIP_TYPE_PRO\x10\x01B1\n" +
+	"\x17MEMBERSHIP_TYPE_INVALID\x10\x00\x12\x1b\n" +
+	"\x17MEMBERSHIP_TYPE_STARTER\x10\x01\x12\x17\n" +
+	"\x13MEMBERSHIP_TYPE_PRO\x10\x02\x12\x1e\n" +
+	"\x1aMEMBERSHIP_TYPE_ENTERPRISE\x10\x03B1\n" +
 	"\x14github.com/nuzur/nemB\n" +
 	"MembershipP\x01Z\vnem/idl/genb\x06proto3"
 
