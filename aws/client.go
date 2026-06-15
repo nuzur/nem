@@ -65,20 +65,22 @@ func (c *AWSClient) Session() *session.Session {
 	return c.session
 }
 
-func (c *AWSClient) UploadToS3(filename string, data []byte, ttl *time.Duration) (*s3manager.UploadOutput, error) {
+func (c *AWSClient) UploadToS3(filename string, data []byte, ttl *time.Duration, encrypt bool) (*s3manager.UploadOutput, error) {
 	uploader := s3manager.NewUploader(c.session)
 
 	bucket := c.config.Bucket
 
 	input := &s3manager.UploadInput{
-		Bucket:               aws.String(bucket),
-		Key:                  aws.String(filename),
-		Body:                 bytes.NewReader(data),
-		ServerSideEncryption: aws.String("aws:kms"),
+		Bucket: aws.String(bucket),
+		Key:    aws.String(filename),
+		Body:   bytes.NewReader(data),
 	}
 
-	if c.config.KmsKeyID != "" {
-		input.SSEKMSKeyId = aws.String(c.config.KmsKeyID)
+	if encrypt {
+		input.ServerSideEncryption = aws.String("aws:kms")
+		if c.config.KmsKeyID != "" {
+			input.SSEKMSKeyId = aws.String(c.config.KmsKeyID)
+		}
 	}
 
 	if ttl != nil {

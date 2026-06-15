@@ -49,7 +49,7 @@ func serverHandlerUploadFunc() http.HandlerFunc {
 		}
 
 		filename := "nem/" + header.Filename
-		res, err := awsClient.UploadToS3(filename, buf.Bytes(), nil)
+		res, err := awsClient.UploadToS3(filename, buf.Bytes(), nil, true)
 		if err != nil {
 			fmt.Printf("error uploading file: %v, %v\n", err, res)
 			http.Error(w, "Internal Error", http.StatusInternalServerError)
