@@ -2,11 +2,25 @@ package keycloak
 
 import (
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
 	"errors"
 	"github.com/Nerzal/gocloak/v13"
 	"github.com/gofrs/uuid"
 	base "github.com/nuzur/nem/auth"
+	"time"
 )
+
+// userIDCacheTTL is how long a validated token->userID mapping is trusted before
+// we re-validate against Keycloak. Kept short so revoked/expired tokens stop
+// working promptly, but long enough to cover the burst of RPCs a single page
+// load makes with the same token.
+const userIDCacheTTL = 2 * time.Minute
+
+// userIDCacheSweepThreshold is the entry count past which storeUserID sweeps
+// expired entries before inserting, keeping the cache from growing unbounded as
+// tokens rotate.
+const userIDCacheSweepThreshold = 1000
 
 func New(params Params) (base.Interface, error) {
 	var config Config
@@ -15,9 +29,10 @@ func New(params Params) (base.Interface, error) {
 	}
 
 	i := Implementation{
-		logger: params.Logger,
-		config: config,
-		client: gocloak.NewClient(config.Hostname),
+		logger:      params.Logger,
+		config:      config,
+		client:      gocloak.NewClient(config.Hostname),
+		userIDCache: make(map[string]userIDCacheEntry),
 	}
 	return &i, nil
 }
@@ -27,14 +42,67 @@ func (i *Implementation) GetClient() *gocloak.GoCloak {
 }
 
 func (i *Implementation) GetUserID(ctx context.Context, token string) (uuid.UUID, error) {
-	userInfo, err := i.client.GetUserInfo(ctx, token, i.config.Realm)
+	// Key the cache by a hash of the token so raw bearer tokens are never held in
+	// memory as map keys.
+	sum := sha256.Sum256([]byte(token))
+	key := hex.EncodeToString(sum[:])
+
+	if userID, ok := i.lookupUserID(key); ok {
+		return userID, nil
+	}
+
+	// Collapse concurrent lookups of the same token (a page load fires many RPCs
+	// at once) into a single Keycloak call.
+	res, err, _ := i.userIDGroup.Do(key, func() (interface{}, error) {
+		// Another in-flight call may have already populated the cache by now.
+		if userID, ok := i.lookupUserID(key); ok {
+			return userID, nil
+		}
+		userInfo, err := i.client.GetUserInfo(ctx, token, i.config.Realm)
+		if err != nil {
+			return uuid.Nil, err
+		}
+		if userInfo.Sub == nil {
+			return uuid.Nil, errors.New("keycloak userinfo returned no subject")
+		}
+		userID := uuid.FromStringOrNil(*userInfo.Sub)
+		i.storeUserID(key, userID)
+		return userID, nil
+	})
 	if err != nil {
 		return uuid.Nil, err
 	}
-	if userInfo.Sub != nil {
-		return uuid.FromStringOrNil(*userInfo.Sub), nil
+	return res.(uuid.UUID), nil
+}
+
+func (i *Implementation) lookupUserID(key string) (uuid.UUID, bool) {
+	i.userIDCacheMu.RLock()
+	entry, ok := i.userIDCache[key]
+	i.userIDCacheMu.RUnlock()
+	if !ok || time.Now().After(entry.expiresAt) {
+		return uuid.Nil, false
 	}
-	return uuid.Nil, err
+	return entry.userID, true
+}
+
+func (i *Implementation) storeUserID(key string, userID uuid.UUID) {
+	now := time.Now()
+	i.userIDCacheMu.Lock()
+	// Tokens rotate (silent renew issues new ones), so entries accumulate. Sweep
+	// expired entries opportunistically once the map grows past a threshold to
+	// keep memory bounded to roughly the set of tokens seen within one TTL window.
+	if len(i.userIDCache) > userIDCacheSweepThreshold {
+		for k, entry := range i.userIDCache {
+			if now.After(entry.expiresAt) {
+				delete(i.userIDCache, k)
+			}
+		}
+	}
+	i.userIDCache[key] = userIDCacheEntry{
+		userID:    userID,
+		expiresAt: now.Add(userIDCacheTTL),
+	}
+	i.userIDCacheMu.Unlock()
 }
 
 func (i *Implementation) GetUserByID(ctx context.Context, userID string) (*gocloak.User, error) {

@@ -2,20 +2,40 @@ package keycloak
 
 import (
 	"github.com/Nerzal/gocloak/v13"
+	"github.com/gofrs/uuid"
 	"go.uber.org/config"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
+	"golang.org/x/sync/singleflight"
 	"net/http"
+	"sync"
+	"time"
 )
 
 type Interface interface {
 	HandleHTTP(w http.ResponseWriter, r *http.Request) error
 }
 
+// userIDCacheEntry holds a resolved token->userID mapping and when it expires.
+type userIDCacheEntry struct {
+	userID    uuid.UUID
+	expiresAt time.Time
+}
+
 type Implementation struct {
 	logger *zap.Logger
 	config Config
 	client *gocloak.GoCloak
+
+	// GetUserID validates the access token against Keycloak's userinfo endpoint
+	// on every call, which added a full auth round-trip to every backend RPC. A
+	// single page load issues ~20 RPCs that all carry the same token, so we cache
+	// the token->userID result for a short TTL and collapse concurrent lookups of
+	// the same token with singleflight. The TTL is intentionally short so a
+	// revoked/expired token stops validating quickly.
+	userIDCache   map[string]userIDCacheEntry
+	userIDCacheMu sync.RWMutex
+	userIDGroup   singleflight.Group
 }
 
 type Params struct {
