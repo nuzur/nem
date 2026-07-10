@@ -1,9 +1,0 @@
-package custom
-
-import (
-	"github.com/gofrs/uuid"
-)
-
-func GenerateUUID() uuid.UUID {
-	return uuid.Must(uuid.NewV4())
-}

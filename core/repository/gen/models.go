@@ -5,9 +5,9 @@
 package nemdb
 
 import (
-	"database/sql"
-	"encoding/json"
 	"time"
+
+	null "github.com/guregu/null/v6"
 )
 
 type AiUsage struct {
@@ -29,149 +29,149 @@ type AiUsage struct {
 }
 
 type ChangeRequest struct {
-	UUID               string         `json:"uuid"`
-	Version            int64          `json:"version"`
-	Title              string         `json:"title"`
-	Description        sql.NullString `json:"description"`
-	ProjectUUID        string         `json:"project_uuid"`
-	ProjectVersionUUID string         `json:"project_version_uuid"`
-	ChangeType         int64          `json:"change_type"`
-	DataChanges        []byte         `json:"data_changes"`
-	Metadata           []byte         `json:"metadata"`
-	Reviews            []byte         `json:"reviews"`
-	ReviewStatus       int64          `json:"review_status"`
-	OwnerUUID          string         `json:"owner_uuid"`
-	Status             int64          `json:"status"`
-	CreatedAt          time.Time      `json:"created_at"`
-	UpdatedAt          time.Time      `json:"updated_at"`
-	CreatedByUUID      string         `json:"created_by_uuid"`
-	UpdatedByUUID      string         `json:"updated_by_uuid"`
-	AiGenerated        bool           `json:"ai_generated"`
-	Scope              sql.NullInt32  `json:"scope"`
-	ScopeConfig        []byte         `json:"scope_config"`
+	UUID               string      `json:"uuid"`
+	Version            int64       `json:"version"`
+	Title              string      `json:"title"`
+	Description        null.String `json:"description"`
+	ProjectUUID        string      `json:"project_uuid"`
+	ProjectVersionUUID string      `json:"project_version_uuid"`
+	ChangeType         int64       `json:"change_type"`
+	DataChanges        []byte      `json:"data_changes"`
+	Metadata           []byte      `json:"metadata"`
+	Reviews            []byte      `json:"reviews"`
+	ReviewStatus       int64       `json:"review_status"`
+	OwnerUUID          string      `json:"owner_uuid"`
+	Status             int64       `json:"status"`
+	CreatedAt          time.Time   `json:"created_at"`
+	UpdatedAt          time.Time   `json:"updated_at"`
+	CreatedByUUID      string      `json:"created_by_uuid"`
+	UpdatedByUUID      string      `json:"updated_by_uuid"`
+	AiGenerated        null.Bool   `json:"ai_generated"`
+	Scope              null.Int    `json:"scope"`
+	ScopeConfig        []byte      `json:"scope_config"`
 }
 
 type Extension struct {
-	UUID              string         `json:"uuid"`
-	Version           int64          `json:"version"`
-	Identifier        string         `json:"identifier"`
-	DisplayName       sql.NullString `json:"display_name"`
-	DisplayAuthorName sql.NullString `json:"display_author_name"`
-	Description       sql.NullString `json:"description"`
-	URL               sql.NullString `json:"url"`
-	Verified          bool           `json:"verified"`
-	Repository        string         `json:"repository"`
-	ExtensionType     int64          `json:"extension_type"`
-	Tags              []byte         `json:"tags"`
-	Pro               bool           `json:"pro"`
-	Public            bool           `json:"public"`
-	Visibility        []byte         `json:"visibility"`
-	Status            int64          `json:"status"`
-	OwnerUUID         string         `json:"owner_uuid"`
-	CreatedAt         time.Time      `json:"created_at"`
-	UpdatedAt         time.Time      `json:"updated_at"`
-	CreatedByUUID     string         `json:"created_by_uuid"`
-	UpdatedByUUID     string         `json:"updated_by_uuid"`
+	UUID              string      `json:"uuid"`
+	Version           int64       `json:"version"`
+	Identifier        string      `json:"identifier"`
+	DisplayName       null.String `json:"display_name"`
+	DisplayAuthorName null.String `json:"display_author_name"`
+	Description       null.String `json:"description"`
+	URL               null.String `json:"url"`
+	Verified          bool        `json:"verified"`
+	Repository        string      `json:"repository"`
+	ExtensionType     int64       `json:"extension_type"`
+	Tags              []byte      `json:"tags"`
+	Pro               bool        `json:"pro"`
+	Public            bool        `json:"public"`
+	Visibility        []byte      `json:"visibility"`
+	Status            int64       `json:"status"`
+	OwnerUUID         string      `json:"owner_uuid"`
+	CreatedAt         time.Time   `json:"created_at"`
+	UpdatedAt         time.Time   `json:"updated_at"`
+	CreatedByUUID     string      `json:"created_by_uuid"`
+	UpdatedByUUID     string      `json:"updated_by_uuid"`
 }
 
 type ExtensionExecution struct {
-	UUID                 string         `json:"uuid"`
-	ExtensionUUID        string         `json:"extension_uuid"`
-	ExtensionVersionUUID string         `json:"extension_version_uuid"`
-	ProjectExtensionUUID sql.NullString `json:"project_extension_uuid"`
-	ProjectUUID          string         `json:"project_uuid"`
-	ProjectVersionUUID   string         `json:"project_version_uuid"`
-	ExecutedByUUID       string         `json:"executed_by_uuid"`
-	Metadata             []byte         `json:"metadata"`
-	Status               int64          `json:"status"`
-	StatusMsg            sql.NullString `json:"status_msg"`
-	CreatedAt            time.Time      `json:"created_at"`
-	UpdatedAt            time.Time      `json:"updated_at"`
+	UUID                 string      `json:"uuid"`
+	ExtensionUUID        string      `json:"extension_uuid"`
+	ExtensionVersionUUID string      `json:"extension_version_uuid"`
+	ProjectExtensionUUID null.String `json:"project_extension_uuid"`
+	ProjectUUID          string      `json:"project_uuid"`
+	ProjectVersionUUID   string      `json:"project_version_uuid"`
+	ExecutedByUUID       string      `json:"executed_by_uuid"`
+	Metadata             []byte      `json:"metadata"`
+	Status               int64       `json:"status"`
+	StatusMsg            null.String `json:"status_msg"`
+	CreatedAt            time.Time   `json:"created_at"`
+	UpdatedAt            time.Time   `json:"updated_at"`
 }
 
 type ExtensionVersion struct {
-	UUID                string          `json:"uuid"`
-	Version             int64           `json:"version"`
-	ExtensionUUID       string          `json:"extension_uuid"`
-	DisplayVersion      sql.NullString  `json:"display_version"`
-	Description         sql.NullString  `json:"description"`
-	RepositoryTag       string          `json:"repository_tag"`
-	ConfigurationEntity []byte          `json:"configuration_entity"`
-	ExecutionMode       json.RawMessage `json:"execution_mode"`
-	ReviewStatus        int64           `json:"review_status"`
-	Status              int64           `json:"status"`
-	CreatedAt           time.Time       `json:"created_at"`
-	UpdatedAt           time.Time       `json:"updated_at"`
-	CreatedByUUID       string          `json:"created_by_uuid"`
-	UpdatedByUUID       string          `json:"updated_by_uuid"`
+	UUID                string      `json:"uuid"`
+	Version             int64       `json:"version"`
+	ExtensionUUID       string      `json:"extension_uuid"`
+	DisplayVersion      null.String `json:"display_version"`
+	Description         null.String `json:"description"`
+	RepositoryTag       string      `json:"repository_tag"`
+	ConfigurationEntity []byte      `json:"configuration_entity"`
+	ExecutionMode       int64       `json:"execution_mode"`
+	ReviewStatus        int64       `json:"review_status"`
+	Status              int64       `json:"status"`
+	CreatedAt           time.Time   `json:"created_at"`
+	UpdatedAt           time.Time   `json:"updated_at"`
+	CreatedByUUID       string      `json:"created_by_uuid"`
+	UpdatedByUUID       string      `json:"updated_by_uuid"`
 }
 
 type LocalAgent struct {
-	UUID          string         `json:"uuid"`
-	UserUUID      string         `json:"user_uuid"`
-	TokenHash     sql.NullString `json:"token_hash"`
-	MachineName   sql.NullString `json:"machine_name"`
-	Os            sql.NullString `json:"os"`
-	CliVersion    sql.NullString `json:"cli_version"`
-	Connections   []byte         `json:"connections"`
-	Status        int64          `json:"status"`
-	LastSeenAt    sql.NullTime   `json:"last_seen_at"`
-	RevokedAt     sql.NullTime   `json:"revoked_at"`
-	CreatedAt     time.Time      `json:"created_at"`
-	UpdatedAt     time.Time      `json:"updated_at"`
-	CreatedByUUID string         `json:"created_by_uuid"`
-	UpdatedByUUID string         `json:"updated_by_uuid"`
+	UUID          string      `json:"uuid"`
+	UserUUID      string      `json:"user_uuid"`
+	TokenHash     null.String `json:"token_hash"`
+	MachineName   null.String `json:"machine_name"`
+	Os            null.String `json:"os"`
+	CliVersion    null.String `json:"cli_version"`
+	Connections   []byte      `json:"connections"`
+	Status        int64       `json:"status"`
+	LastSeenAt    null.Time   `json:"last_seen_at"`
+	RevokedAt     null.Time   `json:"revoked_at"`
+	CreatedAt     time.Time   `json:"created_at"`
+	UpdatedAt     time.Time   `json:"updated_at"`
+	CreatedByUUID string      `json:"created_by_uuid"`
+	UpdatedByUUID string      `json:"updated_by_uuid"`
 }
 
 type Membership struct {
-	UUID            string          `json:"uuid"`
-	OwnerUUID       string          `json:"owner_uuid"`
-	Type            int64           `json:"type"`
-	StartDate       time.Time       `json:"start_date"`
-	BillingMetadata json.RawMessage `json:"billing_metadata"`
-	Status          int64           `json:"status"`
-	CreatedAt       time.Time       `json:"created_at"`
-	UpdatedAt       time.Time       `json:"updated_at"`
-	CreatedByUUID   string          `json:"created_by_uuid"`
-	UpdatedByUUID   string          `json:"updated_by_uuid"`
+	UUID            string    `json:"uuid"`
+	OwnerUUID       string    `json:"owner_uuid"`
+	Type            int64     `json:"type"`
+	StartDate       time.Time `json:"start_date"`
+	BillingMetadata []byte    `json:"billing_metadata"`
+	Status          int64     `json:"status"`
+	CreatedAt       time.Time `json:"created_at"`
+	UpdatedAt       time.Time `json:"updated_at"`
+	CreatedByUUID   string    `json:"created_by_uuid"`
+	UpdatedByUUID   string    `json:"updated_by_uuid"`
 }
 
 type Project struct {
-	UUID              string         `json:"uuid"`
-	Version           int64          `json:"version"`
-	Name              string         `json:"name"`
-	Description       sql.NullString `json:"description"`
-	Tags              []byte         `json:"tags"`
-	URL               sql.NullString `json:"url"`
-	OwnerUUID         string         `json:"owner_uuid"`
-	TeamUUID          string         `json:"team_uuid"`
-	AccessType        int64          `json:"access_type"`
-	ProjectExtensions []byte         `json:"project_extensions"`
-	Status            int64          `json:"status"`
-	CreatedAt         time.Time      `json:"created_at"`
-	UpdatedAt         time.Time      `json:"updated_at"`
-	CreatedByUUID     string         `json:"created_by_uuid"`
-	UpdatedByUUID     string         `json:"updated_by_uuid"`
+	UUID              string      `json:"uuid"`
+	Version           int64       `json:"version"`
+	Name              string      `json:"name"`
+	Description       null.String `json:"description"`
+	Tags              []byte      `json:"tags"`
+	URL               null.String `json:"url"`
+	OwnerUUID         string      `json:"owner_uuid"`
+	TeamUUID          string      `json:"team_uuid"`
+	AccessType        int64       `json:"access_type"`
+	ProjectExtensions []byte      `json:"project_extensions"`
+	Status            int64       `json:"status"`
+	CreatedAt         time.Time   `json:"created_at"`
+	UpdatedAt         time.Time   `json:"updated_at"`
+	CreatedByUUID     string      `json:"created_by_uuid"`
+	UpdatedByUUID     string      `json:"updated_by_uuid"`
 }
 
 type ProjectVersion struct {
-	UUID            string          `json:"uuid"`
-	Version         int64           `json:"version"`
-	Identifier      string          `json:"identifier"`
-	Description     string          `json:"description"`
-	ProjectUUID     string          `json:"project_uuid"`
-	Entities        json.RawMessage `json:"entities"`
-	Relationships   json.RawMessage `json:"relationships"`
-	Enums           json.RawMessage `json:"enums"`
-	Services        json.RawMessage `json:"services"`
-	BaseVersionUUID sql.NullString  `json:"base_version_uuid"`
-	ReviewStatus    int64           `json:"review_status"`
-	Deployments     []byte          `json:"deployments"`
-	Status          int64           `json:"status"`
-	CreatedAt       time.Time       `json:"created_at"`
-	UpdatedAt       time.Time       `json:"updated_at"`
-	CreatedByUUID   string          `json:"created_by_uuid"`
-	UpdatedByUUID   string          `json:"updated_by_uuid"`
+	UUID            string      `json:"uuid"`
+	Version         int64       `json:"version"`
+	Identifier      string      `json:"identifier"`
+	Description     string      `json:"description"`
+	ProjectUUID     string      `json:"project_uuid"`
+	Entities        []byte      `json:"entities"`
+	Relationships   []byte      `json:"relationships"`
+	Enums           []byte      `json:"enums"`
+	Services        []byte      `json:"services"`
+	BaseVersionUUID null.String `json:"base_version_uuid"`
+	ReviewStatus    int64       `json:"review_status"`
+	Deployments     []byte      `json:"deployments"`
+	Status          int64       `json:"status"`
+	CreatedAt       time.Time   `json:"created_at"`
+	UpdatedAt       time.Time   `json:"updated_at"`
+	CreatedByUUID   string      `json:"created_by_uuid"`
+	UpdatedByUUID   string      `json:"updated_by_uuid"`
 }
 
 type Team struct {
@@ -193,47 +193,47 @@ type Team struct {
 }
 
 type User struct {
-	UUID        string         `json:"uuid"`
-	Identifier  string         `json:"identifier"`
-	Name        sql.NullString `json:"name"`
-	LastName    sql.NullString `json:"last_name"`
-	Email       string         `json:"email"`
-	UserType    int64          `json:"user_type"`
-	CountryIos2 sql.NullString `json:"country_ios2"`
-	Locale      sql.NullString `json:"locale"`
-	Metadata    sql.NullString `json:"metadata"`
-	Status      int64          `json:"status"`
-	CreatedAt   time.Time      `json:"created_at"`
-	UpdatedAt   time.Time      `json:"updated_at"`
+	UUID        string      `json:"uuid"`
+	Identifier  string      `json:"identifier"`
+	Name        null.String `json:"name"`
+	LastName    null.String `json:"last_name"`
+	Email       string      `json:"email"`
+	UserType    int64       `json:"user_type"`
+	CountryIos2 null.String `json:"country_ios2"`
+	Locale      null.String `json:"locale"`
+	Metadata    null.String `json:"metadata"`
+	Status      int64       `json:"status"`
+	CreatedAt   time.Time   `json:"created_at"`
+	UpdatedAt   time.Time   `json:"updated_at"`
 }
 
 type UserConnection struct {
-	UUID               string          `json:"uuid"`
-	UserUUID           string          `json:"user_uuid"`
-	ProjectUUID        string          `json:"project_uuid"`
-	ProjectVersionUUID sql.NullString  `json:"project_version_uuid"`
-	Type               int64           `json:"type"`
-	TypeConfig         json.RawMessage `json:"type_config"`
-	DbSchema           string          `json:"db_schema"`
-	Executions         []byte          `json:"executions"`
-	Status             int64           `json:"status"`
-	CreatedAt          time.Time       `json:"created_at"`
-	UpdatedAt          time.Time       `json:"updated_at"`
+	UUID               string      `json:"uuid"`
+	UserUUID           string      `json:"user_uuid"`
+	ProjectUUID        string      `json:"project_uuid"`
+	ProjectVersionUUID null.String `json:"project_version_uuid"`
+	Type               int64       `json:"type"`
+	TypeConfig         []byte      `json:"type_config"`
+	DbSchema           string      `json:"db_schema"`
+	Executions         []byte      `json:"executions"`
+	Status             int64       `json:"status"`
+	CreatedAt          time.Time   `json:"created_at"`
+	UpdatedAt          time.Time   `json:"updated_at"`
 }
 
 type UserProject struct {
-	UUID                    string         `json:"uuid"`
-	UserUUID                sql.NullString `json:"user_uuid"`
-	UserEmail               sql.NullString `json:"user_email"`
-	ProjectUUID             string         `json:"project_uuid"`
-	Role                    int64          `json:"role"`
-	ReviewRequiredStructure bool           `json:"review_required_structure"`
-	ReviewRequiredData      bool           `json:"review_required_data"`
-	Status                  int64          `json:"status"`
-	CreatedAt               time.Time      `json:"created_at"`
-	UpdatedAt               time.Time      `json:"updated_at"`
-	CreatedByUUID           string         `json:"created_by_uuid"`
-	UpdatedByUUID           string         `json:"updated_by_uuid"`
+	UUID                    string      `json:"uuid"`
+	UserUUID                null.String `json:"user_uuid"`
+	UserEmail               null.String `json:"user_email"`
+	ProjectUUID             string      `json:"project_uuid"`
+	Role                    int64       `json:"role"`
+	ReviewRequiredStructure bool        `json:"review_required_structure"`
+	ReviewRequiredData      bool        `json:"review_required_data"`
+	Status                  int64       `json:"status"`
+	CreatedAt               time.Time   `json:"created_at"`
+	UpdatedAt               time.Time   `json:"updated_at"`
+	CreatedByUUID           string      `json:"created_by_uuid"`
+	UpdatedByUUID           string      `json:"updated_by_uuid"`
 }
 
 type UserProjectVersion struct {
@@ -250,16 +250,16 @@ type UserProjectVersion struct {
 }
 
 type UserTeam struct {
-	UUID                    string         `json:"uuid"`
-	UserUUID                sql.NullString `json:"user_uuid"`
-	UserEmail               sql.NullString `json:"user_email"`
-	TeamUUID                string         `json:"team_uuid"`
-	Role                    int64          `json:"role"`
-	ReviewRequiredStructure bool           `json:"review_required_structure"`
-	ReviewRequiredData      bool           `json:"review_required_data"`
-	Status                  int64          `json:"status"`
-	CreatedAt               time.Time      `json:"created_at"`
-	UpdatedAt               time.Time      `json:"updated_at"`
-	CreatedByUUID           string         `json:"created_by_uuid"`
-	UpdatedByUUID           string         `json:"updated_by_uuid"`
+	UUID                    string      `json:"uuid"`
+	UserUUID                null.String `json:"user_uuid"`
+	UserEmail               null.String `json:"user_email"`
+	TeamUUID                string      `json:"team_uuid"`
+	Role                    int64       `json:"role"`
+	ReviewRequiredStructure bool        `json:"review_required_structure"`
+	ReviewRequiredData      bool        `json:"review_required_data"`
+	Status                  int64       `json:"status"`
+	CreatedAt               time.Time   `json:"created_at"`
+	UpdatedAt               time.Time   `json:"updated_at"`
+	CreatedByUUID           string      `json:"created_by_uuid"`
+	UpdatedByUUID           string      `json:"updated_by_uuid"`
 }
