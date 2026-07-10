@@ -109,6 +109,16 @@ func JSONToTimeSlice(data json.RawMessage) []time.Time {
 	return res
 }
 
+// NullifyEmptyJSON returns nil for an empty json.RawMessage so it is written as
+// SQL NULL rather than an empty string, which a JSON column rejects
+// ("Invalid JSON text: The document is empty", MySQL error 3140).
+func NullifyEmptyJSON(data json.RawMessage) json.RawMessage {
+	if len(data) == 0 {
+		return nil
+	}
+	return data
+}
+
 func SliceToJSON(slice interface{}) json.RawMessage {
 	res, err := json.Marshal(slice)
 	if err != nil {

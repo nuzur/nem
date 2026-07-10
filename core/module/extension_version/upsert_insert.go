@@ -86,7 +86,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertExtensi
 
 		RepositoryTag: req.ExtensionVersion.RepositoryTag,
 
-		ConfigurationEntity: req.ExtensionVersion.ConfigurationEntity,
+		ConfigurationEntity: mapper.NullifyEmptyJSON(req.ExtensionVersion.ConfigurationEntity),
 
 		ExecutionMode: mapper.SliceToJSON(req.ExtensionVersion.ExecutionMode),
 

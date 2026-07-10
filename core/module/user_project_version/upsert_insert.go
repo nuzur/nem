@@ -11,6 +11,8 @@ import (
 	"github.com/gofrs/uuid"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -80,7 +82,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertUserPro
 
 		UserUUID: req.UserProjectVersion.UserUUID.String(),
 
-		Data: req.UserProjectVersion.Data,
+		Data: mapper.NullifyEmptyJSON(req.UserProjectVersion.Data),
 
 		Status: req.UserProjectVersion.Status.ToInt64(),
 

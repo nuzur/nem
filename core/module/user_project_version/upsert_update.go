@@ -10,6 +10,8 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -92,7 +94,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateUserPro
 
 		UserUUID: req.UserProjectVersion.UserUUID.String(),
 
-		Data: req.UserProjectVersion.Data,
+		Data: mapper.NullifyEmptyJSON(req.UserProjectVersion.Data),
 
 		Status: req.UserProjectVersion.Status.ToInt64(),
 
