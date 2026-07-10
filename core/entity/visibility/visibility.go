@@ -15,16 +15,16 @@ import (
 )
 
 type Visibility struct {
-	UUID              uuid.UUID             `json:"uuid"`
-	Description       null.String           `json:"description"`
-	OrganizationUUIDs []uuid.UUID           `json:"organization_uuids"`
-	TeamUUIDs         []uuid.UUID           `json:"team_uuids"`
-	UserUUIDs         []uuid.UUID           `json:"user_uuids"`
-	Roles             enums.VisibilityRoles `json:"roles"`
-	CreatedAt         time.Time             `json:"created_at"`
-	UpdatedAt         time.Time             `json:"updated_at"`
-	CreatedByUUID     uuid.UUID             `json:"created_by_uuid"`
-	UpdatedByUUID     uuid.UUID             `json:"updated_by_uuid"`
+	UUID              uuid.UUID               `json:"uuid"`
+	Description       null.String             `json:"description"`
+	OrganizationUUIDs []uuid.UUID             `json:"organization_uuids"`
+	TeamUUIDs         []uuid.UUID             `json:"team_uuids"`
+	UserUUIDs         []uuid.UUID             `json:"user_uuids"`
+	Roles             []enums.VisibilityRoles `json:"roles"`
+	CreatedAt         time.Time               `json:"created_at"`
+	UpdatedAt         time.Time               `json:"updated_at"`
+	CreatedByUUID     uuid.UUID               `json:"created_by_uuid"`
+	UpdatedByUUID     uuid.UUID               `json:"updated_by_uuid"`
 }
 
 func (e Visibility) String() string {

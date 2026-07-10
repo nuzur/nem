@@ -8,6 +8,8 @@ import (
 	"github.com/nuzur/nem/core/module/team/types"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/gofrs/uuid"
+
 	"github.com/nuzur/nem/core/entity/connection"
 	"github.com/nuzur/nem/core/entity/entity"
 	"github.com/nuzur/nem/core/entity/enviorment"
@@ -23,6 +25,11 @@ func (m *module) Insert(
 	req types.UpsertRequest,
 	opts ...Option,
 ) (types.UpsertResponse, error) {
+
+	// auto-generate primary-key UUIDs for new records when not supplied by the caller
+	if req.Team.UUID == uuid.Nil {
+		req.Team.UUID = uuid.Must(uuid.NewV4())
+	}
 
 	optConfig := applyAllOptions(opts)
 

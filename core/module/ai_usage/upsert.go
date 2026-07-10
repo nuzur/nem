@@ -23,8 +23,8 @@ func (m *module) Upsert(
 	}
 
 	if isInsert {
-		// auto-generate primary-key UUIDs for new records
-		req.AiUsage.UUID = uuid.Must(uuid.NewV4())
+		// PK UUIDs are auto-generated inside Insert when not supplied, so the
+		// gRPC Create path (which calls Insert directly) also gets a valid UUID.
 		return m.Insert(ctx, req, opts...)
 	}
 

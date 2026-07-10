@@ -15,7 +15,7 @@ import "google/protobuf/timestamp.proto";
 
 message ReviewConfig {  
     string uuid = 1;
-    ReviewConfigReviewUserRoles review_user_roles = 2;
+    repeated ReviewConfigReviewUserRoles review_user_roles = 2;
     repeated string review_user_uuids = 3;
     int64 min_reviews = 4;
     ReviewConfigStatus status = 5;

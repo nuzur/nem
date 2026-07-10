@@ -18,7 +18,7 @@ type UserProjectVersion struct {
 	Version            int64                          `json:"version"`
 	ProjectVersionUUID uuid.UUID                      `json:"project_version_uuid"`
 	UserUUID           uuid.UUID                      `json:"user_uuid"`
-	Data               json.RawMessage                `json:"data"`
+	Data               json.RawMessage                `json:"data,omitempty"`
 	Status             enums.UserProjectVersionStatus `json:"status"`
 	CreatedAt          time.Time                      `json:"created_at"`
 	UpdatedAt          time.Time                      `json:"updated_at"`

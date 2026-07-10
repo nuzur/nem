@@ -8,8 +8,6 @@ import (
 
 	"github.com/guregu/null/v6"
 
-	"github.com/nuzur/nem/enums"
-
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -20,7 +18,7 @@ func VisibilityToProto(e main_entity.Visibility) *pb.Visibility {
 		OrganizationUuids: UUIDSliceToStringSlice(e.OrganizationUUIDs),
 		TeamUuids:         UUIDSliceToStringSlice(e.TeamUUIDs),
 		UserUuids:         UUIDSliceToStringSlice(e.UserUUIDs),
-		Roles:             pb.VisibilityRoles(e.Roles),
+		Roles:             VisibilityRolesSliceToProto(e.Roles),
 		CreatedAt:         timestamppb.New(e.CreatedAt),
 		UpdatedAt:         timestamppb.New(e.UpdatedAt),
 		CreatedByUuid:     e.CreatedByUUID.String(),
@@ -46,7 +44,7 @@ func VisibilityFromProto(m *pb.Visibility) main_entity.Visibility {
 		OrganizationUUIDs: StringSliceToUUIDSlice(m.GetOrganizationUuids()),
 		TeamUUIDs:         StringSliceToUUIDSlice(m.GetTeamUuids()),
 		UserUUIDs:         StringSliceToUUIDSlice(m.GetUserUuids()),
-		Roles:             enums.VisibilityRoles(m.GetRoles()),
+		Roles:             VisibilityRolesSliceFromProto(m.GetRoles()),
 		CreatedAt:         m.GetCreatedAt().AsTime(),
 		UpdatedAt:         m.GetUpdatedAt().AsTime(),
 		CreatedByUUID:     StringToUUID(m.GetCreatedByUuid()),

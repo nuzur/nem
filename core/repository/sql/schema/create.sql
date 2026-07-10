@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `extension_version` (
     `description` VARCHAR(255),
     `repository_tag` VARCHAR(255) NOT NULL,
     `configuration_entity` JSON,
-    `execution_mode` INT NOT NULL,
+    `execution_mode` JSON NOT NULL,
     `review_status` INT NOT NULL,
     `status` INT NOT NULL,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

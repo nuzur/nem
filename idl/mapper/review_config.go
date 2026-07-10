@@ -14,7 +14,7 @@ import (
 func ReviewConfigToProto(e main_entity.ReviewConfig) *pb.ReviewConfig {
 	return &pb.ReviewConfig{
 		Uuid:            e.UUID.String(),
-		ReviewUserRoles: pb.ReviewConfigReviewUserRoles(e.ReviewUserRoles),
+		ReviewUserRoles: ReviewConfigReviewUserRolesSliceToProto(e.ReviewUserRoles),
 		ReviewUserUuids: UUIDSliceToStringSlice(e.ReviewUserUUIDs),
 		MinReviews:      int64(e.MinReviews),
 		Status:          pb.ReviewConfigStatus(e.Status),
@@ -39,7 +39,7 @@ func ReviewConfigFromProto(m *pb.ReviewConfig) main_entity.ReviewConfig {
 	}
 	return main_entity.ReviewConfig{
 		UUID:            StringToUUID(m.GetUuid()),
-		ReviewUserRoles: enums.ReviewConfigReviewUserRoles(m.GetReviewUserRoles()),
+		ReviewUserRoles: ReviewConfigReviewUserRolesSliceFromProto(m.GetReviewUserRoles()),
 		ReviewUserUUIDs: StringSliceToUUIDSlice(m.GetReviewUserUuids()),
 		MinReviews:      int64(m.GetMinReviews()),
 		Status:          enums.ReviewConfigStatus(m.GetStatus()),

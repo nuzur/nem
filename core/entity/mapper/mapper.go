@@ -44,6 +44,21 @@ func JSONToIntSlice(data json.RawMessage) []int64 {
 	return res
 }
 
+// JSONToEnumSlice decodes a JSON array column (e.g. "[1,2]") into a slice of a
+// multi-enum type. The type parameter is any enum (its underlying type is int64).
+func JSONToEnumSlice[T ~int64](data json.RawMessage) []T {
+	res := []T{}
+	if len(data) == 0 {
+		return res
+	}
+	err := json.Unmarshal(data, &res)
+	if err != nil {
+		log.Printf("error unmarshaling json to enum slice: %v \n", err)
+		return []T{}
+	}
+	return res
+}
+
 func JSONToFloatSlice(data json.RawMessage) []float64 {
 	res := []float64{}
 	err := json.Unmarshal(data, &res)

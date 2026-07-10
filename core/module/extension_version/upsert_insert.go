@@ -8,7 +8,11 @@ import (
 	"github.com/nuzur/nem/core/module/extension_version/types"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/gofrs/uuid"
+
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -16,6 +20,11 @@ func (m *module) Insert(
 	req types.UpsertRequest,
 	opts ...Option,
 ) (types.UpsertResponse, error) {
+
+	// auto-generate primary-key UUIDs for new records when not supplied by the caller
+	if req.ExtensionVersion.UUID == uuid.Nil {
+		req.ExtensionVersion.UUID = uuid.Must(uuid.NewV4())
+	}
 
 	optConfig := applyAllOptions(opts)
 
@@ -79,7 +88,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertExtensi
 
 		ConfigurationEntity: req.ExtensionVersion.ConfigurationEntity,
 
-		ExecutionMode: req.ExtensionVersion.ExecutionMode.ToInt64(),
+		ExecutionMode: mapper.SliceToJSON(req.ExtensionVersion.ExecutionMode),
 
 		ReviewStatus: req.ExtensionVersion.ReviewStatus.ToInt64(),
 

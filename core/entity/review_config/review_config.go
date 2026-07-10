@@ -14,15 +14,15 @@ import (
 )
 
 type ReviewConfig struct {
-	UUID            uuid.UUID                         `json:"uuid"`
-	ReviewUserRoles enums.ReviewConfigReviewUserRoles `json:"review_user_roles"`
-	ReviewUserUUIDs []uuid.UUID                       `json:"review_user_uuids"`
-	MinReviews      int64                             `json:"min_reviews"`
-	Status          enums.ReviewConfigStatus          `json:"status"`
-	CreatedAt       time.Time                         `json:"created_at"`
-	UpdatedAt       time.Time                         `json:"updated_at"`
-	CreatedByUUID   uuid.UUID                         `json:"created_by_uuid"`
-	UpdatedByUUID   uuid.UUID                         `json:"updated_by_uuid"`
+	UUID            uuid.UUID                           `json:"uuid"`
+	ReviewUserRoles []enums.ReviewConfigReviewUserRoles `json:"review_user_roles"`
+	ReviewUserUUIDs []uuid.UUID                         `json:"review_user_uuids"`
+	MinReviews      int64                               `json:"min_reviews"`
+	Status          enums.ReviewConfigStatus            `json:"status"`
+	CreatedAt       time.Time                           `json:"created_at"`
+	UpdatedAt       time.Time                           `json:"updated_at"`
+	CreatedByUUID   uuid.UUID                           `json:"created_by_uuid"`
+	UpdatedByUUID   uuid.UUID                           `json:"updated_by_uuid"`
 }
 
 func (e ReviewConfig) String() string {

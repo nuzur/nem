@@ -8,6 +8,8 @@ import (
 	"github.com/nuzur/nem/core/module/change_request/types"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/gofrs/uuid"
+
 	"github.com/nuzur/nem/core/entity/change_request_data_change"
 	"github.com/nuzur/nem/core/entity/change_request_metadata"
 	"github.com/nuzur/nem/core/entity/change_request_review"
@@ -21,6 +23,11 @@ func (m *module) Insert(
 	req types.UpsertRequest,
 	opts ...Option,
 ) (types.UpsertResponse, error) {
+
+	// auto-generate primary-key UUIDs for new records when not supplied by the caller
+	if req.ChangeRequest.UUID == uuid.Nil {
+		req.ChangeRequest.UUID = uuid.Must(uuid.NewV4())
+	}
 
 	optConfig := applyAllOptions(opts)
 

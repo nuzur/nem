@@ -15,7 +15,7 @@ func (e ExtensionVersion) FieldIdentifierToTypeMap() map[string]entitytypes.Fiel
 		"description":          entitytypes.StringFieldType,
 		"repository_tag":       entitytypes.StringFieldType,
 		"configuration_entity": entitytypes.RawJSONFieldType,
-		"execution_mode":       entitytypes.SingleEnumFieldType,
+		"execution_mode":       entitytypes.MultiEnumFieldType,
 		"review_status":        entitytypes.SingleEnumFieldType,
 		"status":               entitytypes.SingleEnumFieldType,
 		"created_at":           entitytypes.TimestampFieldType,

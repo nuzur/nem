@@ -29,7 +29,7 @@ func mapModelToEntity(m nemdb.ExtensionVersion) main_entity.ExtensionVersion {
 		Description:         null.NewString(m.Description.String, m.Description.Valid),
 		RepositoryTag:       m.RepositoryTag,
 		ConfigurationEntity: m.ConfigurationEntity,
-		ExecutionMode:       enums.ExtensionVersionExecutionMode(m.ExecutionMode),
+		ExecutionMode:       mapper.JSONToEnumSlice[enums.ExtensionVersionExecutionMode](m.ExecutionMode),
 		ReviewStatus:        enums.ExtensionVersionReviewStatus(m.ReviewStatus),
 		Status:              enums.ExtensionVersionStatus(m.Status),
 		CreatedAt:           m.CreatedAt,

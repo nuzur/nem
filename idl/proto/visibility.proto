@@ -19,7 +19,7 @@ message Visibility {
     repeated string organization_uuids = 3;
     repeated string team_uuids = 4;
     repeated string user_uuids = 5;
-    VisibilityRoles roles = 6;
+    repeated VisibilityRoles roles = 6;
     google.protobuf.Timestamp created_at = 7;
     google.protobuf.Timestamp updated_at = 8;
     string created_by_uuid = 9;

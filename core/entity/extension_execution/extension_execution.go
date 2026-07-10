@@ -22,7 +22,7 @@ type ExtensionExecution struct {
 	ProjectUUID          uuid.UUID                      `json:"project_uuid"`
 	ProjectVersionUUID   uuid.UUID                      `json:"project_version_uuid"`
 	ExecutedByUUID       uuid.UUID                      `json:"executed_by_uuid"`
-	Metadata             json.RawMessage                `json:"metadata"`
+	Metadata             json.RawMessage                `json:"metadata,omitempty"`
 	Status               enums.ExtensionExecutionStatus `json:"status"`
 	StatusMsg            null.String                    `json:"status_msg"`
 	CreatedAt            time.Time                      `json:"created_at"`

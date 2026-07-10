@@ -10,6 +10,8 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -98,7 +100,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateExtensi
 
 		ConfigurationEntity: req.ExtensionVersion.ConfigurationEntity,
 
-		ExecutionMode: req.ExtensionVersion.ExecutionMode.ToInt64(),
+		ExecutionMode: mapper.SliceToJSON(req.ExtensionVersion.ExecutionMode),
 
 		ReviewStatus: req.ExtensionVersion.ReviewStatus.ToInt64(),
 

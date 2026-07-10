@@ -8,6 +8,8 @@ import (
 	"github.com/nuzur/nem/core/module/user_connection/types"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/gofrs/uuid"
+
 	"github.com/nuzur/nem/core/entity/user_connection_execution"
 	"github.com/nuzur/nem/core/entity/user_connection_type_config"
 
@@ -19,6 +21,11 @@ func (m *module) Insert(
 	req types.UpsertRequest,
 	opts ...Option,
 ) (types.UpsertResponse, error) {
+
+	// auto-generate primary-key UUIDs for new records when not supplied by the caller
+	if req.UserConnection.UUID == uuid.Nil {
+		req.UserConnection.UUID = uuid.Must(uuid.NewV4())
+	}
 
 	optConfig := applyAllOptions(opts)
 

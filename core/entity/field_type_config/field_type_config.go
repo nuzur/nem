@@ -28,11 +28,11 @@ import (
 )
 
 type FieldTypeConfig struct {
-	UUID      json.RawMessage                                      `json:"uuid"`
+	UUID      json.RawMessage                                      `json:"uuid,omitempty"`
 	Integer   field_type_integer_config.FieldTypeIntegerConfig     `json:"integer"`
 	Float     field_type_float_config.FieldTypeFloatConfig         `json:"float"`
 	Decimal   field_type_decimal_config.FieldTypeDecimalConfig     `json:"decimal"`
-	Boolean   json.RawMessage                                      `json:"boolean"`
+	Boolean   json.RawMessage                                      `json:"boolean,omitempty"`
 	Char      field_type_char_config.FieldTypeCharConfig           `json:"char"`
 	Varchar   field_type_varchar_config.FieldTypeVarcharConfig     `json:"varchar"`
 	Text      field_type_text_config.FieldTypeTextConfig           `json:"text"`
@@ -40,11 +40,11 @@ type FieldTypeConfig struct {
 	Email     field_type_email_config.FieldTypeEmailConfig         `json:"email"`
 	Phone     field_type_phone_config.FieldTypePhoneConfig         `json:"phone"`
 	URL       field_type_url_config.FieldTypeURLConfig             `json:"url"`
-	Location  json.RawMessage                                      `json:"location"`
-	Color     json.RawMessage                                      `json:"color"`
-	RichText  json.RawMessage                                      `json:"rich_text"`
-	Code      json.RawMessage                                      `json:"code"`
-	Markdown  json.RawMessage                                      `json:"markdown"`
+	Location  json.RawMessage                                      `json:"location,omitempty"`
+	Color     json.RawMessage                                      `json:"color,omitempty"`
+	RichText  json.RawMessage                                      `json:"rich_text,omitempty"`
+	Code      json.RawMessage                                      `json:"code,omitempty"`
+	Markdown  json.RawMessage                                      `json:"markdown,omitempty"`
 	File      field_type_file_config.FieldTypeFileConfig           `json:"file"`
 	Image     field_type_file_config.FieldTypeFileConfig           `json:"image"`
 	Video     field_type_file_config.FieldTypeFileConfig           `json:"video"`
@@ -54,7 +54,7 @@ type FieldTypeConfig struct {
 	Array     field_type_array_config.FieldTypeArrayConfig         `json:"array"`
 	Date      field_type_date_config.FieldTypeDateConfig           `json:"date"`
 	Datetime  field_type_datetime_config.FieldTypeDatetimeConfig   `json:"datetime"`
-	Time      json.RawMessage                                      `json:"time"`
+	Time      json.RawMessage                                      `json:"time,omitempty"`
 	Slug      field_type_slug_config.FieldTypeSlugConfig           `json:"slug"`
 }
 

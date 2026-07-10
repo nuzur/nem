@@ -8,6 +8,8 @@ import (
 	"github.com/nuzur/nem/core/module/project/types"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"github.com/gofrs/uuid"
+
 	"github.com/nuzur/nem/core/entity/project_extension"
 
 	"time"
@@ -20,6 +22,11 @@ func (m *module) Insert(
 	req types.UpsertRequest,
 	opts ...Option,
 ) (types.UpsertResponse, error) {
+
+	// auto-generate primary-key UUIDs for new records when not supplied by the caller
+	if req.Project.UUID == uuid.Nil {
+		req.Project.UUID = uuid.Must(uuid.NewV4())
+	}
 
 	optConfig := applyAllOptions(opts)
 

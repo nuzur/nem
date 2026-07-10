@@ -21,7 +21,7 @@ message ExtensionVersion {
     string description = 5;
     string repository_tag = 6;
     string configuration_entity = 7;
-    ExtensionVersionExecutionMode execution_mode = 8;
+    repeated ExtensionVersionExecutionMode execution_mode = 8;
     ExtensionVersionReviewStatus review_status = 9;
     ExtensionVersionStatus status = 10;
     google.protobuf.Timestamp created_at = 11;

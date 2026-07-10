@@ -222,7 +222,7 @@ type InsertExtensionVersionParams struct {
 	Description         null.String `json:"description"`
 	RepositoryTag       string      `json:"repository_tag"`
 	ConfigurationEntity []byte      `json:"configuration_entity"`
-	ExecutionMode       int64       `json:"execution_mode"`
+	ExecutionMode       []byte      `json:"execution_mode"`
 	ReviewStatus        int64       `json:"review_status"`
 	Status              int64       `json:"status"`
 	CreatedAt           time.Time   `json:"created_at"`

@@ -7,6 +7,8 @@ import (
 
 	"github.com/nuzur/nem/core/module/user/types"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
+
+	"github.com/gofrs/uuid"
 )
 
 func (m *module) Insert(
@@ -14,6 +16,11 @@ func (m *module) Insert(
 	req types.UpsertRequest,
 	opts ...Option,
 ) (types.UpsertResponse, error) {
+
+	// auto-generate primary-key UUIDs for new records when not supplied by the caller
+	if req.User.UUID == uuid.Nil {
+		req.User.UUID = uuid.Must(uuid.NewV4())
+	}
 
 	optConfig := applyAllOptions(opts)
 

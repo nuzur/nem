@@ -9,7 +9,7 @@ import (
 func (e ReviewConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
 		"uuid":              entitytypes.StringFieldType,
-		"review_user_roles": entitytypes.SingleEnumFieldType,
+		"review_user_roles": entitytypes.MultiEnumFieldType,
 		"review_user_uuids": entitytypes.StringFieldType,
 		"min_reviews":       entitytypes.IntFieldType,
 		"status":            entitytypes.SingleEnumFieldType,

@@ -15,20 +15,20 @@ import (
 )
 
 type ExtensionVersion struct {
-	UUID                uuid.UUID                           `json:"uuid"`
-	Version             int64                               `json:"version"`
-	ExtensionUUID       uuid.UUID                           `json:"extension_uuid"`
-	DisplayVersion      null.String                         `json:"display_version"`
-	Description         null.String                         `json:"description"`
-	RepositoryTag       string                              `json:"repository_tag"`
-	ConfigurationEntity json.RawMessage                     `json:"configuration_entity"`
-	ExecutionMode       enums.ExtensionVersionExecutionMode `json:"execution_mode"`
-	ReviewStatus        enums.ExtensionVersionReviewStatus  `json:"review_status"`
-	Status              enums.ExtensionVersionStatus        `json:"status"`
-	CreatedAt           time.Time                           `json:"created_at"`
-	UpdatedAt           time.Time                           `json:"updated_at"`
-	CreatedByUUID       uuid.UUID                           `json:"created_by_uuid"`
-	UpdatedByUUID       uuid.UUID                           `json:"updated_by_uuid"`
+	UUID                uuid.UUID                             `json:"uuid"`
+	Version             int64                                 `json:"version"`
+	ExtensionUUID       uuid.UUID                             `json:"extension_uuid"`
+	DisplayVersion      null.String                           `json:"display_version"`
+	Description         null.String                           `json:"description"`
+	RepositoryTag       string                                `json:"repository_tag"`
+	ConfigurationEntity json.RawMessage                       `json:"configuration_entity,omitempty"`
+	ExecutionMode       []enums.ExtensionVersionExecutionMode `json:"execution_mode"`
+	ReviewStatus        enums.ExtensionVersionReviewStatus    `json:"review_status"`
+	Status              enums.ExtensionVersionStatus          `json:"status"`
+	CreatedAt           time.Time                             `json:"created_at"`
+	UpdatedAt           time.Time                             `json:"updated_at"`
+	CreatedByUUID       uuid.UUID                             `json:"created_by_uuid"`
+	UpdatedByUUID       uuid.UUID                             `json:"updated_by_uuid"`
 }
 
 func (e ExtensionVersion) String() string {

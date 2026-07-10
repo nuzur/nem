@@ -18,7 +18,7 @@ type Membership struct {
 	OwnerUUID       uuid.UUID              `json:"owner_uuid"`
 	Type            enums.MembershipType   `json:"type"`
 	StartDate       time.Time              `json:"start_date"`
-	BillingMetadata json.RawMessage        `json:"billing_metadata"`
+	BillingMetadata json.RawMessage        `json:"billing_metadata,omitempty"`
 	Status          enums.MembershipStatus `json:"status"`
 	CreatedAt       time.Time              `json:"created_at"`
 	UpdatedAt       time.Time              `json:"updated_at"`

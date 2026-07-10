@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generator": "nuzur go-code-gen",
-  "generated_at": "2026-07-10T16:18:00Z",
+  "generated_at": "2026-07-10T19:42:27Z",
   "files": [
     "AI.md",
     "auth/keycloak/client.go",
@@ -753,6 +753,7 @@
     "idl/mapper/entity_version_type_field_config.go",
     "idl/mapper/enum.go",
     "idl/mapper/enum_value.go",
+    "idl/mapper/enums.go",
     "idl/mapper/enviorment.go",
     "idl/mapper/extension.go",
     "idl/mapper/extension_execution.go",
