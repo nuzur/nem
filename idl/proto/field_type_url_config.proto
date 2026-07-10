@@ -12,8 +12,8 @@ package nem;
 
 
 message FieldTypeURLConfig {  
-    string allow_domains = 1;
-    string exclude_domains = 2;
+    repeated string allow_domains = 1;
+    repeated string exclude_domains = 2;
     bool https_required = 3;
-    string allowed_extensions = 4;    
+    repeated string allowed_extensions = 4;    
 }

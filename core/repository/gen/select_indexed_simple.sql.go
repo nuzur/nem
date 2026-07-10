@@ -280,7 +280,7 @@ func (q *Queries) FetchAiUsageByContextOrderedByUpdatedAtDESC(ctx context.Contex
 	return items, nil
 }
 
-const fetchAiUsageByProjectUuid = `-- name: FetchAiUsageByProjectUuid :many
+const fetchAiUsageByProjectUUID = `-- name: FetchAiUsageByProjectUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -288,14 +288,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchAiUsageByProjectUuidParams struct {
+type FetchAiUsageByProjectUUIDParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByProjectUuid(ctx context.Context, arg FetchAiUsageByProjectUuidParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectUuid, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByProjectUUID(ctx context.Context, arg FetchAiUsageByProjectUUIDParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectUUID, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -333,7 +333,7 @@ func (q *Queries) FetchAiUsageByProjectUuid(ctx context.Context, arg FetchAiUsag
 	return items, nil
 }
 
-const fetchAiUsageByProjectUuidOrderedByCreatedAtASC = `-- name: FetchAiUsageByProjectUuidOrderedByCreatedAtASC :many
+const fetchAiUsageByProjectUUIDOrderedByCreatedAtASC = `-- name: FetchAiUsageByProjectUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -342,14 +342,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByProjectUuidOrderedByCreatedAtASCParams struct {
+type FetchAiUsageByProjectUUIDOrderedByCreatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByProjectUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByProjectUuidOrderedByCreatedAtASCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectUuidOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByProjectUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByProjectUUIDOrderedByCreatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectUUIDOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -387,7 +387,7 @@ func (q *Queries) FetchAiUsageByProjectUuidOrderedByCreatedAtASC(ctx context.Con
 	return items, nil
 }
 
-const fetchAiUsageByProjectUuidOrderedByCreatedAtDESC = `-- name: FetchAiUsageByProjectUuidOrderedByCreatedAtDESC :many
+const fetchAiUsageByProjectUUIDOrderedByCreatedAtDESC = `-- name: FetchAiUsageByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -396,14 +396,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByProjectUuidOrderedByCreatedAtDESCParams struct {
+type FetchAiUsageByProjectUUIDOrderedByCreatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByProjectUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByProjectUuidOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectUuidOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByProjectUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByProjectUUIDOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectUUIDOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -441,7 +441,7 @@ func (q *Queries) FetchAiUsageByProjectUuidOrderedByCreatedAtDESC(ctx context.Co
 	return items, nil
 }
 
-const fetchAiUsageByProjectUuidOrderedByUpdatedAtASC = `-- name: FetchAiUsageByProjectUuidOrderedByUpdatedAtASC :many
+const fetchAiUsageByProjectUUIDOrderedByUpdatedAtASC = `-- name: FetchAiUsageByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -450,14 +450,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByProjectUuidOrderedByUpdatedAtASCParams struct {
+type FetchAiUsageByProjectUUIDOrderedByUpdatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByProjectUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByProjectUuidOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectUuidOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByProjectUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByProjectUUIDOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectUUIDOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -495,7 +495,7 @@ func (q *Queries) FetchAiUsageByProjectUuidOrderedByUpdatedAtASC(ctx context.Con
 	return items, nil
 }
 
-const fetchAiUsageByProjectUuidOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByProjectUuidOrderedByUpdatedAtDESC :many
+const fetchAiUsageByProjectUUIDOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -504,14 +504,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByProjectUuidOrderedByUpdatedAtDESCParams struct {
+type FetchAiUsageByProjectUUIDOrderedByUpdatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByProjectUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByProjectUuidOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectUuidOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByProjectUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByProjectUUIDOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectUUIDOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -549,7 +549,7 @@ func (q *Queries) FetchAiUsageByProjectUuidOrderedByUpdatedAtDESC(ctx context.Co
 	return items, nil
 }
 
-const fetchAiUsageByProjectVersionUuid = `-- name: FetchAiUsageByProjectVersionUuid :many
+const fetchAiUsageByProjectVersionUUID = `-- name: FetchAiUsageByProjectVersionUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -557,14 +557,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchAiUsageByProjectVersionUuidParams struct {
+type FetchAiUsageByProjectVersionUUIDParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByProjectVersionUuid(ctx context.Context, arg FetchAiUsageByProjectVersionUuidParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectVersionUuid, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByProjectVersionUUID(ctx context.Context, arg FetchAiUsageByProjectVersionUUIDParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectVersionUUID, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -602,7 +602,7 @@ func (q *Queries) FetchAiUsageByProjectVersionUuid(ctx context.Context, arg Fetc
 	return items, nil
 }
 
-const fetchAiUsageByProjectVersionUuidOrderedByCreatedAtASC = `-- name: FetchAiUsageByProjectVersionUuidOrderedByCreatedAtASC :many
+const fetchAiUsageByProjectVersionUUIDOrderedByCreatedAtASC = `-- name: FetchAiUsageByProjectVersionUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -611,14 +611,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByProjectVersionUuidOrderedByCreatedAtASCParams struct {
+type FetchAiUsageByProjectVersionUUIDOrderedByCreatedAtASCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByProjectVersionUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByProjectVersionUuidOrderedByCreatedAtASCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectVersionUuidOrderedByCreatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByProjectVersionUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByProjectVersionUUIDOrderedByCreatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectVersionUUIDOrderedByCreatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -656,7 +656,7 @@ func (q *Queries) FetchAiUsageByProjectVersionUuidOrderedByCreatedAtASC(ctx cont
 	return items, nil
 }
 
-const fetchAiUsageByProjectVersionUuidOrderedByCreatedAtDESC = `-- name: FetchAiUsageByProjectVersionUuidOrderedByCreatedAtDESC :many
+const fetchAiUsageByProjectVersionUUIDOrderedByCreatedAtDESC = `-- name: FetchAiUsageByProjectVersionUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -665,14 +665,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByProjectVersionUuidOrderedByCreatedAtDESCParams struct {
+type FetchAiUsageByProjectVersionUUIDOrderedByCreatedAtDESCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByProjectVersionUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByProjectVersionUuidOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectVersionUuidOrderedByCreatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByProjectVersionUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByProjectVersionUUIDOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectVersionUUIDOrderedByCreatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -710,7 +710,7 @@ func (q *Queries) FetchAiUsageByProjectVersionUuidOrderedByCreatedAtDESC(ctx con
 	return items, nil
 }
 
-const fetchAiUsageByProjectVersionUuidOrderedByUpdatedAtASC = `-- name: FetchAiUsageByProjectVersionUuidOrderedByUpdatedAtASC :many
+const fetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtASC = `-- name: FetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -719,14 +719,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByProjectVersionUuidOrderedByUpdatedAtASCParams struct {
+type FetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtASCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByProjectVersionUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByProjectVersionUuidOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectVersionUuidOrderedByUpdatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -764,7 +764,7 @@ func (q *Queries) FetchAiUsageByProjectVersionUuidOrderedByUpdatedAtASC(ctx cont
 	return items, nil
 }
 
-const fetchAiUsageByProjectVersionUuidOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByProjectVersionUuidOrderedByUpdatedAtDESC :many
+const fetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -773,14 +773,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByProjectVersionUuidOrderedByUpdatedAtDESCParams struct {
+type FetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtDESCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByProjectVersionUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByProjectVersionUuidOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectVersionUuidOrderedByUpdatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -1356,22 +1356,16 @@ func (q *Queries) FetchAiUsageByStatusOrderedByUpdatedAtDESC(ctx context.Context
 	return items, nil
 }
 
-const fetchAiUsageByUserUuid = `-- name: FetchAiUsageByUserUuid :many
+const fetchAiUsageByUUID = `-- name: FetchAiUsageByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
-    ` + "`" + `user_uuid` + "`" + ` = ? 
-LIMIT ?, ?
+    ` + "`" + `uuid` + "`" + ` = ?
 `
 
-type FetchAiUsageByUserUuidParams struct {
-	UserUUID string `json:"user_uuid"`
-	Offset   int32  `json:"offset"`
-	Limit    int32  `json:"limit"`
-}
-
-func (q *Queries) FetchAiUsageByUserUuid(ctx context.Context, arg FetchAiUsageByUserUuidParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUserUuid, arg.UserUUID, arg.Offset, arg.Limit)
+// ai_usage selects:
+func (q *Queries) FetchAiUsageByUUID(ctx context.Context, uuid string) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -1409,7 +1403,107 @@ func (q *Queries) FetchAiUsageByUserUuid(ctx context.Context, arg FetchAiUsageBy
 	return items, nil
 }
 
-const fetchAiUsageByUserUuidOrderedByCreatedAtASC = `-- name: FetchAiUsageByUserUuidOrderedByCreatedAtASC :many
+const fetchAiUsageByUUIDForUpdate = `-- name: FetchAiUsageByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `ai_usage` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchAiUsageByUUIDForUpdate(ctx context.Context, uuid string) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.InputTokens,
+			&i.OutputTokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByUserUUID = `-- name: FetchAiUsageByUserUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `ai_usage` + "`" + `
+WHERE 
+    ` + "`" + `user_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchAiUsageByUserUUIDParams struct {
+	UserUUID string `json:"user_uuid"`
+	Offset   int32  `json:"offset"`
+	Limit    int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAiUsageByUserUUID(ctx context.Context, arg FetchAiUsageByUserUUIDParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUserUUID, arg.UserUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AiUsage
+	for rows.Next() {
+		var i AiUsage
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.UserPrompt,
+			&i.Step,
+			&i.Context,
+			&i.Provider,
+			&i.InputTokens,
+			&i.OutputTokens,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAiUsageByUserUUIDOrderedByCreatedAtASC = `-- name: FetchAiUsageByUserUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -1418,14 +1512,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByUserUuidOrderedByCreatedAtASCParams struct {
+type FetchAiUsageByUserUUIDOrderedByCreatedAtASCParams struct {
 	UserUUID string `json:"user_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByUserUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByUserUuidOrderedByCreatedAtASCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUserUuidOrderedByCreatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByUserUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchAiUsageByUserUUIDOrderedByCreatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUserUUIDOrderedByCreatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -1463,7 +1557,7 @@ func (q *Queries) FetchAiUsageByUserUuidOrderedByCreatedAtASC(ctx context.Contex
 	return items, nil
 }
 
-const fetchAiUsageByUserUuidOrderedByCreatedAtDESC = `-- name: FetchAiUsageByUserUuidOrderedByCreatedAtDESC :many
+const fetchAiUsageByUserUUIDOrderedByCreatedAtDESC = `-- name: FetchAiUsageByUserUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -1472,14 +1566,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByUserUuidOrderedByCreatedAtDESCParams struct {
+type FetchAiUsageByUserUUIDOrderedByCreatedAtDESCParams struct {
 	UserUUID string `json:"user_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByUserUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByUserUuidOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUserUuidOrderedByCreatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByUserUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByUserUUIDOrderedByCreatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUserUUIDOrderedByCreatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -1517,7 +1611,7 @@ func (q *Queries) FetchAiUsageByUserUuidOrderedByCreatedAtDESC(ctx context.Conte
 	return items, nil
 }
 
-const fetchAiUsageByUserUuidOrderedByUpdatedAtASC = `-- name: FetchAiUsageByUserUuidOrderedByUpdatedAtASC :many
+const fetchAiUsageByUserUUIDOrderedByUpdatedAtASC = `-- name: FetchAiUsageByUserUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -1526,14 +1620,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByUserUuidOrderedByUpdatedAtASCParams struct {
+type FetchAiUsageByUserUUIDOrderedByUpdatedAtASCParams struct {
 	UserUUID string `json:"user_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByUserUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByUserUuidOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUserUuidOrderedByUpdatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchAiUsageByUserUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByUserUUIDOrderedByUpdatedAtASCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUserUUIDOrderedByUpdatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -1571,7 +1665,7 @@ func (q *Queries) FetchAiUsageByUserUuidOrderedByUpdatedAtASC(ctx context.Contex
 	return items, nil
 }
 
-const fetchAiUsageByUserUuidOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByUserUuidOrderedByUpdatedAtDESC :many
+const fetchAiUsageByUserUUIDOrderedByUpdatedAtDESC = `-- name: FetchAiUsageByUserUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `ai_usage` + "`" + `
 WHERE 
@@ -1580,108 +1674,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchAiUsageByUserUuidOrderedByUpdatedAtDESCParams struct {
+type FetchAiUsageByUserUUIDOrderedByUpdatedAtDESCParams struct {
 	UserUUID string `json:"user_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchAiUsageByUserUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByUserUuidOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUserUuidOrderedByUpdatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []AiUsage
-	for rows.Next() {
-		var i AiUsage
-		if err := rows.Scan(
-			&i.UUID,
-			&i.UserUUID,
-			&i.ProjectUUID,
-			&i.ProjectVersionUUID,
-			&i.UserPrompt,
-			&i.Step,
-			&i.Context,
-			&i.Provider,
-			&i.InputTokens,
-			&i.OutputTokens,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchAiUsageByUuid = `-- name: FetchAiUsageByUuid :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `ai_usage` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ?
-`
-
-// ai_usage selects:
-func (q *Queries) FetchAiUsageByUuid(ctx context.Context, uuid string) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUuid, uuid)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []AiUsage
-	for rows.Next() {
-		var i AiUsage
-		if err := rows.Scan(
-			&i.UUID,
-			&i.UserUUID,
-			&i.ProjectUUID,
-			&i.ProjectVersionUUID,
-			&i.UserPrompt,
-			&i.Step,
-			&i.Context,
-			&i.Provider,
-			&i.InputTokens,
-			&i.OutputTokens,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchAiUsageByUuidForUpdate = `-- name: FetchAiUsageByUuidForUpdate :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_prompt` + "`" + `,` + "`" + `step` + "`" + `,` + "`" + `context` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `input_tokens` + "`" + `,` + "`" + `output_tokens` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `ai_usage` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ? 
-FOR UPDATE
-`
-
-func (q *Queries) FetchAiUsageByUuidForUpdate(ctx context.Context, uuid string) ([]AiUsage, error) {
-	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUuidForUpdate, uuid)
+func (q *Queries) FetchAiUsageByUserUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByUserUUIDOrderedByUpdatedAtDESCParams) ([]AiUsage, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAiUsageByUserUUIDOrderedByUpdatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2307,7 +2307,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC(ctx conte
 	return items, nil
 }
 
-const fetchChangeRequestByOwnerUuid = `-- name: FetchChangeRequestByOwnerUuid :many
+const fetchChangeRequestByOwnerUUID = `-- name: FetchChangeRequestByOwnerUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2315,14 +2315,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByOwnerUuidParams struct {
+type FetchChangeRequestByOwnerUUIDParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByOwnerUuid(ctx context.Context, arg FetchChangeRequestByOwnerUuidParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByOwnerUuid, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByOwnerUUID(ctx context.Context, arg FetchChangeRequestByOwnerUUIDParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByOwnerUUID, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2365,7 +2365,7 @@ func (q *Queries) FetchChangeRequestByOwnerUuid(ctx context.Context, arg FetchCh
 	return items, nil
 }
 
-const fetchChangeRequestByOwnerUuidOrderedByCreatedAtASC = `-- name: FetchChangeRequestByOwnerUuidOrderedByCreatedAtASC :many
+const fetchChangeRequestByOwnerUUIDOrderedByCreatedAtASC = `-- name: FetchChangeRequestByOwnerUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2374,14 +2374,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByOwnerUuidOrderedByCreatedAtASCParams struct {
+type FetchChangeRequestByOwnerUUIDOrderedByCreatedAtASCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByOwnerUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByOwnerUuidOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByOwnerUuidOrderedByCreatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByOwnerUUIDOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByOwnerUUIDOrderedByCreatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2424,7 +2424,7 @@ func (q *Queries) FetchChangeRequestByOwnerUuidOrderedByCreatedAtASC(ctx context
 	return items, nil
 }
 
-const fetchChangeRequestByOwnerUuidOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByOwnerUuidOrderedByCreatedAtDESC :many
+const fetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2433,14 +2433,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByOwnerUuidOrderedByCreatedAtDESCParams struct {
+type FetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByOwnerUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByOwnerUuidOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByOwnerUuidOrderedByCreatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2483,7 +2483,7 @@ func (q *Queries) FetchChangeRequestByOwnerUuidOrderedByCreatedAtDESC(ctx contex
 	return items, nil
 }
 
-const fetchChangeRequestByOwnerUuidOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByOwnerUuidOrderedByUpdatedAtASC :many
+const fetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2492,14 +2492,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByOwnerUuidOrderedByUpdatedAtASCParams struct {
+type FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByOwnerUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByOwnerUuidOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByOwnerUuidOrderedByUpdatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2542,7 +2542,7 @@ func (q *Queries) FetchChangeRequestByOwnerUuidOrderedByUpdatedAtASC(ctx context
 	return items, nil
 }
 
-const fetchChangeRequestByOwnerUuidOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByOwnerUuidOrderedByUpdatedAtDESC :many
+const fetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2551,14 +2551,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByOwnerUuidOrderedByUpdatedAtDESCParams struct {
+type FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByOwnerUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByOwnerUuidOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByOwnerUuidOrderedByUpdatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2601,7 +2601,7 @@ func (q *Queries) FetchChangeRequestByOwnerUuidOrderedByUpdatedAtDESC(ctx contex
 	return items, nil
 }
 
-const fetchChangeRequestByProjectUuid = `-- name: FetchChangeRequestByProjectUuid :many
+const fetchChangeRequestByProjectUUID = `-- name: FetchChangeRequestByProjectUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2609,14 +2609,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByProjectUuidParams struct {
+type FetchChangeRequestByProjectUUIDParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByProjectUuid(ctx context.Context, arg FetchChangeRequestByProjectUuidParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectUuid, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByProjectUUID(ctx context.Context, arg FetchChangeRequestByProjectUUIDParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectUUID, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2659,7 +2659,7 @@ func (q *Queries) FetchChangeRequestByProjectUuid(ctx context.Context, arg Fetch
 	return items, nil
 }
 
-const fetchChangeRequestByProjectUuidOrderedByCreatedAtASC = `-- name: FetchChangeRequestByProjectUuidOrderedByCreatedAtASC :many
+const fetchChangeRequestByProjectUUIDOrderedByCreatedAtASC = `-- name: FetchChangeRequestByProjectUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2668,14 +2668,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByProjectUuidOrderedByCreatedAtASCParams struct {
+type FetchChangeRequestByProjectUUIDOrderedByCreatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByProjectUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByProjectUuidOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectUuidOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByProjectUUIDOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectUUIDOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2718,7 +2718,7 @@ func (q *Queries) FetchChangeRequestByProjectUuidOrderedByCreatedAtASC(ctx conte
 	return items, nil
 }
 
-const fetchChangeRequestByProjectUuidOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByProjectUuidOrderedByCreatedAtDESC :many
+const fetchChangeRequestByProjectUUIDOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2727,14 +2727,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByProjectUuidOrderedByCreatedAtDESCParams struct {
+type FetchChangeRequestByProjectUUIDOrderedByCreatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByProjectUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByProjectUuidOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectUuidOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByProjectUUIDOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectUUIDOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2777,7 +2777,7 @@ func (q *Queries) FetchChangeRequestByProjectUuidOrderedByCreatedAtDESC(ctx cont
 	return items, nil
 }
 
-const fetchChangeRequestByProjectUuidOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByProjectUuidOrderedByUpdatedAtASC :many
+const fetchChangeRequestByProjectUUIDOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2786,14 +2786,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByProjectUuidOrderedByUpdatedAtASCParams struct {
+type FetchChangeRequestByProjectUUIDOrderedByUpdatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByProjectUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByProjectUuidOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectUuidOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByProjectUUIDOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectUUIDOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2836,7 +2836,7 @@ func (q *Queries) FetchChangeRequestByProjectUuidOrderedByUpdatedAtASC(ctx conte
 	return items, nil
 }
 
-const fetchChangeRequestByProjectUuidOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByProjectUuidOrderedByUpdatedAtDESC :many
+const fetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2845,14 +2845,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByProjectUuidOrderedByUpdatedAtDESCParams struct {
+type FetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByProjectUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByProjectUuidOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectUuidOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2895,7 +2895,7 @@ func (q *Queries) FetchChangeRequestByProjectUuidOrderedByUpdatedAtDESC(ctx cont
 	return items, nil
 }
 
-const fetchChangeRequestByProjectVersionUuid = `-- name: FetchChangeRequestByProjectVersionUuid :many
+const fetchChangeRequestByProjectVersionUUID = `-- name: FetchChangeRequestByProjectVersionUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2903,14 +2903,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByProjectVersionUuidParams struct {
+type FetchChangeRequestByProjectVersionUUIDParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByProjectVersionUuid(ctx context.Context, arg FetchChangeRequestByProjectVersionUuidParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectVersionUuid, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByProjectVersionUUID(ctx context.Context, arg FetchChangeRequestByProjectVersionUUIDParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectVersionUUID, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -2953,7 +2953,7 @@ func (q *Queries) FetchChangeRequestByProjectVersionUuid(ctx context.Context, ar
 	return items, nil
 }
 
-const fetchChangeRequestByProjectVersionUuidOrderedByCreatedAtASC = `-- name: FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtASC :many
+const fetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASC = `-- name: FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -2962,14 +2962,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtASCParams struct {
+type FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectVersionUuidOrderedByCreatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -3012,7 +3012,7 @@ func (q *Queries) FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtASC(ct
 	return items, nil
 }
 
-const fetchChangeRequestByProjectVersionUuidOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtDESC :many
+const fetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -3021,14 +3021,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtDESCParams struct {
+type FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectVersionUuidOrderedByCreatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -3071,7 +3071,7 @@ func (q *Queries) FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtDESC(c
 	return items, nil
 }
 
-const fetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtASC :many
+const fetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -3080,14 +3080,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtASCParams struct {
+type FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -3130,7 +3130,7 @@ func (q *Queries) FetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtASC(ct
 	return items, nil
 }
 
-const fetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtDESC :many
+const fetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -3139,14 +3139,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtDESCParams struct {
+type FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -3777,7 +3777,7 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByUpdatedAtDESC(ctx context.C
 	return items, nil
 }
 
-const fetchChangeRequestByUuid = `-- name: FetchChangeRequestByUuid :many
+const fetchChangeRequestByUUID = `-- name: FetchChangeRequestByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -3785,8 +3785,8 @@ WHERE
 `
 
 // change_request selects:
-func (q *Queries) FetchChangeRequestByUuid(ctx context.Context, uuid string) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByUuid, uuid)
+func (q *Queries) FetchChangeRequestByUUID(ctx context.Context, uuid string) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -3829,7 +3829,7 @@ func (q *Queries) FetchChangeRequestByUuid(ctx context.Context, uuid string) ([]
 	return items, nil
 }
 
-const fetchChangeRequestByUuidForUpdate = `-- name: FetchChangeRequestByUuidForUpdate :many
+const fetchChangeRequestByUUIDForUpdate = `-- name: FetchChangeRequestByUUIDForUpdate :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
@@ -3837,8 +3837,8 @@ WHERE
 FOR UPDATE
 `
 
-func (q *Queries) FetchChangeRequestByUuidForUpdate(ctx context.Context, uuid string) ([]ChangeRequest, error) {
-	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByUuidForUpdate, uuid)
+func (q *Queries) FetchChangeRequestByUUIDForUpdate(ctx context.Context, uuid string) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByUUIDForUpdate, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -4763,7 +4763,7 @@ func (q *Queries) FetchExtensionByIdentifierOrderedByUpdatedAtDESC(ctx context.C
 	return items, nil
 }
 
-const fetchExtensionByOwnerUuid = `-- name: FetchExtensionByOwnerUuid :many
+const fetchExtensionByOwnerUUID = `-- name: FetchExtensionByOwnerUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `display_name` + "`" + `,` + "`" + `display_author_name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `verified` + "`" + `,` + "`" + `repository` + "`" + `,` + "`" + `extension_type` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `pro` + "`" + `,` + "`" + `public` + "`" + `,` + "`" + `visibility` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension` + "`" + `
 WHERE 
@@ -4771,14 +4771,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchExtensionByOwnerUuidParams struct {
+type FetchExtensionByOwnerUUIDParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionByOwnerUuid(ctx context.Context, arg FetchExtensionByOwnerUuidParams) ([]Extension, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionByOwnerUuid, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionByOwnerUUID(ctx context.Context, arg FetchExtensionByOwnerUUIDParams) ([]Extension, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionByOwnerUUID, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -4821,7 +4821,7 @@ func (q *Queries) FetchExtensionByOwnerUuid(ctx context.Context, arg FetchExtens
 	return items, nil
 }
 
-const fetchExtensionByOwnerUuidOrderedByCreatedAtASC = `-- name: FetchExtensionByOwnerUuidOrderedByCreatedAtASC :many
+const fetchExtensionByOwnerUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionByOwnerUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `display_name` + "`" + `,` + "`" + `display_author_name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `verified` + "`" + `,` + "`" + `repository` + "`" + `,` + "`" + `extension_type` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `pro` + "`" + `,` + "`" + `public` + "`" + `,` + "`" + `visibility` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension` + "`" + `
 WHERE 
@@ -4830,14 +4830,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionByOwnerUuidOrderedByCreatedAtASCParams struct {
+type FetchExtensionByOwnerUUIDOrderedByCreatedAtASCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionByOwnerUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionByOwnerUuidOrderedByCreatedAtASCParams) ([]Extension, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionByOwnerUuidOrderedByCreatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionByOwnerUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionByOwnerUUIDOrderedByCreatedAtASCParams) ([]Extension, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionByOwnerUUIDOrderedByCreatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -4880,7 +4880,7 @@ func (q *Queries) FetchExtensionByOwnerUuidOrderedByCreatedAtASC(ctx context.Con
 	return items, nil
 }
 
-const fetchExtensionByOwnerUuidOrderedByCreatedAtDESC = `-- name: FetchExtensionByOwnerUuidOrderedByCreatedAtDESC :many
+const fetchExtensionByOwnerUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionByOwnerUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `display_name` + "`" + `,` + "`" + `display_author_name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `verified` + "`" + `,` + "`" + `repository` + "`" + `,` + "`" + `extension_type` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `pro` + "`" + `,` + "`" + `public` + "`" + `,` + "`" + `visibility` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension` + "`" + `
 WHERE 
@@ -4889,14 +4889,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionByOwnerUuidOrderedByCreatedAtDESCParams struct {
+type FetchExtensionByOwnerUUIDOrderedByCreatedAtDESCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionByOwnerUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionByOwnerUuidOrderedByCreatedAtDESCParams) ([]Extension, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionByOwnerUuidOrderedByCreatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionByOwnerUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionByOwnerUUIDOrderedByCreatedAtDESCParams) ([]Extension, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionByOwnerUUIDOrderedByCreatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -4939,7 +4939,7 @@ func (q *Queries) FetchExtensionByOwnerUuidOrderedByCreatedAtDESC(ctx context.Co
 	return items, nil
 }
 
-const fetchExtensionByOwnerUuidOrderedByUpdatedAtASC = `-- name: FetchExtensionByOwnerUuidOrderedByUpdatedAtASC :many
+const fetchExtensionByOwnerUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionByOwnerUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `display_name` + "`" + `,` + "`" + `display_author_name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `verified` + "`" + `,` + "`" + `repository` + "`" + `,` + "`" + `extension_type` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `pro` + "`" + `,` + "`" + `public` + "`" + `,` + "`" + `visibility` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension` + "`" + `
 WHERE 
@@ -4948,14 +4948,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionByOwnerUuidOrderedByUpdatedAtASCParams struct {
+type FetchExtensionByOwnerUUIDOrderedByUpdatedAtASCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionByOwnerUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionByOwnerUuidOrderedByUpdatedAtASCParams) ([]Extension, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionByOwnerUuidOrderedByUpdatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionByOwnerUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionByOwnerUUIDOrderedByUpdatedAtASCParams) ([]Extension, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionByOwnerUUIDOrderedByUpdatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -4998,7 +4998,7 @@ func (q *Queries) FetchExtensionByOwnerUuidOrderedByUpdatedAtASC(ctx context.Con
 	return items, nil
 }
 
-const fetchExtensionByOwnerUuidOrderedByUpdatedAtDESC = `-- name: FetchExtensionByOwnerUuidOrderedByUpdatedAtDESC :many
+const fetchExtensionByOwnerUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionByOwnerUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `display_name` + "`" + `,` + "`" + `display_author_name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `verified` + "`" + `,` + "`" + `repository` + "`" + `,` + "`" + `extension_type` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `pro` + "`" + `,` + "`" + `public` + "`" + `,` + "`" + `visibility` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension` + "`" + `
 WHERE 
@@ -5007,14 +5007,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionByOwnerUuidOrderedByUpdatedAtDESCParams struct {
+type FetchExtensionByOwnerUUIDOrderedByUpdatedAtDESCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionByOwnerUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionByOwnerUuidOrderedByUpdatedAtDESCParams) ([]Extension, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionByOwnerUuidOrderedByUpdatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionByOwnerUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionByOwnerUUIDOrderedByUpdatedAtDESCParams) ([]Extension, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionByOwnerUUIDOrderedByUpdatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -6233,7 +6233,7 @@ func (q *Queries) FetchExtensionByStatusOrderedByUpdatedAtDESC(ctx context.Conte
 	return items, nil
 }
 
-const fetchExtensionByUuid = `-- name: FetchExtensionByUuid :many
+const fetchExtensionByUUID = `-- name: FetchExtensionByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `display_name` + "`" + `,` + "`" + `display_author_name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `verified` + "`" + `,` + "`" + `repository` + "`" + `,` + "`" + `extension_type` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `pro` + "`" + `,` + "`" + `public` + "`" + `,` + "`" + `visibility` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension` + "`" + `
 WHERE 
@@ -6241,8 +6241,8 @@ WHERE
 `
 
 // extension selects:
-func (q *Queries) FetchExtensionByUuid(ctx context.Context, uuid string) ([]Extension, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionByUuid, uuid)
+func (q *Queries) FetchExtensionByUUID(ctx context.Context, uuid string) ([]Extension, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -6285,7 +6285,7 @@ func (q *Queries) FetchExtensionByUuid(ctx context.Context, uuid string) ([]Exte
 	return items, nil
 }
 
-const fetchExtensionByUuidForUpdate = `-- name: FetchExtensionByUuidForUpdate :many
+const fetchExtensionByUUIDForUpdate = `-- name: FetchExtensionByUUIDForUpdate :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `display_name` + "`" + `,` + "`" + `display_author_name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `verified` + "`" + `,` + "`" + `repository` + "`" + `,` + "`" + `extension_type` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `pro` + "`" + `,` + "`" + `public` + "`" + `,` + "`" + `visibility` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension` + "`" + `
 WHERE 
@@ -6293,8 +6293,8 @@ WHERE
 FOR UPDATE
 `
 
-func (q *Queries) FetchExtensionByUuidForUpdate(ctx context.Context, uuid string) ([]Extension, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionByUuidForUpdate, uuid)
+func (q *Queries) FetchExtensionByUUIDForUpdate(ctx context.Context, uuid string) ([]Extension, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionByUUIDForUpdate, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -6631,7 +6631,7 @@ func (q *Queries) FetchExtensionByVersionOrderedByUpdatedAtDESC(ctx context.Cont
 	return items, nil
 }
 
-const fetchExtensionExecutionByExecutedByUuid = `-- name: FetchExtensionExecutionByExecutedByUuid :many
+const fetchExtensionExecutionByExecutedByUUID = `-- name: FetchExtensionExecutionByExecutedByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -6639,14 +6639,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExecutedByUuidParams struct {
+type FetchExtensionExecutionByExecutedByUUIDParams struct {
 	ExecutedByUUID string `json:"executed_by_uuid"`
 	Offset         int32  `json:"offset"`
 	Limit          int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExecutedByUuid(ctx context.Context, arg FetchExtensionExecutionByExecutedByUuidParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExecutedByUuid, arg.ExecutedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExecutedByUUID(ctx context.Context, arg FetchExtensionExecutionByExecutedByUUIDParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExecutedByUUID, arg.ExecutedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -6681,7 +6681,7 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUuid(ctx context.Context, a
 	return items, nil
 }
 
-const fetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtASC :many
+const fetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -6690,14 +6690,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtASCParams struct {
+type FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASCParams struct {
 	ExecutedByUUID string `json:"executed_by_uuid"`
 	Offset         int32  `json:"offset"`
 	Limit          int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtASCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtASC, arg.ExecutedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC, arg.ExecutedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -6732,7 +6732,7 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtASC(c
 	return items, nil
 }
 
-const fetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtDESC :many
+const fetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -6741,14 +6741,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtDESCParams struct {
+type FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESCParams struct {
 	ExecutedByUUID string `json:"executed_by_uuid"`
 	Offset         int32  `json:"offset"`
 	Limit          int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtDESCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtDESC, arg.ExecutedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC, arg.ExecutedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -6783,7 +6783,7 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtDESC(
 	return items, nil
 }
 
-const fetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtASC :many
+const fetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -6792,14 +6792,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtASCParams struct {
+type FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASCParams struct {
 	ExecutedByUUID string `json:"executed_by_uuid"`
 	Offset         int32  `json:"offset"`
 	Limit          int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtASCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtASC, arg.ExecutedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC, arg.ExecutedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -6834,7 +6834,7 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtASC(c
 	return items, nil
 }
 
-const fetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtDESC :many
+const fetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -6843,14 +6843,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtDESCParams struct {
+type FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESCParams struct {
 	ExecutedByUUID string `json:"executed_by_uuid"`
 	Offset         int32  `json:"offset"`
 	Limit          int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtDESCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtDESC, arg.ExecutedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC, arg.ExecutedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -6885,7 +6885,7 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtDESC(
 	return items, nil
 }
 
-const fetchExtensionExecutionByExtensionUuid = `-- name: FetchExtensionExecutionByExtensionUuid :many
+const fetchExtensionExecutionByExtensionUUID = `-- name: FetchExtensionExecutionByExtensionUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -6893,14 +6893,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExtensionUuidParams struct {
+type FetchExtensionExecutionByExtensionUUIDParams struct {
 	ExtensionUUID string `json:"extension_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExtensionUuid(ctx context.Context, arg FetchExtensionExecutionByExtensionUuidParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionUuid, arg.ExtensionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExtensionUUID(ctx context.Context, arg FetchExtensionExecutionByExtensionUUIDParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionUUID, arg.ExtensionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -6935,7 +6935,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionUuid(ctx context.Context, ar
 	return items, nil
 }
 
-const fetchExtensionExecutionByExtensionUuidOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtASC :many
+const fetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -6944,14 +6944,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtASCParams struct {
+type FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASCParams struct {
 	ExtensionUUID string `json:"extension_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtASCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionUuidOrderedByCreatedAtASC, arg.ExtensionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASC, arg.ExtensionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -6986,7 +6986,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtASC(ct
 	return items, nil
 }
 
-const fetchExtensionExecutionByExtensionUuidOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtDESC :many
+const fetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -6995,14 +6995,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtDESCParams struct {
+type FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESCParams struct {
 	ExtensionUUID string `json:"extension_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtDESCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionUuidOrderedByCreatedAtDESC, arg.ExtensionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESC, arg.ExtensionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7037,7 +7037,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtDESC(c
 	return items, nil
 }
 
-const fetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtASC :many
+const fetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7046,14 +7046,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtASCParams struct {
+type FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASCParams struct {
 	ExtensionUUID string `json:"extension_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtASCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtASC, arg.ExtensionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASC, arg.ExtensionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7088,7 +7088,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtASC(ct
 	return items, nil
 }
 
-const fetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtDESC :many
+const fetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7097,14 +7097,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtDESCParams struct {
+type FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESCParams struct {
 	ExtensionUUID string `json:"extension_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtDESCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtDESC, arg.ExtensionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESC, arg.ExtensionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7139,7 +7139,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtDESC(c
 	return items, nil
 }
 
-const fetchExtensionExecutionByExtensionVersionUuid = `-- name: FetchExtensionExecutionByExtensionVersionUuid :many
+const fetchExtensionExecutionByExtensionVersionUUID = `-- name: FetchExtensionExecutionByExtensionVersionUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7147,14 +7147,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExtensionVersionUuidParams struct {
+type FetchExtensionExecutionByExtensionVersionUUIDParams struct {
 	ExtensionVersionUUID string `json:"extension_version_uuid"`
 	Offset               int32  `json:"offset"`
 	Limit                int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExtensionVersionUuid(ctx context.Context, arg FetchExtensionExecutionByExtensionVersionUuidParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionVersionUuid, arg.ExtensionVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExtensionVersionUUID(ctx context.Context, arg FetchExtensionExecutionByExtensionVersionUUIDParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionVersionUUID, arg.ExtensionVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7189,7 +7189,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUuid(ctx context.Cont
 	return items, nil
 }
 
-const fetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtASC :many
+const fetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7198,14 +7198,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtASCParams struct {
+type FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtASCParams struct {
 	ExtensionVersionUUID string `json:"extension_version_uuid"`
 	Offset               int32  `json:"offset"`
 	Limit                int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtASCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtASC, arg.ExtensionVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtASCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtASC, arg.ExtensionVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7240,7 +7240,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedA
 	return items, nil
 }
 
-const fetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtDESC :many
+const fetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7249,14 +7249,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtDESCParams struct {
+type FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtDESCParams struct {
 	ExtensionVersionUUID string `json:"extension_version_uuid"`
 	Offset               int32  `json:"offset"`
 	Limit                int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtDESCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtDESC, arg.ExtensionVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtDESCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtDESC, arg.ExtensionVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7291,7 +7291,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedA
 	return items, nil
 }
 
-const fetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtASC :many
+const fetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7300,14 +7300,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtASCParams struct {
+type FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtASCParams struct {
 	ExtensionVersionUUID string `json:"extension_version_uuid"`
 	Offset               int32  `json:"offset"`
 	Limit                int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtASCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtASC, arg.ExtensionVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtASCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtASC, arg.ExtensionVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7342,7 +7342,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedA
 	return items, nil
 }
 
-const fetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtDESC :many
+const fetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7351,14 +7351,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtDESCParams struct {
+type FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtDESCParams struct {
 	ExtensionVersionUUID string `json:"extension_version_uuid"`
 	Offset               int32  `json:"offset"`
 	Limit                int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtDESCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtDESC, arg.ExtensionVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtDESCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtDESC, arg.ExtensionVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7393,7 +7393,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedA
 	return items, nil
 }
 
-const fetchExtensionExecutionByProjectUuid = `-- name: FetchExtensionExecutionByProjectUuid :many
+const fetchExtensionExecutionByProjectUUID = `-- name: FetchExtensionExecutionByProjectUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7401,14 +7401,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByProjectUuidParams struct {
+type FetchExtensionExecutionByProjectUUIDParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByProjectUuid(ctx context.Context, arg FetchExtensionExecutionByProjectUuidParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectUuid, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByProjectUUID(ctx context.Context, arg FetchExtensionExecutionByProjectUUIDParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectUUID, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7443,7 +7443,7 @@ func (q *Queries) FetchExtensionExecutionByProjectUuid(ctx context.Context, arg 
 	return items, nil
 }
 
-const fetchExtensionExecutionByProjectUuidOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByProjectUuidOrderedByCreatedAtASC :many
+const fetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7452,14 +7452,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByProjectUuidOrderedByCreatedAtASCParams struct {
+type FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByProjectUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionExecutionByProjectUuidOrderedByCreatedAtASCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectUuidOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7494,7 +7494,7 @@ func (q *Queries) FetchExtensionExecutionByProjectUuidOrderedByCreatedAtASC(ctx 
 	return items, nil
 }
 
-const fetchExtensionExecutionByProjectUuidOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByProjectUuidOrderedByCreatedAtDESC :many
+const fetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7503,14 +7503,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByProjectUuidOrderedByCreatedAtDESCParams struct {
+type FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByProjectUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByProjectUuidOrderedByCreatedAtDESCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectUuidOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7545,7 +7545,7 @@ func (q *Queries) FetchExtensionExecutionByProjectUuidOrderedByCreatedAtDESC(ctx
 	return items, nil
 }
 
-const fetchExtensionExecutionByProjectUuidOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtASC :many
+const fetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7554,14 +7554,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtASCParams struct {
+type FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtASCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectUuidOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7596,7 +7596,7 @@ func (q *Queries) FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtASC(ctx 
 	return items, nil
 }
 
-const fetchExtensionExecutionByProjectUuidOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtDESC :many
+const fetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7605,14 +7605,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtDESCParams struct {
+type FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtDESCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectUuidOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7647,7 +7647,7 @@ func (q *Queries) FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtDESC(ctx
 	return items, nil
 }
 
-const fetchExtensionExecutionByProjectVersionUuid = `-- name: FetchExtensionExecutionByProjectVersionUuid :many
+const fetchExtensionExecutionByProjectVersionUUID = `-- name: FetchExtensionExecutionByProjectVersionUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7655,14 +7655,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByProjectVersionUuidParams struct {
+type FetchExtensionExecutionByProjectVersionUUIDParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByProjectVersionUuid(ctx context.Context, arg FetchExtensionExecutionByProjectVersionUuidParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectVersionUuid, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByProjectVersionUUID(ctx context.Context, arg FetchExtensionExecutionByProjectVersionUUIDParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectVersionUUID, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7697,7 +7697,7 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUuid(ctx context.Contex
 	return items, nil
 }
 
-const fetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtASC :many
+const fetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7706,14 +7706,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtASCParams struct {
+type FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtASCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7748,7 +7748,7 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtA
 	return items, nil
 }
 
-const fetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtDESC :many
+const fetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7757,14 +7757,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtDESCParams struct {
+type FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtDESCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7799,7 +7799,7 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtD
 	return items, nil
 }
 
-const fetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtASC :many
+const fetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7808,14 +7808,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtASCParams struct {
+type FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtASCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -7850,7 +7850,7 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtA
 	return items, nil
 }
 
-const fetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtDESC :many
+const fetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -7859,14 +7859,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtDESCParams struct {
+type FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtDESCParams) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESCParams) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -8155,7 +8155,7 @@ func (q *Queries) FetchExtensionExecutionByStatusOrderedByUpdatedAtDESC(ctx cont
 	return items, nil
 }
 
-const fetchExtensionExecutionByUuid = `-- name: FetchExtensionExecutionByUuid :many
+const fetchExtensionExecutionByUUID = `-- name: FetchExtensionExecutionByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -8163,8 +8163,8 @@ WHERE
 `
 
 // extension_execution selects:
-func (q *Queries) FetchExtensionExecutionByUuid(ctx context.Context, uuid string) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByUuid, uuid)
+func (q *Queries) FetchExtensionExecutionByUUID(ctx context.Context, uuid string) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -8199,7 +8199,7 @@ func (q *Queries) FetchExtensionExecutionByUuid(ctx context.Context, uuid string
 	return items, nil
 }
 
-const fetchExtensionExecutionByUuidForUpdate = `-- name: FetchExtensionExecutionByUuidForUpdate :many
+const fetchExtensionExecutionByUUIDForUpdate = `-- name: FetchExtensionExecutionByUUIDForUpdate :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
@@ -8207,8 +8207,8 @@ WHERE
 FOR UPDATE
 `
 
-func (q *Queries) FetchExtensionExecutionByUuidForUpdate(ctx context.Context, uuid string) ([]ExtensionExecution, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByUuidForUpdate, uuid)
+func (q *Queries) FetchExtensionExecutionByUUIDForUpdate(ctx context.Context, uuid string) ([]ExtensionExecution, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionExecutionByUUIDForUpdate, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -8243,7 +8243,7 @@ func (q *Queries) FetchExtensionExecutionByUuidForUpdate(ctx context.Context, uu
 	return items, nil
 }
 
-const fetchExtensionVersionByExtensionUuid = `-- name: FetchExtensionVersionByExtensionUuid :many
+const fetchExtensionVersionByExtensionUUID = `-- name: FetchExtensionVersionByExtensionUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `display_version` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `repository_tag` + "`" + `,` + "`" + `configuration_entity` + "`" + `,` + "`" + `execution_mode` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension_version` + "`" + `
 WHERE 
@@ -8251,14 +8251,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchExtensionVersionByExtensionUuidParams struct {
+type FetchExtensionVersionByExtensionUUIDParams struct {
 	ExtensionUUID string `json:"extension_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionVersionByExtensionUuid(ctx context.Context, arg FetchExtensionVersionByExtensionUuidParams) ([]ExtensionVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByExtensionUuid, arg.ExtensionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionVersionByExtensionUUID(ctx context.Context, arg FetchExtensionVersionByExtensionUUIDParams) ([]ExtensionVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByExtensionUUID, arg.ExtensionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -8295,7 +8295,7 @@ func (q *Queries) FetchExtensionVersionByExtensionUuid(ctx context.Context, arg 
 	return items, nil
 }
 
-const fetchExtensionVersionByExtensionUuidOrderedByCreatedAtASC = `-- name: FetchExtensionVersionByExtensionUuidOrderedByCreatedAtASC :many
+const fetchExtensionVersionByExtensionUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `display_version` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `repository_tag` + "`" + `,` + "`" + `configuration_entity` + "`" + `,` + "`" + `execution_mode` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension_version` + "`" + `
 WHERE 
@@ -8304,14 +8304,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionVersionByExtensionUuidOrderedByCreatedAtASCParams struct {
+type FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtASCParams struct {
 	ExtensionUUID string `json:"extension_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionVersionByExtensionUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionVersionByExtensionUuidOrderedByCreatedAtASCParams) ([]ExtensionVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByExtensionUuidOrderedByCreatedAtASC, arg.ExtensionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtASCParams) ([]ExtensionVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByExtensionUUIDOrderedByCreatedAtASC, arg.ExtensionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -8348,7 +8348,7 @@ func (q *Queries) FetchExtensionVersionByExtensionUuidOrderedByCreatedAtASC(ctx 
 	return items, nil
 }
 
-const fetchExtensionVersionByExtensionUuidOrderedByCreatedAtDESC = `-- name: FetchExtensionVersionByExtensionUuidOrderedByCreatedAtDESC :many
+const fetchExtensionVersionByExtensionUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `display_version` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `repository_tag` + "`" + `,` + "`" + `configuration_entity` + "`" + `,` + "`" + `execution_mode` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension_version` + "`" + `
 WHERE 
@@ -8357,14 +8357,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionVersionByExtensionUuidOrderedByCreatedAtDESCParams struct {
+type FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtDESCParams struct {
 	ExtensionUUID string `json:"extension_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionVersionByExtensionUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionVersionByExtensionUuidOrderedByCreatedAtDESCParams) ([]ExtensionVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByExtensionUuidOrderedByCreatedAtDESC, arg.ExtensionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtDESCParams) ([]ExtensionVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByExtensionUUIDOrderedByCreatedAtDESC, arg.ExtensionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -8401,7 +8401,7 @@ func (q *Queries) FetchExtensionVersionByExtensionUuidOrderedByCreatedAtDESC(ctx
 	return items, nil
 }
 
-const fetchExtensionVersionByExtensionUuidOrderedByUpdatedAtASC = `-- name: FetchExtensionVersionByExtensionUuidOrderedByUpdatedAtASC :many
+const fetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `display_version` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `repository_tag` + "`" + `,` + "`" + `configuration_entity` + "`" + `,` + "`" + `execution_mode` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension_version` + "`" + `
 WHERE 
@@ -8410,14 +8410,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchExtensionVersionByExtensionUuidOrderedByUpdatedAtASCParams struct {
+type FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtASCParams struct {
 	ExtensionUUID string `json:"extension_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionVersionByExtensionUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionVersionByExtensionUuidOrderedByUpdatedAtASCParams) ([]ExtensionVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByExtensionUuidOrderedByUpdatedAtASC, arg.ExtensionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtASCParams) ([]ExtensionVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtASC, arg.ExtensionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -8454,7 +8454,7 @@ func (q *Queries) FetchExtensionVersionByExtensionUuidOrderedByUpdatedAtASC(ctx 
 	return items, nil
 }
 
-const fetchExtensionVersionByExtensionUuidOrderedByUpdatedAtDESC = `-- name: FetchExtensionVersionByExtensionUuidOrderedByUpdatedAtDESC :many
+const fetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `display_version` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `repository_tag` + "`" + `,` + "`" + `configuration_entity` + "`" + `,` + "`" + `execution_mode` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension_version` + "`" + `
 WHERE 
@@ -8463,14 +8463,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchExtensionVersionByExtensionUuidOrderedByUpdatedAtDESCParams struct {
+type FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtDESCParams struct {
 	ExtensionUUID string `json:"extension_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchExtensionVersionByExtensionUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionVersionByExtensionUuidOrderedByUpdatedAtDESCParams) ([]ExtensionVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByExtensionUuidOrderedByUpdatedAtDESC, arg.ExtensionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtDESCParams) ([]ExtensionVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtDESC, arg.ExtensionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -8771,7 +8771,7 @@ func (q *Queries) FetchExtensionVersionByStatusOrderedByUpdatedAtDESC(ctx contex
 	return items, nil
 }
 
-const fetchExtensionVersionByUuid = `-- name: FetchExtensionVersionByUuid :many
+const fetchExtensionVersionByUUID = `-- name: FetchExtensionVersionByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `display_version` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `repository_tag` + "`" + `,` + "`" + `configuration_entity` + "`" + `,` + "`" + `execution_mode` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension_version` + "`" + `
 WHERE 
@@ -8779,8 +8779,8 @@ WHERE
 `
 
 // extension_version selects:
-func (q *Queries) FetchExtensionVersionByUuid(ctx context.Context, uuid string) ([]ExtensionVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByUuid, uuid)
+func (q *Queries) FetchExtensionVersionByUUID(ctx context.Context, uuid string) ([]ExtensionVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -8817,7 +8817,7 @@ func (q *Queries) FetchExtensionVersionByUuid(ctx context.Context, uuid string) 
 	return items, nil
 }
 
-const fetchExtensionVersionByUuidForUpdate = `-- name: FetchExtensionVersionByUuidForUpdate :many
+const fetchExtensionVersionByUUIDForUpdate = `-- name: FetchExtensionVersionByUUIDForUpdate :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `display_version` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `repository_tag` + "`" + `,` + "`" + `configuration_entity` + "`" + `,` + "`" + `execution_mode` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension_version` + "`" + `
 WHERE 
@@ -8825,8 +8825,8 @@ WHERE
 FOR UPDATE
 `
 
-func (q *Queries) FetchExtensionVersionByUuidForUpdate(ctx context.Context, uuid string) ([]ExtensionVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByUuidForUpdate, uuid)
+func (q *Queries) FetchExtensionVersionByUUIDForUpdate(ctx context.Context, uuid string) ([]ExtensionVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchExtensionVersionByUUIDForUpdate, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -9391,7 +9391,7 @@ func (q *Queries) FetchLocalAgentByStatusOrderedByUpdatedAtDESC(ctx context.Cont
 	return items, nil
 }
 
-const fetchLocalAgentByUuid = `-- name: FetchLocalAgentByUuid :many
+const fetchLocalAgentByUUID = `-- name: FetchLocalAgentByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `token_hash` + "`" + `,` + "`" + `machine_name` + "`" + `,` + "`" + `os` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `last_seen_at` + "`" + `,` + "`" + `revoked_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `local_agent` + "`" + `
 WHERE 
@@ -9399,8 +9399,8 @@ WHERE
 `
 
 // local_agent selects:
-func (q *Queries) FetchLocalAgentByUuid(ctx context.Context, uuid string) ([]LocalAgent, error) {
-	rows, err := q.db.QueryContext(ctx, fetchLocalAgentByUuid, uuid)
+func (q *Queries) FetchLocalAgentByUUID(ctx context.Context, uuid string) ([]LocalAgent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchLocalAgentByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -9437,7 +9437,7 @@ func (q *Queries) FetchLocalAgentByUuid(ctx context.Context, uuid string) ([]Loc
 	return items, nil
 }
 
-const fetchLocalAgentByUuidForUpdate = `-- name: FetchLocalAgentByUuidForUpdate :many
+const fetchLocalAgentByUUIDForUpdate = `-- name: FetchLocalAgentByUUIDForUpdate :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `token_hash` + "`" + `,` + "`" + `machine_name` + "`" + `,` + "`" + `os` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `last_seen_at` + "`" + `,` + "`" + `revoked_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `local_agent` + "`" + `
 WHERE 
@@ -9445,8 +9445,8 @@ WHERE
 FOR UPDATE
 `
 
-func (q *Queries) FetchLocalAgentByUuidForUpdate(ctx context.Context, uuid string) ([]LocalAgent, error) {
-	rows, err := q.db.QueryContext(ctx, fetchLocalAgentByUuidForUpdate, uuid)
+func (q *Queries) FetchLocalAgentByUUIDForUpdate(ctx context.Context, uuid string) ([]LocalAgent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchLocalAgentByUUIDForUpdate, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -9483,7 +9483,7 @@ func (q *Queries) FetchLocalAgentByUuidForUpdate(ctx context.Context, uuid strin
 	return items, nil
 }
 
-const fetchMembershipByOwnerUuid = `-- name: FetchMembershipByOwnerUuid :many
+const fetchMembershipByOwnerUUID = `-- name: FetchMembershipByOwnerUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `start_date` + "`" + `,` + "`" + `billing_metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `membership` + "`" + `
 WHERE 
@@ -9491,14 +9491,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchMembershipByOwnerUuidParams struct {
+type FetchMembershipByOwnerUUIDParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchMembershipByOwnerUuid(ctx context.Context, arg FetchMembershipByOwnerUuidParams) ([]Membership, error) {
-	rows, err := q.db.QueryContext(ctx, fetchMembershipByOwnerUuid, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchMembershipByOwnerUUID(ctx context.Context, arg FetchMembershipByOwnerUUIDParams) ([]Membership, error) {
+	rows, err := q.db.QueryContext(ctx, fetchMembershipByOwnerUUID, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -9531,7 +9531,7 @@ func (q *Queries) FetchMembershipByOwnerUuid(ctx context.Context, arg FetchMembe
 	return items, nil
 }
 
-const fetchMembershipByOwnerUuidOrderedByCreatedAtASC = `-- name: FetchMembershipByOwnerUuidOrderedByCreatedAtASC :many
+const fetchMembershipByOwnerUUIDOrderedByCreatedAtASC = `-- name: FetchMembershipByOwnerUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `start_date` + "`" + `,` + "`" + `billing_metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `membership` + "`" + `
 WHERE 
@@ -9540,14 +9540,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchMembershipByOwnerUuidOrderedByCreatedAtASCParams struct {
+type FetchMembershipByOwnerUUIDOrderedByCreatedAtASCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchMembershipByOwnerUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchMembershipByOwnerUuidOrderedByCreatedAtASCParams) ([]Membership, error) {
-	rows, err := q.db.QueryContext(ctx, fetchMembershipByOwnerUuidOrderedByCreatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchMembershipByOwnerUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchMembershipByOwnerUUIDOrderedByCreatedAtASCParams) ([]Membership, error) {
+	rows, err := q.db.QueryContext(ctx, fetchMembershipByOwnerUUIDOrderedByCreatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -9580,7 +9580,7 @@ func (q *Queries) FetchMembershipByOwnerUuidOrderedByCreatedAtASC(ctx context.Co
 	return items, nil
 }
 
-const fetchMembershipByOwnerUuidOrderedByCreatedAtDESC = `-- name: FetchMembershipByOwnerUuidOrderedByCreatedAtDESC :many
+const fetchMembershipByOwnerUUIDOrderedByCreatedAtDESC = `-- name: FetchMembershipByOwnerUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `start_date` + "`" + `,` + "`" + `billing_metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `membership` + "`" + `
 WHERE 
@@ -9589,14 +9589,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchMembershipByOwnerUuidOrderedByCreatedAtDESCParams struct {
+type FetchMembershipByOwnerUUIDOrderedByCreatedAtDESCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchMembershipByOwnerUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchMembershipByOwnerUuidOrderedByCreatedAtDESCParams) ([]Membership, error) {
-	rows, err := q.db.QueryContext(ctx, fetchMembershipByOwnerUuidOrderedByCreatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchMembershipByOwnerUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchMembershipByOwnerUUIDOrderedByCreatedAtDESCParams) ([]Membership, error) {
+	rows, err := q.db.QueryContext(ctx, fetchMembershipByOwnerUUIDOrderedByCreatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -9629,7 +9629,7 @@ func (q *Queries) FetchMembershipByOwnerUuidOrderedByCreatedAtDESC(ctx context.C
 	return items, nil
 }
 
-const fetchMembershipByOwnerUuidOrderedByUpdatedAtASC = `-- name: FetchMembershipByOwnerUuidOrderedByUpdatedAtASC :many
+const fetchMembershipByOwnerUUIDOrderedByUpdatedAtASC = `-- name: FetchMembershipByOwnerUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `start_date` + "`" + `,` + "`" + `billing_metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `membership` + "`" + `
 WHERE 
@@ -9638,14 +9638,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchMembershipByOwnerUuidOrderedByUpdatedAtASCParams struct {
+type FetchMembershipByOwnerUUIDOrderedByUpdatedAtASCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchMembershipByOwnerUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchMembershipByOwnerUuidOrderedByUpdatedAtASCParams) ([]Membership, error) {
-	rows, err := q.db.QueryContext(ctx, fetchMembershipByOwnerUuidOrderedByUpdatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchMembershipByOwnerUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchMembershipByOwnerUUIDOrderedByUpdatedAtASCParams) ([]Membership, error) {
+	rows, err := q.db.QueryContext(ctx, fetchMembershipByOwnerUUIDOrderedByUpdatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -9678,7 +9678,7 @@ func (q *Queries) FetchMembershipByOwnerUuidOrderedByUpdatedAtASC(ctx context.Co
 	return items, nil
 }
 
-const fetchMembershipByOwnerUuidOrderedByUpdatedAtDESC = `-- name: FetchMembershipByOwnerUuidOrderedByUpdatedAtDESC :many
+const fetchMembershipByOwnerUUIDOrderedByUpdatedAtDESC = `-- name: FetchMembershipByOwnerUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `start_date` + "`" + `,` + "`" + `billing_metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `membership` + "`" + `
 WHERE 
@@ -9687,14 +9687,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchMembershipByOwnerUuidOrderedByUpdatedAtDESCParams struct {
+type FetchMembershipByOwnerUUIDOrderedByUpdatedAtDESCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchMembershipByOwnerUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchMembershipByOwnerUuidOrderedByUpdatedAtDESCParams) ([]Membership, error) {
-	rows, err := q.db.QueryContext(ctx, fetchMembershipByOwnerUuidOrderedByUpdatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchMembershipByOwnerUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchMembershipByOwnerUUIDOrderedByUpdatedAtDESCParams) ([]Membership, error) {
+	rows, err := q.db.QueryContext(ctx, fetchMembershipByOwnerUUIDOrderedByUpdatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -10215,7 +10215,7 @@ func (q *Queries) FetchMembershipByTypeOrderedByUpdatedAtDESC(ctx context.Contex
 	return items, nil
 }
 
-const fetchMembershipByUuid = `-- name: FetchMembershipByUuid :many
+const fetchMembershipByUUID = `-- name: FetchMembershipByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `start_date` + "`" + `,` + "`" + `billing_metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `membership` + "`" + `
 WHERE 
@@ -10223,8 +10223,8 @@ WHERE
 `
 
 // membership selects:
-func (q *Queries) FetchMembershipByUuid(ctx context.Context, uuid string) ([]Membership, error) {
-	rows, err := q.db.QueryContext(ctx, fetchMembershipByUuid, uuid)
+func (q *Queries) FetchMembershipByUUID(ctx context.Context, uuid string) ([]Membership, error) {
+	rows, err := q.db.QueryContext(ctx, fetchMembershipByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -10257,7 +10257,7 @@ func (q *Queries) FetchMembershipByUuid(ctx context.Context, uuid string) ([]Mem
 	return items, nil
 }
 
-const fetchMembershipByUuidForUpdate = `-- name: FetchMembershipByUuidForUpdate :many
+const fetchMembershipByUUIDForUpdate = `-- name: FetchMembershipByUUIDForUpdate :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `start_date` + "`" + `,` + "`" + `billing_metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `membership` + "`" + `
 WHERE 
@@ -10265,8 +10265,8 @@ WHERE
 FOR UPDATE
 `
 
-func (q *Queries) FetchMembershipByUuidForUpdate(ctx context.Context, uuid string) ([]Membership, error) {
-	rows, err := q.db.QueryContext(ctx, fetchMembershipByUuidForUpdate, uuid)
+func (q *Queries) FetchMembershipByUUIDForUpdate(ctx context.Context, uuid string) ([]Membership, error) {
+	rows, err := q.db.QueryContext(ctx, fetchMembershipByUUIDForUpdate, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -10299,7 +10299,7 @@ func (q *Queries) FetchMembershipByUuidForUpdate(ctx context.Context, uuid strin
 	return items, nil
 }
 
-const fetchProjectByCreatedByUuid = `-- name: FetchProjectByCreatedByUuid :many
+const fetchProjectByCreatedByUUID = `-- name: FetchProjectByCreatedByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -10307,14 +10307,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchProjectByCreatedByUuidParams struct {
+type FetchProjectByCreatedByUUIDParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByCreatedByUuid(ctx context.Context, arg FetchProjectByCreatedByUuidParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByCreatedByUuid, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByCreatedByUUID(ctx context.Context, arg FetchProjectByCreatedByUUIDParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByCreatedByUUID, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -10352,7 +10352,7 @@ func (q *Queries) FetchProjectByCreatedByUuid(ctx context.Context, arg FetchProj
 	return items, nil
 }
 
-const fetchProjectByCreatedByUuidOrderedByCreatedAtASC = `-- name: FetchProjectByCreatedByUuidOrderedByCreatedAtASC :many
+const fetchProjectByCreatedByUUIDOrderedByCreatedAtASC = `-- name: FetchProjectByCreatedByUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -10361,14 +10361,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectByCreatedByUuidOrderedByCreatedAtASCParams struct {
+type FetchProjectByCreatedByUUIDOrderedByCreatedAtASCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByCreatedByUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectByCreatedByUuidOrderedByCreatedAtASCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByCreatedByUuidOrderedByCreatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByCreatedByUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectByCreatedByUUIDOrderedByCreatedAtASCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByCreatedByUUIDOrderedByCreatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -10406,7 +10406,7 @@ func (q *Queries) FetchProjectByCreatedByUuidOrderedByCreatedAtASC(ctx context.C
 	return items, nil
 }
 
-const fetchProjectByCreatedByUuidOrderedByCreatedAtDESC = `-- name: FetchProjectByCreatedByUuidOrderedByCreatedAtDESC :many
+const fetchProjectByCreatedByUUIDOrderedByCreatedAtDESC = `-- name: FetchProjectByCreatedByUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -10415,14 +10415,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectByCreatedByUuidOrderedByCreatedAtDESCParams struct {
+type FetchProjectByCreatedByUUIDOrderedByCreatedAtDESCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByCreatedByUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectByCreatedByUuidOrderedByCreatedAtDESCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByCreatedByUuidOrderedByCreatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByCreatedByUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectByCreatedByUUIDOrderedByCreatedAtDESCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByCreatedByUUIDOrderedByCreatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -10460,7 +10460,7 @@ func (q *Queries) FetchProjectByCreatedByUuidOrderedByCreatedAtDESC(ctx context.
 	return items, nil
 }
 
-const fetchProjectByCreatedByUuidOrderedByUpdatedAtASC = `-- name: FetchProjectByCreatedByUuidOrderedByUpdatedAtASC :many
+const fetchProjectByCreatedByUUIDOrderedByUpdatedAtASC = `-- name: FetchProjectByCreatedByUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -10469,14 +10469,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectByCreatedByUuidOrderedByUpdatedAtASCParams struct {
+type FetchProjectByCreatedByUUIDOrderedByUpdatedAtASCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByCreatedByUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectByCreatedByUuidOrderedByUpdatedAtASCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByCreatedByUuidOrderedByUpdatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByCreatedByUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectByCreatedByUUIDOrderedByUpdatedAtASCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByCreatedByUUIDOrderedByUpdatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -10514,7 +10514,7 @@ func (q *Queries) FetchProjectByCreatedByUuidOrderedByUpdatedAtASC(ctx context.C
 	return items, nil
 }
 
-const fetchProjectByCreatedByUuidOrderedByUpdatedAtDESC = `-- name: FetchProjectByCreatedByUuidOrderedByUpdatedAtDESC :many
+const fetchProjectByCreatedByUUIDOrderedByUpdatedAtDESC = `-- name: FetchProjectByCreatedByUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -10523,14 +10523,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectByCreatedByUuidOrderedByUpdatedAtDESCParams struct {
+type FetchProjectByCreatedByUUIDOrderedByUpdatedAtDESCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByCreatedByUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectByCreatedByUuidOrderedByUpdatedAtDESCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByCreatedByUuidOrderedByUpdatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByCreatedByUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectByCreatedByUUIDOrderedByUpdatedAtDESCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByCreatedByUUIDOrderedByUpdatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -10837,7 +10837,7 @@ func (q *Queries) FetchProjectByNameOrderedByUpdatedAtDESC(ctx context.Context, 
 	return items, nil
 }
 
-const fetchProjectByOwnerUuid = `-- name: FetchProjectByOwnerUuid :many
+const fetchProjectByOwnerUUID = `-- name: FetchProjectByOwnerUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -10845,14 +10845,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchProjectByOwnerUuidParams struct {
+type FetchProjectByOwnerUUIDParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByOwnerUuid(ctx context.Context, arg FetchProjectByOwnerUuidParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByOwnerUuid, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByOwnerUUID(ctx context.Context, arg FetchProjectByOwnerUUIDParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByOwnerUUID, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -10890,7 +10890,7 @@ func (q *Queries) FetchProjectByOwnerUuid(ctx context.Context, arg FetchProjectB
 	return items, nil
 }
 
-const fetchProjectByOwnerUuidOrderedByCreatedAtASC = `-- name: FetchProjectByOwnerUuidOrderedByCreatedAtASC :many
+const fetchProjectByOwnerUUIDOrderedByCreatedAtASC = `-- name: FetchProjectByOwnerUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -10899,14 +10899,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectByOwnerUuidOrderedByCreatedAtASCParams struct {
+type FetchProjectByOwnerUUIDOrderedByCreatedAtASCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByOwnerUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectByOwnerUuidOrderedByCreatedAtASCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByOwnerUuidOrderedByCreatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByOwnerUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectByOwnerUUIDOrderedByCreatedAtASCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByOwnerUUIDOrderedByCreatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -10944,7 +10944,7 @@ func (q *Queries) FetchProjectByOwnerUuidOrderedByCreatedAtASC(ctx context.Conte
 	return items, nil
 }
 
-const fetchProjectByOwnerUuidOrderedByCreatedAtDESC = `-- name: FetchProjectByOwnerUuidOrderedByCreatedAtDESC :many
+const fetchProjectByOwnerUUIDOrderedByCreatedAtDESC = `-- name: FetchProjectByOwnerUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -10953,14 +10953,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectByOwnerUuidOrderedByCreatedAtDESCParams struct {
+type FetchProjectByOwnerUUIDOrderedByCreatedAtDESCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByOwnerUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectByOwnerUuidOrderedByCreatedAtDESCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByOwnerUuidOrderedByCreatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByOwnerUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectByOwnerUUIDOrderedByCreatedAtDESCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByOwnerUUIDOrderedByCreatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -10998,7 +10998,7 @@ func (q *Queries) FetchProjectByOwnerUuidOrderedByCreatedAtDESC(ctx context.Cont
 	return items, nil
 }
 
-const fetchProjectByOwnerUuidOrderedByUpdatedAtASC = `-- name: FetchProjectByOwnerUuidOrderedByUpdatedAtASC :many
+const fetchProjectByOwnerUUIDOrderedByUpdatedAtASC = `-- name: FetchProjectByOwnerUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -11007,14 +11007,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectByOwnerUuidOrderedByUpdatedAtASCParams struct {
+type FetchProjectByOwnerUUIDOrderedByUpdatedAtASCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByOwnerUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectByOwnerUuidOrderedByUpdatedAtASCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByOwnerUuidOrderedByUpdatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByOwnerUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectByOwnerUUIDOrderedByUpdatedAtASCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByOwnerUUIDOrderedByUpdatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -11052,7 +11052,7 @@ func (q *Queries) FetchProjectByOwnerUuidOrderedByUpdatedAtASC(ctx context.Conte
 	return items, nil
 }
 
-const fetchProjectByOwnerUuidOrderedByUpdatedAtDESC = `-- name: FetchProjectByOwnerUuidOrderedByUpdatedAtDESC :many
+const fetchProjectByOwnerUUIDOrderedByUpdatedAtDESC = `-- name: FetchProjectByOwnerUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -11061,14 +11061,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectByOwnerUuidOrderedByUpdatedAtDESCParams struct {
+type FetchProjectByOwnerUUIDOrderedByUpdatedAtDESCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByOwnerUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectByOwnerUuidOrderedByUpdatedAtDESCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByOwnerUuidOrderedByUpdatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByOwnerUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectByOwnerUUIDOrderedByUpdatedAtDESCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByOwnerUUIDOrderedByUpdatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -11375,7 +11375,7 @@ func (q *Queries) FetchProjectByStatusOrderedByUpdatedAtDESC(ctx context.Context
 	return items, nil
 }
 
-const fetchProjectByTeamUuid = `-- name: FetchProjectByTeamUuid :many
+const fetchProjectByTeamUUID = `-- name: FetchProjectByTeamUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -11383,14 +11383,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchProjectByTeamUuidParams struct {
+type FetchProjectByTeamUUIDParams struct {
 	TeamUUID string `json:"team_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByTeamUuid(ctx context.Context, arg FetchProjectByTeamUuidParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByTeamUuid, arg.TeamUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByTeamUUID(ctx context.Context, arg FetchProjectByTeamUUIDParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByTeamUUID, arg.TeamUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -11428,7 +11428,7 @@ func (q *Queries) FetchProjectByTeamUuid(ctx context.Context, arg FetchProjectBy
 	return items, nil
 }
 
-const fetchProjectByTeamUuidOrderedByCreatedAtASC = `-- name: FetchProjectByTeamUuidOrderedByCreatedAtASC :many
+const fetchProjectByTeamUUIDOrderedByCreatedAtASC = `-- name: FetchProjectByTeamUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -11437,14 +11437,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectByTeamUuidOrderedByCreatedAtASCParams struct {
+type FetchProjectByTeamUUIDOrderedByCreatedAtASCParams struct {
 	TeamUUID string `json:"team_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByTeamUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectByTeamUuidOrderedByCreatedAtASCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByTeamUuidOrderedByCreatedAtASC, arg.TeamUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByTeamUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectByTeamUUIDOrderedByCreatedAtASCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByTeamUUIDOrderedByCreatedAtASC, arg.TeamUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -11482,7 +11482,7 @@ func (q *Queries) FetchProjectByTeamUuidOrderedByCreatedAtASC(ctx context.Contex
 	return items, nil
 }
 
-const fetchProjectByTeamUuidOrderedByCreatedAtDESC = `-- name: FetchProjectByTeamUuidOrderedByCreatedAtDESC :many
+const fetchProjectByTeamUUIDOrderedByCreatedAtDESC = `-- name: FetchProjectByTeamUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -11491,14 +11491,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectByTeamUuidOrderedByCreatedAtDESCParams struct {
+type FetchProjectByTeamUUIDOrderedByCreatedAtDESCParams struct {
 	TeamUUID string `json:"team_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByTeamUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectByTeamUuidOrderedByCreatedAtDESCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByTeamUuidOrderedByCreatedAtDESC, arg.TeamUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByTeamUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectByTeamUUIDOrderedByCreatedAtDESCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByTeamUUIDOrderedByCreatedAtDESC, arg.TeamUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -11536,7 +11536,7 @@ func (q *Queries) FetchProjectByTeamUuidOrderedByCreatedAtDESC(ctx context.Conte
 	return items, nil
 }
 
-const fetchProjectByTeamUuidOrderedByUpdatedAtASC = `-- name: FetchProjectByTeamUuidOrderedByUpdatedAtASC :many
+const fetchProjectByTeamUUIDOrderedByUpdatedAtASC = `-- name: FetchProjectByTeamUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -11545,14 +11545,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectByTeamUuidOrderedByUpdatedAtASCParams struct {
+type FetchProjectByTeamUUIDOrderedByUpdatedAtASCParams struct {
 	TeamUUID string `json:"team_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByTeamUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectByTeamUuidOrderedByUpdatedAtASCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByTeamUuidOrderedByUpdatedAtASC, arg.TeamUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByTeamUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectByTeamUUIDOrderedByUpdatedAtASCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByTeamUUIDOrderedByUpdatedAtASC, arg.TeamUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -11590,7 +11590,7 @@ func (q *Queries) FetchProjectByTeamUuidOrderedByUpdatedAtASC(ctx context.Contex
 	return items, nil
 }
 
-const fetchProjectByTeamUuidOrderedByUpdatedAtDESC = `-- name: FetchProjectByTeamUuidOrderedByUpdatedAtDESC :many
+const fetchProjectByTeamUUIDOrderedByUpdatedAtDESC = `-- name: FetchProjectByTeamUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -11599,14 +11599,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectByTeamUuidOrderedByUpdatedAtDESCParams struct {
+type FetchProjectByTeamUUIDOrderedByUpdatedAtDESCParams struct {
 	TeamUUID string `json:"team_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectByTeamUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectByTeamUuidOrderedByUpdatedAtDESCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByTeamUuidOrderedByUpdatedAtDESC, arg.TeamUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectByTeamUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectByTeamUUIDOrderedByUpdatedAtDESCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByTeamUUIDOrderedByUpdatedAtDESC, arg.TeamUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -11644,276 +11644,7 @@ func (q *Queries) FetchProjectByTeamUuidOrderedByUpdatedAtDESC(ctx context.Conte
 	return items, nil
 }
 
-const fetchProjectByUpdatedByUuid = `-- name: FetchProjectByUpdatedByUuid :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `project` + "`" + `
-WHERE 
-    ` + "`" + `updated_by_uuid` + "`" + ` = ? 
-LIMIT ?, ?
-`
-
-type FetchProjectByUpdatedByUuidParams struct {
-	UpdatedByUUID string `json:"updated_by_uuid"`
-	Offset        int32  `json:"offset"`
-	Limit         int32  `json:"limit"`
-}
-
-func (q *Queries) FetchProjectByUpdatedByUuid(ctx context.Context, arg FetchProjectByUpdatedByUuidParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByUpdatedByUuid, arg.UpdatedByUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Project
-	for rows.Next() {
-		var i Project
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Description,
-			&i.Tags,
-			&i.URL,
-			&i.OwnerUUID,
-			&i.TeamUUID,
-			&i.AccessType,
-			&i.ProjectExtensions,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchProjectByUpdatedByUuidOrderedByCreatedAtASC = `-- name: FetchProjectByUpdatedByUuidOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `project` + "`" + `
-WHERE 
-    ` + "`" + `updated_by_uuid` + "`" + ` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?
-`
-
-type FetchProjectByUpdatedByUuidOrderedByCreatedAtASCParams struct {
-	UpdatedByUUID string `json:"updated_by_uuid"`
-	Offset        int32  `json:"offset"`
-	Limit         int32  `json:"limit"`
-}
-
-func (q *Queries) FetchProjectByUpdatedByUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectByUpdatedByUuidOrderedByCreatedAtASCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByUpdatedByUuidOrderedByCreatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Project
-	for rows.Next() {
-		var i Project
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Description,
-			&i.Tags,
-			&i.URL,
-			&i.OwnerUUID,
-			&i.TeamUUID,
-			&i.AccessType,
-			&i.ProjectExtensions,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchProjectByUpdatedByUuidOrderedByCreatedAtDESC = `-- name: FetchProjectByUpdatedByUuidOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `project` + "`" + `
-WHERE 
-    ` + "`" + `updated_by_uuid` + "`" + ` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?
-`
-
-type FetchProjectByUpdatedByUuidOrderedByCreatedAtDESCParams struct {
-	UpdatedByUUID string `json:"updated_by_uuid"`
-	Offset        int32  `json:"offset"`
-	Limit         int32  `json:"limit"`
-}
-
-func (q *Queries) FetchProjectByUpdatedByUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectByUpdatedByUuidOrderedByCreatedAtDESCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByUpdatedByUuidOrderedByCreatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Project
-	for rows.Next() {
-		var i Project
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Description,
-			&i.Tags,
-			&i.URL,
-			&i.OwnerUUID,
-			&i.TeamUUID,
-			&i.AccessType,
-			&i.ProjectExtensions,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchProjectByUpdatedByUuidOrderedByUpdatedAtASC = `-- name: FetchProjectByUpdatedByUuidOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `project` + "`" + `
-WHERE 
-    ` + "`" + `updated_by_uuid` + "`" + ` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?
-`
-
-type FetchProjectByUpdatedByUuidOrderedByUpdatedAtASCParams struct {
-	UpdatedByUUID string `json:"updated_by_uuid"`
-	Offset        int32  `json:"offset"`
-	Limit         int32  `json:"limit"`
-}
-
-func (q *Queries) FetchProjectByUpdatedByUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectByUpdatedByUuidOrderedByUpdatedAtASCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByUpdatedByUuidOrderedByUpdatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Project
-	for rows.Next() {
-		var i Project
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Description,
-			&i.Tags,
-			&i.URL,
-			&i.OwnerUUID,
-			&i.TeamUUID,
-			&i.AccessType,
-			&i.ProjectExtensions,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchProjectByUpdatedByUuidOrderedByUpdatedAtDESC = `-- name: FetchProjectByUpdatedByUuidOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `project` + "`" + `
-WHERE 
-    ` + "`" + `updated_by_uuid` + "`" + ` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?
-`
-
-type FetchProjectByUpdatedByUuidOrderedByUpdatedAtDESCParams struct {
-	UpdatedByUUID string `json:"updated_by_uuid"`
-	Offset        int32  `json:"offset"`
-	Limit         int32  `json:"limit"`
-}
-
-func (q *Queries) FetchProjectByUpdatedByUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectByUpdatedByUuidOrderedByUpdatedAtDESCParams) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByUpdatedByUuidOrderedByUpdatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Project
-	for rows.Next() {
-		var i Project
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Description,
-			&i.Tags,
-			&i.URL,
-			&i.OwnerUUID,
-			&i.TeamUUID,
-			&i.AccessType,
-			&i.ProjectExtensions,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchProjectByUuid = `-- name: FetchProjectByUuid :many
+const fetchProjectByUUID = `-- name: FetchProjectByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -11921,8 +11652,8 @@ WHERE
 `
 
 // project selects:
-func (q *Queries) FetchProjectByUuid(ctx context.Context, uuid string) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByUuid, uuid)
+func (q *Queries) FetchProjectByUUID(ctx context.Context, uuid string) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -11960,7 +11691,7 @@ func (q *Queries) FetchProjectByUuid(ctx context.Context, uuid string) ([]Projec
 	return items, nil
 }
 
-const fetchProjectByUuidForUpdate = `-- name: FetchProjectByUuidForUpdate :many
+const fetchProjectByUUIDForUpdate = `-- name: FetchProjectByUUIDForUpdate :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project` + "`" + `
 WHERE 
@@ -11968,8 +11699,277 @@ WHERE
 FOR UPDATE
 `
 
-func (q *Queries) FetchProjectByUuidForUpdate(ctx context.Context, uuid string) ([]Project, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectByUuidForUpdate, uuid)
+func (q *Queries) FetchProjectByUUIDForUpdate(ctx context.Context, uuid string) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Project
+	for rows.Next() {
+		var i Project
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Name,
+			&i.Description,
+			&i.Tags,
+			&i.URL,
+			&i.OwnerUUID,
+			&i.TeamUUID,
+			&i.AccessType,
+			&i.ProjectExtensions,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchProjectByUpdatedByUUID = `-- name: FetchProjectByUpdatedByUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `project` + "`" + `
+WHERE 
+    ` + "`" + `updated_by_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchProjectByUpdatedByUUIDParams struct {
+	UpdatedByUUID string `json:"updated_by_uuid"`
+	Offset        int32  `json:"offset"`
+	Limit         int32  `json:"limit"`
+}
+
+func (q *Queries) FetchProjectByUpdatedByUUID(ctx context.Context, arg FetchProjectByUpdatedByUUIDParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByUpdatedByUUID, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Project
+	for rows.Next() {
+		var i Project
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Name,
+			&i.Description,
+			&i.Tags,
+			&i.URL,
+			&i.OwnerUUID,
+			&i.TeamUUID,
+			&i.AccessType,
+			&i.ProjectExtensions,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchProjectByUpdatedByUUIDOrderedByCreatedAtASC = `-- name: FetchProjectByUpdatedByUUIDOrderedByCreatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `project` + "`" + `
+WHERE 
+    ` + "`" + `updated_by_uuid` + "`" + ` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?
+`
+
+type FetchProjectByUpdatedByUUIDOrderedByCreatedAtASCParams struct {
+	UpdatedByUUID string `json:"updated_by_uuid"`
+	Offset        int32  `json:"offset"`
+	Limit         int32  `json:"limit"`
+}
+
+func (q *Queries) FetchProjectByUpdatedByUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectByUpdatedByUUIDOrderedByCreatedAtASCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByUpdatedByUUIDOrderedByCreatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Project
+	for rows.Next() {
+		var i Project
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Name,
+			&i.Description,
+			&i.Tags,
+			&i.URL,
+			&i.OwnerUUID,
+			&i.TeamUUID,
+			&i.AccessType,
+			&i.ProjectExtensions,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchProjectByUpdatedByUUIDOrderedByCreatedAtDESC = `-- name: FetchProjectByUpdatedByUUIDOrderedByCreatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `project` + "`" + `
+WHERE 
+    ` + "`" + `updated_by_uuid` + "`" + ` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?
+`
+
+type FetchProjectByUpdatedByUUIDOrderedByCreatedAtDESCParams struct {
+	UpdatedByUUID string `json:"updated_by_uuid"`
+	Offset        int32  `json:"offset"`
+	Limit         int32  `json:"limit"`
+}
+
+func (q *Queries) FetchProjectByUpdatedByUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectByUpdatedByUUIDOrderedByCreatedAtDESCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByUpdatedByUUIDOrderedByCreatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Project
+	for rows.Next() {
+		var i Project
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Name,
+			&i.Description,
+			&i.Tags,
+			&i.URL,
+			&i.OwnerUUID,
+			&i.TeamUUID,
+			&i.AccessType,
+			&i.ProjectExtensions,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchProjectByUpdatedByUUIDOrderedByUpdatedAtASC = `-- name: FetchProjectByUpdatedByUUIDOrderedByUpdatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `project` + "`" + `
+WHERE 
+    ` + "`" + `updated_by_uuid` + "`" + ` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?
+`
+
+type FetchProjectByUpdatedByUUIDOrderedByUpdatedAtASCParams struct {
+	UpdatedByUUID string `json:"updated_by_uuid"`
+	Offset        int32  `json:"offset"`
+	Limit         int32  `json:"limit"`
+}
+
+func (q *Queries) FetchProjectByUpdatedByUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectByUpdatedByUUIDOrderedByUpdatedAtASCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByUpdatedByUUIDOrderedByUpdatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Project
+	for rows.Next() {
+		var i Project
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Name,
+			&i.Description,
+			&i.Tags,
+			&i.URL,
+			&i.OwnerUUID,
+			&i.TeamUUID,
+			&i.AccessType,
+			&i.ProjectExtensions,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchProjectByUpdatedByUUIDOrderedByUpdatedAtDESC = `-- name: FetchProjectByUpdatedByUUIDOrderedByUpdatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `access_type` + "`" + `,` + "`" + `project_extensions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `project` + "`" + `
+WHERE 
+    ` + "`" + `updated_by_uuid` + "`" + ` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?
+`
+
+type FetchProjectByUpdatedByUUIDOrderedByUpdatedAtDESCParams struct {
+	UpdatedByUUID string `json:"updated_by_uuid"`
+	Offset        int32  `json:"offset"`
+	Limit         int32  `json:"limit"`
+}
+
+func (q *Queries) FetchProjectByUpdatedByUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectByUpdatedByUUIDOrderedByUpdatedAtDESCParams) ([]Project, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectByUpdatedByUUIDOrderedByUpdatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12276,7 +12276,7 @@ func (q *Queries) FetchProjectByVersionOrderedByUpdatedAtDESC(ctx context.Contex
 	return items, nil
 }
 
-const fetchProjectVersionByBaseVersionUuid = `-- name: FetchProjectVersionByBaseVersionUuid :many
+const fetchProjectVersionByBaseVersionUUID = `-- name: FetchProjectVersionByBaseVersionUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12284,14 +12284,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByBaseVersionUuidParams struct {
+type FetchProjectVersionByBaseVersionUUIDParams struct {
 	BaseVersionUUID null.String `json:"base_version_uuid"`
 	Offset          int32       `json:"offset"`
 	Limit           int32       `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByBaseVersionUuid(ctx context.Context, arg FetchProjectVersionByBaseVersionUuidParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByBaseVersionUuid, arg.BaseVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByBaseVersionUUID(ctx context.Context, arg FetchProjectVersionByBaseVersionUUIDParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByBaseVersionUUID, arg.BaseVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12331,7 +12331,7 @@ func (q *Queries) FetchProjectVersionByBaseVersionUuid(ctx context.Context, arg 
 	return items, nil
 }
 
-const fetchProjectVersionByBaseVersionUuidOrderedByCreatedAtASC = `-- name: FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtASC :many
+const fetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtASC = `-- name: FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12340,14 +12340,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtASCParams struct {
+type FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtASCParams struct {
 	BaseVersionUUID null.String `json:"base_version_uuid"`
 	Offset          int32       `json:"offset"`
 	Limit           int32       `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtASCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByBaseVersionUuidOrderedByCreatedAtASC, arg.BaseVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtASCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtASC, arg.BaseVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12387,7 +12387,7 @@ func (q *Queries) FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtASC(ctx 
 	return items, nil
 }
 
-const fetchProjectVersionByBaseVersionUuidOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtDESC :many
+const fetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12396,14 +12396,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtDESCParams struct {
+type FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtDESCParams struct {
 	BaseVersionUUID null.String `json:"base_version_uuid"`
 	Offset          int32       `json:"offset"`
 	Limit           int32       `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtDESCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByBaseVersionUuidOrderedByCreatedAtDESC, arg.BaseVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtDESCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtDESC, arg.BaseVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12443,7 +12443,7 @@ func (q *Queries) FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtDESC(ctx
 	return items, nil
 }
 
-const fetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtASC :many
+const fetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12452,14 +12452,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtASCParams struct {
+type FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtASCParams struct {
 	BaseVersionUUID null.String `json:"base_version_uuid"`
 	Offset          int32       `json:"offset"`
 	Limit           int32       `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtASCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtASC, arg.BaseVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtASCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtASC, arg.BaseVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12499,7 +12499,7 @@ func (q *Queries) FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtASC(ctx 
 	return items, nil
 }
 
-const fetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtDESC :many
+const fetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12508,14 +12508,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtDESCParams struct {
+type FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtDESCParams struct {
 	BaseVersionUUID null.String `json:"base_version_uuid"`
 	Offset          int32       `json:"offset"`
 	Limit           int32       `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtDESCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtDESC, arg.BaseVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtDESCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtDESC, arg.BaseVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12555,7 +12555,7 @@ func (q *Queries) FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtDESC(ctx
 	return items, nil
 }
 
-const fetchProjectVersionByCreatedByUuid = `-- name: FetchProjectVersionByCreatedByUuid :many
+const fetchProjectVersionByCreatedByUUID = `-- name: FetchProjectVersionByCreatedByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12563,14 +12563,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByCreatedByUuidParams struct {
+type FetchProjectVersionByCreatedByUUIDParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByCreatedByUuid(ctx context.Context, arg FetchProjectVersionByCreatedByUuidParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByCreatedByUuid, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByCreatedByUUID(ctx context.Context, arg FetchProjectVersionByCreatedByUUIDParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByCreatedByUUID, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12610,7 +12610,7 @@ func (q *Queries) FetchProjectVersionByCreatedByUuid(ctx context.Context, arg Fe
 	return items, nil
 }
 
-const fetchProjectVersionByCreatedByUuidOrderedByCreatedAtASC = `-- name: FetchProjectVersionByCreatedByUuidOrderedByCreatedAtASC :many
+const fetchProjectVersionByCreatedByUUIDOrderedByCreatedAtASC = `-- name: FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12619,14 +12619,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByCreatedByUuidOrderedByCreatedAtASCParams struct {
+type FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtASCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByCreatedByUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectVersionByCreatedByUuidOrderedByCreatedAtASCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByCreatedByUuidOrderedByCreatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtASCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByCreatedByUUIDOrderedByCreatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12666,7 +12666,7 @@ func (q *Queries) FetchProjectVersionByCreatedByUuidOrderedByCreatedAtASC(ctx co
 	return items, nil
 }
 
-const fetchProjectVersionByCreatedByUuidOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByCreatedByUuidOrderedByCreatedAtDESC :many
+const fetchProjectVersionByCreatedByUUIDOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12675,14 +12675,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByCreatedByUuidOrderedByCreatedAtDESCParams struct {
+type FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtDESCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByCreatedByUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectVersionByCreatedByUuidOrderedByCreatedAtDESCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByCreatedByUuidOrderedByCreatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtDESCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByCreatedByUUIDOrderedByCreatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12722,7 +12722,7 @@ func (q *Queries) FetchProjectVersionByCreatedByUuidOrderedByCreatedAtDESC(ctx c
 	return items, nil
 }
 
-const fetchProjectVersionByCreatedByUuidOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtASC :many
+const fetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12731,14 +12731,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtASCParams struct {
+type FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtASCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtASCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByCreatedByUuidOrderedByUpdatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtASCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12778,7 +12778,7 @@ func (q *Queries) FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtASC(ctx co
 	return items, nil
 }
 
-const fetchProjectVersionByCreatedByUuidOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtDESC :many
+const fetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12787,14 +12787,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtDESCParams struct {
+type FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtDESCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtDESCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByCreatedByUuidOrderedByUpdatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtDESCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12834,7 +12834,7 @@ func (q *Queries) FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtDESC(ctx c
 	return items, nil
 }
 
-const fetchProjectVersionByProjectUuid = `-- name: FetchProjectVersionByProjectUuid :many
+const fetchProjectVersionByProjectUUID = `-- name: FetchProjectVersionByProjectUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12842,14 +12842,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByProjectUuidParams struct {
+type FetchProjectVersionByProjectUUIDParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByProjectUuid(ctx context.Context, arg FetchProjectVersionByProjectUuidParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByProjectUuid, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByProjectUUID(ctx context.Context, arg FetchProjectVersionByProjectUUIDParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByProjectUUID, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12889,7 +12889,7 @@ func (q *Queries) FetchProjectVersionByProjectUuid(ctx context.Context, arg Fetc
 	return items, nil
 }
 
-const fetchProjectVersionByProjectUuidOrderedByCreatedAtASC = `-- name: FetchProjectVersionByProjectUuidOrderedByCreatedAtASC :many
+const fetchProjectVersionByProjectUUIDOrderedByCreatedAtASC = `-- name: FetchProjectVersionByProjectUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12898,14 +12898,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByProjectUuidOrderedByCreatedAtASCParams struct {
+type FetchProjectVersionByProjectUUIDOrderedByCreatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByProjectUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectVersionByProjectUuidOrderedByCreatedAtASCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByProjectUuidOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByProjectUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectVersionByProjectUUIDOrderedByCreatedAtASCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByProjectUUIDOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -12945,7 +12945,7 @@ func (q *Queries) FetchProjectVersionByProjectUuidOrderedByCreatedAtASC(ctx cont
 	return items, nil
 }
 
-const fetchProjectVersionByProjectUuidOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByProjectUuidOrderedByCreatedAtDESC :many
+const fetchProjectVersionByProjectUUIDOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -12954,14 +12954,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByProjectUuidOrderedByCreatedAtDESCParams struct {
+type FetchProjectVersionByProjectUUIDOrderedByCreatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByProjectUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectVersionByProjectUuidOrderedByCreatedAtDESCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByProjectUuidOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByProjectUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectVersionByProjectUUIDOrderedByCreatedAtDESCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByProjectUUIDOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -13001,7 +13001,7 @@ func (q *Queries) FetchProjectVersionByProjectUuidOrderedByCreatedAtDESC(ctx con
 	return items, nil
 }
 
-const fetchProjectVersionByProjectUuidOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByProjectUuidOrderedByUpdatedAtASC :many
+const fetchProjectVersionByProjectUUIDOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -13010,14 +13010,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByProjectUuidOrderedByUpdatedAtASCParams struct {
+type FetchProjectVersionByProjectUUIDOrderedByUpdatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByProjectUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectVersionByProjectUuidOrderedByUpdatedAtASCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByProjectUuidOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByProjectUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectVersionByProjectUUIDOrderedByUpdatedAtASCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByProjectUUIDOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -13057,7 +13057,7 @@ func (q *Queries) FetchProjectVersionByProjectUuidOrderedByUpdatedAtASC(ctx cont
 	return items, nil
 }
 
-const fetchProjectVersionByProjectUuidOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByProjectUuidOrderedByUpdatedAtDESC :many
+const fetchProjectVersionByProjectUUIDOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -13066,14 +13066,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByProjectUuidOrderedByUpdatedAtDESCParams struct {
+type FetchProjectVersionByProjectUUIDOrderedByUpdatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByProjectUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectVersionByProjectUuidOrderedByUpdatedAtDESCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByProjectUuidOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByProjectUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectVersionByProjectUUIDOrderedByUpdatedAtDESCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByProjectUUIDOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -13671,22 +13671,16 @@ func (q *Queries) FetchProjectVersionByStatusOrderedByUpdatedAtDESC(ctx context.
 	return items, nil
 }
 
-const fetchProjectVersionByUpdatedByUuid = `-- name: FetchProjectVersionByUpdatedByUuid :many
+const fetchProjectVersionByUUID = `-- name: FetchProjectVersionByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
-    ` + "`" + `updated_by_uuid` + "`" + ` = ? 
-LIMIT ?, ?
+    ` + "`" + `uuid` + "`" + ` = ?
 `
 
-type FetchProjectVersionByUpdatedByUuidParams struct {
-	UpdatedByUUID string `json:"updated_by_uuid"`
-	Offset        int32  `json:"offset"`
-	Limit         int32  `json:"limit"`
-}
-
-func (q *Queries) FetchProjectVersionByUpdatedByUuid(ctx context.Context, arg FetchProjectVersionByUpdatedByUuidParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUpdatedByUuid, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+// project_version selects:
+func (q *Queries) FetchProjectVersionByUUID(ctx context.Context, uuid string) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -13726,7 +13720,111 @@ func (q *Queries) FetchProjectVersionByUpdatedByUuid(ctx context.Context, arg Fe
 	return items, nil
 }
 
-const fetchProjectVersionByUpdatedByUuidOrderedByCreatedAtASC = `-- name: FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtASC :many
+const fetchProjectVersionByUUIDForUpdate = `-- name: FetchProjectVersionByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `project_version` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchProjectVersionByUUIDForUpdate(ctx context.Context, uuid string) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ProjectVersion
+	for rows.Next() {
+		var i ProjectVersion
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Identifier,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.Entities,
+			&i.Relationships,
+			&i.Enums,
+			&i.Services,
+			&i.BaseVersionUUID,
+			&i.ReviewStatus,
+			&i.Deployments,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchProjectVersionByUpdatedByUUID = `-- name: FetchProjectVersionByUpdatedByUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `project_version` + "`" + `
+WHERE 
+    ` + "`" + `updated_by_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchProjectVersionByUpdatedByUUIDParams struct {
+	UpdatedByUUID string `json:"updated_by_uuid"`
+	Offset        int32  `json:"offset"`
+	Limit         int32  `json:"limit"`
+}
+
+func (q *Queries) FetchProjectVersionByUpdatedByUUID(ctx context.Context, arg FetchProjectVersionByUpdatedByUUIDParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUpdatedByUUID, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ProjectVersion
+	for rows.Next() {
+		var i ProjectVersion
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Identifier,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.Entities,
+			&i.Relationships,
+			&i.Enums,
+			&i.Services,
+			&i.BaseVersionUUID,
+			&i.ReviewStatus,
+			&i.Deployments,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtASC = `-- name: FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -13735,14 +13833,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtASCParams struct {
+type FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtASCParams struct {
 	UpdatedByUUID string `json:"updated_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtASCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUpdatedByUuidOrderedByCreatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtASCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -13782,7 +13880,7 @@ func (q *Queries) FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtASC(ctx co
 	return items, nil
 }
 
-const fetchProjectVersionByUpdatedByUuidOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtDESC :many
+const fetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtDESC = `-- name: FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -13791,14 +13889,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtDESCParams struct {
+type FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtDESCParams struct {
 	UpdatedByUUID string `json:"updated_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtDESCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUpdatedByUuidOrderedByCreatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtDESCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -13838,7 +13936,7 @@ func (q *Queries) FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtDESC(ctx c
 	return items, nil
 }
 
-const fetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtASC :many
+const fetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtASC = `-- name: FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -13847,14 +13945,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtASCParams struct {
+type FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtASCParams struct {
 	UpdatedByUUID string `json:"updated_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtASCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtASCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -13894,7 +13992,7 @@ func (q *Queries) FetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtASC(ctx co
 	return items, nil
 }
 
-const fetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtDESC :many
+const fetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtDESC = `-- name: FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `project_version` + "`" + `
 WHERE 
@@ -13903,112 +14001,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtDESCParams struct {
+type FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtDESCParams struct {
 	UpdatedByUUID string `json:"updated_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtDESCParams) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []ProjectVersion
-	for rows.Next() {
-		var i ProjectVersion
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Identifier,
-			&i.Description,
-			&i.ProjectUUID,
-			&i.Entities,
-			&i.Relationships,
-			&i.Enums,
-			&i.Services,
-			&i.BaseVersionUUID,
-			&i.ReviewStatus,
-			&i.Deployments,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchProjectVersionByUuid = `-- name: FetchProjectVersionByUuid :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `project_version` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ?
-`
-
-// project_version selects:
-func (q *Queries) FetchProjectVersionByUuid(ctx context.Context, uuid string) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUuid, uuid)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []ProjectVersion
-	for rows.Next() {
-		var i ProjectVersion
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Identifier,
-			&i.Description,
-			&i.ProjectUUID,
-			&i.Entities,
-			&i.Relationships,
-			&i.Enums,
-			&i.Services,
-			&i.BaseVersionUUID,
-			&i.ReviewStatus,
-			&i.Deployments,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchProjectVersionByUuidForUpdate = `-- name: FetchProjectVersionByUuidForUpdate :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entities` + "`" + `,` + "`" + `relationships` + "`" + `,` + "`" + `enums` + "`" + `,` + "`" + `services` + "`" + `,` + "`" + `base_version_uuid` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `deployments` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `project_version` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ? 
-FOR UPDATE
-`
-
-func (q *Queries) FetchProjectVersionByUuidForUpdate(ctx context.Context, uuid string) ([]ProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUuidForUpdate, uuid)
+func (q *Queries) FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtDESCParams) ([]ProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -14327,7 +14327,7 @@ func (q *Queries) FetchProjectVersionByVersionOrderedByUpdatedAtDESC(ctx context
 	return items, nil
 }
 
-const fetchTeamByCreatedByUuid = `-- name: FetchTeamByCreatedByUuid :many
+const fetchTeamByCreatedByUUID = `-- name: FetchTeamByCreatedByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -14335,14 +14335,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchTeamByCreatedByUuidParams struct {
+type FetchTeamByCreatedByUUIDParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByCreatedByUuid(ctx context.Context, arg FetchTeamByCreatedByUuidParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByCreatedByUuid, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByCreatedByUUID(ctx context.Context, arg FetchTeamByCreatedByUUIDParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByCreatedByUUID, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -14380,7 +14380,7 @@ func (q *Queries) FetchTeamByCreatedByUuid(ctx context.Context, arg FetchTeamByC
 	return items, nil
 }
 
-const fetchTeamByCreatedByUuidOrderedByCreatedAtASC = `-- name: FetchTeamByCreatedByUuidOrderedByCreatedAtASC :many
+const fetchTeamByCreatedByUUIDOrderedByCreatedAtASC = `-- name: FetchTeamByCreatedByUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -14389,14 +14389,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchTeamByCreatedByUuidOrderedByCreatedAtASCParams struct {
+type FetchTeamByCreatedByUUIDOrderedByCreatedAtASCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByCreatedByUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchTeamByCreatedByUuidOrderedByCreatedAtASCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByCreatedByUuidOrderedByCreatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByCreatedByUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchTeamByCreatedByUUIDOrderedByCreatedAtASCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByCreatedByUUIDOrderedByCreatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -14434,7 +14434,7 @@ func (q *Queries) FetchTeamByCreatedByUuidOrderedByCreatedAtASC(ctx context.Cont
 	return items, nil
 }
 
-const fetchTeamByCreatedByUuidOrderedByCreatedAtDESC = `-- name: FetchTeamByCreatedByUuidOrderedByCreatedAtDESC :many
+const fetchTeamByCreatedByUUIDOrderedByCreatedAtDESC = `-- name: FetchTeamByCreatedByUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -14443,14 +14443,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchTeamByCreatedByUuidOrderedByCreatedAtDESCParams struct {
+type FetchTeamByCreatedByUUIDOrderedByCreatedAtDESCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByCreatedByUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchTeamByCreatedByUuidOrderedByCreatedAtDESCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByCreatedByUuidOrderedByCreatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByCreatedByUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchTeamByCreatedByUUIDOrderedByCreatedAtDESCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByCreatedByUUIDOrderedByCreatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -14488,7 +14488,7 @@ func (q *Queries) FetchTeamByCreatedByUuidOrderedByCreatedAtDESC(ctx context.Con
 	return items, nil
 }
 
-const fetchTeamByCreatedByUuidOrderedByUpdatedAtASC = `-- name: FetchTeamByCreatedByUuidOrderedByUpdatedAtASC :many
+const fetchTeamByCreatedByUUIDOrderedByUpdatedAtASC = `-- name: FetchTeamByCreatedByUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -14497,14 +14497,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchTeamByCreatedByUuidOrderedByUpdatedAtASCParams struct {
+type FetchTeamByCreatedByUUIDOrderedByUpdatedAtASCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByCreatedByUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchTeamByCreatedByUuidOrderedByUpdatedAtASCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByCreatedByUuidOrderedByUpdatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByCreatedByUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchTeamByCreatedByUUIDOrderedByUpdatedAtASCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByCreatedByUUIDOrderedByUpdatedAtASC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -14542,7 +14542,7 @@ func (q *Queries) FetchTeamByCreatedByUuidOrderedByUpdatedAtASC(ctx context.Cont
 	return items, nil
 }
 
-const fetchTeamByCreatedByUuidOrderedByUpdatedAtDESC = `-- name: FetchTeamByCreatedByUuidOrderedByUpdatedAtDESC :many
+const fetchTeamByCreatedByUUIDOrderedByUpdatedAtDESC = `-- name: FetchTeamByCreatedByUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -14551,14 +14551,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchTeamByCreatedByUuidOrderedByUpdatedAtDESCParams struct {
+type FetchTeamByCreatedByUUIDOrderedByUpdatedAtDESCParams struct {
 	CreatedByUUID string `json:"created_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByCreatedByUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchTeamByCreatedByUuidOrderedByUpdatedAtDESCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByCreatedByUuidOrderedByUpdatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByCreatedByUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchTeamByCreatedByUUIDOrderedByUpdatedAtDESCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByCreatedByUUIDOrderedByUpdatedAtDESC, arg.CreatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -14596,7 +14596,7 @@ func (q *Queries) FetchTeamByCreatedByUuidOrderedByUpdatedAtDESC(ctx context.Con
 	return items, nil
 }
 
-const fetchTeamByOwnerUuid = `-- name: FetchTeamByOwnerUuid :many
+const fetchTeamByOwnerUUID = `-- name: FetchTeamByOwnerUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -14604,14 +14604,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchTeamByOwnerUuidParams struct {
+type FetchTeamByOwnerUUIDParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByOwnerUuid(ctx context.Context, arg FetchTeamByOwnerUuidParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByOwnerUuid, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByOwnerUUID(ctx context.Context, arg FetchTeamByOwnerUUIDParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByOwnerUUID, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -14649,7 +14649,7 @@ func (q *Queries) FetchTeamByOwnerUuid(ctx context.Context, arg FetchTeamByOwner
 	return items, nil
 }
 
-const fetchTeamByOwnerUuidOrderedByCreatedAtASC = `-- name: FetchTeamByOwnerUuidOrderedByCreatedAtASC :many
+const fetchTeamByOwnerUUIDOrderedByCreatedAtASC = `-- name: FetchTeamByOwnerUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -14658,14 +14658,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchTeamByOwnerUuidOrderedByCreatedAtASCParams struct {
+type FetchTeamByOwnerUUIDOrderedByCreatedAtASCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByOwnerUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchTeamByOwnerUuidOrderedByCreatedAtASCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByOwnerUuidOrderedByCreatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByOwnerUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchTeamByOwnerUUIDOrderedByCreatedAtASCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByOwnerUUIDOrderedByCreatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -14703,7 +14703,7 @@ func (q *Queries) FetchTeamByOwnerUuidOrderedByCreatedAtASC(ctx context.Context,
 	return items, nil
 }
 
-const fetchTeamByOwnerUuidOrderedByCreatedAtDESC = `-- name: FetchTeamByOwnerUuidOrderedByCreatedAtDESC :many
+const fetchTeamByOwnerUUIDOrderedByCreatedAtDESC = `-- name: FetchTeamByOwnerUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -14712,14 +14712,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchTeamByOwnerUuidOrderedByCreatedAtDESCParams struct {
+type FetchTeamByOwnerUUIDOrderedByCreatedAtDESCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByOwnerUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchTeamByOwnerUuidOrderedByCreatedAtDESCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByOwnerUuidOrderedByCreatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByOwnerUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchTeamByOwnerUUIDOrderedByCreatedAtDESCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByOwnerUUIDOrderedByCreatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -14757,7 +14757,7 @@ func (q *Queries) FetchTeamByOwnerUuidOrderedByCreatedAtDESC(ctx context.Context
 	return items, nil
 }
 
-const fetchTeamByOwnerUuidOrderedByUpdatedAtASC = `-- name: FetchTeamByOwnerUuidOrderedByUpdatedAtASC :many
+const fetchTeamByOwnerUUIDOrderedByUpdatedAtASC = `-- name: FetchTeamByOwnerUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -14766,14 +14766,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchTeamByOwnerUuidOrderedByUpdatedAtASCParams struct {
+type FetchTeamByOwnerUUIDOrderedByUpdatedAtASCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByOwnerUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchTeamByOwnerUuidOrderedByUpdatedAtASCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByOwnerUuidOrderedByUpdatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByOwnerUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchTeamByOwnerUUIDOrderedByUpdatedAtASCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByOwnerUUIDOrderedByUpdatedAtASC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -14811,7 +14811,7 @@ func (q *Queries) FetchTeamByOwnerUuidOrderedByUpdatedAtASC(ctx context.Context,
 	return items, nil
 }
 
-const fetchTeamByOwnerUuidOrderedByUpdatedAtDESC = `-- name: FetchTeamByOwnerUuidOrderedByUpdatedAtDESC :many
+const fetchTeamByOwnerUUIDOrderedByUpdatedAtDESC = `-- name: FetchTeamByOwnerUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -14820,14 +14820,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchTeamByOwnerUuidOrderedByUpdatedAtDESCParams struct {
+type FetchTeamByOwnerUUIDOrderedByUpdatedAtDESCParams struct {
 	OwnerUUID string `json:"owner_uuid"`
 	Offset    int32  `json:"offset"`
 	Limit     int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByOwnerUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchTeamByOwnerUuidOrderedByUpdatedAtDESCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByOwnerUuidOrderedByUpdatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByOwnerUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchTeamByOwnerUUIDOrderedByUpdatedAtDESCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByOwnerUUIDOrderedByUpdatedAtDESC, arg.OwnerUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -15134,22 +15134,16 @@ func (q *Queries) FetchTeamByStatusOrderedByUpdatedAtDESC(ctx context.Context, a
 	return items, nil
 }
 
-const fetchTeamByUpdatedByUuid = `-- name: FetchTeamByUpdatedByUuid :many
+const fetchTeamByUUID = `-- name: FetchTeamByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
-    ` + "`" + `updated_by_uuid` + "`" + ` = ? 
-LIMIT ?, ?
+    ` + "`" + `uuid` + "`" + ` = ?
 `
 
-type FetchTeamByUpdatedByUuidParams struct {
-	UpdatedByUUID string `json:"updated_by_uuid"`
-	Offset        int32  `json:"offset"`
-	Limit         int32  `json:"limit"`
-}
-
-func (q *Queries) FetchTeamByUpdatedByUuid(ctx context.Context, arg FetchTeamByUpdatedByUuidParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByUpdatedByUuid, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+// team selects:
+func (q *Queries) FetchTeamByUUID(ctx context.Context, uuid string) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -15187,7 +15181,107 @@ func (q *Queries) FetchTeamByUpdatedByUuid(ctx context.Context, arg FetchTeamByU
 	return items, nil
 }
 
-const fetchTeamByUpdatedByUuidOrderedByCreatedAtASC = `-- name: FetchTeamByUpdatedByUuidOrderedByCreatedAtASC :many
+const fetchTeamByUUIDForUpdate = `-- name: FetchTeamByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `team` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchTeamByUUIDForUpdate(ctx context.Context, uuid string) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Team
+	for rows.Next() {
+		var i Team
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Name,
+			&i.Enviorments,
+			&i.ReviewConfigs,
+			&i.Stores,
+			&i.Connections,
+			&i.ObjectStores,
+			&i.DefaultEntity,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchTeamByUpdatedByUUID = `-- name: FetchTeamByUpdatedByUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `team` + "`" + `
+WHERE 
+    ` + "`" + `updated_by_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchTeamByUpdatedByUUIDParams struct {
+	UpdatedByUUID string `json:"updated_by_uuid"`
+	Offset        int32  `json:"offset"`
+	Limit         int32  `json:"limit"`
+}
+
+func (q *Queries) FetchTeamByUpdatedByUUID(ctx context.Context, arg FetchTeamByUpdatedByUUIDParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByUpdatedByUUID, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Team
+	for rows.Next() {
+		var i Team
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Name,
+			&i.Enviorments,
+			&i.ReviewConfigs,
+			&i.Stores,
+			&i.Connections,
+			&i.ObjectStores,
+			&i.DefaultEntity,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchTeamByUpdatedByUUIDOrderedByCreatedAtASC = `-- name: FetchTeamByUpdatedByUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -15196,14 +15290,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchTeamByUpdatedByUuidOrderedByCreatedAtASCParams struct {
+type FetchTeamByUpdatedByUUIDOrderedByCreatedAtASCParams struct {
 	UpdatedByUUID string `json:"updated_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByUpdatedByUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchTeamByUpdatedByUuidOrderedByCreatedAtASCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByUpdatedByUuidOrderedByCreatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByUpdatedByUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchTeamByUpdatedByUUIDOrderedByCreatedAtASCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByUpdatedByUUIDOrderedByCreatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -15241,7 +15335,7 @@ func (q *Queries) FetchTeamByUpdatedByUuidOrderedByCreatedAtASC(ctx context.Cont
 	return items, nil
 }
 
-const fetchTeamByUpdatedByUuidOrderedByCreatedAtDESC = `-- name: FetchTeamByUpdatedByUuidOrderedByCreatedAtDESC :many
+const fetchTeamByUpdatedByUUIDOrderedByCreatedAtDESC = `-- name: FetchTeamByUpdatedByUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -15250,14 +15344,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchTeamByUpdatedByUuidOrderedByCreatedAtDESCParams struct {
+type FetchTeamByUpdatedByUUIDOrderedByCreatedAtDESCParams struct {
 	UpdatedByUUID string `json:"updated_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByUpdatedByUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchTeamByUpdatedByUuidOrderedByCreatedAtDESCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByUpdatedByUuidOrderedByCreatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByUpdatedByUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchTeamByUpdatedByUUIDOrderedByCreatedAtDESCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByUpdatedByUUIDOrderedByCreatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -15295,7 +15389,7 @@ func (q *Queries) FetchTeamByUpdatedByUuidOrderedByCreatedAtDESC(ctx context.Con
 	return items, nil
 }
 
-const fetchTeamByUpdatedByUuidOrderedByUpdatedAtASC = `-- name: FetchTeamByUpdatedByUuidOrderedByUpdatedAtASC :many
+const fetchTeamByUpdatedByUUIDOrderedByUpdatedAtASC = `-- name: FetchTeamByUpdatedByUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -15304,14 +15398,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchTeamByUpdatedByUuidOrderedByUpdatedAtASCParams struct {
+type FetchTeamByUpdatedByUUIDOrderedByUpdatedAtASCParams struct {
 	UpdatedByUUID string `json:"updated_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByUpdatedByUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchTeamByUpdatedByUuidOrderedByUpdatedAtASCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByUpdatedByUuidOrderedByUpdatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchTeamByUpdatedByUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchTeamByUpdatedByUUIDOrderedByUpdatedAtASCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByUpdatedByUUIDOrderedByUpdatedAtASC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -15349,7 +15443,7 @@ func (q *Queries) FetchTeamByUpdatedByUuidOrderedByUpdatedAtASC(ctx context.Cont
 	return items, nil
 }
 
-const fetchTeamByUpdatedByUuidOrderedByUpdatedAtDESC = `-- name: FetchTeamByUpdatedByUuidOrderedByUpdatedAtDESC :many
+const fetchTeamByUpdatedByUUIDOrderedByUpdatedAtDESC = `-- name: FetchTeamByUpdatedByUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `team` + "`" + `
 WHERE 
@@ -15358,108 +15452,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchTeamByUpdatedByUuidOrderedByUpdatedAtDESCParams struct {
+type FetchTeamByUpdatedByUUIDOrderedByUpdatedAtDESCParams struct {
 	UpdatedByUUID string `json:"updated_by_uuid"`
 	Offset        int32  `json:"offset"`
 	Limit         int32  `json:"limit"`
 }
 
-func (q *Queries) FetchTeamByUpdatedByUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchTeamByUpdatedByUuidOrderedByUpdatedAtDESCParams) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByUpdatedByUuidOrderedByUpdatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Team
-	for rows.Next() {
-		var i Team
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Enviorments,
-			&i.ReviewConfigs,
-			&i.Stores,
-			&i.Connections,
-			&i.ObjectStores,
-			&i.DefaultEntity,
-			&i.OwnerUUID,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchTeamByUuid = `-- name: FetchTeamByUuid :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `team` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ?
-`
-
-// team selects:
-func (q *Queries) FetchTeamByUuid(ctx context.Context, uuid string) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByUuid, uuid)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Team
-	for rows.Next() {
-		var i Team
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.Name,
-			&i.Enviorments,
-			&i.ReviewConfigs,
-			&i.Stores,
-			&i.Connections,
-			&i.ObjectStores,
-			&i.DefaultEntity,
-			&i.OwnerUUID,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchTeamByUuidForUpdate = `-- name: FetchTeamByUuidForUpdate :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `enviorments` + "`" + `,` + "`" + `review_configs` + "`" + `,` + "`" + `stores` + "`" + `,` + "`" + `connections` + "`" + `,` + "`" + `object_stores` + "`" + `,` + "`" + `default_entity` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `team` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ? 
-FOR UPDATE
-`
-
-func (q *Queries) FetchTeamByUuidForUpdate(ctx context.Context, uuid string) ([]Team, error) {
-	rows, err := q.db.QueryContext(ctx, fetchTeamByUuidForUpdate, uuid)
+func (q *Queries) FetchTeamByUpdatedByUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchTeamByUpdatedByUUIDOrderedByUpdatedAtDESCParams) ([]Team, error) {
+	rows, err := q.db.QueryContext(ctx, fetchTeamByUpdatedByUUIDOrderedByUpdatedAtDESC, arg.UpdatedByUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -16528,7 +16528,7 @@ func (q *Queries) FetchUserByStatusOrderedByUpdatedAtDESC(ctx context.Context, a
 	return items, nil
 }
 
-const fetchUserByUuid = `-- name: FetchUserByUuid :many
+const fetchUserByUUID = `-- name: FetchUserByUUID :many
 
 
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `last_name` + "`" + `,` + "`" + `email` + "`" + `,` + "`" + `user_type` + "`" + `,` + "`" + `country_ios2` + "`" + `,` + "`" + `locale` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
@@ -16539,8 +16539,8 @@ WHERE
 
 // Code generated by nuzur go-code-gen. DO NOT EDIT.
 // user selects:
-func (q *Queries) FetchUserByUuid(ctx context.Context, uuid string) ([]User, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserByUuid, uuid)
+func (q *Queries) FetchUserByUUID(ctx context.Context, uuid string) ([]User, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -16575,7 +16575,7 @@ func (q *Queries) FetchUserByUuid(ctx context.Context, uuid string) ([]User, err
 	return items, nil
 }
 
-const fetchUserByUuidForUpdate = `-- name: FetchUserByUuidForUpdate :many
+const fetchUserByUUIDForUpdate = `-- name: FetchUserByUUIDForUpdate :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `last_name` + "`" + `,` + "`" + `email` + "`" + `,` + "`" + `user_type` + "`" + `,` + "`" + `country_ios2` + "`" + `,` + "`" + `locale` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user` + "`" + `
 WHERE 
@@ -16583,8 +16583,8 @@ WHERE
 FOR UPDATE
 `
 
-func (q *Queries) FetchUserByUuidForUpdate(ctx context.Context, uuid string) ([]User, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserByUuidForUpdate, uuid)
+func (q *Queries) FetchUserByUUIDForUpdate(ctx context.Context, uuid string) ([]User, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserByUUIDForUpdate, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -16619,7 +16619,7 @@ func (q *Queries) FetchUserByUuidForUpdate(ctx context.Context, uuid string) ([]
 	return items, nil
 }
 
-const fetchUserConnectionByProjectUuid = `-- name: FetchUserConnectionByProjectUuid :many
+const fetchUserConnectionByProjectUUID = `-- name: FetchUserConnectionByProjectUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -16627,14 +16627,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchUserConnectionByProjectUuidParams struct {
+type FetchUserConnectionByProjectUUIDParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserConnectionByProjectUuid(ctx context.Context, arg FetchUserConnectionByProjectUuidParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectUuid, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserConnectionByProjectUUID(ctx context.Context, arg FetchUserConnectionByProjectUUIDParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectUUID, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -16668,7 +16668,7 @@ func (q *Queries) FetchUserConnectionByProjectUuid(ctx context.Context, arg Fetc
 	return items, nil
 }
 
-const fetchUserConnectionByProjectUuidOrderedByCreatedAtASC = `-- name: FetchUserConnectionByProjectUuidOrderedByCreatedAtASC :many
+const fetchUserConnectionByProjectUUIDOrderedByCreatedAtASC = `-- name: FetchUserConnectionByProjectUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -16677,14 +16677,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserConnectionByProjectUuidOrderedByCreatedAtASCParams struct {
+type FetchUserConnectionByProjectUUIDOrderedByCreatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserConnectionByProjectUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchUserConnectionByProjectUuidOrderedByCreatedAtASCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectUuidOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserConnectionByProjectUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchUserConnectionByProjectUUIDOrderedByCreatedAtASCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectUUIDOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -16718,7 +16718,7 @@ func (q *Queries) FetchUserConnectionByProjectUuidOrderedByCreatedAtASC(ctx cont
 	return items, nil
 }
 
-const fetchUserConnectionByProjectUuidOrderedByCreatedAtDESC = `-- name: FetchUserConnectionByProjectUuidOrderedByCreatedAtDESC :many
+const fetchUserConnectionByProjectUUIDOrderedByCreatedAtDESC = `-- name: FetchUserConnectionByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -16727,14 +16727,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserConnectionByProjectUuidOrderedByCreatedAtDESCParams struct {
+type FetchUserConnectionByProjectUUIDOrderedByCreatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserConnectionByProjectUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserConnectionByProjectUuidOrderedByCreatedAtDESCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectUuidOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserConnectionByProjectUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserConnectionByProjectUUIDOrderedByCreatedAtDESCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectUUIDOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -16768,7 +16768,7 @@ func (q *Queries) FetchUserConnectionByProjectUuidOrderedByCreatedAtDESC(ctx con
 	return items, nil
 }
 
-const fetchUserConnectionByProjectUuidOrderedByUpdatedAtASC = `-- name: FetchUserConnectionByProjectUuidOrderedByUpdatedAtASC :many
+const fetchUserConnectionByProjectUUIDOrderedByUpdatedAtASC = `-- name: FetchUserConnectionByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -16777,14 +16777,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserConnectionByProjectUuidOrderedByUpdatedAtASCParams struct {
+type FetchUserConnectionByProjectUUIDOrderedByUpdatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserConnectionByProjectUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserConnectionByProjectUuidOrderedByUpdatedAtASCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectUuidOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserConnectionByProjectUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserConnectionByProjectUUIDOrderedByUpdatedAtASCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectUUIDOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -16818,7 +16818,7 @@ func (q *Queries) FetchUserConnectionByProjectUuidOrderedByUpdatedAtASC(ctx cont
 	return items, nil
 }
 
-const fetchUserConnectionByProjectUuidOrderedByUpdatedAtDESC = `-- name: FetchUserConnectionByProjectUuidOrderedByUpdatedAtDESC :many
+const fetchUserConnectionByProjectUUIDOrderedByUpdatedAtDESC = `-- name: FetchUserConnectionByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -16827,14 +16827,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserConnectionByProjectUuidOrderedByUpdatedAtDESCParams struct {
+type FetchUserConnectionByProjectUUIDOrderedByUpdatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserConnectionByProjectUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserConnectionByProjectUuidOrderedByUpdatedAtDESCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectUuidOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserConnectionByProjectUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserConnectionByProjectUUIDOrderedByUpdatedAtDESCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectUUIDOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -16868,7 +16868,7 @@ func (q *Queries) FetchUserConnectionByProjectUuidOrderedByUpdatedAtDESC(ctx con
 	return items, nil
 }
 
-const fetchUserConnectionByProjectVersionUuid = `-- name: FetchUserConnectionByProjectVersionUuid :many
+const fetchUserConnectionByProjectVersionUUID = `-- name: FetchUserConnectionByProjectVersionUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -16876,14 +16876,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchUserConnectionByProjectVersionUuidParams struct {
+type FetchUserConnectionByProjectVersionUUIDParams struct {
 	ProjectVersionUUID null.String `json:"project_version_uuid"`
 	Offset             int32       `json:"offset"`
 	Limit              int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserConnectionByProjectVersionUuid(ctx context.Context, arg FetchUserConnectionByProjectVersionUuidParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectVersionUuid, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserConnectionByProjectVersionUUID(ctx context.Context, arg FetchUserConnectionByProjectVersionUUIDParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectVersionUUID, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -16917,7 +16917,7 @@ func (q *Queries) FetchUserConnectionByProjectVersionUuid(ctx context.Context, a
 	return items, nil
 }
 
-const fetchUserConnectionByProjectVersionUuidOrderedByCreatedAtASC = `-- name: FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtASC :many
+const fetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtASC = `-- name: FetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -16926,14 +16926,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtASCParams struct {
+type FetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtASCParams struct {
 	ProjectVersionUUID null.String `json:"project_version_uuid"`
 	Offset             int32       `json:"offset"`
 	Limit              int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtASCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectVersionUuidOrderedByCreatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtASCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -16967,7 +16967,7 @@ func (q *Queries) FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtASC(c
 	return items, nil
 }
 
-const fetchUserConnectionByProjectVersionUuidOrderedByCreatedAtDESC = `-- name: FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtDESC :many
+const fetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtDESC = `-- name: FetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -16976,14 +16976,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtDESCParams struct {
+type FetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtDESCParams struct {
 	ProjectVersionUUID null.String `json:"project_version_uuid"`
 	Offset             int32       `json:"offset"`
 	Limit              int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtDESCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectVersionUuidOrderedByCreatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtDESCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -17017,7 +17017,7 @@ func (q *Queries) FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtDESC(
 	return items, nil
 }
 
-const fetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtASC = `-- name: FetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtASC :many
+const fetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtASC = `-- name: FetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -17026,14 +17026,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtASCParams struct {
+type FetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtASCParams struct {
 	ProjectVersionUUID null.String `json:"project_version_uuid"`
 	Offset             int32       `json:"offset"`
 	Limit              int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtASCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtASCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -17067,7 +17067,7 @@ func (q *Queries) FetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtASC(c
 	return items, nil
 }
 
-const fetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtDESC = `-- name: FetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtDESC :many
+const fetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtDESC = `-- name: FetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -17076,14 +17076,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtDESCParams struct {
+type FetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtDESCParams struct {
 	ProjectVersionUUID null.String `json:"project_version_uuid"`
 	Offset             int32       `json:"offset"`
 	Limit              int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtDESCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtDESCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -17366,256 +17366,7 @@ func (q *Queries) FetchUserConnectionByStatusOrderedByUpdatedAtDESC(ctx context.
 	return items, nil
 }
 
-const fetchUserConnectionByUserUuid = `-- name: FetchUserConnectionByUserUuid :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
-FROM ` + "`" + `user_connection` + "`" + `
-WHERE 
-    ` + "`" + `user_uuid` + "`" + ` = ? 
-LIMIT ?, ?
-`
-
-type FetchUserConnectionByUserUuidParams struct {
-	UserUUID string `json:"user_uuid"`
-	Offset   int32  `json:"offset"`
-	Limit    int32  `json:"limit"`
-}
-
-func (q *Queries) FetchUserConnectionByUserUuid(ctx context.Context, arg FetchUserConnectionByUserUuidParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUserUuid, arg.UserUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []UserConnection
-	for rows.Next() {
-		var i UserConnection
-		if err := rows.Scan(
-			&i.UUID,
-			&i.UserUUID,
-			&i.ProjectUUID,
-			&i.ProjectVersionUUID,
-			&i.Type,
-			&i.TypeConfig,
-			&i.DbSchema,
-			&i.Executions,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchUserConnectionByUserUuidOrderedByCreatedAtASC = `-- name: FetchUserConnectionByUserUuidOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
-FROM ` + "`" + `user_connection` + "`" + `
-WHERE 
-    ` + "`" + `user_uuid` + "`" + ` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?
-`
-
-type FetchUserConnectionByUserUuidOrderedByCreatedAtASCParams struct {
-	UserUUID string `json:"user_uuid"`
-	Offset   int32  `json:"offset"`
-	Limit    int32  `json:"limit"`
-}
-
-func (q *Queries) FetchUserConnectionByUserUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchUserConnectionByUserUuidOrderedByCreatedAtASCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUserUuidOrderedByCreatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []UserConnection
-	for rows.Next() {
-		var i UserConnection
-		if err := rows.Scan(
-			&i.UUID,
-			&i.UserUUID,
-			&i.ProjectUUID,
-			&i.ProjectVersionUUID,
-			&i.Type,
-			&i.TypeConfig,
-			&i.DbSchema,
-			&i.Executions,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchUserConnectionByUserUuidOrderedByCreatedAtDESC = `-- name: FetchUserConnectionByUserUuidOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
-FROM ` + "`" + `user_connection` + "`" + `
-WHERE 
-    ` + "`" + `user_uuid` + "`" + ` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?
-`
-
-type FetchUserConnectionByUserUuidOrderedByCreatedAtDESCParams struct {
-	UserUUID string `json:"user_uuid"`
-	Offset   int32  `json:"offset"`
-	Limit    int32  `json:"limit"`
-}
-
-func (q *Queries) FetchUserConnectionByUserUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserConnectionByUserUuidOrderedByCreatedAtDESCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUserUuidOrderedByCreatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []UserConnection
-	for rows.Next() {
-		var i UserConnection
-		if err := rows.Scan(
-			&i.UUID,
-			&i.UserUUID,
-			&i.ProjectUUID,
-			&i.ProjectVersionUUID,
-			&i.Type,
-			&i.TypeConfig,
-			&i.DbSchema,
-			&i.Executions,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchUserConnectionByUserUuidOrderedByUpdatedAtASC = `-- name: FetchUserConnectionByUserUuidOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
-FROM ` + "`" + `user_connection` + "`" + `
-WHERE 
-    ` + "`" + `user_uuid` + "`" + ` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?
-`
-
-type FetchUserConnectionByUserUuidOrderedByUpdatedAtASCParams struct {
-	UserUUID string `json:"user_uuid"`
-	Offset   int32  `json:"offset"`
-	Limit    int32  `json:"limit"`
-}
-
-func (q *Queries) FetchUserConnectionByUserUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserConnectionByUserUuidOrderedByUpdatedAtASCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUserUuidOrderedByUpdatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []UserConnection
-	for rows.Next() {
-		var i UserConnection
-		if err := rows.Scan(
-			&i.UUID,
-			&i.UserUUID,
-			&i.ProjectUUID,
-			&i.ProjectVersionUUID,
-			&i.Type,
-			&i.TypeConfig,
-			&i.DbSchema,
-			&i.Executions,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchUserConnectionByUserUuidOrderedByUpdatedAtDESC = `-- name: FetchUserConnectionByUserUuidOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
-FROM ` + "`" + `user_connection` + "`" + `
-WHERE 
-    ` + "`" + `user_uuid` + "`" + ` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?
-`
-
-type FetchUserConnectionByUserUuidOrderedByUpdatedAtDESCParams struct {
-	UserUUID string `json:"user_uuid"`
-	Offset   int32  `json:"offset"`
-	Limit    int32  `json:"limit"`
-}
-
-func (q *Queries) FetchUserConnectionByUserUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserConnectionByUserUuidOrderedByUpdatedAtDESCParams) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUserUuidOrderedByUpdatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []UserConnection
-	for rows.Next() {
-		var i UserConnection
-		if err := rows.Scan(
-			&i.UUID,
-			&i.UserUUID,
-			&i.ProjectUUID,
-			&i.ProjectVersionUUID,
-			&i.Type,
-			&i.TypeConfig,
-			&i.DbSchema,
-			&i.Executions,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchUserConnectionByUuid = `-- name: FetchUserConnectionByUuid :many
+const fetchUserConnectionByUUID = `-- name: FetchUserConnectionByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -17623,8 +17374,8 @@ WHERE
 `
 
 // user_connection selects:
-func (q *Queries) FetchUserConnectionByUuid(ctx context.Context, uuid string) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUuid, uuid)
+func (q *Queries) FetchUserConnectionByUUID(ctx context.Context, uuid string) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -17658,7 +17409,7 @@ func (q *Queries) FetchUserConnectionByUuid(ctx context.Context, uuid string) ([
 	return items, nil
 }
 
-const fetchUserConnectionByUuidForUpdate = `-- name: FetchUserConnectionByUuidForUpdate :many
+const fetchUserConnectionByUUIDForUpdate = `-- name: FetchUserConnectionByUUIDForUpdate :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user_connection` + "`" + `
 WHERE 
@@ -17666,8 +17417,8 @@ WHERE
 FOR UPDATE
 `
 
-func (q *Queries) FetchUserConnectionByUuidForUpdate(ctx context.Context, uuid string) ([]UserConnection, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUuidForUpdate, uuid)
+func (q *Queries) FetchUserConnectionByUUIDForUpdate(ctx context.Context, uuid string) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUUIDForUpdate, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -17701,7 +17452,256 @@ func (q *Queries) FetchUserConnectionByUuidForUpdate(ctx context.Context, uuid s
 	return items, nil
 }
 
-const fetchUserProjectByProjectUuid = `-- name: FetchUserProjectByProjectUuid :many
+const fetchUserConnectionByUserUUID = `-- name: FetchUserConnectionByUserUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+FROM ` + "`" + `user_connection` + "`" + `
+WHERE 
+    ` + "`" + `user_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchUserConnectionByUserUUIDParams struct {
+	UserUUID string `json:"user_uuid"`
+	Offset   int32  `json:"offset"`
+	Limit    int32  `json:"limit"`
+}
+
+func (q *Queries) FetchUserConnectionByUserUUID(ctx context.Context, arg FetchUserConnectionByUserUUIDParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUserUUID, arg.UserUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserConnection
+	for rows.Next() {
+		var i UserConnection
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.Type,
+			&i.TypeConfig,
+			&i.DbSchema,
+			&i.Executions,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserConnectionByUserUUIDOrderedByCreatedAtASC = `-- name: FetchUserConnectionByUserUUIDOrderedByCreatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+FROM ` + "`" + `user_connection` + "`" + `
+WHERE 
+    ` + "`" + `user_uuid` + "`" + ` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?
+`
+
+type FetchUserConnectionByUserUUIDOrderedByCreatedAtASCParams struct {
+	UserUUID string `json:"user_uuid"`
+	Offset   int32  `json:"offset"`
+	Limit    int32  `json:"limit"`
+}
+
+func (q *Queries) FetchUserConnectionByUserUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchUserConnectionByUserUUIDOrderedByCreatedAtASCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUserUUIDOrderedByCreatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserConnection
+	for rows.Next() {
+		var i UserConnection
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.Type,
+			&i.TypeConfig,
+			&i.DbSchema,
+			&i.Executions,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserConnectionByUserUUIDOrderedByCreatedAtDESC = `-- name: FetchUserConnectionByUserUUIDOrderedByCreatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+FROM ` + "`" + `user_connection` + "`" + `
+WHERE 
+    ` + "`" + `user_uuid` + "`" + ` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?
+`
+
+type FetchUserConnectionByUserUUIDOrderedByCreatedAtDESCParams struct {
+	UserUUID string `json:"user_uuid"`
+	Offset   int32  `json:"offset"`
+	Limit    int32  `json:"limit"`
+}
+
+func (q *Queries) FetchUserConnectionByUserUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserConnectionByUserUUIDOrderedByCreatedAtDESCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUserUUIDOrderedByCreatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserConnection
+	for rows.Next() {
+		var i UserConnection
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.Type,
+			&i.TypeConfig,
+			&i.DbSchema,
+			&i.Executions,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserConnectionByUserUUIDOrderedByUpdatedAtASC = `-- name: FetchUserConnectionByUserUUIDOrderedByUpdatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+FROM ` + "`" + `user_connection` + "`" + `
+WHERE 
+    ` + "`" + `user_uuid` + "`" + ` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?
+`
+
+type FetchUserConnectionByUserUUIDOrderedByUpdatedAtASCParams struct {
+	UserUUID string `json:"user_uuid"`
+	Offset   int32  `json:"offset"`
+	Limit    int32  `json:"limit"`
+}
+
+func (q *Queries) FetchUserConnectionByUserUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserConnectionByUserUUIDOrderedByUpdatedAtASCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUserUUIDOrderedByUpdatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserConnection
+	for rows.Next() {
+		var i UserConnection
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.Type,
+			&i.TypeConfig,
+			&i.DbSchema,
+			&i.Executions,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserConnectionByUserUUIDOrderedByUpdatedAtDESC = `-- name: FetchUserConnectionByUserUUIDOrderedByUpdatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `type` + "`" + `,` + "`" + `type_config` + "`" + `,` + "`" + `db_schema` + "`" + `,` + "`" + `executions` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+FROM ` + "`" + `user_connection` + "`" + `
+WHERE 
+    ` + "`" + `user_uuid` + "`" + ` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?
+`
+
+type FetchUserConnectionByUserUUIDOrderedByUpdatedAtDESCParams struct {
+	UserUUID string `json:"user_uuid"`
+	Offset   int32  `json:"offset"`
+	Limit    int32  `json:"limit"`
+}
+
+func (q *Queries) FetchUserConnectionByUserUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserConnectionByUserUUIDOrderedByUpdatedAtDESCParams) ([]UserConnection, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserConnectionByUserUUIDOrderedByUpdatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserConnection
+	for rows.Next() {
+		var i UserConnection
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.Type,
+			&i.TypeConfig,
+			&i.DbSchema,
+			&i.Executions,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByProjectUUID = `-- name: FetchUserProjectByProjectUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project` + "`" + `
 WHERE 
@@ -17709,14 +17709,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchUserProjectByProjectUuidParams struct {
+type FetchUserProjectByProjectUUIDParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectByProjectUuid(ctx context.Context, arg FetchUserProjectByProjectUuidParams) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByProjectUuid, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectByProjectUUID(ctx context.Context, arg FetchUserProjectByProjectUUIDParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByProjectUUID, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -17751,7 +17751,7 @@ func (q *Queries) FetchUserProjectByProjectUuid(ctx context.Context, arg FetchUs
 	return items, nil
 }
 
-const fetchUserProjectByProjectUuidOrderedByCreatedAtASC = `-- name: FetchUserProjectByProjectUuidOrderedByCreatedAtASC :many
+const fetchUserProjectByProjectUUIDOrderedByCreatedAtASC = `-- name: FetchUserProjectByProjectUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project` + "`" + `
 WHERE 
@@ -17760,14 +17760,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserProjectByProjectUuidOrderedByCreatedAtASCParams struct {
+type FetchUserProjectByProjectUUIDOrderedByCreatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectByProjectUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectByProjectUuidOrderedByCreatedAtASCParams) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByProjectUuidOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectByProjectUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectByProjectUUIDOrderedByCreatedAtASCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByProjectUUIDOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -17802,7 +17802,7 @@ func (q *Queries) FetchUserProjectByProjectUuidOrderedByCreatedAtASC(ctx context
 	return items, nil
 }
 
-const fetchUserProjectByProjectUuidOrderedByCreatedAtDESC = `-- name: FetchUserProjectByProjectUuidOrderedByCreatedAtDESC :many
+const fetchUserProjectByProjectUUIDOrderedByCreatedAtDESC = `-- name: FetchUserProjectByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project` + "`" + `
 WHERE 
@@ -17811,14 +17811,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserProjectByProjectUuidOrderedByCreatedAtDESCParams struct {
+type FetchUserProjectByProjectUUIDOrderedByCreatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectByProjectUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectByProjectUuidOrderedByCreatedAtDESCParams) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByProjectUuidOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectByProjectUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectByProjectUUIDOrderedByCreatedAtDESCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByProjectUUIDOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -17853,7 +17853,7 @@ func (q *Queries) FetchUserProjectByProjectUuidOrderedByCreatedAtDESC(ctx contex
 	return items, nil
 }
 
-const fetchUserProjectByProjectUuidOrderedByUpdatedAtASC = `-- name: FetchUserProjectByProjectUuidOrderedByUpdatedAtASC :many
+const fetchUserProjectByProjectUUIDOrderedByUpdatedAtASC = `-- name: FetchUserProjectByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project` + "`" + `
 WHERE 
@@ -17862,14 +17862,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserProjectByProjectUuidOrderedByUpdatedAtASCParams struct {
+type FetchUserProjectByProjectUUIDOrderedByUpdatedAtASCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectByProjectUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectByProjectUuidOrderedByUpdatedAtASCParams) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByProjectUuidOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectByProjectUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectByProjectUUIDOrderedByUpdatedAtASCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByProjectUUIDOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -17904,7 +17904,7 @@ func (q *Queries) FetchUserProjectByProjectUuidOrderedByUpdatedAtASC(ctx context
 	return items, nil
 }
 
-const fetchUserProjectByProjectUuidOrderedByUpdatedAtDESC = `-- name: FetchUserProjectByProjectUuidOrderedByUpdatedAtDESC :many
+const fetchUserProjectByProjectUUIDOrderedByUpdatedAtDESC = `-- name: FetchUserProjectByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project` + "`" + `
 WHERE 
@@ -17913,14 +17913,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserProjectByProjectUuidOrderedByUpdatedAtDESCParams struct {
+type FetchUserProjectByProjectUUIDOrderedByUpdatedAtDESCParams struct {
 	ProjectUUID string `json:"project_uuid"`
 	Offset      int32  `json:"offset"`
 	Limit       int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectByProjectUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectByProjectUuidOrderedByUpdatedAtDESCParams) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByProjectUuidOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectByProjectUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectByProjectUUIDOrderedByUpdatedAtDESCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByProjectUUIDOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -18463,6 +18463,94 @@ func (q *Queries) FetchUserProjectByStatusOrderedByUpdatedAtDESC(ctx context.Con
 	return items, nil
 }
 
+const fetchUserProjectByUUID = `-- name: FetchUserProjectByUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `user_project` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ?
+`
+
+// user_project selects:
+func (q *Queries) FetchUserProjectByUUID(ctx context.Context, uuid string) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUUID, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectByUUIDForUpdate = `-- name: FetchUserProjectByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `user_project` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchUserProjectByUUIDForUpdate(ctx context.Context, uuid string) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProject
+	for rows.Next() {
+		var i UserProject
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.ProjectUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const fetchUserProjectByUserEmail = `-- name: FetchUserProjectByUserEmail :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project` + "`" + `
@@ -18717,7 +18805,7 @@ func (q *Queries) FetchUserProjectByUserEmailOrderedByUpdatedAtDESC(ctx context.
 	return items, nil
 }
 
-const fetchUserProjectByUserUuid = `-- name: FetchUserProjectByUserUuid :many
+const fetchUserProjectByUserUUID = `-- name: FetchUserProjectByUserUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project` + "`" + `
 WHERE 
@@ -18725,14 +18813,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchUserProjectByUserUuidParams struct {
+type FetchUserProjectByUserUUIDParams struct {
 	UserUUID null.String `json:"user_uuid"`
 	Offset   int32       `json:"offset"`
 	Limit    int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectByUserUuid(ctx context.Context, arg FetchUserProjectByUserUuidParams) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserUuid, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectByUserUUID(ctx context.Context, arg FetchUserProjectByUserUUIDParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserUUID, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -18767,7 +18855,7 @@ func (q *Queries) FetchUserProjectByUserUuid(ctx context.Context, arg FetchUserP
 	return items, nil
 }
 
-const fetchUserProjectByUserUuidOrderedByCreatedAtASC = `-- name: FetchUserProjectByUserUuidOrderedByCreatedAtASC :many
+const fetchUserProjectByUserUUIDOrderedByCreatedAtASC = `-- name: FetchUserProjectByUserUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project` + "`" + `
 WHERE 
@@ -18776,14 +18864,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserProjectByUserUuidOrderedByCreatedAtASCParams struct {
+type FetchUserProjectByUserUUIDOrderedByCreatedAtASCParams struct {
 	UserUUID null.String `json:"user_uuid"`
 	Offset   int32       `json:"offset"`
 	Limit    int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectByUserUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectByUserUuidOrderedByCreatedAtASCParams) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserUuidOrderedByCreatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectByUserUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectByUserUUIDOrderedByCreatedAtASCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserUUIDOrderedByCreatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -18818,7 +18906,7 @@ func (q *Queries) FetchUserProjectByUserUuidOrderedByCreatedAtASC(ctx context.Co
 	return items, nil
 }
 
-const fetchUserProjectByUserUuidOrderedByCreatedAtDESC = `-- name: FetchUserProjectByUserUuidOrderedByCreatedAtDESC :many
+const fetchUserProjectByUserUUIDOrderedByCreatedAtDESC = `-- name: FetchUserProjectByUserUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project` + "`" + `
 WHERE 
@@ -18827,14 +18915,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserProjectByUserUuidOrderedByCreatedAtDESCParams struct {
+type FetchUserProjectByUserUUIDOrderedByCreatedAtDESCParams struct {
 	UserUUID null.String `json:"user_uuid"`
 	Offset   int32       `json:"offset"`
 	Limit    int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectByUserUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectByUserUuidOrderedByCreatedAtDESCParams) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserUuidOrderedByCreatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectByUserUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectByUserUUIDOrderedByCreatedAtDESCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserUUIDOrderedByCreatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -18869,7 +18957,7 @@ func (q *Queries) FetchUserProjectByUserUuidOrderedByCreatedAtDESC(ctx context.C
 	return items, nil
 }
 
-const fetchUserProjectByUserUuidOrderedByUpdatedAtASC = `-- name: FetchUserProjectByUserUuidOrderedByUpdatedAtASC :many
+const fetchUserProjectByUserUUIDOrderedByUpdatedAtASC = `-- name: FetchUserProjectByUserUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project` + "`" + `
 WHERE 
@@ -18878,14 +18966,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserProjectByUserUuidOrderedByUpdatedAtASCParams struct {
+type FetchUserProjectByUserUUIDOrderedByUpdatedAtASCParams struct {
 	UserUUID null.String `json:"user_uuid"`
 	Offset   int32       `json:"offset"`
 	Limit    int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectByUserUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectByUserUuidOrderedByUpdatedAtASCParams) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserUuidOrderedByUpdatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectByUserUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectByUserUUIDOrderedByUpdatedAtASCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserUUIDOrderedByUpdatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -18920,7 +19008,7 @@ func (q *Queries) FetchUserProjectByUserUuidOrderedByUpdatedAtASC(ctx context.Co
 	return items, nil
 }
 
-const fetchUserProjectByUserUuidOrderedByUpdatedAtDESC = `-- name: FetchUserProjectByUserUuidOrderedByUpdatedAtDESC :many
+const fetchUserProjectByUserUUIDOrderedByUpdatedAtDESC = `-- name: FetchUserProjectByUserUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project` + "`" + `
 WHERE 
@@ -18929,14 +19017,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserProjectByUserUuidOrderedByUpdatedAtDESCParams struct {
+type FetchUserProjectByUserUUIDOrderedByUpdatedAtDESCParams struct {
 	UserUUID null.String `json:"user_uuid"`
 	Offset   int32       `json:"offset"`
 	Limit    int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectByUserUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectByUserUuidOrderedByUpdatedAtDESCParams) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserUuidOrderedByUpdatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectByUserUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectByUserUUIDOrderedByUpdatedAtDESCParams) ([]UserProject, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUserUUIDOrderedByUpdatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -18971,95 +19059,7 @@ func (q *Queries) FetchUserProjectByUserUuidOrderedByUpdatedAtDESC(ctx context.C
 	return items, nil
 }
 
-const fetchUserProjectByUuid = `-- name: FetchUserProjectByUuid :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `user_project` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ?
-`
-
-// user_project selects:
-func (q *Queries) FetchUserProjectByUuid(ctx context.Context, uuid string) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUuid, uuid)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []UserProject
-	for rows.Next() {
-		var i UserProject
-		if err := rows.Scan(
-			&i.UUID,
-			&i.UserUUID,
-			&i.UserEmail,
-			&i.ProjectUUID,
-			&i.Role,
-			&i.ReviewRequiredStructure,
-			&i.ReviewRequiredData,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchUserProjectByUuidForUpdate = `-- name: FetchUserProjectByUuidForUpdate :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `user_project` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ? 
-FOR UPDATE
-`
-
-func (q *Queries) FetchUserProjectByUuidForUpdate(ctx context.Context, uuid string) ([]UserProject, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectByUuidForUpdate, uuid)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []UserProject
-	for rows.Next() {
-		var i UserProject
-		if err := rows.Scan(
-			&i.UUID,
-			&i.UserUUID,
-			&i.UserEmail,
-			&i.ProjectUUID,
-			&i.Role,
-			&i.ReviewRequiredStructure,
-			&i.ReviewRequiredData,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchUserProjectVersionByProjectVersionUuid = `-- name: FetchUserProjectVersionByProjectVersionUuid :many
+const fetchUserProjectVersionByProjectVersionUUID = `-- name: FetchUserProjectVersionByProjectVersionUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project_version` + "`" + `
 WHERE 
@@ -19067,14 +19067,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchUserProjectVersionByProjectVersionUuidParams struct {
+type FetchUserProjectVersionByProjectVersionUUIDParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectVersionByProjectVersionUuid(ctx context.Context, arg FetchUserProjectVersionByProjectVersionUuidParams) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByProjectVersionUuid, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectVersionByProjectVersionUUID(ctx context.Context, arg FetchUserProjectVersionByProjectVersionUUIDParams) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByProjectVersionUUID, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -19107,7 +19107,7 @@ func (q *Queries) FetchUserProjectVersionByProjectVersionUuid(ctx context.Contex
 	return items, nil
 }
 
-const fetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtASC = `-- name: FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtASC :many
+const fetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtASC = `-- name: FetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project_version` + "`" + `
 WHERE 
@@ -19116,14 +19116,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtASCParams struct {
+type FetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtASCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtASCParams) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtASCParams) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -19156,7 +19156,7 @@ func (q *Queries) FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtA
 	return items, nil
 }
 
-const fetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtDESC = `-- name: FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtDESC :many
+const fetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtDESC = `-- name: FetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project_version` + "`" + `
 WHERE 
@@ -19165,14 +19165,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtDESCParams struct {
+type FetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtDESCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtDESCParams) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtDESCParams) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -19205,7 +19205,7 @@ func (q *Queries) FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtD
 	return items, nil
 }
 
-const fetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtASC = `-- name: FetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtASC :many
+const fetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtASC = `-- name: FetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project_version` + "`" + `
 WHERE 
@@ -19214,14 +19214,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtASCParams struct {
+type FetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtASCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtASCParams) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtASCParams) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtASC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -19254,7 +19254,7 @@ func (q *Queries) FetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtA
 	return items, nil
 }
 
-const fetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtDESC = `-- name: FetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtDESC :many
+const fetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtDESC = `-- name: FetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project_version` + "`" + `
 WHERE 
@@ -19263,14 +19263,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtDESCParams struct {
+type FetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtDESCParams struct {
 	ProjectVersionUUID string `json:"project_version_uuid"`
 	Offset             int32  `json:"offset"`
 	Limit              int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtDESCParams) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtDESCParams) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtDESC, arg.ProjectVersionUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -19547,22 +19547,16 @@ func (q *Queries) FetchUserProjectVersionByStatusOrderedByUpdatedAtDESC(ctx cont
 	return items, nil
 }
 
-const fetchUserProjectVersionByUserUuid = `-- name: FetchUserProjectVersionByUserUuid :many
+const fetchUserProjectVersionByUUID = `-- name: FetchUserProjectVersionByUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project_version` + "`" + `
 WHERE 
-    ` + "`" + `user_uuid` + "`" + ` = ? 
-LIMIT ?, ?
+    ` + "`" + `uuid` + "`" + ` = ?
 `
 
-type FetchUserProjectVersionByUserUuidParams struct {
-	UserUUID string `json:"user_uuid"`
-	Offset   int32  `json:"offset"`
-	Limit    int32  `json:"limit"`
-}
-
-func (q *Queries) FetchUserProjectVersionByUserUuid(ctx context.Context, arg FetchUserProjectVersionByUserUuidParams) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUserUuid, arg.UserUUID, arg.Offset, arg.Limit)
+// user_project_version selects:
+func (q *Queries) FetchUserProjectVersionByUUID(ctx context.Context, uuid string) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUUID, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -19595,7 +19589,97 @@ func (q *Queries) FetchUserProjectVersionByUserUuid(ctx context.Context, arg Fet
 	return items, nil
 }
 
-const fetchUserProjectVersionByUserUuidOrderedByCreatedAtASC = `-- name: FetchUserProjectVersionByUserUuidOrderedByCreatedAtASC :many
+const fetchUserProjectVersionByUUIDForUpdate = `-- name: FetchUserProjectVersionByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `user_project_version` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchUserProjectVersionByUUIDForUpdate(ctx context.Context, uuid string) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProjectVersion
+	for rows.Next() {
+		var i UserProjectVersion
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.ProjectVersionUUID,
+			&i.UserUUID,
+			&i.Data,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectVersionByUserUUID = `-- name: FetchUserProjectVersionByUserUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `user_project_version` + "`" + `
+WHERE 
+    ` + "`" + `user_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchUserProjectVersionByUserUUIDParams struct {
+	UserUUID string `json:"user_uuid"`
+	Offset   int32  `json:"offset"`
+	Limit    int32  `json:"limit"`
+}
+
+func (q *Queries) FetchUserProjectVersionByUserUUID(ctx context.Context, arg FetchUserProjectVersionByUserUUIDParams) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUserUUID, arg.UserUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserProjectVersion
+	for rows.Next() {
+		var i UserProjectVersion
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.ProjectVersionUUID,
+			&i.UserUUID,
+			&i.Data,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserProjectVersionByUserUUIDOrderedByCreatedAtASC = `-- name: FetchUserProjectVersionByUserUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project_version` + "`" + `
 WHERE 
@@ -19604,14 +19688,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserProjectVersionByUserUuidOrderedByCreatedAtASCParams struct {
+type FetchUserProjectVersionByUserUUIDOrderedByCreatedAtASCParams struct {
 	UserUUID string `json:"user_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectVersionByUserUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectVersionByUserUuidOrderedByCreatedAtASCParams) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUserUuidOrderedByCreatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectVersionByUserUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchUserProjectVersionByUserUUIDOrderedByCreatedAtASCParams) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUserUUIDOrderedByCreatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -19644,7 +19728,7 @@ func (q *Queries) FetchUserProjectVersionByUserUuidOrderedByCreatedAtASC(ctx con
 	return items, nil
 }
 
-const fetchUserProjectVersionByUserUuidOrderedByCreatedAtDESC = `-- name: FetchUserProjectVersionByUserUuidOrderedByCreatedAtDESC :many
+const fetchUserProjectVersionByUserUUIDOrderedByCreatedAtDESC = `-- name: FetchUserProjectVersionByUserUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project_version` + "`" + `
 WHERE 
@@ -19653,14 +19737,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserProjectVersionByUserUuidOrderedByCreatedAtDESCParams struct {
+type FetchUserProjectVersionByUserUUIDOrderedByCreatedAtDESCParams struct {
 	UserUUID string `json:"user_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectVersionByUserUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectVersionByUserUuidOrderedByCreatedAtDESCParams) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUserUuidOrderedByCreatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectVersionByUserUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserProjectVersionByUserUUIDOrderedByCreatedAtDESCParams) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUserUUIDOrderedByCreatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -19693,7 +19777,7 @@ func (q *Queries) FetchUserProjectVersionByUserUuidOrderedByCreatedAtDESC(ctx co
 	return items, nil
 }
 
-const fetchUserProjectVersionByUserUuidOrderedByUpdatedAtASC = `-- name: FetchUserProjectVersionByUserUuidOrderedByUpdatedAtASC :many
+const fetchUserProjectVersionByUserUUIDOrderedByUpdatedAtASC = `-- name: FetchUserProjectVersionByUserUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project_version` + "`" + `
 WHERE 
@@ -19702,14 +19786,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserProjectVersionByUserUuidOrderedByUpdatedAtASCParams struct {
+type FetchUserProjectVersionByUserUUIDOrderedByUpdatedAtASCParams struct {
 	UserUUID string `json:"user_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectVersionByUserUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectVersionByUserUuidOrderedByUpdatedAtASCParams) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUserUuidOrderedByUpdatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserProjectVersionByUserUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserProjectVersionByUserUUIDOrderedByUpdatedAtASCParams) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUserUUIDOrderedByUpdatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -19742,7 +19826,7 @@ func (q *Queries) FetchUserProjectVersionByUserUuidOrderedByUpdatedAtASC(ctx con
 	return items, nil
 }
 
-const fetchUserProjectVersionByUserUuidOrderedByUpdatedAtDESC = `-- name: FetchUserProjectVersionByUserUuidOrderedByUpdatedAtDESC :many
+const fetchUserProjectVersionByUserUUIDOrderedByUpdatedAtDESC = `-- name: FetchUserProjectVersionByUserUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_project_version` + "`" + `
 WHERE 
@@ -19751,98 +19835,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserProjectVersionByUserUuidOrderedByUpdatedAtDESCParams struct {
+type FetchUserProjectVersionByUserUUIDOrderedByUpdatedAtDESCParams struct {
 	UserUUID string `json:"user_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserProjectVersionByUserUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectVersionByUserUuidOrderedByUpdatedAtDESCParams) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUserUuidOrderedByUpdatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []UserProjectVersion
-	for rows.Next() {
-		var i UserProjectVersion
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.ProjectVersionUUID,
-			&i.UserUUID,
-			&i.Data,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchUserProjectVersionByUuid = `-- name: FetchUserProjectVersionByUuid :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `user_project_version` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ?
-`
-
-// user_project_version selects:
-func (q *Queries) FetchUserProjectVersionByUuid(ctx context.Context, uuid string) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUuid, uuid)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []UserProjectVersion
-	for rows.Next() {
-		var i UserProjectVersion
-		if err := rows.Scan(
-			&i.UUID,
-			&i.Version,
-			&i.ProjectVersionUUID,
-			&i.UserUUID,
-			&i.Data,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchUserProjectVersionByUuidForUpdate = `-- name: FetchUserProjectVersionByUuidForUpdate :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `user_project_version` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ? 
-FOR UPDATE
-`
-
-func (q *Queries) FetchUserProjectVersionByUuidForUpdate(ctx context.Context, uuid string) ([]UserProjectVersion, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUuidForUpdate, uuid)
+func (q *Queries) FetchUserProjectVersionByUserUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserProjectVersionByUserUUIDOrderedByUpdatedAtDESCParams) ([]UserProjectVersion, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserProjectVersionByUserUUIDOrderedByUpdatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -20383,7 +20383,7 @@ func (q *Queries) FetchUserTeamByStatusOrderedByUpdatedAtDESC(ctx context.Contex
 	return items, nil
 }
 
-const fetchUserTeamByTeamUuid = `-- name: FetchUserTeamByTeamUuid :many
+const fetchUserTeamByTeamUUID = `-- name: FetchUserTeamByTeamUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_team` + "`" + `
 WHERE 
@@ -20391,14 +20391,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchUserTeamByTeamUuidParams struct {
+type FetchUserTeamByTeamUUIDParams struct {
 	TeamUUID string `json:"team_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserTeamByTeamUuid(ctx context.Context, arg FetchUserTeamByTeamUuidParams) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByTeamUuid, arg.TeamUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserTeamByTeamUUID(ctx context.Context, arg FetchUserTeamByTeamUUIDParams) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByTeamUUID, arg.TeamUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -20433,7 +20433,7 @@ func (q *Queries) FetchUserTeamByTeamUuid(ctx context.Context, arg FetchUserTeam
 	return items, nil
 }
 
-const fetchUserTeamByTeamUuidOrderedByCreatedAtASC = `-- name: FetchUserTeamByTeamUuidOrderedByCreatedAtASC :many
+const fetchUserTeamByTeamUUIDOrderedByCreatedAtASC = `-- name: FetchUserTeamByTeamUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_team` + "`" + `
 WHERE 
@@ -20442,14 +20442,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserTeamByTeamUuidOrderedByCreatedAtASCParams struct {
+type FetchUserTeamByTeamUUIDOrderedByCreatedAtASCParams struct {
 	TeamUUID string `json:"team_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserTeamByTeamUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchUserTeamByTeamUuidOrderedByCreatedAtASCParams) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByTeamUuidOrderedByCreatedAtASC, arg.TeamUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserTeamByTeamUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchUserTeamByTeamUUIDOrderedByCreatedAtASCParams) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByTeamUUIDOrderedByCreatedAtASC, arg.TeamUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -20484,7 +20484,7 @@ func (q *Queries) FetchUserTeamByTeamUuidOrderedByCreatedAtASC(ctx context.Conte
 	return items, nil
 }
 
-const fetchUserTeamByTeamUuidOrderedByCreatedAtDESC = `-- name: FetchUserTeamByTeamUuidOrderedByCreatedAtDESC :many
+const fetchUserTeamByTeamUUIDOrderedByCreatedAtDESC = `-- name: FetchUserTeamByTeamUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_team` + "`" + `
 WHERE 
@@ -20493,14 +20493,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserTeamByTeamUuidOrderedByCreatedAtDESCParams struct {
+type FetchUserTeamByTeamUUIDOrderedByCreatedAtDESCParams struct {
 	TeamUUID string `json:"team_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserTeamByTeamUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserTeamByTeamUuidOrderedByCreatedAtDESCParams) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByTeamUuidOrderedByCreatedAtDESC, arg.TeamUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserTeamByTeamUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserTeamByTeamUUIDOrderedByCreatedAtDESCParams) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByTeamUUIDOrderedByCreatedAtDESC, arg.TeamUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -20535,7 +20535,7 @@ func (q *Queries) FetchUserTeamByTeamUuidOrderedByCreatedAtDESC(ctx context.Cont
 	return items, nil
 }
 
-const fetchUserTeamByTeamUuidOrderedByUpdatedAtASC = `-- name: FetchUserTeamByTeamUuidOrderedByUpdatedAtASC :many
+const fetchUserTeamByTeamUUIDOrderedByUpdatedAtASC = `-- name: FetchUserTeamByTeamUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_team` + "`" + `
 WHERE 
@@ -20544,14 +20544,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserTeamByTeamUuidOrderedByUpdatedAtASCParams struct {
+type FetchUserTeamByTeamUUIDOrderedByUpdatedAtASCParams struct {
 	TeamUUID string `json:"team_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserTeamByTeamUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserTeamByTeamUuidOrderedByUpdatedAtASCParams) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByTeamUuidOrderedByUpdatedAtASC, arg.TeamUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserTeamByTeamUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserTeamByTeamUUIDOrderedByUpdatedAtASCParams) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByTeamUUIDOrderedByUpdatedAtASC, arg.TeamUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -20586,7 +20586,7 @@ func (q *Queries) FetchUserTeamByTeamUuidOrderedByUpdatedAtASC(ctx context.Conte
 	return items, nil
 }
 
-const fetchUserTeamByTeamUuidOrderedByUpdatedAtDESC = `-- name: FetchUserTeamByTeamUuidOrderedByUpdatedAtDESC :many
+const fetchUserTeamByTeamUUIDOrderedByUpdatedAtDESC = `-- name: FetchUserTeamByTeamUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_team` + "`" + `
 WHERE 
@@ -20595,14 +20595,102 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserTeamByTeamUuidOrderedByUpdatedAtDESCParams struct {
+type FetchUserTeamByTeamUUIDOrderedByUpdatedAtDESCParams struct {
 	TeamUUID string `json:"team_uuid"`
 	Offset   int32  `json:"offset"`
 	Limit    int32  `json:"limit"`
 }
 
-func (q *Queries) FetchUserTeamByTeamUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserTeamByTeamUuidOrderedByUpdatedAtDESCParams) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByTeamUuidOrderedByUpdatedAtDESC, arg.TeamUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserTeamByTeamUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserTeamByTeamUUIDOrderedByUpdatedAtDESCParams) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByTeamUUIDOrderedByUpdatedAtDESC, arg.TeamUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserTeam
+	for rows.Next() {
+		var i UserTeam
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.TeamUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserTeamByUUID = `-- name: FetchUserTeamByUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `user_team` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ?
+`
+
+// user_team selects:
+func (q *Queries) FetchUserTeamByUUID(ctx context.Context, uuid string) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUUID, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []UserTeam
+	for rows.Next() {
+		var i UserTeam
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.UserEmail,
+			&i.TeamUUID,
+			&i.Role,
+			&i.ReviewRequiredStructure,
+			&i.ReviewRequiredData,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchUserTeamByUUIDForUpdate = `-- name: FetchUserTeamByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `user_team` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchUserTeamByUUIDForUpdate(ctx context.Context, uuid string) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUUIDForUpdate, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -20891,7 +20979,7 @@ func (q *Queries) FetchUserTeamByUserEmailOrderedByUpdatedAtDESC(ctx context.Con
 	return items, nil
 }
 
-const fetchUserTeamByUserUuid = `-- name: FetchUserTeamByUserUuid :many
+const fetchUserTeamByUserUUID = `-- name: FetchUserTeamByUserUUID :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_team` + "`" + `
 WHERE 
@@ -20899,14 +20987,14 @@ WHERE
 LIMIT ?, ?
 `
 
-type FetchUserTeamByUserUuidParams struct {
+type FetchUserTeamByUserUUIDParams struct {
 	UserUUID null.String `json:"user_uuid"`
 	Offset   int32       `json:"offset"`
 	Limit    int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserTeamByUserUuid(ctx context.Context, arg FetchUserTeamByUserUuidParams) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUserUuid, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserTeamByUserUUID(ctx context.Context, arg FetchUserTeamByUserUUIDParams) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUserUUID, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -20941,7 +21029,7 @@ func (q *Queries) FetchUserTeamByUserUuid(ctx context.Context, arg FetchUserTeam
 	return items, nil
 }
 
-const fetchUserTeamByUserUuidOrderedByCreatedAtASC = `-- name: FetchUserTeamByUserUuidOrderedByCreatedAtASC :many
+const fetchUserTeamByUserUUIDOrderedByCreatedAtASC = `-- name: FetchUserTeamByUserUUIDOrderedByCreatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_team` + "`" + `
 WHERE 
@@ -20950,14 +21038,14 @@ ORDER BY created_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserTeamByUserUuidOrderedByCreatedAtASCParams struct {
+type FetchUserTeamByUserUUIDOrderedByCreatedAtASCParams struct {
 	UserUUID null.String `json:"user_uuid"`
 	Offset   int32       `json:"offset"`
 	Limit    int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserTeamByUserUuidOrderedByCreatedAtASC(ctx context.Context, arg FetchUserTeamByUserUuidOrderedByCreatedAtASCParams) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUserUuidOrderedByCreatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserTeamByUserUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchUserTeamByUserUUIDOrderedByCreatedAtASCParams) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUserUUIDOrderedByCreatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -20992,7 +21080,7 @@ func (q *Queries) FetchUserTeamByUserUuidOrderedByCreatedAtASC(ctx context.Conte
 	return items, nil
 }
 
-const fetchUserTeamByUserUuidOrderedByCreatedAtDESC = `-- name: FetchUserTeamByUserUuidOrderedByCreatedAtDESC :many
+const fetchUserTeamByUserUUIDOrderedByCreatedAtDESC = `-- name: FetchUserTeamByUserUUIDOrderedByCreatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_team` + "`" + `
 WHERE 
@@ -21001,14 +21089,14 @@ ORDER BY created_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserTeamByUserUuidOrderedByCreatedAtDESCParams struct {
+type FetchUserTeamByUserUUIDOrderedByCreatedAtDESCParams struct {
 	UserUUID null.String `json:"user_uuid"`
 	Offset   int32       `json:"offset"`
 	Limit    int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserTeamByUserUuidOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserTeamByUserUuidOrderedByCreatedAtDESCParams) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUserUuidOrderedByCreatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserTeamByUserUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchUserTeamByUserUUIDOrderedByCreatedAtDESCParams) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUserUUIDOrderedByCreatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -21043,7 +21131,7 @@ func (q *Queries) FetchUserTeamByUserUuidOrderedByCreatedAtDESC(ctx context.Cont
 	return items, nil
 }
 
-const fetchUserTeamByUserUuidOrderedByUpdatedAtASC = `-- name: FetchUserTeamByUserUuidOrderedByUpdatedAtASC :many
+const fetchUserTeamByUserUUIDOrderedByUpdatedAtASC = `-- name: FetchUserTeamByUserUUIDOrderedByUpdatedAtASC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_team` + "`" + `
 WHERE 
@@ -21052,14 +21140,14 @@ ORDER BY updated_at ASC
 LIMIT ?, ?
 `
 
-type FetchUserTeamByUserUuidOrderedByUpdatedAtASCParams struct {
+type FetchUserTeamByUserUUIDOrderedByUpdatedAtASCParams struct {
 	UserUUID null.String `json:"user_uuid"`
 	Offset   int32       `json:"offset"`
 	Limit    int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserTeamByUserUuidOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserTeamByUserUuidOrderedByUpdatedAtASCParams) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUserUuidOrderedByUpdatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
+func (q *Queries) FetchUserTeamByUserUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserTeamByUserUUIDOrderedByUpdatedAtASCParams) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUserUUIDOrderedByUpdatedAtASC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -21094,7 +21182,7 @@ func (q *Queries) FetchUserTeamByUserUuidOrderedByUpdatedAtASC(ctx context.Conte
 	return items, nil
 }
 
-const fetchUserTeamByUserUuidOrderedByUpdatedAtDESC = `-- name: FetchUserTeamByUserUuidOrderedByUpdatedAtDESC :many
+const fetchUserTeamByUserUUIDOrderedByUpdatedAtDESC = `-- name: FetchUserTeamByUserUUIDOrderedByUpdatedAtDESC :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `user_team` + "`" + `
 WHERE 
@@ -21103,102 +21191,14 @@ ORDER BY updated_at DESC
 LIMIT ?, ?
 `
 
-type FetchUserTeamByUserUuidOrderedByUpdatedAtDESCParams struct {
+type FetchUserTeamByUserUUIDOrderedByUpdatedAtDESCParams struct {
 	UserUUID null.String `json:"user_uuid"`
 	Offset   int32       `json:"offset"`
 	Limit    int32       `json:"limit"`
 }
 
-func (q *Queries) FetchUserTeamByUserUuidOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserTeamByUserUuidOrderedByUpdatedAtDESCParams) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUserUuidOrderedByUpdatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []UserTeam
-	for rows.Next() {
-		var i UserTeam
-		if err := rows.Scan(
-			&i.UUID,
-			&i.UserUUID,
-			&i.UserEmail,
-			&i.TeamUUID,
-			&i.Role,
-			&i.ReviewRequiredStructure,
-			&i.ReviewRequiredData,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchUserTeamByUuid = `-- name: FetchUserTeamByUuid :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `user_team` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ?
-`
-
-// user_team selects:
-func (q *Queries) FetchUserTeamByUuid(ctx context.Context, uuid string) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUuid, uuid)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []UserTeam
-	for rows.Next() {
-		var i UserTeam
-		if err := rows.Scan(
-			&i.UUID,
-			&i.UserUUID,
-			&i.UserEmail,
-			&i.TeamUUID,
-			&i.Role,
-			&i.ReviewRequiredStructure,
-			&i.ReviewRequiredData,
-			&i.Status,
-			&i.CreatedAt,
-			&i.UpdatedAt,
-			&i.CreatedByUUID,
-			&i.UpdatedByUUID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}
-
-const fetchUserTeamByUuidForUpdate = `-- name: FetchUserTeamByUuidForUpdate :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `user_email` + "`" + `,` + "`" + `team_uuid` + "`" + `,` + "`" + `role` + "`" + `,` + "`" + `review_required_structure` + "`" + `,` + "`" + `review_required_data` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
-FROM ` + "`" + `user_team` + "`" + `
-WHERE 
-    ` + "`" + `uuid` + "`" + ` = ? 
-FOR UPDATE
-`
-
-func (q *Queries) FetchUserTeamByUuidForUpdate(ctx context.Context, uuid string) ([]UserTeam, error) {
-	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUuidForUpdate, uuid)
+func (q *Queries) FetchUserTeamByUserUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserTeamByUserUUIDOrderedByUpdatedAtDESCParams) ([]UserTeam, error) {
+	rows, err := q.db.QueryContext(ctx, fetchUserTeamByUserUUIDOrderedByUpdatedAtDESC, arg.UserUUID, arg.Offset, arg.Limit)
 	if err != nil {
 		return nil, err
 	}

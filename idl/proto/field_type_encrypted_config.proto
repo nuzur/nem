@@ -18,5 +18,5 @@ message FieldTypeEncryptedConfig {
     string regex_validation = 3;
     FieldTypeEncryptedConfigEncryptionType encryption_type = 4;
     bool use_salt = 5;
-    string salt_field_uuids = 6;    
+    repeated string salt_field_uuids = 6;    
 }

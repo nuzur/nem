@@ -14,24 +14,24 @@ import (
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
-func (m *module) FetchProjectVersionByBaseVersionUuid(
+func (m *module) FetchProjectVersionByBaseVersionUUID(
 	ctx context.Context,
-	req types.FetchProjectVersionByBaseVersionUuidRequest,
+	req types.FetchProjectVersionByBaseVersionUUIDRequest,
 	opts ...Option,
-) (types.FetchProjectVersionByBaseVersionUuidResponse, error) {
+) (types.FetchProjectVersionByBaseVersionUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchProjectVersionByBaseVersionUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchProjectVersionByBaseVersionUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchProjectVersionByBaseVersionUuidResponse), nil
+			return cached.(types.FetchProjectVersionByBaseVersionUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchProjectVersionByBaseVersionUuid(
+			models, err := m.repository.Queries.FetchProjectVersionByBaseVersionUUID(
 				ctx,
-				nemdb.FetchProjectVersionByBaseVersionUuidParams{
+				nemdb.FetchProjectVersionByBaseVersionUUIDParams{
 					BaseVersionUUID: mapper.UUIDPtrToNullString(req.BaseVersionUUID),
 
 					Offset: req.Offset,
@@ -41,21 +41,21 @@ func (m *module) FetchProjectVersionByBaseVersionUuid(
 
 			if err != nil {
 
-				return types.FetchProjectVersionByBaseVersionUuidResponse{}, err
+				return types.FetchProjectVersionByBaseVersionUUIDResponse{}, err
 			}
-			return types.FetchProjectVersionByBaseVersionUuidResponse{
+			return types.FetchProjectVersionByBaseVersionUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchProjectVersionByBaseVersionUuidResponse{}, err
+		return types.FetchProjectVersionByBaseVersionUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchProjectVersionByBaseVersionUuidResponse{}, fetchErr
+		return types.FetchProjectVersionByBaseVersionUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchProjectVersionByBaseVersionUuidResponse)
+	result := v.(types.FetchProjectVersionByBaseVersionUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

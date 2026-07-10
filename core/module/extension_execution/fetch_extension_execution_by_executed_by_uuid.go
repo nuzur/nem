@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchExtensionExecutionByExecutedByUuid(
+func (m *module) FetchExtensionExecutionByExecutedByUUID(
 	ctx context.Context,
-	req types.FetchExtensionExecutionByExecutedByUuidRequest,
+	req types.FetchExtensionExecutionByExecutedByUUIDRequest,
 	opts ...Option,
-) (types.FetchExtensionExecutionByExecutedByUuidResponse, error) {
+) (types.FetchExtensionExecutionByExecutedByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchExtensionExecutionByExecutedByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchExtensionExecutionByExecutedByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchExtensionExecutionByExecutedByUuidResponse), nil
+			return cached.(types.FetchExtensionExecutionByExecutedByUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchExtensionExecutionByExecutedByUuid(
+			models, err := m.repository.Queries.FetchExtensionExecutionByExecutedByUUID(
 				ctx,
-				nemdb.FetchExtensionExecutionByExecutedByUuidParams{
+				nemdb.FetchExtensionExecutionByExecutedByUUIDParams{
 					ExecutedByUUID: req.ExecutedByUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchExtensionExecutionByExecutedByUuid(
 
 			if err != nil {
 
-				return types.FetchExtensionExecutionByExecutedByUuidResponse{}, err
+				return types.FetchExtensionExecutionByExecutedByUUIDResponse{}, err
 			}
-			return types.FetchExtensionExecutionByExecutedByUuidResponse{
+			return types.FetchExtensionExecutionByExecutedByUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchExtensionExecutionByExecutedByUuidResponse{}, err
+		return types.FetchExtensionExecutionByExecutedByUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchExtensionExecutionByExecutedByUuidResponse{}, fetchErr
+		return types.FetchExtensionExecutionByExecutedByUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchExtensionExecutionByExecutedByUuidResponse)
+	result := v.(types.FetchExtensionExecutionByExecutedByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

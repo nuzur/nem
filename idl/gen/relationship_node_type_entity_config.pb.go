@@ -26,7 +26,7 @@ const (
 type RelationshipNodeTypeEntityConfig struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	EntityUuid      string                 `protobuf:"bytes,1,opt,name=entity_uuid,json=entityUuid,proto3" json:"entity_uuid,omitempty"`
-	FieldUuids      string                 `protobuf:"bytes,2,opt,name=field_uuids,json=fieldUuids,proto3" json:"field_uuids,omitempty"`
+	FieldUuids      []string               `protobuf:"bytes,2,rep,name=field_uuids,json=fieldUuids,proto3" json:"field_uuids,omitempty"`
 	FieldsGenerated bool                   `protobuf:"varint,3,opt,name=fields_generated,json=fieldsGenerated,proto3" json:"fields_generated,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -69,11 +69,11 @@ func (x *RelationshipNodeTypeEntityConfig) GetEntityUuid() string {
 	return ""
 }
 
-func (x *RelationshipNodeTypeEntityConfig) GetFieldUuids() string {
+func (x *RelationshipNodeTypeEntityConfig) GetFieldUuids() []string {
 	if x != nil {
 		return x.FieldUuids
 	}
-	return ""
+	return nil
 }
 
 func (x *RelationshipNodeTypeEntityConfig) GetFieldsGenerated() bool {
@@ -91,7 +91,7 @@ const file_relationship_node_type_entity_config_proto_rawDesc = "" +
 	" RelationshipNodeTypeEntityConfig\x12\x1f\n" +
 	"\ventity_uuid\x18\x01 \x01(\tR\n" +
 	"entityUuid\x12\x1f\n" +
-	"\vfield_uuids\x18\x02 \x01(\tR\n" +
+	"\vfield_uuids\x18\x02 \x03(\tR\n" +
 	"fieldUuids\x12)\n" +
 	"\x10fields_generated\x18\x03 \x01(\bR\x0ffieldsGeneratedBG\n" +
 	"\x14github.com/nuzur/nemB RelationshipNodeTypeEntityConfigP\x01Z\vnem/idl/genb\x06proto3"

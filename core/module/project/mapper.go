@@ -27,7 +27,7 @@ func mapModelToEntity(m nemdb.Project) main_entity.Project {
 		Version:           int64(m.Version),
 		Name:              m.Name,
 		Description:       null.NewString(m.Description.String, m.Description.Valid),
-		Tags:              m.Tags,
+		Tags:              mapper.JSONToStringSlice(m.Tags),
 		URL:               null.NewString(m.URL.String, m.URL.Valid),
 		OwnerUUID:         mapper.StringToUUID(m.OwnerUUID),
 		TeamUUID:          mapper.StringToUUID(m.TeamUUID),

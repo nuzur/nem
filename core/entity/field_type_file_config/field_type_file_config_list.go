@@ -12,7 +12,7 @@ func (e FieldTypeFileConfig) FieldIdentifierToTypeMap() map[string]entitytypes.F
 	return map[string]entitytypes.FieldType{
 		"storage_type":       entitytypes.SingleEnumFieldType,
 		"storage_config":     entitytypes.MultiDependantEntityFieldType,
-		"allowed_extensions": entitytypes.RawJSONFieldType,
+		"allowed_extensions": entitytypes.StringFieldType,
 		"max_size":           entitytypes.IntFieldType,
 		"allow_multiple":     entitytypes.BooleanFieldType,
 		"max_files":          entitytypes.IntFieldType,
@@ -49,5 +49,6 @@ func (e FieldTypeFileConfig) PrimaryKeyIdentifiers() []string {
 func (e FieldTypeFileConfig) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["allowed_extensions"] = entitytypes.StringFieldType
 	return res
 }

@@ -35,8 +35,8 @@ func (s *server) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb
 		}
 
 		pkEntity := pbmapper.UserFromProto(req.GetUser())
-		existingRes, err := s.core.User().FetchUserByUuid(ctx,
-			types.FetchUserByUuidRequest{
+		existingRes, err := s.core.User().FetchUserByUUID(ctx,
+			types.FetchUserByUUIDRequest{
 				UUID: pkEntity.UUID,
 			},
 			usermodule.WithSkipCache(),
@@ -62,7 +62,7 @@ func (s *server) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb
 		return nil, err
 	}
 
-	fetchRes, err := s.core.User().FetchUserByUuid(ctx, types.FetchUserByUuidRequest(res), usermodule.WithSkipCache())
+	fetchRes, err := s.core.User().FetchUserByUUID(ctx, types.FetchUserByUUIDRequest(res), usermodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

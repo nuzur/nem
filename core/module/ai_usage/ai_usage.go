@@ -15,13 +15,13 @@ import (
 )
 
 type Module interface {
-	FetchAiUsageByUuid(ctx context.Context, req types.FetchAiUsageByUuidRequest, opts ...Option) (types.FetchAiUsageByUuidResponse, error)
+	FetchAiUsageByUUID(ctx context.Context, req types.FetchAiUsageByUUIDRequest, opts ...Option) (types.FetchAiUsageByUUIDResponse, error)
 	FetchAiUsageByContext(ctx context.Context, req types.FetchAiUsageByContextRequest, opts ...Option) (types.FetchAiUsageByContextResponse, error)
-	FetchAiUsageByProjectVersionUuid(ctx context.Context, req types.FetchAiUsageByProjectVersionUuidRequest, opts ...Option) (types.FetchAiUsageByProjectVersionUuidResponse, error)
+	FetchAiUsageByProjectVersionUUID(ctx context.Context, req types.FetchAiUsageByProjectVersionUUIDRequest, opts ...Option) (types.FetchAiUsageByProjectVersionUUIDResponse, error)
 	FetchAiUsageByProvider(ctx context.Context, req types.FetchAiUsageByProviderRequest, opts ...Option) (types.FetchAiUsageByProviderResponse, error)
 	FetchAiUsageByStatus(ctx context.Context, req types.FetchAiUsageByStatusRequest, opts ...Option) (types.FetchAiUsageByStatusResponse, error)
-	FetchAiUsageByUserUuid(ctx context.Context, req types.FetchAiUsageByUserUuidRequest, opts ...Option) (types.FetchAiUsageByUserUuidResponse, error)
-	FetchAiUsageByProjectUuid(ctx context.Context, req types.FetchAiUsageByProjectUuidRequest, opts ...Option) (types.FetchAiUsageByProjectUuidResponse, error)
+	FetchAiUsageByUserUUID(ctx context.Context, req types.FetchAiUsageByUserUUIDRequest, opts ...Option) (types.FetchAiUsageByUserUUIDResponse, error)
+	FetchAiUsageByProjectUUID(ctx context.Context, req types.FetchAiUsageByProjectUUIDRequest, opts ...Option) (types.FetchAiUsageByProjectUUIDResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)
 

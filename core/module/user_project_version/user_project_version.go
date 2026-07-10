@@ -15,9 +15,9 @@ import (
 )
 
 type Module interface {
-	FetchUserProjectVersionByUuid(ctx context.Context, req types.FetchUserProjectVersionByUuidRequest, opts ...Option) (types.FetchUserProjectVersionByUuidResponse, error)
-	FetchUserProjectVersionByUserUuid(ctx context.Context, req types.FetchUserProjectVersionByUserUuidRequest, opts ...Option) (types.FetchUserProjectVersionByUserUuidResponse, error)
-	FetchUserProjectVersionByProjectVersionUuid(ctx context.Context, req types.FetchUserProjectVersionByProjectVersionUuidRequest, opts ...Option) (types.FetchUserProjectVersionByProjectVersionUuidResponse, error)
+	FetchUserProjectVersionByUUID(ctx context.Context, req types.FetchUserProjectVersionByUUIDRequest, opts ...Option) (types.FetchUserProjectVersionByUUIDResponse, error)
+	FetchUserProjectVersionByUserUUID(ctx context.Context, req types.FetchUserProjectVersionByUserUUIDRequest, opts ...Option) (types.FetchUserProjectVersionByUserUUIDResponse, error)
+	FetchUserProjectVersionByProjectVersionUUID(ctx context.Context, req types.FetchUserProjectVersionByProjectVersionUUIDRequest, opts ...Option) (types.FetchUserProjectVersionByProjectVersionUUIDResponse, error)
 	FetchUserProjectVersionByStatus(ctx context.Context, req types.FetchUserProjectVersionByStatusRequest, opts ...Option) (types.FetchUserProjectVersionByStatusResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)

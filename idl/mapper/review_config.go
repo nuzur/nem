@@ -8,8 +8,6 @@ import (
 
 	"github.com/nuzur/nem/enums"
 
-	"encoding/json"
-
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -17,7 +15,7 @@ func ReviewConfigToProto(e main_entity.ReviewConfig) *pb.ReviewConfig {
 	return &pb.ReviewConfig{
 		Uuid:            e.UUID.String(),
 		ReviewUserRoles: pb.ReviewConfigReviewUserRoles(e.ReviewUserRoles),
-		ReviewUserUuids: string(e.ReviewUserUUIDs),
+		ReviewUserUuids: UUIDSliceToStringSlice(e.ReviewUserUUIDs),
 		MinReviews:      int64(e.MinReviews),
 		Status:          pb.ReviewConfigStatus(e.Status),
 		CreatedAt:       timestamppb.New(e.CreatedAt),
@@ -42,7 +40,7 @@ func ReviewConfigFromProto(m *pb.ReviewConfig) main_entity.ReviewConfig {
 	return main_entity.ReviewConfig{
 		UUID:            StringToUUID(m.GetUuid()),
 		ReviewUserRoles: enums.ReviewConfigReviewUserRoles(m.GetReviewUserRoles()),
-		ReviewUserUUIDs: json.RawMessage([]byte(m.GetReviewUserUuids())),
+		ReviewUserUUIDs: StringSliceToUUIDSlice(m.GetReviewUserUuids()),
 		MinReviews:      int64(m.GetMinReviews()),
 		Status:          enums.ReviewConfigStatus(m.GetStatus()),
 		CreatedAt:       m.GetCreatedAt().AsTime(),

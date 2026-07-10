@@ -11,6 +11,8 @@ import (
 	"github.com/nuzur/nem/core/entity/visibility"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -87,7 +89,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertExtensi
 
 		ExtensionType: req.Extension.ExtensionType.ToInt64(),
 
-		Tags: req.Extension.Tags,
+		Tags: mapper.SliceToJSON(req.Extension.Tags),
 
 		Pro: req.Extension.Pro,
 

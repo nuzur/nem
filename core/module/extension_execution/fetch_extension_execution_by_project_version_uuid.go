@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchExtensionExecutionByProjectVersionUuid(
+func (m *module) FetchExtensionExecutionByProjectVersionUUID(
 	ctx context.Context,
-	req types.FetchExtensionExecutionByProjectVersionUuidRequest,
+	req types.FetchExtensionExecutionByProjectVersionUUIDRequest,
 	opts ...Option,
-) (types.FetchExtensionExecutionByProjectVersionUuidResponse, error) {
+) (types.FetchExtensionExecutionByProjectVersionUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchExtensionExecutionByProjectVersionUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchExtensionExecutionByProjectVersionUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchExtensionExecutionByProjectVersionUuidResponse), nil
+			return cached.(types.FetchExtensionExecutionByProjectVersionUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchExtensionExecutionByProjectVersionUuid(
+			models, err := m.repository.Queries.FetchExtensionExecutionByProjectVersionUUID(
 				ctx,
-				nemdb.FetchExtensionExecutionByProjectVersionUuidParams{
+				nemdb.FetchExtensionExecutionByProjectVersionUUIDParams{
 					ProjectVersionUUID: req.ProjectVersionUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchExtensionExecutionByProjectVersionUuid(
 
 			if err != nil {
 
-				return types.FetchExtensionExecutionByProjectVersionUuidResponse{}, err
+				return types.FetchExtensionExecutionByProjectVersionUUIDResponse{}, err
 			}
-			return types.FetchExtensionExecutionByProjectVersionUuidResponse{
+			return types.FetchExtensionExecutionByProjectVersionUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchExtensionExecutionByProjectVersionUuidResponse{}, err
+		return types.FetchExtensionExecutionByProjectVersionUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchExtensionExecutionByProjectVersionUuidResponse{}, fetchErr
+		return types.FetchExtensionExecutionByProjectVersionUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchExtensionExecutionByProjectVersionUuidResponse)
+	result := v.(types.FetchExtensionExecutionByProjectVersionUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

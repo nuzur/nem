@@ -20,7 +20,7 @@ func (e Extension) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 		"verified":            entitytypes.BooleanFieldType,
 		"repository":          entitytypes.StringFieldType,
 		"extension_type":      entitytypes.SingleEnumFieldType,
-		"tags":                entitytypes.RawJSONFieldType,
+		"tags":                entitytypes.StringFieldType,
 		"pro":                 entitytypes.BooleanFieldType,
 		"public":              entitytypes.BooleanFieldType,
 		"visibility":          entitytypes.SingleDependantEntityFieldType,
@@ -79,5 +79,6 @@ func (e Extension) PrimaryKeyIdentifiers() []string {
 func (e Extension) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["tags"] = entitytypes.StringFieldType
 	return res
 }

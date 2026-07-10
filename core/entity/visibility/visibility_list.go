@@ -10,9 +10,9 @@ func (e Visibility) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType 
 	return map[string]entitytypes.FieldType{
 		"uuid":               entitytypes.StringFieldType,
 		"description":        entitytypes.StringFieldType,
-		"organization_uuids": entitytypes.RawJSONFieldType,
-		"team_uuids":         entitytypes.RawJSONFieldType,
-		"user_uuids":         entitytypes.RawJSONFieldType,
+		"organization_uuids": entitytypes.StringFieldType,
+		"team_uuids":         entitytypes.StringFieldType,
+		"user_uuids":         entitytypes.StringFieldType,
 		"roles":              entitytypes.SingleEnumFieldType,
 		"created_at":         entitytypes.TimestampFieldType,
 		"updated_at":         entitytypes.TimestampFieldType,
@@ -54,5 +54,8 @@ func (e Visibility) PrimaryKeyIdentifiers() []string {
 func (e Visibility) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["organization_uuids"] = entitytypes.StringFieldType
+	res["team_uuids"] = entitytypes.StringFieldType
+	res["user_uuids"] = entitytypes.StringFieldType
 	return res
 }

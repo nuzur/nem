@@ -11,6 +11,8 @@ import (
 	"github.com/nuzur/nem/core/entity/project_extension"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -75,7 +77,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertProject
 
 		Description: req.Project.Description,
 
-		Tags: req.Project.Tags,
+		Tags: mapper.SliceToJSON(req.Project.Tags),
 
 		URL: req.Project.URL,
 

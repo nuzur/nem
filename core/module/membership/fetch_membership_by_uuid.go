@@ -9,36 +9,36 @@ import (
 	"github.com/nuzur/nem/core/module/membership/types"
 )
 
-func (m *module) FetchMembershipByUuid(
+func (m *module) FetchMembershipByUUID(
 	ctx context.Context,
-	req types.FetchMembershipByUuidRequest,
+	req types.FetchMembershipByUUIDRequest,
 	opts ...Option,
-) (types.FetchMembershipByUuidResponse, error) {
+) (types.FetchMembershipByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchMembershipByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchMembershipByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchMembershipByUuidResponse), nil
+			return cached.(types.FetchMembershipByUUIDResponse), nil
 		}
 	}
 	v, err, _ := m.sg.Do(cacheKey, func() (any, error) {
-		models, err := m.repository.Queries.FetchMembershipByUuid(
+		models, err := m.repository.Queries.FetchMembershipByUUID(
 			ctx,
 			req.UUID.String(),
 		)
 		if err != nil {
 
-			return types.FetchMembershipByUuidResponse{}, err
+			return types.FetchMembershipByUUIDResponse{}, err
 		}
-		return types.FetchMembershipByUuidResponse{
+		return types.FetchMembershipByUUIDResponse{
 			Results: mapModelsToEntities(models),
 		}, nil
 	})
 	if err != nil {
-		return types.FetchMembershipByUuidResponse{}, err
+		return types.FetchMembershipByUUIDResponse{}, err
 	}
-	result := v.(types.FetchMembershipByUuidResponse)
+	result := v.(types.FetchMembershipByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

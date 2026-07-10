@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchChangeRequestByProjectVersionUuid(
+func (m *module) FetchChangeRequestByProjectVersionUUID(
 	ctx context.Context,
-	req types.FetchChangeRequestByProjectVersionUuidRequest,
+	req types.FetchChangeRequestByProjectVersionUUIDRequest,
 	opts ...Option,
-) (types.FetchChangeRequestByProjectVersionUuidResponse, error) {
+) (types.FetchChangeRequestByProjectVersionUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchChangeRequestByProjectVersionUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchChangeRequestByProjectVersionUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchChangeRequestByProjectVersionUuidResponse), nil
+			return cached.(types.FetchChangeRequestByProjectVersionUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchChangeRequestByProjectVersionUuid(
+			models, err := m.repository.Queries.FetchChangeRequestByProjectVersionUUID(
 				ctx,
-				nemdb.FetchChangeRequestByProjectVersionUuidParams{
+				nemdb.FetchChangeRequestByProjectVersionUUIDParams{
 					ProjectVersionUUID: req.ProjectVersionUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchChangeRequestByProjectVersionUuid(
 
 			if err != nil {
 
-				return types.FetchChangeRequestByProjectVersionUuidResponse{}, err
+				return types.FetchChangeRequestByProjectVersionUUIDResponse{}, err
 			}
-			return types.FetchChangeRequestByProjectVersionUuidResponse{
+			return types.FetchChangeRequestByProjectVersionUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchChangeRequestByProjectVersionUuidResponse{}, err
+		return types.FetchChangeRequestByProjectVersionUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchChangeRequestByProjectVersionUuidResponse{}, fetchErr
+		return types.FetchChangeRequestByProjectVersionUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchChangeRequestByProjectVersionUuidResponse)
+	result := v.(types.FetchChangeRequestByProjectVersionUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

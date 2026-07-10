@@ -15,8 +15,8 @@ import (
 )
 
 type Module interface {
-	FetchMembershipByUuid(ctx context.Context, req types.FetchMembershipByUuidRequest, opts ...Option) (types.FetchMembershipByUuidResponse, error)
-	FetchMembershipByOwnerUuid(ctx context.Context, req types.FetchMembershipByOwnerUuidRequest, opts ...Option) (types.FetchMembershipByOwnerUuidResponse, error)
+	FetchMembershipByUUID(ctx context.Context, req types.FetchMembershipByUUIDRequest, opts ...Option) (types.FetchMembershipByUUIDResponse, error)
+	FetchMembershipByOwnerUUID(ctx context.Context, req types.FetchMembershipByOwnerUUIDRequest, opts ...Option) (types.FetchMembershipByOwnerUUIDResponse, error)
 	FetchMembershipByStatus(ctx context.Context, req types.FetchMembershipByStatusRequest, opts ...Option) (types.FetchMembershipByStatusResponse, error)
 	FetchMembershipByType(ctx context.Context, req types.FetchMembershipByTypeRequest, opts ...Option) (types.FetchMembershipByTypeResponse, error)
 

@@ -35,8 +35,8 @@ func (s *server) UpdateUserTeam(ctx context.Context, req *pb.UpdateUserTeamReque
 		}
 
 		pkEntity := pbmapper.UserTeamFromProto(req.GetUserTeam())
-		existingRes, err := s.core.UserTeam().FetchUserTeamByUuid(ctx,
-			types.FetchUserTeamByUuidRequest{
+		existingRes, err := s.core.UserTeam().FetchUserTeamByUUID(ctx,
+			types.FetchUserTeamByUUIDRequest{
 				UUID: pkEntity.UUID,
 			},
 			user_teammodule.WithSkipCache(),
@@ -62,7 +62,7 @@ func (s *server) UpdateUserTeam(ctx context.Context, req *pb.UpdateUserTeamReque
 		return nil, err
 	}
 
-	fetchRes, err := s.core.UserTeam().FetchUserTeamByUuid(ctx, types.FetchUserTeamByUuidRequest(res), user_teammodule.WithSkipCache())
+	fetchRes, err := s.core.UserTeam().FetchUserTeamByUUID(ctx, types.FetchUserTeamByUUIDRequest(res), user_teammodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

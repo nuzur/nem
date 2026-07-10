@@ -10,7 +10,7 @@ func (e ReviewConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldTyp
 	return map[string]entitytypes.FieldType{
 		"uuid":              entitytypes.StringFieldType,
 		"review_user_roles": entitytypes.SingleEnumFieldType,
-		"review_user_uuids": entitytypes.RawJSONFieldType,
+		"review_user_uuids": entitytypes.StringFieldType,
 		"min_reviews":       entitytypes.IntFieldType,
 		"status":            entitytypes.SingleEnumFieldType,
 		"created_at":        entitytypes.TimestampFieldType,
@@ -52,5 +52,6 @@ func (e ReviewConfig) PrimaryKeyIdentifiers() []string {
 func (e ReviewConfig) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["review_user_uuids"] = entitytypes.StringFieldType
 	return res
 }

@@ -15,13 +15,13 @@ import (
 )
 
 type Module interface {
-	FetchProjectByUuid(ctx context.Context, req types.FetchProjectByUuidRequest, opts ...Option) (types.FetchProjectByUuidResponse, error)
-	FetchProjectByUpdatedByUuid(ctx context.Context, req types.FetchProjectByUpdatedByUuidRequest, opts ...Option) (types.FetchProjectByUpdatedByUuidResponse, error)
+	FetchProjectByUUID(ctx context.Context, req types.FetchProjectByUUIDRequest, opts ...Option) (types.FetchProjectByUUIDResponse, error)
+	FetchProjectByUpdatedByUUID(ctx context.Context, req types.FetchProjectByUpdatedByUUIDRequest, opts ...Option) (types.FetchProjectByUpdatedByUUIDResponse, error)
 	FetchProjectByVersion(ctx context.Context, req types.FetchProjectByVersionRequest, opts ...Option) (types.FetchProjectByVersionResponse, error)
-	FetchProjectByCreatedByUuid(ctx context.Context, req types.FetchProjectByCreatedByUuidRequest, opts ...Option) (types.FetchProjectByCreatedByUuidResponse, error)
-	FetchProjectByOwnerUuid(ctx context.Context, req types.FetchProjectByOwnerUuidRequest, opts ...Option) (types.FetchProjectByOwnerUuidResponse, error)
+	FetchProjectByCreatedByUUID(ctx context.Context, req types.FetchProjectByCreatedByUUIDRequest, opts ...Option) (types.FetchProjectByCreatedByUUIDResponse, error)
+	FetchProjectByOwnerUUID(ctx context.Context, req types.FetchProjectByOwnerUUIDRequest, opts ...Option) (types.FetchProjectByOwnerUUIDResponse, error)
 	FetchProjectByStatus(ctx context.Context, req types.FetchProjectByStatusRequest, opts ...Option) (types.FetchProjectByStatusResponse, error)
-	FetchProjectByTeamUuid(ctx context.Context, req types.FetchProjectByTeamUuidRequest, opts ...Option) (types.FetchProjectByTeamUuidResponse, error)
+	FetchProjectByTeamUUID(ctx context.Context, req types.FetchProjectByTeamUUIDRequest, opts ...Option) (types.FetchProjectByTeamUUIDResponse, error)
 	FetchProjectByName(ctx context.Context, req types.FetchProjectByNameRequest, opts ...Option) (types.FetchProjectByNameResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)

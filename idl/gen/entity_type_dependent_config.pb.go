@@ -25,8 +25,8 @@ const (
 
 type EntityTypeDependentConfig struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
-	ServiceSourceUuids string                 `protobuf:"bytes,1,opt,name=service_source_uuids,json=serviceSourceUuids,proto3" json:"service_source_uuids,omitempty"`
-	EntitySourceUuids  string                 `protobuf:"bytes,2,opt,name=entity_source_uuids,json=entitySourceUuids,proto3" json:"entity_source_uuids,omitempty"`
+	ServiceSourceUuids []string               `protobuf:"bytes,1,rep,name=service_source_uuids,json=serviceSourceUuids,proto3" json:"service_source_uuids,omitempty"`
+	EntitySourceUuids  []string               `protobuf:"bytes,2,rep,name=entity_source_uuids,json=entitySourceUuids,proto3" json:"entity_source_uuids,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -61,18 +61,18 @@ func (*EntityTypeDependentConfig) Descriptor() ([]byte, []int) {
 	return file_entity_type_dependent_config_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *EntityTypeDependentConfig) GetServiceSourceUuids() string {
+func (x *EntityTypeDependentConfig) GetServiceSourceUuids() []string {
 	if x != nil {
 		return x.ServiceSourceUuids
 	}
-	return ""
+	return nil
 }
 
-func (x *EntityTypeDependentConfig) GetEntitySourceUuids() string {
+func (x *EntityTypeDependentConfig) GetEntitySourceUuids() []string {
 	if x != nil {
 		return x.EntitySourceUuids
 	}
-	return ""
+	return nil
 }
 
 var File_entity_type_dependent_config_proto protoreflect.FileDescriptor
@@ -81,8 +81,8 @@ const file_entity_type_dependent_config_proto_rawDesc = "" +
 	"\n" +
 	"\"entity_type_dependent_config.proto\x12\x03nem\"}\n" +
 	"\x19EntityTypeDependentConfig\x120\n" +
-	"\x14service_source_uuids\x18\x01 \x01(\tR\x12serviceSourceUuids\x12.\n" +
-	"\x13entity_source_uuids\x18\x02 \x01(\tR\x11entitySourceUuidsB@\n" +
+	"\x14service_source_uuids\x18\x01 \x03(\tR\x12serviceSourceUuids\x12.\n" +
+	"\x13entity_source_uuids\x18\x02 \x03(\tR\x11entitySourceUuidsB@\n" +
 	"\x14github.com/nuzur/nemB\x19EntityTypeDependentConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

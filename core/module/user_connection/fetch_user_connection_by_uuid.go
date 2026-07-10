@@ -9,36 +9,36 @@ import (
 	"github.com/nuzur/nem/core/module/user_connection/types"
 )
 
-func (m *module) FetchUserConnectionByUuid(
+func (m *module) FetchUserConnectionByUUID(
 	ctx context.Context,
-	req types.FetchUserConnectionByUuidRequest,
+	req types.FetchUserConnectionByUUIDRequest,
 	opts ...Option,
-) (types.FetchUserConnectionByUuidResponse, error) {
+) (types.FetchUserConnectionByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchUserConnectionByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchUserConnectionByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchUserConnectionByUuidResponse), nil
+			return cached.(types.FetchUserConnectionByUUIDResponse), nil
 		}
 	}
 	v, err, _ := m.sg.Do(cacheKey, func() (any, error) {
-		models, err := m.repository.Queries.FetchUserConnectionByUuid(
+		models, err := m.repository.Queries.FetchUserConnectionByUUID(
 			ctx,
 			req.UUID.String(),
 		)
 		if err != nil {
 
-			return types.FetchUserConnectionByUuidResponse{}, err
+			return types.FetchUserConnectionByUUIDResponse{}, err
 		}
-		return types.FetchUserConnectionByUuidResponse{
+		return types.FetchUserConnectionByUUIDResponse{
 			Results: mapModelsToEntities(models),
 		}, nil
 	})
 	if err != nil {
-		return types.FetchUserConnectionByUuidResponse{}, err
+		return types.FetchUserConnectionByUUIDResponse{}, err
 	}
-	result := v.(types.FetchUserConnectionByUuidResponse)
+	result := v.(types.FetchUserConnectionByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

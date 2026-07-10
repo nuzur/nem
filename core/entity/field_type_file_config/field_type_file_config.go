@@ -15,7 +15,7 @@ import (
 type FieldTypeFileConfig struct {
 	StorageType       enums.FieldTypeFileConfigStorageType  `json:"storage_type"`
 	StorageConfig     file_storage_config.FileStorageConfig `json:"storage_config"`
-	AllowedExtensions json.RawMessage                       `json:"allowed_extensions"`
+	AllowedExtensions []string                              `json:"allowed_extensions"`
 	MaxSize           int64                                 `json:"max_size"`
 	AllowMultiple     bool                                  `json:"allow_multiple"`
 	MaxFiles          int64                                 `json:"max_files"`

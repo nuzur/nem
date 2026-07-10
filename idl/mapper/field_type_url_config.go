@@ -5,16 +5,14 @@ package mapper
 import (
 	main_entity "github.com/nuzur/nem/core/entity/field_type_url_config"
 	pb "github.com/nuzur/nem/idl/gen"
-
-	"encoding/json"
 )
 
 func FieldTypeURLConfigToProto(e main_entity.FieldTypeURLConfig) *pb.FieldTypeURLConfig {
 	return &pb.FieldTypeURLConfig{
-		AllowDomains:      string(e.AllowDomains),
-		ExcludeDomains:    string(e.ExcludeDomains),
+		AllowDomains:      e.AllowDomains,
+		ExcludeDomains:    e.ExcludeDomains,
 		HttpsRequired:     e.HTTPSRequired,
-		AllowedExtensions: string(e.AllowedExtensions),
+		AllowedExtensions: e.AllowedExtensions,
 	}
 }
 
@@ -31,10 +29,10 @@ func FieldTypeURLConfigFromProto(m *pb.FieldTypeURLConfig) main_entity.FieldType
 		return main_entity.FieldTypeURLConfig{}
 	}
 	return main_entity.FieldTypeURLConfig{
-		AllowDomains:      json.RawMessage([]byte(m.GetAllowDomains())),
-		ExcludeDomains:    json.RawMessage([]byte(m.GetExcludeDomains())),
+		AllowDomains:      m.GetAllowDomains(),
+		ExcludeDomains:    m.GetExcludeDomains(),
 		HTTPSRequired:     m.GetHttpsRequired(),
-		AllowedExtensions: json.RawMessage([]byte(m.GetAllowedExtensions())),
+		AllowedExtensions: m.GetAllowedExtensions(),
 	}
 }
 

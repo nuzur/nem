@@ -20,7 +20,7 @@ func (s *server) CreateProject(ctx context.Context, req *pb.CreateProjectRequest
 		return nil, err
 	}
 
-	fetchRes, err := s.core.Project().FetchProjectByUuid(ctx, types.FetchProjectByUuidRequest(res), projectmodule.WithSkipCache())
+	fetchRes, err := s.core.Project().FetchProjectByUUID(ctx, types.FetchProjectByUUIDRequest(res), projectmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

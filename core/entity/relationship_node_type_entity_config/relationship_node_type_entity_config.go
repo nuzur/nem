@@ -12,9 +12,9 @@ import (
 )
 
 type RelationshipNodeTypeEntityConfig struct {
-	EntityUUID      uuid.UUID       `json:"entity_uuid"`
-	FieldUUIDs      json.RawMessage `json:"field_uuids"`
-	FieldsGenerated bool            `json:"fields_generated"`
+	EntityUUID      uuid.UUID   `json:"entity_uuid"`
+	FieldUUIDs      []uuid.UUID `json:"field_uuids"`
+	FieldsGenerated bool        `json:"fields_generated"`
 }
 
 func (e RelationshipNodeTypeEntityConfig) String() string {

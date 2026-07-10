@@ -27,7 +27,7 @@ type FieldTypeFileConfig struct {
 	state             protoimpl.MessageState         `protogen:"open.v1"`
 	StorageType       FieldTypeFileConfigStorageType `protobuf:"varint,1,opt,name=storage_type,json=storageType,proto3,enum=nem.FieldTypeFileConfigStorageType" json:"storage_type,omitempty"`
 	StorageConfig     *FileStorageConfig             `protobuf:"bytes,2,opt,name=storage_config,json=storageConfig,proto3" json:"storage_config,omitempty"`
-	AllowedExtensions string                         `protobuf:"bytes,3,opt,name=allowed_extensions,json=allowedExtensions,proto3" json:"allowed_extensions,omitempty"`
+	AllowedExtensions []string                       `protobuf:"bytes,3,rep,name=allowed_extensions,json=allowedExtensions,proto3" json:"allowed_extensions,omitempty"`
 	MaxSize           int64                          `protobuf:"varint,4,opt,name=max_size,json=maxSize,proto3" json:"max_size,omitempty"`
 	AllowMultiple     bool                           `protobuf:"varint,5,opt,name=allow_multiple,json=allowMultiple,proto3" json:"allow_multiple,omitempty"`
 	MaxFiles          int64                          `protobuf:"varint,6,opt,name=max_files,json=maxFiles,proto3" json:"max_files,omitempty"`
@@ -79,11 +79,11 @@ func (x *FieldTypeFileConfig) GetStorageConfig() *FileStorageConfig {
 	return nil
 }
 
-func (x *FieldTypeFileConfig) GetAllowedExtensions() string {
+func (x *FieldTypeFileConfig) GetAllowedExtensions() []string {
 	if x != nil {
 		return x.AllowedExtensions
 	}
-	return ""
+	return nil
 }
 
 func (x *FieldTypeFileConfig) GetMaxSize() int64 {
@@ -115,7 +115,7 @@ const file_field_type_file_config_proto_rawDesc = "" +
 	"\x13FieldTypeFileConfig\x12F\n" +
 	"\fstorage_type\x18\x01 \x01(\x0e2#.nem.FieldTypeFileConfigStorageTypeR\vstorageType\x12=\n" +
 	"\x0estorage_config\x18\x02 \x01(\v2\x16.nem.FileStorageConfigR\rstorageConfig\x12-\n" +
-	"\x12allowed_extensions\x18\x03 \x01(\tR\x11allowedExtensions\x12\x19\n" +
+	"\x12allowed_extensions\x18\x03 \x03(\tR\x11allowedExtensions\x12\x19\n" +
 	"\bmax_size\x18\x04 \x01(\x03R\amaxSize\x12%\n" +
 	"\x0eallow_multiple\x18\x05 \x01(\bR\rallowMultiple\x12\x1b\n" +
 	"\tmax_files\x18\x06 \x01(\x03R\bmaxFilesB:\n" +

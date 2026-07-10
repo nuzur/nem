@@ -9,8 +9,6 @@ import (
 	"github.com/guregu/null/v6"
 
 	"github.com/nuzur/nem/enums"
-
-	"encoding/json"
 )
 
 func FieldTypeEncryptedConfigToProto(e main_entity.FieldTypeEncryptedConfig) *pb.FieldTypeEncryptedConfig {
@@ -20,7 +18,7 @@ func FieldTypeEncryptedConfigToProto(e main_entity.FieldTypeEncryptedConfig) *pb
 		RegexValidation: e.RegexValidation.ValueOrZero(),
 		EncryptionType:  pb.FieldTypeEncryptedConfigEncryptionType(e.EncryptionType),
 		UseSalt:         e.UseSalt,
-		SaltFieldUuids:  string(e.SaltFieldUUIDs),
+		SaltFieldUuids:  UUIDSliceToStringSlice(e.SaltFieldUUIDs),
 	}
 }
 
@@ -42,7 +40,7 @@ func FieldTypeEncryptedConfigFromProto(m *pb.FieldTypeEncryptedConfig) main_enti
 		RegexValidation: null.StringFrom(m.RegexValidation),
 		EncryptionType:  enums.FieldTypeEncryptedConfigEncryptionType(m.GetEncryptionType()),
 		UseSalt:         m.GetUseSalt(),
-		SaltFieldUUIDs:  json.RawMessage([]byte(m.GetSaltFieldUuids())),
+		SaltFieldUUIDs:  StringSliceToUUIDSlice(m.GetSaltFieldUuids()),
 	}
 }
 

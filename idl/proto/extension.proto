@@ -25,7 +25,7 @@ message Extension {
     bool verified = 8;
     string repository = 9;
     ExtensionType extension_type = 10;
-    string tags = 11;
+    repeated string tags = 11;
     bool pro = 12;
     bool public = 13;
     repeated Visibility visibility = 14;

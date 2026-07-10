@@ -12,6 +12,6 @@ package nem;
 
 
 message FieldTypePhoneConfig {  
-    string allow_countries = 1;
-    string exclude_countries = 2;    
+    repeated string allow_countries = 1;
+    repeated string exclude_countries = 2;    
 }

@@ -9,7 +9,7 @@ import (
 func (e RelationshipNodeTypeEntityConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
 		"entity_uuid":      entitytypes.StringFieldType,
-		"field_uuids":      entitytypes.RawJSONFieldType,
+		"field_uuids":      entitytypes.StringFieldType,
 		"fields_generated": entitytypes.BooleanFieldType,
 	}
 }
@@ -40,5 +40,6 @@ func (e RelationshipNodeTypeEntityConfig) PrimaryKeyIdentifiers() []string {
 func (e RelationshipNodeTypeEntityConfig) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["field_uuids"] = entitytypes.StringFieldType
 	return res
 }

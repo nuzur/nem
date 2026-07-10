@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchProjectByOwnerUuid(
+func (m *module) FetchProjectByOwnerUUID(
 	ctx context.Context,
-	req types.FetchProjectByOwnerUuidRequest,
+	req types.FetchProjectByOwnerUUIDRequest,
 	opts ...Option,
-) (types.FetchProjectByOwnerUuidResponse, error) {
+) (types.FetchProjectByOwnerUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchProjectByOwnerUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchProjectByOwnerUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchProjectByOwnerUuidResponse), nil
+			return cached.(types.FetchProjectByOwnerUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchProjectByOwnerUuid(
+			models, err := m.repository.Queries.FetchProjectByOwnerUUID(
 				ctx,
-				nemdb.FetchProjectByOwnerUuidParams{
+				nemdb.FetchProjectByOwnerUUIDParams{
 					OwnerUUID: req.OwnerUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchProjectByOwnerUuid(
 
 			if err != nil {
 
-				return types.FetchProjectByOwnerUuidResponse{}, err
+				return types.FetchProjectByOwnerUUIDResponse{}, err
 			}
-			return types.FetchProjectByOwnerUuidResponse{
+			return types.FetchProjectByOwnerUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchProjectByOwnerUuidResponse{}, err
+		return types.FetchProjectByOwnerUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchProjectByOwnerUuidResponse{}, fetchErr
+		return types.FetchProjectByOwnerUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchProjectByOwnerUuidResponse)
+	result := v.(types.FetchProjectByOwnerUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

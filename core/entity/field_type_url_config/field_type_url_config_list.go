@@ -8,10 +8,10 @@ import (
 
 func (e FieldTypeURLConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"allow_domains":      entitytypes.RawJSONFieldType,
-		"exclude_domains":    entitytypes.RawJSONFieldType,
+		"allow_domains":      entitytypes.StringFieldType,
+		"exclude_domains":    entitytypes.StringFieldType,
 		"https_required":     entitytypes.BooleanFieldType,
-		"allowed_extensions": entitytypes.RawJSONFieldType,
+		"allowed_extensions": entitytypes.StringFieldType,
 	}
 }
 
@@ -42,5 +42,8 @@ func (e FieldTypeURLConfig) PrimaryKeyIdentifiers() []string {
 func (e FieldTypeURLConfig) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["allow_domains"] = entitytypes.StringFieldType
+	res["exclude_domains"] = entitytypes.StringFieldType
+	res["allowed_extensions"] = entitytypes.StringFieldType
 	return res
 }

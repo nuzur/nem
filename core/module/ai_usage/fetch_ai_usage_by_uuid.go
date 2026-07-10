@@ -9,36 +9,36 @@ import (
 	"github.com/nuzur/nem/core/module/ai_usage/types"
 )
 
-func (m *module) FetchAiUsageByUuid(
+func (m *module) FetchAiUsageByUUID(
 	ctx context.Context,
-	req types.FetchAiUsageByUuidRequest,
+	req types.FetchAiUsageByUUIDRequest,
 	opts ...Option,
-) (types.FetchAiUsageByUuidResponse, error) {
+) (types.FetchAiUsageByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchAiUsageByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchAiUsageByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchAiUsageByUuidResponse), nil
+			return cached.(types.FetchAiUsageByUUIDResponse), nil
 		}
 	}
 	v, err, _ := m.sg.Do(cacheKey, func() (any, error) {
-		models, err := m.repository.Queries.FetchAiUsageByUuid(
+		models, err := m.repository.Queries.FetchAiUsageByUUID(
 			ctx,
 			req.UUID.String(),
 		)
 		if err != nil {
 
-			return types.FetchAiUsageByUuidResponse{}, err
+			return types.FetchAiUsageByUUIDResponse{}, err
 		}
-		return types.FetchAiUsageByUuidResponse{
+		return types.FetchAiUsageByUUIDResponse{
 			Results: mapModelsToEntities(models),
 		}, nil
 	})
 	if err != nil {
-		return types.FetchAiUsageByUuidResponse{}, err
+		return types.FetchAiUsageByUUIDResponse{}, err
 	}
-	result := v.(types.FetchAiUsageByUuidResponse)
+	result := v.(types.FetchAiUsageByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

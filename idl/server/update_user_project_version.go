@@ -43,8 +43,8 @@ func (s *server) UpdateUserProjectVersion(ctx context.Context, req *pb.UpdateUse
 		}
 
 		pkEntity := pbmapper.UserProjectVersionFromProto(req.GetUserProjectVersion())
-		existingRes, err := s.core.UserProjectVersion().FetchUserProjectVersionByUuid(ctx,
-			types.FetchUserProjectVersionByUuidRequest{
+		existingRes, err := s.core.UserProjectVersion().FetchUserProjectVersionByUUID(ctx,
+			types.FetchUserProjectVersionByUUIDRequest{
 				UUID: pkEntity.UUID,
 			},
 			user_project_versionmodule.WithSkipCache(),
@@ -70,7 +70,7 @@ func (s *server) UpdateUserProjectVersion(ctx context.Context, req *pb.UpdateUse
 		return nil, err
 	}
 
-	fetchRes, err := s.core.UserProjectVersion().FetchUserProjectVersionByUuid(ctx, types.FetchUserProjectVersionByUuidRequest(res), user_project_versionmodule.WithSkipCache())
+	fetchRes, err := s.core.UserProjectVersion().FetchUserProjectVersionByUUID(ctx, types.FetchUserProjectVersionByUUIDRequest(res), user_project_versionmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

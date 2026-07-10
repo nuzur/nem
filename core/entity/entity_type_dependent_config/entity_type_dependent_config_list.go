@@ -8,8 +8,8 @@ import (
 
 func (e EntityTypeDependentConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"service_source_uuids": entitytypes.RawJSONFieldType,
-		"entity_source_uuids":  entitytypes.RawJSONFieldType,
+		"service_source_uuids": entitytypes.StringFieldType,
+		"entity_source_uuids":  entitytypes.StringFieldType,
 	}
 }
 
@@ -38,5 +38,7 @@ func (e EntityTypeDependentConfig) PrimaryKeyIdentifiers() []string {
 func (e EntityTypeDependentConfig) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["service_source_uuids"] = entitytypes.StringFieldType
+	res["entity_source_uuids"] = entitytypes.StringFieldType
 	return res
 }

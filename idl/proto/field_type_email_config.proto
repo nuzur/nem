@@ -12,6 +12,6 @@ package nem;
 
 
 message FieldTypeEmailConfig {  
-    string allow_domains = 1;
-    string exclude_domains = 2;    
+    repeated string allow_domains = 1;
+    repeated string exclude_domains = 2;    
 }

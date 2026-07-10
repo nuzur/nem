@@ -15,13 +15,13 @@ import (
 )
 
 type Module interface {
-	FetchChangeRequestByUuid(ctx context.Context, req types.FetchChangeRequestByUuidRequest, opts ...Option) (types.FetchChangeRequestByUuidResponse, error)
+	FetchChangeRequestByUUID(ctx context.Context, req types.FetchChangeRequestByUUIDRequest, opts ...Option) (types.FetchChangeRequestByUUIDResponse, error)
 	FetchChangeRequestByVersion(ctx context.Context, req types.FetchChangeRequestByVersionRequest, opts ...Option) (types.FetchChangeRequestByVersionResponse, error)
 	FetchChangeRequestByAiGenerated(ctx context.Context, req types.FetchChangeRequestByAiGeneratedRequest, opts ...Option) (types.FetchChangeRequestByAiGeneratedResponse, error)
 	FetchChangeRequestByChangeType(ctx context.Context, req types.FetchChangeRequestByChangeTypeRequest, opts ...Option) (types.FetchChangeRequestByChangeTypeResponse, error)
-	FetchChangeRequestByProjectUuid(ctx context.Context, req types.FetchChangeRequestByProjectUuidRequest, opts ...Option) (types.FetchChangeRequestByProjectUuidResponse, error)
-	FetchChangeRequestByProjectVersionUuid(ctx context.Context, req types.FetchChangeRequestByProjectVersionUuidRequest, opts ...Option) (types.FetchChangeRequestByProjectVersionUuidResponse, error)
-	FetchChangeRequestByOwnerUuid(ctx context.Context, req types.FetchChangeRequestByOwnerUuidRequest, opts ...Option) (types.FetchChangeRequestByOwnerUuidResponse, error)
+	FetchChangeRequestByProjectUUID(ctx context.Context, req types.FetchChangeRequestByProjectUUIDRequest, opts ...Option) (types.FetchChangeRequestByProjectUUIDResponse, error)
+	FetchChangeRequestByProjectVersionUUID(ctx context.Context, req types.FetchChangeRequestByProjectVersionUUIDRequest, opts ...Option) (types.FetchChangeRequestByProjectVersionUUIDResponse, error)
+	FetchChangeRequestByOwnerUUID(ctx context.Context, req types.FetchChangeRequestByOwnerUUIDRequest, opts ...Option) (types.FetchChangeRequestByOwnerUUIDResponse, error)
 	FetchChangeRequestByReviewStatus(ctx context.Context, req types.FetchChangeRequestByReviewStatusRequest, opts ...Option) (types.FetchChangeRequestByReviewStatusResponse, error)
 	FetchChangeRequestByStatus(ctx context.Context, req types.FetchChangeRequestByStatusRequest, opts ...Option) (types.FetchChangeRequestByStatusResponse, error)
 

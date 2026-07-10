@@ -15,14 +15,14 @@ import (
 )
 
 type Module interface {
-	FetchProjectVersionByUuid(ctx context.Context, req types.FetchProjectVersionByUuidRequest, opts ...Option) (types.FetchProjectVersionByUuidResponse, error)
-	FetchProjectVersionByCreatedByUuid(ctx context.Context, req types.FetchProjectVersionByCreatedByUuidRequest, opts ...Option) (types.FetchProjectVersionByCreatedByUuidResponse, error)
+	FetchProjectVersionByUUID(ctx context.Context, req types.FetchProjectVersionByUUIDRequest, opts ...Option) (types.FetchProjectVersionByUUIDResponse, error)
+	FetchProjectVersionByCreatedByUUID(ctx context.Context, req types.FetchProjectVersionByCreatedByUUIDRequest, opts ...Option) (types.FetchProjectVersionByCreatedByUUIDResponse, error)
 	FetchProjectVersionByStatus(ctx context.Context, req types.FetchProjectVersionByStatusRequest, opts ...Option) (types.FetchProjectVersionByStatusResponse, error)
 	FetchProjectVersionByVersion(ctx context.Context, req types.FetchProjectVersionByVersionRequest, opts ...Option) (types.FetchProjectVersionByVersionResponse, error)
-	FetchProjectVersionByProjectUuid(ctx context.Context, req types.FetchProjectVersionByProjectUuidRequest, opts ...Option) (types.FetchProjectVersionByProjectUuidResponse, error)
+	FetchProjectVersionByProjectUUID(ctx context.Context, req types.FetchProjectVersionByProjectUUIDRequest, opts ...Option) (types.FetchProjectVersionByProjectUUIDResponse, error)
 	FetchProjectVersionByReviewStatus(ctx context.Context, req types.FetchProjectVersionByReviewStatusRequest, opts ...Option) (types.FetchProjectVersionByReviewStatusResponse, error)
-	FetchProjectVersionByUpdatedByUuid(ctx context.Context, req types.FetchProjectVersionByUpdatedByUuidRequest, opts ...Option) (types.FetchProjectVersionByUpdatedByUuidResponse, error)
-	FetchProjectVersionByBaseVersionUuid(ctx context.Context, req types.FetchProjectVersionByBaseVersionUuidRequest, opts ...Option) (types.FetchProjectVersionByBaseVersionUuidResponse, error)
+	FetchProjectVersionByUpdatedByUUID(ctx context.Context, req types.FetchProjectVersionByUpdatedByUUIDRequest, opts ...Option) (types.FetchProjectVersionByUpdatedByUUIDResponse, error)
+	FetchProjectVersionByBaseVersionUUID(ctx context.Context, req types.FetchProjectVersionByBaseVersionUUIDRequest, opts ...Option) (types.FetchProjectVersionByBaseVersionUUIDResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)
 

@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"log"
 
+	"github.com/gofrs/uuid"
 	"github.com/guregu/null/v6"
 	"github.com/nuzur/nem/enums"
 
@@ -18,7 +19,7 @@ type FieldTypeEncryptedConfig struct {
 	RegexValidation null.String                                  `json:"regex_validation"`
 	EncryptionType  enums.FieldTypeEncryptedConfigEncryptionType `json:"encryption_type"`
 	UseSalt         bool                                         `json:"use_salt"`
-	SaltFieldUUIDs  json.RawMessage                              `json:"salt_field_uuids"`
+	SaltFieldUUIDs  []uuid.UUID                                  `json:"salt_field_uuids"`
 }
 
 func (e FieldTypeEncryptedConfig) String() string {

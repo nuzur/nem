@@ -9,7 +9,7 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-type FetchTeamByUpdatedByUuidRequest struct {
+type FetchTeamByUpdatedByUUIDRequest struct {
 	UpdatedByUUID uuid.UUID
 
 	Offset  int32
@@ -18,13 +18,13 @@ type FetchTeamByUpdatedByUuidRequest struct {
 	Sort    string
 }
 
-func (r FetchTeamByUpdatedByUuidRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
+func (r FetchTeamByUpdatedByUUIDRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
 
 	e.AddString("updated_by_uuid", r.UpdatedByUUID.String())
 
 	return nil
 }
 
-type FetchTeamByUpdatedByUuidResponse struct {
+type FetchTeamByUpdatedByUUIDResponse struct {
 	Results []main_entity.Team
 }

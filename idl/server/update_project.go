@@ -43,8 +43,8 @@ func (s *server) UpdateProject(ctx context.Context, req *pb.UpdateProjectRequest
 		}
 
 		pkEntity := pbmapper.ProjectFromProto(req.GetProject())
-		existingRes, err := s.core.Project().FetchProjectByUuid(ctx,
-			types.FetchProjectByUuidRequest{
+		existingRes, err := s.core.Project().FetchProjectByUUID(ctx,
+			types.FetchProjectByUUIDRequest{
 				UUID: pkEntity.UUID,
 			},
 			projectmodule.WithSkipCache(),
@@ -70,7 +70,7 @@ func (s *server) UpdateProject(ctx context.Context, req *pb.UpdateProjectRequest
 		return nil, err
 	}
 
-	fetchRes, err := s.core.Project().FetchProjectByUuid(ctx, types.FetchProjectByUuidRequest(res), projectmodule.WithSkipCache())
+	fetchRes, err := s.core.Project().FetchProjectByUUID(ctx, types.FetchProjectByUUIDRequest(res), projectmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

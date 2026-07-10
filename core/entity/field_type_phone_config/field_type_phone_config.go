@@ -10,8 +10,8 @@ import (
 )
 
 type FieldTypePhoneConfig struct {
-	AllowCountries   json.RawMessage `json:"allow_countries"`
-	ExcludeCountries json.RawMessage `json:"exclude_countries"`
+	AllowCountries   []string `json:"allow_countries"`
+	ExcludeCountries []string `json:"exclude_countries"`
 }
 
 func (e FieldTypePhoneConfig) String() string {

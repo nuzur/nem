@@ -35,8 +35,8 @@ func (s *server) UpdateExtensionExecution(ctx context.Context, req *pb.UpdateExt
 		}
 
 		pkEntity := pbmapper.ExtensionExecutionFromProto(req.GetExtensionExecution())
-		existingRes, err := s.core.ExtensionExecution().FetchExtensionExecutionByUuid(ctx,
-			types.FetchExtensionExecutionByUuidRequest{
+		existingRes, err := s.core.ExtensionExecution().FetchExtensionExecutionByUUID(ctx,
+			types.FetchExtensionExecutionByUUIDRequest{
 				UUID: pkEntity.UUID,
 			},
 			extension_executionmodule.WithSkipCache(),
@@ -62,7 +62,7 @@ func (s *server) UpdateExtensionExecution(ctx context.Context, req *pb.UpdateExt
 		return nil, err
 	}
 
-	fetchRes, err := s.core.ExtensionExecution().FetchExtensionExecutionByUuid(ctx, types.FetchExtensionExecutionByUuidRequest(res), extension_executionmodule.WithSkipCache())
+	fetchRes, err := s.core.ExtensionExecution().FetchExtensionExecutionByUUID(ctx, types.FetchExtensionExecutionByUUIDRequest(res), extension_executionmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

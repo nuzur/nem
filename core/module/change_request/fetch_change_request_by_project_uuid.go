@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchChangeRequestByProjectUuid(
+func (m *module) FetchChangeRequestByProjectUUID(
 	ctx context.Context,
-	req types.FetchChangeRequestByProjectUuidRequest,
+	req types.FetchChangeRequestByProjectUUIDRequest,
 	opts ...Option,
-) (types.FetchChangeRequestByProjectUuidResponse, error) {
+) (types.FetchChangeRequestByProjectUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchChangeRequestByProjectUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchChangeRequestByProjectUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchChangeRequestByProjectUuidResponse), nil
+			return cached.(types.FetchChangeRequestByProjectUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchChangeRequestByProjectUuid(
+			models, err := m.repository.Queries.FetchChangeRequestByProjectUUID(
 				ctx,
-				nemdb.FetchChangeRequestByProjectUuidParams{
+				nemdb.FetchChangeRequestByProjectUUIDParams{
 					ProjectUUID: req.ProjectUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchChangeRequestByProjectUuid(
 
 			if err != nil {
 
-				return types.FetchChangeRequestByProjectUuidResponse{}, err
+				return types.FetchChangeRequestByProjectUUIDResponse{}, err
 			}
-			return types.FetchChangeRequestByProjectUuidResponse{
+			return types.FetchChangeRequestByProjectUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchChangeRequestByProjectUuidResponse{}, err
+		return types.FetchChangeRequestByProjectUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchChangeRequestByProjectUuidResponse{}, fetchErr
+		return types.FetchChangeRequestByProjectUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchChangeRequestByProjectUuidResponse)
+	result := v.(types.FetchChangeRequestByProjectUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

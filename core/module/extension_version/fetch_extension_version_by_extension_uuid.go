@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchExtensionVersionByExtensionUuid(
+func (m *module) FetchExtensionVersionByExtensionUUID(
 	ctx context.Context,
-	req types.FetchExtensionVersionByExtensionUuidRequest,
+	req types.FetchExtensionVersionByExtensionUUIDRequest,
 	opts ...Option,
-) (types.FetchExtensionVersionByExtensionUuidResponse, error) {
+) (types.FetchExtensionVersionByExtensionUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchExtensionVersionByExtensionUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchExtensionVersionByExtensionUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchExtensionVersionByExtensionUuidResponse), nil
+			return cached.(types.FetchExtensionVersionByExtensionUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchExtensionVersionByExtensionUuid(
+			models, err := m.repository.Queries.FetchExtensionVersionByExtensionUUID(
 				ctx,
-				nemdb.FetchExtensionVersionByExtensionUuidParams{
+				nemdb.FetchExtensionVersionByExtensionUUIDParams{
 					ExtensionUUID: req.ExtensionUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchExtensionVersionByExtensionUuid(
 
 			if err != nil {
 
-				return types.FetchExtensionVersionByExtensionUuidResponse{}, err
+				return types.FetchExtensionVersionByExtensionUUIDResponse{}, err
 			}
-			return types.FetchExtensionVersionByExtensionUuidResponse{
+			return types.FetchExtensionVersionByExtensionUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchExtensionVersionByExtensionUuidResponse{}, err
+		return types.FetchExtensionVersionByExtensionUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchExtensionVersionByExtensionUuidResponse{}, fetchErr
+		return types.FetchExtensionVersionByExtensionUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchExtensionVersionByExtensionUuidResponse)
+	result := v.(types.FetchExtensionVersionByExtensionUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

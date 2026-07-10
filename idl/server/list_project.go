@@ -157,6 +157,8 @@ func projectDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("description", filtering.TypeString),
 
+		filtering.DeclareIdent("tags", filtering.TypeString),
+
 		filtering.DeclareIdent("url", filtering.TypeString),
 
 		filtering.DeclareIdent("owner_uuid", filtering.TypeString),

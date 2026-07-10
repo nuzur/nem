@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchTeamByOwnerUuid(
+func (m *module) FetchTeamByOwnerUUID(
 	ctx context.Context,
-	req types.FetchTeamByOwnerUuidRequest,
+	req types.FetchTeamByOwnerUUIDRequest,
 	opts ...Option,
-) (types.FetchTeamByOwnerUuidResponse, error) {
+) (types.FetchTeamByOwnerUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchTeamByOwnerUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchTeamByOwnerUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchTeamByOwnerUuidResponse), nil
+			return cached.(types.FetchTeamByOwnerUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchTeamByOwnerUuid(
+			models, err := m.repository.Queries.FetchTeamByOwnerUUID(
 				ctx,
-				nemdb.FetchTeamByOwnerUuidParams{
+				nemdb.FetchTeamByOwnerUUIDParams{
 					OwnerUUID: req.OwnerUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchTeamByOwnerUuid(
 
 			if err != nil {
 
-				return types.FetchTeamByOwnerUuidResponse{}, err
+				return types.FetchTeamByOwnerUUIDResponse{}, err
 			}
-			return types.FetchTeamByOwnerUuidResponse{
+			return types.FetchTeamByOwnerUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchTeamByOwnerUuidResponse{}, err
+		return types.FetchTeamByOwnerUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchTeamByOwnerUuidResponse{}, fetchErr
+		return types.FetchTeamByOwnerUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchTeamByOwnerUuidResponse)
+	result := v.(types.FetchTeamByOwnerUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

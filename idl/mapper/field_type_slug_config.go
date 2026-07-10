@@ -7,8 +7,6 @@ import (
 	pb "github.com/nuzur/nem/idl/gen"
 
 	"github.com/guregu/null/v6"
-
-	"encoding/json"
 )
 
 func FieldTypeSlugConfigToProto(e main_entity.FieldTypeSlugConfig) *pb.FieldTypeSlugConfig {
@@ -16,7 +14,7 @@ func FieldTypeSlugConfigToProto(e main_entity.FieldTypeSlugConfig) *pb.FieldType
 		MinSize:           int64(e.MinSize),
 		MaxSize:           int64(e.MaxSize),
 		RegexValidation:   e.RegexValidation.ValueOrZero(),
-		BasedOnFieldUuids: string(e.BasedOnFieldUUIDs),
+		BasedOnFieldUuids: UUIDSliceToStringSlice(e.BasedOnFieldUUIDs),
 	}
 }
 
@@ -36,7 +34,7 @@ func FieldTypeSlugConfigFromProto(m *pb.FieldTypeSlugConfig) main_entity.FieldTy
 		MinSize:           int64(m.GetMinSize()),
 		MaxSize:           int64(m.GetMaxSize()),
 		RegexValidation:   null.StringFrom(m.RegexValidation),
-		BasedOnFieldUUIDs: json.RawMessage([]byte(m.GetBasedOnFieldUuids())),
+		BasedOnFieldUUIDs: StringSliceToUUIDSlice(m.GetBasedOnFieldUuids()),
 	}
 }
 

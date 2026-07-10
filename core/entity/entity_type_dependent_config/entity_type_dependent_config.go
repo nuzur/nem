@@ -6,12 +6,14 @@ import (
 	"encoding/json"
 	"log"
 
+	"github.com/gofrs/uuid"
+
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 type EntityTypeDependentConfig struct {
-	ServiceSourceUUIDs json.RawMessage `json:"service_source_uuids"`
-	EntitySourceUUIDs  json.RawMessage `json:"entity_source_uuids"`
+	ServiceSourceUUIDs []uuid.UUID `json:"service_source_uuids"`
+	EntitySourceUUIDs  []uuid.UUID `json:"entity_source_uuids"`
 }
 
 func (e EntityTypeDependentConfig) String() string {

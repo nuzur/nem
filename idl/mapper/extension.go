@@ -10,8 +10,6 @@ import (
 
 	"github.com/nuzur/nem/enums"
 
-	"encoding/json"
-
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -27,7 +25,7 @@ func ExtensionToProto(e main_entity.Extension) *pb.Extension {
 		Verified:          e.Verified,
 		Repository:        e.Repository,
 		ExtensionType:     pb.ExtensionType(e.ExtensionType),
-		Tags:              string(e.Tags),
+		Tags:              e.Tags,
 		Pro:               e.Pro,
 		Public:            e.Public,
 		Visibility:        VisibilitySliceToProto(e.Visibility),
@@ -63,7 +61,7 @@ func ExtensionFromProto(m *pb.Extension) main_entity.Extension {
 		Verified:          m.GetVerified(),
 		Repository:        m.GetRepository(),
 		ExtensionType:     enums.ExtensionType(m.GetExtensionType()),
-		Tags:              json.RawMessage([]byte(m.GetTags())),
+		Tags:              m.GetTags(),
 		Pro:               m.GetPro(),
 		Public:            m.GetPublic(),
 		Visibility:        VisibilitySliceFromProto(m.GetVisibility()),

@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchMembershipByOwnerUuid(
+func (m *module) FetchMembershipByOwnerUUID(
 	ctx context.Context,
-	req types.FetchMembershipByOwnerUuidRequest,
+	req types.FetchMembershipByOwnerUUIDRequest,
 	opts ...Option,
-) (types.FetchMembershipByOwnerUuidResponse, error) {
+) (types.FetchMembershipByOwnerUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchMembershipByOwnerUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchMembershipByOwnerUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchMembershipByOwnerUuidResponse), nil
+			return cached.(types.FetchMembershipByOwnerUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchMembershipByOwnerUuid(
+			models, err := m.repository.Queries.FetchMembershipByOwnerUUID(
 				ctx,
-				nemdb.FetchMembershipByOwnerUuidParams{
+				nemdb.FetchMembershipByOwnerUUIDParams{
 					OwnerUUID: req.OwnerUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchMembershipByOwnerUuid(
 
 			if err != nil {
 
-				return types.FetchMembershipByOwnerUuidResponse{}, err
+				return types.FetchMembershipByOwnerUUIDResponse{}, err
 			}
-			return types.FetchMembershipByOwnerUuidResponse{
+			return types.FetchMembershipByOwnerUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchMembershipByOwnerUuidResponse{}, err
+		return types.FetchMembershipByOwnerUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchMembershipByOwnerUuidResponse{}, fetchErr
+		return types.FetchMembershipByOwnerUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchMembershipByOwnerUuidResponse)
+	result := v.(types.FetchMembershipByOwnerUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

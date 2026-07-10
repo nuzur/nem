@@ -20,7 +20,7 @@ func (s *server) CreateMembership(ctx context.Context, req *pb.CreateMembershipR
 		return nil, err
 	}
 
-	fetchRes, err := s.core.Membership().FetchMembershipByUuid(ctx, types.FetchMembershipByUuidRequest(res), membershipmodule.WithSkipCache())
+	fetchRes, err := s.core.Membership().FetchMembershipByUUID(ctx, types.FetchMembershipByUUIDRequest(res), membershipmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

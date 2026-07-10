@@ -7,15 +7,13 @@ import (
 	pb "github.com/nuzur/nem/idl/gen"
 
 	"github.com/nuzur/nem/enums"
-
-	"encoding/json"
 )
 
 func FieldTypeFileConfigToProto(e main_entity.FieldTypeFileConfig) *pb.FieldTypeFileConfig {
 	return &pb.FieldTypeFileConfig{
 		StorageType:       pb.FieldTypeFileConfigStorageType(e.StorageType),
 		StorageConfig:     FileStorageConfigToProto(e.StorageConfig),
-		AllowedExtensions: string(e.AllowedExtensions),
+		AllowedExtensions: e.AllowedExtensions,
 		MaxSize:           int64(e.MaxSize),
 		AllowMultiple:     e.AllowMultiple,
 		MaxFiles:          int64(e.MaxFiles),
@@ -37,7 +35,7 @@ func FieldTypeFileConfigFromProto(m *pb.FieldTypeFileConfig) main_entity.FieldTy
 	return main_entity.FieldTypeFileConfig{
 		StorageType:       enums.FieldTypeFileConfigStorageType(m.GetStorageType()),
 		StorageConfig:     FileStorageConfigFromProto(m.GetStorageConfig()),
-		AllowedExtensions: json.RawMessage([]byte(m.GetAllowedExtensions())),
+		AllowedExtensions: m.GetAllowedExtensions(),
 		MaxSize:           int64(m.GetMaxSize()),
 		AllowMultiple:     m.GetAllowMultiple(),
 		MaxFiles:          int64(m.GetMaxFiles()),

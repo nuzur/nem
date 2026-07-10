@@ -43,8 +43,8 @@ func (s *server) UpdateExtension(ctx context.Context, req *pb.UpdateExtensionReq
 		}
 
 		pkEntity := pbmapper.ExtensionFromProto(req.GetExtension())
-		existingRes, err := s.core.Extension().FetchExtensionByUuid(ctx,
-			types.FetchExtensionByUuidRequest{
+		existingRes, err := s.core.Extension().FetchExtensionByUUID(ctx,
+			types.FetchExtensionByUUIDRequest{
 				UUID: pkEntity.UUID,
 			},
 			extensionmodule.WithSkipCache(),
@@ -70,7 +70,7 @@ func (s *server) UpdateExtension(ctx context.Context, req *pb.UpdateExtensionReq
 		return nil, err
 	}
 
-	fetchRes, err := s.core.Extension().FetchExtensionByUuid(ctx, types.FetchExtensionByUuidRequest(res), extensionmodule.WithSkipCache())
+	fetchRes, err := s.core.Extension().FetchExtensionByUUID(ctx, types.FetchExtensionByUUIDRequest(res), extensionmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

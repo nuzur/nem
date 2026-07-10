@@ -215,13 +215,29 @@ func project_versionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("field_type_encrypted_config.use_salt", filtering.TypeBool),
 
+		filtering.DeclareIdent("field_type_encrypted_config.salt_field_uuids", filtering.TypeString),
+
 		//field_type_email_config
+
+		filtering.DeclareIdent("field_type_email_config.allow_domains", filtering.TypeString),
+
+		filtering.DeclareIdent("field_type_email_config.exclude_domains", filtering.TypeString),
 
 		//field_type_phone_config
 
+		filtering.DeclareIdent("field_type_phone_config.allow_countries", filtering.TypeString),
+
+		filtering.DeclareIdent("field_type_phone_config.exclude_countries", filtering.TypeString),
+
 		//field_type_url_config
 
+		filtering.DeclareIdent("field_type_url_config.allow_domains", filtering.TypeString),
+
+		filtering.DeclareIdent("field_type_url_config.exclude_domains", filtering.TypeString),
+
 		filtering.DeclareIdent("field_type_url_config.https_required", filtering.TypeBool),
+
+		filtering.DeclareIdent("field_type_url_config.allowed_extensions", filtering.TypeString),
 
 		//file_object_storage_config
 
@@ -234,6 +250,8 @@ func project_versionDeclarations() *filtering.Declarations {
 		//field_type_file_config
 
 		filtering.DeclareEnumIdent("field_type_file_config.storage_type", pb.FieldTypeFileConfigStorageType(0).Type()),
+
+		filtering.DeclareIdent("field_type_file_config.allowed_extensions", filtering.TypeString),
 
 		filtering.DeclareIdent("field_type_file_config.max_size", filtering.TypeInt),
 
@@ -292,6 +310,8 @@ func project_versionDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("field_type_slug_config.max_size", filtering.TypeInt),
 
 		filtering.DeclareIdent("field_type_slug_config.regex_validation", filtering.TypeString),
+
+		filtering.DeclareIdent("field_type_slug_config.based_on_field_uuids", filtering.TypeString),
 
 		//field_type_config
 
@@ -387,6 +407,10 @@ func project_versionDeclarations() *filtering.Declarations {
 
 		//entity_type_dependent_config
 
+		filtering.DeclareIdent("entity_type_dependent_config.service_source_uuids", filtering.TypeString),
+
+		filtering.DeclareIdent("entity_type_dependent_config.entity_source_uuids", filtering.TypeString),
+
 		//entity_type_config
 
 		//element_render
@@ -402,6 +426,8 @@ func project_versionDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("element_render.collapsed", filtering.TypeBool),
 
 		//entity_data_management_config
+
+		filtering.DeclareIdent("entity_data_management_config.list_display_fields", filtering.TypeString),
 
 		//entity
 
@@ -428,6 +454,8 @@ func project_versionDeclarations() *filtering.Declarations {
 		//relationship_node_type_entity_config
 
 		filtering.DeclareIdent("relationship_node_type_entity_config.entity_uuid", filtering.TypeString),
+
+		filtering.DeclareIdent("relationship_node_type_entity_config.field_uuids", filtering.TypeString),
 
 		filtering.DeclareIdent("relationship_node_type_entity_config.fields_generated", filtering.TypeBool),
 

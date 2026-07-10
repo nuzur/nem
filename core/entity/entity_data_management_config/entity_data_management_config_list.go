@@ -8,7 +8,7 @@ import (
 
 func (e EntityDataManagementConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"list_display_fields": entitytypes.RawJSONFieldType,
+		"list_display_fields": entitytypes.StringFieldType,
 	}
 }
 
@@ -36,5 +36,6 @@ func (e EntityDataManagementConfig) PrimaryKeyIdentifiers() []string {
 func (e EntityDataManagementConfig) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["list_display_fields"] = entitytypes.StringFieldType
 	return res
 }

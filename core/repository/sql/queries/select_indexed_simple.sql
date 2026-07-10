@@ -2,7 +2,7 @@
 
 
 -- user selects:
--- name: FetchUserByUuid :many
+-- name: FetchUserByUUID :many
 SELECT `uuid`,`identifier`,`name`,`last_name`,`email`,`user_type`,`country_ios2`,`locale`,`metadata`,`status`,`created_at`,`updated_at`
 FROM `user`
 WHERE 
@@ -30,7 +30,7 @@ WHERE
     `email` = ? 
 LIMIT ?, ?;
         
--- name: FetchUserByUuidForUpdate :many
+-- name: FetchUserByUUIDForUpdate :many
 SELECT `uuid`,`identifier`,`name`,`last_name`,`email`,`user_type`,`country_ios2`,`locale`,`metadata`,`status`,`created_at`,`updated_at`
 FROM `user`
 WHERE 
@@ -144,14 +144,14 @@ LIMIT ?, ?;
 
 
 -- membership selects:
--- name: FetchMembershipByUuid :many
+-- name: FetchMembershipByUUID :many
 SELECT `uuid`,`owner_uuid`,`type`,`start_date`,`billing_metadata`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `membership`
 WHERE 
     `uuid` = ? ;
 
         
--- name: FetchMembershipByOwnerUuid :many
+-- name: FetchMembershipByOwnerUUID :many
 SELECT `uuid`,`owner_uuid`,`type`,`start_date`,`billing_metadata`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `membership`
 WHERE 
@@ -172,14 +172,14 @@ WHERE
     `type` = ? 
 LIMIT ?, ?;
         
--- name: FetchMembershipByUuidForUpdate :many
+-- name: FetchMembershipByUUIDForUpdate :many
 SELECT `uuid`,`owner_uuid`,`type`,`start_date`,`billing_metadata`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `membership`
 WHERE 
     `uuid` = ? 
 FOR UPDATE;
         
--- name: FetchMembershipByOwnerUuidOrderedByUpdatedAtASC :many
+-- name: FetchMembershipByOwnerUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`owner_uuid`,`type`,`start_date`,`billing_metadata`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `membership`
 WHERE 
@@ -187,7 +187,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchMembershipByOwnerUuidOrderedByUpdatedAtDESC :many
+-- name: FetchMembershipByOwnerUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`owner_uuid`,`type`,`start_date`,`billing_metadata`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `membership`
 WHERE 
@@ -196,7 +196,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchMembershipByOwnerUuidOrderedByCreatedAtASC :many
+-- name: FetchMembershipByOwnerUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`owner_uuid`,`type`,`start_date`,`billing_metadata`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `membership`
 WHERE 
@@ -204,7 +204,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchMembershipByOwnerUuidOrderedByCreatedAtDESC :many
+-- name: FetchMembershipByOwnerUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`owner_uuid`,`type`,`start_date`,`billing_metadata`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `membership`
 WHERE 
@@ -286,7 +286,7 @@ LIMIT ?, ?;
 
 
 -- extension selects:
--- name: FetchExtensionByUuid :many
+-- name: FetchExtensionByUUID :many
 SELECT `uuid`,`version`,`identifier`,`display_name`,`display_author_name`,`description`,`url`,`verified`,`repository`,`extension_type`,`tags`,`pro`,`public`,`visibility`,`status`,`owner_uuid`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension`
 WHERE 
@@ -307,7 +307,7 @@ WHERE
     `extension_type` = ? 
 LIMIT ?, ?;
         
--- name: FetchExtensionByOwnerUuid :many
+-- name: FetchExtensionByOwnerUUID :many
 SELECT `uuid`,`version`,`identifier`,`display_name`,`display_author_name`,`description`,`url`,`verified`,`repository`,`extension_type`,`tags`,`pro`,`public`,`visibility`,`status`,`owner_uuid`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension`
 WHERE 
@@ -349,7 +349,7 @@ WHERE
     `status` = ? 
 LIMIT ?, ?;
         
--- name: FetchExtensionByUuidForUpdate :many
+-- name: FetchExtensionByUUIDForUpdate :many
 SELECT `uuid`,`version`,`identifier`,`display_name`,`display_author_name`,`description`,`url`,`verified`,`repository`,`extension_type`,`tags`,`pro`,`public`,`visibility`,`status`,`owner_uuid`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension`
 WHERE 
@@ -424,7 +424,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionByOwnerUuidOrderedByUpdatedAtASC :many
+-- name: FetchExtensionByOwnerUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`identifier`,`display_name`,`display_author_name`,`description`,`url`,`verified`,`repository`,`extension_type`,`tags`,`pro`,`public`,`visibility`,`status`,`owner_uuid`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension`
 WHERE 
@@ -432,7 +432,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionByOwnerUuidOrderedByUpdatedAtDESC :many
+-- name: FetchExtensionByOwnerUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`identifier`,`display_name`,`display_author_name`,`description`,`url`,`verified`,`repository`,`extension_type`,`tags`,`pro`,`public`,`visibility`,`status`,`owner_uuid`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension`
 WHERE 
@@ -441,7 +441,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionByOwnerUuidOrderedByCreatedAtASC :many
+-- name: FetchExtensionByOwnerUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`identifier`,`display_name`,`display_author_name`,`description`,`url`,`verified`,`repository`,`extension_type`,`tags`,`pro`,`public`,`visibility`,`status`,`owner_uuid`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension`
 WHERE 
@@ -449,7 +449,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionByOwnerUuidOrderedByCreatedAtDESC :many
+-- name: FetchExtensionByOwnerUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`identifier`,`display_name`,`display_author_name`,`description`,`url`,`verified`,`repository`,`extension_type`,`tags`,`pro`,`public`,`visibility`,`status`,`owner_uuid`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension`
 WHERE 
@@ -633,14 +633,14 @@ LIMIT ?, ?;
 
 
 -- extension_version selects:
--- name: FetchExtensionVersionByUuid :many
+-- name: FetchExtensionVersionByUUID :many
 SELECT `uuid`,`version`,`extension_uuid`,`display_version`,`description`,`repository_tag`,`configuration_entity`,`execution_mode`,`review_status`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension_version`
 WHERE 
     `uuid` = ? ;
 
         
--- name: FetchExtensionVersionByExtensionUuid :many
+-- name: FetchExtensionVersionByExtensionUUID :many
 SELECT `uuid`,`version`,`extension_uuid`,`display_version`,`description`,`repository_tag`,`configuration_entity`,`execution_mode`,`review_status`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension_version`
 WHERE 
@@ -661,14 +661,14 @@ WHERE
     `version` = ? 
 LIMIT ?, ?;
         
--- name: FetchExtensionVersionByUuidForUpdate :many
+-- name: FetchExtensionVersionByUUIDForUpdate :many
 SELECT `uuid`,`version`,`extension_uuid`,`display_version`,`description`,`repository_tag`,`configuration_entity`,`execution_mode`,`review_status`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension_version`
 WHERE 
     `uuid` = ? 
 FOR UPDATE;
         
--- name: FetchExtensionVersionByExtensionUuidOrderedByCreatedAtASC :many
+-- name: FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`extension_uuid`,`display_version`,`description`,`repository_tag`,`configuration_entity`,`execution_mode`,`review_status`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension_version`
 WHERE 
@@ -676,7 +676,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionVersionByExtensionUuidOrderedByCreatedAtDESC :many
+-- name: FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`extension_uuid`,`display_version`,`description`,`repository_tag`,`configuration_entity`,`execution_mode`,`review_status`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension_version`
 WHERE 
@@ -685,7 +685,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionVersionByExtensionUuidOrderedByUpdatedAtASC :many
+-- name: FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`extension_uuid`,`display_version`,`description`,`repository_tag`,`configuration_entity`,`execution_mode`,`review_status`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension_version`
 WHERE 
@@ -693,7 +693,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionVersionByExtensionUuidOrderedByUpdatedAtDESC :many
+-- name: FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`extension_uuid`,`display_version`,`description`,`repository_tag`,`configuration_entity`,`execution_mode`,`review_status`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `extension_version`
 WHERE 
@@ -775,14 +775,14 @@ LIMIT ?, ?;
 
 
 -- user_project selects:
--- name: FetchUserProjectByUuid :many
+-- name: FetchUserProjectByUUID :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
     `uuid` = ? ;
 
         
--- name: FetchUserProjectByProjectUuid :many
+-- name: FetchUserProjectByProjectUUID :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
@@ -810,21 +810,21 @@ WHERE
     `user_email` = ? 
 LIMIT ?, ?;
         
--- name: FetchUserProjectByUserUuid :many
+-- name: FetchUserProjectByUserUUID :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
     `user_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchUserProjectByUuidForUpdate :many
+-- name: FetchUserProjectByUUIDForUpdate :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
     `uuid` = ? 
 FOR UPDATE;
         
--- name: FetchUserProjectByProjectUuidOrderedByUpdatedAtASC :many
+-- name: FetchUserProjectByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
@@ -832,7 +832,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserProjectByProjectUuidOrderedByUpdatedAtDESC :many
+-- name: FetchUserProjectByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
@@ -841,7 +841,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserProjectByProjectUuidOrderedByCreatedAtASC :many
+-- name: FetchUserProjectByProjectUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
@@ -849,7 +849,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserProjectByProjectUuidOrderedByCreatedAtDESC :many
+-- name: FetchUserProjectByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
@@ -960,7 +960,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserProjectByUserUuidOrderedByUpdatedAtASC :many
+-- name: FetchUserProjectByUserUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
@@ -968,7 +968,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserProjectByUserUuidOrderedByUpdatedAtDESC :many
+-- name: FetchUserProjectByUserUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
@@ -977,7 +977,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserProjectByUserUuidOrderedByCreatedAtASC :many
+-- name: FetchUserProjectByUserUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
@@ -985,7 +985,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserProjectByUserUuidOrderedByCreatedAtDESC :many
+-- name: FetchUserProjectByUserUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`
 WHERE 
@@ -999,7 +999,7 @@ LIMIT ?, ?;
 
 
 -- local_agent selects:
--- name: FetchLocalAgentByUuid :many
+-- name: FetchLocalAgentByUUID :many
 SELECT `uuid`,`user_uuid`,`token_hash`,`machine_name`,`os`,`cli_version`,`connections`,`status`,`last_seen_at`,`revoked_at`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `local_agent`
 WHERE 
@@ -1013,7 +1013,7 @@ WHERE
     `status` = ? 
 LIMIT ?, ?;
         
--- name: FetchLocalAgentByUuidForUpdate :many
+-- name: FetchLocalAgentByUUIDForUpdate :many
 SELECT `uuid`,`user_uuid`,`token_hash`,`machine_name`,`os`,`cli_version`,`connections`,`status`,`last_seen_at`,`revoked_at`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `local_agent`
 WHERE 
@@ -1059,7 +1059,7 @@ LIMIT ?, ?;
 
 
 -- extension_execution selects:
--- name: FetchExtensionExecutionByUuid :many
+-- name: FetchExtensionExecutionByUUID :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1073,42 +1073,42 @@ WHERE
     `status` = ? 
 LIMIT ?, ?;
         
--- name: FetchExtensionExecutionByExecutedByUuid :many
+-- name: FetchExtensionExecutionByExecutedByUUID :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
     `executed_by_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchExtensionExecutionByExtensionVersionUuid :many
+-- name: FetchExtensionExecutionByExtensionVersionUUID :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
     `extension_version_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchExtensionExecutionByProjectUuid :many
+-- name: FetchExtensionExecutionByProjectUUID :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
     `project_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchExtensionExecutionByProjectVersionUuid :many
+-- name: FetchExtensionExecutionByProjectVersionUUID :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
     `project_version_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchExtensionExecutionByExtensionUuid :many
+-- name: FetchExtensionExecutionByExtensionUUID :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
     `extension_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchExtensionExecutionByUuidForUpdate :many
+-- name: FetchExtensionExecutionByUUIDForUpdate :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1149,7 +1149,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtASC :many
+-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1157,7 +1157,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionExecutionByExecutedByUuidOrderedByCreatedAtDESC :many
+-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1166,7 +1166,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtASC :many
+-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1174,7 +1174,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionExecutionByExecutedByUuidOrderedByUpdatedAtDESC :many
+-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1183,7 +1183,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtASC :many
+-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1191,7 +1191,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionExecutionByExtensionVersionUuidOrderedByCreatedAtDESC :many
+-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1200,7 +1200,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtASC :many
+-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1208,7 +1208,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionExecutionByExtensionVersionUuidOrderedByUpdatedAtDESC :many
+-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1217,7 +1217,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionExecutionByProjectUuidOrderedByCreatedAtASC :many
+-- name: FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1225,7 +1225,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionExecutionByProjectUuidOrderedByCreatedAtDESC :many
+-- name: FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1234,7 +1234,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtASC :many
+-- name: FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1242,7 +1242,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionExecutionByProjectUuidOrderedByUpdatedAtDESC :many
+-- name: FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1251,7 +1251,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtASC :many
+-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1259,7 +1259,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionExecutionByProjectVersionUuidOrderedByCreatedAtDESC :many
+-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1268,7 +1268,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtASC :many
+-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1276,7 +1276,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionExecutionByProjectVersionUuidOrderedByUpdatedAtDESC :many
+-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1285,7 +1285,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtASC :many
+-- name: FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1293,7 +1293,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionExecutionByExtensionUuidOrderedByCreatedAtDESC :many
+-- name: FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1302,7 +1302,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtASC :many
+-- name: FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1310,7 +1310,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchExtensionExecutionByExtensionUuidOrderedByUpdatedAtDESC :many
+-- name: FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
 FROM `extension_execution`
 WHERE 
@@ -1324,14 +1324,14 @@ LIMIT ?, ?;
 
 
 -- project_version selects:
--- name: FetchProjectVersionByUuid :many
+-- name: FetchProjectVersionByUUID :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
     `uuid` = ? ;
 
         
--- name: FetchProjectVersionByCreatedByUuid :many
+-- name: FetchProjectVersionByCreatedByUUID :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1352,7 +1352,7 @@ WHERE
     `version` = ? 
 LIMIT ?, ?;
         
--- name: FetchProjectVersionByProjectUuid :many
+-- name: FetchProjectVersionByProjectUUID :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1366,28 +1366,28 @@ WHERE
     `review_status` = ? 
 LIMIT ?, ?;
         
--- name: FetchProjectVersionByUpdatedByUuid :many
+-- name: FetchProjectVersionByUpdatedByUUID :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
     `updated_by_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchProjectVersionByBaseVersionUuid :many
+-- name: FetchProjectVersionByBaseVersionUUID :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
     `base_version_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchProjectVersionByUuidForUpdate :many
+-- name: FetchProjectVersionByUUIDForUpdate :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
     `uuid` = ? 
 FOR UPDATE;
         
--- name: FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtASC :many
+-- name: FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1395,7 +1395,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectVersionByCreatedByUuidOrderedByUpdatedAtDESC :many
+-- name: FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1404,7 +1404,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectVersionByCreatedByUuidOrderedByCreatedAtASC :many
+-- name: FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1412,7 +1412,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectVersionByCreatedByUuidOrderedByCreatedAtDESC :many
+-- name: FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1489,7 +1489,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectVersionByProjectUuidOrderedByUpdatedAtASC :many
+-- name: FetchProjectVersionByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1497,7 +1497,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectVersionByProjectUuidOrderedByUpdatedAtDESC :many
+-- name: FetchProjectVersionByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1506,7 +1506,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectVersionByProjectUuidOrderedByCreatedAtASC :many
+-- name: FetchProjectVersionByProjectUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1514,7 +1514,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectVersionByProjectUuidOrderedByCreatedAtDESC :many
+-- name: FetchProjectVersionByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1557,7 +1557,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtASC :many
+-- name: FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1565,7 +1565,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectVersionByUpdatedByUuidOrderedByUpdatedAtDESC :many
+-- name: FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1574,7 +1574,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtASC :many
+-- name: FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1582,7 +1582,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectVersionByUpdatedByUuidOrderedByCreatedAtDESC :many
+-- name: FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1591,7 +1591,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtASC :many
+-- name: FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1599,7 +1599,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectVersionByBaseVersionUuidOrderedByUpdatedAtDESC :many
+-- name: FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1608,7 +1608,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtASC :many
+-- name: FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1616,7 +1616,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectVersionByBaseVersionUuidOrderedByCreatedAtDESC :many
+-- name: FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project_version`
 WHERE 
@@ -1630,21 +1630,21 @@ LIMIT ?, ?;
 
 
 -- user_project_version selects:
--- name: FetchUserProjectVersionByUuid :many
+-- name: FetchUserProjectVersionByUUID :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
     `uuid` = ? ;
 
         
--- name: FetchUserProjectVersionByUserUuid :many
+-- name: FetchUserProjectVersionByUserUUID :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
     `user_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchUserProjectVersionByProjectVersionUuid :many
+-- name: FetchUserProjectVersionByProjectVersionUUID :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
@@ -1658,14 +1658,14 @@ WHERE
     `status` = ? 
 LIMIT ?, ?;
         
--- name: FetchUserProjectVersionByUuidForUpdate :many
+-- name: FetchUserProjectVersionByUUIDForUpdate :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
     `uuid` = ? 
 FOR UPDATE;
         
--- name: FetchUserProjectVersionByUserUuidOrderedByCreatedAtASC :many
+-- name: FetchUserProjectVersionByUserUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
@@ -1673,7 +1673,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserProjectVersionByUserUuidOrderedByCreatedAtDESC :many
+-- name: FetchUserProjectVersionByUserUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
@@ -1682,7 +1682,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserProjectVersionByUserUuidOrderedByUpdatedAtASC :many
+-- name: FetchUserProjectVersionByUserUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
@@ -1690,7 +1690,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserProjectVersionByUserUuidOrderedByUpdatedAtDESC :many
+-- name: FetchUserProjectVersionByUserUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
@@ -1699,7 +1699,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtASC :many
+-- name: FetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
@@ -1707,7 +1707,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserProjectVersionByProjectVersionUuidOrderedByCreatedAtDESC :many
+-- name: FetchUserProjectVersionByProjectVersionUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
@@ -1716,7 +1716,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtASC :many
+-- name: FetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
@@ -1724,7 +1724,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserProjectVersionByProjectVersionUuidOrderedByUpdatedAtDESC :many
+-- name: FetchUserProjectVersionByProjectVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project_version`
 WHERE 
@@ -1772,14 +1772,14 @@ LIMIT ?, ?;
 
 
 -- project selects:
--- name: FetchProjectByUuid :many
+-- name: FetchProjectByUUID :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
     `uuid` = ? ;
 
         
--- name: FetchProjectByUpdatedByUuid :many
+-- name: FetchProjectByUpdatedByUUID :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1793,14 +1793,14 @@ WHERE
     `version` = ? 
 LIMIT ?, ?;
         
--- name: FetchProjectByCreatedByUuid :many
+-- name: FetchProjectByCreatedByUUID :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
     `created_by_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchProjectByOwnerUuid :many
+-- name: FetchProjectByOwnerUUID :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1814,7 +1814,7 @@ WHERE
     `status` = ? 
 LIMIT ?, ?;
         
--- name: FetchProjectByTeamUuid :many
+-- name: FetchProjectByTeamUUID :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1828,14 +1828,14 @@ WHERE
     `name` = ? 
 LIMIT ?, ?;
         
--- name: FetchProjectByUuidForUpdate :many
+-- name: FetchProjectByUUIDForUpdate :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
     `uuid` = ? 
 FOR UPDATE;
         
--- name: FetchProjectByUpdatedByUuidOrderedByUpdatedAtASC :many
+-- name: FetchProjectByUpdatedByUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1843,7 +1843,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectByUpdatedByUuidOrderedByUpdatedAtDESC :many
+-- name: FetchProjectByUpdatedByUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1852,7 +1852,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectByUpdatedByUuidOrderedByCreatedAtASC :many
+-- name: FetchProjectByUpdatedByUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1860,7 +1860,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectByUpdatedByUuidOrderedByCreatedAtDESC :many
+-- name: FetchProjectByUpdatedByUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1903,7 +1903,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectByCreatedByUuidOrderedByUpdatedAtASC :many
+-- name: FetchProjectByCreatedByUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1911,7 +1911,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectByCreatedByUuidOrderedByUpdatedAtDESC :many
+-- name: FetchProjectByCreatedByUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1920,7 +1920,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectByCreatedByUuidOrderedByCreatedAtASC :many
+-- name: FetchProjectByCreatedByUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1928,7 +1928,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectByCreatedByUuidOrderedByCreatedAtDESC :many
+-- name: FetchProjectByCreatedByUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1937,7 +1937,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectByOwnerUuidOrderedByUpdatedAtASC :many
+-- name: FetchProjectByOwnerUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1945,7 +1945,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectByOwnerUuidOrderedByUpdatedAtDESC :many
+-- name: FetchProjectByOwnerUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1954,7 +1954,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectByOwnerUuidOrderedByCreatedAtASC :many
+-- name: FetchProjectByOwnerUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -1962,7 +1962,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectByOwnerUuidOrderedByCreatedAtDESC :many
+-- name: FetchProjectByOwnerUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -2005,7 +2005,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectByTeamUuidOrderedByUpdatedAtASC :many
+-- name: FetchProjectByTeamUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -2013,7 +2013,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectByTeamUuidOrderedByUpdatedAtDESC :many
+-- name: FetchProjectByTeamUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -2022,7 +2022,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchProjectByTeamUuidOrderedByCreatedAtASC :many
+-- name: FetchProjectByTeamUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -2030,7 +2030,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchProjectByTeamUuidOrderedByCreatedAtDESC :many
+-- name: FetchProjectByTeamUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `project`
 WHERE 
@@ -2078,21 +2078,21 @@ LIMIT ?, ?;
 
 
 -- team selects:
--- name: FetchTeamByUuid :many
+-- name: FetchTeamByUUID :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
     `uuid` = ? ;
 
         
--- name: FetchTeamByCreatedByUuid :many
+-- name: FetchTeamByCreatedByUUID :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
     `created_by_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchTeamByOwnerUuid :many
+-- name: FetchTeamByOwnerUUID :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2106,7 +2106,7 @@ WHERE
     `status` = ? 
 LIMIT ?, ?;
         
--- name: FetchTeamByUpdatedByUuid :many
+-- name: FetchTeamByUpdatedByUUID :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2120,14 +2120,14 @@ WHERE
     `version` = ? 
 LIMIT ?, ?;
         
--- name: FetchTeamByUuidForUpdate :many
+-- name: FetchTeamByUUIDForUpdate :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
     `uuid` = ? 
 FOR UPDATE;
         
--- name: FetchTeamByCreatedByUuidOrderedByCreatedAtASC :many
+-- name: FetchTeamByCreatedByUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2135,7 +2135,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchTeamByCreatedByUuidOrderedByCreatedAtDESC :many
+-- name: FetchTeamByCreatedByUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2144,7 +2144,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchTeamByCreatedByUuidOrderedByUpdatedAtASC :many
+-- name: FetchTeamByCreatedByUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2152,7 +2152,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchTeamByCreatedByUuidOrderedByUpdatedAtDESC :many
+-- name: FetchTeamByCreatedByUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2161,7 +2161,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchTeamByOwnerUuidOrderedByCreatedAtASC :many
+-- name: FetchTeamByOwnerUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2169,7 +2169,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchTeamByOwnerUuidOrderedByCreatedAtDESC :many
+-- name: FetchTeamByOwnerUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2178,7 +2178,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchTeamByOwnerUuidOrderedByUpdatedAtASC :many
+-- name: FetchTeamByOwnerUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2186,7 +2186,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchTeamByOwnerUuidOrderedByUpdatedAtDESC :many
+-- name: FetchTeamByOwnerUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2229,7 +2229,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchTeamByUpdatedByUuidOrderedByCreatedAtASC :many
+-- name: FetchTeamByUpdatedByUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2237,7 +2237,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchTeamByUpdatedByUuidOrderedByCreatedAtDESC :many
+-- name: FetchTeamByUpdatedByUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2246,7 +2246,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchTeamByUpdatedByUuidOrderedByUpdatedAtASC :many
+-- name: FetchTeamByUpdatedByUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2254,7 +2254,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchTeamByUpdatedByUuidOrderedByUpdatedAtDESC :many
+-- name: FetchTeamByUpdatedByUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`name`,`enviorments`,`review_configs`,`stores`,`connections`,`object_stores`,`default_entity`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `team`
 WHERE 
@@ -2302,7 +2302,7 @@ LIMIT ?, ?;
 
 
 -- ai_usage selects:
--- name: FetchAiUsageByUuid :many
+-- name: FetchAiUsageByUUID :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2316,7 +2316,7 @@ WHERE
     `context` = ? 
 LIMIT ?, ?;
         
--- name: FetchAiUsageByProjectVersionUuid :many
+-- name: FetchAiUsageByProjectVersionUUID :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2337,21 +2337,21 @@ WHERE
     `status` = ? 
 LIMIT ?, ?;
         
--- name: FetchAiUsageByUserUuid :many
+-- name: FetchAiUsageByUserUUID :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
     `user_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchAiUsageByProjectUuid :many
+-- name: FetchAiUsageByProjectUUID :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
     `project_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchAiUsageByUuidForUpdate :many
+-- name: FetchAiUsageByUUIDForUpdate :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2392,7 +2392,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchAiUsageByProjectVersionUuidOrderedByCreatedAtASC :many
+-- name: FetchAiUsageByProjectVersionUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2400,7 +2400,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchAiUsageByProjectVersionUuidOrderedByCreatedAtDESC :many
+-- name: FetchAiUsageByProjectVersionUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2409,7 +2409,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchAiUsageByProjectVersionUuidOrderedByUpdatedAtASC :many
+-- name: FetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2417,7 +2417,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchAiUsageByProjectVersionUuidOrderedByUpdatedAtDESC :many
+-- name: FetchAiUsageByProjectVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2494,7 +2494,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchAiUsageByUserUuidOrderedByCreatedAtASC :many
+-- name: FetchAiUsageByUserUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2502,7 +2502,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchAiUsageByUserUuidOrderedByCreatedAtDESC :many
+-- name: FetchAiUsageByUserUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2511,7 +2511,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchAiUsageByUserUuidOrderedByUpdatedAtASC :many
+-- name: FetchAiUsageByUserUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2519,7 +2519,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchAiUsageByUserUuidOrderedByUpdatedAtDESC :many
+-- name: FetchAiUsageByUserUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2528,7 +2528,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchAiUsageByProjectUuidOrderedByCreatedAtASC :many
+-- name: FetchAiUsageByProjectUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2536,7 +2536,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchAiUsageByProjectUuidOrderedByCreatedAtDESC :many
+-- name: FetchAiUsageByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2545,7 +2545,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchAiUsageByProjectUuidOrderedByUpdatedAtASC :many
+-- name: FetchAiUsageByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2553,7 +2553,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchAiUsageByProjectUuidOrderedByUpdatedAtDESC :many
+-- name: FetchAiUsageByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`
 WHERE 
@@ -2567,7 +2567,7 @@ LIMIT ?, ?;
 
 
 -- change_request selects:
--- name: FetchChangeRequestByUuid :many
+-- name: FetchChangeRequestByUUID :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2595,21 +2595,21 @@ WHERE
     `change_type` = ? 
 LIMIT ?, ?;
         
--- name: FetchChangeRequestByProjectUuid :many
+-- name: FetchChangeRequestByProjectUUID :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
     `project_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchChangeRequestByProjectVersionUuid :many
+-- name: FetchChangeRequestByProjectVersionUUID :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
     `project_version_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchChangeRequestByOwnerUuid :many
+-- name: FetchChangeRequestByOwnerUUID :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2630,7 +2630,7 @@ WHERE
     `status` = ? 
 LIMIT ?, ?;
         
--- name: FetchChangeRequestByUuidForUpdate :many
+-- name: FetchChangeRequestByUUIDForUpdate :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2739,7 +2739,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchChangeRequestByProjectUuidOrderedByUpdatedAtASC :many
+-- name: FetchChangeRequestByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2747,7 +2747,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchChangeRequestByProjectUuidOrderedByUpdatedAtDESC :many
+-- name: FetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2756,7 +2756,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchChangeRequestByProjectUuidOrderedByCreatedAtASC :many
+-- name: FetchChangeRequestByProjectUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2764,7 +2764,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchChangeRequestByProjectUuidOrderedByCreatedAtDESC :many
+-- name: FetchChangeRequestByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2773,7 +2773,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtASC :many
+-- name: FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2781,7 +2781,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchChangeRequestByProjectVersionUuidOrderedByUpdatedAtDESC :many
+-- name: FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2790,7 +2790,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtASC :many
+-- name: FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2798,7 +2798,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchChangeRequestByProjectVersionUuidOrderedByCreatedAtDESC :many
+-- name: FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2807,7 +2807,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchChangeRequestByOwnerUuidOrderedByUpdatedAtASC :many
+-- name: FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2815,7 +2815,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchChangeRequestByOwnerUuidOrderedByUpdatedAtDESC :many
+-- name: FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2824,7 +2824,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchChangeRequestByOwnerUuidOrderedByCreatedAtASC :many
+-- name: FetchChangeRequestByOwnerUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2832,7 +2832,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchChangeRequestByOwnerUuidOrderedByCreatedAtDESC :many
+-- name: FetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`
 WHERE 
@@ -2914,21 +2914,21 @@ LIMIT ?, ?;
 
 
 -- user_connection selects:
--- name: FetchUserConnectionByUuid :many
+-- name: FetchUserConnectionByUUID :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
     `uuid` = ? ;
 
         
--- name: FetchUserConnectionByProjectUuid :many
+-- name: FetchUserConnectionByProjectUUID :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
     `project_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchUserConnectionByProjectVersionUuid :many
+-- name: FetchUserConnectionByProjectVersionUUID :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -2942,21 +2942,21 @@ WHERE
     `status` = ? 
 LIMIT ?, ?;
         
--- name: FetchUserConnectionByUserUuid :many
+-- name: FetchUserConnectionByUserUUID :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
     `user_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchUserConnectionByUuidForUpdate :many
+-- name: FetchUserConnectionByUUIDForUpdate :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
     `uuid` = ? 
 FOR UPDATE;
         
--- name: FetchUserConnectionByProjectUuidOrderedByUpdatedAtASC :many
+-- name: FetchUserConnectionByProjectUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -2964,7 +2964,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserConnectionByProjectUuidOrderedByUpdatedAtDESC :many
+-- name: FetchUserConnectionByProjectUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -2973,7 +2973,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserConnectionByProjectUuidOrderedByCreatedAtASC :many
+-- name: FetchUserConnectionByProjectUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -2981,7 +2981,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserConnectionByProjectUuidOrderedByCreatedAtDESC :many
+-- name: FetchUserConnectionByProjectUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -2990,7 +2990,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtASC :many
+-- name: FetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -2998,7 +2998,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserConnectionByProjectVersionUuidOrderedByUpdatedAtDESC :many
+-- name: FetchUserConnectionByProjectVersionUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -3007,7 +3007,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtASC :many
+-- name: FetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -3015,7 +3015,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserConnectionByProjectVersionUuidOrderedByCreatedAtDESC :many
+-- name: FetchUserConnectionByProjectVersionUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -3058,7 +3058,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserConnectionByUserUuidOrderedByUpdatedAtASC :many
+-- name: FetchUserConnectionByUserUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -3066,7 +3066,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserConnectionByUserUuidOrderedByUpdatedAtDESC :many
+-- name: FetchUserConnectionByUserUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -3075,7 +3075,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserConnectionByUserUuidOrderedByCreatedAtASC :many
+-- name: FetchUserConnectionByUserUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -3083,7 +3083,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserConnectionByUserUuidOrderedByCreatedAtDESC :many
+-- name: FetchUserConnectionByUserUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`
 WHERE 
@@ -3097,7 +3097,7 @@ LIMIT ?, ?;
 
 
 -- user_team selects:
--- name: FetchUserTeamByUuid :many
+-- name: FetchUserTeamByUUID :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 
@@ -3118,7 +3118,7 @@ WHERE
     `status` = ? 
 LIMIT ?, ?;
         
--- name: FetchUserTeamByTeamUuid :many
+-- name: FetchUserTeamByTeamUUID :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 
@@ -3132,14 +3132,14 @@ WHERE
     `user_email` = ? 
 LIMIT ?, ?;
         
--- name: FetchUserTeamByUserUuid :many
+-- name: FetchUserTeamByUserUUID :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 
     `user_uuid` = ? 
 LIMIT ?, ?;
         
--- name: FetchUserTeamByUuidForUpdate :many
+-- name: FetchUserTeamByUUIDForUpdate :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 
@@ -3214,7 +3214,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserTeamByTeamUuidOrderedByUpdatedAtASC :many
+-- name: FetchUserTeamByTeamUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 
@@ -3222,7 +3222,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserTeamByTeamUuidOrderedByUpdatedAtDESC :many
+-- name: FetchUserTeamByTeamUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 
@@ -3231,7 +3231,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserTeamByTeamUuidOrderedByCreatedAtASC :many
+-- name: FetchUserTeamByTeamUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 
@@ -3239,7 +3239,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserTeamByTeamUuidOrderedByCreatedAtDESC :many
+-- name: FetchUserTeamByTeamUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 
@@ -3282,7 +3282,7 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserTeamByUserUuidOrderedByUpdatedAtASC :many
+-- name: FetchUserTeamByUserUUIDOrderedByUpdatedAtASC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 
@@ -3290,7 +3290,7 @@ WHERE
 ORDER BY updated_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserTeamByUserUuidOrderedByUpdatedAtDESC :many
+-- name: FetchUserTeamByUserUUIDOrderedByUpdatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 
@@ -3299,7 +3299,7 @@ ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             
--- name: FetchUserTeamByUserUuidOrderedByCreatedAtASC :many
+-- name: FetchUserTeamByUserUUIDOrderedByCreatedAtASC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 
@@ -3307,7 +3307,7 @@ WHERE
 ORDER BY created_at ASC
 LIMIT ?, ?;
 
--- name: FetchUserTeamByUserUuidOrderedByCreatedAtDESC :many
+-- name: FetchUserTeamByUserUUIDOrderedByCreatedAtDESC :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`
 WHERE 

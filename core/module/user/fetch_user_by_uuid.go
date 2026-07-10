@@ -9,36 +9,36 @@ import (
 	"github.com/nuzur/nem/core/module/user/types"
 )
 
-func (m *module) FetchUserByUuid(
+func (m *module) FetchUserByUUID(
 	ctx context.Context,
-	req types.FetchUserByUuidRequest,
+	req types.FetchUserByUUIDRequest,
 	opts ...Option,
-) (types.FetchUserByUuidResponse, error) {
+) (types.FetchUserByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchUserByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchUserByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchUserByUuidResponse), nil
+			return cached.(types.FetchUserByUUIDResponse), nil
 		}
 	}
 	v, err, _ := m.sg.Do(cacheKey, func() (any, error) {
-		models, err := m.repository.Queries.FetchUserByUuid(
+		models, err := m.repository.Queries.FetchUserByUUID(
 			ctx,
 			req.UUID.String(),
 		)
 		if err != nil {
 
-			return types.FetchUserByUuidResponse{}, err
+			return types.FetchUserByUUIDResponse{}, err
 		}
-		return types.FetchUserByUuidResponse{
+		return types.FetchUserByUUIDResponse{
 			Results: mapModelsToEntities(models),
 		}, nil
 	})
 	if err != nil {
-		return types.FetchUserByUuidResponse{}, err
+		return types.FetchUserByUUIDResponse{}, err
 	}
-	result := v.(types.FetchUserByUuidResponse)
+	result := v.(types.FetchUserByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

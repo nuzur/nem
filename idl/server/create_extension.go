@@ -20,7 +20,7 @@ func (s *server) CreateExtension(ctx context.Context, req *pb.CreateExtensionReq
 		return nil, err
 	}
 
-	fetchRes, err := s.core.Extension().FetchExtensionByUuid(ctx, types.FetchExtensionByUuidRequest(res), extensionmodule.WithSkipCache())
+	fetchRes, err := s.core.Extension().FetchExtensionByUUID(ctx, types.FetchExtensionByUUIDRequest(res), extensionmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

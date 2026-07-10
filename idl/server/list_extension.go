@@ -131,6 +131,12 @@ func extensionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("visibility.description", filtering.TypeString),
 
+		filtering.DeclareIdent("visibility.organization_uuids", filtering.TypeString),
+
+		filtering.DeclareIdent("visibility.team_uuids", filtering.TypeString),
+
+		filtering.DeclareIdent("visibility.user_uuids", filtering.TypeString),
+
 		filtering.DeclareEnumIdent("visibility.roles", pb.VisibilityRoles(0).Type()),
 
 		filtering.DeclareIdent("visibility.created_at", filtering.TypeTimestamp),
@@ -162,6 +168,8 @@ func extensionDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("repository", filtering.TypeString),
 
 		filtering.DeclareEnumIdent("extension_type", pb.ExtensionType(0).Type()),
+
+		filtering.DeclareIdent("tags", filtering.TypeString),
 
 		filtering.DeclareIdent("pro", filtering.TypeBool),
 

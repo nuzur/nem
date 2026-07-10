@@ -32,7 +32,7 @@ func (m *module) Update(
 	}
 
 	qtx := m.repository.Queries.WithTx(tx)
-	existing, err := qtx.FetchUserTeamByUuidForUpdate(ctx,
+	existing, err := qtx.FetchUserTeamByUUIDForUpdate(ctx,
 		req.UserTeam.UUID.String(),
 	)
 	if err != nil {

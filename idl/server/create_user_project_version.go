@@ -20,7 +20,7 @@ func (s *server) CreateUserProjectVersion(ctx context.Context, req *pb.CreateUse
 		return nil, err
 	}
 
-	fetchRes, err := s.core.UserProjectVersion().FetchUserProjectVersionByUuid(ctx, types.FetchUserProjectVersionByUuidRequest(res), user_project_versionmodule.WithSkipCache())
+	fetchRes, err := s.core.UserProjectVersion().FetchUserProjectVersionByUUID(ctx, types.FetchUserProjectVersionByUUIDRequest(res), user_project_versionmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

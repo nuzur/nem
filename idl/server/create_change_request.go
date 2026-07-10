@@ -20,7 +20,7 @@ func (s *server) CreateChangeRequest(ctx context.Context, req *pb.CreateChangeRe
 		return nil, err
 	}
 
-	fetchRes, err := s.core.ChangeRequest().FetchChangeRequestByUuid(ctx, types.FetchChangeRequestByUuidRequest(res), change_requestmodule.WithSkipCache())
+	fetchRes, err := s.core.ChangeRequest().FetchChangeRequestByUUID(ctx, types.FetchChangeRequestByUUIDRequest(res), change_requestmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

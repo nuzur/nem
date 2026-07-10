@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchProjectVersionByUpdatedByUuid(
+func (m *module) FetchProjectVersionByUpdatedByUUID(
 	ctx context.Context,
-	req types.FetchProjectVersionByUpdatedByUuidRequest,
+	req types.FetchProjectVersionByUpdatedByUUIDRequest,
 	opts ...Option,
-) (types.FetchProjectVersionByUpdatedByUuidResponse, error) {
+) (types.FetchProjectVersionByUpdatedByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchProjectVersionByUpdatedByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchProjectVersionByUpdatedByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchProjectVersionByUpdatedByUuidResponse), nil
+			return cached.(types.FetchProjectVersionByUpdatedByUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchProjectVersionByUpdatedByUuid(
+			models, err := m.repository.Queries.FetchProjectVersionByUpdatedByUUID(
 				ctx,
-				nemdb.FetchProjectVersionByUpdatedByUuidParams{
+				nemdb.FetchProjectVersionByUpdatedByUUIDParams{
 					UpdatedByUUID: req.UpdatedByUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchProjectVersionByUpdatedByUuid(
 
 			if err != nil {
 
-				return types.FetchProjectVersionByUpdatedByUuidResponse{}, err
+				return types.FetchProjectVersionByUpdatedByUUIDResponse{}, err
 			}
-			return types.FetchProjectVersionByUpdatedByUuidResponse{
+			return types.FetchProjectVersionByUpdatedByUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchProjectVersionByUpdatedByUuidResponse{}, err
+		return types.FetchProjectVersionByUpdatedByUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchProjectVersionByUpdatedByUuidResponse{}, fetchErr
+		return types.FetchProjectVersionByUpdatedByUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchProjectVersionByUpdatedByUuidResponse)
+	result := v.(types.FetchProjectVersionByUpdatedByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

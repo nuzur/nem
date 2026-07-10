@@ -12,5 +12,5 @@ package nem;
 
 
 message EntityDataManagementConfig {  
-    string list_display_fields = 1;    
+    repeated string list_display_fields = 1;    
 }

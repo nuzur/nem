@@ -28,9 +28,9 @@ type Visibility struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Uuid              string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	Description       string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	OrganizationUuids string                 `protobuf:"bytes,3,opt,name=organization_uuids,json=organizationUuids,proto3" json:"organization_uuids,omitempty"`
-	TeamUuids         string                 `protobuf:"bytes,4,opt,name=team_uuids,json=teamUuids,proto3" json:"team_uuids,omitempty"`
-	UserUuids         string                 `protobuf:"bytes,5,opt,name=user_uuids,json=userUuids,proto3" json:"user_uuids,omitempty"`
+	OrganizationUuids []string               `protobuf:"bytes,3,rep,name=organization_uuids,json=organizationUuids,proto3" json:"organization_uuids,omitempty"`
+	TeamUuids         []string               `protobuf:"bytes,4,rep,name=team_uuids,json=teamUuids,proto3" json:"team_uuids,omitempty"`
+	UserUuids         []string               `protobuf:"bytes,5,rep,name=user_uuids,json=userUuids,proto3" json:"user_uuids,omitempty"`
 	Roles             VisibilityRoles        `protobuf:"varint,6,opt,name=roles,proto3,enum=nem.VisibilityRoles" json:"roles,omitempty"`
 	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
@@ -84,25 +84,25 @@ func (x *Visibility) GetDescription() string {
 	return ""
 }
 
-func (x *Visibility) GetOrganizationUuids() string {
+func (x *Visibility) GetOrganizationUuids() []string {
 	if x != nil {
 		return x.OrganizationUuids
 	}
-	return ""
+	return nil
 }
 
-func (x *Visibility) GetTeamUuids() string {
+func (x *Visibility) GetTeamUuids() []string {
 	if x != nil {
 		return x.TeamUuids
 	}
-	return ""
+	return nil
 }
 
-func (x *Visibility) GetUserUuids() string {
+func (x *Visibility) GetUserUuids() []string {
 	if x != nil {
 		return x.UserUuids
 	}
-	return ""
+	return nil
 }
 
 func (x *Visibility) GetRoles() VisibilityRoles {
@@ -149,11 +149,11 @@ const file_visibility_proto_rawDesc = "" +
 	"Visibility\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12-\n" +
-	"\x12organization_uuids\x18\x03 \x01(\tR\x11organizationUuids\x12\x1d\n" +
+	"\x12organization_uuids\x18\x03 \x03(\tR\x11organizationUuids\x12\x1d\n" +
 	"\n" +
-	"team_uuids\x18\x04 \x01(\tR\tteamUuids\x12\x1d\n" +
+	"team_uuids\x18\x04 \x03(\tR\tteamUuids\x12\x1d\n" +
 	"\n" +
-	"user_uuids\x18\x05 \x01(\tR\tuserUuids\x12*\n" +
+	"user_uuids\x18\x05 \x03(\tR\tuserUuids\x12*\n" +
 	"\x05roles\x18\x06 \x01(\x0e2\x14.nem.VisibilityRolesR\x05roles\x129\n" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +

@@ -8,8 +8,8 @@ import (
 
 func (e FieldTypePhoneConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"allow_countries":   entitytypes.RawJSONFieldType,
-		"exclude_countries": entitytypes.RawJSONFieldType,
+		"allow_countries":   entitytypes.StringFieldType,
+		"exclude_countries": entitytypes.StringFieldType,
 	}
 }
 
@@ -38,5 +38,7 @@ func (e FieldTypePhoneConfig) PrimaryKeyIdentifiers() []string {
 func (e FieldTypePhoneConfig) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["allow_countries"] = entitytypes.StringFieldType
+	res["exclude_countries"] = entitytypes.StringFieldType
 	return res
 }

@@ -20,7 +20,7 @@ func (s *server) CreateAiUsage(ctx context.Context, req *pb.CreateAiUsageRequest
 		return nil, err
 	}
 
-	fetchRes, err := s.core.AiUsage().FetchAiUsageByUuid(ctx, types.FetchAiUsageByUuidRequest(res), ai_usagemodule.WithSkipCache())
+	fetchRes, err := s.core.AiUsage().FetchAiUsageByUUID(ctx, types.FetchAiUsageByUUIDRequest(res), ai_usagemodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

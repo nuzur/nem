@@ -9,7 +9,7 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-type FetchExtensionExecutionByProjectVersionUuidRequest struct {
+type FetchExtensionExecutionByProjectVersionUUIDRequest struct {
 	ProjectVersionUUID uuid.UUID
 
 	Offset  int32
@@ -18,13 +18,13 @@ type FetchExtensionExecutionByProjectVersionUuidRequest struct {
 	Sort    string
 }
 
-func (r FetchExtensionExecutionByProjectVersionUuidRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
+func (r FetchExtensionExecutionByProjectVersionUUIDRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
 
 	e.AddString("project_version_uuid", r.ProjectVersionUUID.String())
 
 	return nil
 }
 
-type FetchExtensionExecutionByProjectVersionUuidResponse struct {
+type FetchExtensionExecutionByProjectVersionUUIDResponse struct {
 	Results []main_entity.ExtensionExecution
 }

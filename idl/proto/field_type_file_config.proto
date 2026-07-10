@@ -16,7 +16,7 @@ import "file_storage_config.proto";
 message FieldTypeFileConfig {  
     FieldTypeFileConfigStorageType storage_type = 1;
     FileStorageConfig storage_config = 2;
-    string allowed_extensions = 3;
+    repeated string allowed_extensions = 3;
     int64 max_size = 4;
     bool allow_multiple = 5;
     int64 max_files = 6;    

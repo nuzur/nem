@@ -35,8 +35,8 @@ func (s *server) UpdateLocalAgent(ctx context.Context, req *pb.UpdateLocalAgentR
 		}
 
 		pkEntity := pbmapper.LocalAgentFromProto(req.GetLocalAgent())
-		existingRes, err := s.core.LocalAgent().FetchLocalAgentByUuid(ctx,
-			types.FetchLocalAgentByUuidRequest{
+		existingRes, err := s.core.LocalAgent().FetchLocalAgentByUUID(ctx,
+			types.FetchLocalAgentByUUIDRequest{
 				UUID: pkEntity.UUID,
 			},
 			local_agentmodule.WithSkipCache(),
@@ -62,7 +62,7 @@ func (s *server) UpdateLocalAgent(ctx context.Context, req *pb.UpdateLocalAgentR
 		return nil, err
 	}
 
-	fetchRes, err := s.core.LocalAgent().FetchLocalAgentByUuid(ctx, types.FetchLocalAgentByUuidRequest(res), local_agentmodule.WithSkipCache())
+	fetchRes, err := s.core.LocalAgent().FetchLocalAgentByUUID(ctx, types.FetchLocalAgentByUUIDRequest(res), local_agentmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

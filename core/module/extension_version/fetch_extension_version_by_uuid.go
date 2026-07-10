@@ -9,36 +9,36 @@ import (
 	"github.com/nuzur/nem/core/module/extension_version/types"
 )
 
-func (m *module) FetchExtensionVersionByUuid(
+func (m *module) FetchExtensionVersionByUUID(
 	ctx context.Context,
-	req types.FetchExtensionVersionByUuidRequest,
+	req types.FetchExtensionVersionByUUIDRequest,
 	opts ...Option,
-) (types.FetchExtensionVersionByUuidResponse, error) {
+) (types.FetchExtensionVersionByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchExtensionVersionByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchExtensionVersionByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchExtensionVersionByUuidResponse), nil
+			return cached.(types.FetchExtensionVersionByUUIDResponse), nil
 		}
 	}
 	v, err, _ := m.sg.Do(cacheKey, func() (any, error) {
-		models, err := m.repository.Queries.FetchExtensionVersionByUuid(
+		models, err := m.repository.Queries.FetchExtensionVersionByUUID(
 			ctx,
 			req.UUID.String(),
 		)
 		if err != nil {
 
-			return types.FetchExtensionVersionByUuidResponse{}, err
+			return types.FetchExtensionVersionByUUIDResponse{}, err
 		}
-		return types.FetchExtensionVersionByUuidResponse{
+		return types.FetchExtensionVersionByUUIDResponse{
 			Results: mapModelsToEntities(models),
 		}, nil
 	})
 	if err != nil {
-		return types.FetchExtensionVersionByUuidResponse{}, err
+		return types.FetchExtensionVersionByUUIDResponse{}, err
 	}
-	result := v.(types.FetchExtensionVersionByUuidResponse)
+	result := v.(types.FetchExtensionVersionByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

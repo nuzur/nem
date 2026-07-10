@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchUserProjectByProjectUuid(
+func (m *module) FetchUserProjectByProjectUUID(
 	ctx context.Context,
-	req types.FetchUserProjectByProjectUuidRequest,
+	req types.FetchUserProjectByProjectUUIDRequest,
 	opts ...Option,
-) (types.FetchUserProjectByProjectUuidResponse, error) {
+) (types.FetchUserProjectByProjectUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchUserProjectByProjectUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchUserProjectByProjectUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchUserProjectByProjectUuidResponse), nil
+			return cached.(types.FetchUserProjectByProjectUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchUserProjectByProjectUuid(
+			models, err := m.repository.Queries.FetchUserProjectByProjectUUID(
 				ctx,
-				nemdb.FetchUserProjectByProjectUuidParams{
+				nemdb.FetchUserProjectByProjectUUIDParams{
 					ProjectUUID: req.ProjectUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchUserProjectByProjectUuid(
 
 			if err != nil {
 
-				return types.FetchUserProjectByProjectUuidResponse{}, err
+				return types.FetchUserProjectByProjectUUIDResponse{}, err
 			}
-			return types.FetchUserProjectByProjectUuidResponse{
+			return types.FetchUserProjectByProjectUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchUserProjectByProjectUuidResponse{}, err
+		return types.FetchUserProjectByProjectUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchUserProjectByProjectUuidResponse{}, fetchErr
+		return types.FetchUserProjectByProjectUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchUserProjectByProjectUuidResponse)
+	result := v.(types.FetchUserProjectByProjectUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

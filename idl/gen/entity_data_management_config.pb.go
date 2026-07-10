@@ -25,7 +25,7 @@ const (
 
 type EntityDataManagementConfig struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	ListDisplayFields string                 `protobuf:"bytes,1,opt,name=list_display_fields,json=listDisplayFields,proto3" json:"list_display_fields,omitempty"`
+	ListDisplayFields []string               `protobuf:"bytes,1,rep,name=list_display_fields,json=listDisplayFields,proto3" json:"list_display_fields,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -60,11 +60,11 @@ func (*EntityDataManagementConfig) Descriptor() ([]byte, []int) {
 	return file_entity_data_management_config_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *EntityDataManagementConfig) GetListDisplayFields() string {
+func (x *EntityDataManagementConfig) GetListDisplayFields() []string {
 	if x != nil {
 		return x.ListDisplayFields
 	}
-	return ""
+	return nil
 }
 
 var File_entity_data_management_config_proto protoreflect.FileDescriptor
@@ -73,7 +73,7 @@ const file_entity_data_management_config_proto_rawDesc = "" +
 	"\n" +
 	"#entity_data_management_config.proto\x12\x03nem\"L\n" +
 	"\x1aEntityDataManagementConfig\x12.\n" +
-	"\x13list_display_fields\x18\x01 \x01(\tR\x11listDisplayFieldsBA\n" +
+	"\x13list_display_fields\x18\x01 \x03(\tR\x11listDisplayFieldsBA\n" +
 	"\x14github.com/nuzur/nemB\x1aEntityDataManagementConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

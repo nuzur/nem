@@ -15,7 +15,7 @@ import (
 )
 
 type Module interface {
-	FetchLocalAgentByUuid(ctx context.Context, req types.FetchLocalAgentByUuidRequest, opts ...Option) (types.FetchLocalAgentByUuidResponse, error)
+	FetchLocalAgentByUUID(ctx context.Context, req types.FetchLocalAgentByUUIDRequest, opts ...Option) (types.FetchLocalAgentByUUIDResponse, error)
 	FetchLocalAgentByStatus(ctx context.Context, req types.FetchLocalAgentByStatusRequest, opts ...Option) (types.FetchLocalAgentByStatusResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)

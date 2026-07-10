@@ -33,7 +33,7 @@ func mapModelToEntity(m nemdb.Extension) main_entity.Extension {
 		Verified:          m.Verified,
 		Repository:        m.Repository,
 		ExtensionType:     enums.ExtensionType(m.ExtensionType),
-		Tags:              m.Tags,
+		Tags:              mapper.JSONToStringSlice(m.Tags),
 		Pro:               m.Pro,
 		Public:            m.Public,
 		Visibility:        visibility.VisibilitySliceFromJSON(m.Visibility),

@@ -13,6 +13,6 @@ package nem;
 
 message RelationshipNodeTypeEntityConfig {  
     string entity_uuid = 1;
-    string field_uuids = 2;
+    repeated string field_uuids = 2;
     bool fields_generated = 3;    
 }

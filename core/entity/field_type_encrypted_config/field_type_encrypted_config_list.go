@@ -13,7 +13,7 @@ func (e FieldTypeEncryptedConfig) FieldIdentifierToTypeMap() map[string]entityty
 		"regex_validation": entitytypes.StringFieldType,
 		"encryption_type":  entitytypes.SingleEnumFieldType,
 		"use_salt":         entitytypes.BooleanFieldType,
-		"salt_field_uuids": entitytypes.RawJSONFieldType,
+		"salt_field_uuids": entitytypes.StringFieldType,
 	}
 }
 
@@ -46,5 +46,6 @@ func (e FieldTypeEncryptedConfig) PrimaryKeyIdentifiers() []string {
 func (e FieldTypeEncryptedConfig) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["salt_field_uuids"] = entitytypes.StringFieldType
 	return res
 }

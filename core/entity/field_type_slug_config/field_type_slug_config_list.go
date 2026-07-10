@@ -11,7 +11,7 @@ func (e FieldTypeSlugConfig) FieldIdentifierToTypeMap() map[string]entitytypes.F
 		"min_size":             entitytypes.IntFieldType,
 		"max_size":             entitytypes.IntFieldType,
 		"regex_validation":     entitytypes.StringFieldType,
-		"based_on_field_uuids": entitytypes.RawJSONFieldType,
+		"based_on_field_uuids": entitytypes.StringFieldType,
 	}
 }
 
@@ -42,5 +42,6 @@ func (e FieldTypeSlugConfig) PrimaryKeyIdentifiers() []string {
 func (e FieldTypeSlugConfig) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["based_on_field_uuids"] = entitytypes.StringFieldType
 	return res
 }

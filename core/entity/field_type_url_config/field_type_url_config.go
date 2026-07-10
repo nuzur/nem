@@ -10,10 +10,10 @@ import (
 )
 
 type FieldTypeURLConfig struct {
-	AllowDomains      json.RawMessage `json:"allow_domains"`
-	ExcludeDomains    json.RawMessage `json:"exclude_domains"`
-	HTTPSRequired     bool            `json:"https_required"`
-	AllowedExtensions json.RawMessage `json:"allowed_extensions"`
+	AllowDomains      []string `json:"allow_domains"`
+	ExcludeDomains    []string `json:"exclude_domains"`
+	HTTPSRequired     bool     `json:"https_required"`
+	AllowedExtensions []string `json:"allowed_extensions"`
 }
 
 func (e FieldTypeURLConfig) String() string {

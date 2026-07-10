@@ -9,36 +9,36 @@ import (
 	"github.com/nuzur/nem/core/module/local_agent/types"
 )
 
-func (m *module) FetchLocalAgentByUuid(
+func (m *module) FetchLocalAgentByUUID(
 	ctx context.Context,
-	req types.FetchLocalAgentByUuidRequest,
+	req types.FetchLocalAgentByUUIDRequest,
 	opts ...Option,
-) (types.FetchLocalAgentByUuidResponse, error) {
+) (types.FetchLocalAgentByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchLocalAgentByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchLocalAgentByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchLocalAgentByUuidResponse), nil
+			return cached.(types.FetchLocalAgentByUUIDResponse), nil
 		}
 	}
 	v, err, _ := m.sg.Do(cacheKey, func() (any, error) {
-		models, err := m.repository.Queries.FetchLocalAgentByUuid(
+		models, err := m.repository.Queries.FetchLocalAgentByUUID(
 			ctx,
 			req.UUID.String(),
 		)
 		if err != nil {
 
-			return types.FetchLocalAgentByUuidResponse{}, err
+			return types.FetchLocalAgentByUUIDResponse{}, err
 		}
-		return types.FetchLocalAgentByUuidResponse{
+		return types.FetchLocalAgentByUUIDResponse{
 			Results: mapModelsToEntities(models),
 		}, nil
 	})
 	if err != nil {
-		return types.FetchLocalAgentByUuidResponse{}, err
+		return types.FetchLocalAgentByUUIDResponse{}, err
 	}
-	result := v.(types.FetchLocalAgentByUuidResponse)
+	result := v.(types.FetchLocalAgentByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

@@ -15,5 +15,5 @@ message FieldTypeSlugConfig {
     int64 min_size = 1;
     int64 max_size = 2;
     string regex_validation = 3;
-    string based_on_field_uuids = 4;    
+    repeated string based_on_field_uuids = 4;    
 }

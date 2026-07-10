@@ -15,8 +15,8 @@ import (
 )
 
 type Module interface {
-	FetchExtensionVersionByUuid(ctx context.Context, req types.FetchExtensionVersionByUuidRequest, opts ...Option) (types.FetchExtensionVersionByUuidResponse, error)
-	FetchExtensionVersionByExtensionUuid(ctx context.Context, req types.FetchExtensionVersionByExtensionUuidRequest, opts ...Option) (types.FetchExtensionVersionByExtensionUuidResponse, error)
+	FetchExtensionVersionByUUID(ctx context.Context, req types.FetchExtensionVersionByUUIDRequest, opts ...Option) (types.FetchExtensionVersionByUUIDResponse, error)
+	FetchExtensionVersionByExtensionUUID(ctx context.Context, req types.FetchExtensionVersionByExtensionUUIDRequest, opts ...Option) (types.FetchExtensionVersionByExtensionUUIDResponse, error)
 	FetchExtensionVersionByStatus(ctx context.Context, req types.FetchExtensionVersionByStatusRequest, opts ...Option) (types.FetchExtensionVersionByStatusResponse, error)
 	FetchExtensionVersionByVersion(ctx context.Context, req types.FetchExtensionVersionByVersionRequest, opts ...Option) (types.FetchExtensionVersionByVersionResponse, error)
 

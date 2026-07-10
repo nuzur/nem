@@ -8,8 +8,6 @@ import (
 
 	"github.com/guregu/null/v6"
 
-	"encoding/json"
-
 	"github.com/nuzur/nem/enums"
 
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -19,9 +17,9 @@ func VisibilityToProto(e main_entity.Visibility) *pb.Visibility {
 	return &pb.Visibility{
 		Uuid:              e.UUID.String(),
 		Description:       e.Description.ValueOrZero(),
-		OrganizationUuids: string(e.OrganizationUUIDs),
-		TeamUuids:         string(e.TeamUUIDs),
-		UserUuids:         string(e.UserUUIDs),
+		OrganizationUuids: UUIDSliceToStringSlice(e.OrganizationUUIDs),
+		TeamUuids:         UUIDSliceToStringSlice(e.TeamUUIDs),
+		UserUuids:         UUIDSliceToStringSlice(e.UserUUIDs),
 		Roles:             pb.VisibilityRoles(e.Roles),
 		CreatedAt:         timestamppb.New(e.CreatedAt),
 		UpdatedAt:         timestamppb.New(e.UpdatedAt),
@@ -45,9 +43,9 @@ func VisibilityFromProto(m *pb.Visibility) main_entity.Visibility {
 	return main_entity.Visibility{
 		UUID:              StringToUUID(m.GetUuid()),
 		Description:       null.StringFrom(m.Description),
-		OrganizationUUIDs: json.RawMessage([]byte(m.GetOrganizationUuids())),
-		TeamUUIDs:         json.RawMessage([]byte(m.GetTeamUuids())),
-		UserUUIDs:         json.RawMessage([]byte(m.GetUserUuids())),
+		OrganizationUUIDs: StringSliceToUUIDSlice(m.GetOrganizationUuids()),
+		TeamUUIDs:         StringSliceToUUIDSlice(m.GetTeamUuids()),
+		UserUUIDs:         StringSliceToUUIDSlice(m.GetUserUuids()),
 		Roles:             enums.VisibilityRoles(m.GetRoles()),
 		CreatedAt:         m.GetCreatedAt().AsTime(),
 		UpdatedAt:         m.GetUpdatedAt().AsTime(),

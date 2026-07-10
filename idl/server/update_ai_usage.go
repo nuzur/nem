@@ -35,8 +35,8 @@ func (s *server) UpdateAiUsage(ctx context.Context, req *pb.UpdateAiUsageRequest
 		}
 
 		pkEntity := pbmapper.AiUsageFromProto(req.GetAiUsage())
-		existingRes, err := s.core.AiUsage().FetchAiUsageByUuid(ctx,
-			types.FetchAiUsageByUuidRequest{
+		existingRes, err := s.core.AiUsage().FetchAiUsageByUUID(ctx,
+			types.FetchAiUsageByUUIDRequest{
 				UUID: pkEntity.UUID,
 			},
 			ai_usagemodule.WithSkipCache(),
@@ -62,7 +62,7 @@ func (s *server) UpdateAiUsage(ctx context.Context, req *pb.UpdateAiUsageRequest
 		return nil, err
 	}
 
-	fetchRes, err := s.core.AiUsage().FetchAiUsageByUuid(ctx, types.FetchAiUsageByUuidRequest(res), ai_usagemodule.WithSkipCache())
+	fetchRes, err := s.core.AiUsage().FetchAiUsageByUUID(ctx, types.FetchAiUsageByUUIDRequest(res), ai_usagemodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

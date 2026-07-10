@@ -10,8 +10,8 @@ import (
 )
 
 type FieldTypeEmailConfig struct {
-	AllowDomains   json.RawMessage `json:"allow_domains"`
-	ExcludeDomains json.RawMessage `json:"exclude_domains"`
+	AllowDomains   []string `json:"allow_domains"`
+	ExcludeDomains []string `json:"exclude_domains"`
 }
 
 func (e FieldTypeEmailConfig) String() string {

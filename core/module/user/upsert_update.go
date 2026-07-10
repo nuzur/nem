@@ -30,7 +30,7 @@ func (m *module) Update(
 	}
 
 	qtx := m.repository.Queries.WithTx(tx)
-	existing, err := qtx.FetchUserByUuidForUpdate(ctx,
+	existing, err := qtx.FetchUserByUUIDForUpdate(ctx,
 		req.User.UUID.String(),
 	)
 	if err != nil {

@@ -28,7 +28,7 @@ type FieldTypeSlugConfig struct {
 	MinSize           int64                  `protobuf:"varint,1,opt,name=min_size,json=minSize,proto3" json:"min_size,omitempty"`
 	MaxSize           int64                  `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3" json:"max_size,omitempty"`
 	RegexValidation   string                 `protobuf:"bytes,3,opt,name=regex_validation,json=regexValidation,proto3" json:"regex_validation,omitempty"`
-	BasedOnFieldUuids string                 `protobuf:"bytes,4,opt,name=based_on_field_uuids,json=basedOnFieldUuids,proto3" json:"based_on_field_uuids,omitempty"`
+	BasedOnFieldUuids []string               `protobuf:"bytes,4,rep,name=based_on_field_uuids,json=basedOnFieldUuids,proto3" json:"based_on_field_uuids,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -84,11 +84,11 @@ func (x *FieldTypeSlugConfig) GetRegexValidation() string {
 	return ""
 }
 
-func (x *FieldTypeSlugConfig) GetBasedOnFieldUuids() string {
+func (x *FieldTypeSlugConfig) GetBasedOnFieldUuids() []string {
 	if x != nil {
 		return x.BasedOnFieldUuids
 	}
-	return ""
+	return nil
 }
 
 var File_field_type_slug_config_proto protoreflect.FileDescriptor
@@ -100,7 +100,7 @@ const file_field_type_slug_config_proto_rawDesc = "" +
 	"\bmin_size\x18\x01 \x01(\x03R\aminSize\x12\x19\n" +
 	"\bmax_size\x18\x02 \x01(\x03R\amaxSize\x12)\n" +
 	"\x10regex_validation\x18\x03 \x01(\tR\x0fregexValidation\x12/\n" +
-	"\x14based_on_field_uuids\x18\x04 \x01(\tR\x11basedOnFieldUuidsB:\n" +
+	"\x14based_on_field_uuids\x18\x04 \x03(\tR\x11basedOnFieldUuidsB:\n" +
 	"\x14github.com/nuzur/nemB\x13FieldTypeSlugConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

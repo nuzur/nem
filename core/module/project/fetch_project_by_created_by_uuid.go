@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchProjectByCreatedByUuid(
+func (m *module) FetchProjectByCreatedByUUID(
 	ctx context.Context,
-	req types.FetchProjectByCreatedByUuidRequest,
+	req types.FetchProjectByCreatedByUUIDRequest,
 	opts ...Option,
-) (types.FetchProjectByCreatedByUuidResponse, error) {
+) (types.FetchProjectByCreatedByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchProjectByCreatedByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchProjectByCreatedByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchProjectByCreatedByUuidResponse), nil
+			return cached.(types.FetchProjectByCreatedByUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchProjectByCreatedByUuid(
+			models, err := m.repository.Queries.FetchProjectByCreatedByUUID(
 				ctx,
-				nemdb.FetchProjectByCreatedByUuidParams{
+				nemdb.FetchProjectByCreatedByUUIDParams{
 					CreatedByUUID: req.CreatedByUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchProjectByCreatedByUuid(
 
 			if err != nil {
 
-				return types.FetchProjectByCreatedByUuidResponse{}, err
+				return types.FetchProjectByCreatedByUUIDResponse{}, err
 			}
-			return types.FetchProjectByCreatedByUuidResponse{
+			return types.FetchProjectByCreatedByUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchProjectByCreatedByUuidResponse{}, err
+		return types.FetchProjectByCreatedByUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchProjectByCreatedByUuidResponse{}, fetchErr
+		return types.FetchProjectByCreatedByUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchProjectByCreatedByUuidResponse)
+	result := v.(types.FetchProjectByCreatedByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

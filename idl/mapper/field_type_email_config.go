@@ -5,14 +5,12 @@ package mapper
 import (
 	main_entity "github.com/nuzur/nem/core/entity/field_type_email_config"
 	pb "github.com/nuzur/nem/idl/gen"
-
-	"encoding/json"
 )
 
 func FieldTypeEmailConfigToProto(e main_entity.FieldTypeEmailConfig) *pb.FieldTypeEmailConfig {
 	return &pb.FieldTypeEmailConfig{
-		AllowDomains:   string(e.AllowDomains),
-		ExcludeDomains: string(e.ExcludeDomains),
+		AllowDomains:   e.AllowDomains,
+		ExcludeDomains: e.ExcludeDomains,
 	}
 }
 
@@ -29,8 +27,8 @@ func FieldTypeEmailConfigFromProto(m *pb.FieldTypeEmailConfig) main_entity.Field
 		return main_entity.FieldTypeEmailConfig{}
 	}
 	return main_entity.FieldTypeEmailConfig{
-		AllowDomains:   json.RawMessage([]byte(m.GetAllowDomains())),
-		ExcludeDomains: json.RawMessage([]byte(m.GetExcludeDomains())),
+		AllowDomains:   m.GetAllowDomains(),
+		ExcludeDomains: m.GetExcludeDomains(),
 	}
 }
 

@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchAiUsageByProjectUuid(
+func (m *module) FetchAiUsageByProjectUUID(
 	ctx context.Context,
-	req types.FetchAiUsageByProjectUuidRequest,
+	req types.FetchAiUsageByProjectUUIDRequest,
 	opts ...Option,
-) (types.FetchAiUsageByProjectUuidResponse, error) {
+) (types.FetchAiUsageByProjectUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchAiUsageByProjectUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchAiUsageByProjectUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchAiUsageByProjectUuidResponse), nil
+			return cached.(types.FetchAiUsageByProjectUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchAiUsageByProjectUuid(
+			models, err := m.repository.Queries.FetchAiUsageByProjectUUID(
 				ctx,
-				nemdb.FetchAiUsageByProjectUuidParams{
+				nemdb.FetchAiUsageByProjectUUIDParams{
 					ProjectUUID: req.ProjectUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchAiUsageByProjectUuid(
 
 			if err != nil {
 
-				return types.FetchAiUsageByProjectUuidResponse{}, err
+				return types.FetchAiUsageByProjectUUIDResponse{}, err
 			}
-			return types.FetchAiUsageByProjectUuidResponse{
+			return types.FetchAiUsageByProjectUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchAiUsageByProjectUuidResponse{}, err
+		return types.FetchAiUsageByProjectUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchAiUsageByProjectUuidResponse{}, fetchErr
+		return types.FetchAiUsageByProjectUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchAiUsageByProjectUuidResponse)
+	result := v.(types.FetchAiUsageByProjectUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

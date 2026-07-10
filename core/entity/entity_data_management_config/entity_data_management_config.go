@@ -6,11 +6,13 @@ import (
 	"encoding/json"
 	"log"
 
+	"github.com/gofrs/uuid"
+
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 type EntityDataManagementConfig struct {
-	ListDisplayFields json.RawMessage `json:"list_display_fields"`
+	ListDisplayFields []uuid.UUID `json:"list_display_fields"`
 }
 
 func (e EntityDataManagementConfig) String() string {

@@ -15,12 +15,12 @@ import (
 )
 
 type Module interface {
-	FetchUserProjectByUuid(ctx context.Context, req types.FetchUserProjectByUuidRequest, opts ...Option) (types.FetchUserProjectByUuidResponse, error)
-	FetchUserProjectByProjectUuid(ctx context.Context, req types.FetchUserProjectByProjectUuidRequest, opts ...Option) (types.FetchUserProjectByProjectUuidResponse, error)
+	FetchUserProjectByUUID(ctx context.Context, req types.FetchUserProjectByUUIDRequest, opts ...Option) (types.FetchUserProjectByUUIDResponse, error)
+	FetchUserProjectByProjectUUID(ctx context.Context, req types.FetchUserProjectByProjectUUIDRequest, opts ...Option) (types.FetchUserProjectByProjectUUIDResponse, error)
 	FetchUserProjectByRole(ctx context.Context, req types.FetchUserProjectByRoleRequest, opts ...Option) (types.FetchUserProjectByRoleResponse, error)
 	FetchUserProjectByStatus(ctx context.Context, req types.FetchUserProjectByStatusRequest, opts ...Option) (types.FetchUserProjectByStatusResponse, error)
 	FetchUserProjectByUserEmail(ctx context.Context, req types.FetchUserProjectByUserEmailRequest, opts ...Option) (types.FetchUserProjectByUserEmailResponse, error)
-	FetchUserProjectByUserUuid(ctx context.Context, req types.FetchUserProjectByUserUuidRequest, opts ...Option) (types.FetchUserProjectByUserUuidResponse, error)
+	FetchUserProjectByUserUUID(ctx context.Context, req types.FetchUserProjectByUserUUIDRequest, opts ...Option) (types.FetchUserProjectByUserUUIDResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)
 

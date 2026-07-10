@@ -30,7 +30,7 @@ func (m *module) Delete(
 
 	qtx := m.repository.Queries.WithTx(tx)
 
-	existing, err := qtx.FetchLocalAgentByUuidForUpdate(ctx,
+	existing, err := qtx.FetchLocalAgentByUUIDForUpdate(ctx,
 		req.UUID.String(),
 	)
 	if err != nil {

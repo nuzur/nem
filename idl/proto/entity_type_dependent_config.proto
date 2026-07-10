@@ -12,6 +12,6 @@ package nem;
 
 
 message EntityTypeDependentConfig {  
-    string service_source_uuids = 1;
-    string entity_source_uuids = 2;    
+    repeated string service_source_uuids = 1;
+    repeated string entity_source_uuids = 2;    
 }

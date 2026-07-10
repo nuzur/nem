@@ -30,7 +30,7 @@ type FieldTypeEncryptedConfig struct {
 	RegexValidation string                                 `protobuf:"bytes,3,opt,name=regex_validation,json=regexValidation,proto3" json:"regex_validation,omitempty"`
 	EncryptionType  FieldTypeEncryptedConfigEncryptionType `protobuf:"varint,4,opt,name=encryption_type,json=encryptionType,proto3,enum=nem.FieldTypeEncryptedConfigEncryptionType" json:"encryption_type,omitempty"`
 	UseSalt         bool                                   `protobuf:"varint,5,opt,name=use_salt,json=useSalt,proto3" json:"use_salt,omitempty"`
-	SaltFieldUuids  string                                 `protobuf:"bytes,6,opt,name=salt_field_uuids,json=saltFieldUuids,proto3" json:"salt_field_uuids,omitempty"`
+	SaltFieldUuids  []string                               `protobuf:"bytes,6,rep,name=salt_field_uuids,json=saltFieldUuids,proto3" json:"salt_field_uuids,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -100,11 +100,11 @@ func (x *FieldTypeEncryptedConfig) GetUseSalt() bool {
 	return false
 }
 
-func (x *FieldTypeEncryptedConfig) GetSaltFieldUuids() string {
+func (x *FieldTypeEncryptedConfig) GetSaltFieldUuids() []string {
 	if x != nil {
 		return x.SaltFieldUuids
 	}
-	return ""
+	return nil
 }
 
 var File_field_type_encrypted_config_proto protoreflect.FileDescriptor
@@ -118,7 +118,7 @@ const file_field_type_encrypted_config_proto_rawDesc = "" +
 	"\x10regex_validation\x18\x03 \x01(\tR\x0fregexValidation\x12T\n" +
 	"\x0fencryption_type\x18\x04 \x01(\x0e2+.nem.FieldTypeEncryptedConfigEncryptionTypeR\x0eencryptionType\x12\x19\n" +
 	"\buse_salt\x18\x05 \x01(\bR\auseSalt\x12(\n" +
-	"\x10salt_field_uuids\x18\x06 \x01(\tR\x0esaltFieldUuidsB?\n" +
+	"\x10salt_field_uuids\x18\x06 \x03(\tR\x0esaltFieldUuidsB?\n" +
 	"\x14github.com/nuzur/nemB\x18FieldTypeEncryptedConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

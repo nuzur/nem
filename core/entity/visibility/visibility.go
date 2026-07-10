@@ -17,9 +17,9 @@ import (
 type Visibility struct {
 	UUID              uuid.UUID             `json:"uuid"`
 	Description       null.String           `json:"description"`
-	OrganizationUUIDs json.RawMessage       `json:"organization_uuids"`
-	TeamUUIDs         json.RawMessage       `json:"team_uuids"`
-	UserUUIDs         json.RawMessage       `json:"user_uuids"`
+	OrganizationUUIDs []uuid.UUID           `json:"organization_uuids"`
+	TeamUUIDs         []uuid.UUID           `json:"team_uuids"`
+	UserUUIDs         []uuid.UUID           `json:"user_uuids"`
 	Roles             enums.VisibilityRoles `json:"roles"`
 	CreatedAt         time.Time             `json:"created_at"`
 	UpdatedAt         time.Time             `json:"updated_at"`

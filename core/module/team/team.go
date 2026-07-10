@@ -15,11 +15,11 @@ import (
 )
 
 type Module interface {
-	FetchTeamByUuid(ctx context.Context, req types.FetchTeamByUuidRequest, opts ...Option) (types.FetchTeamByUuidResponse, error)
-	FetchTeamByCreatedByUuid(ctx context.Context, req types.FetchTeamByCreatedByUuidRequest, opts ...Option) (types.FetchTeamByCreatedByUuidResponse, error)
-	FetchTeamByOwnerUuid(ctx context.Context, req types.FetchTeamByOwnerUuidRequest, opts ...Option) (types.FetchTeamByOwnerUuidResponse, error)
+	FetchTeamByUUID(ctx context.Context, req types.FetchTeamByUUIDRequest, opts ...Option) (types.FetchTeamByUUIDResponse, error)
+	FetchTeamByCreatedByUUID(ctx context.Context, req types.FetchTeamByCreatedByUUIDRequest, opts ...Option) (types.FetchTeamByCreatedByUUIDResponse, error)
+	FetchTeamByOwnerUUID(ctx context.Context, req types.FetchTeamByOwnerUUIDRequest, opts ...Option) (types.FetchTeamByOwnerUUIDResponse, error)
 	FetchTeamByStatus(ctx context.Context, req types.FetchTeamByStatusRequest, opts ...Option) (types.FetchTeamByStatusResponse, error)
-	FetchTeamByUpdatedByUuid(ctx context.Context, req types.FetchTeamByUpdatedByUuidRequest, opts ...Option) (types.FetchTeamByUpdatedByUuidResponse, error)
+	FetchTeamByUpdatedByUUID(ctx context.Context, req types.FetchTeamByUpdatedByUUIDRequest, opts ...Option) (types.FetchTeamByUpdatedByUUIDResponse, error)
 	FetchTeamByVersion(ctx context.Context, req types.FetchTeamByVersionRequest, opts ...Option) (types.FetchTeamByVersionResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)

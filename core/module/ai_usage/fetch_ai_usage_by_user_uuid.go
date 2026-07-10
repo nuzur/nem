@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchAiUsageByUserUuid(
+func (m *module) FetchAiUsageByUserUUID(
 	ctx context.Context,
-	req types.FetchAiUsageByUserUuidRequest,
+	req types.FetchAiUsageByUserUUIDRequest,
 	opts ...Option,
-) (types.FetchAiUsageByUserUuidResponse, error) {
+) (types.FetchAiUsageByUserUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchAiUsageByUserUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchAiUsageByUserUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchAiUsageByUserUuidResponse), nil
+			return cached.(types.FetchAiUsageByUserUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchAiUsageByUserUuid(
+			models, err := m.repository.Queries.FetchAiUsageByUserUUID(
 				ctx,
-				nemdb.FetchAiUsageByUserUuidParams{
+				nemdb.FetchAiUsageByUserUUIDParams{
 					UserUUID: req.UserUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchAiUsageByUserUuid(
 
 			if err != nil {
 
-				return types.FetchAiUsageByUserUuidResponse{}, err
+				return types.FetchAiUsageByUserUUIDResponse{}, err
 			}
-			return types.FetchAiUsageByUserUuidResponse{
+			return types.FetchAiUsageByUserUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchAiUsageByUserUuidResponse{}, err
+		return types.FetchAiUsageByUserUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchAiUsageByUserUuidResponse{}, fetchErr
+		return types.FetchAiUsageByUserUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchAiUsageByUserUuidResponse)
+	result := v.(types.FetchAiUsageByUserUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

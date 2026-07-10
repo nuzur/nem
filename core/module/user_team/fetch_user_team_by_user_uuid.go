@@ -14,24 +14,24 @@ import (
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
-func (m *module) FetchUserTeamByUserUuid(
+func (m *module) FetchUserTeamByUserUUID(
 	ctx context.Context,
-	req types.FetchUserTeamByUserUuidRequest,
+	req types.FetchUserTeamByUserUUIDRequest,
 	opts ...Option,
-) (types.FetchUserTeamByUserUuidResponse, error) {
+) (types.FetchUserTeamByUserUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchUserTeamByUserUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchUserTeamByUserUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchUserTeamByUserUuidResponse), nil
+			return cached.(types.FetchUserTeamByUserUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchUserTeamByUserUuid(
+			models, err := m.repository.Queries.FetchUserTeamByUserUUID(
 				ctx,
-				nemdb.FetchUserTeamByUserUuidParams{
+				nemdb.FetchUserTeamByUserUUIDParams{
 					UserUUID: mapper.UUIDPtrToNullString(req.UserUUID),
 
 					Offset: req.Offset,
@@ -41,21 +41,21 @@ func (m *module) FetchUserTeamByUserUuid(
 
 			if err != nil {
 
-				return types.FetchUserTeamByUserUuidResponse{}, err
+				return types.FetchUserTeamByUserUUIDResponse{}, err
 			}
-			return types.FetchUserTeamByUserUuidResponse{
+			return types.FetchUserTeamByUserUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchUserTeamByUserUuidResponse{}, err
+		return types.FetchUserTeamByUserUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchUserTeamByUserUuidResponse{}, fetchErr
+		return types.FetchUserTeamByUserUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchUserTeamByUserUuidResponse)
+	result := v.(types.FetchUserTeamByUserUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

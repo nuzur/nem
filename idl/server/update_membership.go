@@ -35,8 +35,8 @@ func (s *server) UpdateMembership(ctx context.Context, req *pb.UpdateMembershipR
 		}
 
 		pkEntity := pbmapper.MembershipFromProto(req.GetMembership())
-		existingRes, err := s.core.Membership().FetchMembershipByUuid(ctx,
-			types.FetchMembershipByUuidRequest{
+		existingRes, err := s.core.Membership().FetchMembershipByUUID(ctx,
+			types.FetchMembershipByUUIDRequest{
 				UUID: pkEntity.UUID,
 			},
 			membershipmodule.WithSkipCache(),
@@ -62,7 +62,7 @@ func (s *server) UpdateMembership(ctx context.Context, req *pb.UpdateMembershipR
 		return nil, err
 	}
 
-	fetchRes, err := s.core.Membership().FetchMembershipByUuid(ctx, types.FetchMembershipByUuidRequest(res), membershipmodule.WithSkipCache())
+	fetchRes, err := s.core.Membership().FetchMembershipByUUID(ctx, types.FetchMembershipByUUIDRequest(res), membershipmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

@@ -32,7 +32,7 @@ func (m *module) Update(
 	}
 
 	qtx := m.repository.Queries.WithTx(tx)
-	existing, err := qtx.FetchLocalAgentByUuidForUpdate(ctx,
+	existing, err := qtx.FetchLocalAgentByUUIDForUpdate(ctx,
 		req.LocalAgent.UUID.String(),
 	)
 	if err != nil {

@@ -12,6 +12,8 @@ import (
 	"github.com/nuzur/nem/core/entity/project_extension"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -34,7 +36,7 @@ func (m *module) Update(
 	}
 
 	qtx := m.repository.Queries.WithTx(tx)
-	existing, err := qtx.FetchProjectByUuidForUpdate(ctx,
+	existing, err := qtx.FetchProjectByUUIDForUpdate(ctx,
 		req.Project.UUID.String(),
 	)
 	if err != nil {
@@ -94,7 +96,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateProject
 
 		Description: req.Project.Description,
 
-		Tags: req.Project.Tags,
+		Tags: mapper.SliceToJSON(req.Project.Tags),
 
 		URL: req.Project.URL,
 

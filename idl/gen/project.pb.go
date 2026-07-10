@@ -30,7 +30,7 @@ type Project struct {
 	Version           int64                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
 	Name              string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Description       string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Tags              string                 `protobuf:"bytes,5,opt,name=tags,proto3" json:"tags,omitempty"`
+	Tags              []string               `protobuf:"bytes,5,rep,name=tags,proto3" json:"tags,omitempty"`
 	Url               string                 `protobuf:"bytes,6,opt,name=url,proto3" json:"url,omitempty"`
 	OwnerUuid         string                 `protobuf:"bytes,7,opt,name=owner_uuid,json=ownerUuid,proto3" json:"owner_uuid,omitempty"`
 	TeamUuid          string                 `protobuf:"bytes,8,opt,name=team_uuid,json=teamUuid,proto3" json:"team_uuid,omitempty"`
@@ -103,11 +103,11 @@ func (x *Project) GetDescription() string {
 	return ""
 }
 
-func (x *Project) GetTags() string {
+func (x *Project) GetTags() []string {
 	if x != nil {
 		return x.Tags
 	}
-	return ""
+	return nil
 }
 
 func (x *Project) GetUrl() string {
@@ -190,7 +190,7 @@ const file_project_proto_rawDesc = "" +
 	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04tags\x18\x05 \x01(\tR\x04tags\x12\x10\n" +
+	"\x04tags\x18\x05 \x03(\tR\x04tags\x12\x10\n" +
 	"\x03url\x18\x06 \x01(\tR\x03url\x12\x1d\n" +
 	"\n" +
 	"owner_uuid\x18\a \x01(\tR\townerUuid\x12\x1b\n" +

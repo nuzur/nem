@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchExtensionExecutionByProjectUuid(
+func (m *module) FetchExtensionExecutionByProjectUUID(
 	ctx context.Context,
-	req types.FetchExtensionExecutionByProjectUuidRequest,
+	req types.FetchExtensionExecutionByProjectUUIDRequest,
 	opts ...Option,
-) (types.FetchExtensionExecutionByProjectUuidResponse, error) {
+) (types.FetchExtensionExecutionByProjectUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchExtensionExecutionByProjectUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchExtensionExecutionByProjectUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchExtensionExecutionByProjectUuidResponse), nil
+			return cached.(types.FetchExtensionExecutionByProjectUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchExtensionExecutionByProjectUuid(
+			models, err := m.repository.Queries.FetchExtensionExecutionByProjectUUID(
 				ctx,
-				nemdb.FetchExtensionExecutionByProjectUuidParams{
+				nemdb.FetchExtensionExecutionByProjectUUIDParams{
 					ProjectUUID: req.ProjectUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchExtensionExecutionByProjectUuid(
 
 			if err != nil {
 
-				return types.FetchExtensionExecutionByProjectUuidResponse{}, err
+				return types.FetchExtensionExecutionByProjectUUIDResponse{}, err
 			}
-			return types.FetchExtensionExecutionByProjectUuidResponse{
+			return types.FetchExtensionExecutionByProjectUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchExtensionExecutionByProjectUuidResponse{}, err
+		return types.FetchExtensionExecutionByProjectUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchExtensionExecutionByProjectUuidResponse{}, fetchErr
+		return types.FetchExtensionExecutionByProjectUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchExtensionExecutionByProjectUuidResponse)
+	result := v.(types.FetchExtensionExecutionByProjectUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

@@ -26,7 +26,7 @@ type Extension struct {
 	Verified          bool                    `json:"verified"`
 	Repository        string                  `json:"repository"`
 	ExtensionType     enums.ExtensionType     `json:"extension_type"`
-	Tags              json.RawMessage         `json:"tags"`
+	Tags              []string                `json:"tags"`
 	Pro               bool                    `json:"pro"`
 	Public            bool                    `json:"public"`
 	Visibility        []visibility.Visibility `json:"visibility"`

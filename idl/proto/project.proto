@@ -19,7 +19,7 @@ message Project {
     int64 version = 2;
     string name = 3;
     string description = 4;
-    string tags = 5;
+    repeated string tags = 5;
     string url = 6;
     string owner_uuid = 7;
     string team_uuid = 8;

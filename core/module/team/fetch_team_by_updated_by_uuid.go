@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchTeamByUpdatedByUuid(
+func (m *module) FetchTeamByUpdatedByUUID(
 	ctx context.Context,
-	req types.FetchTeamByUpdatedByUuidRequest,
+	req types.FetchTeamByUpdatedByUUIDRequest,
 	opts ...Option,
-) (types.FetchTeamByUpdatedByUuidResponse, error) {
+) (types.FetchTeamByUpdatedByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchTeamByUpdatedByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchTeamByUpdatedByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchTeamByUpdatedByUuidResponse), nil
+			return cached.(types.FetchTeamByUpdatedByUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchTeamByUpdatedByUuid(
+			models, err := m.repository.Queries.FetchTeamByUpdatedByUUID(
 				ctx,
-				nemdb.FetchTeamByUpdatedByUuidParams{
+				nemdb.FetchTeamByUpdatedByUUIDParams{
 					UpdatedByUUID: req.UpdatedByUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchTeamByUpdatedByUuid(
 
 			if err != nil {
 
-				return types.FetchTeamByUpdatedByUuidResponse{}, err
+				return types.FetchTeamByUpdatedByUUIDResponse{}, err
 			}
-			return types.FetchTeamByUpdatedByUuidResponse{
+			return types.FetchTeamByUpdatedByUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchTeamByUpdatedByUuidResponse{}, err
+		return types.FetchTeamByUpdatedByUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchTeamByUpdatedByUuidResponse{}, fetchErr
+		return types.FetchTeamByUpdatedByUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchTeamByUpdatedByUuidResponse)
+	result := v.(types.FetchTeamByUpdatedByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

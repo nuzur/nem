@@ -9,17 +9,17 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-type FetchUserTeamByUuidRequest struct {
+type FetchUserTeamByUUIDRequest struct {
 	UUID uuid.UUID
 }
 
-func (r FetchUserTeamByUuidRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
+func (r FetchUserTeamByUUIDRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
 
 	e.AddString("uuid", r.UUID.String())
 
 	return nil
 }
 
-type FetchUserTeamByUuidResponse struct {
+type FetchUserTeamByUUIDResponse struct {
 	Results []main_entity.UserTeam
 }

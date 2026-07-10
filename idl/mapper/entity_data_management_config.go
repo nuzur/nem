@@ -5,13 +5,11 @@ package mapper
 import (
 	main_entity "github.com/nuzur/nem/core/entity/entity_data_management_config"
 	pb "github.com/nuzur/nem/idl/gen"
-
-	"encoding/json"
 )
 
 func EntityDataManagementConfigToProto(e main_entity.EntityDataManagementConfig) *pb.EntityDataManagementConfig {
 	return &pb.EntityDataManagementConfig{
-		ListDisplayFields: string(e.ListDisplayFields),
+		ListDisplayFields: UUIDSliceToStringSlice(e.ListDisplayFields),
 	}
 }
 
@@ -28,7 +26,7 @@ func EntityDataManagementConfigFromProto(m *pb.EntityDataManagementConfig) main_
 		return main_entity.EntityDataManagementConfig{}
 	}
 	return main_entity.EntityDataManagementConfig{
-		ListDisplayFields: json.RawMessage([]byte(m.GetListDisplayFields())),
+		ListDisplayFields: StringSliceToUUIDSlice(m.GetListDisplayFields()),
 	}
 }
 

@@ -20,7 +20,7 @@ func (s *server) CreateLocalAgent(ctx context.Context, req *pb.CreateLocalAgentR
 		return nil, err
 	}
 
-	fetchRes, err := s.core.LocalAgent().FetchLocalAgentByUuid(ctx, types.FetchLocalAgentByUuidRequest(res), local_agentmodule.WithSkipCache())
+	fetchRes, err := s.core.LocalAgent().FetchLocalAgentByUUID(ctx, types.FetchLocalAgentByUUIDRequest(res), local_agentmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

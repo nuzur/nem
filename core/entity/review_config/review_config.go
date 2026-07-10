@@ -16,7 +16,7 @@ import (
 type ReviewConfig struct {
 	UUID            uuid.UUID                         `json:"uuid"`
 	ReviewUserRoles enums.ReviewConfigReviewUserRoles `json:"review_user_roles"`
-	ReviewUserUUIDs json.RawMessage                   `json:"review_user_uuids"`
+	ReviewUserUUIDs []uuid.UUID                       `json:"review_user_uuids"`
 	MinReviews      int64                             `json:"min_reviews"`
 	Status          enums.ReviewConfigStatus          `json:"status"`
 	CreatedAt       time.Time                         `json:"created_at"`

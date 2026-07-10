@@ -8,8 +8,6 @@ import (
 
 	"github.com/guregu/null/v6"
 
-	"encoding/json"
-
 	"github.com/nuzur/nem/enums"
 
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -21,7 +19,7 @@ func ProjectToProto(e main_entity.Project) *pb.Project {
 		Version:           int64(e.Version),
 		Name:              e.Name,
 		Description:       e.Description.ValueOrZero(),
-		Tags:              string(e.Tags),
+		Tags:              e.Tags,
 		Url:               e.URL.ValueOrZero(),
 		OwnerUuid:         e.OwnerUUID.String(),
 		TeamUuid:          e.TeamUUID.String(),
@@ -52,7 +50,7 @@ func ProjectFromProto(m *pb.Project) main_entity.Project {
 		Version:           int64(m.GetVersion()),
 		Name:              m.GetName(),
 		Description:       null.StringFrom(m.Description),
-		Tags:              json.RawMessage([]byte(m.GetTags())),
+		Tags:              m.GetTags(),
 		URL:               null.StringFrom(m.Url),
 		OwnerUUID:         StringToUUID(m.GetOwnerUuid()),
 		TeamUUID:          StringToUUID(m.GetTeamUuid()),

@@ -43,8 +43,8 @@ func (s *server) UpdateChangeRequest(ctx context.Context, req *pb.UpdateChangeRe
 		}
 
 		pkEntity := pbmapper.ChangeRequestFromProto(req.GetChangeRequest())
-		existingRes, err := s.core.ChangeRequest().FetchChangeRequestByUuid(ctx,
-			types.FetchChangeRequestByUuidRequest{
+		existingRes, err := s.core.ChangeRequest().FetchChangeRequestByUUID(ctx,
+			types.FetchChangeRequestByUUIDRequest{
 				UUID: pkEntity.UUID,
 			},
 			change_requestmodule.WithSkipCache(),
@@ -70,7 +70,7 @@ func (s *server) UpdateChangeRequest(ctx context.Context, req *pb.UpdateChangeRe
 		return nil, err
 	}
 
-	fetchRes, err := s.core.ChangeRequest().FetchChangeRequestByUuid(ctx, types.FetchChangeRequestByUuidRequest(res), change_requestmodule.WithSkipCache())
+	fetchRes, err := s.core.ChangeRequest().FetchChangeRequestByUUID(ctx, types.FetchChangeRequestByUUIDRequest(res), change_requestmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

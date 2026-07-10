@@ -36,7 +36,7 @@ type Extension struct {
 	Verified          bool                   `protobuf:"varint,8,opt,name=verified,proto3" json:"verified,omitempty"`
 	Repository        string                 `protobuf:"bytes,9,opt,name=repository,proto3" json:"repository,omitempty"`
 	ExtensionType     ExtensionType          `protobuf:"varint,10,opt,name=extension_type,json=extensionType,proto3,enum=nem.ExtensionType" json:"extension_type,omitempty"`
-	Tags              string                 `protobuf:"bytes,11,opt,name=tags,proto3" json:"tags,omitempty"`
+	Tags              []string               `protobuf:"bytes,11,rep,name=tags,proto3" json:"tags,omitempty"`
 	Pro               bool                   `protobuf:"varint,12,opt,name=pro,proto3" json:"pro,omitempty"`
 	Public            bool                   `protobuf:"varint,13,opt,name=public,proto3" json:"public,omitempty"`
 	Visibility        []*Visibility          `protobuf:"bytes,14,rep,name=visibility,proto3" json:"visibility,omitempty"`
@@ -150,11 +150,11 @@ func (x *Extension) GetExtensionType() ExtensionType {
 	return ExtensionType_EXTENSION_TYPE_INVALID
 }
 
-func (x *Extension) GetTags() string {
+func (x *Extension) GetTags() []string {
 	if x != nil {
 		return x.Tags
 	}
-	return ""
+	return nil
 }
 
 func (x *Extension) GetPro() bool {
@@ -241,7 +241,7 @@ const file_extension_proto_rawDesc = "" +
 	"repository\x129\n" +
 	"\x0eextension_type\x18\n" +
 	" \x01(\x0e2\x12.nem.ExtensionTypeR\rextensionType\x12\x12\n" +
-	"\x04tags\x18\v \x01(\tR\x04tags\x12\x10\n" +
+	"\x04tags\x18\v \x03(\tR\x04tags\x12\x10\n" +
 	"\x03pro\x18\f \x01(\bR\x03pro\x12\x16\n" +
 	"\x06public\x18\r \x01(\bR\x06public\x12/\n" +
 	"\n" +

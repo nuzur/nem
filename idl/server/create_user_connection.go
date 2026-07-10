@@ -20,7 +20,7 @@ func (s *server) CreateUserConnection(ctx context.Context, req *pb.CreateUserCon
 		return nil, err
 	}
 
-	fetchRes, err := s.core.UserConnection().FetchUserConnectionByUuid(ctx, types.FetchUserConnectionByUuidRequest(res), user_connectionmodule.WithSkipCache())
+	fetchRes, err := s.core.UserConnection().FetchUserConnectionByUUID(ctx, types.FetchUserConnectionByUUIDRequest(res), user_connectionmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

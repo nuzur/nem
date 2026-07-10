@@ -14,24 +14,24 @@ import (
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
-func (m *module) FetchUserConnectionByProjectVersionUuid(
+func (m *module) FetchUserConnectionByProjectVersionUUID(
 	ctx context.Context,
-	req types.FetchUserConnectionByProjectVersionUuidRequest,
+	req types.FetchUserConnectionByProjectVersionUUIDRequest,
 	opts ...Option,
-) (types.FetchUserConnectionByProjectVersionUuidResponse, error) {
+) (types.FetchUserConnectionByProjectVersionUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchUserConnectionByProjectVersionUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchUserConnectionByProjectVersionUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchUserConnectionByProjectVersionUuidResponse), nil
+			return cached.(types.FetchUserConnectionByProjectVersionUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchUserConnectionByProjectVersionUuid(
+			models, err := m.repository.Queries.FetchUserConnectionByProjectVersionUUID(
 				ctx,
-				nemdb.FetchUserConnectionByProjectVersionUuidParams{
+				nemdb.FetchUserConnectionByProjectVersionUUIDParams{
 					ProjectVersionUUID: mapper.UUIDPtrToNullString(req.ProjectVersionUUID),
 
 					Offset: req.Offset,
@@ -41,21 +41,21 @@ func (m *module) FetchUserConnectionByProjectVersionUuid(
 
 			if err != nil {
 
-				return types.FetchUserConnectionByProjectVersionUuidResponse{}, err
+				return types.FetchUserConnectionByProjectVersionUUIDResponse{}, err
 			}
-			return types.FetchUserConnectionByProjectVersionUuidResponse{
+			return types.FetchUserConnectionByProjectVersionUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchUserConnectionByProjectVersionUuidResponse{}, err
+		return types.FetchUserConnectionByProjectVersionUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchUserConnectionByProjectVersionUuidResponse{}, fetchErr
+		return types.FetchUserConnectionByProjectVersionUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchUserConnectionByProjectVersionUuidResponse)
+	result := v.(types.FetchUserConnectionByProjectVersionUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

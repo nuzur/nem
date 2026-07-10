@@ -40,7 +40,7 @@ func (m *module) Update(
 	}
 
 	qtx := m.repository.Queries.WithTx(tx)
-	existing, err := qtx.FetchProjectVersionByUuidForUpdate(ctx,
+	existing, err := qtx.FetchProjectVersionByUUIDForUpdate(ctx,
 		req.ProjectVersion.UUID.String(),
 	)
 	if err != nil {

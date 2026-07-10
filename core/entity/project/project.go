@@ -20,7 +20,7 @@ type Project struct {
 	Version           int64                                `json:"version"`
 	Name              string                               `json:"name"`
 	Description       null.String                          `json:"description"`
-	Tags              json.RawMessage                      `json:"tags"`
+	Tags              []string                             `json:"tags"`
 	URL               null.String                          `json:"url"`
 	OwnerUUID         uuid.UUID                            `json:"owner_uuid"`
 	TeamUUID          uuid.UUID                            `json:"team_uuid"`

@@ -9,17 +9,17 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-type FetchLocalAgentByUuidRequest struct {
+type FetchLocalAgentByUUIDRequest struct {
 	UUID uuid.UUID
 }
 
-func (r FetchLocalAgentByUuidRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
+func (r FetchLocalAgentByUUIDRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
 
 	e.AddString("uuid", r.UUID.String())
 
 	return nil
 }
 
-type FetchLocalAgentByUuidResponse struct {
+type FetchLocalAgentByUUIDResponse struct {
 	Results []main_entity.LocalAgent
 }

@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchUserConnectionByUserUuid(
+func (m *module) FetchUserConnectionByUserUUID(
 	ctx context.Context,
-	req types.FetchUserConnectionByUserUuidRequest,
+	req types.FetchUserConnectionByUserUUIDRequest,
 	opts ...Option,
-) (types.FetchUserConnectionByUserUuidResponse, error) {
+) (types.FetchUserConnectionByUserUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchUserConnectionByUserUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchUserConnectionByUserUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchUserConnectionByUserUuidResponse), nil
+			return cached.(types.FetchUserConnectionByUserUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchUserConnectionByUserUuid(
+			models, err := m.repository.Queries.FetchUserConnectionByUserUUID(
 				ctx,
-				nemdb.FetchUserConnectionByUserUuidParams{
+				nemdb.FetchUserConnectionByUserUUIDParams{
 					UserUUID: req.UserUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchUserConnectionByUserUuid(
 
 			if err != nil {
 
-				return types.FetchUserConnectionByUserUuidResponse{}, err
+				return types.FetchUserConnectionByUserUUIDResponse{}, err
 			}
-			return types.FetchUserConnectionByUserUuidResponse{
+			return types.FetchUserConnectionByUserUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchUserConnectionByUserUuidResponse{}, err
+		return types.FetchUserConnectionByUserUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchUserConnectionByUserUuidResponse{}, fetchErr
+		return types.FetchUserConnectionByUserUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchUserConnectionByUserUuidResponse)
+	result := v.(types.FetchUserConnectionByUserUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

@@ -9,36 +9,36 @@ import (
 	"github.com/nuzur/nem/core/module/change_request/types"
 )
 
-func (m *module) FetchChangeRequestByUuid(
+func (m *module) FetchChangeRequestByUUID(
 	ctx context.Context,
-	req types.FetchChangeRequestByUuidRequest,
+	req types.FetchChangeRequestByUUIDRequest,
 	opts ...Option,
-) (types.FetchChangeRequestByUuidResponse, error) {
+) (types.FetchChangeRequestByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchChangeRequestByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchChangeRequestByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchChangeRequestByUuidResponse), nil
+			return cached.(types.FetchChangeRequestByUUIDResponse), nil
 		}
 	}
 	v, err, _ := m.sg.Do(cacheKey, func() (any, error) {
-		models, err := m.repository.Queries.FetchChangeRequestByUuid(
+		models, err := m.repository.Queries.FetchChangeRequestByUUID(
 			ctx,
 			req.UUID.String(),
 		)
 		if err != nil {
 
-			return types.FetchChangeRequestByUuidResponse{}, err
+			return types.FetchChangeRequestByUUIDResponse{}, err
 		}
-		return types.FetchChangeRequestByUuidResponse{
+		return types.FetchChangeRequestByUUIDResponse{
 			Results: mapModelsToEntities(models),
 		}, nil
 	})
 	if err != nil {
-		return types.FetchChangeRequestByUuidResponse{}, err
+		return types.FetchChangeRequestByUUIDResponse{}, err
 	}
-	result := v.(types.FetchChangeRequestByUuidResponse)
+	result := v.(types.FetchChangeRequestByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

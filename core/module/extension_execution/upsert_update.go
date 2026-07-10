@@ -32,7 +32,7 @@ func (m *module) Update(
 	}
 
 	qtx := m.repository.Queries.WithTx(tx)
-	existing, err := qtx.FetchExtensionExecutionByUuidForUpdate(ctx,
+	existing, err := qtx.FetchExtensionExecutionByUUIDForUpdate(ctx,
 		req.ExtensionExecution.UUID.String(),
 	)
 	if err != nil {

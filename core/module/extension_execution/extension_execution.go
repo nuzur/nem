@@ -15,13 +15,13 @@ import (
 )
 
 type Module interface {
-	FetchExtensionExecutionByUuid(ctx context.Context, req types.FetchExtensionExecutionByUuidRequest, opts ...Option) (types.FetchExtensionExecutionByUuidResponse, error)
+	FetchExtensionExecutionByUUID(ctx context.Context, req types.FetchExtensionExecutionByUUIDRequest, opts ...Option) (types.FetchExtensionExecutionByUUIDResponse, error)
 	FetchExtensionExecutionByStatus(ctx context.Context, req types.FetchExtensionExecutionByStatusRequest, opts ...Option) (types.FetchExtensionExecutionByStatusResponse, error)
-	FetchExtensionExecutionByExecutedByUuid(ctx context.Context, req types.FetchExtensionExecutionByExecutedByUuidRequest, opts ...Option) (types.FetchExtensionExecutionByExecutedByUuidResponse, error)
-	FetchExtensionExecutionByExtensionVersionUuid(ctx context.Context, req types.FetchExtensionExecutionByExtensionVersionUuidRequest, opts ...Option) (types.FetchExtensionExecutionByExtensionVersionUuidResponse, error)
-	FetchExtensionExecutionByProjectUuid(ctx context.Context, req types.FetchExtensionExecutionByProjectUuidRequest, opts ...Option) (types.FetchExtensionExecutionByProjectUuidResponse, error)
-	FetchExtensionExecutionByProjectVersionUuid(ctx context.Context, req types.FetchExtensionExecutionByProjectVersionUuidRequest, opts ...Option) (types.FetchExtensionExecutionByProjectVersionUuidResponse, error)
-	FetchExtensionExecutionByExtensionUuid(ctx context.Context, req types.FetchExtensionExecutionByExtensionUuidRequest, opts ...Option) (types.FetchExtensionExecutionByExtensionUuidResponse, error)
+	FetchExtensionExecutionByExecutedByUUID(ctx context.Context, req types.FetchExtensionExecutionByExecutedByUUIDRequest, opts ...Option) (types.FetchExtensionExecutionByExecutedByUUIDResponse, error)
+	FetchExtensionExecutionByExtensionVersionUUID(ctx context.Context, req types.FetchExtensionExecutionByExtensionVersionUUIDRequest, opts ...Option) (types.FetchExtensionExecutionByExtensionVersionUUIDResponse, error)
+	FetchExtensionExecutionByProjectUUID(ctx context.Context, req types.FetchExtensionExecutionByProjectUUIDRequest, opts ...Option) (types.FetchExtensionExecutionByProjectUUIDResponse, error)
+	FetchExtensionExecutionByProjectVersionUUID(ctx context.Context, req types.FetchExtensionExecutionByProjectVersionUUIDRequest, opts ...Option) (types.FetchExtensionExecutionByProjectVersionUUIDResponse, error)
+	FetchExtensionExecutionByExtensionUUID(ctx context.Context, req types.FetchExtensionExecutionByExtensionUUIDRequest, opts ...Option) (types.FetchExtensionExecutionByExtensionUUIDResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)
 

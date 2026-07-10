@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchProjectByTeamUuid(
+func (m *module) FetchProjectByTeamUUID(
 	ctx context.Context,
-	req types.FetchProjectByTeamUuidRequest,
+	req types.FetchProjectByTeamUUIDRequest,
 	opts ...Option,
-) (types.FetchProjectByTeamUuidResponse, error) {
+) (types.FetchProjectByTeamUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchProjectByTeamUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchProjectByTeamUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchProjectByTeamUuidResponse), nil
+			return cached.(types.FetchProjectByTeamUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchProjectByTeamUuid(
+			models, err := m.repository.Queries.FetchProjectByTeamUUID(
 				ctx,
-				nemdb.FetchProjectByTeamUuidParams{
+				nemdb.FetchProjectByTeamUUIDParams{
 					TeamUUID: req.TeamUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchProjectByTeamUuid(
 
 			if err != nil {
 
-				return types.FetchProjectByTeamUuidResponse{}, err
+				return types.FetchProjectByTeamUUIDResponse{}, err
 			}
-			return types.FetchProjectByTeamUuidResponse{
+			return types.FetchProjectByTeamUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchProjectByTeamUuidResponse{}, err
+		return types.FetchProjectByTeamUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchProjectByTeamUuidResponse{}, fetchErr
+		return types.FetchProjectByTeamUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchProjectByTeamUuidResponse)
+	result := v.(types.FetchProjectByTeamUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

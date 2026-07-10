@@ -9,36 +9,36 @@ import (
 	"github.com/nuzur/nem/core/module/project_version/types"
 )
 
-func (m *module) FetchProjectVersionByUuid(
+func (m *module) FetchProjectVersionByUUID(
 	ctx context.Context,
-	req types.FetchProjectVersionByUuidRequest,
+	req types.FetchProjectVersionByUUIDRequest,
 	opts ...Option,
-) (types.FetchProjectVersionByUuidResponse, error) {
+) (types.FetchProjectVersionByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchProjectVersionByUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchProjectVersionByUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchProjectVersionByUuidResponse), nil
+			return cached.(types.FetchProjectVersionByUUIDResponse), nil
 		}
 	}
 	v, err, _ := m.sg.Do(cacheKey, func() (any, error) {
-		models, err := m.repository.Queries.FetchProjectVersionByUuid(
+		models, err := m.repository.Queries.FetchProjectVersionByUUID(
 			ctx,
 			req.UUID.String(),
 		)
 		if err != nil {
 
-			return types.FetchProjectVersionByUuidResponse{}, err
+			return types.FetchProjectVersionByUUIDResponse{}, err
 		}
-		return types.FetchProjectVersionByUuidResponse{
+		return types.FetchProjectVersionByUUIDResponse{
 			Results: mapModelsToEntities(models),
 		}, nil
 	})
 	if err != nil {
-		return types.FetchProjectVersionByUuidResponse{}, err
+		return types.FetchProjectVersionByUUIDResponse{}, err
 	}
-	result := v.(types.FetchProjectVersionByUuidResponse)
+	result := v.(types.FetchProjectVersionByUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

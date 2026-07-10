@@ -6,16 +6,17 @@ import (
 	"encoding/json"
 	"log"
 
+	"github.com/gofrs/uuid"
 	"github.com/guregu/null/v6"
 
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 type FieldTypeSlugConfig struct {
-	MinSize           int64           `json:"min_size"`
-	MaxSize           int64           `json:"max_size"`
-	RegexValidation   null.String     `json:"regex_validation"`
-	BasedOnFieldUUIDs json.RawMessage `json:"based_on_field_uuids"`
+	MinSize           int64       `json:"min_size"`
+	MaxSize           int64       `json:"max_size"`
+	RegexValidation   null.String `json:"regex_validation"`
+	BasedOnFieldUUIDs []uuid.UUID `json:"based_on_field_uuids"`
 }
 
 func (e FieldTypeSlugConfig) String() string {

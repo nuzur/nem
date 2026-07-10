@@ -15,7 +15,7 @@ import (
 )
 
 type Module interface {
-	FetchUserByUuid(ctx context.Context, req types.FetchUserByUuidRequest, opts ...Option) (types.FetchUserByUuidResponse, error)
+	FetchUserByUUID(ctx context.Context, req types.FetchUserByUUIDRequest, opts ...Option) (types.FetchUserByUUIDResponse, error)
 	FetchUserByIdentifier(ctx context.Context, req types.FetchUserByIdentifierRequest, opts ...Option) (types.FetchUserByIdentifierResponse, error)
 	FetchUserByStatus(ctx context.Context, req types.FetchUserByStatusRequest, opts ...Option) (types.FetchUserByStatusResponse, error)
 	FetchUserByEmail(ctx context.Context, req types.FetchUserByEmailRequest, opts ...Option) (types.FetchUserByEmailResponse, error)

@@ -9,7 +9,7 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-type FetchChangeRequestByProjectUuidRequest struct {
+type FetchChangeRequestByProjectUUIDRequest struct {
 	ProjectUUID uuid.UUID
 
 	Offset  int32
@@ -18,13 +18,13 @@ type FetchChangeRequestByProjectUuidRequest struct {
 	Sort    string
 }
 
-func (r FetchChangeRequestByProjectUuidRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
+func (r FetchChangeRequestByProjectUUIDRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
 
 	e.AddString("project_uuid", r.ProjectUUID.String())
 
 	return nil
 }
 
-type FetchChangeRequestByProjectUuidResponse struct {
+type FetchChangeRequestByProjectUUIDResponse struct {
 	Results []main_entity.ChangeRequest
 }

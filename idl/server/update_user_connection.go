@@ -35,8 +35,8 @@ func (s *server) UpdateUserConnection(ctx context.Context, req *pb.UpdateUserCon
 		}
 
 		pkEntity := pbmapper.UserConnectionFromProto(req.GetUserConnection())
-		existingRes, err := s.core.UserConnection().FetchUserConnectionByUuid(ctx,
-			types.FetchUserConnectionByUuidRequest{
+		existingRes, err := s.core.UserConnection().FetchUserConnectionByUUID(ctx,
+			types.FetchUserConnectionByUUIDRequest{
 				UUID: pkEntity.UUID,
 			},
 			user_connectionmodule.WithSkipCache(),
@@ -62,7 +62,7 @@ func (s *server) UpdateUserConnection(ctx context.Context, req *pb.UpdateUserCon
 		return nil, err
 	}
 
-	fetchRes, err := s.core.UserConnection().FetchUserConnectionByUuid(ctx, types.FetchUserConnectionByUuidRequest(res), user_connectionmodule.WithSkipCache())
+	fetchRes, err := s.core.UserConnection().FetchUserConnectionByUUID(ctx, types.FetchUserConnectionByUUIDRequest(res), user_connectionmodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

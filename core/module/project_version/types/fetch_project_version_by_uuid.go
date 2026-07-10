@@ -9,17 +9,17 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-type FetchProjectVersionByUuidRequest struct {
+type FetchProjectVersionByUUIDRequest struct {
 	UUID uuid.UUID
 }
 
-func (r FetchProjectVersionByUuidRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
+func (r FetchProjectVersionByUUIDRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
 
 	e.AddString("uuid", r.UUID.String())
 
 	return nil
 }
 
-type FetchProjectVersionByUuidResponse struct {
+type FetchProjectVersionByUUIDResponse struct {
 	Results []main_entity.ProjectVersion
 }

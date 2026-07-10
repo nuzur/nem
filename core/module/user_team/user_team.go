@@ -15,12 +15,12 @@ import (
 )
 
 type Module interface {
-	FetchUserTeamByUuid(ctx context.Context, req types.FetchUserTeamByUuidRequest, opts ...Option) (types.FetchUserTeamByUuidResponse, error)
+	FetchUserTeamByUUID(ctx context.Context, req types.FetchUserTeamByUUIDRequest, opts ...Option) (types.FetchUserTeamByUUIDResponse, error)
 	FetchUserTeamByRole(ctx context.Context, req types.FetchUserTeamByRoleRequest, opts ...Option) (types.FetchUserTeamByRoleResponse, error)
 	FetchUserTeamByStatus(ctx context.Context, req types.FetchUserTeamByStatusRequest, opts ...Option) (types.FetchUserTeamByStatusResponse, error)
-	FetchUserTeamByTeamUuid(ctx context.Context, req types.FetchUserTeamByTeamUuidRequest, opts ...Option) (types.FetchUserTeamByTeamUuidResponse, error)
+	FetchUserTeamByTeamUUID(ctx context.Context, req types.FetchUserTeamByTeamUUIDRequest, opts ...Option) (types.FetchUserTeamByTeamUUIDResponse, error)
 	FetchUserTeamByUserEmail(ctx context.Context, req types.FetchUserTeamByUserEmailRequest, opts ...Option) (types.FetchUserTeamByUserEmailResponse, error)
-	FetchUserTeamByUserUuid(ctx context.Context, req types.FetchUserTeamByUserUuidRequest, opts ...Option) (types.FetchUserTeamByUserUuidResponse, error)
+	FetchUserTeamByUserUUID(ctx context.Context, req types.FetchUserTeamByUserUUIDRequest, opts ...Option) (types.FetchUserTeamByUserUUIDResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)
 

@@ -25,10 +25,10 @@ const (
 
 type FieldTypeURLConfig struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	AllowDomains      string                 `protobuf:"bytes,1,opt,name=allow_domains,json=allowDomains,proto3" json:"allow_domains,omitempty"`
-	ExcludeDomains    string                 `protobuf:"bytes,2,opt,name=exclude_domains,json=excludeDomains,proto3" json:"exclude_domains,omitempty"`
+	AllowDomains      []string               `protobuf:"bytes,1,rep,name=allow_domains,json=allowDomains,proto3" json:"allow_domains,omitempty"`
+	ExcludeDomains    []string               `protobuf:"bytes,2,rep,name=exclude_domains,json=excludeDomains,proto3" json:"exclude_domains,omitempty"`
 	HttpsRequired     bool                   `protobuf:"varint,3,opt,name=https_required,json=httpsRequired,proto3" json:"https_required,omitempty"`
-	AllowedExtensions string                 `protobuf:"bytes,4,opt,name=allowed_extensions,json=allowedExtensions,proto3" json:"allowed_extensions,omitempty"`
+	AllowedExtensions []string               `protobuf:"bytes,4,rep,name=allowed_extensions,json=allowedExtensions,proto3" json:"allowed_extensions,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -63,18 +63,18 @@ func (*FieldTypeURLConfig) Descriptor() ([]byte, []int) {
 	return file_field_type_url_config_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *FieldTypeURLConfig) GetAllowDomains() string {
+func (x *FieldTypeURLConfig) GetAllowDomains() []string {
 	if x != nil {
 		return x.AllowDomains
 	}
-	return ""
+	return nil
 }
 
-func (x *FieldTypeURLConfig) GetExcludeDomains() string {
+func (x *FieldTypeURLConfig) GetExcludeDomains() []string {
 	if x != nil {
 		return x.ExcludeDomains
 	}
-	return ""
+	return nil
 }
 
 func (x *FieldTypeURLConfig) GetHttpsRequired() bool {
@@ -84,11 +84,11 @@ func (x *FieldTypeURLConfig) GetHttpsRequired() bool {
 	return false
 }
 
-func (x *FieldTypeURLConfig) GetAllowedExtensions() string {
+func (x *FieldTypeURLConfig) GetAllowedExtensions() []string {
 	if x != nil {
 		return x.AllowedExtensions
 	}
-	return ""
+	return nil
 }
 
 var File_field_type_url_config_proto protoreflect.FileDescriptor
@@ -97,10 +97,10 @@ const file_field_type_url_config_proto_rawDesc = "" +
 	"\n" +
 	"\x1bfield_type_url_config.proto\x12\x03nem\"\xb8\x01\n" +
 	"\x12FieldTypeURLConfig\x12#\n" +
-	"\rallow_domains\x18\x01 \x01(\tR\fallowDomains\x12'\n" +
-	"\x0fexclude_domains\x18\x02 \x01(\tR\x0eexcludeDomains\x12%\n" +
+	"\rallow_domains\x18\x01 \x03(\tR\fallowDomains\x12'\n" +
+	"\x0fexclude_domains\x18\x02 \x03(\tR\x0eexcludeDomains\x12%\n" +
 	"\x0ehttps_required\x18\x03 \x01(\bR\rhttpsRequired\x12-\n" +
-	"\x12allowed_extensions\x18\x04 \x01(\tR\x11allowedExtensionsB9\n" +
+	"\x12allowed_extensions\x18\x04 \x03(\tR\x11allowedExtensionsB9\n" +
 	"\x14github.com/nuzur/nemB\x12FieldTypeURLConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

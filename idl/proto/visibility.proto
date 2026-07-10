@@ -16,9 +16,9 @@ import "google/protobuf/timestamp.proto";
 message Visibility {  
     string uuid = 1;
     string description = 2;
-    string organization_uuids = 3;
-    string team_uuids = 4;
-    string user_uuids = 5;
+    repeated string organization_uuids = 3;
+    repeated string team_uuids = 4;
+    repeated string user_uuids = 5;
     VisibilityRoles roles = 6;
     google.protobuf.Timestamp created_at = 7;
     google.protobuf.Timestamp updated_at = 8;

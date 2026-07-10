@@ -30,7 +30,7 @@ func (m *module) Delete(
 
 	qtx := m.repository.Queries.WithTx(tx)
 
-	existing, err := qtx.FetchAiUsageByUuidForUpdate(ctx,
+	existing, err := qtx.FetchAiUsageByUUIDForUpdate(ctx,
 		req.UUID.String(),
 	)
 	if err != nil {

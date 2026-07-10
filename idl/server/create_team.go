@@ -20,7 +20,7 @@ func (s *server) CreateTeam(ctx context.Context, req *pb.CreateTeamRequest) (*pb
 		return nil, err
 	}
 
-	fetchRes, err := s.core.Team().FetchTeamByUuid(ctx, types.FetchTeamByUuidRequest(res), teammodule.WithSkipCache())
+	fetchRes, err := s.core.Team().FetchTeamByUUID(ctx, types.FetchTeamByUUIDRequest(res), teammodule.WithSkipCache())
 	if err != nil {
 
 		return nil, err

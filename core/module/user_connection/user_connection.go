@@ -15,11 +15,11 @@ import (
 )
 
 type Module interface {
-	FetchUserConnectionByUuid(ctx context.Context, req types.FetchUserConnectionByUuidRequest, opts ...Option) (types.FetchUserConnectionByUuidResponse, error)
-	FetchUserConnectionByProjectUuid(ctx context.Context, req types.FetchUserConnectionByProjectUuidRequest, opts ...Option) (types.FetchUserConnectionByProjectUuidResponse, error)
-	FetchUserConnectionByProjectVersionUuid(ctx context.Context, req types.FetchUserConnectionByProjectVersionUuidRequest, opts ...Option) (types.FetchUserConnectionByProjectVersionUuidResponse, error)
+	FetchUserConnectionByUUID(ctx context.Context, req types.FetchUserConnectionByUUIDRequest, opts ...Option) (types.FetchUserConnectionByUUIDResponse, error)
+	FetchUserConnectionByProjectUUID(ctx context.Context, req types.FetchUserConnectionByProjectUUIDRequest, opts ...Option) (types.FetchUserConnectionByProjectUUIDResponse, error)
+	FetchUserConnectionByProjectVersionUUID(ctx context.Context, req types.FetchUserConnectionByProjectVersionUUIDRequest, opts ...Option) (types.FetchUserConnectionByProjectVersionUUIDResponse, error)
 	FetchUserConnectionByStatus(ctx context.Context, req types.FetchUserConnectionByStatusRequest, opts ...Option) (types.FetchUserConnectionByStatusResponse, error)
-	FetchUserConnectionByUserUuid(ctx context.Context, req types.FetchUserConnectionByUserUuidRequest, opts ...Option) (types.FetchUserConnectionByUserUuidResponse, error)
+	FetchUserConnectionByUserUUID(ctx context.Context, req types.FetchUserConnectionByUserUUIDRequest, opts ...Option) (types.FetchUserConnectionByUserUUIDResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)
 

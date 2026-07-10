@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchChangeRequestByOwnerUuid(
+func (m *module) FetchChangeRequestByOwnerUUID(
 	ctx context.Context,
-	req types.FetchChangeRequestByOwnerUuidRequest,
+	req types.FetchChangeRequestByOwnerUUIDRequest,
 	opts ...Option,
-) (types.FetchChangeRequestByOwnerUuidResponse, error) {
+) (types.FetchChangeRequestByOwnerUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchChangeRequestByOwnerUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchChangeRequestByOwnerUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchChangeRequestByOwnerUuidResponse), nil
+			return cached.(types.FetchChangeRequestByOwnerUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchChangeRequestByOwnerUuid(
+			models, err := m.repository.Queries.FetchChangeRequestByOwnerUUID(
 				ctx,
-				nemdb.FetchChangeRequestByOwnerUuidParams{
+				nemdb.FetchChangeRequestByOwnerUUIDParams{
 					OwnerUUID: req.OwnerUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchChangeRequestByOwnerUuid(
 
 			if err != nil {
 
-				return types.FetchChangeRequestByOwnerUuidResponse{}, err
+				return types.FetchChangeRequestByOwnerUUIDResponse{}, err
 			}
-			return types.FetchChangeRequestByOwnerUuidResponse{
+			return types.FetchChangeRequestByOwnerUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchChangeRequestByOwnerUuidResponse{}, err
+		return types.FetchChangeRequestByOwnerUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchChangeRequestByOwnerUuidResponse{}, fetchErr
+		return types.FetchChangeRequestByOwnerUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchChangeRequestByOwnerUuidResponse)
+	result := v.(types.FetchChangeRequestByOwnerUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

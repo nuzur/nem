@@ -5,14 +5,12 @@ package mapper
 import (
 	main_entity "github.com/nuzur/nem/core/entity/field_type_phone_config"
 	pb "github.com/nuzur/nem/idl/gen"
-
-	"encoding/json"
 )
 
 func FieldTypePhoneConfigToProto(e main_entity.FieldTypePhoneConfig) *pb.FieldTypePhoneConfig {
 	return &pb.FieldTypePhoneConfig{
-		AllowCountries:   string(e.AllowCountries),
-		ExcludeCountries: string(e.ExcludeCountries),
+		AllowCountries:   e.AllowCountries,
+		ExcludeCountries: e.ExcludeCountries,
 	}
 }
 
@@ -29,8 +27,8 @@ func FieldTypePhoneConfigFromProto(m *pb.FieldTypePhoneConfig) main_entity.Field
 		return main_entity.FieldTypePhoneConfig{}
 	}
 	return main_entity.FieldTypePhoneConfig{
-		AllowCountries:   json.RawMessage([]byte(m.GetAllowCountries())),
-		ExcludeCountries: json.RawMessage([]byte(m.GetExcludeCountries())),
+		AllowCountries:   m.GetAllowCountries(),
+		ExcludeCountries: m.GetExcludeCountries(),
 	}
 }
 

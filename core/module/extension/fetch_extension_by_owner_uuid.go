@@ -12,24 +12,24 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 )
 
-func (m *module) FetchExtensionByOwnerUuid(
+func (m *module) FetchExtensionByOwnerUUID(
 	ctx context.Context,
-	req types.FetchExtensionByOwnerUuidRequest,
+	req types.FetchExtensionByOwnerUUIDRequest,
 	opts ...Option,
-) (types.FetchExtensionByOwnerUuidResponse, error) {
+) (types.FetchExtensionByOwnerUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
-	cacheKey := fmt.Sprintf("FetchExtensionByOwnerUuid:%v", req)
+	cacheKey := fmt.Sprintf("FetchExtensionByOwnerUUID:%v", req)
 	if !resolvedOpts.SkipCache {
 		if cached, found := m.cache.Get(cacheKey); found {
-			return cached.(types.FetchExtensionByOwnerUuidResponse), nil
+			return cached.(types.FetchExtensionByOwnerUUIDResponse), nil
 		}
 	}
 	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchExtensionByOwnerUuid(
+			models, err := m.repository.Queries.FetchExtensionByOwnerUUID(
 				ctx,
-				nemdb.FetchExtensionByOwnerUuidParams{
+				nemdb.FetchExtensionByOwnerUUIDParams{
 					OwnerUUID: req.OwnerUUID.String(),
 
 					Offset: req.Offset,
@@ -39,21 +39,21 @@ func (m *module) FetchExtensionByOwnerUuid(
 
 			if err != nil {
 
-				return types.FetchExtensionByOwnerUuidResponse{}, err
+				return types.FetchExtensionByOwnerUUIDResponse{}, err
 			}
-			return types.FetchExtensionByOwnerUuidResponse{
+			return types.FetchExtensionByOwnerUUIDResponse{
 				Results: mapModelsToEntities(models),
 			}, nil
 		}
 
 		err := errors.New("could not process request")
 
-		return types.FetchExtensionByOwnerUuidResponse{}, err
+		return types.FetchExtensionByOwnerUUIDResponse{}, err
 	}) // end sg.Do
 	if fetchErr != nil {
-		return types.FetchExtensionByOwnerUuidResponse{}, fetchErr
+		return types.FetchExtensionByOwnerUUIDResponse{}, fetchErr
 	}
-	result := v.(types.FetchExtensionByOwnerUuidResponse)
+	result := v.(types.FetchExtensionByOwnerUUIDResponse)
 	if !resolvedOpts.SkipCache {
 		m.cache.Set(cacheKey, result, 0)
 	}

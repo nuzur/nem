@@ -5,14 +5,12 @@ package mapper
 import (
 	main_entity "github.com/nuzur/nem/core/entity/relationship_node_type_entity_config"
 	pb "github.com/nuzur/nem/idl/gen"
-
-	"encoding/json"
 )
 
 func RelationshipNodeTypeEntityConfigToProto(e main_entity.RelationshipNodeTypeEntityConfig) *pb.RelationshipNodeTypeEntityConfig {
 	return &pb.RelationshipNodeTypeEntityConfig{
 		EntityUuid:      e.EntityUUID.String(),
-		FieldUuids:      string(e.FieldUUIDs),
+		FieldUuids:      UUIDSliceToStringSlice(e.FieldUUIDs),
 		FieldsGenerated: e.FieldsGenerated,
 	}
 }
@@ -31,7 +29,7 @@ func RelationshipNodeTypeEntityConfigFromProto(m *pb.RelationshipNodeTypeEntityC
 	}
 	return main_entity.RelationshipNodeTypeEntityConfig{
 		EntityUUID:      StringToUUID(m.GetEntityUuid()),
-		FieldUUIDs:      json.RawMessage([]byte(m.GetFieldUuids())),
+		FieldUUIDs:      StringSliceToUUIDSlice(m.GetFieldUuids()),
 		FieldsGenerated: m.GetFieldsGenerated(),
 	}
 }

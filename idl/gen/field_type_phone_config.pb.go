@@ -25,8 +25,8 @@ const (
 
 type FieldTypePhoneConfig struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	AllowCountries   string                 `protobuf:"bytes,1,opt,name=allow_countries,json=allowCountries,proto3" json:"allow_countries,omitempty"`
-	ExcludeCountries string                 `protobuf:"bytes,2,opt,name=exclude_countries,json=excludeCountries,proto3" json:"exclude_countries,omitempty"`
+	AllowCountries   []string               `protobuf:"bytes,1,rep,name=allow_countries,json=allowCountries,proto3" json:"allow_countries,omitempty"`
+	ExcludeCountries []string               `protobuf:"bytes,2,rep,name=exclude_countries,json=excludeCountries,proto3" json:"exclude_countries,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -61,18 +61,18 @@ func (*FieldTypePhoneConfig) Descriptor() ([]byte, []int) {
 	return file_field_type_phone_config_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *FieldTypePhoneConfig) GetAllowCountries() string {
+func (x *FieldTypePhoneConfig) GetAllowCountries() []string {
 	if x != nil {
 		return x.AllowCountries
 	}
-	return ""
+	return nil
 }
 
-func (x *FieldTypePhoneConfig) GetExcludeCountries() string {
+func (x *FieldTypePhoneConfig) GetExcludeCountries() []string {
 	if x != nil {
 		return x.ExcludeCountries
 	}
-	return ""
+	return nil
 }
 
 var File_field_type_phone_config_proto protoreflect.FileDescriptor
@@ -81,8 +81,8 @@ const file_field_type_phone_config_proto_rawDesc = "" +
 	"\n" +
 	"\x1dfield_type_phone_config.proto\x12\x03nem\"l\n" +
 	"\x14FieldTypePhoneConfig\x12'\n" +
-	"\x0fallow_countries\x18\x01 \x01(\tR\x0eallowCountries\x12+\n" +
-	"\x11exclude_countries\x18\x02 \x01(\tR\x10excludeCountriesB;\n" +
+	"\x0fallow_countries\x18\x01 \x03(\tR\x0eallowCountries\x12+\n" +
+	"\x11exclude_countries\x18\x02 \x03(\tR\x10excludeCountriesB;\n" +
 	"\x14github.com/nuzur/nemB\x14FieldTypePhoneConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

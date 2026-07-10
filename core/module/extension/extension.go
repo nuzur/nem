@@ -15,10 +15,10 @@ import (
 )
 
 type Module interface {
-	FetchExtensionByUuid(ctx context.Context, req types.FetchExtensionByUuidRequest, opts ...Option) (types.FetchExtensionByUuidResponse, error)
+	FetchExtensionByUUID(ctx context.Context, req types.FetchExtensionByUUIDRequest, opts ...Option) (types.FetchExtensionByUUIDResponse, error)
 	FetchExtensionByVersion(ctx context.Context, req types.FetchExtensionByVersionRequest, opts ...Option) (types.FetchExtensionByVersionResponse, error)
 	FetchExtensionByExtensionType(ctx context.Context, req types.FetchExtensionByExtensionTypeRequest, opts ...Option) (types.FetchExtensionByExtensionTypeResponse, error)
-	FetchExtensionByOwnerUuid(ctx context.Context, req types.FetchExtensionByOwnerUuidRequest, opts ...Option) (types.FetchExtensionByOwnerUuidResponse, error)
+	FetchExtensionByOwnerUUID(ctx context.Context, req types.FetchExtensionByOwnerUUIDRequest, opts ...Option) (types.FetchExtensionByOwnerUUIDResponse, error)
 	FetchExtensionByRepository(ctx context.Context, req types.FetchExtensionByRepositoryRequest, opts ...Option) (types.FetchExtensionByRepositoryResponse, error)
 	FetchExtensionByIdentifier(ctx context.Context, req types.FetchExtensionByIdentifierRequest, opts ...Option) (types.FetchExtensionByIdentifierResponse, error)
 	FetchExtensionByPro(ctx context.Context, req types.FetchExtensionByProRequest, opts ...Option) (types.FetchExtensionByProResponse, error)

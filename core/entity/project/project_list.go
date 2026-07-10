@@ -14,7 +14,7 @@ func (e Project) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 		"version":            entitytypes.IntFieldType,
 		"name":               entitytypes.StringFieldType,
 		"description":        entitytypes.StringFieldType,
-		"tags":               entitytypes.RawJSONFieldType,
+		"tags":               entitytypes.StringFieldType,
 		"url":                entitytypes.StringFieldType,
 		"owner_uuid":         entitytypes.StringFieldType,
 		"team_uuid":          entitytypes.StringFieldType,
@@ -69,5 +69,6 @@ func (e Project) PrimaryKeyIdentifiers() []string {
 func (e Project) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["tags"] = entitytypes.StringFieldType
 	return res
 }

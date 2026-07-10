@@ -28,7 +28,7 @@ type ReviewConfig struct {
 	state           protoimpl.MessageState      `protogen:"open.v1"`
 	Uuid            string                      `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	ReviewUserRoles ReviewConfigReviewUserRoles `protobuf:"varint,2,opt,name=review_user_roles,json=reviewUserRoles,proto3,enum=nem.ReviewConfigReviewUserRoles" json:"review_user_roles,omitempty"`
-	ReviewUserUuids string                      `protobuf:"bytes,3,opt,name=review_user_uuids,json=reviewUserUuids,proto3" json:"review_user_uuids,omitempty"`
+	ReviewUserUuids []string                    `protobuf:"bytes,3,rep,name=review_user_uuids,json=reviewUserUuids,proto3" json:"review_user_uuids,omitempty"`
 	MinReviews      int64                       `protobuf:"varint,4,opt,name=min_reviews,json=minReviews,proto3" json:"min_reviews,omitempty"`
 	Status          ReviewConfigStatus          `protobuf:"varint,5,opt,name=status,proto3,enum=nem.ReviewConfigStatus" json:"status,omitempty"`
 	CreatedAt       *timestamppb.Timestamp      `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -83,11 +83,11 @@ func (x *ReviewConfig) GetReviewUserRoles() ReviewConfigReviewUserRoles {
 	return ReviewConfigReviewUserRoles_REVIEW_CONFIG_REVIEW_USER_ROLES_INVALID
 }
 
-func (x *ReviewConfig) GetReviewUserUuids() string {
+func (x *ReviewConfig) GetReviewUserUuids() []string {
 	if x != nil {
 		return x.ReviewUserUuids
 	}
-	return ""
+	return nil
 }
 
 func (x *ReviewConfig) GetMinReviews() int64 {
@@ -140,7 +140,7 @@ const file_review_config_proto_rawDesc = "" +
 	"\fReviewConfig\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12L\n" +
 	"\x11review_user_roles\x18\x02 \x01(\x0e2 .nem.ReviewConfigReviewUserRolesR\x0freviewUserRoles\x12*\n" +
-	"\x11review_user_uuids\x18\x03 \x01(\tR\x0freviewUserUuids\x12\x1f\n" +
+	"\x11review_user_uuids\x18\x03 \x03(\tR\x0freviewUserUuids\x12\x1f\n" +
 	"\vmin_reviews\x18\x04 \x01(\x03R\n" +
 	"minReviews\x12/\n" +
 	"\x06status\x18\x05 \x01(\x0e2\x17.nem.ReviewConfigStatusR\x06status\x129\n" +

@@ -8,8 +8,8 @@ import (
 
 func (e FieldTypeEmailConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"allow_domains":   entitytypes.RawJSONFieldType,
-		"exclude_domains": entitytypes.RawJSONFieldType,
+		"allow_domains":   entitytypes.StringFieldType,
+		"exclude_domains": entitytypes.StringFieldType,
 	}
 }
 
@@ -38,5 +38,7 @@ func (e FieldTypeEmailConfig) PrimaryKeyIdentifiers() []string {
 func (e FieldTypeEmailConfig) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["allow_domains"] = entitytypes.StringFieldType
+	res["exclude_domains"] = entitytypes.StringFieldType
 	return res
 }

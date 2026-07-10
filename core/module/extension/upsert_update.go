@@ -12,6 +12,8 @@ import (
 	"github.com/nuzur/nem/core/entity/visibility"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -34,7 +36,7 @@ func (m *module) Update(
 	}
 
 	qtx := m.repository.Queries.WithTx(tx)
-	existing, err := qtx.FetchExtensionByUuidForUpdate(ctx,
+	existing, err := qtx.FetchExtensionByUUIDForUpdate(ctx,
 		req.Extension.UUID.String(),
 	)
 	if err != nil {
@@ -106,7 +108,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateExtensi
 
 		ExtensionType: req.Extension.ExtensionType.ToInt64(),
 
-		Tags: req.Extension.Tags,
+		Tags: mapper.SliceToJSON(req.Extension.Tags),
 
 		Pro: req.Extension.Pro,
 

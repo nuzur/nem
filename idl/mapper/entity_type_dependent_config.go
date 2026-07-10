@@ -5,14 +5,12 @@ package mapper
 import (
 	main_entity "github.com/nuzur/nem/core/entity/entity_type_dependent_config"
 	pb "github.com/nuzur/nem/idl/gen"
-
-	"encoding/json"
 )
 
 func EntityTypeDependentConfigToProto(e main_entity.EntityTypeDependentConfig) *pb.EntityTypeDependentConfig {
 	return &pb.EntityTypeDependentConfig{
-		ServiceSourceUuids: string(e.ServiceSourceUUIDs),
-		EntitySourceUuids:  string(e.EntitySourceUUIDs),
+		ServiceSourceUuids: UUIDSliceToStringSlice(e.ServiceSourceUUIDs),
+		EntitySourceUuids:  UUIDSliceToStringSlice(e.EntitySourceUUIDs),
 	}
 }
 
@@ -29,8 +27,8 @@ func EntityTypeDependentConfigFromProto(m *pb.EntityTypeDependentConfig) main_en
 		return main_entity.EntityTypeDependentConfig{}
 	}
 	return main_entity.EntityTypeDependentConfig{
-		ServiceSourceUUIDs: json.RawMessage([]byte(m.GetServiceSourceUuids())),
-		EntitySourceUUIDs:  json.RawMessage([]byte(m.GetEntitySourceUuids())),
+		ServiceSourceUUIDs: StringSliceToUUIDSlice(m.GetServiceSourceUuids()),
+		EntitySourceUUIDs:  StringSliceToUUIDSlice(m.GetEntitySourceUuids()),
 	}
 }
 
