@@ -13,6 +13,8 @@ import (
 	"github.com/nuzur/nem/core/entity/user_connection_execution"
 	"github.com/nuzur/nem/core/entity/user_connection_type_config"
 
+	"time"
+
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
@@ -26,6 +28,10 @@ func (m *module) Insert(
 	if req.UserConnection.UUID == uuid.Nil {
 		req.UserConnection.UUID = uuid.Must(uuid.NewV4())
 	}
+
+	// server-managed timestamps (generated created_at/updated_at)
+	req.UserConnection.CreatedAt = time.Now()
+	req.UserConnection.UpdatedAt = time.Now()
 
 	optConfig := applyAllOptions(opts)
 

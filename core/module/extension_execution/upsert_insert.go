@@ -10,6 +10,8 @@ import (
 
 	"github.com/gofrs/uuid"
 
+	"time"
+
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
@@ -23,6 +25,10 @@ func (m *module) Insert(
 	if req.ExtensionExecution.UUID == uuid.Nil {
 		req.ExtensionExecution.UUID = uuid.Must(uuid.NewV4())
 	}
+
+	// server-managed timestamps (generated created_at/updated_at)
+	req.ExtensionExecution.CreatedAt = time.Now()
+	req.ExtensionExecution.UpdatedAt = time.Now()
 
 	optConfig := applyAllOptions(opts)
 

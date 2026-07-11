@@ -10,6 +10,8 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
 	"github.com/nuzur/nem/core/entity/local_agent_connection"
+
+	"time"
 )
 
 func (m *module) Update(
@@ -45,6 +47,9 @@ func (m *module) Update(
 
 		return types.UpsertResponse{}, err
 	}
+
+	// refresh server-managed timestamps that update on every write (updated_at)
+	req.LocalAgent.UpdatedAt = time.Now()
 
 	params := mapUpsertRequestToUpdateParams(req)
 	err = qtx.UpdateLocalAgent(

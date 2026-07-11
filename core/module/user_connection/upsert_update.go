@@ -12,6 +12,8 @@ import (
 	"github.com/nuzur/nem/core/entity/user_connection_execution"
 	"github.com/nuzur/nem/core/entity/user_connection_type_config"
 
+	"time"
+
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
@@ -48,6 +50,9 @@ func (m *module) Update(
 
 		return types.UpsertResponse{}, err
 	}
+
+	// refresh server-managed timestamps that update on every write (updated_at)
+	req.UserConnection.UpdatedAt = time.Now()
 
 	params := mapUpsertRequestToUpdateParams(req)
 	err = qtx.UpdateUserConnection(

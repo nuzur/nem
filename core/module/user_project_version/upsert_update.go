@@ -56,6 +56,9 @@ func (m *module) Update(
 
 	req.UserProjectVersion.Version = time.Now().Unix()
 
+	// refresh server-managed timestamps that update on every write (updated_at)
+	req.UserProjectVersion.UpdatedAt = time.Now()
+
 	params := mapUpsertRequestToUpdateParams(req)
 	err = qtx.UpdateUserProjectVersion(
 		ctx,

@@ -31,6 +31,10 @@ func (m *module) Insert(
 		req.Team.UUID = uuid.Must(uuid.NewV4())
 	}
 
+	// server-managed timestamps (generated created_at/updated_at)
+	req.Team.CreatedAt = time.Now()
+	req.Team.UpdatedAt = time.Now()
+
 	optConfig := applyAllOptions(opts)
 
 	tx := optConfig.SQLTx

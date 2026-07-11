@@ -11,6 +11,8 @@ import (
 	"github.com/gofrs/uuid"
 
 	"github.com/nuzur/nem/core/entity/local_agent_connection"
+
+	"time"
 )
 
 func (m *module) Insert(
@@ -23,6 +25,10 @@ func (m *module) Insert(
 	if req.LocalAgent.UUID == uuid.Nil {
 		req.LocalAgent.UUID = uuid.Must(uuid.NewV4())
 	}
+
+	// server-managed timestamps (generated created_at/updated_at)
+	req.LocalAgent.CreatedAt = time.Now()
+	req.LocalAgent.UpdatedAt = time.Now()
 
 	optConfig := applyAllOptions(opts)
 

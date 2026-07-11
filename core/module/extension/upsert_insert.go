@@ -28,6 +28,10 @@ func (m *module) Insert(
 		req.Extension.UUID = uuid.Must(uuid.NewV4())
 	}
 
+	// server-managed timestamps (generated created_at/updated_at)
+	req.Extension.CreatedAt = time.Now()
+	req.Extension.UpdatedAt = time.Now()
+
 	optConfig := applyAllOptions(opts)
 
 	tx := optConfig.SQLTx

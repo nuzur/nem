@@ -8,6 +8,8 @@ import (
 
 	"github.com/nuzur/nem/core/module/membership/types"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
+
+	"time"
 )
 
 func (m *module) Update(
@@ -43,6 +45,9 @@ func (m *module) Update(
 
 		return types.UpsertResponse{}, err
 	}
+
+	// refresh server-managed timestamps that update on every write (updated_at)
+	req.Membership.UpdatedAt = time.Now()
 
 	params := mapUpsertRequestToUpdateParams(req)
 	err = qtx.UpdateMembership(

@@ -9,6 +9,8 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
 	"github.com/gofrs/uuid"
+
+	"time"
 )
 
 func (m *module) Insert(
@@ -21,6 +23,10 @@ func (m *module) Insert(
 	if req.User.UUID == uuid.Nil {
 		req.User.UUID = uuid.Must(uuid.NewV4())
 	}
+
+	// server-managed timestamps (generated created_at/updated_at)
+	req.User.CreatedAt = time.Now()
+	req.User.UpdatedAt = time.Now()
 
 	optConfig := applyAllOptions(opts)
 

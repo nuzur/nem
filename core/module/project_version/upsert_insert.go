@@ -32,6 +32,10 @@ func (m *module) Insert(
 		req.ProjectVersion.UUID = uuid.Must(uuid.NewV4())
 	}
 
+	// server-managed timestamps (generated created_at/updated_at)
+	req.ProjectVersion.CreatedAt = time.Now()
+	req.ProjectVersion.UpdatedAt = time.Now()
+
 	optConfig := applyAllOptions(opts)
 
 	tx := optConfig.SQLTx

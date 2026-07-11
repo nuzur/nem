@@ -29,6 +29,10 @@ func (m *module) Insert(
 		req.ChangeRequest.UUID = uuid.Must(uuid.NewV4())
 	}
 
+	// server-managed timestamps (generated created_at/updated_at)
+	req.ChangeRequest.CreatedAt = time.Now()
+	req.ChangeRequest.UpdatedAt = time.Now()
+
 	optConfig := applyAllOptions(opts)
 
 	tx := optConfig.SQLTx

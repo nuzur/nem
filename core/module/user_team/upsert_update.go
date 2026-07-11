@@ -9,6 +9,8 @@ import (
 	"github.com/nuzur/nem/core/module/user_team/types"
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
+	"time"
+
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
@@ -45,6 +47,9 @@ func (m *module) Update(
 
 		return types.UpsertResponse{}, err
 	}
+
+	// refresh server-managed timestamps that update on every write (updated_at)
+	req.UserTeam.UpdatedAt = time.Now()
 
 	params := mapUpsertRequestToUpdateParams(req)
 	err = qtx.UpdateUserTeam(
