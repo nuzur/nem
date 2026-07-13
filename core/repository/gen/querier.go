@@ -11,6 +11,8 @@ import (
 
 type Querier interface {
 	DeleteAiUsage(ctx context.Context, uuid string) (sql.Result, error)
+	DeleteAutomation(ctx context.Context, uuid string) (sql.Result, error)
+	DeleteAutomationEvent(ctx context.Context, uuid string) (sql.Result, error)
 	DeleteChangeRequest(ctx context.Context, uuid string) (sql.Result, error)
 	DeleteExtension(ctx context.Context, uuid string) (sql.Result, error)
 	DeleteExtensionExecution(ctx context.Context, uuid string) (sql.Result, error)
@@ -60,6 +62,44 @@ type Querier interface {
 	FetchAiUsageByUserUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchAiUsageByUserUUIDOrderedByCreatedAtDESCParams) ([]AiUsage, error)
 	FetchAiUsageByUserUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchAiUsageByUserUUIDOrderedByUpdatedAtASCParams) ([]AiUsage, error)
 	FetchAiUsageByUserUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAiUsageByUserUUIDOrderedByUpdatedAtDESCParams) ([]AiUsage, error)
+	FetchAutomation(ctx context.Context) ([]Automation, error)
+	FetchAutomationByProjectUUIDAndEntityUUIDAndEnabled(ctx context.Context, arg FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledParams) ([]Automation, error)
+	FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtASCParams) ([]Automation, error)
+	FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtDESCParams) ([]Automation, error)
+	FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtASCParams) ([]Automation, error)
+	FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtDESCParams) ([]Automation, error)
+	FetchAutomationByStatus(ctx context.Context, arg FetchAutomationByStatusParams) ([]Automation, error)
+	FetchAutomationByStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationByStatusOrderedByCreatedAtASCParams) ([]Automation, error)
+	FetchAutomationByStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationByStatusOrderedByCreatedAtDESCParams) ([]Automation, error)
+	FetchAutomationByStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationByStatusOrderedByUpdatedAtASCParams) ([]Automation, error)
+	FetchAutomationByStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationByStatusOrderedByUpdatedAtDESCParams) ([]Automation, error)
+	// automation selects:
+	FetchAutomationByUUID(ctx context.Context, uuid string) ([]Automation, error)
+	FetchAutomationByUUIDForUpdate(ctx context.Context, uuid string) ([]Automation, error)
+	FetchAutomationEvent(ctx context.Context) ([]AutomationEvent, error)
+	FetchAutomationEventByAutomationUUID(ctx context.Context, arg FetchAutomationEventByAutomationUUIDParams) ([]AutomationEvent, error)
+	FetchAutomationEventByAutomationUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationEventByAutomationUUIDOrderedByCreatedAtASCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByAutomationUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationEventByAutomationUUIDOrderedByCreatedAtDESCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtASCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtDESCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByChangeRequestUUID(ctx context.Context, arg FetchAutomationEventByChangeRequestUUIDParams) ([]AutomationEvent, error)
+	FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtASCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtDESCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtASCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtDESCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByProjectUUID(ctx context.Context, arg FetchAutomationEventByProjectUUIDParams) ([]AutomationEvent, error)
+	FetchAutomationEventByProjectUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationEventByProjectUUIDOrderedByCreatedAtASCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByProjectUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationEventByProjectUUIDOrderedByCreatedAtDESCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByProjectUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationEventByProjectUUIDOrderedByUpdatedAtASCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByProjectUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationEventByProjectUUIDOrderedByUpdatedAtDESCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByStatus(ctx context.Context, arg FetchAutomationEventByStatusParams) ([]AutomationEvent, error)
+	FetchAutomationEventByStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationEventByStatusOrderedByCreatedAtASCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationEventByStatusOrderedByCreatedAtDESCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationEventByStatusOrderedByUpdatedAtASCParams) ([]AutomationEvent, error)
+	FetchAutomationEventByStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationEventByStatusOrderedByUpdatedAtDESCParams) ([]AutomationEvent, error)
+	// automation_event selects:
+	FetchAutomationEventByUUID(ctx context.Context, uuid string) ([]AutomationEvent, error)
+	FetchAutomationEventByUUIDForUpdate(ctx context.Context, uuid string) ([]AutomationEvent, error)
 	FetchChangeRequest(ctx context.Context) ([]ChangeRequest, error)
 	FetchChangeRequestByAiGenerated(ctx context.Context, arg FetchChangeRequestByAiGeneratedParams) ([]ChangeRequest, error)
 	FetchChangeRequestByAiGeneratedOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByAiGeneratedOrderedByCreatedAtASCParams) ([]ChangeRequest, error)
@@ -459,6 +499,8 @@ type Querier interface {
 	FetchUserTeamByUserUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchUserTeamByUserUUIDOrderedByUpdatedAtASCParams) ([]UserTeam, error)
 	FetchUserTeamByUserUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchUserTeamByUserUUIDOrderedByUpdatedAtDESCParams) ([]UserTeam, error)
 	InsertAiUsage(ctx context.Context, arg InsertAiUsageParams) (sql.Result, error)
+	InsertAutomation(ctx context.Context, arg InsertAutomationParams) (sql.Result, error)
+	InsertAutomationEvent(ctx context.Context, arg InsertAutomationEventParams) (sql.Result, error)
 	InsertChangeRequest(ctx context.Context, arg InsertChangeRequestParams) (sql.Result, error)
 	InsertExtension(ctx context.Context, arg InsertExtensionParams) (sql.Result, error)
 	InsertExtensionExecution(ctx context.Context, arg InsertExtensionExecutionParams) (sql.Result, error)
@@ -475,6 +517,8 @@ type Querier interface {
 	InsertUserProjectVersion(ctx context.Context, arg InsertUserProjectVersionParams) (sql.Result, error)
 	InsertUserTeam(ctx context.Context, arg InsertUserTeamParams) (sql.Result, error)
 	UpdateAiUsage(ctx context.Context, arg UpdateAiUsageParams) error
+	UpdateAutomation(ctx context.Context, arg UpdateAutomationParams) error
+	UpdateAutomationEvent(ctx context.Context, arg UpdateAutomationEventParams) error
 	UpdateChangeRequest(ctx context.Context, arg UpdateChangeRequestParams) error
 	UpdateExtension(ctx context.Context, arg UpdateExtensionParams) error
 	UpdateExtensionExecution(ctx context.Context, arg UpdateExtensionExecutionParams) error

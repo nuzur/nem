@@ -104,3 +104,17 @@ SET
 WHERE
 `uuid` = ?;
 
+-- name: UpdateAutomation :exec
+UPDATE `automation`
+SET
+`project_uuid` = ?, `entity_uuid` = ?, `name` = ?, `operation` = ?, `condition` = ?, `action_type` = ?, `action_config` = ?, `enabled` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+WHERE
+`uuid` = ?;
+
+-- name: UpdateAutomationEvent :exec
+UPDATE `automation_event`
+SET
+`automation_uuid` = ?, `project_uuid` = ?, `change_request_uuid` = ?, `payload` = ?, `status` = ?, `attempts` = ?, `next_attempt_at` = ?, `delivered_at` = ?, `last_error` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+WHERE
+`uuid` = ?;
+

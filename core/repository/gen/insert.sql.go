@@ -58,6 +58,92 @@ func (q *Queries) InsertAiUsage(ctx context.Context, arg InsertAiUsageParams) (s
 	)
 }
 
+const insertAutomation = `-- name: InsertAutomation :execresult
+INSERT INTO ` + "`" + `automation` + "`" + `
+(` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+`
+
+type InsertAutomationParams struct {
+	UUID          string    `json:"uuid"`
+	ProjectUUID   string    `json:"project_uuid"`
+	EntityUUID    string    `json:"entity_uuid"`
+	Name          string    `json:"name"`
+	Operation     int64     `json:"operation"`
+	Condition     []byte    `json:"condition"`
+	ActionType    int64     `json:"action_type"`
+	ActionConfig  []byte    `json:"action_config"`
+	Enabled       bool      `json:"enabled"`
+	Status        int64     `json:"status"`
+	CreatedAt     time.Time `json:"created_at"`
+	UpdatedAt     time.Time `json:"updated_at"`
+	CreatedByUUID string    `json:"created_by_uuid"`
+	UpdatedByUUID string    `json:"updated_by_uuid"`
+}
+
+func (q *Queries) InsertAutomation(ctx context.Context, arg InsertAutomationParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, insertAutomation,
+		arg.UUID,
+		arg.ProjectUUID,
+		arg.EntityUUID,
+		arg.Name,
+		arg.Operation,
+		arg.Condition,
+		arg.ActionType,
+		arg.ActionConfig,
+		arg.Enabled,
+		arg.Status,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+	)
+}
+
+const insertAutomationEvent = `-- name: InsertAutomationEvent :execresult
+INSERT INTO ` + "`" + `automation_event` + "`" + `
+(` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+`
+
+type InsertAutomationEventParams struct {
+	UUID              string      `json:"uuid"`
+	AutomationUUID    string      `json:"automation_uuid"`
+	ProjectUUID       string      `json:"project_uuid"`
+	ChangeRequestUUID string      `json:"change_request_uuid"`
+	Payload           []byte      `json:"payload"`
+	Status            int64       `json:"status"`
+	Attempts          int64       `json:"attempts"`
+	NextAttemptAt     null.Time   `json:"next_attempt_at"`
+	DeliveredAt       null.Time   `json:"delivered_at"`
+	LastError         null.String `json:"last_error"`
+	CreatedAt         time.Time   `json:"created_at"`
+	UpdatedAt         time.Time   `json:"updated_at"`
+	CreatedByUUID     string      `json:"created_by_uuid"`
+	UpdatedByUUID     string      `json:"updated_by_uuid"`
+}
+
+func (q *Queries) InsertAutomationEvent(ctx context.Context, arg InsertAutomationEventParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, insertAutomationEvent,
+		arg.UUID,
+		arg.AutomationUUID,
+		arg.ProjectUUID,
+		arg.ChangeRequestUUID,
+		arg.Payload,
+		arg.Status,
+		arg.Attempts,
+		arg.NextAttemptAt,
+		arg.DeliveredAt,
+		arg.LastError,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+	)
+}
+
 const insertChangeRequest = `-- name: InsertChangeRequest :execresult
 INSERT INTO ` + "`" + `change_request` + "`" + `
 (` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `)

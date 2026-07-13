@@ -20,6 +20,26 @@ func (q *Queries) DeleteAiUsage(ctx context.Context, uuid string) (sql.Result, e
 	return q.db.ExecContext(ctx, deleteAiUsage, uuid)
 }
 
+const deleteAutomation = `-- name: DeleteAutomation :execresult
+DELETE FROM ` + "`" + `automation` + "`" + `
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+func (q *Queries) DeleteAutomation(ctx context.Context, uuid string) (sql.Result, error) {
+	return q.db.ExecContext(ctx, deleteAutomation, uuid)
+}
+
+const deleteAutomationEvent = `-- name: DeleteAutomationEvent :execresult
+DELETE FROM ` + "`" + `automation_event` + "`" + `
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+func (q *Queries) DeleteAutomationEvent(ctx context.Context, uuid string) (sql.Result, error) {
+	return q.db.ExecContext(ctx, deleteAutomationEvent, uuid)
+}
+
 const deleteChangeRequest = `-- name: DeleteChangeRequest :execresult
 DELETE FROM ` + "`" + `change_request` + "`" + `
 WHERE

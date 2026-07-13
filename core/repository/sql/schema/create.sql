@@ -372,3 +372,49 @@ CREATE TABLE IF NOT EXISTS `user_team` (
     INDEX `created_at` (`created_at`)
 ) ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `automation` (
+    `uuid` CHAR(36) NOT NULL,
+    `project_uuid` CHAR(36) NOT NULL,
+    `entity_uuid` CHAR(36) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `operation` INT NOT NULL,
+    `condition` JSON,
+    `action_type` INT NOT NULL,
+    `action_config` JSON,
+    `enabled` TINYINT(1) NOT NULL,
+    `status` INT NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_by_uuid` CHAR(36) NOT NULL,
+    `updated_by_uuid` CHAR(36) NOT NULL,
+    PRIMARY KEY (`uuid`),
+    INDEX `project_entity_enabled` (`project_uuid`, `entity_uuid`, `enabled`),
+    INDEX `status` (`status`),
+    INDEX `created_at` (`created_at`),
+    INDEX `updated_at` (`updated_at`)
+) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `automation_event` (
+    `uuid` CHAR(36) NOT NULL,
+    `automation_uuid` CHAR(36) NOT NULL,
+    `project_uuid` CHAR(36) NOT NULL,
+    `change_request_uuid` CHAR(36) NOT NULL,
+    `payload` JSON,
+    `status` INT NOT NULL,
+    `attempts` INT NOT NULL,
+    `next_attempt_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `delivered_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `last_error` TEXT,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_by_uuid` CHAR(36) NOT NULL,
+    `updated_by_uuid` CHAR(36) NOT NULL,
+    PRIMARY KEY (`uuid`),
+    INDEX `status_next_attempt` (`status`, `next_attempt_at`),
+    INDEX `automation_uuid` (`automation_uuid`),
+    INDEX `project_uuid` (`project_uuid`),
+    INDEX `change_request_uuid` (`change_request_uuid`),
+    INDEX `created_at` (`created_at`),
+    INDEX `updated_at` (`updated_at`)
+) ENGINE = InnoDB;
+

@@ -47,6 +47,10 @@ import (
 
 	"github.com/nuzur/nem/core/module/user_team"
 
+	"github.com/nuzur/nem/core/module/automation"
+
+	"github.com/nuzur/nem/core/module/automation_event"
+
 	"github.com/nuzur/nem/core/repository"
 )
 
@@ -84,6 +88,10 @@ type Implementation struct {
 	user_connection user_connection.Module
 
 	user_team user_team.Module
+
+	automation automation.Module
+
+	automation_event automation_event.Module
 }
 
 type Params struct {
@@ -304,4 +312,24 @@ func (i Implementation) UserTeam() user_team.Module {
 		})
 	}
 	return i.user_team
+}
+
+func (i Implementation) Automation() automation.Module {
+	if i.automation == nil {
+		i.automation = automation.New(coretypes.ModuleParams{
+			Repository: i.repository,
+			Logger:     i.logger,
+		})
+	}
+	return i.automation
+}
+
+func (i Implementation) AutomationEvent() automation_event.Module {
+	if i.automation_event == nil {
+		i.automation_event = automation_event.New(coretypes.ModuleParams{
+			Repository: i.repository,
+			Logger:     i.logger,
+		})
+	}
+	return i.automation_event
 }

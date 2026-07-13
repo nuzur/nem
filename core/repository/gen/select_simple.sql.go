@@ -53,6 +53,92 @@ func (q *Queries) FetchAiUsage(ctx context.Context) ([]AiUsage, error) {
 	return items, nil
 }
 
+const fetchAutomation = `-- name: FetchAutomation :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+`
+
+func (q *Queries) FetchAutomation(ctx context.Context) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomation)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEvent = `-- name: FetchAutomationEvent :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+`
+
+func (q *Queries) FetchAutomationEvent(ctx context.Context) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEvent)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const fetchChangeRequest = `-- name: FetchChangeRequest :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `

@@ -13,6 +13,8 @@ sql:
         emit_json_tags: true
         rename: 
           access_type: AccessType
+          action_config: ActionConfig
+          action_type: ActionType
           agent_connection_uuid: AgentConnectionUUID
           agent_uuid: AgentUUID
           ai_generated: AiGenerated
@@ -23,7 +25,9 @@ sql:
           allowed_extensions: AllowedExtensions
           append_only: AppendOnly
           array: Array
+          attempts: Attempts
           audio: Audio
+          automation_uuid: AutomationUUID
           base_version_uuid: BaseVersionUUID
           based_on_field_uuids: BasedOnFieldUUIDs
           billing_metadata: BillingMetadata
@@ -31,6 +35,7 @@ sql:
           boolean: Boolean
           bucket: Bucket
           cardinality: Cardinality
+          change_request_uuid: ChangeRequestUUID
           change_type: ChangeType
           char: Char
           cli_version: CliVersion
@@ -38,6 +43,7 @@ sql:
           collapsed: Collapsed
           color: Color
           comment: Comment
+          condition: Condition
           config: Config
           configuration_entity: ConfigurationEntity
           configuration_entity_values: ConfigurationEntityValues
@@ -67,6 +73,7 @@ sql:
           default_entity: DefaultEntity
           default_schema: DefaultSchema
           delete: Delete
+          delivered_at: DeliveredAt
           dependent: Dependent
           deployments: Deployments
           deprecated: Deprecated
@@ -78,6 +85,7 @@ sql:
           display_version: DisplayVersion
           email: Email
           enable_limits: EnableLimits
+          enabled: Enabled
           encrypted: Encrypted
           encryption_type: EncryptionType
           enforce_future: EnforceFuture
@@ -128,6 +136,7 @@ sql:
           key: Key
           key_auto_increment: KeyAutoIncrement
           keys: Keys
+          last_error: LastError
           last_name: LastName
           last_seen_at: LastSeenAt
           length: Length
@@ -153,12 +162,14 @@ sql:
           mysql: Mysql
           name: Name
           new_value: NewValue
+          next_attempt_at: NextAttemptAt
           num_results: NumResults
           number_of_decimals: NumberOfDecimals
           numeric_value: NumericValue
           object_store: ObjectStore
           object_store_uuid: ObjectStoreUUID
           object_stores: ObjectStores
+          operation: Operation
           order: Order
           organization_uuids: OrganizationUUIDs
           os: Os
@@ -167,6 +178,7 @@ sql:
           params: Params
           password: Password
           path: Path
+          payload: Payload
           phone: Phone
           port: Port
           postgres: Postgres
@@ -353,6 +365,8 @@ overrides:
     rename:
       ai_usage: AiUsage
       array_type_config: ArrayTypeConfig
+      automation: Automation
+      automation_event: AutomationEvent
       change_request: ChangeRequest
       change_request_data_change: ChangeRequestDataChange
       change_request_metadata: ChangeRequestMetadata

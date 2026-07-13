@@ -74,3 +74,13 @@ DELETE FROM `user_team`
 WHERE
 `uuid` = ?;
 
+-- name: DeleteAutomation :execresult
+DELETE FROM `automation`
+WHERE
+`uuid` = ?;
+
+-- name: DeleteAutomationEvent :execresult
+DELETE FROM `automation_event`
+WHERE
+`uuid` = ?;
+

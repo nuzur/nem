@@ -89,3 +89,15 @@ INSERT INTO `user_team`
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?);
 
+-- name: InsertAutomation :execresult
+INSERT INTO `automation`
+(`uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+
+-- name: InsertAutomationEvent :execresult
+INSERT INTO `automation_event`
+(`uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+

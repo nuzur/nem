@@ -1719,6 +1719,1814 @@ func (q *Queries) FetchAiUsageByUserUUIDOrderedByUpdatedAtDESC(ctx context.Conte
 	return items, nil
 }
 
+const fetchAutomationByProjectUUIDAndEntityUUIDAndEnabled = `-- name: FetchAutomationByProjectUUIDAndEntityUUIDAndEnabled :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `enabled` + "`" + ` = ? AND ` + "`" + `entity_uuid` + "`" + ` = ? AND ` + "`" + `project_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledParams struct {
+	Enabled     bool   `json:"enabled"`
+	EntityUUID  string `json:"entity_uuid"`
+	ProjectUUID string `json:"project_uuid"`
+	Offset      int32  `json:"offset"`
+	Limit       int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationByProjectUUIDAndEntityUUIDAndEnabled(ctx context.Context, arg FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledParams) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByProjectUUIDAndEntityUUIDAndEnabled,
+		arg.Enabled,
+		arg.EntityUUID,
+		arg.ProjectUUID,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtASC = `-- name: FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `enabled` + "`" + ` = ? AND ` + "`" + `entity_uuid` + "`" + ` = ? AND ` + "`" + `project_uuid` + "`" + ` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtASCParams struct {
+	Enabled     bool   `json:"enabled"`
+	EntityUUID  string `json:"entity_uuid"`
+	ProjectUUID string `json:"project_uuid"`
+	Offset      int32  `json:"offset"`
+	Limit       int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtASCParams) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtASC,
+		arg.Enabled,
+		arg.EntityUUID,
+		arg.ProjectUUID,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtDESC = `-- name: FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `enabled` + "`" + ` = ? AND ` + "`" + `entity_uuid` + "`" + ` = ? AND ` + "`" + `project_uuid` + "`" + ` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtDESCParams struct {
+	Enabled     bool   `json:"enabled"`
+	EntityUUID  string `json:"entity_uuid"`
+	ProjectUUID string `json:"project_uuid"`
+	Offset      int32  `json:"offset"`
+	Limit       int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtDESCParams) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtDESC,
+		arg.Enabled,
+		arg.EntityUUID,
+		arg.ProjectUUID,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtASC = `-- name: FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `enabled` + "`" + ` = ? AND ` + "`" + `entity_uuid` + "`" + ` = ? AND ` + "`" + `project_uuid` + "`" + ` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtASCParams struct {
+	Enabled     bool   `json:"enabled"`
+	EntityUUID  string `json:"entity_uuid"`
+	ProjectUUID string `json:"project_uuid"`
+	Offset      int32  `json:"offset"`
+	Limit       int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtASCParams) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtASC,
+		arg.Enabled,
+		arg.EntityUUID,
+		arg.ProjectUUID,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtDESC = `-- name: FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `enabled` + "`" + ` = ? AND ` + "`" + `entity_uuid` + "`" + ` = ? AND ` + "`" + `project_uuid` + "`" + ` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtDESCParams struct {
+	Enabled     bool   `json:"enabled"`
+	EntityUUID  string `json:"entity_uuid"`
+	ProjectUUID string `json:"project_uuid"`
+	Offset      int32  `json:"offset"`
+	Limit       int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtDESCParams) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtDESC,
+		arg.Enabled,
+		arg.EntityUUID,
+		arg.ProjectUUID,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationByStatus = `-- name: FetchAutomationByStatus :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `status` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchAutomationByStatusParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationByStatus(ctx context.Context, arg FetchAutomationByStatusParams) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByStatus, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationByStatusOrderedByCreatedAtASC = `-- name: FetchAutomationByStatusOrderedByCreatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `status` + "`" + ` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationByStatusOrderedByCreatedAtASCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationByStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationByStatusOrderedByCreatedAtASCParams) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByStatusOrderedByCreatedAtASC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationByStatusOrderedByCreatedAtDESC = `-- name: FetchAutomationByStatusOrderedByCreatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `status` + "`" + ` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationByStatusOrderedByCreatedAtDESCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationByStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationByStatusOrderedByCreatedAtDESCParams) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByStatusOrderedByCreatedAtDESC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationByStatusOrderedByUpdatedAtASC = `-- name: FetchAutomationByStatusOrderedByUpdatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `status` + "`" + ` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationByStatusOrderedByUpdatedAtASCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationByStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationByStatusOrderedByUpdatedAtASCParams) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByStatusOrderedByUpdatedAtASC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationByStatusOrderedByUpdatedAtDESC = `-- name: FetchAutomationByStatusOrderedByUpdatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `status` + "`" + ` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationByStatusOrderedByUpdatedAtDESCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationByStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationByStatusOrderedByUpdatedAtDESCParams) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByStatusOrderedByUpdatedAtDESC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationByUUID = `-- name: FetchAutomationByUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ?
+`
+
+// automation selects:
+func (q *Queries) FetchAutomationByUUID(ctx context.Context, uuid string) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByUUID, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationByUUIDForUpdate = `-- name: FetchAutomationByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `entity_uuid` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `operation` + "`" + `,` + "`" + `condition` + "`" + `,` + "`" + `action_type` + "`" + `,` + "`" + `action_config` + "`" + `,` + "`" + `enabled` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchAutomationByUUIDForUpdate(ctx context.Context, uuid string) ([]Automation, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Automation
+	for rows.Next() {
+		var i Automation
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.EntityUUID,
+			&i.Name,
+			&i.Operation,
+			&i.Condition,
+			&i.ActionType,
+			&i.ActionConfig,
+			&i.Enabled,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByAutomationUUID = `-- name: FetchAutomationEventByAutomationUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `automation_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByAutomationUUIDParams struct {
+	AutomationUUID string `json:"automation_uuid"`
+	Offset         int32  `json:"offset"`
+	Limit          int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByAutomationUUID(ctx context.Context, arg FetchAutomationEventByAutomationUUIDParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByAutomationUUID, arg.AutomationUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByAutomationUUIDOrderedByCreatedAtASC = `-- name: FetchAutomationEventByAutomationUUIDOrderedByCreatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `automation_uuid` + "`" + ` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByAutomationUUIDOrderedByCreatedAtASCParams struct {
+	AutomationUUID string `json:"automation_uuid"`
+	Offset         int32  `json:"offset"`
+	Limit          int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByAutomationUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationEventByAutomationUUIDOrderedByCreatedAtASCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByAutomationUUIDOrderedByCreatedAtASC, arg.AutomationUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByAutomationUUIDOrderedByCreatedAtDESC = `-- name: FetchAutomationEventByAutomationUUIDOrderedByCreatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `automation_uuid` + "`" + ` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByAutomationUUIDOrderedByCreatedAtDESCParams struct {
+	AutomationUUID string `json:"automation_uuid"`
+	Offset         int32  `json:"offset"`
+	Limit          int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByAutomationUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationEventByAutomationUUIDOrderedByCreatedAtDESCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByAutomationUUIDOrderedByCreatedAtDESC, arg.AutomationUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByAutomationUUIDOrderedByUpdatedAtASC = `-- name: FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `automation_uuid` + "`" + ` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtASCParams struct {
+	AutomationUUID string `json:"automation_uuid"`
+	Offset         int32  `json:"offset"`
+	Limit          int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtASCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByAutomationUUIDOrderedByUpdatedAtASC, arg.AutomationUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByAutomationUUIDOrderedByUpdatedAtDESC = `-- name: FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `automation_uuid` + "`" + ` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtDESCParams struct {
+	AutomationUUID string `json:"automation_uuid"`
+	Offset         int32  `json:"offset"`
+	Limit          int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtDESCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByAutomationUUIDOrderedByUpdatedAtDESC, arg.AutomationUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByChangeRequestUUID = `-- name: FetchAutomationEventByChangeRequestUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `change_request_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByChangeRequestUUIDParams struct {
+	ChangeRequestUUID string `json:"change_request_uuid"`
+	Offset            int32  `json:"offset"`
+	Limit             int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByChangeRequestUUID(ctx context.Context, arg FetchAutomationEventByChangeRequestUUIDParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByChangeRequestUUID, arg.ChangeRequestUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtASC = `-- name: FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `change_request_uuid` + "`" + ` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtASCParams struct {
+	ChangeRequestUUID string `json:"change_request_uuid"`
+	Offset            int32  `json:"offset"`
+	Limit             int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtASCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtASC, arg.ChangeRequestUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtDESC = `-- name: FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `change_request_uuid` + "`" + ` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtDESCParams struct {
+	ChangeRequestUUID string `json:"change_request_uuid"`
+	Offset            int32  `json:"offset"`
+	Limit             int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtDESCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtDESC, arg.ChangeRequestUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtASC = `-- name: FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `change_request_uuid` + "`" + ` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtASCParams struct {
+	ChangeRequestUUID string `json:"change_request_uuid"`
+	Offset            int32  `json:"offset"`
+	Limit             int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtASCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtASC, arg.ChangeRequestUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtDESC = `-- name: FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `change_request_uuid` + "`" + ` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtDESCParams struct {
+	ChangeRequestUUID string `json:"change_request_uuid"`
+	Offset            int32  `json:"offset"`
+	Limit             int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtDESCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtDESC, arg.ChangeRequestUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByProjectUUID = `-- name: FetchAutomationEventByProjectUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `project_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByProjectUUIDParams struct {
+	ProjectUUID string `json:"project_uuid"`
+	Offset      int32  `json:"offset"`
+	Limit       int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByProjectUUID(ctx context.Context, arg FetchAutomationEventByProjectUUIDParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByProjectUUID, arg.ProjectUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByProjectUUIDOrderedByCreatedAtASC = `-- name: FetchAutomationEventByProjectUUIDOrderedByCreatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `project_uuid` + "`" + ` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByProjectUUIDOrderedByCreatedAtASCParams struct {
+	ProjectUUID string `json:"project_uuid"`
+	Offset      int32  `json:"offset"`
+	Limit       int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByProjectUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationEventByProjectUUIDOrderedByCreatedAtASCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByProjectUUIDOrderedByCreatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByProjectUUIDOrderedByCreatedAtDESC = `-- name: FetchAutomationEventByProjectUUIDOrderedByCreatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `project_uuid` + "`" + ` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByProjectUUIDOrderedByCreatedAtDESCParams struct {
+	ProjectUUID string `json:"project_uuid"`
+	Offset      int32  `json:"offset"`
+	Limit       int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByProjectUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationEventByProjectUUIDOrderedByCreatedAtDESCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByProjectUUIDOrderedByCreatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByProjectUUIDOrderedByUpdatedAtASC = `-- name: FetchAutomationEventByProjectUUIDOrderedByUpdatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `project_uuid` + "`" + ` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByProjectUUIDOrderedByUpdatedAtASCParams struct {
+	ProjectUUID string `json:"project_uuid"`
+	Offset      int32  `json:"offset"`
+	Limit       int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByProjectUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationEventByProjectUUIDOrderedByUpdatedAtASCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByProjectUUIDOrderedByUpdatedAtASC, arg.ProjectUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByProjectUUIDOrderedByUpdatedAtDESC = `-- name: FetchAutomationEventByProjectUUIDOrderedByUpdatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `project_uuid` + "`" + ` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByProjectUUIDOrderedByUpdatedAtDESCParams struct {
+	ProjectUUID string `json:"project_uuid"`
+	Offset      int32  `json:"offset"`
+	Limit       int32  `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByProjectUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationEventByProjectUUIDOrderedByUpdatedAtDESCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByProjectUUIDOrderedByUpdatedAtDESC, arg.ProjectUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByStatus = `-- name: FetchAutomationEventByStatus :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `status` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByStatusParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByStatus(ctx context.Context, arg FetchAutomationEventByStatusParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByStatus, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByStatusOrderedByCreatedAtASC = `-- name: FetchAutomationEventByStatusOrderedByCreatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `status` + "`" + ` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByStatusOrderedByCreatedAtASCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByStatusOrderedByCreatedAtASC(ctx context.Context, arg FetchAutomationEventByStatusOrderedByCreatedAtASCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByStatusOrderedByCreatedAtASC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByStatusOrderedByCreatedAtDESC = `-- name: FetchAutomationEventByStatusOrderedByCreatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `status` + "`" + ` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByStatusOrderedByCreatedAtDESCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByStatusOrderedByCreatedAtDESC(ctx context.Context, arg FetchAutomationEventByStatusOrderedByCreatedAtDESCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByStatusOrderedByCreatedAtDESC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByStatusOrderedByUpdatedAtASC = `-- name: FetchAutomationEventByStatusOrderedByUpdatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `status` + "`" + ` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByStatusOrderedByUpdatedAtASCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByStatusOrderedByUpdatedAtASC(ctx context.Context, arg FetchAutomationEventByStatusOrderedByUpdatedAtASCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByStatusOrderedByUpdatedAtASC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByStatusOrderedByUpdatedAtDESC = `-- name: FetchAutomationEventByStatusOrderedByUpdatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `status` + "`" + ` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?
+`
+
+type FetchAutomationEventByStatusOrderedByUpdatedAtDESCParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchAutomationEventByStatusOrderedByUpdatedAtDESC(ctx context.Context, arg FetchAutomationEventByStatusOrderedByUpdatedAtDESCParams) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByStatusOrderedByUpdatedAtDESC, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByUUID = `-- name: FetchAutomationEventByUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ?
+`
+
+// automation_event selects:
+func (q *Queries) FetchAutomationEventByUUID(ctx context.Context, uuid string) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByUUID, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchAutomationEventByUUIDForUpdate = `-- name: FetchAutomationEventByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `automation_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `change_request_uuid` + "`" + `,` + "`" + `payload` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `attempts` + "`" + `,` + "`" + `next_attempt_at` + "`" + `,` + "`" + `delivered_at` + "`" + `,` + "`" + `last_error` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `automation_event` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchAutomationEventByUUIDForUpdate(ctx context.Context, uuid string) ([]AutomationEvent, error) {
+	rows, err := q.db.QueryContext(ctx, fetchAutomationEventByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []AutomationEvent
+	for rows.Next() {
+		var i AutomationEvent
+		if err := rows.Scan(
+			&i.UUID,
+			&i.AutomationUUID,
+			&i.ProjectUUID,
+			&i.ChangeRequestUUID,
+			&i.Payload,
+			&i.Status,
+			&i.Attempts,
+			&i.NextAttemptAt,
+			&i.DeliveredAt,
+			&i.LastError,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const fetchChangeRequestByAiGenerated = `-- name: FetchChangeRequestByAiGenerated :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `

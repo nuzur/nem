@@ -1011,3 +1011,63 @@ func ReviewConfigReviewUserRolesSliceFromProto(s []pb.ReviewConfigReviewUserRole
 	}
 	return res
 }
+
+func AutomationOperationSliceToProto(s []enums.AutomationOperation) []pb.AutomationOperation {
+	res := []pb.AutomationOperation{}
+	for _, e := range s {
+		res = append(res, pb.AutomationOperation(e))
+	}
+	return res
+}
+func AutomationOperationSliceFromProto(s []pb.AutomationOperation) []enums.AutomationOperation {
+	res := []enums.AutomationOperation{}
+	for _, e := range s {
+		res = append(res, enums.AutomationOperation(e))
+	}
+	return res
+}
+
+func AutomationActionTypeSliceToProto(s []enums.AutomationActionType) []pb.AutomationActionType {
+	res := []pb.AutomationActionType{}
+	for _, e := range s {
+		res = append(res, pb.AutomationActionType(e))
+	}
+	return res
+}
+func AutomationActionTypeSliceFromProto(s []pb.AutomationActionType) []enums.AutomationActionType {
+	res := []enums.AutomationActionType{}
+	for _, e := range s {
+		res = append(res, enums.AutomationActionType(e))
+	}
+	return res
+}
+
+func AutomationStatusSliceToProto(s []enums.AutomationStatus) []pb.AutomationStatus {
+	res := []pb.AutomationStatus{}
+	for _, e := range s {
+		res = append(res, pb.AutomationStatus(e))
+	}
+	return res
+}
+func AutomationStatusSliceFromProto(s []pb.AutomationStatus) []enums.AutomationStatus {
+	res := []enums.AutomationStatus{}
+	for _, e := range s {
+		res = append(res, enums.AutomationStatus(e))
+	}
+	return res
+}
+
+func AutomationEventStatusSliceToProto(s []enums.AutomationEventStatus) []pb.AutomationEventStatus {
+	res := []pb.AutomationEventStatus{}
+	for _, e := range s {
+		res = append(res, pb.AutomationEventStatus(e))
+	}
+	return res
+}
+func AutomationEventStatusSliceFromProto(s []pb.AutomationEventStatus) []enums.AutomationEventStatus {
+	res := []enums.AutomationEventStatus{}
+	for _, e := range s {
+		res = append(res, enums.AutomationEventStatus(e))
+	}
+	return res
+}

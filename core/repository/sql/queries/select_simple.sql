@@ -59,3 +59,11 @@ FROM `user_connection`;
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`;
 
+-- name: FetchAutomation :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`;
+
+-- name: FetchAutomationEvent :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`;
+

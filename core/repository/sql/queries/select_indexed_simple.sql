@@ -3318,3 +3318,287 @@ LIMIT ?, ?;
             
 
 
+
+
+-- automation selects:
+-- name: FetchAutomationByUUID :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `uuid` = ? ;
+
+        
+-- name: FetchAutomationByProjectUUIDAndEntityUUIDAndEnabled :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `enabled` = ? AND `entity_uuid` = ? AND `project_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchAutomationByStatus :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `status` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchAutomationByUUIDForUpdate :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `uuid` = ? 
+FOR UPDATE;
+        
+-- name: FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtASC :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `enabled` = ? AND `entity_uuid` = ? AND `project_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByCreatedAtDESC :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `enabled` = ? AND `entity_uuid` = ? AND `project_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtASC :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `enabled` = ? AND `entity_uuid` = ? AND `project_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationByProjectUUIDAndEntityUUIDAndEnabledOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `enabled` = ? AND `entity_uuid` = ? AND `project_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchAutomationByStatusOrderedByCreatedAtASC :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `status` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationByStatusOrderedByCreatedAtDESC :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `status` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchAutomationByStatusOrderedByUpdatedAtASC :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `status` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationByStatusOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation`
+WHERE 
+    `status` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+
+
+
+
+-- automation_event selects:
+-- name: FetchAutomationEventByUUID :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `uuid` = ? ;
+
+        
+-- name: FetchAutomationEventByStatus :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `status` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchAutomationEventByAutomationUUID :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `automation_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchAutomationEventByProjectUUID :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `project_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchAutomationEventByChangeRequestUUID :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `change_request_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchAutomationEventByUUIDForUpdate :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `uuid` = ? 
+FOR UPDATE;
+        
+-- name: FetchAutomationEventByStatusOrderedByCreatedAtASC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `status` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationEventByStatusOrderedByCreatedAtDESC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `status` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchAutomationEventByStatusOrderedByUpdatedAtASC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `status` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationEventByStatusOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `status` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchAutomationEventByAutomationUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `automation_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationEventByAutomationUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `automation_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `automation_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `automation_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchAutomationEventByProjectUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationEventByProjectUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchAutomationEventByProjectUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationEventByProjectUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `change_request_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationEventByChangeRequestUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `change_request_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `change_request_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchAutomationEventByChangeRequestUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `automation_event`
+WHERE 
+    `change_request_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+
+

@@ -59,6 +59,96 @@ func (q *Queries) UpdateAiUsage(ctx context.Context, arg UpdateAiUsageParams) er
 	return err
 }
 
+const updateAutomation = `-- name: UpdateAutomation :exec
+UPDATE ` + "`" + `automation` + "`" + `
+SET
+` + "`" + `project_uuid` + "`" + ` = ?, ` + "`" + `entity_uuid` + "`" + ` = ?, ` + "`" + `name` + "`" + ` = ?, ` + "`" + `operation` + "`" + ` = ?, ` + "`" + `condition` + "`" + ` = ?, ` + "`" + `action_type` + "`" + ` = ?, ` + "`" + `action_config` + "`" + ` = ?, ` + "`" + `enabled` + "`" + ` = ?, ` + "`" + `status` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?, ` + "`" + `created_by_uuid` + "`" + ` = ?, ` + "`" + `updated_by_uuid` + "`" + ` = ?
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+type UpdateAutomationParams struct {
+	ProjectUUID   string    `json:"project_uuid"`
+	EntityUUID    string    `json:"entity_uuid"`
+	Name          string    `json:"name"`
+	Operation     int64     `json:"operation"`
+	Condition     []byte    `json:"condition"`
+	ActionType    int64     `json:"action_type"`
+	ActionConfig  []byte    `json:"action_config"`
+	Enabled       bool      `json:"enabled"`
+	Status        int64     `json:"status"`
+	CreatedAt     time.Time `json:"created_at"`
+	UpdatedAt     time.Time `json:"updated_at"`
+	CreatedByUUID string    `json:"created_by_uuid"`
+	UpdatedByUUID string    `json:"updated_by_uuid"`
+	UUID          string    `json:"uuid"`
+}
+
+func (q *Queries) UpdateAutomation(ctx context.Context, arg UpdateAutomationParams) error {
+	_, err := q.db.ExecContext(ctx, updateAutomation,
+		arg.ProjectUUID,
+		arg.EntityUUID,
+		arg.Name,
+		arg.Operation,
+		arg.Condition,
+		arg.ActionType,
+		arg.ActionConfig,
+		arg.Enabled,
+		arg.Status,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+		arg.UUID,
+	)
+	return err
+}
+
+const updateAutomationEvent = `-- name: UpdateAutomationEvent :exec
+UPDATE ` + "`" + `automation_event` + "`" + `
+SET
+` + "`" + `automation_uuid` + "`" + ` = ?, ` + "`" + `project_uuid` + "`" + ` = ?, ` + "`" + `change_request_uuid` + "`" + ` = ?, ` + "`" + `payload` + "`" + ` = ?, ` + "`" + `status` + "`" + ` = ?, ` + "`" + `attempts` + "`" + ` = ?, ` + "`" + `next_attempt_at` + "`" + ` = ?, ` + "`" + `delivered_at` + "`" + ` = ?, ` + "`" + `last_error` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?, ` + "`" + `created_by_uuid` + "`" + ` = ?, ` + "`" + `updated_by_uuid` + "`" + ` = ?
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+type UpdateAutomationEventParams struct {
+	AutomationUUID    string      `json:"automation_uuid"`
+	ProjectUUID       string      `json:"project_uuid"`
+	ChangeRequestUUID string      `json:"change_request_uuid"`
+	Payload           []byte      `json:"payload"`
+	Status            int64       `json:"status"`
+	Attempts          int64       `json:"attempts"`
+	NextAttemptAt     null.Time   `json:"next_attempt_at"`
+	DeliveredAt       null.Time   `json:"delivered_at"`
+	LastError         null.String `json:"last_error"`
+	CreatedAt         time.Time   `json:"created_at"`
+	UpdatedAt         time.Time   `json:"updated_at"`
+	CreatedByUUID     string      `json:"created_by_uuid"`
+	UpdatedByUUID     string      `json:"updated_by_uuid"`
+	UUID              string      `json:"uuid"`
+}
+
+func (q *Queries) UpdateAutomationEvent(ctx context.Context, arg UpdateAutomationEventParams) error {
+	_, err := q.db.ExecContext(ctx, updateAutomationEvent,
+		arg.AutomationUUID,
+		arg.ProjectUUID,
+		arg.ChangeRequestUUID,
+		arg.Payload,
+		arg.Status,
+		arg.Attempts,
+		arg.NextAttemptAt,
+		arg.DeliveredAt,
+		arg.LastError,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+		arg.UUID,
+	)
+	return err
+}
+
 const updateChangeRequest = `-- name: UpdateChangeRequest :exec
 UPDATE ` + "`" + `change_request` + "`" + `
 SET

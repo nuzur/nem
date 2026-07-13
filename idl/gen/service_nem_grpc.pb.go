@@ -294,6 +294,12 @@ const (
 	Nem_ListChangeRequestScopeConfigRemote_FullMethodName      = "/nem.Nem/ListChangeRequestScopeConfigRemote"
 	Nem_CreateChangeRequestScopeConfigRemote_FullMethodName    = "/nem.Nem/CreateChangeRequestScopeConfigRemote"
 	Nem_UpdateChangeRequestScopeConfigRemote_FullMethodName    = "/nem.Nem/UpdateChangeRequestScopeConfigRemote"
+	Nem_ListAutomation_FullMethodName                          = "/nem.Nem/ListAutomation"
+	Nem_CreateAutomation_FullMethodName                        = "/nem.Nem/CreateAutomation"
+	Nem_UpdateAutomation_FullMethodName                        = "/nem.Nem/UpdateAutomation"
+	Nem_ListAutomationEvent_FullMethodName                     = "/nem.Nem/ListAutomationEvent"
+	Nem_CreateAutomationEvent_FullMethodName                   = "/nem.Nem/CreateAutomationEvent"
+	Nem_UpdateAutomationEvent_FullMethodName                   = "/nem.Nem/UpdateAutomationEvent"
 )
 
 // NemClient is the client API for Nem service.
@@ -664,6 +670,14 @@ type NemClient interface {
 	ListChangeRequestScopeConfigRemote(ctx context.Context, in *ListChangeRequestScopeConfigRemoteRequest, opts ...grpc.CallOption) (*ListChangeRequestScopeConfigRemoteResponse, error)
 	CreateChangeRequestScopeConfigRemote(ctx context.Context, in *CreateChangeRequestScopeConfigRemoteRequest, opts ...grpc.CallOption) (*ChangeRequestScopeConfigRemote, error)
 	UpdateChangeRequestScopeConfigRemote(ctx context.Context, in *UpdateChangeRequestScopeConfigRemoteRequest, opts ...grpc.CallOption) (*ChangeRequestScopeConfigRemote, error)
+	// automation start
+	ListAutomation(ctx context.Context, in *ListAutomationRequest, opts ...grpc.CallOption) (*ListAutomationResponse, error)
+	CreateAutomation(ctx context.Context, in *CreateAutomationRequest, opts ...grpc.CallOption) (*Automation, error)
+	UpdateAutomation(ctx context.Context, in *UpdateAutomationRequest, opts ...grpc.CallOption) (*Automation, error)
+	// automation_event start
+	ListAutomationEvent(ctx context.Context, in *ListAutomationEventRequest, opts ...grpc.CallOption) (*ListAutomationEventResponse, error)
+	CreateAutomationEvent(ctx context.Context, in *CreateAutomationEventRequest, opts ...grpc.CallOption) (*AutomationEvent, error)
+	UpdateAutomationEvent(ctx context.Context, in *UpdateAutomationEventRequest, opts ...grpc.CallOption) (*AutomationEvent, error)
 }
 
 type nemClient struct {
@@ -3404,6 +3418,66 @@ func (c *nemClient) UpdateChangeRequestScopeConfigRemote(ctx context.Context, in
 	return out, nil
 }
 
+func (c *nemClient) ListAutomation(ctx context.Context, in *ListAutomationRequest, opts ...grpc.CallOption) (*ListAutomationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAutomationResponse)
+	err := c.cc.Invoke(ctx, Nem_ListAutomation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateAutomation(ctx context.Context, in *CreateAutomationRequest, opts ...grpc.CallOption) (*Automation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Automation)
+	err := c.cc.Invoke(ctx, Nem_CreateAutomation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateAutomation(ctx context.Context, in *UpdateAutomationRequest, opts ...grpc.CallOption) (*Automation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Automation)
+	err := c.cc.Invoke(ctx, Nem_UpdateAutomation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) ListAutomationEvent(ctx context.Context, in *ListAutomationEventRequest, opts ...grpc.CallOption) (*ListAutomationEventResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAutomationEventResponse)
+	err := c.cc.Invoke(ctx, Nem_ListAutomationEvent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateAutomationEvent(ctx context.Context, in *CreateAutomationEventRequest, opts ...grpc.CallOption) (*AutomationEvent, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AutomationEvent)
+	err := c.cc.Invoke(ctx, Nem_CreateAutomationEvent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateAutomationEvent(ctx context.Context, in *UpdateAutomationEventRequest, opts ...grpc.CallOption) (*AutomationEvent, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AutomationEvent)
+	err := c.cc.Invoke(ctx, Nem_UpdateAutomationEvent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NemServer is the server API for Nem service.
 // All implementations must embed UnimplementedNemServer
 // for forward compatibility.
@@ -3772,6 +3846,14 @@ type NemServer interface {
 	ListChangeRequestScopeConfigRemote(context.Context, *ListChangeRequestScopeConfigRemoteRequest) (*ListChangeRequestScopeConfigRemoteResponse, error)
 	CreateChangeRequestScopeConfigRemote(context.Context, *CreateChangeRequestScopeConfigRemoteRequest) (*ChangeRequestScopeConfigRemote, error)
 	UpdateChangeRequestScopeConfigRemote(context.Context, *UpdateChangeRequestScopeConfigRemoteRequest) (*ChangeRequestScopeConfigRemote, error)
+	// automation start
+	ListAutomation(context.Context, *ListAutomationRequest) (*ListAutomationResponse, error)
+	CreateAutomation(context.Context, *CreateAutomationRequest) (*Automation, error)
+	UpdateAutomation(context.Context, *UpdateAutomationRequest) (*Automation, error)
+	// automation_event start
+	ListAutomationEvent(context.Context, *ListAutomationEventRequest) (*ListAutomationEventResponse, error)
+	CreateAutomationEvent(context.Context, *CreateAutomationEventRequest) (*AutomationEvent, error)
+	UpdateAutomationEvent(context.Context, *UpdateAutomationEventRequest) (*AutomationEvent, error)
 	mustEmbedUnimplementedNemServer()
 }
 
@@ -4600,6 +4682,24 @@ func (UnimplementedNemServer) CreateChangeRequestScopeConfigRemote(context.Conte
 }
 func (UnimplementedNemServer) UpdateChangeRequestScopeConfigRemote(context.Context, *UpdateChangeRequestScopeConfigRemoteRequest) (*ChangeRequestScopeConfigRemote, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateChangeRequestScopeConfigRemote not implemented")
+}
+func (UnimplementedNemServer) ListAutomation(context.Context, *ListAutomationRequest) (*ListAutomationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAutomation not implemented")
+}
+func (UnimplementedNemServer) CreateAutomation(context.Context, *CreateAutomationRequest) (*Automation, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAutomation not implemented")
+}
+func (UnimplementedNemServer) UpdateAutomation(context.Context, *UpdateAutomationRequest) (*Automation, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAutomation not implemented")
+}
+func (UnimplementedNemServer) ListAutomationEvent(context.Context, *ListAutomationEventRequest) (*ListAutomationEventResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAutomationEvent not implemented")
+}
+func (UnimplementedNemServer) CreateAutomationEvent(context.Context, *CreateAutomationEventRequest) (*AutomationEvent, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAutomationEvent not implemented")
+}
+func (UnimplementedNemServer) UpdateAutomationEvent(context.Context, *UpdateAutomationEventRequest) (*AutomationEvent, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAutomationEvent not implemented")
 }
 func (UnimplementedNemServer) mustEmbedUnimplementedNemServer() {}
 func (UnimplementedNemServer) testEmbeddedByValue()             {}
@@ -9536,6 +9636,114 @@ func _Nem_UpdateChangeRequestScopeConfigRemote_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Nem_ListAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAutomationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListAutomation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListAutomation(ctx, req.(*ListAutomationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAutomationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateAutomation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateAutomation(ctx, req.(*CreateAutomationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAutomationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateAutomation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateAutomation(ctx, req.(*UpdateAutomationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_ListAutomationEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAutomationEventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListAutomationEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListAutomationEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListAutomationEvent(ctx, req.(*ListAutomationEventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateAutomationEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAutomationEventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateAutomationEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateAutomationEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateAutomationEvent(ctx, req.(*CreateAutomationEventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateAutomationEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAutomationEventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateAutomationEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateAutomationEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateAutomationEvent(ctx, req.(*UpdateAutomationEventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Nem_ServiceDesc is the grpc.ServiceDesc for Nem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -10634,6 +10842,30 @@ var Nem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateChangeRequestScopeConfigRemote",
 			Handler:    _Nem_UpdateChangeRequestScopeConfigRemote_Handler,
+		},
+		{
+			MethodName: "ListAutomation",
+			Handler:    _Nem_ListAutomation_Handler,
+		},
+		{
+			MethodName: "CreateAutomation",
+			Handler:    _Nem_CreateAutomation_Handler,
+		},
+		{
+			MethodName: "UpdateAutomation",
+			Handler:    _Nem_UpdateAutomation_Handler,
+		},
+		{
+			MethodName: "ListAutomationEvent",
+			Handler:    _Nem_ListAutomationEvent_Handler,
+		},
+		{
+			MethodName: "CreateAutomationEvent",
+			Handler:    _Nem_CreateAutomationEvent_Handler,
+		},
+		{
+			MethodName: "UpdateAutomationEvent",
+			Handler:    _Nem_UpdateAutomationEvent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -28,6 +28,40 @@ type AiUsage struct {
 	UpdatedByUUID      string    `json:"updated_by_uuid"`
 }
 
+type Automation struct {
+	UUID          string    `json:"uuid"`
+	ProjectUUID   string    `json:"project_uuid"`
+	EntityUUID    string    `json:"entity_uuid"`
+	Name          string    `json:"name"`
+	Operation     int64     `json:"operation"`
+	Condition     []byte    `json:"condition"`
+	ActionType    int64     `json:"action_type"`
+	ActionConfig  []byte    `json:"action_config"`
+	Enabled       bool      `json:"enabled"`
+	Status        int64     `json:"status"`
+	CreatedAt     time.Time `json:"created_at"`
+	UpdatedAt     time.Time `json:"updated_at"`
+	CreatedByUUID string    `json:"created_by_uuid"`
+	UpdatedByUUID string    `json:"updated_by_uuid"`
+}
+
+type AutomationEvent struct {
+	UUID              string      `json:"uuid"`
+	AutomationUUID    string      `json:"automation_uuid"`
+	ProjectUUID       string      `json:"project_uuid"`
+	ChangeRequestUUID string      `json:"change_request_uuid"`
+	Payload           []byte      `json:"payload"`
+	Status            int64       `json:"status"`
+	Attempts          int64       `json:"attempts"`
+	NextAttemptAt     null.Time   `json:"next_attempt_at"`
+	DeliveredAt       null.Time   `json:"delivered_at"`
+	LastError         null.String `json:"last_error"`
+	CreatedAt         time.Time   `json:"created_at"`
+	UpdatedAt         time.Time   `json:"updated_at"`
+	CreatedByUUID     string      `json:"created_by_uuid"`
+	UpdatedByUUID     string      `json:"updated_by_uuid"`
+}
+
 type ChangeRequest struct {
 	UUID               string      `json:"uuid"`
 	Version            int64       `json:"version"`

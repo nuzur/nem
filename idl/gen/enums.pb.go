@@ -3558,6 +3558,217 @@ func (ReviewConfigReviewUserRoles) EnumDescriptor() ([]byte, []int) {
 	return file_enums_proto_rawDescGZIP(), []int{66}
 }
 
+type AutomationOperation int32
+
+const (
+	AutomationOperation_AUTOMATION_OPERATION_INVALID AutomationOperation = 0
+	AutomationOperation_AUTOMATION_OPERATION_CREATE  AutomationOperation = 1
+	AutomationOperation_AUTOMATION_OPERATION_UPDATE  AutomationOperation = 2
+	AutomationOperation_AUTOMATION_OPERATION_DELETE  AutomationOperation = 3
+	AutomationOperation_AUTOMATION_OPERATION_ANY     AutomationOperation = 4
+)
+
+// Enum value maps for AutomationOperation.
+var (
+	AutomationOperation_name = map[int32]string{
+		0: "AUTOMATION_OPERATION_INVALID",
+		1: "AUTOMATION_OPERATION_CREATE",
+		2: "AUTOMATION_OPERATION_UPDATE",
+		3: "AUTOMATION_OPERATION_DELETE",
+		4: "AUTOMATION_OPERATION_ANY",
+	}
+	AutomationOperation_value = map[string]int32{
+		"AUTOMATION_OPERATION_INVALID": 0,
+		"AUTOMATION_OPERATION_CREATE":  1,
+		"AUTOMATION_OPERATION_UPDATE":  2,
+		"AUTOMATION_OPERATION_DELETE":  3,
+		"AUTOMATION_OPERATION_ANY":     4,
+	}
+)
+
+func (x AutomationOperation) Enum() *AutomationOperation {
+	p := new(AutomationOperation)
+	*p = x
+	return p
+}
+
+func (x AutomationOperation) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AutomationOperation) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[67].Descriptor()
+}
+
+func (AutomationOperation) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[67]
+}
+
+func (x AutomationOperation) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AutomationOperation.Descriptor instead.
+func (AutomationOperation) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{67}
+}
+
+type AutomationActionType int32
+
+const (
+	AutomationActionType_AUTOMATION_ACTION_TYPE_INVALID AutomationActionType = 0
+	AutomationActionType_AUTOMATION_ACTION_TYPE_WEBHOOK AutomationActionType = 1
+)
+
+// Enum value maps for AutomationActionType.
+var (
+	AutomationActionType_name = map[int32]string{
+		0: "AUTOMATION_ACTION_TYPE_INVALID",
+		1: "AUTOMATION_ACTION_TYPE_WEBHOOK",
+	}
+	AutomationActionType_value = map[string]int32{
+		"AUTOMATION_ACTION_TYPE_INVALID": 0,
+		"AUTOMATION_ACTION_TYPE_WEBHOOK": 1,
+	}
+)
+
+func (x AutomationActionType) Enum() *AutomationActionType {
+	p := new(AutomationActionType)
+	*p = x
+	return p
+}
+
+func (x AutomationActionType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AutomationActionType) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[68].Descriptor()
+}
+
+func (AutomationActionType) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[68]
+}
+
+func (x AutomationActionType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AutomationActionType.Descriptor instead.
+func (AutomationActionType) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{68}
+}
+
+type AutomationStatus int32
+
+const (
+	AutomationStatus_AUTOMATION_STATUS_INVALID         AutomationStatus = 0
+	AutomationStatus_AUTOMATION_STATUS_ACTIVE          AutomationStatus = 1
+	AutomationStatus_AUTOMATION_STATUS_NEEDS_ATTENTION AutomationStatus = 2
+	AutomationStatus_AUTOMATION_STATUS_DISABLED        AutomationStatus = 3
+)
+
+// Enum value maps for AutomationStatus.
+var (
+	AutomationStatus_name = map[int32]string{
+		0: "AUTOMATION_STATUS_INVALID",
+		1: "AUTOMATION_STATUS_ACTIVE",
+		2: "AUTOMATION_STATUS_NEEDS_ATTENTION",
+		3: "AUTOMATION_STATUS_DISABLED",
+	}
+	AutomationStatus_value = map[string]int32{
+		"AUTOMATION_STATUS_INVALID":         0,
+		"AUTOMATION_STATUS_ACTIVE":          1,
+		"AUTOMATION_STATUS_NEEDS_ATTENTION": 2,
+		"AUTOMATION_STATUS_DISABLED":        3,
+	}
+)
+
+func (x AutomationStatus) Enum() *AutomationStatus {
+	p := new(AutomationStatus)
+	*p = x
+	return p
+}
+
+func (x AutomationStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AutomationStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[69].Descriptor()
+}
+
+func (AutomationStatus) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[69]
+}
+
+func (x AutomationStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AutomationStatus.Descriptor instead.
+func (AutomationStatus) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{69}
+}
+
+type AutomationEventStatus int32
+
+const (
+	AutomationEventStatus_AUTOMATION_EVENT_STATUS_INVALID    AutomationEventStatus = 0
+	AutomationEventStatus_AUTOMATION_EVENT_STATUS_PENDING    AutomationEventStatus = 1
+	AutomationEventStatus_AUTOMATION_EVENT_STATUS_DELIVERING AutomationEventStatus = 2
+	AutomationEventStatus_AUTOMATION_EVENT_STATUS_DELIVERED  AutomationEventStatus = 3
+	AutomationEventStatus_AUTOMATION_EVENT_STATUS_FAILED     AutomationEventStatus = 4
+	AutomationEventStatus_AUTOMATION_EVENT_STATUS_DEAD       AutomationEventStatus = 5
+)
+
+// Enum value maps for AutomationEventStatus.
+var (
+	AutomationEventStatus_name = map[int32]string{
+		0: "AUTOMATION_EVENT_STATUS_INVALID",
+		1: "AUTOMATION_EVENT_STATUS_PENDING",
+		2: "AUTOMATION_EVENT_STATUS_DELIVERING",
+		3: "AUTOMATION_EVENT_STATUS_DELIVERED",
+		4: "AUTOMATION_EVENT_STATUS_FAILED",
+		5: "AUTOMATION_EVENT_STATUS_DEAD",
+	}
+	AutomationEventStatus_value = map[string]int32{
+		"AUTOMATION_EVENT_STATUS_INVALID":    0,
+		"AUTOMATION_EVENT_STATUS_PENDING":    1,
+		"AUTOMATION_EVENT_STATUS_DELIVERING": 2,
+		"AUTOMATION_EVENT_STATUS_DELIVERED":  3,
+		"AUTOMATION_EVENT_STATUS_FAILED":     4,
+		"AUTOMATION_EVENT_STATUS_DEAD":       5,
+	}
+)
+
+func (x AutomationEventStatus) Enum() *AutomationEventStatus {
+	p := new(AutomationEventStatus)
+	*p = x
+	return p
+}
+
+func (x AutomationEventStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AutomationEventStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[70].Descriptor()
+}
+
+func (AutomationEventStatus) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[70]
+}
+
+func (x AutomationEventStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AutomationEventStatus.Descriptor instead.
+func (AutomationEventStatus) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{70}
+}
+
 var File_enums_proto protoreflect.FileDescriptor
 
 const file_enums_proto_rawDesc = "" +
@@ -3920,7 +4131,28 @@ const file_enums_proto_rawDesc = "" +
 	")REVIEW_CONFIG_REVIEW_USER_ROLES_DEVELOPER\x10\x02\x120\n" +
 	",REVIEW_CONFIG_REVIEW_USER_ROLES_DATA_MANAGER\x10\x03\x120\n" +
 	",REVIEW_CONFIG_REVIEW_USER_ROLES_DATA_ANALYST\x10\x04\x12*\n" +
-	"&REVIEW_CONFIG_REVIEW_USER_ROLES_VIEWER\x10\x05B+\n" +
+	"&REVIEW_CONFIG_REVIEW_USER_ROLES_VIEWER\x10\x05*\xb8\x01\n" +
+	"\x13AutomationOperation\x12 \n" +
+	"\x1cAUTOMATION_OPERATION_INVALID\x10\x00\x12\x1f\n" +
+	"\x1bAUTOMATION_OPERATION_CREATE\x10\x01\x12\x1f\n" +
+	"\x1bAUTOMATION_OPERATION_UPDATE\x10\x02\x12\x1f\n" +
+	"\x1bAUTOMATION_OPERATION_DELETE\x10\x03\x12\x1c\n" +
+	"\x18AUTOMATION_OPERATION_ANY\x10\x04*^\n" +
+	"\x14AutomationActionType\x12\"\n" +
+	"\x1eAUTOMATION_ACTION_TYPE_INVALID\x10\x00\x12\"\n" +
+	"\x1eAUTOMATION_ACTION_TYPE_WEBHOOK\x10\x01*\x96\x01\n" +
+	"\x10AutomationStatus\x12\x1d\n" +
+	"\x19AUTOMATION_STATUS_INVALID\x10\x00\x12\x1c\n" +
+	"\x18AUTOMATION_STATUS_ACTIVE\x10\x01\x12%\n" +
+	"!AUTOMATION_STATUS_NEEDS_ATTENTION\x10\x02\x12\x1e\n" +
+	"\x1aAUTOMATION_STATUS_DISABLED\x10\x03*\xf6\x01\n" +
+	"\x15AutomationEventStatus\x12#\n" +
+	"\x1fAUTOMATION_EVENT_STATUS_INVALID\x10\x00\x12#\n" +
+	"\x1fAUTOMATION_EVENT_STATUS_PENDING\x10\x01\x12&\n" +
+	"\"AUTOMATION_EVENT_STATUS_DELIVERING\x10\x02\x12%\n" +
+	"!AUTOMATION_EVENT_STATUS_DELIVERED\x10\x03\x12\"\n" +
+	"\x1eAUTOMATION_EVENT_STATUS_FAILED\x10\x04\x12 \n" +
+	"\x1cAUTOMATION_EVENT_STATUS_DEAD\x10\x05B+\n" +
 	"\x14github.com/nuzur/nemB\x04EnumP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -3935,7 +4167,7 @@ func file_enums_proto_rawDescGZIP() []byte {
 	return file_enums_proto_rawDescData
 }
 
-var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 67)
+var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 71)
 var file_enums_proto_goTypes = []any{
 	(AiUsageContext)(0),                         // 0: nem.AiUsageContext
 	(AiUsageProvider)(0),                        // 1: nem.AiUsageProvider
@@ -4004,6 +4236,10 @@ var file_enums_proto_goTypes = []any{
 	(ExtensionVersionExecutionMode)(0),          // 64: nem.ExtensionVersionExecutionMode
 	(VisibilityRoles)(0),                        // 65: nem.VisibilityRoles
 	(ReviewConfigReviewUserRoles)(0),            // 66: nem.ReviewConfigReviewUserRoles
+	(AutomationOperation)(0),                    // 67: nem.AutomationOperation
+	(AutomationActionType)(0),                   // 68: nem.AutomationActionType
+	(AutomationStatus)(0),                       // 69: nem.AutomationStatus
+	(AutomationEventStatus)(0),                  // 70: nem.AutomationEventStatus
 }
 var file_enums_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -4023,7 +4259,7 @@ func file_enums_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_enums_proto_rawDesc), len(file_enums_proto_rawDesc)),
-			NumEnums:      67,
+			NumEnums:      71,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,
