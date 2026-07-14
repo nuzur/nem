@@ -33,12 +33,6 @@ func (m *module) Insert(
 	req.ChangeRequest.CreatedAt = time.Now()
 	req.ChangeRequest.UpdatedAt = time.Now()
 
-	// validate the new record against the schema's field type/type-config rules
-	if err := req.ChangeRequest.Validate(); err != nil {
-
-		return types.UpsertResponse{}, err
-	}
-
 	optConfig := applyAllOptions(opts)
 
 	tx := optConfig.SQLTx
