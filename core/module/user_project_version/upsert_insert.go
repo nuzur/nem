@@ -30,6 +30,12 @@ func (m *module) Insert(
 	req.UserProjectVersion.CreatedAt = time.Now()
 	req.UserProjectVersion.UpdatedAt = time.Now()
 
+	// validate the new record against the schema's field type/type-config rules
+	if err := req.UserProjectVersion.Validate(); err != nil {
+
+		return types.UpsertResponse{}, err
+	}
+
 	optConfig := applyAllOptions(opts)
 
 	tx := optConfig.SQLTx

@@ -28,6 +28,12 @@ func (m *module) Insert(
 	req.Membership.CreatedAt = time.Now()
 	req.Membership.UpdatedAt = time.Now()
 
+	// validate the new record against the schema's field type/type-config rules
+	if err := req.Membership.Validate(); err != nil {
+
+		return types.UpsertResponse{}, err
+	}
+
 	optConfig := applyAllOptions(opts)
 
 	tx := optConfig.SQLTx

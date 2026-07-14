@@ -30,6 +30,12 @@ func (m *module) Insert(
 	req.ExtensionVersion.CreatedAt = time.Now()
 	req.ExtensionVersion.UpdatedAt = time.Now()
 
+	// validate the new record against the schema's field type/type-config rules
+	if err := req.ExtensionVersion.Validate(); err != nil {
+
+		return types.UpsertResponse{}, err
+	}
+
 	optConfig := applyAllOptions(opts)
 
 	tx := optConfig.SQLTx

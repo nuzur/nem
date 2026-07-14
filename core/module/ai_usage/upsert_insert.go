@@ -28,6 +28,12 @@ func (m *module) Insert(
 	req.AiUsage.CreatedAt = time.Now()
 	req.AiUsage.UpdatedAt = time.Now()
 
+	// validate the new record against the schema's field type/type-config rules
+	if err := req.AiUsage.Validate(); err != nil {
+
+		return types.UpsertResponse{}, err
+	}
+
 	optConfig := applyAllOptions(opts)
 
 	tx := optConfig.SQLTx

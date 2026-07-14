@@ -49,6 +49,12 @@ func (m *module) Update(
 	// refresh server-managed timestamps that update on every write (updated_at)
 	req.User.UpdatedAt = time.Now()
 
+	// validate the merged entity against the schema's field type/type-config rules
+	if err := req.User.Validate(); err != nil {
+
+		return types.UpsertResponse{}, err
+	}
+
 	params := mapUpsertRequestToUpdateParams(req)
 	err = qtx.UpdateUser(
 		ctx,
