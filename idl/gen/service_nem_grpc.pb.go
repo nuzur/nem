@@ -300,6 +300,9 @@ const (
 	Nem_ListAutomationEvent_FullMethodName                     = "/nem.Nem/ListAutomationEvent"
 	Nem_CreateAutomationEvent_FullMethodName                   = "/nem.Nem/CreateAutomationEvent"
 	Nem_UpdateAutomationEvent_FullMethodName                   = "/nem.Nem/UpdateAutomationEvent"
+	Nem_ListDeployment_FullMethodName                          = "/nem.Nem/ListDeployment"
+	Nem_CreateDeployment_FullMethodName                        = "/nem.Nem/CreateDeployment"
+	Nem_UpdateDeployment_FullMethodName                        = "/nem.Nem/UpdateDeployment"
 )
 
 // NemClient is the client API for Nem service.
@@ -678,6 +681,10 @@ type NemClient interface {
 	ListAutomationEvent(ctx context.Context, in *ListAutomationEventRequest, opts ...grpc.CallOption) (*ListAutomationEventResponse, error)
 	CreateAutomationEvent(ctx context.Context, in *CreateAutomationEventRequest, opts ...grpc.CallOption) (*AutomationEvent, error)
 	UpdateAutomationEvent(ctx context.Context, in *UpdateAutomationEventRequest, opts ...grpc.CallOption) (*AutomationEvent, error)
+	// deployment start
+	ListDeployment(ctx context.Context, in *ListDeploymentRequest, opts ...grpc.CallOption) (*ListDeploymentResponse, error)
+	CreateDeployment(ctx context.Context, in *CreateDeploymentRequest, opts ...grpc.CallOption) (*Deployment, error)
+	UpdateDeployment(ctx context.Context, in *UpdateDeploymentRequest, opts ...grpc.CallOption) (*Deployment, error)
 }
 
 type nemClient struct {
@@ -3478,6 +3485,36 @@ func (c *nemClient) UpdateAutomationEvent(ctx context.Context, in *UpdateAutomat
 	return out, nil
 }
 
+func (c *nemClient) ListDeployment(ctx context.Context, in *ListDeploymentRequest, opts ...grpc.CallOption) (*ListDeploymentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDeploymentResponse)
+	err := c.cc.Invoke(ctx, Nem_ListDeployment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateDeployment(ctx context.Context, in *CreateDeploymentRequest, opts ...grpc.CallOption) (*Deployment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Deployment)
+	err := c.cc.Invoke(ctx, Nem_CreateDeployment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateDeployment(ctx context.Context, in *UpdateDeploymentRequest, opts ...grpc.CallOption) (*Deployment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Deployment)
+	err := c.cc.Invoke(ctx, Nem_UpdateDeployment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NemServer is the server API for Nem service.
 // All implementations must embed UnimplementedNemServer
 // for forward compatibility.
@@ -3854,6 +3891,10 @@ type NemServer interface {
 	ListAutomationEvent(context.Context, *ListAutomationEventRequest) (*ListAutomationEventResponse, error)
 	CreateAutomationEvent(context.Context, *CreateAutomationEventRequest) (*AutomationEvent, error)
 	UpdateAutomationEvent(context.Context, *UpdateAutomationEventRequest) (*AutomationEvent, error)
+	// deployment start
+	ListDeployment(context.Context, *ListDeploymentRequest) (*ListDeploymentResponse, error)
+	CreateDeployment(context.Context, *CreateDeploymentRequest) (*Deployment, error)
+	UpdateDeployment(context.Context, *UpdateDeploymentRequest) (*Deployment, error)
 	mustEmbedUnimplementedNemServer()
 }
 
@@ -4700,6 +4741,15 @@ func (UnimplementedNemServer) CreateAutomationEvent(context.Context, *CreateAuto
 }
 func (UnimplementedNemServer) UpdateAutomationEvent(context.Context, *UpdateAutomationEventRequest) (*AutomationEvent, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAutomationEvent not implemented")
+}
+func (UnimplementedNemServer) ListDeployment(context.Context, *ListDeploymentRequest) (*ListDeploymentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDeployment not implemented")
+}
+func (UnimplementedNemServer) CreateDeployment(context.Context, *CreateDeploymentRequest) (*Deployment, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateDeployment not implemented")
+}
+func (UnimplementedNemServer) UpdateDeployment(context.Context, *UpdateDeploymentRequest) (*Deployment, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateDeployment not implemented")
 }
 func (UnimplementedNemServer) mustEmbedUnimplementedNemServer() {}
 func (UnimplementedNemServer) testEmbeddedByValue()             {}
@@ -9744,6 +9794,60 @@ func _Nem_UpdateAutomationEvent_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Nem_ListDeployment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDeploymentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListDeployment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListDeployment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListDeployment(ctx, req.(*ListDeploymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateDeployment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDeploymentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateDeployment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateDeployment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateDeployment(ctx, req.(*CreateDeploymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateDeployment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDeploymentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateDeployment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateDeployment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateDeployment(ctx, req.(*UpdateDeploymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Nem_ServiceDesc is the grpc.ServiceDesc for Nem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -10866,6 +10970,18 @@ var Nem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAutomationEvent",
 			Handler:    _Nem_UpdateAutomationEvent_Handler,
+		},
+		{
+			MethodName: "ListDeployment",
+			Handler:    _Nem_ListDeployment_Handler,
+		},
+		{
+			MethodName: "CreateDeployment",
+			Handler:    _Nem_CreateDeployment_Handler,
+		},
+		{
+			MethodName: "UpdateDeployment",
+			Handler:    _Nem_UpdateDeployment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

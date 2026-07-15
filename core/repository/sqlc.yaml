@@ -27,6 +27,7 @@ sql:
           array: Array
           attempts: Attempts
           audio: Audio
+          auth_type: AuthType
           automation_uuid: AutomationUUID
           base_version_uuid: BaseVersionUUID
           based_on_field_uuids: BasedOnFieldUUIDs
@@ -49,6 +50,7 @@ sql:
           configuration_entity_values: ConfigurationEntityValues
           connection_uuid: ConnectionUUID
           connections: Connections
+          container_name: ContainerName
           context: Context
           country_ios2: CountryIos2
           create: Create
@@ -62,9 +64,13 @@ sql:
           data_change_type_config: DataChangeTypeConfig
           data_changes: DataChanges
           data_management_config: DataManagementConfig
+          data_manager_url: DataManagerURL
           database: Database
           date: Date
           datetime: Datetime
+          db_engine: DbEngine
+          db_location: DbLocation
+          db_port: DbPort
           db_schema: DbSchema
           db_type: DbType
           db_type_config: DbTypeConfig
@@ -83,6 +89,7 @@ sql:
           display_name: DisplayName
           display_timezone: DisplayTimezone
           display_version: DisplayVersion
+          domain: Domain
           email: Email
           enable_limits: EnableLimits
           enabled: Enabled
@@ -122,11 +129,16 @@ sql:
           from: From
           generated: Generated
           generator: Generator
+          grpc_enabled: GrpcEnabled
+          grpc_port: GrpcPort
           height: Height
+          host: Host
           hostname: Hostname
+          http_port: HTTPPort
           https_required: HTTPSRequired
           identifier: Identifier
           image: Image
+          image_name: ImageName
           indexes: Indexes
           input_tokens: InputTokens
           integer: Integer
@@ -136,6 +148,7 @@ sql:
           key: Key
           key_auto_increment: KeyAutoIncrement
           keys: Keys
+          last_deployed_at: LastDeployedAt
           last_error: LastError
           last_name: LastName
           last_seen_at: LastSeenAt
@@ -159,6 +172,7 @@ sql:
           min_size: MinSize
           min_value: MinValue
           min_value_inclusive: MinValueInclusive
+          mode: Mode
           mysql: Mysql
           name: Name
           new_value: NewValue
@@ -190,6 +204,8 @@ sql:
           project_version_uuid: ProjectVersionUUID
           provider: Provider
           public: Public
+          public_port: PublicPort
+          public_url: PublicURL
           regex_validation: RegexValidation
           region: Region
           relationships: Relationships
@@ -200,6 +216,7 @@ sql:
           repository_tag: RepositoryTag
           required: Required
           response: Response
+          rest_enabled: RestEnabled
           results_path: ResultsPath
           review_configs: ReviewConfigs
           review_required_data: ReviewRequiredData
@@ -283,79 +300,79 @@ sql:
           width: Width
           x: X
           y: Y        
-        overrides:          
-          - db_type: "int"            
-            go_type:              
+        # sqlc type overrides. Keys are the db_type strings sqlc derives from the
+        # schema, which DIFFER by engine (MySQL bare names vs Postgres catalog
+        # names like pg_catalog.varchar / bpchar / pg_catalog.timestamp). Each
+        # override is made dialect-aware so Postgres sqlc emits the SAME Go types
+        # MySQL does (string UUIDs, guregu null.*, []byte json) — that keeps the
+        # domain layer, the mappers, and every repo call site engine-agnostic.
+        overrides:
+          - db_type: "int"
+            go_type:
               type: "int64"
-          - db_type: "json"            
+          - db_type: "json"
             go_type:
-              type: "[]byte"  # workaround sqlc bug when reading null json columns            
-          - db_type: "json"  
-            nullable: true            
+              type: "[]byte"  # workaround sqlc bug when reading null json columns
+          - db_type: "json"
+            nullable: true
             go_type:
-              type: "[]byte"  # workaround sqlc bug when reading null json columns            
-          - db_type: datetime
-            nullable: true            
-            go_type:
-              import: "github.com/guregu/null/v6"
-              package: "null"
-              type: "Time"
-          - db_type: date
-            nullable: true            
+              type: "[]byte"  # workaround sqlc bug when reading null json columns
+          - db_type: "datetime"
+            nullable: true
             go_type:
               import: "github.com/guregu/null/v6"
               package: "null"
               type: "Time"
-          - db_type: time
-            nullable: true            
+          - db_type: "date"
+            nullable: true
             go_type:
               import: "github.com/guregu/null/v6"
               package: "null"
               type: "Time"
-          - db_type: varchar
-            nullable: true            
+          - db_type: "time"
+            nullable: true
+            go_type:
+              import: "github.com/guregu/null/v6"
+              package: "null"
+              type: "Time"
+          - db_type: "varchar"
+            nullable: true
             go_type:
               import: "github.com/guregu/null/v6"
               package: "null"
               type: "String"
-          - db_type: char
-            nullable: true            
+          - db_type: "char"
+            nullable: true
             go_type:
               import: "github.com/guregu/null/v6"
               package: "null"
               type: "String"
-          - db_type: text
-            nullable: true            
+          - db_type: "text"
+            nullable: true
             go_type:
               import: "github.com/guregu/null/v6"
               package: "null"
               type: "String"
           - db_type: "int"
-            nullable: true            
+            nullable: true
             go_type:
               import: "github.com/guregu/null/v6"
               package: "null"
               type: "Int"
-          - db_type: float
-            nullable: true            
+          - db_type: "float"
+            nullable: true
             go_type:
               import: "github.com/guregu/null/v6"
               package: "null"
               type: "Float"
-          - db_type: double
-            nullable: true            
+          - db_type: "double"
+            nullable: true
             go_type:
               import: "github.com/guregu/null/v6"
               package: "null"
               type: "Float"
-          - db_type: double
-            nullable: true            
-            go_type:
-              import: "github.com/guregu/null/v6"
-              package: "null"
-              type: "Float"
-          - db_type: tinyint
-            nullable: true            
+          - db_type: "tinyint"
+            nullable: true
             go_type:
               import: "github.com/guregu/null/v6"
               package: "null"
@@ -386,6 +403,7 @@ overrides:
       db_type_config: DbTypeConfig
       db_type_mysql_config: DbTypeMysqlConfig
       db_type_postgres_config: DbTypePostgresConfig
+      deployment: Deployment
       element_render: ElementRender
       entity: Entity
       entity_data_management_config: EntityDataManagementConfig

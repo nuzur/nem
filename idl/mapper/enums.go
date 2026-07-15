@@ -1071,3 +1071,63 @@ func AutomationEventStatusSliceFromProto(s []pb.AutomationEventStatus) []enums.A
 	}
 	return res
 }
+
+func DeploymentStatusSliceToProto(s []enums.DeploymentStatus) []pb.DeploymentStatus {
+	res := []pb.DeploymentStatus{}
+	for _, e := range s {
+		res = append(res, pb.DeploymentStatus(e))
+	}
+	return res
+}
+func DeploymentStatusSliceFromProto(s []pb.DeploymentStatus) []enums.DeploymentStatus {
+	res := []enums.DeploymentStatus{}
+	for _, e := range s {
+		res = append(res, enums.DeploymentStatus(e))
+	}
+	return res
+}
+
+func DeploymentModeSliceToProto(s []enums.DeploymentMode) []pb.DeploymentMode {
+	res := []pb.DeploymentMode{}
+	for _, e := range s {
+		res = append(res, pb.DeploymentMode(e))
+	}
+	return res
+}
+func DeploymentModeSliceFromProto(s []pb.DeploymentMode) []enums.DeploymentMode {
+	res := []enums.DeploymentMode{}
+	for _, e := range s {
+		res = append(res, enums.DeploymentMode(e))
+	}
+	return res
+}
+
+func DeploymentDbLocationSliceToProto(s []enums.DeploymentDbLocation) []pb.DeploymentDbLocation {
+	res := []pb.DeploymentDbLocation{}
+	for _, e := range s {
+		res = append(res, pb.DeploymentDbLocation(e))
+	}
+	return res
+}
+func DeploymentDbLocationSliceFromProto(s []pb.DeploymentDbLocation) []enums.DeploymentDbLocation {
+	res := []enums.DeploymentDbLocation{}
+	for _, e := range s {
+		res = append(res, enums.DeploymentDbLocation(e))
+	}
+	return res
+}
+
+func DeploymentAuthTypeSliceToProto(s []enums.DeploymentAuthType) []pb.DeploymentAuthType {
+	res := []pb.DeploymentAuthType{}
+	for _, e := range s {
+		res = append(res, pb.DeploymentAuthType(e))
+	}
+	return res
+}
+func DeploymentAuthTypeSliceFromProto(s []pb.DeploymentAuthType) []enums.DeploymentAuthType {
+	res := []enums.DeploymentAuthType{}
+	for _, e := range s {
+		res = append(res, enums.DeploymentAuthType(e))
+	}
+	return res
+}

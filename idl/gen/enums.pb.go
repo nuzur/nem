@@ -3769,6 +3769,205 @@ func (AutomationEventStatus) EnumDescriptor() ([]byte, []int) {
 	return file_enums_proto_rawDescGZIP(), []int{70}
 }
 
+type DeploymentStatus int32
+
+const (
+	DeploymentStatus_DEPLOYMENT_STATUS_INVALID   DeploymentStatus = 0
+	DeploymentStatus_DEPLOYMENT_STATUS_ACTIVE    DeploymentStatus = 1
+	DeploymentStatus_DEPLOYMENT_STATUS_DESTROYED DeploymentStatus = 2
+)
+
+// Enum value maps for DeploymentStatus.
+var (
+	DeploymentStatus_name = map[int32]string{
+		0: "DEPLOYMENT_STATUS_INVALID",
+		1: "DEPLOYMENT_STATUS_ACTIVE",
+		2: "DEPLOYMENT_STATUS_DESTROYED",
+	}
+	DeploymentStatus_value = map[string]int32{
+		"DEPLOYMENT_STATUS_INVALID":   0,
+		"DEPLOYMENT_STATUS_ACTIVE":    1,
+		"DEPLOYMENT_STATUS_DESTROYED": 2,
+	}
+)
+
+func (x DeploymentStatus) Enum() *DeploymentStatus {
+	p := new(DeploymentStatus)
+	*p = x
+	return p
+}
+
+func (x DeploymentStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DeploymentStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[71].Descriptor()
+}
+
+func (DeploymentStatus) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[71]
+}
+
+func (x DeploymentStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DeploymentStatus.Descriptor instead.
+func (DeploymentStatus) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{71}
+}
+
+type DeploymentMode int32
+
+const (
+	DeploymentMode_DEPLOYMENT_MODE_INVALID  DeploymentMode = 0
+	DeploymentMode_DEPLOYMENT_MODE_FULL_APP DeploymentMode = 1
+	DeploymentMode_DEPLOYMENT_MODE_DB_ONLY  DeploymentMode = 2
+)
+
+// Enum value maps for DeploymentMode.
+var (
+	DeploymentMode_name = map[int32]string{
+		0: "DEPLOYMENT_MODE_INVALID",
+		1: "DEPLOYMENT_MODE_FULL_APP",
+		2: "DEPLOYMENT_MODE_DB_ONLY",
+	}
+	DeploymentMode_value = map[string]int32{
+		"DEPLOYMENT_MODE_INVALID":  0,
+		"DEPLOYMENT_MODE_FULL_APP": 1,
+		"DEPLOYMENT_MODE_DB_ONLY":  2,
+	}
+)
+
+func (x DeploymentMode) Enum() *DeploymentMode {
+	p := new(DeploymentMode)
+	*p = x
+	return p
+}
+
+func (x DeploymentMode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DeploymentMode) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[72].Descriptor()
+}
+
+func (DeploymentMode) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[72]
+}
+
+func (x DeploymentMode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DeploymentMode.Descriptor instead.
+func (DeploymentMode) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{72}
+}
+
+type DeploymentDbLocation int32
+
+const (
+	DeploymentDbLocation_DEPLOYMENT_DB_LOCATION_INVALID     DeploymentDbLocation = 0
+	DeploymentDbLocation_DEPLOYMENT_DB_LOCATION_SELF_HOSTED DeploymentDbLocation = 1
+	DeploymentDbLocation_DEPLOYMENT_DB_LOCATION_EXTERNAL    DeploymentDbLocation = 2
+)
+
+// Enum value maps for DeploymentDbLocation.
+var (
+	DeploymentDbLocation_name = map[int32]string{
+		0: "DEPLOYMENT_DB_LOCATION_INVALID",
+		1: "DEPLOYMENT_DB_LOCATION_SELF_HOSTED",
+		2: "DEPLOYMENT_DB_LOCATION_EXTERNAL",
+	}
+	DeploymentDbLocation_value = map[string]int32{
+		"DEPLOYMENT_DB_LOCATION_INVALID":     0,
+		"DEPLOYMENT_DB_LOCATION_SELF_HOSTED": 1,
+		"DEPLOYMENT_DB_LOCATION_EXTERNAL":    2,
+	}
+)
+
+func (x DeploymentDbLocation) Enum() *DeploymentDbLocation {
+	p := new(DeploymentDbLocation)
+	*p = x
+	return p
+}
+
+func (x DeploymentDbLocation) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DeploymentDbLocation) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[73].Descriptor()
+}
+
+func (DeploymentDbLocation) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[73]
+}
+
+func (x DeploymentDbLocation) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DeploymentDbLocation.Descriptor instead.
+func (DeploymentDbLocation) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{73}
+}
+
+type DeploymentAuthType int32
+
+const (
+	DeploymentAuthType_DEPLOYMENT_AUTH_TYPE_INVALID  DeploymentAuthType = 0
+	DeploymentAuthType_DEPLOYMENT_AUTH_TYPE_NONE     DeploymentAuthType = 1
+	DeploymentAuthType_DEPLOYMENT_AUTH_TYPE_JWT      DeploymentAuthType = 2
+	DeploymentAuthType_DEPLOYMENT_AUTH_TYPE_KEYCLOAK DeploymentAuthType = 3
+)
+
+// Enum value maps for DeploymentAuthType.
+var (
+	DeploymentAuthType_name = map[int32]string{
+		0: "DEPLOYMENT_AUTH_TYPE_INVALID",
+		1: "DEPLOYMENT_AUTH_TYPE_NONE",
+		2: "DEPLOYMENT_AUTH_TYPE_JWT",
+		3: "DEPLOYMENT_AUTH_TYPE_KEYCLOAK",
+	}
+	DeploymentAuthType_value = map[string]int32{
+		"DEPLOYMENT_AUTH_TYPE_INVALID":  0,
+		"DEPLOYMENT_AUTH_TYPE_NONE":     1,
+		"DEPLOYMENT_AUTH_TYPE_JWT":      2,
+		"DEPLOYMENT_AUTH_TYPE_KEYCLOAK": 3,
+	}
+)
+
+func (x DeploymentAuthType) Enum() *DeploymentAuthType {
+	p := new(DeploymentAuthType)
+	*p = x
+	return p
+}
+
+func (x DeploymentAuthType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DeploymentAuthType) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[74].Descriptor()
+}
+
+func (DeploymentAuthType) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[74]
+}
+
+func (x DeploymentAuthType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DeploymentAuthType.Descriptor instead.
+func (DeploymentAuthType) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{74}
+}
+
 var File_enums_proto protoreflect.FileDescriptor
 
 const file_enums_proto_rawDesc = "" +
@@ -4152,7 +4351,24 @@ const file_enums_proto_rawDesc = "" +
 	"\"AUTOMATION_EVENT_STATUS_DELIVERING\x10\x02\x12%\n" +
 	"!AUTOMATION_EVENT_STATUS_DELIVERED\x10\x03\x12\"\n" +
 	"\x1eAUTOMATION_EVENT_STATUS_FAILED\x10\x04\x12 \n" +
-	"\x1cAUTOMATION_EVENT_STATUS_DEAD\x10\x05B+\n" +
+	"\x1cAUTOMATION_EVENT_STATUS_DEAD\x10\x05*p\n" +
+	"\x10DeploymentStatus\x12\x1d\n" +
+	"\x19DEPLOYMENT_STATUS_INVALID\x10\x00\x12\x1c\n" +
+	"\x18DEPLOYMENT_STATUS_ACTIVE\x10\x01\x12\x1f\n" +
+	"\x1bDEPLOYMENT_STATUS_DESTROYED\x10\x02*h\n" +
+	"\x0eDeploymentMode\x12\x1b\n" +
+	"\x17DEPLOYMENT_MODE_INVALID\x10\x00\x12\x1c\n" +
+	"\x18DEPLOYMENT_MODE_FULL_APP\x10\x01\x12\x1b\n" +
+	"\x17DEPLOYMENT_MODE_DB_ONLY\x10\x02*\x87\x01\n" +
+	"\x14DeploymentDbLocation\x12\"\n" +
+	"\x1eDEPLOYMENT_DB_LOCATION_INVALID\x10\x00\x12&\n" +
+	"\"DEPLOYMENT_DB_LOCATION_SELF_HOSTED\x10\x01\x12#\n" +
+	"\x1fDEPLOYMENT_DB_LOCATION_EXTERNAL\x10\x02*\x96\x01\n" +
+	"\x12DeploymentAuthType\x12 \n" +
+	"\x1cDEPLOYMENT_AUTH_TYPE_INVALID\x10\x00\x12\x1d\n" +
+	"\x19DEPLOYMENT_AUTH_TYPE_NONE\x10\x01\x12\x1c\n" +
+	"\x18DEPLOYMENT_AUTH_TYPE_JWT\x10\x02\x12!\n" +
+	"\x1dDEPLOYMENT_AUTH_TYPE_KEYCLOAK\x10\x03B+\n" +
 	"\x14github.com/nuzur/nemB\x04EnumP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -4167,7 +4383,7 @@ func file_enums_proto_rawDescGZIP() []byte {
 	return file_enums_proto_rawDescData
 }
 
-var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 71)
+var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 75)
 var file_enums_proto_goTypes = []any{
 	(AiUsageContext)(0),                         // 0: nem.AiUsageContext
 	(AiUsageProvider)(0),                        // 1: nem.AiUsageProvider
@@ -4240,6 +4456,10 @@ var file_enums_proto_goTypes = []any{
 	(AutomationActionType)(0),                   // 68: nem.AutomationActionType
 	(AutomationStatus)(0),                       // 69: nem.AutomationStatus
 	(AutomationEventStatus)(0),                  // 70: nem.AutomationEventStatus
+	(DeploymentStatus)(0),                       // 71: nem.DeploymentStatus
+	(DeploymentMode)(0),                         // 72: nem.DeploymentMode
+	(DeploymentDbLocation)(0),                   // 73: nem.DeploymentDbLocation
+	(DeploymentAuthType)(0),                     // 74: nem.DeploymentAuthType
 }
 var file_enums_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -4259,7 +4479,7 @@ func file_enums_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_enums_proto_rawDesc), len(file_enums_proto_rawDesc)),
-			NumEnums:      71,
+			NumEnums:      75,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -22,6 +22,9 @@ type DB struct {
 	Password string `yaml:"pswd"`
 	Params   string `yaml:"params"`
 	Driver   string `yaml:"driver"`
+	// Schema is the Postgres schema/namespace (search_path). Empty for MySQL,
+	// where the database is the schema.
+	Schema string `yaml:"schema"`
 }
 
 type AWS struct {
@@ -32,6 +35,20 @@ type AWS struct {
 }
 
 func (db DB) Path() string {
+	// Postgres (lib/pq) uses a space-separated keyword DSN, not the MySQL
+	// user:pass@tcp(host:port)/db?params form. Params (e.g. sslmode=disable) and
+	// the optional schema (search_path) are appended as keyword pairs.
+	if db.Driver == "postgres" {
+		dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s",
+			db.Host, db.Port, db.User, db.Password, db.Name)
+		if db.Params != "" {
+			dsn += " " + db.Params
+		}
+		if db.Schema != "" {
+			dsn += " search_path=" + db.Schema
+		}
+		return dsn
+	}
 	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?%s",
 		db.User,
 		db.Password,

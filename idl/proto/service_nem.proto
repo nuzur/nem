@@ -197,6 +197,8 @@ import "automation.proto";
 
 import "automation_event.proto";
 
+import "deployment.proto";
+
 
 service Nem {    
     
@@ -757,6 +759,12 @@ service Nem {
     rpc CreateAutomationEvent(CreateAutomationEventRequest) returns (AutomationEvent) {}
     rpc UpdateAutomationEvent(UpdateAutomationEventRequest) returns (AutomationEvent) {}
     // automation_event end
+    
+    // deployment start
+    rpc ListDeployment(ListDeploymentRequest) returns (ListDeploymentResponse){}
+    rpc CreateDeployment(CreateDeploymentRequest) returns (Deployment) {}
+    rpc UpdateDeployment(UpdateDeploymentRequest) returns (Deployment) {}
+    // deployment end
     
 }
 
@@ -4573,3 +4581,44 @@ message UpdateAutomationEventRequest {
     google.protobuf.FieldMask update_mask = 2;
 }
 // automation_event end
+
+// deployment start
+message ListDeploymentRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;  
+    repeated string include_fields = 5;
+    repeated string exclude_fields = 6;
+    bool skip_cache = 7;
+}
+
+message ListDeploymentResponse {
+    repeated Deployment deployment = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateDeploymentRequest {
+    Deployment deployment = 1;
+}
+
+message UpdateDeploymentRequest {
+   
+    Deployment deployment = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// deployment end

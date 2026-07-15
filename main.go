@@ -14,6 +14,8 @@ import (
 	pbserver "github.com/nuzur/nem/idl/server"
 
 	auth "github.com/nuzur/nem/auth/keycloak"
+
+	"github.com/nuzur/nem/info"
 )
 
 func main() {
@@ -25,6 +27,8 @@ func main() {
 
 			auth.New,
 		),
+
+		fx.Invoke(info.Register),
 
 		fx.Invoke(httpServer),
 

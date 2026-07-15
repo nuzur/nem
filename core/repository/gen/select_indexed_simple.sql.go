@@ -5983,6 +5983,347 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByUpdatedAtDESC(ctx context.
 	return items, nil
 }
 
+const fetchDeploymentByStatus = `-- name: FetchDeploymentByStatus :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `local_agent_uuid` + "`" + `,` + "`" + `connection_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `host` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `db_engine` + "`" + `,` + "`" + `db_location` + "`" + `,` + "`" + `mode` + "`" + `,` + "`" + `domain` + "`" + `,` + "`" + `public_url` + "`" + `,` + "`" + `data_manager_url` + "`" + `,` + "`" + `public_port` + "`" + `,` + "`" + `rest_enabled` + "`" + `,` + "`" + `http_port` + "`" + `,` + "`" + `grpc_enabled` + "`" + `,` + "`" + `grpc_port` + "`" + `,` + "`" + `db_port` + "`" + `,` + "`" + `auth_type` + "`" + `,` + "`" + `container_name` + "`" + `,` + "`" + `image_name` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `last_deployed_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `deployment` + "`" + `
+WHERE 
+    ` + "`" + `status` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchDeploymentByStatusParams struct {
+	Status int64 `json:"status"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
+}
+
+func (q *Queries) FetchDeploymentByStatus(ctx context.Context, arg FetchDeploymentByStatusParams) ([]Deployment, error) {
+	rows, err := q.db.QueryContext(ctx, fetchDeploymentByStatus, arg.Status, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Deployment
+	for rows.Next() {
+		var i Deployment
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.LocalAgentUUID,
+			&i.ConnectionUUID,
+			&i.Identifier,
+			&i.Host,
+			&i.Provider,
+			&i.DbEngine,
+			&i.DbLocation,
+			&i.Mode,
+			&i.Domain,
+			&i.PublicURL,
+			&i.DataManagerURL,
+			&i.PublicPort,
+			&i.RestEnabled,
+			&i.HTTPPort,
+			&i.GrpcEnabled,
+			&i.GrpcPort,
+			&i.DbPort,
+			&i.AuthType,
+			&i.ContainerName,
+			&i.ImageName,
+			&i.CliVersion,
+			&i.Status,
+			&i.LastDeployedAt,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchDeploymentByUUID = `-- name: FetchDeploymentByUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `local_agent_uuid` + "`" + `,` + "`" + `connection_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `host` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `db_engine` + "`" + `,` + "`" + `db_location` + "`" + `,` + "`" + `mode` + "`" + `,` + "`" + `domain` + "`" + `,` + "`" + `public_url` + "`" + `,` + "`" + `data_manager_url` + "`" + `,` + "`" + `public_port` + "`" + `,` + "`" + `rest_enabled` + "`" + `,` + "`" + `http_port` + "`" + `,` + "`" + `grpc_enabled` + "`" + `,` + "`" + `grpc_port` + "`" + `,` + "`" + `db_port` + "`" + `,` + "`" + `auth_type` + "`" + `,` + "`" + `container_name` + "`" + `,` + "`" + `image_name` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `last_deployed_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `deployment` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ?
+`
+
+// deployment selects:
+func (q *Queries) FetchDeploymentByUUID(ctx context.Context, uuid string) ([]Deployment, error) {
+	rows, err := q.db.QueryContext(ctx, fetchDeploymentByUUID, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Deployment
+	for rows.Next() {
+		var i Deployment
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.LocalAgentUUID,
+			&i.ConnectionUUID,
+			&i.Identifier,
+			&i.Host,
+			&i.Provider,
+			&i.DbEngine,
+			&i.DbLocation,
+			&i.Mode,
+			&i.Domain,
+			&i.PublicURL,
+			&i.DataManagerURL,
+			&i.PublicPort,
+			&i.RestEnabled,
+			&i.HTTPPort,
+			&i.GrpcEnabled,
+			&i.GrpcPort,
+			&i.DbPort,
+			&i.AuthType,
+			&i.ContainerName,
+			&i.ImageName,
+			&i.CliVersion,
+			&i.Status,
+			&i.LastDeployedAt,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchDeploymentByUUIDForUpdate = `-- name: FetchDeploymentByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `local_agent_uuid` + "`" + `,` + "`" + `connection_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `host` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `db_engine` + "`" + `,` + "`" + `db_location` + "`" + `,` + "`" + `mode` + "`" + `,` + "`" + `domain` + "`" + `,` + "`" + `public_url` + "`" + `,` + "`" + `data_manager_url` + "`" + `,` + "`" + `public_port` + "`" + `,` + "`" + `rest_enabled` + "`" + `,` + "`" + `http_port` + "`" + `,` + "`" + `grpc_enabled` + "`" + `,` + "`" + `grpc_port` + "`" + `,` + "`" + `db_port` + "`" + `,` + "`" + `auth_type` + "`" + `,` + "`" + `container_name` + "`" + `,` + "`" + `image_name` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `last_deployed_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `deployment` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchDeploymentByUUIDForUpdate(ctx context.Context, uuid string) ([]Deployment, error) {
+	rows, err := q.db.QueryContext(ctx, fetchDeploymentByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Deployment
+	for rows.Next() {
+		var i Deployment
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.LocalAgentUUID,
+			&i.ConnectionUUID,
+			&i.Identifier,
+			&i.Host,
+			&i.Provider,
+			&i.DbEngine,
+			&i.DbLocation,
+			&i.Mode,
+			&i.Domain,
+			&i.PublicURL,
+			&i.DataManagerURL,
+			&i.PublicPort,
+			&i.RestEnabled,
+			&i.HTTPPort,
+			&i.GrpcEnabled,
+			&i.GrpcPort,
+			&i.DbPort,
+			&i.AuthType,
+			&i.ContainerName,
+			&i.ImageName,
+			&i.CliVersion,
+			&i.Status,
+			&i.LastDeployedAt,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchDeploymentByUserUUID = `-- name: FetchDeploymentByUserUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `local_agent_uuid` + "`" + `,` + "`" + `connection_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `host` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `db_engine` + "`" + `,` + "`" + `db_location` + "`" + `,` + "`" + `mode` + "`" + `,` + "`" + `domain` + "`" + `,` + "`" + `public_url` + "`" + `,` + "`" + `data_manager_url` + "`" + `,` + "`" + `public_port` + "`" + `,` + "`" + `rest_enabled` + "`" + `,` + "`" + `http_port` + "`" + `,` + "`" + `grpc_enabled` + "`" + `,` + "`" + `grpc_port` + "`" + `,` + "`" + `db_port` + "`" + `,` + "`" + `auth_type` + "`" + `,` + "`" + `container_name` + "`" + `,` + "`" + `image_name` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `last_deployed_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `deployment` + "`" + `
+WHERE 
+    ` + "`" + `user_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchDeploymentByUserUUIDParams struct {
+	UserUUID string `json:"user_uuid"`
+	Offset   int32  `json:"offset"`
+	Limit    int32  `json:"limit"`
+}
+
+func (q *Queries) FetchDeploymentByUserUUID(ctx context.Context, arg FetchDeploymentByUserUUIDParams) ([]Deployment, error) {
+	rows, err := q.db.QueryContext(ctx, fetchDeploymentByUserUUID, arg.UserUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Deployment
+	for rows.Next() {
+		var i Deployment
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.LocalAgentUUID,
+			&i.ConnectionUUID,
+			&i.Identifier,
+			&i.Host,
+			&i.Provider,
+			&i.DbEngine,
+			&i.DbLocation,
+			&i.Mode,
+			&i.Domain,
+			&i.PublicURL,
+			&i.DataManagerURL,
+			&i.PublicPort,
+			&i.RestEnabled,
+			&i.HTTPPort,
+			&i.GrpcEnabled,
+			&i.GrpcPort,
+			&i.DbPort,
+			&i.AuthType,
+			&i.ContainerName,
+			&i.ImageName,
+			&i.CliVersion,
+			&i.Status,
+			&i.LastDeployedAt,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchDeploymentByUserUUIDAndHostAndIdentifier = `-- name: FetchDeploymentByUserUUIDAndHostAndIdentifier :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `local_agent_uuid` + "`" + `,` + "`" + `connection_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `host` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `db_engine` + "`" + `,` + "`" + `db_location` + "`" + `,` + "`" + `mode` + "`" + `,` + "`" + `domain` + "`" + `,` + "`" + `public_url` + "`" + `,` + "`" + `data_manager_url` + "`" + `,` + "`" + `public_port` + "`" + `,` + "`" + `rest_enabled` + "`" + `,` + "`" + `http_port` + "`" + `,` + "`" + `grpc_enabled` + "`" + `,` + "`" + `grpc_port` + "`" + `,` + "`" + `db_port` + "`" + `,` + "`" + `auth_type` + "`" + `,` + "`" + `container_name` + "`" + `,` + "`" + `image_name` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `last_deployed_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `deployment` + "`" + `
+WHERE 
+    ` + "`" + `host` + "`" + ` = ? AND ` + "`" + `identifier` + "`" + ` = ? AND ` + "`" + `user_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchDeploymentByUserUUIDAndHostAndIdentifierParams struct {
+	Host       string `json:"host"`
+	Identifier string `json:"identifier"`
+	UserUUID   string `json:"user_uuid"`
+	Offset     int32  `json:"offset"`
+	Limit      int32  `json:"limit"`
+}
+
+func (q *Queries) FetchDeploymentByUserUUIDAndHostAndIdentifier(ctx context.Context, arg FetchDeploymentByUserUUIDAndHostAndIdentifierParams) ([]Deployment, error) {
+	rows, err := q.db.QueryContext(ctx, fetchDeploymentByUserUUIDAndHostAndIdentifier,
+		arg.Host,
+		arg.Identifier,
+		arg.UserUUID,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Deployment
+	for rows.Next() {
+		var i Deployment
+		if err := rows.Scan(
+			&i.UUID,
+			&i.UserUUID,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.LocalAgentUUID,
+			&i.ConnectionUUID,
+			&i.Identifier,
+			&i.Host,
+			&i.Provider,
+			&i.DbEngine,
+			&i.DbLocation,
+			&i.Mode,
+			&i.Domain,
+			&i.PublicURL,
+			&i.DataManagerURL,
+			&i.PublicPort,
+			&i.RestEnabled,
+			&i.HTTPPort,
+			&i.GrpcEnabled,
+			&i.GrpcPort,
+			&i.DbPort,
+			&i.AuthType,
+			&i.ContainerName,
+			&i.ImageName,
+			&i.CliVersion,
+			&i.Status,
+			&i.LastDeployedAt,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const fetchExtensionByExtensionType = `-- name: FetchExtensionByExtensionType :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `display_name` + "`" + `,` + "`" + `display_author_name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `verified` + "`" + `,` + "`" + `repository` + "`" + `,` + "`" + `extension_type` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `pro` + "`" + `,` + "`" + `public` + "`" + `,` + "`" + `visibility` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension` + "`" + `
@@ -8042,12 +8383,15 @@ func (q *Queries) FetchExtensionByStatusOrderedByUpdatedAtDESC(ctx context.Conte
 }
 
 const fetchExtensionByUUID = `-- name: FetchExtensionByUUID :many
+
+
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `display_name` + "`" + `,` + "`" + `display_author_name` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `url` + "`" + `,` + "`" + `verified` + "`" + `,` + "`" + `repository` + "`" + `,` + "`" + `extension_type` + "`" + `,` + "`" + `tags` + "`" + `,` + "`" + `pro` + "`" + `,` + "`" + `public` + "`" + `,` + "`" + `visibility` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
 FROM ` + "`" + `extension` + "`" + `
 WHERE 
     ` + "`" + `uuid` + "`" + ` = ?
 `
 
+// Code generated by nuzur go-code-gen. DO NOT EDIT.
 // extension selects:
 func (q *Queries) FetchExtensionByUUID(ctx context.Context, uuid string) ([]Extension, error) {
 	rows, err := q.db.QueryContext(ctx, fetchExtensionByUUID, uuid)
@@ -18337,15 +18681,12 @@ func (q *Queries) FetchUserByStatusOrderedByUpdatedAtDESC(ctx context.Context, a
 }
 
 const fetchUserByUUID = `-- name: FetchUserByUUID :many
-
-
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `name` + "`" + `,` + "`" + `last_name` + "`" + `,` + "`" + `email` + "`" + `,` + "`" + `user_type` + "`" + `,` + "`" + `country_ios2` + "`" + `,` + "`" + `locale` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
 FROM ` + "`" + `user` + "`" + `
 WHERE 
     ` + "`" + `uuid` + "`" + ` = ?
 `
 
-// Code generated by nuzur go-code-gen. DO NOT EDIT.
 // user selects:
 func (q *Queries) FetchUserByUUID(ctx context.Context, uuid string) ([]User, error) {
 	rows, err := q.db.QueryContext(ctx, fetchUserByUUID, uuid)

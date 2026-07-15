@@ -51,6 +51,8 @@ import (
 
 	"github.com/nuzur/nem/core/module/automation_event"
 
+	"github.com/nuzur/nem/core/module/deployment"
+
 	"github.com/nuzur/nem/core/repository"
 )
 
@@ -92,6 +94,8 @@ type Implementation struct {
 	automation automation.Module
 
 	automation_event automation_event.Module
+
+	deployment deployment.Module
 }
 
 type Params struct {
@@ -332,4 +336,14 @@ func (i Implementation) AutomationEvent() automation_event.Module {
 		})
 	}
 	return i.automation_event
+}
+
+func (i Implementation) Deployment() deployment.Module {
+	if i.deployment == nil {
+		i.deployment = deployment.New(coretypes.ModuleParams{
+			Repository: i.repository,
+			Logger:     i.logger,
+		})
+	}
+	return i.deployment
 }
