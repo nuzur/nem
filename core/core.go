@@ -53,6 +53,8 @@ import (
 
 	"github.com/nuzur/nem/core/module/deployment"
 
+	"github.com/nuzur/nem/core/module/deployment_revision"
+
 	"github.com/nuzur/nem/core/repository"
 )
 
@@ -96,6 +98,8 @@ type Implementation struct {
 	automation_event automation_event.Module
 
 	deployment deployment.Module
+
+	deployment_revision deployment_revision.Module
 }
 
 type Params struct {
@@ -346,4 +350,14 @@ func (i Implementation) Deployment() deployment.Module {
 		})
 	}
 	return i.deployment
+}
+
+func (i Implementation) DeploymentRevision() deployment_revision.Module {
+	if i.deployment_revision == nil {
+		i.deployment_revision = deployment_revision.New(coretypes.ModuleParams{
+			Repository: i.repository,
+			Logger:     i.logger,
+		})
+	}
+	return i.deployment_revision
 }

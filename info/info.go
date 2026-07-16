@@ -67,6 +67,7 @@ const infoHTML = `<!doctype html>
     <li><code>automation</code></li>
     <li><code>automation_event</code></li>
     <li><code>deployment</code></li>
+    <li><code>deployment_revision</code></li>
   </ul>
 </div>
 

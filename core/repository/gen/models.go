@@ -89,34 +89,32 @@ type Deployment struct {
 	UUID               string      `json:"uuid"`
 	UserUUID           string      `json:"user_uuid"`
 	ProjectUUID        string      `json:"project_uuid"`
-	ProjectVersionUUID string      `json:"project_version_uuid"`
-	LocalAgentUUID     string      `json:"local_agent_uuid"`
-	ConnectionUUID     null.String `json:"connection_uuid"`
 	Identifier         string      `json:"identifier"`
-	Host               string      `json:"host"`
-	Provider           string      `json:"provider"`
-	DbEngine           int64       `json:"db_engine"`
-	DbLocation         int64       `json:"db_location"`
-	Mode               int64       `json:"mode"`
-	Domain             null.String `json:"domain"`
-	PublicURL          null.String `json:"public_url"`
-	DataManagerURL     null.String `json:"data_manager_url"`
-	PublicPort         null.Int    `json:"public_port"`
-	RestEnabled        bool        `json:"rest_enabled"`
-	HTTPPort           null.Int    `json:"http_port"`
-	GrpcEnabled        bool        `json:"grpc_enabled"`
-	GrpcPort           null.Int    `json:"grpc_port"`
-	DbPort             null.Int    `json:"db_port"`
-	AuthType           int64       `json:"auth_type"`
-	ContainerName      null.String `json:"container_name"`
-	ImageName          null.String `json:"image_name"`
-	CliVersion         null.String `json:"cli_version"`
 	Status             int64       `json:"status"`
-	LastDeployedAt     null.Time   `json:"last_deployed_at"`
 	CreatedAt          time.Time   `json:"created_at"`
 	UpdatedAt          time.Time   `json:"updated_at"`
 	CreatedByUUID      string      `json:"created_by_uuid"`
 	UpdatedByUUID      string      `json:"updated_by_uuid"`
+	Host               string      `json:"host"`
+	ActiveRevisionUUID null.String `json:"active_revision_uuid"`
+}
+
+type DeploymentRevision struct {
+	UUID               string      `json:"uuid"`
+	DeploymentUUID     string      `json:"deployment_uuid"`
+	ProjectVersionUUID string      `json:"project_version_uuid"`
+	CliVersion         null.String `json:"cli_version"`
+	ImageName          null.String `json:"image_name"`
+	Status             int64       `json:"status"`
+	DeployedAt         null.Time   `json:"deployed_at"`
+	CreatedAt          time.Time   `json:"created_at"`
+	UpdatedAt          time.Time   `json:"updated_at"`
+	CreatedByUUID      string      `json:"created_by_uuid"`
+	UpdatedByUUID      string      `json:"updated_by_uuid"`
+	Provider           []byte      `json:"provider"`
+	Server             []byte      `json:"server"`
+	Database           []byte      `json:"database"`
+	Codegen            []byte      `json:"codegen"`
 }
 
 type Extension struct {

@@ -303,6 +303,21 @@ const (
 	Nem_ListDeployment_FullMethodName                          = "/nem.Nem/ListDeployment"
 	Nem_CreateDeployment_FullMethodName                        = "/nem.Nem/CreateDeployment"
 	Nem_UpdateDeployment_FullMethodName                        = "/nem.Nem/UpdateDeployment"
+	Nem_ListDeploymentProvider_FullMethodName                  = "/nem.Nem/ListDeploymentProvider"
+	Nem_CreateDeploymentProvider_FullMethodName                = "/nem.Nem/CreateDeploymentProvider"
+	Nem_UpdateDeploymentProvider_FullMethodName                = "/nem.Nem/UpdateDeploymentProvider"
+	Nem_ListDeploymentServer_FullMethodName                    = "/nem.Nem/ListDeploymentServer"
+	Nem_CreateDeploymentServer_FullMethodName                  = "/nem.Nem/CreateDeploymentServer"
+	Nem_UpdateDeploymentServer_FullMethodName                  = "/nem.Nem/UpdateDeploymentServer"
+	Nem_ListDeploymentDatabase_FullMethodName                  = "/nem.Nem/ListDeploymentDatabase"
+	Nem_CreateDeploymentDatabase_FullMethodName                = "/nem.Nem/CreateDeploymentDatabase"
+	Nem_UpdateDeploymentDatabase_FullMethodName                = "/nem.Nem/UpdateDeploymentDatabase"
+	Nem_ListDeploymentCodegen_FullMethodName                   = "/nem.Nem/ListDeploymentCodegen"
+	Nem_CreateDeploymentCodegen_FullMethodName                 = "/nem.Nem/CreateDeploymentCodegen"
+	Nem_UpdateDeploymentCodegen_FullMethodName                 = "/nem.Nem/UpdateDeploymentCodegen"
+	Nem_ListDeploymentRevision_FullMethodName                  = "/nem.Nem/ListDeploymentRevision"
+	Nem_CreateDeploymentRevision_FullMethodName                = "/nem.Nem/CreateDeploymentRevision"
+	Nem_UpdateDeploymentRevision_FullMethodName                = "/nem.Nem/UpdateDeploymentRevision"
 )
 
 // NemClient is the client API for Nem service.
@@ -685,6 +700,26 @@ type NemClient interface {
 	ListDeployment(ctx context.Context, in *ListDeploymentRequest, opts ...grpc.CallOption) (*ListDeploymentResponse, error)
 	CreateDeployment(ctx context.Context, in *CreateDeploymentRequest, opts ...grpc.CallOption) (*Deployment, error)
 	UpdateDeployment(ctx context.Context, in *UpdateDeploymentRequest, opts ...grpc.CallOption) (*Deployment, error)
+	// deployment_provider start
+	ListDeploymentProvider(ctx context.Context, in *ListDeploymentProviderRequest, opts ...grpc.CallOption) (*ListDeploymentProviderResponse, error)
+	CreateDeploymentProvider(ctx context.Context, in *CreateDeploymentProviderRequest, opts ...grpc.CallOption) (*DeploymentProvider, error)
+	UpdateDeploymentProvider(ctx context.Context, in *UpdateDeploymentProviderRequest, opts ...grpc.CallOption) (*DeploymentProvider, error)
+	// deployment_server start
+	ListDeploymentServer(ctx context.Context, in *ListDeploymentServerRequest, opts ...grpc.CallOption) (*ListDeploymentServerResponse, error)
+	CreateDeploymentServer(ctx context.Context, in *CreateDeploymentServerRequest, opts ...grpc.CallOption) (*DeploymentServer, error)
+	UpdateDeploymentServer(ctx context.Context, in *UpdateDeploymentServerRequest, opts ...grpc.CallOption) (*DeploymentServer, error)
+	// deployment_database start
+	ListDeploymentDatabase(ctx context.Context, in *ListDeploymentDatabaseRequest, opts ...grpc.CallOption) (*ListDeploymentDatabaseResponse, error)
+	CreateDeploymentDatabase(ctx context.Context, in *CreateDeploymentDatabaseRequest, opts ...grpc.CallOption) (*DeploymentDatabase, error)
+	UpdateDeploymentDatabase(ctx context.Context, in *UpdateDeploymentDatabaseRequest, opts ...grpc.CallOption) (*DeploymentDatabase, error)
+	// deployment_codegen start
+	ListDeploymentCodegen(ctx context.Context, in *ListDeploymentCodegenRequest, opts ...grpc.CallOption) (*ListDeploymentCodegenResponse, error)
+	CreateDeploymentCodegen(ctx context.Context, in *CreateDeploymentCodegenRequest, opts ...grpc.CallOption) (*DeploymentCodegen, error)
+	UpdateDeploymentCodegen(ctx context.Context, in *UpdateDeploymentCodegenRequest, opts ...grpc.CallOption) (*DeploymentCodegen, error)
+	// deployment_revision start
+	ListDeploymentRevision(ctx context.Context, in *ListDeploymentRevisionRequest, opts ...grpc.CallOption) (*ListDeploymentRevisionResponse, error)
+	CreateDeploymentRevision(ctx context.Context, in *CreateDeploymentRevisionRequest, opts ...grpc.CallOption) (*DeploymentRevision, error)
+	UpdateDeploymentRevision(ctx context.Context, in *UpdateDeploymentRevisionRequest, opts ...grpc.CallOption) (*DeploymentRevision, error)
 }
 
 type nemClient struct {
@@ -3515,6 +3550,156 @@ func (c *nemClient) UpdateDeployment(ctx context.Context, in *UpdateDeploymentRe
 	return out, nil
 }
 
+func (c *nemClient) ListDeploymentProvider(ctx context.Context, in *ListDeploymentProviderRequest, opts ...grpc.CallOption) (*ListDeploymentProviderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDeploymentProviderResponse)
+	err := c.cc.Invoke(ctx, Nem_ListDeploymentProvider_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateDeploymentProvider(ctx context.Context, in *CreateDeploymentProviderRequest, opts ...grpc.CallOption) (*DeploymentProvider, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeploymentProvider)
+	err := c.cc.Invoke(ctx, Nem_CreateDeploymentProvider_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateDeploymentProvider(ctx context.Context, in *UpdateDeploymentProviderRequest, opts ...grpc.CallOption) (*DeploymentProvider, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeploymentProvider)
+	err := c.cc.Invoke(ctx, Nem_UpdateDeploymentProvider_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) ListDeploymentServer(ctx context.Context, in *ListDeploymentServerRequest, opts ...grpc.CallOption) (*ListDeploymentServerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDeploymentServerResponse)
+	err := c.cc.Invoke(ctx, Nem_ListDeploymentServer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateDeploymentServer(ctx context.Context, in *CreateDeploymentServerRequest, opts ...grpc.CallOption) (*DeploymentServer, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeploymentServer)
+	err := c.cc.Invoke(ctx, Nem_CreateDeploymentServer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateDeploymentServer(ctx context.Context, in *UpdateDeploymentServerRequest, opts ...grpc.CallOption) (*DeploymentServer, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeploymentServer)
+	err := c.cc.Invoke(ctx, Nem_UpdateDeploymentServer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) ListDeploymentDatabase(ctx context.Context, in *ListDeploymentDatabaseRequest, opts ...grpc.CallOption) (*ListDeploymentDatabaseResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDeploymentDatabaseResponse)
+	err := c.cc.Invoke(ctx, Nem_ListDeploymentDatabase_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateDeploymentDatabase(ctx context.Context, in *CreateDeploymentDatabaseRequest, opts ...grpc.CallOption) (*DeploymentDatabase, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeploymentDatabase)
+	err := c.cc.Invoke(ctx, Nem_CreateDeploymentDatabase_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateDeploymentDatabase(ctx context.Context, in *UpdateDeploymentDatabaseRequest, opts ...grpc.CallOption) (*DeploymentDatabase, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeploymentDatabase)
+	err := c.cc.Invoke(ctx, Nem_UpdateDeploymentDatabase_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) ListDeploymentCodegen(ctx context.Context, in *ListDeploymentCodegenRequest, opts ...grpc.CallOption) (*ListDeploymentCodegenResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDeploymentCodegenResponse)
+	err := c.cc.Invoke(ctx, Nem_ListDeploymentCodegen_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateDeploymentCodegen(ctx context.Context, in *CreateDeploymentCodegenRequest, opts ...grpc.CallOption) (*DeploymentCodegen, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeploymentCodegen)
+	err := c.cc.Invoke(ctx, Nem_CreateDeploymentCodegen_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateDeploymentCodegen(ctx context.Context, in *UpdateDeploymentCodegenRequest, opts ...grpc.CallOption) (*DeploymentCodegen, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeploymentCodegen)
+	err := c.cc.Invoke(ctx, Nem_UpdateDeploymentCodegen_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) ListDeploymentRevision(ctx context.Context, in *ListDeploymentRevisionRequest, opts ...grpc.CallOption) (*ListDeploymentRevisionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDeploymentRevisionResponse)
+	err := c.cc.Invoke(ctx, Nem_ListDeploymentRevision_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateDeploymentRevision(ctx context.Context, in *CreateDeploymentRevisionRequest, opts ...grpc.CallOption) (*DeploymentRevision, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeploymentRevision)
+	err := c.cc.Invoke(ctx, Nem_CreateDeploymentRevision_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateDeploymentRevision(ctx context.Context, in *UpdateDeploymentRevisionRequest, opts ...grpc.CallOption) (*DeploymentRevision, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeploymentRevision)
+	err := c.cc.Invoke(ctx, Nem_UpdateDeploymentRevision_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NemServer is the server API for Nem service.
 // All implementations must embed UnimplementedNemServer
 // for forward compatibility.
@@ -3895,6 +4080,26 @@ type NemServer interface {
 	ListDeployment(context.Context, *ListDeploymentRequest) (*ListDeploymentResponse, error)
 	CreateDeployment(context.Context, *CreateDeploymentRequest) (*Deployment, error)
 	UpdateDeployment(context.Context, *UpdateDeploymentRequest) (*Deployment, error)
+	// deployment_provider start
+	ListDeploymentProvider(context.Context, *ListDeploymentProviderRequest) (*ListDeploymentProviderResponse, error)
+	CreateDeploymentProvider(context.Context, *CreateDeploymentProviderRequest) (*DeploymentProvider, error)
+	UpdateDeploymentProvider(context.Context, *UpdateDeploymentProviderRequest) (*DeploymentProvider, error)
+	// deployment_server start
+	ListDeploymentServer(context.Context, *ListDeploymentServerRequest) (*ListDeploymentServerResponse, error)
+	CreateDeploymentServer(context.Context, *CreateDeploymentServerRequest) (*DeploymentServer, error)
+	UpdateDeploymentServer(context.Context, *UpdateDeploymentServerRequest) (*DeploymentServer, error)
+	// deployment_database start
+	ListDeploymentDatabase(context.Context, *ListDeploymentDatabaseRequest) (*ListDeploymentDatabaseResponse, error)
+	CreateDeploymentDatabase(context.Context, *CreateDeploymentDatabaseRequest) (*DeploymentDatabase, error)
+	UpdateDeploymentDatabase(context.Context, *UpdateDeploymentDatabaseRequest) (*DeploymentDatabase, error)
+	// deployment_codegen start
+	ListDeploymentCodegen(context.Context, *ListDeploymentCodegenRequest) (*ListDeploymentCodegenResponse, error)
+	CreateDeploymentCodegen(context.Context, *CreateDeploymentCodegenRequest) (*DeploymentCodegen, error)
+	UpdateDeploymentCodegen(context.Context, *UpdateDeploymentCodegenRequest) (*DeploymentCodegen, error)
+	// deployment_revision start
+	ListDeploymentRevision(context.Context, *ListDeploymentRevisionRequest) (*ListDeploymentRevisionResponse, error)
+	CreateDeploymentRevision(context.Context, *CreateDeploymentRevisionRequest) (*DeploymentRevision, error)
+	UpdateDeploymentRevision(context.Context, *UpdateDeploymentRevisionRequest) (*DeploymentRevision, error)
 	mustEmbedUnimplementedNemServer()
 }
 
@@ -4750,6 +4955,51 @@ func (UnimplementedNemServer) CreateDeployment(context.Context, *CreateDeploymen
 }
 func (UnimplementedNemServer) UpdateDeployment(context.Context, *UpdateDeploymentRequest) (*Deployment, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateDeployment not implemented")
+}
+func (UnimplementedNemServer) ListDeploymentProvider(context.Context, *ListDeploymentProviderRequest) (*ListDeploymentProviderResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDeploymentProvider not implemented")
+}
+func (UnimplementedNemServer) CreateDeploymentProvider(context.Context, *CreateDeploymentProviderRequest) (*DeploymentProvider, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateDeploymentProvider not implemented")
+}
+func (UnimplementedNemServer) UpdateDeploymentProvider(context.Context, *UpdateDeploymentProviderRequest) (*DeploymentProvider, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateDeploymentProvider not implemented")
+}
+func (UnimplementedNemServer) ListDeploymentServer(context.Context, *ListDeploymentServerRequest) (*ListDeploymentServerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDeploymentServer not implemented")
+}
+func (UnimplementedNemServer) CreateDeploymentServer(context.Context, *CreateDeploymentServerRequest) (*DeploymentServer, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateDeploymentServer not implemented")
+}
+func (UnimplementedNemServer) UpdateDeploymentServer(context.Context, *UpdateDeploymentServerRequest) (*DeploymentServer, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateDeploymentServer not implemented")
+}
+func (UnimplementedNemServer) ListDeploymentDatabase(context.Context, *ListDeploymentDatabaseRequest) (*ListDeploymentDatabaseResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDeploymentDatabase not implemented")
+}
+func (UnimplementedNemServer) CreateDeploymentDatabase(context.Context, *CreateDeploymentDatabaseRequest) (*DeploymentDatabase, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateDeploymentDatabase not implemented")
+}
+func (UnimplementedNemServer) UpdateDeploymentDatabase(context.Context, *UpdateDeploymentDatabaseRequest) (*DeploymentDatabase, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateDeploymentDatabase not implemented")
+}
+func (UnimplementedNemServer) ListDeploymentCodegen(context.Context, *ListDeploymentCodegenRequest) (*ListDeploymentCodegenResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDeploymentCodegen not implemented")
+}
+func (UnimplementedNemServer) CreateDeploymentCodegen(context.Context, *CreateDeploymentCodegenRequest) (*DeploymentCodegen, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateDeploymentCodegen not implemented")
+}
+func (UnimplementedNemServer) UpdateDeploymentCodegen(context.Context, *UpdateDeploymentCodegenRequest) (*DeploymentCodegen, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateDeploymentCodegen not implemented")
+}
+func (UnimplementedNemServer) ListDeploymentRevision(context.Context, *ListDeploymentRevisionRequest) (*ListDeploymentRevisionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDeploymentRevision not implemented")
+}
+func (UnimplementedNemServer) CreateDeploymentRevision(context.Context, *CreateDeploymentRevisionRequest) (*DeploymentRevision, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateDeploymentRevision not implemented")
+}
+func (UnimplementedNemServer) UpdateDeploymentRevision(context.Context, *UpdateDeploymentRevisionRequest) (*DeploymentRevision, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateDeploymentRevision not implemented")
 }
 func (UnimplementedNemServer) mustEmbedUnimplementedNemServer() {}
 func (UnimplementedNemServer) testEmbeddedByValue()             {}
@@ -9848,6 +10098,276 @@ func _Nem_UpdateDeployment_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Nem_ListDeploymentProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDeploymentProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListDeploymentProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListDeploymentProvider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListDeploymentProvider(ctx, req.(*ListDeploymentProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateDeploymentProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDeploymentProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateDeploymentProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateDeploymentProvider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateDeploymentProvider(ctx, req.(*CreateDeploymentProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateDeploymentProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDeploymentProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateDeploymentProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateDeploymentProvider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateDeploymentProvider(ctx, req.(*UpdateDeploymentProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_ListDeploymentServer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDeploymentServerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListDeploymentServer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListDeploymentServer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListDeploymentServer(ctx, req.(*ListDeploymentServerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateDeploymentServer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDeploymentServerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateDeploymentServer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateDeploymentServer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateDeploymentServer(ctx, req.(*CreateDeploymentServerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateDeploymentServer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDeploymentServerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateDeploymentServer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateDeploymentServer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateDeploymentServer(ctx, req.(*UpdateDeploymentServerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_ListDeploymentDatabase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDeploymentDatabaseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListDeploymentDatabase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListDeploymentDatabase_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListDeploymentDatabase(ctx, req.(*ListDeploymentDatabaseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateDeploymentDatabase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDeploymentDatabaseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateDeploymentDatabase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateDeploymentDatabase_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateDeploymentDatabase(ctx, req.(*CreateDeploymentDatabaseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateDeploymentDatabase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDeploymentDatabaseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateDeploymentDatabase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateDeploymentDatabase_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateDeploymentDatabase(ctx, req.(*UpdateDeploymentDatabaseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_ListDeploymentCodegen_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDeploymentCodegenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListDeploymentCodegen(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListDeploymentCodegen_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListDeploymentCodegen(ctx, req.(*ListDeploymentCodegenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateDeploymentCodegen_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDeploymentCodegenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateDeploymentCodegen(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateDeploymentCodegen_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateDeploymentCodegen(ctx, req.(*CreateDeploymentCodegenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateDeploymentCodegen_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDeploymentCodegenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateDeploymentCodegen(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateDeploymentCodegen_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateDeploymentCodegen(ctx, req.(*UpdateDeploymentCodegenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_ListDeploymentRevision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDeploymentRevisionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListDeploymentRevision(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListDeploymentRevision_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListDeploymentRevision(ctx, req.(*ListDeploymentRevisionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateDeploymentRevision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDeploymentRevisionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateDeploymentRevision(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateDeploymentRevision_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateDeploymentRevision(ctx, req.(*CreateDeploymentRevisionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateDeploymentRevision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDeploymentRevisionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateDeploymentRevision(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateDeploymentRevision_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateDeploymentRevision(ctx, req.(*UpdateDeploymentRevisionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Nem_ServiceDesc is the grpc.ServiceDesc for Nem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -10982,6 +11502,66 @@ var Nem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateDeployment",
 			Handler:    _Nem_UpdateDeployment_Handler,
+		},
+		{
+			MethodName: "ListDeploymentProvider",
+			Handler:    _Nem_ListDeploymentProvider_Handler,
+		},
+		{
+			MethodName: "CreateDeploymentProvider",
+			Handler:    _Nem_CreateDeploymentProvider_Handler,
+		},
+		{
+			MethodName: "UpdateDeploymentProvider",
+			Handler:    _Nem_UpdateDeploymentProvider_Handler,
+		},
+		{
+			MethodName: "ListDeploymentServer",
+			Handler:    _Nem_ListDeploymentServer_Handler,
+		},
+		{
+			MethodName: "CreateDeploymentServer",
+			Handler:    _Nem_CreateDeploymentServer_Handler,
+		},
+		{
+			MethodName: "UpdateDeploymentServer",
+			Handler:    _Nem_UpdateDeploymentServer_Handler,
+		},
+		{
+			MethodName: "ListDeploymentDatabase",
+			Handler:    _Nem_ListDeploymentDatabase_Handler,
+		},
+		{
+			MethodName: "CreateDeploymentDatabase",
+			Handler:    _Nem_CreateDeploymentDatabase_Handler,
+		},
+		{
+			MethodName: "UpdateDeploymentDatabase",
+			Handler:    _Nem_UpdateDeploymentDatabase_Handler,
+		},
+		{
+			MethodName: "ListDeploymentCodegen",
+			Handler:    _Nem_ListDeploymentCodegen_Handler,
+		},
+		{
+			MethodName: "CreateDeploymentCodegen",
+			Handler:    _Nem_CreateDeploymentCodegen_Handler,
+		},
+		{
+			MethodName: "UpdateDeploymentCodegen",
+			Handler:    _Nem_UpdateDeploymentCodegen_Handler,
+		},
+		{
+			MethodName: "ListDeploymentRevision",
+			Handler:    _Nem_ListDeploymentRevision_Handler,
+		},
+		{
+			MethodName: "CreateDeploymentRevision",
+			Handler:    _Nem_CreateDeploymentRevision_Handler,
+		},
+		{
+			MethodName: "UpdateDeploymentRevision",
+			Handler:    _Nem_UpdateDeploymentRevision_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

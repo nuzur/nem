@@ -8,8 +8,6 @@ import (
 
 	"github.com/nuzur/nem/enums"
 
-	"github.com/guregu/null/v6"
-
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -18,34 +16,14 @@ func DeploymentToProto(e main_entity.Deployment) *pb.Deployment {
 		Uuid:               e.UUID.String(),
 		UserUuid:           e.UserUUID.String(),
 		ProjectUuid:        e.ProjectUUID.String(),
-		ProjectVersionUuid: e.ProjectVersionUUID.String(),
-		LocalAgentUuid:     e.LocalAgentUUID.String(),
-		ConnectionUuid:     StringFromUUIDPtr(e.ConnectionUUID),
 		Identifier:         e.Identifier,
-		Host:               e.Host,
-		Provider:           e.Provider,
-		DbEngine:           pb.LocalAgentConnectionDbType(e.DbEngine),
-		DbLocation:         pb.DeploymentDbLocation(e.DbLocation),
-		Mode:               pb.DeploymentMode(e.Mode),
-		Domain:             e.Domain.ValueOrZero(),
-		PublicUrl:          e.PublicURL.ValueOrZero(),
-		DataManagerUrl:     e.DataManagerURL.ValueOrZero(),
-		PublicPort:         e.PublicPort.ValueOrZero(),
-		RestEnabled:        e.RestEnabled,
-		HttpPort:           e.HTTPPort.ValueOrZero(),
-		GrpcEnabled:        e.GrpcEnabled,
-		GrpcPort:           e.GrpcPort.ValueOrZero(),
-		DbPort:             e.DbPort.ValueOrZero(),
-		AuthType:           pb.DeploymentAuthType(e.AuthType),
-		ContainerName:      e.ContainerName.ValueOrZero(),
-		ImageName:          e.ImageName.ValueOrZero(),
-		CliVersion:         e.CliVersion.ValueOrZero(),
 		Status:             pb.DeploymentStatus(e.Status),
-		LastDeployedAt:     timestamppb.New(e.LastDeployedAt.ValueOrZero()),
 		CreatedAt:          timestamppb.New(e.CreatedAt),
 		UpdatedAt:          timestamppb.New(e.UpdatedAt),
 		CreatedByUuid:      e.CreatedByUUID.String(),
 		UpdatedByUuid:      e.UpdatedByUUID.String(),
+		Host:               e.Host,
+		ActiveRevisionUuid: StringFromUUIDPtr(e.ActiveRevisionUUID),
 	}
 }
 
@@ -65,34 +43,14 @@ func DeploymentFromProto(m *pb.Deployment) main_entity.Deployment {
 		UUID:               StringToUUID(m.GetUuid()),
 		UserUUID:           StringToUUID(m.GetUserUuid()),
 		ProjectUUID:        StringToUUID(m.GetProjectUuid()),
-		ProjectVersionUUID: StringToUUID(m.GetProjectVersionUuid()),
-		LocalAgentUUID:     StringToUUID(m.GetLocalAgentUuid()),
-		ConnectionUUID:     StringToUUIDPtr(m.GetConnectionUuid()),
 		Identifier:         m.GetIdentifier(),
-		Host:               m.GetHost(),
-		Provider:           m.GetProvider(),
-		DbEngine:           enums.LocalAgentConnectionDbType(m.GetDbEngine()),
-		DbLocation:         enums.DeploymentDbLocation(m.GetDbLocation()),
-		Mode:               enums.DeploymentMode(m.GetMode()),
-		Domain:             null.StringFrom(m.Domain),
-		PublicURL:          null.StringFrom(m.PublicUrl),
-		DataManagerURL:     null.StringFrom(m.DataManagerUrl),
-		PublicPort:         null.IntFrom(m.GetPublicPort()),
-		RestEnabled:        m.GetRestEnabled(),
-		HTTPPort:           null.IntFrom(m.GetHttpPort()),
-		GrpcEnabled:        m.GetGrpcEnabled(),
-		GrpcPort:           null.IntFrom(m.GetGrpcPort()),
-		DbPort:             null.IntFrom(m.GetDbPort()),
-		AuthType:           enums.DeploymentAuthType(m.GetAuthType()),
-		ContainerName:      null.StringFrom(m.ContainerName),
-		ImageName:          null.StringFrom(m.ImageName),
-		CliVersion:         null.StringFrom(m.CliVersion),
 		Status:             enums.DeploymentStatus(m.GetStatus()),
-		LastDeployedAt:     null.TimeFrom(m.GetLastDeployedAt().AsTime()),
 		CreatedAt:          m.GetCreatedAt().AsTime(),
 		UpdatedAt:          m.GetUpdatedAt().AsTime(),
 		CreatedByUUID:      StringToUUID(m.GetCreatedByUuid()),
 		UpdatedByUUID:      StringToUUID(m.GetUpdatedByUuid()),
+		Host:               m.GetHost(),
+		ActiveRevisionUUID: StringToUUIDPtr(m.GetActiveRevisionUuid()),
 	}
 }
 

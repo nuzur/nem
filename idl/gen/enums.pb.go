@@ -3968,6 +3968,58 @@ func (DeploymentAuthType) EnumDescriptor() ([]byte, []int) {
 	return file_enums_proto_rawDescGZIP(), []int{74}
 }
 
+type DeploymentRevisionStatus int32
+
+const (
+	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_INVALID    DeploymentRevisionStatus = 0
+	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_ACTIVE     DeploymentRevisionStatus = 1
+	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_SUPERSEDED DeploymentRevisionStatus = 2
+	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_FAILED     DeploymentRevisionStatus = 3
+)
+
+// Enum value maps for DeploymentRevisionStatus.
+var (
+	DeploymentRevisionStatus_name = map[int32]string{
+		0: "DEPLOYMENT_REVISION_STATUS_INVALID",
+		1: "DEPLOYMENT_REVISION_STATUS_ACTIVE",
+		2: "DEPLOYMENT_REVISION_STATUS_SUPERSEDED",
+		3: "DEPLOYMENT_REVISION_STATUS_FAILED",
+	}
+	DeploymentRevisionStatus_value = map[string]int32{
+		"DEPLOYMENT_REVISION_STATUS_INVALID":    0,
+		"DEPLOYMENT_REVISION_STATUS_ACTIVE":     1,
+		"DEPLOYMENT_REVISION_STATUS_SUPERSEDED": 2,
+		"DEPLOYMENT_REVISION_STATUS_FAILED":     3,
+	}
+)
+
+func (x DeploymentRevisionStatus) Enum() *DeploymentRevisionStatus {
+	p := new(DeploymentRevisionStatus)
+	*p = x
+	return p
+}
+
+func (x DeploymentRevisionStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DeploymentRevisionStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[75].Descriptor()
+}
+
+func (DeploymentRevisionStatus) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[75]
+}
+
+func (x DeploymentRevisionStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DeploymentRevisionStatus.Descriptor instead.
+func (DeploymentRevisionStatus) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{75}
+}
+
 var File_enums_proto protoreflect.FileDescriptor
 
 const file_enums_proto_rawDesc = "" +
@@ -4368,7 +4420,12 @@ const file_enums_proto_rawDesc = "" +
 	"\x1cDEPLOYMENT_AUTH_TYPE_INVALID\x10\x00\x12\x1d\n" +
 	"\x19DEPLOYMENT_AUTH_TYPE_NONE\x10\x01\x12\x1c\n" +
 	"\x18DEPLOYMENT_AUTH_TYPE_JWT\x10\x02\x12!\n" +
-	"\x1dDEPLOYMENT_AUTH_TYPE_KEYCLOAK\x10\x03B+\n" +
+	"\x1dDEPLOYMENT_AUTH_TYPE_KEYCLOAK\x10\x03*\xbb\x01\n" +
+	"\x18DeploymentRevisionStatus\x12&\n" +
+	"\"DEPLOYMENT_REVISION_STATUS_INVALID\x10\x00\x12%\n" +
+	"!DEPLOYMENT_REVISION_STATUS_ACTIVE\x10\x01\x12)\n" +
+	"%DEPLOYMENT_REVISION_STATUS_SUPERSEDED\x10\x02\x12%\n" +
+	"!DEPLOYMENT_REVISION_STATUS_FAILED\x10\x03B+\n" +
 	"\x14github.com/nuzur/nemB\x04EnumP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -4383,7 +4440,7 @@ func file_enums_proto_rawDescGZIP() []byte {
 	return file_enums_proto_rawDescData
 }
 
-var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 75)
+var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 76)
 var file_enums_proto_goTypes = []any{
 	(AiUsageContext)(0),                         // 0: nem.AiUsageContext
 	(AiUsageProvider)(0),                        // 1: nem.AiUsageProvider
@@ -4460,6 +4517,7 @@ var file_enums_proto_goTypes = []any{
 	(DeploymentMode)(0),                         // 72: nem.DeploymentMode
 	(DeploymentDbLocation)(0),                   // 73: nem.DeploymentDbLocation
 	(DeploymentAuthType)(0),                     // 74: nem.DeploymentAuthType
+	(DeploymentRevisionStatus)(0),               // 75: nem.DeploymentRevisionStatus
 }
 var file_enums_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -4479,7 +4537,7 @@ func file_enums_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_enums_proto_rawDesc), len(file_enums_proto_rawDesc)),
-			NumEnums:      75,
+			NumEnums:      76,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,

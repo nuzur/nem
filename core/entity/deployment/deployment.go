@@ -7,7 +7,6 @@ import (
 	"log"
 
 	"github.com/gofrs/uuid"
-	"github.com/guregu/null/v6"
 	"github.com/nuzur/nem/enums"
 	"time"
 
@@ -15,37 +14,17 @@ import (
 )
 
 type Deployment struct {
-	UUID               uuid.UUID                        `json:"uuid"`
-	UserUUID           uuid.UUID                        `json:"user_uuid"`
-	ProjectUUID        uuid.UUID                        `json:"project_uuid"`
-	ProjectVersionUUID uuid.UUID                        `json:"project_version_uuid"`
-	LocalAgentUUID     uuid.UUID                        `json:"local_agent_uuid"`
-	ConnectionUUID     *uuid.UUID                       `json:"connection_uuid"`
-	Identifier         string                           `json:"identifier"`
-	Host               string                           `json:"host"`
-	Provider           string                           `json:"provider"`
-	DbEngine           enums.LocalAgentConnectionDbType `json:"db_engine"`
-	DbLocation         enums.DeploymentDbLocation       `json:"db_location"`
-	Mode               enums.DeploymentMode             `json:"mode"`
-	Domain             null.String                      `json:"domain"`
-	PublicURL          null.String                      `json:"public_url"`
-	DataManagerURL     null.String                      `json:"data_manager_url"`
-	PublicPort         null.Int64                       `json:"public_port"`
-	RestEnabled        bool                             `json:"rest_enabled"`
-	HTTPPort           null.Int64                       `json:"http_port"`
-	GrpcEnabled        bool                             `json:"grpc_enabled"`
-	GrpcPort           null.Int64                       `json:"grpc_port"`
-	DbPort             null.Int64                       `json:"db_port"`
-	AuthType           enums.DeploymentAuthType         `json:"auth_type"`
-	ContainerName      null.String                      `json:"container_name"`
-	ImageName          null.String                      `json:"image_name"`
-	CliVersion         null.String                      `json:"cli_version"`
-	Status             enums.DeploymentStatus           `json:"status"`
-	LastDeployedAt     null.Time                        `json:"last_deployed_at"`
-	CreatedAt          time.Time                        `json:"created_at"`
-	UpdatedAt          time.Time                        `json:"updated_at"`
-	CreatedByUUID      uuid.UUID                        `json:"created_by_uuid"`
-	UpdatedByUUID      uuid.UUID                        `json:"updated_by_uuid"`
+	UUID               uuid.UUID              `json:"uuid"`
+	UserUUID           uuid.UUID              `json:"user_uuid"`
+	ProjectUUID        uuid.UUID              `json:"project_uuid"`
+	Identifier         string                 `json:"identifier"`
+	Status             enums.DeploymentStatus `json:"status"`
+	CreatedAt          time.Time              `json:"created_at"`
+	UpdatedAt          time.Time              `json:"updated_at"`
+	CreatedByUUID      uuid.UUID              `json:"created_by_uuid"`
+	UpdatedByUUID      uuid.UUID              `json:"updated_by_uuid"`
+	Host               string                 `json:"host"`
+	ActiveRevisionUUID *uuid.UUID             `json:"active_revision_uuid"`
 }
 
 func (e Deployment) String() string {

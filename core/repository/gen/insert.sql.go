@@ -201,43 +201,23 @@ func (q *Queries) InsertChangeRequest(ctx context.Context, arg InsertChangeReque
 
 const insertDeployment = `-- name: InsertDeployment :execresult
 INSERT INTO ` + "`" + `deployment` + "`" + `
-(` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `local_agent_uuid` + "`" + `,` + "`" + `connection_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `host` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `db_engine` + "`" + `,` + "`" + `db_location` + "`" + `,` + "`" + `mode` + "`" + `,` + "`" + `domain` + "`" + `,` + "`" + `public_url` + "`" + `,` + "`" + `data_manager_url` + "`" + `,` + "`" + `public_port` + "`" + `,` + "`" + `rest_enabled` + "`" + `,` + "`" + `http_port` + "`" + `,` + "`" + `grpc_enabled` + "`" + `,` + "`" + `grpc_port` + "`" + `,` + "`" + `db_port` + "`" + `,` + "`" + `auth_type` + "`" + `,` + "`" + `container_name` + "`" + `,` + "`" + `image_name` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `last_deployed_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `)
+(` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `host` + "`" + `,` + "`" + `active_revision_uuid` + "`" + `)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertDeploymentParams struct {
 	UUID               string      `json:"uuid"`
 	UserUUID           string      `json:"user_uuid"`
 	ProjectUUID        string      `json:"project_uuid"`
-	ProjectVersionUUID string      `json:"project_version_uuid"`
-	LocalAgentUUID     string      `json:"local_agent_uuid"`
-	ConnectionUUID     null.String `json:"connection_uuid"`
 	Identifier         string      `json:"identifier"`
-	Host               string      `json:"host"`
-	Provider           string      `json:"provider"`
-	DbEngine           int64       `json:"db_engine"`
-	DbLocation         int64       `json:"db_location"`
-	Mode               int64       `json:"mode"`
-	Domain             null.String `json:"domain"`
-	PublicURL          null.String `json:"public_url"`
-	DataManagerURL     null.String `json:"data_manager_url"`
-	PublicPort         null.Int    `json:"public_port"`
-	RestEnabled        bool        `json:"rest_enabled"`
-	HTTPPort           null.Int    `json:"http_port"`
-	GrpcEnabled        bool        `json:"grpc_enabled"`
-	GrpcPort           null.Int    `json:"grpc_port"`
-	DbPort             null.Int    `json:"db_port"`
-	AuthType           int64       `json:"auth_type"`
-	ContainerName      null.String `json:"container_name"`
-	ImageName          null.String `json:"image_name"`
-	CliVersion         null.String `json:"cli_version"`
 	Status             int64       `json:"status"`
-	LastDeployedAt     null.Time   `json:"last_deployed_at"`
 	CreatedAt          time.Time   `json:"created_at"`
 	UpdatedAt          time.Time   `json:"updated_at"`
 	CreatedByUUID      string      `json:"created_by_uuid"`
 	UpdatedByUUID      string      `json:"updated_by_uuid"`
+	Host               string      `json:"host"`
+	ActiveRevisionUUID null.String `json:"active_revision_uuid"`
 }
 
 func (q *Queries) InsertDeployment(ctx context.Context, arg InsertDeploymentParams) (sql.Result, error) {
@@ -245,34 +225,59 @@ func (q *Queries) InsertDeployment(ctx context.Context, arg InsertDeploymentPara
 		arg.UUID,
 		arg.UserUUID,
 		arg.ProjectUUID,
-		arg.ProjectVersionUUID,
-		arg.LocalAgentUUID,
-		arg.ConnectionUUID,
 		arg.Identifier,
-		arg.Host,
-		arg.Provider,
-		arg.DbEngine,
-		arg.DbLocation,
-		arg.Mode,
-		arg.Domain,
-		arg.PublicURL,
-		arg.DataManagerURL,
-		arg.PublicPort,
-		arg.RestEnabled,
-		arg.HTTPPort,
-		arg.GrpcEnabled,
-		arg.GrpcPort,
-		arg.DbPort,
-		arg.AuthType,
-		arg.ContainerName,
-		arg.ImageName,
-		arg.CliVersion,
 		arg.Status,
-		arg.LastDeployedAt,
 		arg.CreatedAt,
 		arg.UpdatedAt,
 		arg.CreatedByUUID,
 		arg.UpdatedByUUID,
+		arg.Host,
+		arg.ActiveRevisionUUID,
+	)
+}
+
+const insertDeploymentRevision = `-- name: InsertDeploymentRevision :execresult
+INSERT INTO ` + "`" + `deployment_revision` + "`" + `
+(` + "`" + `uuid` + "`" + `,` + "`" + `deployment_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `image_name` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `deployed_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `server` + "`" + `,` + "`" + `database` + "`" + `,` + "`" + `codegen` + "`" + `)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+`
+
+type InsertDeploymentRevisionParams struct {
+	UUID               string      `json:"uuid"`
+	DeploymentUUID     string      `json:"deployment_uuid"`
+	ProjectVersionUUID string      `json:"project_version_uuid"`
+	CliVersion         null.String `json:"cli_version"`
+	ImageName          null.String `json:"image_name"`
+	Status             int64       `json:"status"`
+	DeployedAt         null.Time   `json:"deployed_at"`
+	CreatedAt          time.Time   `json:"created_at"`
+	UpdatedAt          time.Time   `json:"updated_at"`
+	CreatedByUUID      string      `json:"created_by_uuid"`
+	UpdatedByUUID      string      `json:"updated_by_uuid"`
+	Provider           []byte      `json:"provider"`
+	Server             []byte      `json:"server"`
+	Database           []byte      `json:"database"`
+	Codegen            []byte      `json:"codegen"`
+}
+
+func (q *Queries) InsertDeploymentRevision(ctx context.Context, arg InsertDeploymentRevisionParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, insertDeploymentRevision,
+		arg.UUID,
+		arg.DeploymentUUID,
+		arg.ProjectVersionUUID,
+		arg.CliVersion,
+		arg.ImageName,
+		arg.Status,
+		arg.DeployedAt,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+		arg.Provider,
+		arg.Server,
+		arg.Database,
+		arg.Codegen,
 	)
 }
 

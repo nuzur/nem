@@ -87,53 +87,9 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateDeploym
 
 		ProjectUUID: req.Deployment.ProjectUUID.String(),
 
-		ProjectVersionUUID: req.Deployment.ProjectVersionUUID.String(),
-
-		LocalAgentUUID: req.Deployment.LocalAgentUUID.String(),
-
-		ConnectionUUID: mapper.UUIDPtrToNullString(req.Deployment.ConnectionUUID),
-
 		Identifier: req.Deployment.Identifier,
 
-		Host: req.Deployment.Host,
-
-		Provider: req.Deployment.Provider,
-
-		DbEngine: req.Deployment.DbEngine.ToInt64(),
-
-		DbLocation: req.Deployment.DbLocation.ToInt64(),
-
-		Mode: req.Deployment.Mode.ToInt64(),
-
-		Domain: req.Deployment.Domain,
-
-		PublicURL: req.Deployment.PublicURL,
-
-		DataManagerURL: req.Deployment.DataManagerURL,
-
-		PublicPort: req.Deployment.PublicPort,
-
-		RestEnabled: req.Deployment.RestEnabled,
-
-		HTTPPort: req.Deployment.HTTPPort,
-
-		GrpcEnabled: req.Deployment.GrpcEnabled,
-
-		GrpcPort: req.Deployment.GrpcPort,
-
-		DbPort: req.Deployment.DbPort,
-
-		AuthType: req.Deployment.AuthType.ToInt64(),
-
-		ContainerName: req.Deployment.ContainerName,
-
-		ImageName: req.Deployment.ImageName,
-
-		CliVersion: req.Deployment.CliVersion,
-
 		Status: req.Deployment.Status.ToInt64(),
-
-		LastDeployedAt: req.Deployment.LastDeployedAt,
 
 		CreatedAt: req.Deployment.CreatedAt,
 
@@ -142,5 +98,9 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateDeploym
 		CreatedByUUID: req.Deployment.CreatedByUUID.String(),
 
 		UpdatedByUUID: req.Deployment.UpdatedByUUID.String(),
+
+		Host: req.Deployment.Host,
+
+		ActiveRevisionUUID: mapper.UUIDPtrToNullString(req.Deployment.ActiveRevisionUUID),
 	}
 }

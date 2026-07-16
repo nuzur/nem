@@ -15,6 +15,7 @@ sql:
           access_type: AccessType
           action_config: ActionConfig
           action_type: ActionType
+          active_revision_uuid: ActiveRevisionUUID
           agent_connection_uuid: AgentConnectionUUID
           agent_uuid: AgentUUID
           ai_generated: AiGenerated
@@ -41,6 +42,7 @@ sql:
           char: Char
           cli_version: CliVersion
           code: Code
+          codegen: Codegen
           collapsed: Collapsed
           color: Color
           comment: Comment
@@ -59,6 +61,7 @@ sql:
           critical: Critical
           currency_code: CurrencyCode
           current_value: CurrentValue
+          custom: Custom
           data: Data
           data_change_type: DataChangeType
           data_change_type_config: DataChangeTypeConfig
@@ -68,9 +71,6 @@ sql:
           database: Database
           date: Date
           datetime: Datetime
-          db_engine: DbEngine
-          db_location: DbLocation
-          db_port: DbPort
           db_schema: DbSchema
           db_type: DbType
           db_type_config: DbTypeConfig
@@ -81,6 +81,8 @@ sql:
           delete: Delete
           delivered_at: DeliveredAt
           dependent: Dependent
+          deployed_at: DeployedAt
+          deployment_uuid: DeploymentUUID
           deployments: Deployments
           deprecated: Deprecated
           description: Description
@@ -99,6 +101,7 @@ sql:
           enforce_past: EnforcePast
           enforce_schema_validation: EnforceSchemaValidation
           enforce_unique: EnforceUnique
+          engine: Engine
           entities: Entities
           entity: Entity
           entity_source_uuids: EntitySourceUUIDs
@@ -148,7 +151,6 @@ sql:
           key: Key
           key_auto_increment: KeyAutoIncrement
           keys: Keys
-          last_deployed_at: LastDeployedAt
           last_error: LastError
           last_name: LastName
           last_seen_at: LastSeenAt
@@ -236,15 +238,20 @@ sql:
           scope_config: ScopeConfig
           secret: Secret
           separator: Separator
+          server: Server
           service: Service
           service_source_uuids: ServiceSourceUUIDs
           service_uuid: ServiceUUID
           services: Services
           size: Size
           slug: Slug
+          source_dir: SourceDir
           ssh_hostname: SshHostname
           ssh_key_file: SshKeyFile
+          ssh_key_name: SshKeyName
           ssh_password: SshPassword
+          ssh_port: SshPort
+          ssh_user: SshUser
           ssh_username: SshUsername
           sslmode: Sslmode
           standalone: Standalone
@@ -404,6 +411,11 @@ overrides:
       db_type_mysql_config: DbTypeMysqlConfig
       db_type_postgres_config: DbTypePostgresConfig
       deployment: Deployment
+      deployment_codegen: DeploymentCodegen
+      deployment_database: DeploymentDatabase
+      deployment_provider: DeploymentProvider
+      deployment_revision: DeploymentRevision
+      deployment_server: DeploymentServer
       element_render: ElementRender
       entity: Entity
       entity_data_management_config: EntityDataManagementConfig

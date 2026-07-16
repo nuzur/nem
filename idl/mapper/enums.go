@@ -1131,3 +1131,18 @@ func DeploymentAuthTypeSliceFromProto(s []pb.DeploymentAuthType) []enums.Deploym
 	}
 	return res
 }
+
+func DeploymentRevisionStatusSliceToProto(s []enums.DeploymentRevisionStatus) []pb.DeploymentRevisionStatus {
+	res := []pb.DeploymentRevisionStatus{}
+	for _, e := range s {
+		res = append(res, pb.DeploymentRevisionStatus(e))
+	}
+	return res
+}
+func DeploymentRevisionStatusSliceFromProto(s []pb.DeploymentRevisionStatus) []enums.DeploymentRevisionStatus {
+	res := []enums.DeploymentRevisionStatus{}
+	for _, e := range s {
+		res = append(res, enums.DeploymentRevisionStatus(e))
+	}
+	return res
+}

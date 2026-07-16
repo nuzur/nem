@@ -209,7 +209,7 @@ func (q *Queries) UpdateChangeRequest(ctx context.Context, arg UpdateChangeReque
 const updateDeployment = `-- name: UpdateDeployment :exec
 UPDATE ` + "`" + `deployment` + "`" + `
 SET
-` + "`" + `user_uuid` + "`" + ` = ?, ` + "`" + `project_uuid` + "`" + ` = ?, ` + "`" + `project_version_uuid` + "`" + ` = ?, ` + "`" + `local_agent_uuid` + "`" + ` = ?, ` + "`" + `connection_uuid` + "`" + ` = ?, ` + "`" + `identifier` + "`" + ` = ?, ` + "`" + `host` + "`" + ` = ?, ` + "`" + `provider` + "`" + ` = ?, ` + "`" + `db_engine` + "`" + ` = ?, ` + "`" + `db_location` + "`" + ` = ?, ` + "`" + `mode` + "`" + ` = ?, ` + "`" + `domain` + "`" + ` = ?, ` + "`" + `public_url` + "`" + ` = ?, ` + "`" + `data_manager_url` + "`" + ` = ?, ` + "`" + `public_port` + "`" + ` = ?, ` + "`" + `rest_enabled` + "`" + ` = ?, ` + "`" + `http_port` + "`" + ` = ?, ` + "`" + `grpc_enabled` + "`" + ` = ?, ` + "`" + `grpc_port` + "`" + ` = ?, ` + "`" + `db_port` + "`" + ` = ?, ` + "`" + `auth_type` + "`" + ` = ?, ` + "`" + `container_name` + "`" + ` = ?, ` + "`" + `image_name` + "`" + ` = ?, ` + "`" + `cli_version` + "`" + ` = ?, ` + "`" + `status` + "`" + ` = ?, ` + "`" + `last_deployed_at` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?, ` + "`" + `created_by_uuid` + "`" + ` = ?, ` + "`" + `updated_by_uuid` + "`" + ` = ?
+` + "`" + `user_uuid` + "`" + ` = ?, ` + "`" + `project_uuid` + "`" + ` = ?, ` + "`" + `identifier` + "`" + ` = ?, ` + "`" + `status` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?, ` + "`" + `created_by_uuid` + "`" + ` = ?, ` + "`" + `updated_by_uuid` + "`" + ` = ?, ` + "`" + `host` + "`" + ` = ?, ` + "`" + `active_revision_uuid` + "`" + ` = ?
 WHERE
 ` + "`" + `uuid` + "`" + ` = ?
 `
@@ -217,34 +217,14 @@ WHERE
 type UpdateDeploymentParams struct {
 	UserUUID           string      `json:"user_uuid"`
 	ProjectUUID        string      `json:"project_uuid"`
-	ProjectVersionUUID string      `json:"project_version_uuid"`
-	LocalAgentUUID     string      `json:"local_agent_uuid"`
-	ConnectionUUID     null.String `json:"connection_uuid"`
 	Identifier         string      `json:"identifier"`
-	Host               string      `json:"host"`
-	Provider           string      `json:"provider"`
-	DbEngine           int64       `json:"db_engine"`
-	DbLocation         int64       `json:"db_location"`
-	Mode               int64       `json:"mode"`
-	Domain             null.String `json:"domain"`
-	PublicURL          null.String `json:"public_url"`
-	DataManagerURL     null.String `json:"data_manager_url"`
-	PublicPort         null.Int    `json:"public_port"`
-	RestEnabled        bool        `json:"rest_enabled"`
-	HTTPPort           null.Int    `json:"http_port"`
-	GrpcEnabled        bool        `json:"grpc_enabled"`
-	GrpcPort           null.Int    `json:"grpc_port"`
-	DbPort             null.Int    `json:"db_port"`
-	AuthType           int64       `json:"auth_type"`
-	ContainerName      null.String `json:"container_name"`
-	ImageName          null.String `json:"image_name"`
-	CliVersion         null.String `json:"cli_version"`
 	Status             int64       `json:"status"`
-	LastDeployedAt     null.Time   `json:"last_deployed_at"`
 	CreatedAt          time.Time   `json:"created_at"`
 	UpdatedAt          time.Time   `json:"updated_at"`
 	CreatedByUUID      string      `json:"created_by_uuid"`
 	UpdatedByUUID      string      `json:"updated_by_uuid"`
+	Host               string      `json:"host"`
+	ActiveRevisionUUID null.String `json:"active_revision_uuid"`
 	UUID               string      `json:"uuid"`
 }
 
@@ -252,34 +232,61 @@ func (q *Queries) UpdateDeployment(ctx context.Context, arg UpdateDeploymentPara
 	_, err := q.db.ExecContext(ctx, updateDeployment,
 		arg.UserUUID,
 		arg.ProjectUUID,
-		arg.ProjectVersionUUID,
-		arg.LocalAgentUUID,
-		arg.ConnectionUUID,
 		arg.Identifier,
-		arg.Host,
-		arg.Provider,
-		arg.DbEngine,
-		arg.DbLocation,
-		arg.Mode,
-		arg.Domain,
-		arg.PublicURL,
-		arg.DataManagerURL,
-		arg.PublicPort,
-		arg.RestEnabled,
-		arg.HTTPPort,
-		arg.GrpcEnabled,
-		arg.GrpcPort,
-		arg.DbPort,
-		arg.AuthType,
-		arg.ContainerName,
-		arg.ImageName,
-		arg.CliVersion,
 		arg.Status,
-		arg.LastDeployedAt,
 		arg.CreatedAt,
 		arg.UpdatedAt,
 		arg.CreatedByUUID,
 		arg.UpdatedByUUID,
+		arg.Host,
+		arg.ActiveRevisionUUID,
+		arg.UUID,
+	)
+	return err
+}
+
+const updateDeploymentRevision = `-- name: UpdateDeploymentRevision :exec
+UPDATE ` + "`" + `deployment_revision` + "`" + `
+SET
+` + "`" + `deployment_uuid` + "`" + ` = ?, ` + "`" + `project_version_uuid` + "`" + ` = ?, ` + "`" + `cli_version` + "`" + ` = ?, ` + "`" + `image_name` + "`" + ` = ?, ` + "`" + `status` + "`" + ` = ?, ` + "`" + `deployed_at` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?, ` + "`" + `created_by_uuid` + "`" + ` = ?, ` + "`" + `updated_by_uuid` + "`" + ` = ?, ` + "`" + `provider` + "`" + ` = ?, ` + "`" + `server` + "`" + ` = ?, ` + "`" + `database` + "`" + ` = ?, ` + "`" + `codegen` + "`" + ` = ?
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+type UpdateDeploymentRevisionParams struct {
+	DeploymentUUID     string      `json:"deployment_uuid"`
+	ProjectVersionUUID string      `json:"project_version_uuid"`
+	CliVersion         null.String `json:"cli_version"`
+	ImageName          null.String `json:"image_name"`
+	Status             int64       `json:"status"`
+	DeployedAt         null.Time   `json:"deployed_at"`
+	CreatedAt          time.Time   `json:"created_at"`
+	UpdatedAt          time.Time   `json:"updated_at"`
+	CreatedByUUID      string      `json:"created_by_uuid"`
+	UpdatedByUUID      string      `json:"updated_by_uuid"`
+	Provider           []byte      `json:"provider"`
+	Server             []byte      `json:"server"`
+	Database           []byte      `json:"database"`
+	Codegen            []byte      `json:"codegen"`
+	UUID               string      `json:"uuid"`
+}
+
+func (q *Queries) UpdateDeploymentRevision(ctx context.Context, arg UpdateDeploymentRevisionParams) error {
+	_, err := q.db.ExecContext(ctx, updateDeploymentRevision,
+		arg.DeploymentUUID,
+		arg.ProjectVersionUUID,
+		arg.CliVersion,
+		arg.ImageName,
+		arg.Status,
+		arg.DeployedAt,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+		arg.Provider,
+		arg.Server,
+		arg.Database,
+		arg.Codegen,
 		arg.UUID,
 	)
 	return err

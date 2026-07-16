@@ -25,38 +25,18 @@ const (
 )
 
 type Deployment struct {
-	state              protoimpl.MessageState     `protogen:"open.v1"`
-	Uuid               string                     `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	UserUuid           string                     `protobuf:"bytes,2,opt,name=user_uuid,json=userUuid,proto3" json:"user_uuid,omitempty"`
-	ProjectUuid        string                     `protobuf:"bytes,3,opt,name=project_uuid,json=projectUuid,proto3" json:"project_uuid,omitempty"`
-	ProjectVersionUuid string                     `protobuf:"bytes,4,opt,name=project_version_uuid,json=projectVersionUuid,proto3" json:"project_version_uuid,omitempty"`
-	LocalAgentUuid     string                     `protobuf:"bytes,5,opt,name=local_agent_uuid,json=localAgentUuid,proto3" json:"local_agent_uuid,omitempty"`
-	ConnectionUuid     string                     `protobuf:"bytes,6,opt,name=connection_uuid,json=connectionUuid,proto3" json:"connection_uuid,omitempty"`
-	Identifier         string                     `protobuf:"bytes,7,opt,name=identifier,proto3" json:"identifier,omitempty"`
-	Host               string                     `protobuf:"bytes,8,opt,name=host,proto3" json:"host,omitempty"`
-	Provider           string                     `protobuf:"bytes,9,opt,name=provider,proto3" json:"provider,omitempty"`
-	DbEngine           LocalAgentConnectionDbType `protobuf:"varint,10,opt,name=db_engine,json=dbEngine,proto3,enum=nem.LocalAgentConnectionDbType" json:"db_engine,omitempty"`
-	DbLocation         DeploymentDbLocation       `protobuf:"varint,11,opt,name=db_location,json=dbLocation,proto3,enum=nem.DeploymentDbLocation" json:"db_location,omitempty"`
-	Mode               DeploymentMode             `protobuf:"varint,12,opt,name=mode,proto3,enum=nem.DeploymentMode" json:"mode,omitempty"`
-	Domain             string                     `protobuf:"bytes,13,opt,name=domain,proto3" json:"domain,omitempty"`
-	PublicUrl          string                     `protobuf:"bytes,14,opt,name=public_url,json=publicUrl,proto3" json:"public_url,omitempty"`
-	DataManagerUrl     string                     `protobuf:"bytes,15,opt,name=data_manager_url,json=dataManagerUrl,proto3" json:"data_manager_url,omitempty"`
-	PublicPort         int64                      `protobuf:"varint,16,opt,name=public_port,json=publicPort,proto3" json:"public_port,omitempty"`
-	RestEnabled        bool                       `protobuf:"varint,17,opt,name=rest_enabled,json=restEnabled,proto3" json:"rest_enabled,omitempty"`
-	HttpPort           int64                      `protobuf:"varint,18,opt,name=http_port,json=httpPort,proto3" json:"http_port,omitempty"`
-	GrpcEnabled        bool                       `protobuf:"varint,19,opt,name=grpc_enabled,json=grpcEnabled,proto3" json:"grpc_enabled,omitempty"`
-	GrpcPort           int64                      `protobuf:"varint,20,opt,name=grpc_port,json=grpcPort,proto3" json:"grpc_port,omitempty"`
-	DbPort             int64                      `protobuf:"varint,21,opt,name=db_port,json=dbPort,proto3" json:"db_port,omitempty"`
-	AuthType           DeploymentAuthType         `protobuf:"varint,22,opt,name=auth_type,json=authType,proto3,enum=nem.DeploymentAuthType" json:"auth_type,omitempty"`
-	ContainerName      string                     `protobuf:"bytes,23,opt,name=container_name,json=containerName,proto3" json:"container_name,omitempty"`
-	ImageName          string                     `protobuf:"bytes,24,opt,name=image_name,json=imageName,proto3" json:"image_name,omitempty"`
-	CliVersion         string                     `protobuf:"bytes,25,opt,name=cli_version,json=cliVersion,proto3" json:"cli_version,omitempty"`
-	Status             DeploymentStatus           `protobuf:"varint,26,opt,name=status,proto3,enum=nem.DeploymentStatus" json:"status,omitempty"`
-	LastDeployedAt     *timestamppb.Timestamp     `protobuf:"bytes,27,opt,name=last_deployed_at,json=lastDeployedAt,proto3" json:"last_deployed_at,omitempty"`
-	CreatedAt          *timestamppb.Timestamp     `protobuf:"bytes,28,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt          *timestamppb.Timestamp     `protobuf:"bytes,29,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CreatedByUuid      string                     `protobuf:"bytes,30,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
-	UpdatedByUuid      string                     `protobuf:"bytes,31,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Uuid               string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	UserUuid           string                 `protobuf:"bytes,2,opt,name=user_uuid,json=userUuid,proto3" json:"user_uuid,omitempty"`
+	ProjectUuid        string                 `protobuf:"bytes,3,opt,name=project_uuid,json=projectUuid,proto3" json:"project_uuid,omitempty"`
+	Identifier         string                 `protobuf:"bytes,4,opt,name=identifier,proto3" json:"identifier,omitempty"`
+	Status             DeploymentStatus       `protobuf:"varint,5,opt,name=status,proto3,enum=nem.DeploymentStatus" json:"status,omitempty"`
+	CreatedAt          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt          *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedByUuid      string                 `protobuf:"bytes,8,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
+	UpdatedByUuid      string                 `protobuf:"bytes,9,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	Host               string                 `protobuf:"bytes,10,opt,name=host,proto3" json:"host,omitempty"`
+	ActiveRevisionUuid string                 `protobuf:"bytes,11,opt,name=active_revision_uuid,json=activeRevisionUuid,proto3" json:"active_revision_uuid,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -112,156 +92,9 @@ func (x *Deployment) GetProjectUuid() string {
 	return ""
 }
 
-func (x *Deployment) GetProjectVersionUuid() string {
-	if x != nil {
-		return x.ProjectVersionUuid
-	}
-	return ""
-}
-
-func (x *Deployment) GetLocalAgentUuid() string {
-	if x != nil {
-		return x.LocalAgentUuid
-	}
-	return ""
-}
-
-func (x *Deployment) GetConnectionUuid() string {
-	if x != nil {
-		return x.ConnectionUuid
-	}
-	return ""
-}
-
 func (x *Deployment) GetIdentifier() string {
 	if x != nil {
 		return x.Identifier
-	}
-	return ""
-}
-
-func (x *Deployment) GetHost() string {
-	if x != nil {
-		return x.Host
-	}
-	return ""
-}
-
-func (x *Deployment) GetProvider() string {
-	if x != nil {
-		return x.Provider
-	}
-	return ""
-}
-
-func (x *Deployment) GetDbEngine() LocalAgentConnectionDbType {
-	if x != nil {
-		return x.DbEngine
-	}
-	return LocalAgentConnectionDbType_LOCAL_AGENT_CONNECTION_DB_TYPE_INVALID
-}
-
-func (x *Deployment) GetDbLocation() DeploymentDbLocation {
-	if x != nil {
-		return x.DbLocation
-	}
-	return DeploymentDbLocation_DEPLOYMENT_DB_LOCATION_INVALID
-}
-
-func (x *Deployment) GetMode() DeploymentMode {
-	if x != nil {
-		return x.Mode
-	}
-	return DeploymentMode_DEPLOYMENT_MODE_INVALID
-}
-
-func (x *Deployment) GetDomain() string {
-	if x != nil {
-		return x.Domain
-	}
-	return ""
-}
-
-func (x *Deployment) GetPublicUrl() string {
-	if x != nil {
-		return x.PublicUrl
-	}
-	return ""
-}
-
-func (x *Deployment) GetDataManagerUrl() string {
-	if x != nil {
-		return x.DataManagerUrl
-	}
-	return ""
-}
-
-func (x *Deployment) GetPublicPort() int64 {
-	if x != nil {
-		return x.PublicPort
-	}
-	return 0
-}
-
-func (x *Deployment) GetRestEnabled() bool {
-	if x != nil {
-		return x.RestEnabled
-	}
-	return false
-}
-
-func (x *Deployment) GetHttpPort() int64 {
-	if x != nil {
-		return x.HttpPort
-	}
-	return 0
-}
-
-func (x *Deployment) GetGrpcEnabled() bool {
-	if x != nil {
-		return x.GrpcEnabled
-	}
-	return false
-}
-
-func (x *Deployment) GetGrpcPort() int64 {
-	if x != nil {
-		return x.GrpcPort
-	}
-	return 0
-}
-
-func (x *Deployment) GetDbPort() int64 {
-	if x != nil {
-		return x.DbPort
-	}
-	return 0
-}
-
-func (x *Deployment) GetAuthType() DeploymentAuthType {
-	if x != nil {
-		return x.AuthType
-	}
-	return DeploymentAuthType_DEPLOYMENT_AUTH_TYPE_INVALID
-}
-
-func (x *Deployment) GetContainerName() string {
-	if x != nil {
-		return x.ContainerName
-	}
-	return ""
-}
-
-func (x *Deployment) GetImageName() string {
-	if x != nil {
-		return x.ImageName
-	}
-	return ""
-}
-
-func (x *Deployment) GetCliVersion() string {
-	if x != nil {
-		return x.CliVersion
 	}
 	return ""
 }
@@ -271,13 +104,6 @@ func (x *Deployment) GetStatus() DeploymentStatus {
 		return x.Status
 	}
 	return DeploymentStatus_DEPLOYMENT_STATUS_INVALID
-}
-
-func (x *Deployment) GetLastDeployedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.LastDeployedAt
-	}
-	return nil
 }
 
 func (x *Deployment) GetCreatedAt() *timestamppb.Timestamp {
@@ -308,54 +134,43 @@ func (x *Deployment) GetUpdatedByUuid() string {
 	return ""
 }
 
+func (x *Deployment) GetHost() string {
+	if x != nil {
+		return x.Host
+	}
+	return ""
+}
+
+func (x *Deployment) GetActiveRevisionUuid() string {
+	if x != nil {
+		return x.ActiveRevisionUuid
+	}
+	return ""
+}
+
 var File_deployment_proto protoreflect.FileDescriptor
 
 const file_deployment_proto_rawDesc = "" +
 	"\n" +
-	"\x10deployment.proto\x12\x03nem\x1a\venums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcb\t\n" +
+	"\x10deployment.proto\x12\x03nem\x1a\venums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbb\x03\n" +
 	"\n" +
 	"Deployment\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x1b\n" +
 	"\tuser_uuid\x18\x02 \x01(\tR\buserUuid\x12!\n" +
-	"\fproject_uuid\x18\x03 \x01(\tR\vprojectUuid\x120\n" +
-	"\x14project_version_uuid\x18\x04 \x01(\tR\x12projectVersionUuid\x12(\n" +
-	"\x10local_agent_uuid\x18\x05 \x01(\tR\x0elocalAgentUuid\x12'\n" +
-	"\x0fconnection_uuid\x18\x06 \x01(\tR\x0econnectionUuid\x12\x1e\n" +
+	"\fproject_uuid\x18\x03 \x01(\tR\vprojectUuid\x12\x1e\n" +
 	"\n" +
-	"identifier\x18\a \x01(\tR\n" +
-	"identifier\x12\x12\n" +
-	"\x04host\x18\b \x01(\tR\x04host\x12\x1a\n" +
-	"\bprovider\x18\t \x01(\tR\bprovider\x12<\n" +
-	"\tdb_engine\x18\n" +
-	" \x01(\x0e2\x1f.nem.LocalAgentConnectionDbTypeR\bdbEngine\x12:\n" +
-	"\vdb_location\x18\v \x01(\x0e2\x19.nem.DeploymentDbLocationR\n" +
-	"dbLocation\x12'\n" +
-	"\x04mode\x18\f \x01(\x0e2\x13.nem.DeploymentModeR\x04mode\x12\x16\n" +
-	"\x06domain\x18\r \x01(\tR\x06domain\x12\x1d\n" +
+	"identifier\x18\x04 \x01(\tR\n" +
+	"identifier\x12-\n" +
+	"\x06status\x18\x05 \x01(\x0e2\x15.nem.DeploymentStatusR\x06status\x129\n" +
 	"\n" +
-	"public_url\x18\x0e \x01(\tR\tpublicUrl\x12(\n" +
-	"\x10data_manager_url\x18\x0f \x01(\tR\x0edataManagerUrl\x12\x1f\n" +
-	"\vpublic_port\x18\x10 \x01(\x03R\n" +
-	"publicPort\x12!\n" +
-	"\frest_enabled\x18\x11 \x01(\bR\vrestEnabled\x12\x1b\n" +
-	"\thttp_port\x18\x12 \x01(\x03R\bhttpPort\x12!\n" +
-	"\fgrpc_enabled\x18\x13 \x01(\bR\vgrpcEnabled\x12\x1b\n" +
-	"\tgrpc_port\x18\x14 \x01(\x03R\bgrpcPort\x12\x17\n" +
-	"\adb_port\x18\x15 \x01(\x03R\x06dbPort\x124\n" +
-	"\tauth_type\x18\x16 \x01(\x0e2\x17.nem.DeploymentAuthTypeR\bauthType\x12%\n" +
-	"\x0econtainer_name\x18\x17 \x01(\tR\rcontainerName\x12\x1d\n" +
+	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"image_name\x18\x18 \x01(\tR\timageName\x12\x1f\n" +
-	"\vcli_version\x18\x19 \x01(\tR\n" +
-	"cliVersion\x12-\n" +
-	"\x06status\x18\x1a \x01(\x0e2\x15.nem.DeploymentStatusR\x06status\x12D\n" +
-	"\x10last_deployed_at\x18\x1b \x01(\v2\x1a.google.protobuf.TimestampR\x0elastDeployedAt\x129\n" +
-	"\n" +
-	"created_at\x18\x1c \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
-	"\n" +
-	"updated_at\x18\x1d \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
-	"\x0fcreated_by_uuid\x18\x1e \x01(\tR\rcreatedByUuid\x12&\n" +
-	"\x0fupdated_by_uuid\x18\x1f \x01(\tR\rupdatedByUuidB1\n" +
+	"updated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
+	"\x0fcreated_by_uuid\x18\b \x01(\tR\rcreatedByUuid\x12&\n" +
+	"\x0fupdated_by_uuid\x18\t \x01(\tR\rupdatedByUuid\x12\x12\n" +
+	"\x04host\x18\n" +
+	" \x01(\tR\x04host\x120\n" +
+	"\x14active_revision_uuid\x18\v \x01(\tR\x12activeRevisionUuidB1\n" +
 	"\x14github.com/nuzur/nemB\n" +
 	"DeploymentP\x01Z\vnem/idl/genb\x06proto3"
 
@@ -373,28 +188,19 @@ func file_deployment_proto_rawDescGZIP() []byte {
 
 var file_deployment_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_deployment_proto_goTypes = []any{
-	(*Deployment)(nil),              // 0: nem.Deployment
-	(LocalAgentConnectionDbType)(0), // 1: nem.LocalAgentConnectionDbType
-	(DeploymentDbLocation)(0),       // 2: nem.DeploymentDbLocation
-	(DeploymentMode)(0),             // 3: nem.DeploymentMode
-	(DeploymentAuthType)(0),         // 4: nem.DeploymentAuthType
-	(DeploymentStatus)(0),           // 5: nem.DeploymentStatus
-	(*timestamppb.Timestamp)(nil),   // 6: google.protobuf.Timestamp
+	(*Deployment)(nil),            // 0: nem.Deployment
+	(DeploymentStatus)(0),         // 1: nem.DeploymentStatus
+	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
 var file_deployment_proto_depIdxs = []int32{
-	1, // 0: nem.Deployment.db_engine:type_name -> nem.LocalAgentConnectionDbType
-	2, // 1: nem.Deployment.db_location:type_name -> nem.DeploymentDbLocation
-	3, // 2: nem.Deployment.mode:type_name -> nem.DeploymentMode
-	4, // 3: nem.Deployment.auth_type:type_name -> nem.DeploymentAuthType
-	5, // 4: nem.Deployment.status:type_name -> nem.DeploymentStatus
-	6, // 5: nem.Deployment.last_deployed_at:type_name -> google.protobuf.Timestamp
-	6, // 6: nem.Deployment.created_at:type_name -> google.protobuf.Timestamp
-	6, // 7: nem.Deployment.updated_at:type_name -> google.protobuf.Timestamp
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	1, // 0: nem.Deployment.status:type_name -> nem.DeploymentStatus
+	2, // 1: nem.Deployment.created_at:type_name -> google.protobuf.Timestamp
+	2, // 2: nem.Deployment.updated_at:type_name -> google.protobuf.Timestamp
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_deployment_proto_init() }

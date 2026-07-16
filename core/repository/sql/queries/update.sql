@@ -55,13 +55,6 @@ SET
 WHERE
 `uuid` = ?;
 
--- name: UpdateProjectVersion :exec
-UPDATE `project_version`
-SET
-`version` = ?, `identifier` = ?, `description` = ?, `project_uuid` = ?, `entities` = ?, `relationships` = ?, `enums` = ?, `services` = ?, `base_version_uuid` = ?, `review_status` = ?, `deployments` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
-WHERE
-`uuid` = ?;
-
 -- name: UpdateAutomation :exec
 UPDATE `automation`
 SET
@@ -69,10 +62,24 @@ SET
 WHERE
 `uuid` = ?;
 
+-- name: UpdateProjectVersion :exec
+UPDATE `project_version`
+SET
+`version` = ?, `identifier` = ?, `description` = ?, `project_uuid` = ?, `entities` = ?, `relationships` = ?, `enums` = ?, `services` = ?, `base_version_uuid` = ?, `review_status` = ?, `deployments` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+WHERE
+`uuid` = ?;
+
 -- name: UpdateUserProject :exec
 UPDATE `user_project`
 SET
 `user_uuid` = ?, `user_email` = ?, `project_uuid` = ?, `role` = ?, `review_required_structure` = ?, `review_required_data` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+WHERE
+`uuid` = ?;
+
+-- name: UpdateAiUsage :exec
+UPDATE `ai_usage`
+SET
+`user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `user_prompt` = ?, `step` = ?, `context` = ?, `provider` = ?, `input_tokens` = ?, `output_tokens` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
 WHERE
 `uuid` = ?;
 
@@ -90,10 +97,10 @@ SET
 WHERE
 `uuid` = ?;
 
--- name: UpdateAiUsage :exec
-UPDATE `ai_usage`
+-- name: UpdateUserProjectVersion :exec
+UPDATE `user_project_version`
 SET
-`user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `user_prompt` = ?, `step` = ?, `context` = ?, `provider` = ?, `input_tokens` = ?, `output_tokens` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+`version` = ?, `project_version_uuid` = ?, `user_uuid` = ?, `data` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
 WHERE
 `uuid` = ?;
 
@@ -104,24 +111,24 @@ SET
 WHERE
 `uuid` = ?;
 
--- name: UpdateUserProjectVersion :exec
-UPDATE `user_project_version`
+-- name: UpdateAutomationEvent :exec
+UPDATE `automation_event`
 SET
-`version` = ?, `project_version_uuid` = ?, `user_uuid` = ?, `data` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+`automation_uuid` = ?, `project_uuid` = ?, `change_request_uuid` = ?, `payload` = ?, `status` = ?, `attempts` = ?, `next_attempt_at` = ?, `delivered_at` = ?, `last_error` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
 WHERE
 `uuid` = ?;
 
 -- name: UpdateDeployment :exec
 UPDATE `deployment`
 SET
-`user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `local_agent_uuid` = ?, `connection_uuid` = ?, `identifier` = ?, `host` = ?, `provider` = ?, `db_engine` = ?, `db_location` = ?, `mode` = ?, `domain` = ?, `public_url` = ?, `data_manager_url` = ?, `public_port` = ?, `rest_enabled` = ?, `http_port` = ?, `grpc_enabled` = ?, `grpc_port` = ?, `db_port` = ?, `auth_type` = ?, `container_name` = ?, `image_name` = ?, `cli_version` = ?, `status` = ?, `last_deployed_at` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+`user_uuid` = ?, `project_uuid` = ?, `identifier` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?, `host` = ?, `active_revision_uuid` = ?
 WHERE
 `uuid` = ?;
 
--- name: UpdateAutomationEvent :exec
-UPDATE `automation_event`
+-- name: UpdateDeploymentRevision :exec
+UPDATE `deployment_revision`
 SET
-`automation_uuid` = ?, `project_uuid` = ?, `change_request_uuid` = ?, `payload` = ?, `status` = ?, `attempts` = ?, `next_attempt_at` = ?, `delivered_at` = ?, `last_error` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+`deployment_uuid` = ?, `project_version_uuid` = ?, `cli_version` = ?, `image_name` = ?, `status` = ?, `deployed_at` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?, `provider` = ?, `server` = ?, `database` = ?, `codegen` = ?
 WHERE
 `uuid` = ?;
 

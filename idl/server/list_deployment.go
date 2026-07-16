@@ -133,53 +133,9 @@ func deploymentDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("project_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("project_version_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("local_agent_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("connection_uuid", filtering.TypeString),
-
 		filtering.DeclareIdent("identifier", filtering.TypeString),
 
-		filtering.DeclareIdent("host", filtering.TypeString),
-
-		filtering.DeclareIdent("provider", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("db_engine", pb.LocalAgentConnectionDbType(0).Type()),
-
-		filtering.DeclareEnumIdent("db_location", pb.DeploymentDbLocation(0).Type()),
-
-		filtering.DeclareEnumIdent("mode", pb.DeploymentMode(0).Type()),
-
-		filtering.DeclareIdent("domain", filtering.TypeString),
-
-		filtering.DeclareIdent("public_url", filtering.TypeString),
-
-		filtering.DeclareIdent("data_manager_url", filtering.TypeString),
-
-		filtering.DeclareIdent("public_port", filtering.TypeInt),
-
-		filtering.DeclareIdent("rest_enabled", filtering.TypeBool),
-
-		filtering.DeclareIdent("http_port", filtering.TypeInt),
-
-		filtering.DeclareIdent("grpc_enabled", filtering.TypeBool),
-
-		filtering.DeclareIdent("grpc_port", filtering.TypeInt),
-
-		filtering.DeclareIdent("db_port", filtering.TypeInt),
-
-		filtering.DeclareEnumIdent("auth_type", pb.DeploymentAuthType(0).Type()),
-
-		filtering.DeclareIdent("container_name", filtering.TypeString),
-
-		filtering.DeclareIdent("image_name", filtering.TypeString),
-
-		filtering.DeclareIdent("cli_version", filtering.TypeString),
-
 		filtering.DeclareEnumIdent("status", pb.DeploymentStatus(0).Type()),
-
-		filtering.DeclareIdent("last_deployed_at", filtering.TypeTimestamp),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -188,6 +144,10 @@ func deploymentDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("created_by_uuid", filtering.TypeString),
 
 		filtering.DeclareIdent("updated_by_uuid", filtering.TypeString),
+
+		filtering.DeclareIdent("host", filtering.TypeString),
+
+		filtering.DeclareIdent("active_revision_uuid", filtering.TypeString),
 	)
 	if err != nil {
 		log.Printf("error creating declarations: %v", err)

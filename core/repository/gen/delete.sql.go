@@ -60,6 +60,16 @@ func (q *Queries) DeleteDeployment(ctx context.Context, uuid string) (sql.Result
 	return q.db.ExecContext(ctx, deleteDeployment, uuid)
 }
 
+const deleteDeploymentRevision = `-- name: DeleteDeploymentRevision :execresult
+DELETE FROM ` + "`" + `deployment_revision` + "`" + `
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+func (q *Queries) DeleteDeploymentRevision(ctx context.Context, uuid string) (sql.Result, error) {
+	return q.db.ExecContext(ctx, deleteDeploymentRevision, uuid)
+}
+
 const deleteExtension = `-- name: DeleteExtension :execresult
 DELETE FROM ` + "`" + `extension` + "`" + `
 WHERE

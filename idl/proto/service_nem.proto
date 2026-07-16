@@ -199,6 +199,16 @@ import "automation_event.proto";
 
 import "deployment.proto";
 
+import "deployment_provider.proto";
+
+import "deployment_server.proto";
+
+import "deployment_database.proto";
+
+import "deployment_codegen.proto";
+
+import "deployment_revision.proto";
+
 
 service Nem {    
     
@@ -765,6 +775,36 @@ service Nem {
     rpc CreateDeployment(CreateDeploymentRequest) returns (Deployment) {}
     rpc UpdateDeployment(UpdateDeploymentRequest) returns (Deployment) {}
     // deployment end
+    
+    // deployment_provider start
+    rpc ListDeploymentProvider(ListDeploymentProviderRequest) returns (ListDeploymentProviderResponse){}
+    rpc CreateDeploymentProvider(CreateDeploymentProviderRequest) returns (DeploymentProvider) {}
+    rpc UpdateDeploymentProvider(UpdateDeploymentProviderRequest) returns (DeploymentProvider) {}
+    // deployment_provider end
+    
+    // deployment_server start
+    rpc ListDeploymentServer(ListDeploymentServerRequest) returns (ListDeploymentServerResponse){}
+    rpc CreateDeploymentServer(CreateDeploymentServerRequest) returns (DeploymentServer) {}
+    rpc UpdateDeploymentServer(UpdateDeploymentServerRequest) returns (DeploymentServer) {}
+    // deployment_server end
+    
+    // deployment_database start
+    rpc ListDeploymentDatabase(ListDeploymentDatabaseRequest) returns (ListDeploymentDatabaseResponse){}
+    rpc CreateDeploymentDatabase(CreateDeploymentDatabaseRequest) returns (DeploymentDatabase) {}
+    rpc UpdateDeploymentDatabase(UpdateDeploymentDatabaseRequest) returns (DeploymentDatabase) {}
+    // deployment_database end
+    
+    // deployment_codegen start
+    rpc ListDeploymentCodegen(ListDeploymentCodegenRequest) returns (ListDeploymentCodegenResponse){}
+    rpc CreateDeploymentCodegen(CreateDeploymentCodegenRequest) returns (DeploymentCodegen) {}
+    rpc UpdateDeploymentCodegen(UpdateDeploymentCodegenRequest) returns (DeploymentCodegen) {}
+    // deployment_codegen end
+    
+    // deployment_revision start
+    rpc ListDeploymentRevision(ListDeploymentRevisionRequest) returns (ListDeploymentRevisionResponse){}
+    rpc CreateDeploymentRevision(CreateDeploymentRevisionRequest) returns (DeploymentRevision) {}
+    rpc UpdateDeploymentRevision(UpdateDeploymentRevisionRequest) returns (DeploymentRevision) {}
+    // deployment_revision end
     
 }
 
@@ -4622,3 +4662,208 @@ message UpdateDeploymentRequest {
     google.protobuf.FieldMask update_mask = 2;
 }
 // deployment end
+
+// deployment_provider start
+message ListDeploymentProviderRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;  
+    repeated string include_fields = 5;
+    repeated string exclude_fields = 6;
+    bool skip_cache = 7;
+}
+
+message ListDeploymentProviderResponse {
+    repeated DeploymentProvider deployment_provider = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateDeploymentProviderRequest {
+    DeploymentProvider deployment_provider = 1;
+}
+
+message UpdateDeploymentProviderRequest {
+   
+    DeploymentProvider deployment_provider = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// deployment_provider end
+
+// deployment_server start
+message ListDeploymentServerRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;  
+    repeated string include_fields = 5;
+    repeated string exclude_fields = 6;
+    bool skip_cache = 7;
+}
+
+message ListDeploymentServerResponse {
+    repeated DeploymentServer deployment_server = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateDeploymentServerRequest {
+    DeploymentServer deployment_server = 1;
+}
+
+message UpdateDeploymentServerRequest {
+   
+    DeploymentServer deployment_server = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// deployment_server end
+
+// deployment_database start
+message ListDeploymentDatabaseRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;  
+    repeated string include_fields = 5;
+    repeated string exclude_fields = 6;
+    bool skip_cache = 7;
+}
+
+message ListDeploymentDatabaseResponse {
+    repeated DeploymentDatabase deployment_database = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateDeploymentDatabaseRequest {
+    DeploymentDatabase deployment_database = 1;
+}
+
+message UpdateDeploymentDatabaseRequest {
+   
+    DeploymentDatabase deployment_database = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// deployment_database end
+
+// deployment_codegen start
+message ListDeploymentCodegenRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;  
+    repeated string include_fields = 5;
+    repeated string exclude_fields = 6;
+    bool skip_cache = 7;
+}
+
+message ListDeploymentCodegenResponse {
+    repeated DeploymentCodegen deployment_codegen = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateDeploymentCodegenRequest {
+    DeploymentCodegen deployment_codegen = 1;
+}
+
+message UpdateDeploymentCodegenRequest {
+   
+    DeploymentCodegen deployment_codegen = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// deployment_codegen end
+
+// deployment_revision start
+message ListDeploymentRevisionRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;  
+    repeated string include_fields = 5;
+    repeated string exclude_fields = 6;
+    bool skip_cache = 7;
+}
+
+message ListDeploymentRevisionResponse {
+    repeated DeploymentRevision deployment_revision = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateDeploymentRevisionRequest {
+    DeploymentRevision deployment_revision = 1;
+}
+
+message UpdateDeploymentRevisionRequest {
+   
+    DeploymentRevision deployment_revision = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// deployment_revision end

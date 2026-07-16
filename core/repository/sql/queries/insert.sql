@@ -47,23 +47,29 @@ INSERT INTO `project`
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
--- name: InsertProjectVersion :execresult
-INSERT INTO `project_version`
-(`uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
-VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
-
 -- name: InsertAutomation :execresult
 INSERT INTO `automation`
 (`uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
+-- name: InsertProjectVersion :execresult
+INSERT INTO `project_version`
+(`uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+
 -- name: InsertUserProject :execresult
 INSERT INTO `user_project`
 (`uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?);
+
+-- name: InsertAiUsage :execresult
+INSERT INTO `ai_usage`
+(`uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertChangeRequest :execresult
 INSERT INTO `change_request`
@@ -77,11 +83,11 @@ INSERT INTO `user_connection`
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?);
 
--- name: InsertAiUsage :execresult
-INSERT INTO `ai_usage`
-(`uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+-- name: InsertUserProjectVersion :execresult
+INSERT INTO `user_project_version`
+(`uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertExtensionExecution :execresult
 INSERT INTO `extension_execution`
@@ -89,21 +95,21 @@ INSERT INTO `extension_execution`
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?);
 
--- name: InsertUserProjectVersion :execresult
-INSERT INTO `user_project_version`
-(`uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
-VALUES
-(?,?,?,?,?,?,?,?,?,?);
-
--- name: InsertDeployment :execresult
-INSERT INTO `deployment`
-(`uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`local_agent_uuid`,`connection_uuid`,`identifier`,`host`,`provider`,`db_engine`,`db_location`,`mode`,`domain`,`public_url`,`data_manager_url`,`public_port`,`rest_enabled`,`http_port`,`grpc_enabled`,`grpc_port`,`db_port`,`auth_type`,`container_name`,`image_name`,`cli_version`,`status`,`last_deployed_at`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
-VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
-
 -- name: InsertAutomationEvent :execresult
 INSERT INTO `automation_event`
 (`uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+
+-- name: InsertDeployment :execresult
+INSERT INTO `deployment`
+(`uuid`,`user_uuid`,`project_uuid`,`identifier`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`host`,`active_revision_uuid`)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?);
+
+-- name: InsertDeploymentRevision :execresult
+INSERT INTO `deployment_revision`
+(`uuid`,`deployment_uuid`,`project_version_uuid`,`cli_version`,`image_name`,`status`,`deployed_at`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`provider`,`server`,`database`,`codegen`)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 

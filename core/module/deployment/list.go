@@ -118,53 +118,9 @@ var listFields = []string{
 
 	"project_uuid",
 
-	"project_version_uuid",
-
-	"local_agent_uuid",
-
-	"connection_uuid",
-
 	"identifier",
 
-	"host",
-
-	"provider",
-
-	"db_engine",
-
-	"db_location",
-
-	"mode",
-
-	"domain",
-
-	"public_url",
-
-	"data_manager_url",
-
-	"public_port",
-
-	"rest_enabled",
-
-	"http_port",
-
-	"grpc_enabled",
-
-	"grpc_port",
-
-	"db_port",
-
-	"auth_type",
-
-	"container_name",
-
-	"image_name",
-
-	"cli_version",
-
 	"status",
-
-	"last_deployed_at",
 
 	"created_at",
 
@@ -173,6 +129,10 @@ var listFields = []string{
 	"created_by_uuid",
 
 	"updated_by_uuid",
+
+	"host",
+
+	"active_revision_uuid",
 }
 
 var listFieldRegistry = map[string]func(*repogen.Deployment) any{
@@ -183,53 +143,9 @@ var listFieldRegistry = map[string]func(*repogen.Deployment) any{
 
 	"project_uuid": func(i *repogen.Deployment) any { return &i.ProjectUUID },
 
-	"project_version_uuid": func(i *repogen.Deployment) any { return &i.ProjectVersionUUID },
-
-	"local_agent_uuid": func(i *repogen.Deployment) any { return &i.LocalAgentUUID },
-
-	"connection_uuid": func(i *repogen.Deployment) any { return &i.ConnectionUUID },
-
 	"identifier": func(i *repogen.Deployment) any { return &i.Identifier },
 
-	"host": func(i *repogen.Deployment) any { return &i.Host },
-
-	"provider": func(i *repogen.Deployment) any { return &i.Provider },
-
-	"db_engine": func(i *repogen.Deployment) any { return &i.DbEngine },
-
-	"db_location": func(i *repogen.Deployment) any { return &i.DbLocation },
-
-	"mode": func(i *repogen.Deployment) any { return &i.Mode },
-
-	"domain": func(i *repogen.Deployment) any { return &i.Domain },
-
-	"public_url": func(i *repogen.Deployment) any { return &i.PublicURL },
-
-	"data_manager_url": func(i *repogen.Deployment) any { return &i.DataManagerURL },
-
-	"public_port": func(i *repogen.Deployment) any { return &i.PublicPort },
-
-	"rest_enabled": func(i *repogen.Deployment) any { return &i.RestEnabled },
-
-	"http_port": func(i *repogen.Deployment) any { return &i.HTTPPort },
-
-	"grpc_enabled": func(i *repogen.Deployment) any { return &i.GrpcEnabled },
-
-	"grpc_port": func(i *repogen.Deployment) any { return &i.GrpcPort },
-
-	"db_port": func(i *repogen.Deployment) any { return &i.DbPort },
-
-	"auth_type": func(i *repogen.Deployment) any { return &i.AuthType },
-
-	"container_name": func(i *repogen.Deployment) any { return &i.ContainerName },
-
-	"image_name": func(i *repogen.Deployment) any { return &i.ImageName },
-
-	"cli_version": func(i *repogen.Deployment) any { return &i.CliVersion },
-
 	"status": func(i *repogen.Deployment) any { return &i.Status },
-
-	"last_deployed_at": func(i *repogen.Deployment) any { return &i.LastDeployedAt },
 
 	"created_at": func(i *repogen.Deployment) any { return &i.CreatedAt },
 
@@ -238,4 +154,8 @@ var listFieldRegistry = map[string]func(*repogen.Deployment) any{
 	"created_by_uuid": func(i *repogen.Deployment) any { return &i.CreatedByUUID },
 
 	"updated_by_uuid": func(i *repogen.Deployment) any { return &i.UpdatedByUUID },
+
+	"host": func(i *repogen.Deployment) any { return &i.Host },
+
+	"active_revision_uuid": func(i *repogen.Deployment) any { return &i.ActiveRevisionUUID },
 }
