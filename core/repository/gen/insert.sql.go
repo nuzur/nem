@@ -238,9 +238,9 @@ func (q *Queries) InsertDeployment(ctx context.Context, arg InsertDeploymentPara
 
 const insertDeploymentRevision = `-- name: InsertDeploymentRevision :execresult
 INSERT INTO ` + "`" + `deployment_revision` + "`" + `
-(` + "`" + `uuid` + "`" + `,` + "`" + `deployment_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `image_name` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `deployed_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `server` + "`" + `,` + "`" + `database` + "`" + `,` + "`" + `codegen` + "`" + `)
+(` + "`" + `uuid` + "`" + `,` + "`" + `deployment_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `image_name` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `deployed_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `server` + "`" + `,` + "`" + `database` + "`" + `,` + "`" + `codegen` + "`" + `,` + "`" + `status_message` + "`" + `)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertDeploymentRevisionParams struct {
@@ -259,6 +259,7 @@ type InsertDeploymentRevisionParams struct {
 	Server             []byte      `json:"server"`
 	Database           []byte      `json:"database"`
 	Codegen            []byte      `json:"codegen"`
+	StatusMessage      null.String `json:"status_message"`
 }
 
 func (q *Queries) InsertDeploymentRevision(ctx context.Context, arg InsertDeploymentRevisionParams) (sql.Result, error) {
@@ -278,6 +279,7 @@ func (q *Queries) InsertDeploymentRevision(ctx context.Context, arg InsertDeploy
 		arg.Server,
 		arg.Database,
 		arg.Codegen,
+		arg.StatusMessage,
 	)
 }
 

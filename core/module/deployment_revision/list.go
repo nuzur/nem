@@ -141,6 +141,8 @@ var listFields = []string{
 	"database",
 
 	"codegen",
+
+	"status_message",
 }
 
 var listFieldRegistry = map[string]func(*repogen.DeploymentRevision) any{
@@ -174,4 +176,6 @@ var listFieldRegistry = map[string]func(*repogen.DeploymentRevision) any{
 	"database": func(i *repogen.DeploymentRevision) any { return &i.Database },
 
 	"codegen": func(i *repogen.DeploymentRevision) any { return &i.Codegen },
+
+	"status_message": func(i *repogen.DeploymentRevision) any { return &i.StatusMessage },
 }

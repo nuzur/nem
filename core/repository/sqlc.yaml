@@ -259,6 +259,7 @@ sql:
           started_at: StartedAt
           static_values: StaticValues
           status: Status
+          status_message: StatusMessage
           status_msg: StatusMsg
           step: Step
           storage_config: StorageConfig

@@ -3971,10 +3971,11 @@ func (DeploymentAuthType) EnumDescriptor() ([]byte, []int) {
 type DeploymentRevisionStatus int32
 
 const (
-	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_INVALID    DeploymentRevisionStatus = 0
-	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_ACTIVE     DeploymentRevisionStatus = 1
-	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_SUPERSEDED DeploymentRevisionStatus = 2
-	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_FAILED     DeploymentRevisionStatus = 3
+	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_INVALID     DeploymentRevisionStatus = 0
+	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_ACTIVE      DeploymentRevisionStatus = 1
+	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_SUPERSEDED  DeploymentRevisionStatus = 2
+	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_FAILED      DeploymentRevisionStatus = 3
+	DeploymentRevisionStatus_DEPLOYMENT_REVISION_STATUS_IN_PROGRESS DeploymentRevisionStatus = 4
 )
 
 // Enum value maps for DeploymentRevisionStatus.
@@ -3984,12 +3985,14 @@ var (
 		1: "DEPLOYMENT_REVISION_STATUS_ACTIVE",
 		2: "DEPLOYMENT_REVISION_STATUS_SUPERSEDED",
 		3: "DEPLOYMENT_REVISION_STATUS_FAILED",
+		4: "DEPLOYMENT_REVISION_STATUS_IN_PROGRESS",
 	}
 	DeploymentRevisionStatus_value = map[string]int32{
-		"DEPLOYMENT_REVISION_STATUS_INVALID":    0,
-		"DEPLOYMENT_REVISION_STATUS_ACTIVE":     1,
-		"DEPLOYMENT_REVISION_STATUS_SUPERSEDED": 2,
-		"DEPLOYMENT_REVISION_STATUS_FAILED":     3,
+		"DEPLOYMENT_REVISION_STATUS_INVALID":     0,
+		"DEPLOYMENT_REVISION_STATUS_ACTIVE":      1,
+		"DEPLOYMENT_REVISION_STATUS_SUPERSEDED":  2,
+		"DEPLOYMENT_REVISION_STATUS_FAILED":      3,
+		"DEPLOYMENT_REVISION_STATUS_IN_PROGRESS": 4,
 	}
 )
 
@@ -4420,12 +4423,13 @@ const file_enums_proto_rawDesc = "" +
 	"\x1cDEPLOYMENT_AUTH_TYPE_INVALID\x10\x00\x12\x1d\n" +
 	"\x19DEPLOYMENT_AUTH_TYPE_NONE\x10\x01\x12\x1c\n" +
 	"\x18DEPLOYMENT_AUTH_TYPE_JWT\x10\x02\x12!\n" +
-	"\x1dDEPLOYMENT_AUTH_TYPE_KEYCLOAK\x10\x03*\xbb\x01\n" +
+	"\x1dDEPLOYMENT_AUTH_TYPE_KEYCLOAK\x10\x03*\xe7\x01\n" +
 	"\x18DeploymentRevisionStatus\x12&\n" +
 	"\"DEPLOYMENT_REVISION_STATUS_INVALID\x10\x00\x12%\n" +
 	"!DEPLOYMENT_REVISION_STATUS_ACTIVE\x10\x01\x12)\n" +
 	"%DEPLOYMENT_REVISION_STATUS_SUPERSEDED\x10\x02\x12%\n" +
-	"!DEPLOYMENT_REVISION_STATUS_FAILED\x10\x03B+\n" +
+	"!DEPLOYMENT_REVISION_STATUS_FAILED\x10\x03\x12*\n" +
+	"&DEPLOYMENT_REVISION_STATUS_IN_PROGRESS\x10\x04B+\n" +
 	"\x14github.com/nuzur/nemB\x04EnumP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

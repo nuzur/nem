@@ -210,6 +210,8 @@ func deployment_revisionDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("created_by_uuid", filtering.TypeString),
 
 		filtering.DeclareIdent("updated_by_uuid", filtering.TypeString),
+
+		filtering.DeclareIdent("status_message", filtering.TypeString),
 	)
 	if err != nil {
 		log.Printf("error creating declarations: %v", err)

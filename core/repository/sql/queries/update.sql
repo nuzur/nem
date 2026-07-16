@@ -62,13 +62,6 @@ SET
 WHERE
 `uuid` = ?;
 
--- name: UpdateProjectVersion :exec
-UPDATE `project_version`
-SET
-`version` = ?, `identifier` = ?, `description` = ?, `project_uuid` = ?, `entities` = ?, `relationships` = ?, `enums` = ?, `services` = ?, `base_version_uuid` = ?, `review_status` = ?, `deployments` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
-WHERE
-`uuid` = ?;
-
 -- name: UpdateUserProject :exec
 UPDATE `user_project`
 SET
@@ -76,17 +69,10 @@ SET
 WHERE
 `uuid` = ?;
 
--- name: UpdateAiUsage :exec
-UPDATE `ai_usage`
+-- name: UpdateProjectVersion :exec
+UPDATE `project_version`
 SET
-`user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `user_prompt` = ?, `step` = ?, `context` = ?, `provider` = ?, `input_tokens` = ?, `output_tokens` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
-WHERE
-`uuid` = ?;
-
--- name: UpdateChangeRequest :exec
-UPDATE `change_request`
-SET
-`version` = ?, `title` = ?, `description` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `change_type` = ?, `data_changes` = ?, `metadata` = ?, `reviews` = ?, `review_status` = ?, `owner_uuid` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?, `ai_generated` = ?, `scope` = ?, `scope_config` = ?
+`version` = ?, `identifier` = ?, `description` = ?, `project_uuid` = ?, `entities` = ?, `relationships` = ?, `enums` = ?, `services` = ?, `base_version_uuid` = ?, `review_status` = ?, `deployments` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
 WHERE
 `uuid` = ?;
 
@@ -101,6 +87,20 @@ WHERE
 UPDATE `user_project_version`
 SET
 `version` = ?, `project_version_uuid` = ?, `user_uuid` = ?, `data` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+WHERE
+`uuid` = ?;
+
+-- name: UpdateAiUsage :exec
+UPDATE `ai_usage`
+SET
+`user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `user_prompt` = ?, `step` = ?, `context` = ?, `provider` = ?, `input_tokens` = ?, `output_tokens` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+WHERE
+`uuid` = ?;
+
+-- name: UpdateChangeRequest :exec
+UPDATE `change_request`
+SET
+`version` = ?, `title` = ?, `description` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `change_type` = ?, `data_changes` = ?, `metadata` = ?, `reviews` = ?, `review_status` = ?, `owner_uuid` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?, `ai_generated` = ?, `scope` = ?, `scope_config` = ?
 WHERE
 `uuid` = ?;
 
@@ -128,7 +128,7 @@ WHERE
 -- name: UpdateDeploymentRevision :exec
 UPDATE `deployment_revision`
 SET
-`deployment_uuid` = ?, `project_version_uuid` = ?, `cli_version` = ?, `image_name` = ?, `status` = ?, `deployed_at` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?, `provider` = ?, `server` = ?, `database` = ?, `codegen` = ?
+`deployment_uuid` = ?, `project_version_uuid` = ?, `cli_version` = ?, `image_name` = ?, `status` = ?, `deployed_at` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?, `provider` = ?, `server` = ?, `database` = ?, `codegen` = ?, `status_message` = ?
 WHERE
 `uuid` = ?;
 

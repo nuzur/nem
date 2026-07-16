@@ -41,5 +41,6 @@ func mapModelToEntity(m nemdb.DeploymentRevision) main_entity.DeploymentRevision
 		Server:             deployment_server.DeploymentServerFromJSON(m.Server),
 		Database:           deployment_database.DeploymentDatabaseFromJSON(m.Database),
 		Codegen:            deployment_codegen.DeploymentCodegenFromJSON(m.Codegen),
+		StatusMessage:      null.NewString(m.StatusMessage.String, m.StatusMessage.Valid),
 	}
 }

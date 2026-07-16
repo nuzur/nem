@@ -53,29 +53,17 @@ INSERT INTO `automation`
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
--- name: InsertProjectVersion :execresult
-INSERT INTO `project_version`
-(`uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
-VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
-
 -- name: InsertUserProject :execresult
 INSERT INTO `user_project`
 (`uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?);
 
--- name: InsertAiUsage :execresult
-INSERT INTO `ai_usage`
-(`uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+-- name: InsertProjectVersion :execresult
+INSERT INTO `project_version`
+(`uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
-
--- name: InsertChangeRequest :execresult
-INSERT INTO `change_request`
-(`uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`)
-VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertUserConnection :execresult
 INSERT INTO `user_connection`
@@ -88,6 +76,18 @@ INSERT INTO `user_project_version`
 (`uuid`,`version`,`project_version_uuid`,`user_uuid`,`data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
 VALUES
 (?,?,?,?,?,?,?,?,?,?);
+
+-- name: InsertAiUsage :execresult
+INSERT INTO `ai_usage`
+(`uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+
+-- name: InsertChangeRequest :execresult
+INSERT INTO `change_request`
+(`uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertExtensionExecution :execresult
 INSERT INTO `extension_execution`
@@ -109,7 +109,7 @@ VALUES
 
 -- name: InsertDeploymentRevision :execresult
 INSERT INTO `deployment_revision`
-(`uuid`,`deployment_uuid`,`project_version_uuid`,`cli_version`,`image_name`,`status`,`deployed_at`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`provider`,`server`,`database`,`codegen`)
+(`uuid`,`deployment_uuid`,`project_version_uuid`,`cli_version`,`image_name`,`status`,`deployed_at`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`provider`,`server`,`database`,`codegen`,`status_message`)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 

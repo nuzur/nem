@@ -34,6 +34,7 @@ type DeploymentRevision struct {
 	Server             deployment_server.DeploymentServer     `json:"server"`
 	Database           deployment_database.DeploymentDatabase `json:"database"`
 	Codegen            deployment_codegen.DeploymentCodegen   `json:"codegen"`
+	StatusMessage      null.String                            `json:"status_message"`
 }
 
 func (e DeploymentRevision) String() string {

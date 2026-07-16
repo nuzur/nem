@@ -30,6 +30,7 @@ func DeploymentRevisionToProto(e main_entity.DeploymentRevision) *pb.DeploymentR
 		Server:             DeploymentServerToProto(e.Server),
 		Database:           DeploymentDatabaseToProto(e.Database),
 		Codegen:            DeploymentCodegenToProto(e.Codegen),
+		StatusMessage:      e.StatusMessage.ValueOrZero(),
 	}
 }
 
@@ -61,6 +62,7 @@ func DeploymentRevisionFromProto(m *pb.DeploymentRevision) main_entity.Deploymen
 		Server:             DeploymentServerFromProto(m.GetServer()),
 		Database:           DeploymentDatabaseFromProto(m.GetDatabase()),
 		Codegen:            DeploymentCodegenFromProto(m.GetCodegen()),
+		StatusMessage:      null.StringFrom(m.StatusMessage),
 	}
 }
 

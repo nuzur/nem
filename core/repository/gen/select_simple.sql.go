@@ -229,7 +229,7 @@ func (q *Queries) FetchDeployment(ctx context.Context) ([]Deployment, error) {
 }
 
 const fetchDeploymentRevision = `-- name: FetchDeploymentRevision :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `deployment_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `image_name` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `deployed_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `server` + "`" + `,` + "`" + `database` + "`" + `,` + "`" + `codegen` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `deployment_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `cli_version` + "`" + `,` + "`" + `image_name` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `deployed_at` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `provider` + "`" + `,` + "`" + `server` + "`" + `,` + "`" + `database` + "`" + `,` + "`" + `codegen` + "`" + `,` + "`" + `status_message` + "`" + `
 FROM ` + "`" + `deployment_revision` + "`" + `
 `
 
@@ -258,6 +258,7 @@ func (q *Queries) FetchDeploymentRevision(ctx context.Context) ([]DeploymentRevi
 			&i.Server,
 			&i.Database,
 			&i.Codegen,
+			&i.StatusMessage,
 		); err != nil {
 			return nil, err
 		}

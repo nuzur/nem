@@ -41,6 +41,7 @@ type DeploymentRevision struct {
 	Server             *DeploymentServer        `protobuf:"bytes,13,opt,name=server,proto3" json:"server,omitempty"`
 	Database           *DeploymentDatabase      `protobuf:"bytes,14,opt,name=database,proto3" json:"database,omitempty"`
 	Codegen            *DeploymentCodegen       `protobuf:"bytes,15,opt,name=codegen,proto3" json:"codegen,omitempty"`
+	StatusMessage      string                   `protobuf:"bytes,16,opt,name=status_message,json=statusMessage,proto3" json:"status_message,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -180,11 +181,18 @@ func (x *DeploymentRevision) GetCodegen() *DeploymentCodegen {
 	return nil
 }
 
+func (x *DeploymentRevision) GetStatusMessage() string {
+	if x != nil {
+		return x.StatusMessage
+	}
+	return ""
+}
+
 var File_deployment_revision_proto protoreflect.FileDescriptor
 
 const file_deployment_revision_proto_rawDesc = "" +
 	"\n" +
-	"\x19deployment_revision.proto\x12\x03nem\x1a\x18deployment_codegen.proto\x1a\x19deployment_database.proto\x1a\x19deployment_provider.proto\x1a\x17deployment_server.proto\x1a\venums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc8\x05\n" +
+	"\x19deployment_revision.proto\x12\x03nem\x1a\x18deployment_codegen.proto\x1a\x19deployment_database.proto\x1a\x19deployment_provider.proto\x1a\x17deployment_server.proto\x1a\venums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xef\x05\n" +
 	"\x12DeploymentRevision\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12'\n" +
 	"\x0fdeployment_uuid\x18\x02 \x01(\tR\x0edeploymentUuid\x120\n" +
@@ -206,7 +214,8 @@ const file_deployment_revision_proto_rawDesc = "" +
 	"\bprovider\x18\f \x01(\v2\x17.nem.DeploymentProviderR\bprovider\x12-\n" +
 	"\x06server\x18\r \x01(\v2\x15.nem.DeploymentServerR\x06server\x123\n" +
 	"\bdatabase\x18\x0e \x01(\v2\x17.nem.DeploymentDatabaseR\bdatabase\x120\n" +
-	"\acodegen\x18\x0f \x01(\v2\x16.nem.DeploymentCodegenR\acodegenB9\n" +
+	"\acodegen\x18\x0f \x01(\v2\x16.nem.DeploymentCodegenR\acodegen\x12%\n" +
+	"\x0estatus_message\x18\x10 \x01(\tR\rstatusMessageB9\n" +
 	"\x14github.com/nuzur/nemB\x12DeploymentRevisionP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

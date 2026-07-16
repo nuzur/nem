@@ -115,6 +115,7 @@ type DeploymentRevision struct {
 	Server             []byte      `json:"server"`
 	Database           []byte      `json:"database"`
 	Codegen            []byte      `json:"codegen"`
+	StatusMessage      null.String `json:"status_message"`
 }
 
 type Extension struct {

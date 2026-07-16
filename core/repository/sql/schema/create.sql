@@ -216,6 +216,29 @@ CREATE TABLE IF NOT EXISTS `automation` (
     INDEX `updated_at` (`updated_at`)
 ) ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `user_project` (
+    `uuid` CHAR(36) NOT NULL,
+    `user_uuid` CHAR(36),
+    `user_email` VARCHAR(255),
+    `project_uuid` CHAR(36) NOT NULL,
+    `role` INT NOT NULL,
+    `review_required_structure` TINYINT(1) NOT NULL,
+    `review_required_data` TINYINT(1) NOT NULL,
+    `status` INT NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_by_uuid` CHAR(36) NOT NULL,
+    `updated_by_uuid` CHAR(36) NOT NULL,
+    PRIMARY KEY (`uuid`),
+    INDEX `project_uuid` (`project_uuid`),
+    INDEX `role` (`role`),
+    INDEX `status` (`status`),
+    INDEX `updated_at` (`updated_at`),
+    INDEX `user_email` (`user_email`),
+    INDEX `user_uuid` (`user_uuid`),
+    INDEX `created_at` (`created_at`)
+) ENGINE = InnoDB;
+
 CREATE TABLE IF NOT EXISTS `project_version` (
     `uuid` CHAR(36) NOT NULL,
     `version` INT NOT NULL,
@@ -246,27 +269,44 @@ CREATE TABLE IF NOT EXISTS `project_version` (
     INDEX `created_at` (`created_at`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `user_project` (
+CREATE TABLE IF NOT EXISTS `user_connection` (
     `uuid` CHAR(36) NOT NULL,
-    `user_uuid` CHAR(36),
-    `user_email` VARCHAR(255),
+    `user_uuid` CHAR(36) NOT NULL,
     `project_uuid` CHAR(36) NOT NULL,
-    `role` INT NOT NULL,
-    `review_required_structure` TINYINT(1) NOT NULL,
-    `review_required_data` TINYINT(1) NOT NULL,
+    `project_version_uuid` CHAR(36),
+    `type` INT NOT NULL,
+    `type_config` JSON NOT NULL,
+    `db_schema` VARCHAR(255) NOT NULL,
+    `executions` JSON,
+    `status` INT NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`uuid`),
+    INDEX `project_uuid` (`project_uuid`),
+    INDEX `project_version_uuid` (`project_version_uuid`),
+    INDEX `status` (`status`),
+    INDEX `updated_at` (`updated_at`),
+    INDEX `user_uuid` (`user_uuid`),
+    INDEX `created_at` (`created_at`)
+) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `user_project_version` (
+    `uuid` CHAR(36) NOT NULL,
+    `version` INT NOT NULL,
+    `project_version_uuid` CHAR(36) NOT NULL,
+    `user_uuid` CHAR(36) NOT NULL,
+    `data` JSON,
     `status` INT NOT NULL,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `created_by_uuid` CHAR(36) NOT NULL,
     `updated_by_uuid` CHAR(36) NOT NULL,
     PRIMARY KEY (`uuid`),
-    INDEX `project_uuid` (`project_uuid`),
-    INDEX `role` (`role`),
-    INDEX `status` (`status`),
-    INDEX `updated_at` (`updated_at`),
-    INDEX `user_email` (`user_email`),
     INDEX `user_uuid` (`user_uuid`),
-    INDEX `created_at` (`created_at`)
+    INDEX `created_at` (`created_at`),
+    INDEX `project_version_uuid` (`project_version_uuid`),
+    INDEX `status` (`status`),
+    INDEX `updated_at` (`updated_at`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `ai_usage` (
@@ -328,46 +368,6 @@ CREATE TABLE IF NOT EXISTS `change_request` (
     INDEX `owner_uuid` (`owner_uuid`),
     INDEX `review_status` (`review_status`),
     INDEX `status` (`status`)
-) ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `user_connection` (
-    `uuid` CHAR(36) NOT NULL,
-    `user_uuid` CHAR(36) NOT NULL,
-    `project_uuid` CHAR(36) NOT NULL,
-    `project_version_uuid` CHAR(36),
-    `type` INT NOT NULL,
-    `type_config` JSON NOT NULL,
-    `db_schema` VARCHAR(255) NOT NULL,
-    `executions` JSON,
-    `status` INT NOT NULL,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`uuid`),
-    INDEX `project_uuid` (`project_uuid`),
-    INDEX `project_version_uuid` (`project_version_uuid`),
-    INDEX `status` (`status`),
-    INDEX `updated_at` (`updated_at`),
-    INDEX `user_uuid` (`user_uuid`),
-    INDEX `created_at` (`created_at`)
-) ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `user_project_version` (
-    `uuid` CHAR(36) NOT NULL,
-    `version` INT NOT NULL,
-    `project_version_uuid` CHAR(36) NOT NULL,
-    `user_uuid` CHAR(36) NOT NULL,
-    `data` JSON,
-    `status` INT NOT NULL,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `created_by_uuid` CHAR(36) NOT NULL,
-    `updated_by_uuid` CHAR(36) NOT NULL,
-    PRIMARY KEY (`uuid`),
-    INDEX `user_uuid` (`user_uuid`),
-    INDEX `created_at` (`created_at`),
-    INDEX `project_version_uuid` (`project_version_uuid`),
-    INDEX `status` (`status`),
-    INDEX `updated_at` (`updated_at`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `extension_execution` (
@@ -452,6 +452,7 @@ CREATE TABLE IF NOT EXISTS `deployment_revision` (
     `server` JSON,
     `database` JSON,
     `codegen` JSON,
+    `status_message` VARCHAR(512),
     PRIMARY KEY (`uuid`),
     INDEX `deployment_uuid` (`deployment_uuid`),
     INDEX `deployed_at` (`deployed_at`),

@@ -32,5 +32,6 @@ message DeploymentRevision {
     DeploymentProvider provider = 12;
     DeploymentServer server = 13;
     DeploymentDatabase database = 14;
-    DeploymentCodegen codegen = 15;    
+    DeploymentCodegen codegen = 15;
+    string status_message = 16;    
 }

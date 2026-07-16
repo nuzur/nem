@@ -248,7 +248,7 @@ func (q *Queries) UpdateDeployment(ctx context.Context, arg UpdateDeploymentPara
 const updateDeploymentRevision = `-- name: UpdateDeploymentRevision :exec
 UPDATE ` + "`" + `deployment_revision` + "`" + `
 SET
-` + "`" + `deployment_uuid` + "`" + ` = ?, ` + "`" + `project_version_uuid` + "`" + ` = ?, ` + "`" + `cli_version` + "`" + ` = ?, ` + "`" + `image_name` + "`" + ` = ?, ` + "`" + `status` + "`" + ` = ?, ` + "`" + `deployed_at` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?, ` + "`" + `created_by_uuid` + "`" + ` = ?, ` + "`" + `updated_by_uuid` + "`" + ` = ?, ` + "`" + `provider` + "`" + ` = ?, ` + "`" + `server` + "`" + ` = ?, ` + "`" + `database` + "`" + ` = ?, ` + "`" + `codegen` + "`" + ` = ?
+` + "`" + `deployment_uuid` + "`" + ` = ?, ` + "`" + `project_version_uuid` + "`" + ` = ?, ` + "`" + `cli_version` + "`" + ` = ?, ` + "`" + `image_name` + "`" + ` = ?, ` + "`" + `status` + "`" + ` = ?, ` + "`" + `deployed_at` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?, ` + "`" + `created_by_uuid` + "`" + ` = ?, ` + "`" + `updated_by_uuid` + "`" + ` = ?, ` + "`" + `provider` + "`" + ` = ?, ` + "`" + `server` + "`" + ` = ?, ` + "`" + `database` + "`" + ` = ?, ` + "`" + `codegen` + "`" + ` = ?, ` + "`" + `status_message` + "`" + ` = ?
 WHERE
 ` + "`" + `uuid` + "`" + ` = ?
 `
@@ -268,6 +268,7 @@ type UpdateDeploymentRevisionParams struct {
 	Server             []byte      `json:"server"`
 	Database           []byte      `json:"database"`
 	Codegen            []byte      `json:"codegen"`
+	StatusMessage      null.String `json:"status_message"`
 	UUID               string      `json:"uuid"`
 }
 
@@ -287,6 +288,7 @@ func (q *Queries) UpdateDeploymentRevision(ctx context.Context, arg UpdateDeploy
 		arg.Server,
 		arg.Database,
 		arg.Codegen,
+		arg.StatusMessage,
 		arg.UUID,
 	)
 	return err

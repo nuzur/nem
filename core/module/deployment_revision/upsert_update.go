@@ -113,5 +113,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateDeploym
 		Database: deployment_database.DeploymentDatabaseToJSON(req.DeploymentRevision.Database),
 
 		Codegen: deployment_codegen.DeploymentCodegenToJSON(req.DeploymentRevision.Codegen),
+
+		StatusMessage: req.DeploymentRevision.StatusMessage,
 	}
 }

@@ -28,6 +28,7 @@ func (e DeploymentRevision) FieldIdentifierToTypeMap() map[string]entitytypes.Fi
 		"server":               entitytypes.MultiDependantEntityFieldType,
 		"database":             entitytypes.MultiDependantEntityFieldType,
 		"codegen":              entitytypes.MultiDependantEntityFieldType,
+		"status_message":       entitytypes.StringFieldType,
 	}
 }
 
@@ -48,6 +49,7 @@ func (e DeploymentRevision) OrderedFieldIdentifiers() []string {
 	res = append(res, "server")
 	res = append(res, "database")
 	res = append(res, "codegen")
+	res = append(res, "status_message")
 
 	return res
 }

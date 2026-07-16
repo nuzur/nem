@@ -16,6 +16,7 @@ const (
 	DEPLOYMENT_REVISION_STATUS_ACTIVE
 	DEPLOYMENT_REVISION_STATUS_SUPERSEDED
 	DEPLOYMENT_REVISION_STATUS_FAILED
+	DEPLOYMENT_REVISION_STATUS_IN_PROGRESS
 )
 
 func (e DeploymentRevisionStatus) ToInt64() int64 {
@@ -36,6 +37,8 @@ func DeploymentRevisionStatusFromString(in string) DeploymentRevisionStatus {
 		return DEPLOYMENT_REVISION_STATUS_SUPERSEDED
 	case "failed":
 		return DEPLOYMENT_REVISION_STATUS_FAILED
+	case "in_progress":
+		return DEPLOYMENT_REVISION_STATUS_IN_PROGRESS
 	}
 	return DEPLOYMENT_REVISION_STATUS_INVALID
 }
@@ -57,6 +60,8 @@ func (e DeploymentRevisionStatus) String() string {
 		return "superseded"
 	case DEPLOYMENT_REVISION_STATUS_FAILED:
 		return "failed"
+	case DEPLOYMENT_REVISION_STATUS_IN_PROGRESS:
+		return "in_progress"
 	}
 
 	return "invalid"
