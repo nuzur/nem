@@ -29,6 +29,8 @@ func ExtensionExecutionToProto(e main_entity.ExtensionExecution) *pb.ExtensionEx
 		StatusMsg:            e.StatusMsg.ValueOrZero(),
 		CreatedAt:            timestamppb.New(e.CreatedAt),
 		UpdatedAt:            timestamppb.New(e.UpdatedAt),
+		QueuePriority:        e.QueuePriority.ValueOrZero(),
+		LastHeartbeatAt:      timestamppb.New(e.LastHeartbeatAt.ValueOrZero()),
 	}
 }
 
@@ -57,6 +59,8 @@ func ExtensionExecutionFromProto(m *pb.ExtensionExecution) main_entity.Extension
 		StatusMsg:            null.StringFrom(m.StatusMsg),
 		CreatedAt:            m.GetCreatedAt().AsTime(),
 		UpdatedAt:            m.GetUpdatedAt().AsTime(),
+		QueuePriority:        null.IntFrom(m.GetQueuePriority()),
+		LastHeartbeatAt:      null.TimeFrom(m.GetLastHeartbeatAt().AsTime()),
 	}
 }
 

@@ -107,7 +107,7 @@ WHERE
 -- name: UpdateExtensionExecution :exec
 UPDATE `extension_execution`
 SET
-`extension_uuid` = ?, `extension_version_uuid` = ?, `project_extension_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `executed_by_uuid` = ?, `metadata` = ?, `status` = ?, `status_msg` = ?, `created_at` = ?, `updated_at` = ?
+`extension_uuid` = ?, `extension_version_uuid` = ?, `project_extension_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `executed_by_uuid` = ?, `metadata` = ?, `status` = ?, `status_msg` = ?, `created_at` = ?, `updated_at` = ?, `queue_priority` = ?, `last_heartbeat_at` = ?
 WHERE
 `uuid` = ?;
 

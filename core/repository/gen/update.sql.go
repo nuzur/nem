@@ -355,7 +355,7 @@ func (q *Queries) UpdateExtension(ctx context.Context, arg UpdateExtensionParams
 const updateExtensionExecution = `-- name: UpdateExtensionExecution :exec
 UPDATE ` + "`" + `extension_execution` + "`" + `
 SET
-` + "`" + `extension_uuid` + "`" + ` = ?, ` + "`" + `extension_version_uuid` + "`" + ` = ?, ` + "`" + `project_extension_uuid` + "`" + ` = ?, ` + "`" + `project_uuid` + "`" + ` = ?, ` + "`" + `project_version_uuid` + "`" + ` = ?, ` + "`" + `executed_by_uuid` + "`" + ` = ?, ` + "`" + `metadata` + "`" + ` = ?, ` + "`" + `status` + "`" + ` = ?, ` + "`" + `status_msg` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?
+` + "`" + `extension_uuid` + "`" + ` = ?, ` + "`" + `extension_version_uuid` + "`" + ` = ?, ` + "`" + `project_extension_uuid` + "`" + ` = ?, ` + "`" + `project_uuid` + "`" + ` = ?, ` + "`" + `project_version_uuid` + "`" + ` = ?, ` + "`" + `executed_by_uuid` + "`" + ` = ?, ` + "`" + `metadata` + "`" + ` = ?, ` + "`" + `status` + "`" + ` = ?, ` + "`" + `status_msg` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?, ` + "`" + `queue_priority` + "`" + ` = ?, ` + "`" + `last_heartbeat_at` + "`" + ` = ?
 WHERE
 ` + "`" + `uuid` + "`" + ` = ?
 `
@@ -372,6 +372,8 @@ type UpdateExtensionExecutionParams struct {
 	StatusMsg            null.String `json:"status_msg"`
 	CreatedAt            time.Time   `json:"created_at"`
 	UpdatedAt            time.Time   `json:"updated_at"`
+	QueuePriority        null.Int    `json:"queue_priority"`
+	LastHeartbeatAt      null.Time   `json:"last_heartbeat_at"`
 	UUID                 string      `json:"uuid"`
 }
 
@@ -388,6 +390,8 @@ func (q *Queries) UpdateExtensionExecution(ctx context.Context, arg UpdateExtens
 		arg.StatusMsg,
 		arg.CreatedAt,
 		arg.UpdatedAt,
+		arg.QueuePriority,
+		arg.LastHeartbeatAt,
 		arg.UUID,
 	)
 	return err

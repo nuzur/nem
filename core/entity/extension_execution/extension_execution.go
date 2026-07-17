@@ -27,6 +27,8 @@ type ExtensionExecution struct {
 	StatusMsg            null.String                    `json:"status_msg"`
 	CreatedAt            time.Time                      `json:"created_at"`
 	UpdatedAt            time.Time                      `json:"updated_at"`
+	QueuePriority        null.Int64                     `json:"queue_priority"`
+	LastHeartbeatAt      null.Time                      `json:"last_heartbeat_at"`
 }
 
 func (e ExtensionExecution) String() string {

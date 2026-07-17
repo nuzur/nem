@@ -38,6 +38,8 @@ type ExtensionExecution struct {
 	StatusMsg            string                   `protobuf:"bytes,10,opt,name=status_msg,json=statusMsg,proto3" json:"status_msg,omitempty"`
 	CreatedAt            *timestamppb.Timestamp   `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            *timestamppb.Timestamp   `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	QueuePriority        int64                    `protobuf:"varint,13,opt,name=queue_priority,json=queuePriority,proto3" json:"queue_priority,omitempty"`
+	LastHeartbeatAt      *timestamppb.Timestamp   `protobuf:"bytes,14,opt,name=last_heartbeat_at,json=lastHeartbeatAt,proto3" json:"last_heartbeat_at,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -156,11 +158,25 @@ func (x *ExtensionExecution) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *ExtensionExecution) GetQueuePriority() int64 {
+	if x != nil {
+		return x.QueuePriority
+	}
+	return 0
+}
+
+func (x *ExtensionExecution) GetLastHeartbeatAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastHeartbeatAt
+	}
+	return nil
+}
+
 var File_extension_execution_proto protoreflect.FileDescriptor
 
 const file_extension_execution_proto_rawDesc = "" +
 	"\n" +
-	"\x19extension_execution.proto\x12\x03nem\x1a\venums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa2\x04\n" +
+	"\x19extension_execution.proto\x12\x03nem\x1a\venums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x91\x05\n" +
 	"\x12ExtensionExecution\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12%\n" +
 	"\x0eextension_uuid\x18\x02 \x01(\tR\rextensionUuid\x124\n" +
@@ -177,7 +193,9 @@ const file_extension_execution_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtB9\n" +
+	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12%\n" +
+	"\x0equeue_priority\x18\r \x01(\x03R\rqueuePriority\x12F\n" +
+	"\x11last_heartbeat_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\x0flastHeartbeatAtB9\n" +
 	"\x14github.com/nuzur/nemB\x12ExtensionExecutionP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -202,11 +220,12 @@ var file_extension_execution_proto_depIdxs = []int32{
 	1, // 0: nem.ExtensionExecution.status:type_name -> nem.ExtensionExecutionStatus
 	2, // 1: nem.ExtensionExecution.created_at:type_name -> google.protobuf.Timestamp
 	2, // 2: nem.ExtensionExecution.updated_at:type_name -> google.protobuf.Timestamp
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	2, // 3: nem.ExtensionExecution.last_heartbeat_at:type_name -> google.protobuf.Timestamp
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_extension_execution_proto_init() }

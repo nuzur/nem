@@ -91,9 +91,9 @@ VALUES
 
 -- name: InsertExtensionExecution :execresult
 INSERT INTO `extension_execution`
-(`uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`)
+(`uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertAutomationEvent :execresult
 INSERT INTO `automation_event`

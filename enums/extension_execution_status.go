@@ -17,6 +17,7 @@ const (
 	EXTENSION_EXECUTION_STATUS_SUCCEEDED
 	EXTENSION_EXECUTION_STATUS_FAILED
 	EXTENSION_EXECUTION_STATUS_CANCELLED
+	EXTENSION_EXECUTION_STATUS_QUEUED
 )
 
 func (e ExtensionExecutionStatus) ToInt64() int64 {
@@ -39,6 +40,8 @@ func ExtensionExecutionStatusFromString(in string) ExtensionExecutionStatus {
 		return EXTENSION_EXECUTION_STATUS_FAILED
 	case "cancelled":
 		return EXTENSION_EXECUTION_STATUS_CANCELLED
+	case "queued":
+		return EXTENSION_EXECUTION_STATUS_QUEUED
 	}
 	return EXTENSION_EXECUTION_STATUS_INVALID
 }
@@ -62,6 +65,8 @@ func (e ExtensionExecutionStatus) String() string {
 		return "failed"
 	case EXTENSION_EXECUTION_STATUS_CANCELLED:
 		return "cancelled"
+	case EXTENSION_EXECUTION_STATUS_QUEUED:
+		return "queued"
 	}
 
 	return "invalid"

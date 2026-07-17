@@ -34,5 +34,7 @@ func mapModelToEntity(m nemdb.ExtensionExecution) main_entity.ExtensionExecution
 		StatusMsg:            null.NewString(m.StatusMsg.String, m.StatusMsg.Valid),
 		CreatedAt:            m.CreatedAt,
 		UpdatedAt:            m.UpdatedAt,
+		QueuePriority:        null.NewInt(m.QueuePriority.Int64, m.QueuePriority.Valid),
+		LastHeartbeatAt:      null.NewTime(m.LastHeartbeatAt.Time, m.LastHeartbeatAt.Valid),
 	}
 }

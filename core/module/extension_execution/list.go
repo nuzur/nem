@@ -135,6 +135,10 @@ var listFields = []string{
 	"created_at",
 
 	"updated_at",
+
+	"queue_priority",
+
+	"last_heartbeat_at",
 }
 
 var listFieldRegistry = map[string]func(*repogen.ExtensionExecution) any{
@@ -162,4 +166,8 @@ var listFieldRegistry = map[string]func(*repogen.ExtensionExecution) any{
 	"created_at": func(i *repogen.ExtensionExecution) any { return &i.CreatedAt },
 
 	"updated_at": func(i *repogen.ExtensionExecution) any { return &i.UpdatedAt },
+
+	"queue_priority": func(i *repogen.ExtensionExecution) any { return &i.QueuePriority },
+
+	"last_heartbeat_at": func(i *repogen.ExtensionExecution) any { return &i.LastHeartbeatAt },
 }

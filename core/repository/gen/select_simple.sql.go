@@ -324,7 +324,7 @@ func (q *Queries) FetchExtension(ctx context.Context) ([]Extension, error) {
 }
 
 const fetchExtensionExecution = `-- name: FetchExtensionExecution :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 `
 
@@ -350,6 +350,8 @@ func (q *Queries) FetchExtensionExecution(ctx context.Context) ([]ExtensionExecu
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}

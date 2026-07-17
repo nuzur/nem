@@ -20,6 +20,8 @@ func (e ExtensionExecution) FieldIdentifierToTypeMap() map[string]entitytypes.Fi
 		"status_msg":             entitytypes.StringFieldType,
 		"created_at":             entitytypes.TimestampFieldType,
 		"updated_at":             entitytypes.TimestampFieldType,
+		"queue_priority":         entitytypes.IntFieldType,
+		"last_heartbeat_at":      entitytypes.TimestampFieldType,
 	}
 }
 
@@ -37,6 +39,8 @@ func (e ExtensionExecution) OrderedFieldIdentifiers() []string {
 	res = append(res, "status_msg")
 	res = append(res, "created_at")
 	res = append(res, "updated_at")
+	res = append(res, "queue_priority")
+	res = append(res, "last_heartbeat_at")
 
 	return res
 }

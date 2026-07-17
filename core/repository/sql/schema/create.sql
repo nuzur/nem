@@ -383,6 +383,8 @@ CREATE TABLE IF NOT EXISTS `extension_execution` (
     `status_msg` VARCHAR(255),
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `queue_priority` INT,
+    `last_heartbeat_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`uuid`),
     INDEX `status` (`status`),
     INDEX `created_at` (`created_at`),

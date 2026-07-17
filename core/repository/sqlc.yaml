@@ -152,6 +152,7 @@ sql:
           key_auto_increment: KeyAutoIncrement
           keys: Keys
           last_error: LastError
+          last_heartbeat_at: LastHeartbeatAt
           last_name: LastName
           last_seen_at: LastSeenAt
           length: Length
@@ -208,6 +209,7 @@ sql:
           public: Public
           public_port: PublicPort
           public_url: PublicURL
+          queue_priority: QueuePriority
           regex_validation: RegexValidation
           region: Region
           relationships: Relationships

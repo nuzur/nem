@@ -341,9 +341,9 @@ func (q *Queries) InsertExtension(ctx context.Context, arg InsertExtensionParams
 
 const insertExtensionExecution = `-- name: InsertExtensionExecution :execresult
 INSERT INTO ` + "`" + `extension_execution` + "`" + `
-(` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `)
+(` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertExtensionExecutionParams struct {
@@ -359,6 +359,8 @@ type InsertExtensionExecutionParams struct {
 	StatusMsg            null.String `json:"status_msg"`
 	CreatedAt            time.Time   `json:"created_at"`
 	UpdatedAt            time.Time   `json:"updated_at"`
+	QueuePriority        null.Int    `json:"queue_priority"`
+	LastHeartbeatAt      null.Time   `json:"last_heartbeat_at"`
 }
 
 func (q *Queries) InsertExtensionExecution(ctx context.Context, arg InsertExtensionExecutionParams) (sql.Result, error) {
@@ -375,6 +377,8 @@ func (q *Queries) InsertExtensionExecution(ctx context.Context, arg InsertExtens
 		arg.StatusMsg,
 		arg.CreatedAt,
 		arg.UpdatedAt,
+		arg.QueuePriority,
+		arg.LastHeartbeatAt,
 	)
 }
 

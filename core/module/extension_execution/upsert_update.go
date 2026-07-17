@@ -104,5 +104,9 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateExtensi
 		CreatedAt: req.ExtensionExecution.CreatedAt,
 
 		UpdatedAt: req.ExtensionExecution.UpdatedAt,
+
+		QueuePriority: req.ExtensionExecution.QueuePriority,
+
+		LastHeartbeatAt: req.ExtensionExecution.LastHeartbeatAt,
 	}
 }

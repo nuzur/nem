@@ -25,5 +25,7 @@ message ExtensionExecution {
     ExtensionExecutionStatus status = 9;
     string status_msg = 10;
     google.protobuf.Timestamp created_at = 11;
-    google.protobuf.Timestamp updated_at = 12;    
+    google.protobuf.Timestamp updated_at = 12;
+    int64 queue_priority = 13;
+    google.protobuf.Timestamp last_heartbeat_at = 14;    
 }

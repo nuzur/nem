@@ -8944,7 +8944,7 @@ func (q *Queries) FetchExtensionByVersionOrderedByUpdatedAtDESC(ctx context.Cont
 }
 
 const fetchExtensionExecutionByExecutedByUUID = `-- name: FetchExtensionExecutionByExecutedByUUID :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `executed_by_uuid` + "`" + ` = ? 
@@ -8979,6 +8979,8 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUUID(ctx context.Context, a
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -8994,7 +8996,7 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUUID(ctx context.Context, a
 }
 
 const fetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `executed_by_uuid` + "`" + ` = ?  
@@ -9030,6 +9032,8 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC(c
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9045,7 +9049,7 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC(c
 }
 
 const fetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `executed_by_uuid` + "`" + ` = ?  
@@ -9081,6 +9085,8 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC(
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9096,7 +9102,7 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC(
 }
 
 const fetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `executed_by_uuid` + "`" + ` = ?  
@@ -9132,6 +9138,8 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC(c
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9147,7 +9155,7 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC(c
 }
 
 const fetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `executed_by_uuid` + "`" + ` = ?  
@@ -9183,6 +9191,8 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC(
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9198,7 +9208,7 @@ func (q *Queries) FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC(
 }
 
 const fetchExtensionExecutionByExtensionUUID = `-- name: FetchExtensionExecutionByExtensionUUID :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `extension_uuid` + "`" + ` = ? 
@@ -9233,6 +9243,8 @@ func (q *Queries) FetchExtensionExecutionByExtensionUUID(ctx context.Context, ar
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9248,7 +9260,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionUUID(ctx context.Context, ar
 }
 
 const fetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `extension_uuid` + "`" + ` = ?  
@@ -9284,6 +9296,8 @@ func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASC(ct
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9299,7 +9313,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASC(ct
 }
 
 const fetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `extension_uuid` + "`" + ` = ?  
@@ -9335,6 +9349,8 @@ func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESC(c
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9350,7 +9366,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESC(c
 }
 
 const fetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `extension_uuid` + "`" + ` = ?  
@@ -9386,6 +9402,8 @@ func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASC(ct
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9401,7 +9419,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASC(ct
 }
 
 const fetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `extension_uuid` + "`" + ` = ?  
@@ -9437,6 +9455,8 @@ func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESC(c
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9452,7 +9472,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESC(c
 }
 
 const fetchExtensionExecutionByExtensionVersionUUID = `-- name: FetchExtensionExecutionByExtensionVersionUUID :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `extension_version_uuid` + "`" + ` = ? 
@@ -9487,6 +9507,8 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUUID(ctx context.Cont
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9502,7 +9524,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUUID(ctx context.Cont
 }
 
 const fetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `extension_version_uuid` + "`" + ` = ?  
@@ -9538,6 +9560,8 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedA
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9553,7 +9577,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedA
 }
 
 const fetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `extension_version_uuid` + "`" + ` = ?  
@@ -9589,6 +9613,8 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedA
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9604,7 +9630,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedA
 }
 
 const fetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `extension_version_uuid` + "`" + ` = ?  
@@ -9640,6 +9666,8 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedA
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9655,7 +9683,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedA
 }
 
 const fetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `extension_version_uuid` + "`" + ` = ?  
@@ -9691,6 +9719,8 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedA
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9706,7 +9736,7 @@ func (q *Queries) FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedA
 }
 
 const fetchExtensionExecutionByProjectUUID = `-- name: FetchExtensionExecutionByProjectUUID :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `project_uuid` + "`" + ` = ? 
@@ -9741,6 +9771,8 @@ func (q *Queries) FetchExtensionExecutionByProjectUUID(ctx context.Context, arg 
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9756,7 +9788,7 @@ func (q *Queries) FetchExtensionExecutionByProjectUUID(ctx context.Context, arg 
 }
 
 const fetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `project_uuid` + "`" + ` = ?  
@@ -9792,6 +9824,8 @@ func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASC(ctx 
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9807,7 +9841,7 @@ func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASC(ctx 
 }
 
 const fetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `project_uuid` + "`" + ` = ?  
@@ -9843,6 +9877,8 @@ func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESC(ctx
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9858,7 +9894,7 @@ func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESC(ctx
 }
 
 const fetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `project_uuid` + "`" + ` = ?  
@@ -9894,6 +9930,8 @@ func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASC(ctx 
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9909,7 +9947,7 @@ func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASC(ctx 
 }
 
 const fetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `project_uuid` + "`" + ` = ?  
@@ -9945,6 +9983,8 @@ func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESC(ctx
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -9960,7 +10000,7 @@ func (q *Queries) FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESC(ctx
 }
 
 const fetchExtensionExecutionByProjectVersionUUID = `-- name: FetchExtensionExecutionByProjectVersionUUID :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `project_version_uuid` + "`" + ` = ? 
@@ -9995,6 +10035,8 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUUID(ctx context.Contex
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -10010,7 +10052,7 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUUID(ctx context.Contex
 }
 
 const fetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `project_version_uuid` + "`" + ` = ?  
@@ -10046,6 +10088,8 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtA
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -10061,7 +10105,7 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtA
 }
 
 const fetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `project_version_uuid` + "`" + ` = ?  
@@ -10097,6 +10141,8 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtD
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -10112,7 +10158,7 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtD
 }
 
 const fetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `project_version_uuid` + "`" + ` = ?  
@@ -10148,6 +10194,8 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtA
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -10163,7 +10211,7 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtA
 }
 
 const fetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `project_version_uuid` + "`" + ` = ?  
@@ -10199,6 +10247,8 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtD
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -10214,7 +10264,7 @@ func (q *Queries) FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtD
 }
 
 const fetchExtensionExecutionByStatus = `-- name: FetchExtensionExecutionByStatus :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `status` + "`" + ` = ? 
@@ -10249,6 +10299,8 @@ func (q *Queries) FetchExtensionExecutionByStatus(ctx context.Context, arg Fetch
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -10264,7 +10316,7 @@ func (q *Queries) FetchExtensionExecutionByStatus(ctx context.Context, arg Fetch
 }
 
 const fetchExtensionExecutionByStatusOrderedByCreatedAtASC = `-- name: FetchExtensionExecutionByStatusOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `status` + "`" + ` = ?  
@@ -10300,6 +10352,8 @@ func (q *Queries) FetchExtensionExecutionByStatusOrderedByCreatedAtASC(ctx conte
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -10315,7 +10369,7 @@ func (q *Queries) FetchExtensionExecutionByStatusOrderedByCreatedAtASC(ctx conte
 }
 
 const fetchExtensionExecutionByStatusOrderedByCreatedAtDESC = `-- name: FetchExtensionExecutionByStatusOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `status` + "`" + ` = ?  
@@ -10351,6 +10405,8 @@ func (q *Queries) FetchExtensionExecutionByStatusOrderedByCreatedAtDESC(ctx cont
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -10366,7 +10422,7 @@ func (q *Queries) FetchExtensionExecutionByStatusOrderedByCreatedAtDESC(ctx cont
 }
 
 const fetchExtensionExecutionByStatusOrderedByUpdatedAtASC = `-- name: FetchExtensionExecutionByStatusOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `status` + "`" + ` = ?  
@@ -10402,6 +10458,8 @@ func (q *Queries) FetchExtensionExecutionByStatusOrderedByUpdatedAtASC(ctx conte
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -10417,7 +10475,7 @@ func (q *Queries) FetchExtensionExecutionByStatusOrderedByUpdatedAtASC(ctx conte
 }
 
 const fetchExtensionExecutionByStatusOrderedByUpdatedAtDESC = `-- name: FetchExtensionExecutionByStatusOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `status` + "`" + ` = ?  
@@ -10453,6 +10511,8 @@ func (q *Queries) FetchExtensionExecutionByStatusOrderedByUpdatedAtDESC(ctx cont
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -10468,7 +10528,7 @@ func (q *Queries) FetchExtensionExecutionByStatusOrderedByUpdatedAtDESC(ctx cont
 }
 
 const fetchExtensionExecutionByUUID = `-- name: FetchExtensionExecutionByUUID :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `uuid` + "`" + ` = ?
@@ -10497,6 +10557,8 @@ func (q *Queries) FetchExtensionExecutionByUUID(ctx context.Context, uuid string
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
@@ -10512,7 +10574,7 @@ func (q *Queries) FetchExtensionExecutionByUUID(ctx context.Context, uuid string
 }
 
 const fetchExtensionExecutionByUUIDForUpdate = `-- name: FetchExtensionExecutionByUUIDForUpdate :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `extension_uuid` + "`" + `,` + "`" + `extension_version_uuid` + "`" + `,` + "`" + `project_extension_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `executed_by_uuid` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `status_msg` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `queue_priority` + "`" + `,` + "`" + `last_heartbeat_at` + "`" + `
 FROM ` + "`" + `extension_execution` + "`" + `
 WHERE 
     ` + "`" + `uuid` + "`" + ` = ? 
@@ -10541,6 +10603,8 @@ func (q *Queries) FetchExtensionExecutionByUUIDForUpdate(ctx context.Context, uu
 			&i.StatusMsg,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QueuePriority,
+			&i.LastHeartbeatAt,
 		); err != nil {
 			return nil, err
 		}
