@@ -1058,230 +1058,6 @@ LIMIT ?, ?;
 
 
 
--- user_team selects:
--- name: FetchUserTeamByUUID :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `uuid` = ? ;
-
-        
--- name: FetchUserTeamByRole :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `role` = ? 
-LIMIT ?, ?;
-        
--- name: FetchUserTeamByStatus :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `status` = ? 
-LIMIT ?, ?;
-        
--- name: FetchUserTeamByTeamUUID :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `team_uuid` = ? 
-LIMIT ?, ?;
-        
--- name: FetchUserTeamByUserEmail :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `user_email` = ? 
-LIMIT ?, ?;
-        
--- name: FetchUserTeamByUserUUID :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `user_uuid` = ? 
-LIMIT ?, ?;
-        
--- name: FetchUserTeamByUUIDForUpdate :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `uuid` = ? 
-FOR UPDATE;
-        
--- name: FetchUserTeamByRoleOrderedByUpdatedAtASC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `role` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchUserTeamByRoleOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `role` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchUserTeamByRoleOrderedByCreatedAtASC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `role` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchUserTeamByRoleOrderedByCreatedAtDESC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `role` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchUserTeamByStatusOrderedByUpdatedAtASC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `status` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchUserTeamByStatusOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `status` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchUserTeamByStatusOrderedByCreatedAtASC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `status` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchUserTeamByStatusOrderedByCreatedAtDESC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `status` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchUserTeamByTeamUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `team_uuid` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchUserTeamByTeamUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `team_uuid` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchUserTeamByTeamUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `team_uuid` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchUserTeamByTeamUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `team_uuid` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchUserTeamByUserEmailOrderedByUpdatedAtASC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `user_email` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchUserTeamByUserEmailOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `user_email` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchUserTeamByUserEmailOrderedByCreatedAtASC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `user_email` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchUserTeamByUserEmailOrderedByCreatedAtDESC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `user_email` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchUserTeamByUserUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `user_uuid` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchUserTeamByUserUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `user_uuid` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchUserTeamByUserUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `user_uuid` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchUserTeamByUserUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `user_team`
-WHERE 
-    `user_uuid` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
-
-
-
-
 -- project selects:
 -- name: FetchProjectByUUID :many
 SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
@@ -1580,6 +1356,536 @@ SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uui
 FROM `project`
 WHERE 
     `name` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+
+
+
+
+-- user_team selects:
+-- name: FetchUserTeamByUUID :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `uuid` = ? ;
+
+        
+-- name: FetchUserTeamByRole :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `role` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchUserTeamByStatus :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `status` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchUserTeamByTeamUUID :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `team_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchUserTeamByUserEmail :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `user_email` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchUserTeamByUserUUID :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `user_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchUserTeamByUUIDForUpdate :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `uuid` = ? 
+FOR UPDATE;
+        
+-- name: FetchUserTeamByRoleOrderedByUpdatedAtASC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `role` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchUserTeamByRoleOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `role` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchUserTeamByRoleOrderedByCreatedAtASC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `role` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchUserTeamByRoleOrderedByCreatedAtDESC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `role` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchUserTeamByStatusOrderedByUpdatedAtASC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `status` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchUserTeamByStatusOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `status` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchUserTeamByStatusOrderedByCreatedAtASC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `status` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchUserTeamByStatusOrderedByCreatedAtDESC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `status` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchUserTeamByTeamUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `team_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchUserTeamByTeamUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `team_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchUserTeamByTeamUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `team_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchUserTeamByTeamUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `team_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchUserTeamByUserEmailOrderedByUpdatedAtASC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `user_email` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchUserTeamByUserEmailOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `user_email` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchUserTeamByUserEmailOrderedByCreatedAtASC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `user_email` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchUserTeamByUserEmailOrderedByCreatedAtDESC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `user_email` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchUserTeamByUserUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `user_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchUserTeamByUserUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `user_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchUserTeamByUserUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `user_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchUserTeamByUserUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `user_team`
+WHERE 
+    `user_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+
+
+
+
+-- project_version selects:
+-- name: FetchProjectVersionByUUID :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `uuid` = ? ;
+
+        
+-- name: FetchProjectVersionByCreatedByUUID :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `created_by_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchProjectVersionByStatus :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `status` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchProjectVersionByVersion :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `version` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchProjectVersionByProjectUUID :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `project_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchProjectVersionByReviewStatus :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `review_status` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchProjectVersionByUpdatedByUUID :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `updated_by_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchProjectVersionByBaseVersionUUID :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `base_version_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchProjectVersionByUUIDForUpdate :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `uuid` = ? 
+FOR UPDATE;
+        
+-- name: FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `created_by_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `created_by_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `created_by_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `created_by_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByStatusOrderedByUpdatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `status` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByStatusOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `status` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByStatusOrderedByCreatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `status` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByStatusOrderedByCreatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `status` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByVersionOrderedByUpdatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `version` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByVersionOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `version` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByVersionOrderedByCreatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `version` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByVersionOrderedByCreatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `version` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByProjectUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByProjectUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByProjectUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByProjectUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByReviewStatusOrderedByUpdatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `review_status` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByReviewStatusOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `review_status` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByReviewStatusOrderedByCreatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `review_status` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByReviewStatusOrderedByCreatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `review_status` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `updated_by_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `updated_by_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `updated_by_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `updated_by_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `base_version_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `base_version_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `base_version_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`
+WHERE 
+    `base_version_uuid` = ?  
 ORDER BY created_at DESC
 LIMIT ?, ?;
 
@@ -1905,312 +2211,6 @@ SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_st
 FROM `user_project`
 WHERE 
     `user_uuid` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
-
-
-
-
--- project_version selects:
--- name: FetchProjectVersionByUUID :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `uuid` = ? ;
-
-        
--- name: FetchProjectVersionByCreatedByUUID :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `created_by_uuid` = ? 
-LIMIT ?, ?;
-        
--- name: FetchProjectVersionByStatus :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `status` = ? 
-LIMIT ?, ?;
-        
--- name: FetchProjectVersionByVersion :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `version` = ? 
-LIMIT ?, ?;
-        
--- name: FetchProjectVersionByProjectUUID :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `project_uuid` = ? 
-LIMIT ?, ?;
-        
--- name: FetchProjectVersionByReviewStatus :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `review_status` = ? 
-LIMIT ?, ?;
-        
--- name: FetchProjectVersionByUpdatedByUUID :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `updated_by_uuid` = ? 
-LIMIT ?, ?;
-        
--- name: FetchProjectVersionByBaseVersionUUID :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `base_version_uuid` = ? 
-LIMIT ?, ?;
-        
--- name: FetchProjectVersionByUUIDForUpdate :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `uuid` = ? 
-FOR UPDATE;
-        
--- name: FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `created_by_uuid` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByCreatedByUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `created_by_uuid` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `created_by_uuid` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByCreatedByUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `created_by_uuid` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByStatusOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `status` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByStatusOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `status` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByStatusOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `status` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByStatusOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `status` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByVersionOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `version` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByVersionOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `version` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByVersionOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `version` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByVersionOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `version` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByProjectUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `project_uuid` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByProjectUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `project_uuid` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByProjectUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `project_uuid` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByProjectUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `project_uuid` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByReviewStatusOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `review_status` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByReviewStatusOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `review_status` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByReviewStatusOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `review_status` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByReviewStatusOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `review_status` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `updated_by_uuid` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByUpdatedByUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `updated_by_uuid` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `updated_by_uuid` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByUpdatedByUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `updated_by_uuid` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `base_version_uuid` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByBaseVersionUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `base_version_uuid` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `base_version_uuid` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchProjectVersionByBaseVersionUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`
-WHERE 
-    `base_version_uuid` = ?  
 ORDER BY created_at DESC
 LIMIT ?, ?;
 
@@ -2809,6 +2809,271 @@ LIMIT ?, ?;
 
 
 
+-- extension_execution selects:
+-- name: FetchExtensionExecutionByUUID :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `uuid` = ? ;
+
+        
+-- name: FetchExtensionExecutionByStatus :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `status` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchExtensionExecutionByExecutedByUUID :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `executed_by_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchExtensionExecutionByExtensionVersionUUID :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `extension_version_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchExtensionExecutionByProjectUUID :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `project_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchExtensionExecutionByProjectVersionUUID :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `project_version_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchExtensionExecutionByExtensionUUID :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `extension_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchExtensionExecutionByUUIDForUpdate :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `uuid` = ? 
+FOR UPDATE;
+        
+-- name: FetchExtensionExecutionByStatusOrderedByCreatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `status` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByStatusOrderedByCreatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `status` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchExtensionExecutionByStatusOrderedByUpdatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `status` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByStatusOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `status` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `executed_by_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `executed_by_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `executed_by_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `executed_by_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `extension_version_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `extension_version_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `extension_version_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `extension_version_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `project_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `project_version_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `project_version_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `project_version_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `project_version_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `extension_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `extension_uuid` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `extension_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`
+WHERE 
+    `extension_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+
+
+
+
 -- change_request selects:
 -- name: FetchChangeRequestByUUID :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
@@ -3149,271 +3414,6 @@ FROM `change_request`
 WHERE 
     `status` = ?  
 ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
-
-
-
-
--- extension_execution selects:
--- name: FetchExtensionExecutionByUUID :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `uuid` = ? ;
-
-        
--- name: FetchExtensionExecutionByStatus :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `status` = ? 
-LIMIT ?, ?;
-        
--- name: FetchExtensionExecutionByExecutedByUUID :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `executed_by_uuid` = ? 
-LIMIT ?, ?;
-        
--- name: FetchExtensionExecutionByExtensionVersionUUID :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `extension_version_uuid` = ? 
-LIMIT ?, ?;
-        
--- name: FetchExtensionExecutionByProjectUUID :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `project_uuid` = ? 
-LIMIT ?, ?;
-        
--- name: FetchExtensionExecutionByProjectVersionUUID :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `project_version_uuid` = ? 
-LIMIT ?, ?;
-        
--- name: FetchExtensionExecutionByExtensionUUID :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `extension_uuid` = ? 
-LIMIT ?, ?;
-        
--- name: FetchExtensionExecutionByUUIDForUpdate :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `uuid` = ? 
-FOR UPDATE;
-        
--- name: FetchExtensionExecutionByStatusOrderedByCreatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `status` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByStatusOrderedByCreatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `status` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchExtensionExecutionByStatusOrderedByUpdatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `status` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByStatusOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `status` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `executed_by_uuid` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `executed_by_uuid` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `executed_by_uuid` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `executed_by_uuid` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `extension_version_uuid` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `extension_version_uuid` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `extension_version_uuid` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByExtensionVersionUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `extension_version_uuid` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `project_uuid` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByProjectUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `project_uuid` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `project_uuid` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByProjectUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `project_uuid` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `project_version_uuid` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `project_version_uuid` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `project_version_uuid` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `project_version_uuid` = ?  
-ORDER BY updated_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `extension_uuid` = ?  
-ORDER BY created_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByExtensionUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `extension_uuid` = ?  
-ORDER BY created_at DESC
-LIMIT ?, ?;
-
-            
--- name: FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `extension_uuid` = ?  
-ORDER BY updated_at ASC
-LIMIT ?, ?;
-
--- name: FetchExtensionExecutionByExtensionUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`
-WHERE 
-    `extension_uuid` = ?  
-ORDER BY updated_at DESC
 LIMIT ?, ?;
 
             

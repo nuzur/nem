@@ -23,13 +23,17 @@ FROM `extension_version`;
 SELECT `uuid`,`user_uuid`,`token_hash`,`machine_name`,`os`,`cli_version`,`connections`,`status`,`last_seen_at`,`revoked_at`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `local_agent`;
 
+-- name: FetchProject :many
+SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project`;
+
 -- name: FetchUserTeam :many
 SELECT `uuid`,`user_uuid`,`user_email`,`team_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_team`;
 
--- name: FetchProject :many
-SELECT `uuid`,`version`,`name`,`description`,`tags`,`url`,`owner_uuid`,`team_uuid`,`access_type`,`project_extensions`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project`;
+-- name: FetchProjectVersion :many
+SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `project_version`;
 
 -- name: FetchAutomation :many
 SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
@@ -38,10 +42,6 @@ FROM `automation`;
 -- name: FetchUserProject :many
 SELECT `uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `user_project`;
-
--- name: FetchProjectVersion :many
-SELECT `uuid`,`version`,`identifier`,`description`,`project_uuid`,`entities`,`relationships`,`enums`,`services`,`base_version_uuid`,`review_status`,`deployments`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
-FROM `project_version`;
 
 -- name: FetchUserConnection :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
@@ -55,13 +55,13 @@ FROM `user_project_version`;
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `ai_usage`;
 
+-- name: FetchExtensionExecution :many
+SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
+FROM `extension_execution`;
+
 -- name: FetchChangeRequest :many
 SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
 FROM `change_request`;
-
--- name: FetchExtensionExecution :many
-SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`
-FROM `extension_execution`;
 
 -- name: FetchAutomationEvent :many
 SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`

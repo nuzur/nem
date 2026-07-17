@@ -29,13 +29,18 @@ DELETE FROM `local_agent`
 WHERE
 `uuid` = ?;
 
+-- name: DeleteProject :execresult
+DELETE FROM `project`
+WHERE
+`uuid` = ?;
+
 -- name: DeleteUserTeam :execresult
 DELETE FROM `user_team`
 WHERE
 `uuid` = ?;
 
--- name: DeleteProject :execresult
-DELETE FROM `project`
+-- name: DeleteProjectVersion :execresult
+DELETE FROM `project_version`
 WHERE
 `uuid` = ?;
 
@@ -46,11 +51,6 @@ WHERE
 
 -- name: DeleteUserProject :execresult
 DELETE FROM `user_project`
-WHERE
-`uuid` = ?;
-
--- name: DeleteProjectVersion :execresult
-DELETE FROM `project_version`
 WHERE
 `uuid` = ?;
 
@@ -69,13 +69,13 @@ DELETE FROM `ai_usage`
 WHERE
 `uuid` = ?;
 
--- name: DeleteChangeRequest :execresult
-DELETE FROM `change_request`
+-- name: DeleteExtensionExecution :execresult
+DELETE FROM `extension_execution`
 WHERE
 `uuid` = ?;
 
--- name: DeleteExtensionExecution :execresult
-DELETE FROM `extension_execution`
+-- name: DeleteChangeRequest :execresult
+DELETE FROM `change_request`
 WHERE
 `uuid` = ?;
 
