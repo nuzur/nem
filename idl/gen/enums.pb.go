@@ -4026,6 +4026,64 @@ func (DeploymentRevisionStatus) EnumDescriptor() ([]byte, []int) {
 	return file_enums_proto_rawDescGZIP(), []int{75}
 }
 
+type FieldPiiConfigMaskStrategy int32
+
+const (
+	FieldPiiConfigMaskStrategy_FIELD_PII_CONFIG_MASK_STRATEGY_INVALID FieldPiiConfigMaskStrategy = 0
+	FieldPiiConfigMaskStrategy_FIELD_PII_CONFIG_MASK_STRATEGY_FULL    FieldPiiConfigMaskStrategy = 1
+	FieldPiiConfigMaskStrategy_FIELD_PII_CONFIG_MASK_STRATEGY_PARTIAL FieldPiiConfigMaskStrategy = 2
+	FieldPiiConfigMaskStrategy_FIELD_PII_CONFIG_MASK_STRATEGY_EMAIL   FieldPiiConfigMaskStrategy = 3
+	FieldPiiConfigMaskStrategy_FIELD_PII_CONFIG_MASK_STRATEGY_LAST_4  FieldPiiConfigMaskStrategy = 4
+	FieldPiiConfigMaskStrategy_FIELD_PII_CONFIG_MASK_STRATEGY_CUSTOM  FieldPiiConfigMaskStrategy = 5
+)
+
+// Enum value maps for FieldPiiConfigMaskStrategy.
+var (
+	FieldPiiConfigMaskStrategy_name = map[int32]string{
+		0: "FIELD_PII_CONFIG_MASK_STRATEGY_INVALID",
+		1: "FIELD_PII_CONFIG_MASK_STRATEGY_FULL",
+		2: "FIELD_PII_CONFIG_MASK_STRATEGY_PARTIAL",
+		3: "FIELD_PII_CONFIG_MASK_STRATEGY_EMAIL",
+		4: "FIELD_PII_CONFIG_MASK_STRATEGY_LAST_4",
+		5: "FIELD_PII_CONFIG_MASK_STRATEGY_CUSTOM",
+	}
+	FieldPiiConfigMaskStrategy_value = map[string]int32{
+		"FIELD_PII_CONFIG_MASK_STRATEGY_INVALID": 0,
+		"FIELD_PII_CONFIG_MASK_STRATEGY_FULL":    1,
+		"FIELD_PII_CONFIG_MASK_STRATEGY_PARTIAL": 2,
+		"FIELD_PII_CONFIG_MASK_STRATEGY_EMAIL":   3,
+		"FIELD_PII_CONFIG_MASK_STRATEGY_LAST_4":  4,
+		"FIELD_PII_CONFIG_MASK_STRATEGY_CUSTOM":  5,
+	}
+)
+
+func (x FieldPiiConfigMaskStrategy) Enum() *FieldPiiConfigMaskStrategy {
+	p := new(FieldPiiConfigMaskStrategy)
+	*p = x
+	return p
+}
+
+func (x FieldPiiConfigMaskStrategy) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (FieldPiiConfigMaskStrategy) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[76].Descriptor()
+}
+
+func (FieldPiiConfigMaskStrategy) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[76]
+}
+
+func (x FieldPiiConfigMaskStrategy) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use FieldPiiConfigMaskStrategy.Descriptor instead.
+func (FieldPiiConfigMaskStrategy) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{76}
+}
+
 var File_enums_proto protoreflect.FileDescriptor
 
 const file_enums_proto_rawDesc = "" +
@@ -4433,7 +4491,14 @@ const file_enums_proto_rawDesc = "" +
 	"!DEPLOYMENT_REVISION_STATUS_ACTIVE\x10\x01\x12)\n" +
 	"%DEPLOYMENT_REVISION_STATUS_SUPERSEDED\x10\x02\x12%\n" +
 	"!DEPLOYMENT_REVISION_STATUS_FAILED\x10\x03\x12*\n" +
-	"&DEPLOYMENT_REVISION_STATUS_IN_PROGRESS\x10\x04B+\n" +
+	"&DEPLOYMENT_REVISION_STATUS_IN_PROGRESS\x10\x04*\x9d\x02\n" +
+	"\x1aFieldPiiConfigMaskStrategy\x12*\n" +
+	"&FIELD_PII_CONFIG_MASK_STRATEGY_INVALID\x10\x00\x12'\n" +
+	"#FIELD_PII_CONFIG_MASK_STRATEGY_FULL\x10\x01\x12*\n" +
+	"&FIELD_PII_CONFIG_MASK_STRATEGY_PARTIAL\x10\x02\x12(\n" +
+	"$FIELD_PII_CONFIG_MASK_STRATEGY_EMAIL\x10\x03\x12)\n" +
+	"%FIELD_PII_CONFIG_MASK_STRATEGY_LAST_4\x10\x04\x12)\n" +
+	"%FIELD_PII_CONFIG_MASK_STRATEGY_CUSTOM\x10\x05B+\n" +
 	"\x14github.com/nuzur/nemB\x04EnumP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -4448,7 +4513,7 @@ func file_enums_proto_rawDescGZIP() []byte {
 	return file_enums_proto_rawDescData
 }
 
-var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 76)
+var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 77)
 var file_enums_proto_goTypes = []any{
 	(AiUsageContext)(0),                         // 0: nem.AiUsageContext
 	(AiUsageProvider)(0),                        // 1: nem.AiUsageProvider
@@ -4526,6 +4591,7 @@ var file_enums_proto_goTypes = []any{
 	(DeploymentDbLocation)(0),                   // 73: nem.DeploymentDbLocation
 	(DeploymentAuthType)(0),                     // 74: nem.DeploymentAuthType
 	(DeploymentRevisionStatus)(0),               // 75: nem.DeploymentRevisionStatus
+	(FieldPiiConfigMaskStrategy)(0),             // 76: nem.FieldPiiConfigMaskStrategy
 }
 var file_enums_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -4545,7 +4611,7 @@ func file_enums_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_enums_proto_rawDesc), len(file_enums_proto_rawDesc)),
-			NumEnums:      76,
+			NumEnums:      77,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,

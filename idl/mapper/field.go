@@ -32,6 +32,8 @@ func FieldToProto(e main_entity.Field) *pb.Field {
 		UpdatedAt:        timestamppb.New(e.UpdatedAt),
 		CreatedByUuid:    e.CreatedByUUID.String(),
 		UpdatedByUuid:    e.UpdatedByUUID.String(),
+		Pii:              e.Pii,
+		PiiConfig:        FieldPiiConfigToProto(e.PiiConfig),
 	}
 }
 
@@ -65,6 +67,8 @@ func FieldFromProto(m *pb.Field) main_entity.Field {
 		UpdatedAt:        m.GetUpdatedAt().AsTime(),
 		CreatedByUUID:    StringToUUID(m.GetCreatedByUuid()),
 		UpdatedByUUID:    StringToUUID(m.GetUpdatedByUuid()),
+		Pii:              m.GetPii(),
+		PiiConfig:        FieldPiiConfigFromProto(m.GetPiiConfig()),
 	}
 }
 

@@ -318,6 +318,9 @@ const (
 	Nem_ListDeploymentRevision_FullMethodName                  = "/nem.Nem/ListDeploymentRevision"
 	Nem_CreateDeploymentRevision_FullMethodName                = "/nem.Nem/CreateDeploymentRevision"
 	Nem_UpdateDeploymentRevision_FullMethodName                = "/nem.Nem/UpdateDeploymentRevision"
+	Nem_ListFieldPiiConfig_FullMethodName                      = "/nem.Nem/ListFieldPiiConfig"
+	Nem_CreateFieldPiiConfig_FullMethodName                    = "/nem.Nem/CreateFieldPiiConfig"
+	Nem_UpdateFieldPiiConfig_FullMethodName                    = "/nem.Nem/UpdateFieldPiiConfig"
 )
 
 // NemClient is the client API for Nem service.
@@ -720,6 +723,10 @@ type NemClient interface {
 	ListDeploymentRevision(ctx context.Context, in *ListDeploymentRevisionRequest, opts ...grpc.CallOption) (*ListDeploymentRevisionResponse, error)
 	CreateDeploymentRevision(ctx context.Context, in *CreateDeploymentRevisionRequest, opts ...grpc.CallOption) (*DeploymentRevision, error)
 	UpdateDeploymentRevision(ctx context.Context, in *UpdateDeploymentRevisionRequest, opts ...grpc.CallOption) (*DeploymentRevision, error)
+	// field_pii_config start
+	ListFieldPiiConfig(ctx context.Context, in *ListFieldPiiConfigRequest, opts ...grpc.CallOption) (*ListFieldPiiConfigResponse, error)
+	CreateFieldPiiConfig(ctx context.Context, in *CreateFieldPiiConfigRequest, opts ...grpc.CallOption) (*FieldPiiConfig, error)
+	UpdateFieldPiiConfig(ctx context.Context, in *UpdateFieldPiiConfigRequest, opts ...grpc.CallOption) (*FieldPiiConfig, error)
 }
 
 type nemClient struct {
@@ -3700,6 +3707,36 @@ func (c *nemClient) UpdateDeploymentRevision(ctx context.Context, in *UpdateDepl
 	return out, nil
 }
 
+func (c *nemClient) ListFieldPiiConfig(ctx context.Context, in *ListFieldPiiConfigRequest, opts ...grpc.CallOption) (*ListFieldPiiConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListFieldPiiConfigResponse)
+	err := c.cc.Invoke(ctx, Nem_ListFieldPiiConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateFieldPiiConfig(ctx context.Context, in *CreateFieldPiiConfigRequest, opts ...grpc.CallOption) (*FieldPiiConfig, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FieldPiiConfig)
+	err := c.cc.Invoke(ctx, Nem_CreateFieldPiiConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateFieldPiiConfig(ctx context.Context, in *UpdateFieldPiiConfigRequest, opts ...grpc.CallOption) (*FieldPiiConfig, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FieldPiiConfig)
+	err := c.cc.Invoke(ctx, Nem_UpdateFieldPiiConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NemServer is the server API for Nem service.
 // All implementations must embed UnimplementedNemServer
 // for forward compatibility.
@@ -4100,6 +4137,10 @@ type NemServer interface {
 	ListDeploymentRevision(context.Context, *ListDeploymentRevisionRequest) (*ListDeploymentRevisionResponse, error)
 	CreateDeploymentRevision(context.Context, *CreateDeploymentRevisionRequest) (*DeploymentRevision, error)
 	UpdateDeploymentRevision(context.Context, *UpdateDeploymentRevisionRequest) (*DeploymentRevision, error)
+	// field_pii_config start
+	ListFieldPiiConfig(context.Context, *ListFieldPiiConfigRequest) (*ListFieldPiiConfigResponse, error)
+	CreateFieldPiiConfig(context.Context, *CreateFieldPiiConfigRequest) (*FieldPiiConfig, error)
+	UpdateFieldPiiConfig(context.Context, *UpdateFieldPiiConfigRequest) (*FieldPiiConfig, error)
 	mustEmbedUnimplementedNemServer()
 }
 
@@ -5000,6 +5041,15 @@ func (UnimplementedNemServer) CreateDeploymentRevision(context.Context, *CreateD
 }
 func (UnimplementedNemServer) UpdateDeploymentRevision(context.Context, *UpdateDeploymentRevisionRequest) (*DeploymentRevision, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateDeploymentRevision not implemented")
+}
+func (UnimplementedNemServer) ListFieldPiiConfig(context.Context, *ListFieldPiiConfigRequest) (*ListFieldPiiConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListFieldPiiConfig not implemented")
+}
+func (UnimplementedNemServer) CreateFieldPiiConfig(context.Context, *CreateFieldPiiConfigRequest) (*FieldPiiConfig, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateFieldPiiConfig not implemented")
+}
+func (UnimplementedNemServer) UpdateFieldPiiConfig(context.Context, *UpdateFieldPiiConfigRequest) (*FieldPiiConfig, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateFieldPiiConfig not implemented")
 }
 func (UnimplementedNemServer) mustEmbedUnimplementedNemServer() {}
 func (UnimplementedNemServer) testEmbeddedByValue()             {}
@@ -10368,6 +10418,60 @@ func _Nem_UpdateDeploymentRevision_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Nem_ListFieldPiiConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFieldPiiConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListFieldPiiConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListFieldPiiConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListFieldPiiConfig(ctx, req.(*ListFieldPiiConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateFieldPiiConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateFieldPiiConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateFieldPiiConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateFieldPiiConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateFieldPiiConfig(ctx, req.(*CreateFieldPiiConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateFieldPiiConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFieldPiiConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateFieldPiiConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateFieldPiiConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateFieldPiiConfig(ctx, req.(*UpdateFieldPiiConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Nem_ServiceDesc is the grpc.ServiceDesc for Nem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -11562,6 +11666,18 @@ var Nem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateDeploymentRevision",
 			Handler:    _Nem_UpdateDeploymentRevision_Handler,
+		},
+		{
+			MethodName: "ListFieldPiiConfig",
+			Handler:    _Nem_ListFieldPiiConfig_Handler,
+		},
+		{
+			MethodName: "CreateFieldPiiConfig",
+			Handler:    _Nem_CreateFieldPiiConfig_Handler,
+		},
+		{
+			MethodName: "UpdateFieldPiiConfig",
+			Handler:    _Nem_UpdateFieldPiiConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

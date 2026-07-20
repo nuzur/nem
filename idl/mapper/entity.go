@@ -29,6 +29,7 @@ func EntityToProto(e main_entity.Entity) *pb.Entity {
 		CreatedByUuid:        e.CreatedByUUID.String(),
 		UpdatedByUuid:        e.UpdatedByUUID.String(),
 		DataManagementConfig: EntityDataManagementConfigToProto(e.DataManagementConfig),
+		Visibility:           VisibilitySliceToProto(e.Visibility),
 	}
 }
 
@@ -59,6 +60,7 @@ func EntityFromProto(m *pb.Entity) main_entity.Entity {
 		CreatedByUUID:        StringToUUID(m.GetCreatedByUuid()),
 		UpdatedByUUID:        StringToUUID(m.GetUpdatedByUuid()),
 		DataManagementConfig: EntityDataManagementConfigFromProto(m.GetDataManagementConfig()),
+		Visibility:           VisibilitySliceFromProto(m.GetVisibility()),
 	}
 }
 

@@ -12,6 +12,7 @@ import (
 	"github.com/nuzur/nem/core/entity/entity_data_management_config"
 	"github.com/nuzur/nem/core/entity/entity_type_config"
 	"github.com/nuzur/nem/core/entity/field"
+	"github.com/nuzur/nem/core/entity/visibility"
 	"github.com/nuzur/nem/enums"
 	"time"
 
@@ -33,6 +34,7 @@ type Entity struct {
 	CreatedByUUID        uuid.UUID                                                `json:"created_by_uuid"`
 	UpdatedByUUID        uuid.UUID                                                `json:"updated_by_uuid"`
 	DataManagementConfig entity_data_management_config.EntityDataManagementConfig `json:"data_management_config"`
+	Visibility           []visibility.Visibility                                  `json:"visibility"`
 }
 
 func (e Entity) String() string {

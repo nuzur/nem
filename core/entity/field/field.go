@@ -8,6 +8,7 @@ import (
 
 	"github.com/gofrs/uuid"
 	"github.com/guregu/null/v6"
+	"github.com/nuzur/nem/core/entity/field_pii_config"
 	"github.com/nuzur/nem/core/entity/field_type_config"
 	"github.com/nuzur/nem/enums"
 	"time"
@@ -33,6 +34,8 @@ type Field struct {
 	UpdatedAt        time.Time                         `json:"updated_at"`
 	CreatedByUUID    uuid.UUID                         `json:"created_by_uuid"`
 	UpdatedByUUID    uuid.UUID                         `json:"updated_by_uuid"`
+	Pii              bool                              `json:"pii"`
+	PiiConfig        field_pii_config.FieldPiiConfig   `json:"pii_config"`
 }
 
 func (e Field) String() string {

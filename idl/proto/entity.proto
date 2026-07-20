@@ -16,6 +16,7 @@ import "entity_type_config.proto";
 import "enums.proto";
 import "field.proto";
 import "google/protobuf/timestamp.proto";
+import "visibility.proto";
 
 message Entity {  
     string uuid = 1;
@@ -31,5 +32,6 @@ message Entity {
     google.protobuf.Timestamp updated_at = 11;
     string created_by_uuid = 12;
     string updated_by_uuid = 13;
-    EntityDataManagementConfig data_management_config = 14;    
+    EntityDataManagementConfig data_management_config = 14;
+    repeated Visibility visibility = 15;    
 }

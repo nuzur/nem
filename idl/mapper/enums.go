@@ -1146,3 +1146,18 @@ func DeploymentRevisionStatusSliceFromProto(s []pb.DeploymentRevisionStatus) []e
 	}
 	return res
 }
+
+func FieldPiiConfigMaskStrategySliceToProto(s []enums.FieldPiiConfigMaskStrategy) []pb.FieldPiiConfigMaskStrategy {
+	res := []pb.FieldPiiConfigMaskStrategy{}
+	for _, e := range s {
+		res = append(res, pb.FieldPiiConfigMaskStrategy(e))
+	}
+	return res
+}
+func FieldPiiConfigMaskStrategySliceFromProto(s []pb.FieldPiiConfigMaskStrategy) []enums.FieldPiiConfigMaskStrategy {
+	res := []enums.FieldPiiConfigMaskStrategy{}
+	for _, e := range s {
+		res = append(res, enums.FieldPiiConfigMaskStrategy(e))
+	}
+	return res
+}

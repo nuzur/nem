@@ -473,6 +473,34 @@ func teamDeclarations() *filtering.Declarations {
 
 		//field_type_config
 
+		//visibility
+
+		filtering.DeclareIdent("visibility.uuid", filtering.TypeString),
+
+		filtering.DeclareIdent("visibility.description", filtering.TypeString),
+
+		filtering.DeclareIdent("visibility.organization_uuids", filtering.TypeString),
+
+		filtering.DeclareIdent("visibility.team_uuids", filtering.TypeString),
+
+		filtering.DeclareIdent("visibility.user_uuids", filtering.TypeString),
+
+		filtering.DeclareEnumIdent("visibility.roles", pb.VisibilityRoles(0).Type()),
+
+		filtering.DeclareIdent("visibility.created_at", filtering.TypeTimestamp),
+
+		filtering.DeclareIdent("visibility.updated_at", filtering.TypeTimestamp),
+
+		filtering.DeclareIdent("visibility.created_by_uuid", filtering.TypeString),
+
+		filtering.DeclareIdent("visibility.updated_by_uuid", filtering.TypeString),
+
+		//field_pii_config
+
+		filtering.DeclareEnumIdent("field_pii_config.mask_strategy", pb.FieldPiiConfigMaskStrategy(0).Type()),
+
+		filtering.DeclareIdent("field_pii_config.custom_mask_template", filtering.TypeString),
+
 		//field
 
 		filtering.DeclareIdent("field.uuid", filtering.TypeString),
@@ -506,6 +534,8 @@ func teamDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("field.created_by_uuid", filtering.TypeString),
 
 		filtering.DeclareIdent("field.updated_by_uuid", filtering.TypeString),
+
+		filtering.DeclareIdent("field.pii", filtering.TypeBool),
 
 		//entity_version_type_field_config
 

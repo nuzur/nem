@@ -9,6 +9,7 @@ import (
 	"github.com/nuzur/nem/core/entity/entity_data_management_config"
 	"github.com/nuzur/nem/core/entity/entity_type_config"
 	"github.com/nuzur/nem/core/entity/field"
+	"github.com/nuzur/nem/core/entity/visibility"
 )
 
 func (e Entity) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
@@ -27,6 +28,7 @@ func (e Entity) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 		"created_by_uuid":        entitytypes.StringFieldType,
 		"updated_by_uuid":        entitytypes.StringFieldType,
 		"data_management_config": entitytypes.MultiDependantEntityFieldType,
+		"visibility":             entitytypes.SingleDependantEntityFieldType,
 	}
 }
 
@@ -46,6 +48,7 @@ func (e Entity) OrderedFieldIdentifiers() []string {
 	res = append(res, "created_by_uuid")
 	res = append(res, "updated_by_uuid")
 	res = append(res, "data_management_config")
+	res = append(res, "visibility")
 
 	return res
 }
@@ -57,6 +60,7 @@ func (e Entity) DependantFieldIdentifierToTypeMap() map[string]map[string]entity
 	res["type_config"] = entity_type_config.EntityTypeConfig{}.FieldIdentifierToTypeMap()
 	res["render"] = element_render.ElementRender{}.FieldIdentifierToTypeMap()
 	res["data_management_config"] = entity_data_management_config.EntityDataManagementConfig{}.FieldIdentifierToTypeMap()
+	res["visibility"] = visibility.Visibility{}.FieldIdentifierToTypeMap()
 	return res
 }
 

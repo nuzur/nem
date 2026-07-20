@@ -55,13 +55,6 @@ SET
 WHERE
 `uuid` = ?;
 
--- name: UpdateProjectVersion :exec
-UPDATE `project_version`
-SET
-`version` = ?, `identifier` = ?, `description` = ?, `project_uuid` = ?, `entities` = ?, `relationships` = ?, `enums` = ?, `services` = ?, `base_version_uuid` = ?, `review_status` = ?, `deployments` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
-WHERE
-`uuid` = ?;
-
 -- name: UpdateAutomation :exec
 UPDATE `automation`
 SET
@@ -69,10 +62,24 @@ SET
 WHERE
 `uuid` = ?;
 
+-- name: UpdateProjectVersion :exec
+UPDATE `project_version`
+SET
+`version` = ?, `identifier` = ?, `description` = ?, `project_uuid` = ?, `entities` = ?, `relationships` = ?, `enums` = ?, `services` = ?, `base_version_uuid` = ?, `review_status` = ?, `deployments` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+WHERE
+`uuid` = ?;
+
 -- name: UpdateUserProject :exec
 UPDATE `user_project`
 SET
 `user_uuid` = ?, `user_email` = ?, `project_uuid` = ?, `role` = ?, `review_required_structure` = ?, `review_required_data` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+WHERE
+`uuid` = ?;
+
+-- name: UpdateAiUsage :exec
+UPDATE `ai_usage`
+SET
+`user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `user_prompt` = ?, `step` = ?, `context` = ?, `provider` = ?, `input_tokens` = ?, `output_tokens` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
 WHERE
 `uuid` = ?;
 
@@ -90,10 +97,10 @@ SET
 WHERE
 `uuid` = ?;
 
--- name: UpdateAiUsage :exec
-UPDATE `ai_usage`
+-- name: UpdateChangeRequest :exec
+UPDATE `change_request`
 SET
-`user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `user_prompt` = ?, `step` = ?, `context` = ?, `provider` = ?, `input_tokens` = ?, `output_tokens` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+`version` = ?, `title` = ?, `description` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `change_type` = ?, `data_changes` = ?, `metadata` = ?, `reviews` = ?, `review_status` = ?, `owner_uuid` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?, `ai_generated` = ?, `scope` = ?, `scope_config` = ?
 WHERE
 `uuid` = ?;
 
@@ -101,13 +108,6 @@ WHERE
 UPDATE `extension_execution`
 SET
 `extension_uuid` = ?, `extension_version_uuid` = ?, `project_extension_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `executed_by_uuid` = ?, `metadata` = ?, `status` = ?, `status_msg` = ?, `created_at` = ?, `updated_at` = ?, `queue_priority` = ?, `last_heartbeat_at` = ?
-WHERE
-`uuid` = ?;
-
--- name: UpdateChangeRequest :exec
-UPDATE `change_request`
-SET
-`version` = ?, `title` = ?, `description` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `change_type` = ?, `data_changes` = ?, `metadata` = ?, `reviews` = ?, `review_status` = ?, `owner_uuid` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?, `ai_generated` = ?, `scope` = ?, `scope_config` = ?
 WHERE
 `uuid` = ?;
 

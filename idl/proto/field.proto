@@ -11,6 +11,7 @@ package nem;
 
 
 import "enums.proto";
+import "field_pii_config.proto";
 import "field_type_config.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -31,5 +32,7 @@ message Field {
     google.protobuf.Timestamp created_at = 14;
     google.protobuf.Timestamp updated_at = 15;
     string created_by_uuid = 16;
-    string updated_by_uuid = 17;    
+    string updated_by_uuid = 17;
+    bool pii = 18;
+    FieldPiiConfig pii_config = 19;    
 }

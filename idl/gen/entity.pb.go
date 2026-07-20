@@ -40,6 +40,7 @@ type Entity struct {
 	CreatedByUuid        string                      `protobuf:"bytes,12,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
 	UpdatedByUuid        string                      `protobuf:"bytes,13,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
 	DataManagementConfig *EntityDataManagementConfig `protobuf:"bytes,14,opt,name=data_management_config,json=dataManagementConfig,proto3" json:"data_management_config,omitempty"`
+	Visibility           []*Visibility               `protobuf:"bytes,15,rep,name=visibility,proto3" json:"visibility,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -172,11 +173,18 @@ func (x *Entity) GetDataManagementConfig() *EntityDataManagementConfig {
 	return nil
 }
 
+func (x *Entity) GetVisibility() []*Visibility {
+	if x != nil {
+		return x.Visibility
+	}
+	return nil
+}
+
 var File_entity_proto protoreflect.FileDescriptor
 
 const file_entity_proto_rawDesc = "" +
 	"\n" +
-	"\fentity.proto\x12\x03nem\x1a\x14element_render.proto\x1a#entity_data_management_config.proto\x1a\x18entity_type_config.proto\x1a\venums.proto\x1a\vfield.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xed\x04\n" +
+	"\fentity.proto\x12\x03nem\x1a\x14element_render.proto\x1a#entity_data_management_config.proto\x1a\x18entity_type_config.proto\x1a\venums.proto\x1a\vfield.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x10visibility.proto\"\x9e\x05\n" +
 	"\x06Entity\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x1e\n" +
@@ -198,7 +206,10 @@ const file_entity_proto_rawDesc = "" +
 	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
 	"\x0fcreated_by_uuid\x18\f \x01(\tR\rcreatedByUuid\x12&\n" +
 	"\x0fupdated_by_uuid\x18\r \x01(\tR\rupdatedByUuid\x12U\n" +
-	"\x16data_management_config\x18\x0e \x01(\v2\x1f.nem.EntityDataManagementConfigR\x14dataManagementConfigB-\n" +
+	"\x16data_management_config\x18\x0e \x01(\v2\x1f.nem.EntityDataManagementConfigR\x14dataManagementConfig\x12/\n" +
+	"\n" +
+	"visibility\x18\x0f \x03(\v2\x0f.nem.VisibilityR\n" +
+	"visibilityB-\n" +
 	"\x14github.com/nuzur/nemB\x06EntityP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -223,6 +234,7 @@ var file_entity_proto_goTypes = []any{
 	(EntityStatus)(0),                  // 5: nem.EntityStatus
 	(*timestamppb.Timestamp)(nil),      // 6: google.protobuf.Timestamp
 	(*EntityDataManagementConfig)(nil), // 7: nem.EntityDataManagementConfig
+	(*Visibility)(nil),                 // 8: nem.Visibility
 }
 var file_entity_proto_depIdxs = []int32{
 	1, // 0: nem.Entity.fields:type_name -> nem.Field
@@ -233,11 +245,12 @@ var file_entity_proto_depIdxs = []int32{
 	6, // 5: nem.Entity.created_at:type_name -> google.protobuf.Timestamp
 	6, // 6: nem.Entity.updated_at:type_name -> google.protobuf.Timestamp
 	7, // 7: nem.Entity.data_management_config:type_name -> nem.EntityDataManagementConfig
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	8, // 8: nem.Entity.visibility:type_name -> nem.Visibility
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_entity_proto_init() }
@@ -250,6 +263,7 @@ func file_entity_proto_init() {
 	file_entity_type_config_proto_init()
 	file_enums_proto_init()
 	file_field_proto_init()
+	file_visibility_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

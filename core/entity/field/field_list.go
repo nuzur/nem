@@ -5,6 +5,7 @@ package field
 import (
 	entitytypes "github.com/nuzur/nem/core/entity/types"
 
+	"github.com/nuzur/nem/core/entity/field_pii_config"
 	"github.com/nuzur/nem/core/entity/field_type_config"
 )
 
@@ -27,6 +28,8 @@ func (e Field) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 		"updated_at":         entitytypes.TimestampFieldType,
 		"created_by_uuid":    entitytypes.StringFieldType,
 		"updated_by_uuid":    entitytypes.StringFieldType,
+		"pii":                entitytypes.BooleanFieldType,
+		"pii_config":         entitytypes.MultiDependantEntityFieldType,
 	}
 }
 
@@ -49,6 +52,8 @@ func (e Field) OrderedFieldIdentifiers() []string {
 	res = append(res, "updated_at")
 	res = append(res, "created_by_uuid")
 	res = append(res, "updated_by_uuid")
+	res = append(res, "pii")
+	res = append(res, "pii_config")
 
 	return res
 }
@@ -57,6 +62,7 @@ func (e Field) DependantFieldIdentifierToTypeMap() map[string]map[string]entityt
 	res := make(map[string]map[string]entitytypes.FieldType)
 
 	res["type_config"] = field_type_config.FieldTypeConfig{}.FieldIdentifierToTypeMap()
+	res["pii_config"] = field_pii_config.FieldPiiConfig{}.FieldIdentifierToTypeMap()
 	return res
 }
 

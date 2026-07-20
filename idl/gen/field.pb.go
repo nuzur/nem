@@ -43,6 +43,8 @@ type Field struct {
 	UpdatedAt        *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	CreatedByUuid    string                 `protobuf:"bytes,16,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
 	UpdatedByUuid    string                 `protobuf:"bytes,17,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	Pii              bool                   `protobuf:"varint,18,opt,name=pii,proto3" json:"pii,omitempty"`
+	PiiConfig        *FieldPiiConfig        `protobuf:"bytes,19,opt,name=pii_config,json=piiConfig,proto3" json:"pii_config,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -196,11 +198,25 @@ func (x *Field) GetUpdatedByUuid() string {
 	return ""
 }
 
+func (x *Field) GetPii() bool {
+	if x != nil {
+		return x.Pii
+	}
+	return false
+}
+
+func (x *Field) GetPiiConfig() *FieldPiiConfig {
+	if x != nil {
+		return x.PiiConfig
+	}
+	return nil
+}
+
 var File_field_proto protoreflect.FileDescriptor
 
 const file_field_proto_rawDesc = "" +
 	"\n" +
-	"\vfield.proto\x12\x03nem\x1a\venums.proto\x1a\x17field_type_config.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf4\x04\n" +
+	"\vfield.proto\x12\x03nem\x1a\venums.proto\x1a\x16field_pii_config.proto\x1a\x17field_type_config.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xba\x05\n" +
 	"\x05Field\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x1e\n" +
@@ -226,7 +242,10 @@ const file_field_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12&\n" +
 	"\x0fcreated_by_uuid\x18\x10 \x01(\tR\rcreatedByUuid\x12&\n" +
-	"\x0fupdated_by_uuid\x18\x11 \x01(\tR\rupdatedByUuidB,\n" +
+	"\x0fupdated_by_uuid\x18\x11 \x01(\tR\rupdatedByUuid\x12\x10\n" +
+	"\x03pii\x18\x12 \x01(\bR\x03pii\x122\n" +
+	"\n" +
+	"pii_config\x18\x13 \x01(\v2\x13.nem.FieldPiiConfigR\tpiiConfigB,\n" +
 	"\x14github.com/nuzur/nemB\x05FieldP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -248,6 +267,7 @@ var file_field_proto_goTypes = []any{
 	(*FieldTypeConfig)(nil),       // 2: nem.FieldTypeConfig
 	(FieldStatus)(0),              // 3: nem.FieldStatus
 	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	(*FieldPiiConfig)(nil),        // 5: nem.FieldPiiConfig
 }
 var file_field_proto_depIdxs = []int32{
 	1, // 0: nem.Field.type:type_name -> nem.FieldType
@@ -255,11 +275,12 @@ var file_field_proto_depIdxs = []int32{
 	3, // 2: nem.Field.status:type_name -> nem.FieldStatus
 	4, // 3: nem.Field.created_at:type_name -> google.protobuf.Timestamp
 	4, // 4: nem.Field.updated_at:type_name -> google.protobuf.Timestamp
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	5, // 5: nem.Field.pii_config:type_name -> nem.FieldPiiConfig
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_field_proto_init() }
@@ -268,6 +289,7 @@ func file_field_proto_init() {
 		return
 	}
 	file_enums_proto_init()
+	file_field_pii_config_proto_init()
 	file_field_type_config_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

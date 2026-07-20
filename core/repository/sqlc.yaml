@@ -62,6 +62,7 @@ sql:
           currency_code: CurrencyCode
           current_value: CurrentValue
           custom: Custom
+          custom_mask_template: CustomMaskTemplate
           data: Data
           data_change_type: DataChangeType
           data_change_type_config: DataChangeTypeConfig
@@ -164,6 +165,7 @@ sql:
           location: Location
           machine_name: MachineName
           markdown: Markdown
+          mask_strategy: MaskStrategy
           max_elements: MaxElements
           max_files: MaxFiles
           max_size: MaxSize
@@ -197,6 +199,8 @@ sql:
           path: Path
           payload: Payload
           phone: Phone
+          pii: Pii
+          pii_config: PiiConfig
           port: Port
           postgres: Postgres
           priority: Priority
@@ -436,6 +440,7 @@ overrides:
       extension_execution: ExtensionExecution
       extension_version: ExtensionVersion
       field: Field
+      field_pii_config: FieldPiiConfig
       field_type_array_config: FieldTypeArrayConfig
       field_type_char_config: FieldTypeCharConfig
       field_type_config: FieldTypeConfig
