@@ -47,11 +47,11 @@ INSERT INTO `user_team`
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?);
 
--- name: InsertAutomation :execresult
-INSERT INTO `automation`
-(`uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+-- name: InsertUserProject :execresult
+INSERT INTO `user_project`
+(`uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertProjectVersion :execresult
 INSERT INTO `project_version`
@@ -59,23 +59,17 @@ INSERT INTO `project_version`
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
--- name: InsertUserProject :execresult
-INSERT INTO `user_project`
-(`uuid`,`user_uuid`,`user_email`,`project_uuid`,`role`,`review_required_structure`,`review_required_data`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+-- name: InsertAutomation :execresult
+INSERT INTO `automation`
+(`uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
--- name: InsertAiUsage :execresult
-INSERT INTO `ai_usage`
-(`uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+-- name: InsertExtensionExecution :execresult
+INSERT INTO `extension_execution`
+(`uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
-
--- name: InsertUserConnection :execresult
-INSERT INTO `user_connection`
-(`uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`)
-VALUES
-(?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertUserProjectVersion :execresult
 INSERT INTO `user_project_version`
@@ -83,17 +77,23 @@ INSERT INTO `user_project_version`
 VALUES
 (?,?,?,?,?,?,?,?,?,?);
 
+-- name: InsertAiUsage :execresult
+INSERT INTO `ai_usage`
+(`uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`user_prompt`,`step`,`context`,`provider`,`input_tokens`,`output_tokens`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+
 -- name: InsertChangeRequest :execresult
 INSERT INTO `change_request`
 (`uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`)
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
--- name: InsertExtensionExecution :execresult
-INSERT INTO `extension_execution`
-(`uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`)
+-- name: InsertUserConnection :execresult
+INSERT INTO `user_connection`
+(`uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertAutomationEvent :execresult
 INSERT INTO `automation_event`

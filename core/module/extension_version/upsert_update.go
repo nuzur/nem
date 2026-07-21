@@ -54,7 +54,18 @@ func (m *module) Update(
 		return types.UpsertResponse{}, err
 	}
 
-	req.ExtensionVersion.Version = time.Now().Unix()
+	// Bump the optimistic-concurrency token. It is a unix-second timestamp, but two
+	// writes in the same second would otherwise mint the same token and weaken the
+	// compare-and-swap above (a second concurrent writer could pass the check and
+	// silently overwrite). Force it strictly greater than the row we just read so
+	// the token is monotonic even under sub-second contention.
+	{
+		newVersion := time.Now().Unix()
+		if newVersion <= existing[0].Version {
+			newVersion = existing[0].Version + 1
+		}
+		req.ExtensionVersion.Version = newVersion
+	}
 
 	// refresh server-managed timestamps that update on every write (updated_at)
 	req.ExtensionVersion.UpdatedAt = time.Now()

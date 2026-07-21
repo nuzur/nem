@@ -55,10 +55,10 @@ SET
 WHERE
 `uuid` = ?;
 
--- name: UpdateAutomation :exec
-UPDATE `automation`
+-- name: UpdateUserProject :exec
+UPDATE `user_project`
 SET
-`project_uuid` = ?, `entity_uuid` = ?, `name` = ?, `operation` = ?, `condition` = ?, `action_type` = ?, `action_config` = ?, `enabled` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+`user_uuid` = ?, `user_email` = ?, `project_uuid` = ?, `role` = ?, `review_required_structure` = ?, `review_required_data` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
 WHERE
 `uuid` = ?;
 
@@ -69,24 +69,17 @@ SET
 WHERE
 `uuid` = ?;
 
--- name: UpdateUserProject :exec
-UPDATE `user_project`
+-- name: UpdateAutomation :exec
+UPDATE `automation`
 SET
-`user_uuid` = ?, `user_email` = ?, `project_uuid` = ?, `role` = ?, `review_required_structure` = ?, `review_required_data` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+`project_uuid` = ?, `entity_uuid` = ?, `name` = ?, `operation` = ?, `condition` = ?, `action_type` = ?, `action_config` = ?, `enabled` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
 WHERE
 `uuid` = ?;
 
--- name: UpdateAiUsage :exec
-UPDATE `ai_usage`
+-- name: UpdateExtensionExecution :exec
+UPDATE `extension_execution`
 SET
-`user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `user_prompt` = ?, `step` = ?, `context` = ?, `provider` = ?, `input_tokens` = ?, `output_tokens` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
-WHERE
-`uuid` = ?;
-
--- name: UpdateUserConnection :exec
-UPDATE `user_connection`
-SET
-`user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `type` = ?, `type_config` = ?, `db_schema` = ?, `executions` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?
+`extension_uuid` = ?, `extension_version_uuid` = ?, `project_extension_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `executed_by_uuid` = ?, `metadata` = ?, `status` = ?, `status_msg` = ?, `created_at` = ?, `updated_at` = ?, `queue_priority` = ?, `last_heartbeat_at` = ?
 WHERE
 `uuid` = ?;
 
@@ -97,6 +90,13 @@ SET
 WHERE
 `uuid` = ?;
 
+-- name: UpdateAiUsage :exec
+UPDATE `ai_usage`
+SET
+`user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `user_prompt` = ?, `step` = ?, `context` = ?, `provider` = ?, `input_tokens` = ?, `output_tokens` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+WHERE
+`uuid` = ?;
+
 -- name: UpdateChangeRequest :exec
 UPDATE `change_request`
 SET
@@ -104,10 +104,10 @@ SET
 WHERE
 `uuid` = ?;
 
--- name: UpdateExtensionExecution :exec
-UPDATE `extension_execution`
+-- name: UpdateUserConnection :exec
+UPDATE `user_connection`
 SET
-`extension_uuid` = ?, `extension_version_uuid` = ?, `project_extension_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `executed_by_uuid` = ?, `metadata` = ?, `status` = ?, `status_msg` = ?, `created_at` = ?, `updated_at` = ?, `queue_priority` = ?, `last_heartbeat_at` = ?
+`user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `type` = ?, `type_config` = ?, `db_schema` = ?, `executions` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?
 WHERE
 `uuid` = ?;
 

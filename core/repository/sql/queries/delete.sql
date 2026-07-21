@@ -39,8 +39,8 @@ DELETE FROM `user_team`
 WHERE
 `uuid` = ?;
 
--- name: DeleteAutomation :execresult
-DELETE FROM `automation`
+-- name: DeleteUserProject :execresult
+DELETE FROM `user_project`
 WHERE
 `uuid` = ?;
 
@@ -49,18 +49,13 @@ DELETE FROM `project_version`
 WHERE
 `uuid` = ?;
 
--- name: DeleteUserProject :execresult
-DELETE FROM `user_project`
+-- name: DeleteAutomation :execresult
+DELETE FROM `automation`
 WHERE
 `uuid` = ?;
 
--- name: DeleteAiUsage :execresult
-DELETE FROM `ai_usage`
-WHERE
-`uuid` = ?;
-
--- name: DeleteUserConnection :execresult
-DELETE FROM `user_connection`
+-- name: DeleteExtensionExecution :execresult
+DELETE FROM `extension_execution`
 WHERE
 `uuid` = ?;
 
@@ -69,13 +64,18 @@ DELETE FROM `user_project_version`
 WHERE
 `uuid` = ?;
 
+-- name: DeleteAiUsage :execresult
+DELETE FROM `ai_usage`
+WHERE
+`uuid` = ?;
+
 -- name: DeleteChangeRequest :execresult
 DELETE FROM `change_request`
 WHERE
 `uuid` = ?;
 
--- name: DeleteExtensionExecution :execresult
-DELETE FROM `extension_execution`
+-- name: DeleteUserConnection :execresult
+DELETE FROM `user_connection`
 WHERE
 `uuid` = ?;
 
