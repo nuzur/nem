@@ -19,15 +19,23 @@ func (m *module) FetchChangeRequestByAiGenerated(
 ) (types.FetchChangeRequestByAiGeneratedResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
+	queries := m.repository.Queries
+	if resolvedOpts.SQLTx != nil {
+		queries = queries.WithTx(resolvedOpts.SQLTx)
+	}
+	// A read inside a transaction must observe that transaction's own
+	// uncommitted writes, so it can neither be served from the shared cache nor
+	// be collapsed into another caller's in-flight query.
+	skipShared := resolvedOpts.SkipCache || resolvedOpts.SQLTx != nil
 	cacheKey := fmt.Sprintf("FetchChangeRequestByAiGenerated:%v", req)
-	if !resolvedOpts.SkipCache {
+	if !skipShared {
 		if cached, found := m.cache.Get(cacheKey); found {
 			return cached.(types.FetchChangeRequestByAiGeneratedResponse), nil
 		}
 	}
-	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
+	fetch := func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchChangeRequestByAiGenerated(
+			models, err := queries.FetchChangeRequestByAiGenerated(
 				ctx,
 				nemdb.FetchChangeRequestByAiGeneratedParams{
 					AiGenerated: req.AiGenerated,
@@ -49,12 +57,19 @@ func (m *module) FetchChangeRequestByAiGenerated(
 		err := errors.New("could not process request")
 
 		return types.FetchChangeRequestByAiGeneratedResponse{}, err
-	}) // end sg.Do
+	} // end fetch
+	var v any
+	var fetchErr error
+	if skipShared {
+		v, fetchErr = fetch()
+	} else {
+		v, fetchErr, _ = m.sg.Do(cacheKey, fetch)
+	}
 	if fetchErr != nil {
 		return types.FetchChangeRequestByAiGeneratedResponse{}, fetchErr
 	}
 	result := v.(types.FetchChangeRequestByAiGeneratedResponse)
-	if !resolvedOpts.SkipCache {
+	if !skipShared {
 		m.cache.Set(cacheKey, result, 0)
 	}
 	return result, nil

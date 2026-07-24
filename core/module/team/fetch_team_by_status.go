@@ -19,15 +19,23 @@ func (m *module) FetchTeamByStatus(
 ) (types.FetchTeamByStatusResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
+	queries := m.repository.Queries
+	if resolvedOpts.SQLTx != nil {
+		queries = queries.WithTx(resolvedOpts.SQLTx)
+	}
+	// A read inside a transaction must observe that transaction's own
+	// uncommitted writes, so it can neither be served from the shared cache nor
+	// be collapsed into another caller's in-flight query.
+	skipShared := resolvedOpts.SkipCache || resolvedOpts.SQLTx != nil
 	cacheKey := fmt.Sprintf("FetchTeamByStatus:%v", req)
-	if !resolvedOpts.SkipCache {
+	if !skipShared {
 		if cached, found := m.cache.Get(cacheKey); found {
 			return cached.(types.FetchTeamByStatusResponse), nil
 		}
 	}
-	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
+	fetch := func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchTeamByStatus(
+			models, err := queries.FetchTeamByStatus(
 				ctx,
 				nemdb.FetchTeamByStatusParams{
 					Status: req.Status.ToInt64(),
@@ -49,12 +57,19 @@ func (m *module) FetchTeamByStatus(
 		err := errors.New("could not process request")
 
 		return types.FetchTeamByStatusResponse{}, err
-	}) // end sg.Do
+	} // end fetch
+	var v any
+	var fetchErr error
+	if skipShared {
+		v, fetchErr = fetch()
+	} else {
+		v, fetchErr, _ = m.sg.Do(cacheKey, fetch)
+	}
 	if fetchErr != nil {
 		return types.FetchTeamByStatusResponse{}, fetchErr
 	}
 	result := v.(types.FetchTeamByStatusResponse)
-	if !resolvedOpts.SkipCache {
+	if !skipShared {
 		m.cache.Set(cacheKey, result, 0)
 	}
 	return result, nil

@@ -32,16 +32,27 @@ func (m *module) List(ctx context.Context,
 	}
 
 	resolvedOpts := applyAllOptions(opts)
+	// A read inside a transaction must observe that transaction's own
+	// uncommitted writes, so it runs on the transaction and can neither be
+	// served from the shared cache nor be collapsed into another caller's
+	// in-flight query.
+	var querier interface {
+		QueryContext(ctx context.Context, query string, args ...any) (*sql.Rows, error)
+	} = m.repository.DB
+	if resolvedOpts.SQLTx != nil {
+		querier = resolvedOpts.SQLTx
+	}
+	skipShared := resolvedOpts.SkipCache || resolvedOpts.SQLTx != nil
 	cacheKey := fmt.Sprintf("ListExtensionExecution:%v", request)
-	if !resolvedOpts.SkipCache {
+	if !skipShared {
 		if cached, found := m.cache.Get(cacheKey); found {
 			return cached.(types.ListResponse), nil
 		}
 	}
 
-	v, listErr, _ := m.sg.Do(cacheKey, func() (any, error) {
+	list := func() (any, error) {
 		var rows *sql.Rows
-		rows, err = m.repository.DB.QueryContext(ctx, query)
+		rows, err = querier.QueryContext(ctx, query)
 		if err != nil {
 
 			m.logger.Error("error in executing query for ListExtensionExecution", zap.String("query", query), zap.Error(err))
@@ -99,12 +110,19 @@ func (m *module) List(ctx context.Context,
 			ExtensionExecution: mapModelsToEntities(items),
 			HasNextPage:        hasNextPage,
 		}, nil
-	})
+	}
+	var v any
+	var listErr error
+	if skipShared {
+		v, listErr = list()
+	} else {
+		v, listErr, _ = m.sg.Do(cacheKey, list)
+	}
 	if listErr != nil {
 		return types.ListResponse{}, listErr
 	}
 	listResponse := v.(types.ListResponse)
-	if !resolvedOpts.SkipCache {
+	if !skipShared {
 		m.cache.Set(cacheKey, listResponse, 0)
 	}
 	return listResponse, nil

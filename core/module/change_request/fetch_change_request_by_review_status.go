@@ -19,15 +19,23 @@ func (m *module) FetchChangeRequestByReviewStatus(
 ) (types.FetchChangeRequestByReviewStatusResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
+	queries := m.repository.Queries
+	if resolvedOpts.SQLTx != nil {
+		queries = queries.WithTx(resolvedOpts.SQLTx)
+	}
+	// A read inside a transaction must observe that transaction's own
+	// uncommitted writes, so it can neither be served from the shared cache nor
+	// be collapsed into another caller's in-flight query.
+	skipShared := resolvedOpts.SkipCache || resolvedOpts.SQLTx != nil
 	cacheKey := fmt.Sprintf("FetchChangeRequestByReviewStatus:%v", req)
-	if !resolvedOpts.SkipCache {
+	if !skipShared {
 		if cached, found := m.cache.Get(cacheKey); found {
 			return cached.(types.FetchChangeRequestByReviewStatusResponse), nil
 		}
 	}
-	v, fetchErr, _ := m.sg.Do(cacheKey, func() (any, error) {
+	fetch := func() (any, error) {
 		if req.OrderBy == "" {
-			models, err := m.repository.Queries.FetchChangeRequestByReviewStatus(
+			models, err := queries.FetchChangeRequestByReviewStatus(
 				ctx,
 				nemdb.FetchChangeRequestByReviewStatusParams{
 					ReviewStatus: req.ReviewStatus.ToInt64(),
@@ -49,12 +57,19 @@ func (m *module) FetchChangeRequestByReviewStatus(
 		err := errors.New("could not process request")
 
 		return types.FetchChangeRequestByReviewStatusResponse{}, err
-	}) // end sg.Do
+	} // end fetch
+	var v any
+	var fetchErr error
+	if skipShared {
+		v, fetchErr = fetch()
+	} else {
+		v, fetchErr, _ = m.sg.Do(cacheKey, fetch)
+	}
 	if fetchErr != nil {
 		return types.FetchChangeRequestByReviewStatusResponse{}, fetchErr
 	}
 	result := v.(types.FetchChangeRequestByReviewStatusResponse)
-	if !resolvedOpts.SkipCache {
+	if !skipShared {
 		m.cache.Set(cacheKey, result, 0)
 	}
 	return result, nil

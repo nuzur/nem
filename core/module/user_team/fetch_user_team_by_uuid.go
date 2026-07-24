@@ -16,14 +16,22 @@ func (m *module) FetchUserTeamByUUID(
 ) (types.FetchUserTeamByUUIDResponse, error) {
 
 	resolvedOpts := applyAllOptions(opts)
+	queries := m.repository.Queries
+	if resolvedOpts.SQLTx != nil {
+		queries = queries.WithTx(resolvedOpts.SQLTx)
+	}
+	// A read inside a transaction must observe that transaction's own
+	// uncommitted writes, so it can neither be served from the shared cache nor
+	// be collapsed into another caller's in-flight query.
+	skipShared := resolvedOpts.SkipCache || resolvedOpts.SQLTx != nil
 	cacheKey := fmt.Sprintf("FetchUserTeamByUUID:%v", req)
-	if !resolvedOpts.SkipCache {
+	if !skipShared {
 		if cached, found := m.cache.Get(cacheKey); found {
 			return cached.(types.FetchUserTeamByUUIDResponse), nil
 		}
 	}
-	v, err, _ := m.sg.Do(cacheKey, func() (any, error) {
-		models, err := m.repository.Queries.FetchUserTeamByUUID(
+	fetch := func() (any, error) {
+		models, err := queries.FetchUserTeamByUUID(
 			ctx,
 			req.UUID.String(),
 		)
@@ -34,12 +42,19 @@ func (m *module) FetchUserTeamByUUID(
 		return types.FetchUserTeamByUUIDResponse{
 			Results: mapModelsToEntities(models),
 		}, nil
-	})
+	}
+	var v any
+	var err error
+	if skipShared {
+		v, err = fetch()
+	} else {
+		v, err, _ = m.sg.Do(cacheKey, fetch)
+	}
 	if err != nil {
 		return types.FetchUserTeamByUUIDResponse{}, err
 	}
 	result := v.(types.FetchUserTeamByUUIDResponse)
-	if !resolvedOpts.SkipCache {
+	if !skipShared {
 		m.cache.Set(cacheKey, result, 0)
 	}
 	return result, nil
