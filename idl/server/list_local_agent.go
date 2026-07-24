@@ -135,6 +135,8 @@ func local_agentDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("local_agent_connection.default_schema", filtering.TypeString),
 
+		filtering.DeclareIdent("local_agent_connection.shared_team_uuids", filtering.TypeString),
+
 		//local_agent
 
 		filtering.DeclareIdent("uuid", filtering.TypeString),

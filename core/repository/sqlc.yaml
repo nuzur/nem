@@ -249,6 +249,7 @@ sql:
           service_source_uuids: ServiceSourceUUIDs
           service_uuid: ServiceUUID
           services: Services
+          shared_team_uuids: SharedTeamUUIDs
           size: Size
           slug: Slug
           source_dir: SourceDir

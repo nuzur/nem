@@ -11,10 +11,11 @@ import (
 
 func LocalAgentConnectionToProto(e main_entity.LocalAgentConnection) *pb.LocalAgentConnection {
 	return &pb.LocalAgentConnection{
-		Uuid:          e.UUID.String(),
-		Name:          e.Name,
-		DbType:        pb.LocalAgentConnectionDbType(e.DbType),
-		DefaultSchema: e.DefaultSchema,
+		Uuid:            e.UUID.String(),
+		Name:            e.Name,
+		DbType:          pb.LocalAgentConnectionDbType(e.DbType),
+		DefaultSchema:   e.DefaultSchema,
+		SharedTeamUuids: UUIDSliceToStringSlice(e.SharedTeamUUIDs),
 	}
 }
 
@@ -31,10 +32,11 @@ func LocalAgentConnectionFromProto(m *pb.LocalAgentConnection) main_entity.Local
 		return main_entity.LocalAgentConnection{}
 	}
 	return main_entity.LocalAgentConnection{
-		UUID:          StringToUUID(m.GetUuid()),
-		Name:          m.GetName(),
-		DbType:        enums.LocalAgentConnectionDbType(m.GetDbType()),
-		DefaultSchema: m.GetDefaultSchema(),
+		UUID:            StringToUUID(m.GetUuid()),
+		Name:            m.GetName(),
+		DbType:          enums.LocalAgentConnectionDbType(m.GetDbType()),
+		DefaultSchema:   m.GetDefaultSchema(),
+		SharedTeamUUIDs: StringSliceToUUIDSlice(m.GetSharedTeamUuids()),
 	}
 }
 

@@ -13,10 +13,11 @@ import (
 )
 
 type LocalAgentConnection struct {
-	UUID          uuid.UUID                        `json:"uuid"`
-	Name          string                           `json:"name"`
-	DbType        enums.LocalAgentConnectionDbType `json:"db_type"`
-	DefaultSchema string                           `json:"default_schema"`
+	UUID            uuid.UUID                        `json:"uuid"`
+	Name            string                           `json:"name"`
+	DbType          enums.LocalAgentConnectionDbType `json:"db_type"`
+	DefaultSchema   string                           `json:"default_schema"`
+	SharedTeamUUIDs []uuid.UUID                      `json:"shared_team_uuids"`
 }
 
 func (e LocalAgentConnection) String() string {

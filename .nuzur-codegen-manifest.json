@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generator": "nuzur go-code-gen",
-  "generated_at": "2026-07-21T22:16:41Z",
+  "generated_at": "2026-07-24T02:05:21Z",
   "files": [
     "AI.md",
     "auth/keycloak/client.go",

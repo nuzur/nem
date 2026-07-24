@@ -24,13 +24,14 @@ const (
 )
 
 type LocalAgentConnection struct {
-	state         protoimpl.MessageState     `protogen:"open.v1"`
-	Uuid          string                     `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	Name          string                     `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	DbType        LocalAgentConnectionDbType `protobuf:"varint,3,opt,name=db_type,json=dbType,proto3,enum=nem.LocalAgentConnectionDbType" json:"db_type,omitempty"`
-	DefaultSchema string                     `protobuf:"bytes,4,opt,name=default_schema,json=defaultSchema,proto3" json:"default_schema,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState     `protogen:"open.v1"`
+	Uuid            string                     `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Name            string                     `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	DbType          LocalAgentConnectionDbType `protobuf:"varint,3,opt,name=db_type,json=dbType,proto3,enum=nem.LocalAgentConnectionDbType" json:"db_type,omitempty"`
+	DefaultSchema   string                     `protobuf:"bytes,4,opt,name=default_schema,json=defaultSchema,proto3" json:"default_schema,omitempty"`
+	SharedTeamUuids []string                   `protobuf:"bytes,5,rep,name=shared_team_uuids,json=sharedTeamUuids,proto3" json:"shared_team_uuids,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *LocalAgentConnection) Reset() {
@@ -91,16 +92,24 @@ func (x *LocalAgentConnection) GetDefaultSchema() string {
 	return ""
 }
 
+func (x *LocalAgentConnection) GetSharedTeamUuids() []string {
+	if x != nil {
+		return x.SharedTeamUuids
+	}
+	return nil
+}
+
 var File_local_agent_connection_proto protoreflect.FileDescriptor
 
 const file_local_agent_connection_proto_rawDesc = "" +
 	"\n" +
-	"\x1clocal_agent_connection.proto\x12\x03nem\x1a\venums.proto\"\x9f\x01\n" +
+	"\x1clocal_agent_connection.proto\x12\x03nem\x1a\venums.proto\"\xcb\x01\n" +
 	"\x14LocalAgentConnection\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x128\n" +
 	"\adb_type\x18\x03 \x01(\x0e2\x1f.nem.LocalAgentConnectionDbTypeR\x06dbType\x12%\n" +
-	"\x0edefault_schema\x18\x04 \x01(\tR\rdefaultSchemaB;\n" +
+	"\x0edefault_schema\x18\x04 \x01(\tR\rdefaultSchema\x12*\n" +
+	"\x11shared_team_uuids\x18\x05 \x03(\tR\x0fsharedTeamUuidsB;\n" +
 	"\x14github.com/nuzur/nemB\x14LocalAgentConnectionP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

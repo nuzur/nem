@@ -16,5 +16,6 @@ message LocalAgentConnection {
     string uuid = 1;
     string name = 2;
     LocalAgentConnectionDbType db_type = 3;
-    string default_schema = 4;    
+    string default_schema = 4;
+    repeated string shared_team_uuids = 5;    
 }

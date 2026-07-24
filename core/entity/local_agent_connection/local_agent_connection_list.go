@@ -8,10 +8,11 @@ import (
 
 func (e LocalAgentConnection) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"uuid":           entitytypes.StringFieldType,
-		"name":           entitytypes.StringFieldType,
-		"db_type":        entitytypes.SingleEnumFieldType,
-		"default_schema": entitytypes.StringFieldType,
+		"uuid":              entitytypes.StringFieldType,
+		"name":              entitytypes.StringFieldType,
+		"db_type":           entitytypes.SingleEnumFieldType,
+		"default_schema":    entitytypes.StringFieldType,
+		"shared_team_uuids": entitytypes.StringFieldType,
 	}
 }
 
@@ -21,6 +22,7 @@ func (e LocalAgentConnection) OrderedFieldIdentifiers() []string {
 	res = append(res, "name")
 	res = append(res, "db_type")
 	res = append(res, "default_schema")
+	res = append(res, "shared_team_uuids")
 
 	return res
 }
@@ -42,5 +44,6 @@ func (e LocalAgentConnection) PrimaryKeyIdentifiers() []string {
 func (e LocalAgentConnection) ArrayFieldIdentifierToType() map[string]entitytypes.FieldType {
 	res := make(map[string]entitytypes.FieldType)
 
+	res["shared_team_uuids"] = entitytypes.StringFieldType
 	return res
 }
