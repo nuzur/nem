@@ -11,10 +11,13 @@ import (
 
 func FieldTypeDatetimeConfigToProto(e main_entity.FieldTypeDatetimeConfig) *pb.FieldTypeDatetimeConfig {
 	return &pb.FieldTypeDatetimeConfig{
-		EnforceFuture:   e.EnforceFuture,
-		EnforcePast:     e.EnforcePast,
-		DisplayTimezone: e.DisplayTimezone.ValueOrZero(),
-		StorageTimezone: e.StorageTimezone.ValueOrZero(),
+		EnforceFuture:             e.EnforceFuture,
+		EnforcePast:               e.EnforcePast,
+		DisplayTimezone:           e.DisplayTimezone.ValueOrZero(),
+		StorageTimezone:           e.StorageTimezone.ValueOrZero(),
+		Precision:                 e.Precision,
+		OnUpdateCurrentTimestamp:  e.OnUpdateCurrentTimestamp,
+		NoDefaultCurrentTimestamp: e.NoDefaultCurrentTimestamp,
 	}
 }
 
@@ -31,10 +34,13 @@ func FieldTypeDatetimeConfigFromProto(m *pb.FieldTypeDatetimeConfig) main_entity
 		return main_entity.FieldTypeDatetimeConfig{}
 	}
 	return main_entity.FieldTypeDatetimeConfig{
-		EnforceFuture:   m.GetEnforceFuture(),
-		EnforcePast:     m.GetEnforcePast(),
-		DisplayTimezone: null.StringFrom(m.DisplayTimezone),
-		StorageTimezone: null.StringFrom(m.StorageTimezone),
+		EnforceFuture:             m.GetEnforceFuture(),
+		EnforcePast:               m.GetEnforcePast(),
+		DisplayTimezone:           null.StringFrom(m.DisplayTimezone),
+		StorageTimezone:           null.StringFrom(m.StorageTimezone),
+		Precision:                 m.GetPrecision(),
+		OnUpdateCurrentTimestamp:  m.GetOnUpdateCurrentTimestamp(),
+		NoDefaultCurrentTimestamp: m.GetNoDefaultCurrentTimestamp(),
 	}
 }
 

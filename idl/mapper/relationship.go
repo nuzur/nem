@@ -28,6 +28,8 @@ func RelationshipToProto(e main_entity.Relationship) *pb.Relationship {
 		UpdatedAt:     timestamppb.New(e.UpdatedAt),
 		CreatedByUuid: e.CreatedByUUID.String(),
 		UpdatedByUuid: e.UpdatedByUUID.String(),
+		OnDelete:      pb.RelationshipReferentialAction(e.OnDelete),
+		OnUpdate:      pb.RelationshipReferentialAction(e.OnUpdate),
 	}
 }
 
@@ -57,6 +59,8 @@ func RelationshipFromProto(m *pb.Relationship) main_entity.Relationship {
 		UpdatedAt:     m.GetUpdatedAt().AsTime(),
 		CreatedByUUID: StringToUUID(m.GetCreatedByUuid()),
 		UpdatedByUUID: StringToUUID(m.GetUpdatedByUuid()),
+		OnDelete:      enums.RelationshipReferentialAction(m.GetOnDelete()),
+		OnUpdate:      enums.RelationshipReferentialAction(m.GetOnUpdate()),
 	}
 }
 

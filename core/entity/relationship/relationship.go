@@ -16,19 +16,21 @@ import (
 )
 
 type Relationship struct {
-	UUID          uuid.UUID                          `json:"uuid"`
-	Version       int64                              `json:"version"`
-	Identifier    string                             `json:"identifier"`
-	Description   null.String                        `json:"description"`
-	Cardinality   enums.RelationshipCardinality      `json:"cardinality"`
-	From          relationship_node.RelationshipNode `json:"from"`
-	To            relationship_node.RelationshipNode `json:"to"`
-	UseForeignKey bool                               `json:"use_foreign_key"`
-	Status        enums.RelationshipStatus           `json:"status"`
-	CreatedAt     time.Time                          `json:"created_at"`
-	UpdatedAt     time.Time                          `json:"updated_at"`
-	CreatedByUUID uuid.UUID                          `json:"created_by_uuid"`
-	UpdatedByUUID uuid.UUID                          `json:"updated_by_uuid"`
+	UUID          uuid.UUID                           `json:"uuid"`
+	Version       int64                               `json:"version"`
+	Identifier    string                              `json:"identifier"`
+	Description   null.String                         `json:"description"`
+	Cardinality   enums.RelationshipCardinality       `json:"cardinality"`
+	From          relationship_node.RelationshipNode  `json:"from"`
+	To            relationship_node.RelationshipNode  `json:"to"`
+	UseForeignKey bool                                `json:"use_foreign_key"`
+	Status        enums.RelationshipStatus            `json:"status"`
+	CreatedAt     time.Time                           `json:"created_at"`
+	UpdatedAt     time.Time                           `json:"updated_at"`
+	CreatedByUUID uuid.UUID                           `json:"created_by_uuid"`
+	UpdatedByUUID uuid.UUID                           `json:"updated_by_uuid"`
+	OnDelete      enums.RelationshipReferentialAction `json:"on_delete"`
+	OnUpdate      enums.RelationshipReferentialAction `json:"on_update"`
 }
 
 func (e Relationship) String() string {

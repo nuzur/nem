@@ -17,25 +17,27 @@ import (
 )
 
 type Field struct {
-	UUID             uuid.UUID                         `json:"uuid"`
-	Version          int64                             `json:"version"`
-	Identifier       string                            `json:"identifier"`
-	Description      null.String                       `json:"description"`
-	Type             enums.FieldType                   `json:"type"`
-	TypeConfig       field_type_config.FieldTypeConfig `json:"type_config"`
-	Required         bool                              `json:"required"`
-	Key              bool                              `json:"key"`
-	KeyAutoIncrement bool                              `json:"key_auto_increment"`
-	Unique           bool                              `json:"unique"`
-	Deprecated       bool                              `json:"deprecated"`
-	Generated        bool                              `json:"generated"`
-	Status           enums.FieldStatus                 `json:"status"`
-	CreatedAt        time.Time                         `json:"created_at"`
-	UpdatedAt        time.Time                         `json:"updated_at"`
-	CreatedByUUID    uuid.UUID                         `json:"created_by_uuid"`
-	UpdatedByUUID    uuid.UUID                         `json:"updated_by_uuid"`
-	Pii              bool                              `json:"pii"`
-	PiiConfig        field_pii_config.FieldPiiConfig   `json:"pii_config"`
+	UUID                     uuid.UUID                         `json:"uuid"`
+	Version                  int64                             `json:"version"`
+	Identifier               string                            `json:"identifier"`
+	Description              null.String                       `json:"description"`
+	Type                     enums.FieldType                   `json:"type"`
+	TypeConfig               field_type_config.FieldTypeConfig `json:"type_config"`
+	Required                 bool                              `json:"required"`
+	Key                      bool                              `json:"key"`
+	KeyAutoIncrement         bool                              `json:"key_auto_increment"`
+	Unique                   bool                              `json:"unique"`
+	Deprecated               bool                              `json:"deprecated"`
+	Generated                bool                              `json:"generated"`
+	Status                   enums.FieldStatus                 `json:"status"`
+	CreatedAt                time.Time                         `json:"created_at"`
+	UpdatedAt                time.Time                         `json:"updated_at"`
+	CreatedByUUID            uuid.UUID                         `json:"created_by_uuid"`
+	UpdatedByUUID            uuid.UUID                         `json:"updated_by_uuid"`
+	Pii                      bool                              `json:"pii"`
+	PiiConfig                field_pii_config.FieldPiiConfig   `json:"pii_config"`
+	DefaultValue             null.String                       `json:"default_value"`
+	DefaultValueIsExpression bool                              `json:"default_value_is_expression"`
 }
 
 func (e Field) String() string {

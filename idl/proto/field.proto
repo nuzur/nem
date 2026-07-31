@@ -34,5 +34,19 @@ message Field {
     string created_by_uuid = 16;
     string updated_by_uuid = 17;
     bool pii = 18;
-    FieldPiiConfig pii_config = 19;    
+    FieldPiiConfig pii_config = 19;
+    // default_value is the column DEFAULT. Empty means no default is stated —
+    // which for a datetime field still yields DEFAULT CURRENT_TIMESTAMP unless
+    // its type_config sets no_default_current_timestamp (see there).
+    //
+    // A literal is rendered quoted for text-ish columns and bare for numeric and
+    // boolean ones; set default_value_is_expression to render it verbatim
+    // instead, which is how keyword defaults (CURRENT_TIMESTAMP, and the function
+    // calls an engine accepts) are expressed.
+    string default_value = 20;
+    // default_value_is_expression renders default_value verbatim rather than as a
+    // literal: CURRENT_TIMESTAMP, CURRENT_TIMESTAMP(3), now(), gen_random_uuid().
+    // The expression is not translated between engines — it is emitted as
+    // written, so it has to be valid on every engine the project deploys to.
+    bool default_value_is_expression = 21;
 }

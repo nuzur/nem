@@ -12,10 +12,13 @@ import (
 )
 
 type FieldTypeDatetimeConfig struct {
-	EnforceFuture   bool        `json:"enforce_future"`
-	EnforcePast     bool        `json:"enforce_past"`
-	DisplayTimezone null.String `json:"display_timezone"`
-	StorageTimezone null.String `json:"storage_timezone"`
+	EnforceFuture             bool        `json:"enforce_future"`
+	EnforcePast               bool        `json:"enforce_past"`
+	DisplayTimezone           null.String `json:"display_timezone"`
+	StorageTimezone           null.String `json:"storage_timezone"`
+	Precision                 int64       `json:"precision"`
+	OnUpdateCurrentTimestamp  bool        `json:"on_update_current_timestamp"`
+	NoDefaultCurrentTimestamp bool        `json:"no_default_current_timestamp"`
 }
 
 func (e FieldTypeDatetimeConfig) String() string {
