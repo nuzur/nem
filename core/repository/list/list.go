@@ -31,7 +31,7 @@ func (i *Implementation) BuildListEntityQuery(
 	includeColumns := request.GetIncludeFields()
 	excludeColumns := request.GetExcludeFields()
 
-	columnsFinal := fmt.Sprintf("%s.*", entity.EntityIdentifier())
+	columnsFinal := fmt.Sprintf("%s.*", quoteIdent(entity.EntityIdentifier()))
 	if len(includeColumns) > 0 && len(excludeColumns) > 0 {
 		return "", errors.New("cannot use includeColumns and excludeColumns at the same time")
 	}
@@ -40,7 +40,7 @@ func (i *Implementation) BuildListEntityQuery(
 		fields := entity.OrderedFieldIdentifiers()
 		for _, c := range fields {
 			if slices.Contains(includeColumns, c) {
-				columns = append(columns, fmt.Sprintf("%s.%s", entity.EntityIdentifier(), c))
+				columns = append(columns, qualifiedColumn(entity.EntityIdentifier(), c))
 			}
 		}
 		if len(columns) > 0 {
@@ -51,7 +51,7 @@ func (i *Implementation) BuildListEntityQuery(
 		fields := entity.OrderedFieldIdentifiers()
 		for _, c := range fields {
 			if !slices.Contains(excludeColumns, c) {
-				columns = append(columns, fmt.Sprintf("%s.%s", entity.EntityIdentifier(), c))
+				columns = append(columns, qualifiedColumn(entity.EntityIdentifier(), c))
 			}
 		}
 		if len(columns) > 0 {
@@ -67,9 +67,14 @@ func (i *Implementation) BuildListEntityQuery(
 			request.GetFilter().CheckedExpr.Expr,
 			entity,
 			request.GetFilteringDeclarations(),
+			request.GetEnumValues(),
 			jsonTables)
 		if err != nil {
-			return "", err
+			// A clause the builder cannot express is the CALLER's problem, and it
+			// is reported as one. It must never fall through: an unreported
+			// failure here left whereClause empty and emitted `... WHERE  LIMIT
+			// 10 OFFSET 0`, i.e. a syntax error surfacing as a 500.
+			return "", &InvalidRequestError{Op: "filter", Err: err}
 		}
 	}
 
@@ -77,7 +82,7 @@ func (i *Implementation) BuildListEntityQuery(
 	if len(request.GetOrderBy().Fields) > 0 {
 		orderByClause, err = buildOrderByClause(request, entity, jsonTables)
 		if err != nil {
-			return "", err
+			return "", &InvalidRequestError{Op: "order_by", Err: err}
 		}
 	}
 
@@ -90,80 +95,111 @@ func (i *Implementation) BuildListEntityQuery(
 
 	limit := buildLimit(request)
 
+	joinStatement := ""
 	if request.GetJoinParams() != nil {
-		finalWhereClause := whereClause
+		joinStatement = request.GetJoinParams().JoinStatement
 		if request.GetJoinParams().JoinWhereClauses != "" {
-			finalWhereClause = fmt.Sprintf("%s AND (%s)", whereClause, request.GetJoinParams().JoinWhereClauses)
+			whereClause = fmt.Sprintf("%s AND (%s)", whereClause, request.GetJoinParams().JoinWhereClauses)
 		}
-		if onlyCount {
-			pks := entity.PrimaryKeyIdentifiers()
-			if len(pks) == 1 {
-				return fmt.Sprintf(
-					"SELECT DISTINCT count(%s.%s) FROM %s %s %s WHERE %s",
-					entity.EntityIdentifier(),
-					pks[0],
-					entity.EntityIdentifier(),
-					request.GetJoinParams().JoinStatement,
-					jsonTablesFinal,
-					finalWhereClause,
-				), nil
-			}
-			return fmt.Sprintf(
-				"SELECT DISTINCT count(*) FROM %s %s %s WHERE %s",
-				entity.EntityIdentifier(),
-				request.GetJoinParams().JoinStatement,
-				jsonTablesFinal,
-				finalWhereClause,
-			), nil
-		}
-		return fmt.Sprintf(
-			"SELECT DISTINCT %s FROM %s %s %s WHERE %s %s %s",
-			columnsFinal,
-			entity.EntityIdentifier(),
-			request.GetJoinParams().JoinStatement,
-			jsonTablesFinal,
-			finalWhereClause,
-			orderByClause,
-			limit,
-		), nil
 	}
+
+	// The entity, then any caller-supplied join, then the lateral expansions a
+	// filter needed.
+	fromClause := squash(fmt.Sprintf("%s %s %s", quoteIdent(entity.EntityIdentifier()), joinStatement, jsonTablesFinal))
+
+	// A row of the entity appears more than once ONLY when the query joins
+	// something that fans out: a lateral/JSON_TABLE expansion built for a filter
+	// over an array embed, or a join the caller supplied. With neither, the FROM
+	// clause is the single entity table and every row is already unique — so
+	// there is nothing to de-duplicate, and de-duplicating anyway is not free:
+	//
+	// `SELECT DISTINCT` compares whole projected rows, and neither engine can
+	// compare a JSON value. Postgres has no equality operator for `json` at all
+	// ("could not identify an equality operator for type json"), and MySQL
+	// rejects JSON in DISTINCT before 8.0. Since an entity with an embed, a raw
+	// json field or an array almost always projects that column, an
+	// unconditional DISTINCT made whole list endpoints fail outright. It also
+	// made `SELECT DISTINCT ... ORDER BY <expr>` illegal in Postgres whenever the
+	// sort expression was not in the select list, which is every sort over a
+	// dependant field.
+	//
+	// When there IS fan-out, de-duplication is spelled `GROUP BY <primary key>`
+	// rather than DISTINCT: it dedupes exactly the fan-out, never compares a json
+	// column, and is legal on both engines because the remaining columns are
+	// functionally dependent on the key. DISTINCT survives only for an entity
+	// with no primary key to group by, where there is no alternative.
+	pks := qualifyColumns(entity, entity.PrimaryKeyIdentifiers())
+	fansOut := len(jsonTablesSlice) > 0 || joinStatement != ""
+	selectModifier := ""
+	groupByClause := ""
+	if fansOut {
+		if len(pks) > 0 {
+			groupByClause = "GROUP BY " + strings.Join(pks, ", ")
+		} else {
+			selectModifier = "DISTINCT "
+		}
+	}
+
 	if onlyCount {
-		pks := entity.PrimaryKeyIdentifiers()
-		if len(pks) == 1 {
-			return fmt.Sprintf(
-				"SELECT DISTINCT count(%s.%s) FROM %s %s WHERE %s",
-				entity.EntityIdentifier(),
-				pks[0],
-				entity.EntityIdentifier(),
-				jsonTablesFinal,
-				whereClause,
-			), nil
+		// count() collapses to one row, so DISTINCT on the select list never did
+		// anything here. Deduping a fanned-out count means counting distinct
+		// keys.
+		countExpr := "count(*)"
+		if len(pks) > 0 {
+			if fansOut {
+				countExpr = countDistinct(pks)
+			} else {
+				countExpr = fmt.Sprintf("count(%s)", pks[0])
+			}
 		}
-		return fmt.Sprintf(
-			"SELECT DISTINCT count(*) FROM %s %s WHERE %s",
-			entity.EntityIdentifier(),
-			jsonTablesFinal,
+		return squash(fmt.Sprintf(
+			"SELECT %s FROM %s WHERE %s",
+			countExpr,
+			fromClause,
 			whereClause,
-		), nil
+		)), nil
 	}
-	return fmt.Sprintf(
-		"SELECT DISTINCT %s FROM %s %s WHERE %s %s %s",
+
+	return squash(fmt.Sprintf(
+		"SELECT %s%s FROM %s WHERE %s %s %s %s",
+		selectModifier,
 		columnsFinal,
-		entity.EntityIdentifier(),
-		jsonTablesFinal,
+		fromClause,
 		whereClause,
+		groupByClause,
 		orderByClause,
 		limit,
-	), nil
+	)), nil
 }
 
-func buildWhereClauses(ex *expr.Expr, entity ListEntity, declarations *filtering.Declarations, jsonTables map[string]string) (string, error) {
+// qualifyColumns prefixes each column with the entity table so that a column
+// name a caller-supplied join also carries stays unambiguous. Both parts are
+// quoted for the engine — see qualifiedColumn.
+func qualifyColumns(entity ListEntity, columns []string) []string {
+	res := make([]string, 0, len(columns))
+	for _, c := range columns {
+		res = append(res, qualifiedColumn(entity.EntityIdentifier(), c))
+	}
+	return res
+}
+
+// squash collapses the runs of whitespace that the optional clauses leave behind
+// when they are empty, and trims the ends. Purely cosmetic for the engine, but
+// it keeps the emitted SQL (which is logged, and asserted on in tests) readable.
+func squash(query string) string {
+	return strings.Join(strings.Fields(query), " ")
+}
+
+func buildWhereClauses(ex *expr.Expr, entity ListEntity, declarations *filtering.Declarations, enumValues map[string]map[string]int64, jsonTables map[string]string) (string, error) {
 	cex := ex.GetCallExpr()
 	if cex != nil {
 		if isBaseFunction(cex.Function) {
-			res, err := buildSingleClause(cex, entity, declarations)
+			res, err := buildSingleClause(cex, entity, declarations, enumValues)
 			if err != nil {
-				return "", nil
+				// Propagate. Discarding the error here (`return "", nil`) is what
+				// turned "this filter cannot be built" into an EMPTY where clause
+				// and therefore into malformed SQL and a 500, instead of a 400.
+				return "", err
 			}
 			if res.JSONTable != "" {
 				if _, found := jsonTables[res.JSONTableName]; !found {
@@ -181,11 +217,11 @@ func buildWhereClauses(ex *expr.Expr, entity ListEntity, declarations *filtering
 			operator = "OR"
 		}
 
-		left, err := buildWhereClauses(cex.Args[0], entity, declarations, jsonTables)
+		left, err := buildWhereClauses(cex.Args[0], entity, declarations, enumValues, jsonTables)
 		if err != nil {
 			return "", err
 		}
-		right, err := buildWhereClauses(cex.Args[1], entity, declarations, jsonTables)
+		right, err := buildWhereClauses(cex.Args[1], entity, declarations, enumValues, jsonTables)
 		if err != nil {
 			return "", err
 		}
@@ -194,7 +230,7 @@ func buildWhereClauses(ex *expr.Expr, entity ListEntity, declarations *filtering
 	return "", errors.New("invalid call expression")
 }
 
-func buildSingleClause(cex *expr.Expr_Call, entity ListEntity, declarations *filtering.Declarations) (SingleClauseResponse, error) {
+func buildSingleClause(cex *expr.Expr_Call, entity ListEntity, declarations *filtering.Declarations, enumValues map[string]map[string]int64) (SingleClauseResponse, error) {
 	if len(cex.Args) != 2 {
 		return SingleClauseResponse{}, errors.New("invalid argument count")
 	}
@@ -214,14 +250,31 @@ func buildSingleClause(cex *expr.Expr_Call, entity ListEntity, declarations *fil
 	request := SingleClauseRequest{
 		cex:                      cex,
 		declarations:             declarations,
+		enumValues:               enumValues,
 		fieldIdentifier:          fieldIdentifier,
 		isDependant:              isDependant,
 		dependantFieldIdentifier: dependantField,
 		entity:                   entity,
 	}
 
+	// FieldIdentifierToTypeMap is keyed by the entity's own FIELD identifier —
+	// which, for a filter over a dependant embed, is the HOST field (the json
+	// column), not the embedded entity's name. The filter declarations the
+	// transports emit must use the same spelling, or this lookup misses, fieldType
+	// is the zero FieldType, and handleClauseByType reports "unsupported field
+	// type" for a field that exists. Reported by name so the mismatch is
+	// diagnosable rather than looking like an unsupported type.
 	fieldMap := entity.FieldIdentifierToTypeMap()
-	fieldType := fieldMap[fieldIdentifier]
+	fieldType, found := fieldMap[fieldIdentifier]
+	if !found {
+		return SingleClauseResponse{}, fmt.Errorf("unknown filter field %q on %s", fieldIdentifier, entity.EntityIdentifier())
+	}
+	if isDependant {
+		dependantMap := entity.DependantFieldIdentifierToTypeMap()[fieldIdentifier]
+		if _, ok := dependantMap[dependantField]; !ok {
+			return SingleClauseResponse{}, fmt.Errorf("unknown filter field %q on %s.%s", dependantField, entity.EntityIdentifier(), fieldIdentifier)
+		}
+	}
 	return handleClauseByType(request, entity, fieldType)
 }
 
@@ -257,7 +310,11 @@ func buildOrderByClause(request ListRequest, entity ListEntity, jsonTables map[s
 				order = "DESC"
 			}
 			if !f.isDependant {
-				orderByPairs = append(orderByPairs, fmt.Sprintf("%s %s", f.fieldIdentifier, order))
+				// Qualified AND quoted, like every other column reference the
+				// builder emits: an unquoted `ORDER BY order ASC` is a syntax
+				// error, and an unqualified name is ambiguous once a
+				// caller-supplied join carries the same column.
+				orderByPairs = append(orderByPairs, fmt.Sprintf("%s %s", qualifiedColumn(entity.EntityIdentifier(), f.fieldIdentifier), order))
 			} else if f.isDependantMulti {
 				/*
 					json_table_name, json_table := resolveJSONTable(SingleClauseRequest{
@@ -276,6 +333,10 @@ func buildOrderByClause(request ListRequest, entity ListEntity, jsonTables map[s
 					dependantFieldIdentifier: f.dependantFieldIdentifier,
 					isDependant:              f.isDependant,
 					isDependantMulti:         f.isDependantMulti,
+					// entity is required: buildJSONExtract qualifies the column with
+					// it. Leaving it nil panicked on any order-by over a dependant
+					// field.
+					entity: entity,
 				})
 				orderByPairs = append(orderByPairs, fmt.Sprintf("%s %s", left, order))
 			}
@@ -340,5 +401,10 @@ func isValidOrderby(request ListRequest, entity ListEntity) ([]OrderByField, err
 }
 
 func buildLimit(request ListRequest) string {
-	return fmt.Sprintf("LIMIT %d, %d ", request.GetOffset(), request.GetPageSize())
+	// `LIMIT <count> OFFSET <offset>` is the portable spelling: Postgres accepts
+	// only this form, while MySQL accepts it alongside its own `LIMIT <offset>,
+	// <count>`. The comma form is MySQL-only, and it made every generated Postgres
+	// list endpoint fail with `pq: LIMIT #,# syntax is not supported`.
+	// Note the operands are in the opposite order to the comma form.
+	return fmt.Sprintf("LIMIT %d OFFSET %d ", request.GetPageSize(), request.GetOffset())
 }

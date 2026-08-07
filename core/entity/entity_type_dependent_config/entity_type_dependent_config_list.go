@@ -8,8 +8,8 @@ import (
 
 func (e EntityTypeDependentConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"service_source_uuids": entitytypes.StringFieldType,
-		"entity_source_uuids":  entitytypes.StringFieldType,
+		"service_source_uuids": entitytypes.ArrayFieldType,
+		"entity_source_uuids":  entitytypes.ArrayFieldType,
 	}
 }
 

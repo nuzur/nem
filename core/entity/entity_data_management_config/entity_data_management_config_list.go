@@ -8,7 +8,7 @@ import (
 
 func (e EntityDataManagementConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"list_display_fields": entitytypes.StringFieldType,
+		"list_display_fields": entitytypes.ArrayFieldType,
 	}
 }
 

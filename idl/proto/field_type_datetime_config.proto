@@ -11,34 +11,12 @@ package nem;
 
 
 
-message FieldTypeDatetimeConfig {
+message FieldTypeDatetimeConfig {  
     bool enforce_future = 1;
     bool enforce_past = 2;
     string display_timezone = 3;
     string storage_timezone = 4;
-    // precision is the number of fractional-second digits the column stores:
-    // DATETIME(n) on mysql, TIMESTAMP(n) on postgres. 0 means unset, which keeps
-    // the bare type — and the two engines disagree about what bare means (mysql
-    // stores whole seconds, postgres microseconds), so set it explicitly when
-    // sub-second resolution matters. Introspection reports the engine's own
-    // default as unset so an imported schema renders the type it came from.
     int64 precision = 5;
-    // on_update_current_timestamp renders ON UPDATE CURRENT_TIMESTAMP, which
-    // makes the database refresh the column on every UPDATE.
-    //
-    // MYSQL ONLY. Postgres has no column-level equivalent — the same behavior
-    // needs a trigger, which nuzur does not generate — so a model that sets this
-    // and deploys to postgres gets a column that is never refreshed by the
-    // database. schemaops raises a mysql-only design warning rather than letting
-    // the divergence pass silently; the portable alternative is generated:true on
-    // an updated_at field, which the application layer fills on every write.
     bool on_update_current_timestamp = 6;
-    // no_default_current_timestamp suppresses the DEFAULT CURRENT_TIMESTAMP that
-    // datetime columns get when the field states no default_value.
-    //
-    // That implicit default predates per-field defaults and every existing model
-    // relies on it, so unset keeps it. Set this (or state a default_value) to opt
-    // out. Introspection sets it for a datetime column the database reports with
-    // no default, so re-rendering an imported schema does not invent one.
-    bool no_default_current_timestamp = 7;
+    bool no_default_current_timestamp = 7;    
 }

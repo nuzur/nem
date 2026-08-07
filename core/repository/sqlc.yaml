@@ -28,6 +28,7 @@ sql:
           array: Array
           attempts: Attempts
           audio: Audio
+          auth_domain: AuthDomain
           auth_type: AuthType
           automation_uuid: AutomationUUID
           base_version_uuid: BaseVersionUUID
@@ -79,6 +80,8 @@ sql:
           decimal: Decimal
           default_entity: DefaultEntity
           default_schema: DefaultSchema
+          default_value: DefaultValue
+          default_value_is_expression: DefaultValueIsExpression
           delete: Delete
           delivered_at: DeliveredAt
           dependent: Dependent
@@ -133,6 +136,7 @@ sql:
           from: From
           generated: Generated
           generator: Generator
+          grpc_domain: GrpcDomain
           grpc_enabled: GrpcEnabled
           grpc_port: GrpcPort
           height: Height
@@ -182,12 +186,16 @@ sql:
           name: Name
           new_value: NewValue
           next_attempt_at: NextAttemptAt
+          no_default_current_timestamp: NoDefaultCurrentTimestamp
           num_results: NumResults
           number_of_decimals: NumberOfDecimals
           numeric_value: NumericValue
           object_store: ObjectStore
           object_store_uuid: ObjectStoreUUID
           object_stores: ObjectStores
+          on_delete: OnDelete
+          on_update: OnUpdate
+          on_update_current_timestamp: OnUpdateCurrentTimestamp
           operation: Operation
           order: Order
           organization_uuids: OrganizationUUIDs
@@ -203,6 +211,7 @@ sql:
           pii_config: PiiConfig
           port: Port
           postgres: Postgres
+          precision: Precision
           priority: Priority
           pro: Pro
           project_extension_uuid: ProjectExtensionUUID
@@ -368,7 +377,59 @@ sql:
               import: "github.com/guregu/null/v6"
               package: "null"
               type: "String"
+          # MySQL tiers TEXT by max_size (TINYTEXT / TEXT / MEDIUMTEXT / LONGTEXT);
+          # all four are plain string / null.String in the domain layer. Postgres
+          # has a single TEXT type, so it needs no extra entries here.
+          - db_type: "tinytext"
+            nullable: true
+            go_type:
+              import: "github.com/guregu/null/v6"
+              package: "null"
+              type: "String"
+          - db_type: "mediumtext"
+            nullable: true
+            go_type:
+              import: "github.com/guregu/null/v6"
+              package: "null"
+              type: "String"
+          - db_type: "longtext"
+            nullable: true
+            go_type:
+              import: "github.com/guregu/null/v6"
+              package: "null"
+              type: "String"
           - db_type: "int"
+            nullable: true
+            go_type:
+              import: "github.com/guregu/null/v6"
+              package: "null"
+              type: "Int"
+          # An INTEGER field's size picks a different SQL width (MySQL SMALLINT /
+          # MEDIUMINT / BIGINT, Postgres int2 / int8), but GolangType() emits
+          # int64 / null.Int for EVERY width and the upsert path passes the entity
+          # value straight through — so each width needs the same override as int.
+          - db_type: "bigint"
+            go_type:
+              type: "int64"
+          - db_type: "bigint"
+            nullable: true
+            go_type:
+              import: "github.com/guregu/null/v6"
+              package: "null"
+              type: "Int"
+          - db_type: "mediumint"
+            go_type:
+              type: "int64"
+          - db_type: "mediumint"
+            nullable: true
+            go_type:
+              import: "github.com/guregu/null/v6"
+              package: "null"
+              type: "Int"
+          - db_type: "smallint"
+            go_type:
+              type: "int64"
+          - db_type: "smallint"
             nullable: true
             go_type:
               import: "github.com/guregu/null/v6"
@@ -386,12 +447,49 @@ sql:
               import: "github.com/guregu/null/v6"
               package: "null"
               type: "Float"
+          # DECIMAL has no sqlc default that matches the domain layer: MySQL
+          # `decimal` and Postgres `numeric` both fall back to string /
+          # sql.NullString, while GolangType() emits float64 / null.Float and the
+          # upsert path passes the entity value through untouched. BOTH
+          # nullabilities need an override — miss either and any decimal field
+          # generates code that does not compile.
+          - db_type: "decimal"
+            go_type:
+              type: "float64"
+          - db_type: "decimal"
+            nullable: true
+            go_type:
+              import: "github.com/guregu/null/v6"
+              package: "null"
+              type: "Float"
           - db_type: "tinyint"
             nullable: true
             go_type:
               import: "github.com/guregu/null/v6"
               package: "null"
               type: "Bool"
+          # A file/image/audio/video field with BINARY storage is []byte in the
+          # domain layer for both nullabilities. sqlc's default for a NULLABLE
+          # blob is sql.NullString, which neither the entity struct ([]byte) nor
+          # the mapper can use — the non-null case needs no override, the
+          # nullable one does. MySQL tiers BLOB by max_size the same way it
+          # tiers TEXT, so every width needs the entry.
+          - db_type: "blob"
+            nullable: true
+            go_type:
+              type: "[]byte"
+          - db_type: "tinyblob"
+            nullable: true
+            go_type:
+              type: "[]byte"
+          - db_type: "mediumblob"
+            nullable: true
+            go_type:
+              type: "[]byte"
+          - db_type: "longblob"
+            nullable: true
+            go_type:
+              type: "[]byte"
 overrides:
   go: 
     rename:

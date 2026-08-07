@@ -65,13 +65,19 @@ func AiUsageProviderSliceToJSON(in []AiUsageProvider) json.RawMessage {
 	jr, err := json.Marshal(res)
 	if err != nil {
 		log.Printf("error marshaling AiUsageProvider slice to json: %v", err)
-		return json.RawMessage{}
+		// the empty ARRAY, not a zero-length RawMessage: the latter reaches the
+		// driver as an empty string, which no JSON column accepts
+		return json.RawMessage("[]")
 	}
 	return jr
 }
 
 func JSONToAiUsageProviderSlice(in json.RawMessage) []AiUsageProvider {
 	res := []int64{}
+	// an absent column (NULL / empty / JSON null) is not a decode failure
+	if len(in) == 0 || string(in) == "null" {
+		return nil
+	}
 	err := json.Unmarshal(in, &res)
 	if err != nil {
 		log.Printf("error unmarshaling AiUsageProvider slice to int slice: %v", err)

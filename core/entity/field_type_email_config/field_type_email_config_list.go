@@ -8,8 +8,8 @@ import (
 
 func (e FieldTypeEmailConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"allow_domains":   entitytypes.StringFieldType,
-		"exclude_domains": entitytypes.StringFieldType,
+		"allow_domains":   entitytypes.ArrayFieldType,
+		"exclude_domains": entitytypes.ArrayFieldType,
 	}
 }
 

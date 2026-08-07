@@ -10,9 +10,9 @@ func (e Visibility) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType 
 	return map[string]entitytypes.FieldType{
 		"uuid":               entitytypes.StringFieldType,
 		"description":        entitytypes.StringFieldType,
-		"organization_uuids": entitytypes.StringFieldType,
-		"team_uuids":         entitytypes.StringFieldType,
-		"user_uuids":         entitytypes.StringFieldType,
+		"organization_uuids": entitytypes.ArrayFieldType,
+		"team_uuids":         entitytypes.ArrayFieldType,
+		"user_uuids":         entitytypes.ArrayFieldType,
 		"roles":              entitytypes.MultiEnumFieldType,
 		"created_at":         entitytypes.TimestampFieldType,
 		"updated_at":         entitytypes.TimestampFieldType,

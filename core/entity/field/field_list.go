@@ -11,25 +11,27 @@ import (
 
 func (e Field) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"uuid":               entitytypes.StringFieldType,
-		"version":            entitytypes.IntFieldType,
-		"identifier":         entitytypes.StringFieldType,
-		"description":        entitytypes.StringFieldType,
-		"type":               entitytypes.SingleEnumFieldType,
-		"type_config":        entitytypes.MultiDependantEntityFieldType,
-		"required":           entitytypes.BooleanFieldType,
-		"key":                entitytypes.BooleanFieldType,
-		"key_auto_increment": entitytypes.BooleanFieldType,
-		"unique":             entitytypes.BooleanFieldType,
-		"deprecated":         entitytypes.BooleanFieldType,
-		"generated":          entitytypes.BooleanFieldType,
-		"status":             entitytypes.SingleEnumFieldType,
-		"created_at":         entitytypes.TimestampFieldType,
-		"updated_at":         entitytypes.TimestampFieldType,
-		"created_by_uuid":    entitytypes.StringFieldType,
-		"updated_by_uuid":    entitytypes.StringFieldType,
-		"pii":                entitytypes.BooleanFieldType,
-		"pii_config":         entitytypes.MultiDependantEntityFieldType,
+		"uuid":                        entitytypes.StringFieldType,
+		"version":                     entitytypes.IntFieldType,
+		"identifier":                  entitytypes.StringFieldType,
+		"description":                 entitytypes.StringFieldType,
+		"type":                        entitytypes.SingleEnumFieldType,
+		"type_config":                 entitytypes.SingleDependantEntityFieldType,
+		"required":                    entitytypes.BooleanFieldType,
+		"key":                         entitytypes.BooleanFieldType,
+		"key_auto_increment":          entitytypes.BooleanFieldType,
+		"unique":                      entitytypes.BooleanFieldType,
+		"deprecated":                  entitytypes.BooleanFieldType,
+		"generated":                   entitytypes.BooleanFieldType,
+		"status":                      entitytypes.SingleEnumFieldType,
+		"created_at":                  entitytypes.TimestampFieldType,
+		"updated_at":                  entitytypes.TimestampFieldType,
+		"created_by_uuid":             entitytypes.StringFieldType,
+		"updated_by_uuid":             entitytypes.StringFieldType,
+		"pii":                         entitytypes.BooleanFieldType,
+		"pii_config":                  entitytypes.SingleDependantEntityFieldType,
+		"default_value":               entitytypes.StringFieldType,
+		"default_value_is_expression": entitytypes.BooleanFieldType,
 	}
 }
 
@@ -54,6 +56,8 @@ func (e Field) OrderedFieldIdentifiers() []string {
 	res = append(res, "updated_by_uuid")
 	res = append(res, "pii")
 	res = append(res, "pii_config")
+	res = append(res, "default_value")
+	res = append(res, "default_value_is_expression")
 
 	return res
 }

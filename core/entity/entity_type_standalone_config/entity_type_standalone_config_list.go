@@ -13,8 +13,8 @@ func (e EntityTypeStandaloneConfig) FieldIdentifierToTypeMap() map[string]entity
 	return map[string]entitytypes.FieldType{
 		"store_uuid":     entitytypes.StringFieldType,
 		"versioned":      entitytypes.BooleanFieldType,
-		"version_config": entitytypes.MultiDependantEntityFieldType,
-		"indexes":        entitytypes.SingleDependantEntityFieldType,
+		"version_config": entitytypes.SingleDependantEntityFieldType,
+		"indexes":        entitytypes.MultiDependantEntityFieldType,
 	}
 }
 

@@ -17,10 +17,15 @@ type ListRequest struct {
 	Offset                int64
 	Filter                filtering.Filter
 	FilteringDeclarations *filtering.Declarations
-	OrderBy               ordering.OrderBy
-	JoinParams            *list.JoinParams
-	IncludeFields         []string
-	ExcludeFields         []string
+	// EnumValues maps a declared filter field to every accepted spelling of its
+	// enum values and the number the column stores. The transports fill it in
+	// from the schema; without it an enum filter can only be resolved through a
+	// protobuf enum declaration, which a REST-only app does not have.
+	EnumValues    map[string]map[string]int64
+	OrderBy       ordering.OrderBy
+	JoinParams    *list.JoinParams
+	IncludeFields []string
+	ExcludeFields []string
 }
 
 func (r ListRequest) MarshalLogObject(e zapcore.ObjectEncoder) error {
@@ -53,6 +58,10 @@ func (r ListRequest) GetFilter() filtering.Filter {
 
 func (r ListRequest) GetFilteringDeclarations() *filtering.Declarations {
 	return r.FilteringDeclarations
+}
+
+func (r ListRequest) GetEnumValues() map[string]map[string]int64 {
+	return r.EnumValues
 }
 
 func (r ListRequest) GetOrderBy() ordering.OrderBy {

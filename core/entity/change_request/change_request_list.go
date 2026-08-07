@@ -20,9 +20,9 @@ func (e ChangeRequest) FieldIdentifierToTypeMap() map[string]entitytypes.FieldTy
 		"project_uuid":         entitytypes.StringFieldType,
 		"project_version_uuid": entitytypes.StringFieldType,
 		"change_type":          entitytypes.SingleEnumFieldType,
-		"data_changes":         entitytypes.SingleDependantEntityFieldType,
-		"metadata":             entitytypes.MultiDependantEntityFieldType,
-		"reviews":              entitytypes.SingleDependantEntityFieldType,
+		"data_changes":         entitytypes.MultiDependantEntityFieldType,
+		"metadata":             entitytypes.SingleDependantEntityFieldType,
+		"reviews":              entitytypes.MultiDependantEntityFieldType,
 		"review_status":        entitytypes.SingleEnumFieldType,
 		"owner_uuid":           entitytypes.StringFieldType,
 		"status":               entitytypes.SingleEnumFieldType,
@@ -32,7 +32,7 @@ func (e ChangeRequest) FieldIdentifierToTypeMap() map[string]entitytypes.FieldTy
 		"updated_by_uuid":      entitytypes.StringFieldType,
 		"ai_generated":         entitytypes.BooleanFieldType,
 		"scope":                entitytypes.SingleEnumFieldType,
-		"scope_config":         entitytypes.MultiDependantEntityFieldType,
+		"scope_config":         entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

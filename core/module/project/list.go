@@ -5,7 +5,6 @@ package project
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	main_entity "github.com/nuzur/nem/core/entity/project"
 	"github.com/nuzur/nem/core/module/project/types"
 	repogen "github.com/nuzur/nem/core/repository/gen"
@@ -43,7 +42,12 @@ func (m *module) List(ctx context.Context,
 		querier = resolvedOpts.SQLTx
 	}
 	skipShared := resolvedOpts.SkipCache || resolvedOpts.SQLTx != nil
-	cacheKey := fmt.Sprintf("ListProject:%v", request)
+	// Keyed on the BUILT QUERY, which already encodes the filter, the ordering,
+	// the projection and the page. Formatting the request instead put the
+	// *filtering.Declarations POINTER in the key — a fresh allocation on every
+	// request — so no two keys could ever match: the cache only grew, and the
+	// singleflight group never collapsed anything.
+	cacheKey := "ListProject:" + query
 	if !skipShared {
 		if cached, found := m.cache.Get(cacheKey); found {
 			return cached.(types.ListResponse), nil

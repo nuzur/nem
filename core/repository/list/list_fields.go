@@ -5,6 +5,7 @@ package list
 import (
 	"errors"
 	"fmt"
+	"strings"
 
 	entitytypes "github.com/nuzur/nem/core/entity/types"
 	"go.einride.tech/aip/filtering"
@@ -51,6 +52,25 @@ func handleClauseByType(req SingleClauseRequest, entity ListEntity, fieldType en
 func buildStringClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 	cex := req.cex
 	left := buildLeftOperator(req)
+	// A string field inside a JSON ARRAY of objects is multi-valued, so the filter
+	// has to ask "does any element match". Comparing the extracted array to a
+	// scalar instead is not just imprecise — an array is never equal to a string,
+	// so the clause was false for every row and the filter silently matched
+	// nothing, even when an element did match.
+	if req.isDependant && req.isDependantMulti {
+		value := cex.Args[1].GetConstExpr().GetStringValue()
+		switch cex.Function {
+		case filtering.FunctionEquals, filtering.FunctionNotEquals:
+			return SingleClauseResponse{
+				ResolvedClause: maybeNegate(jsonMemberStringEquals(req, value), cex.Function),
+			}, nil
+		case filtering.FunctionHas:
+			return SingleClauseResponse{
+				ResolvedClause: jsonMemberStringLike(req, value),
+			}, nil
+		}
+		return SingleClauseResponse{}, errors.New("unsupported function for type string")
+	}
 	switch cex.Function {
 	case filtering.FunctionEquals, filtering.FunctionNotEquals:
 		return SingleClauseResponse{
@@ -58,7 +78,7 @@ func buildStringClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 		}, nil
 	case filtering.FunctionHas:
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("%s like '%%%s%%'", left, cex.Args[1].GetConstExpr().GetStringValue()),
+			ResolvedClause: fmt.Sprintf("%s %s '%%%s%%'", left, sqlLike, cex.Args[1].GetConstExpr().GetStringValue()),
 		}, nil
 	}
 	return SingleClauseResponse{}, errors.New("unsupported function for type string")
@@ -66,50 +86,108 @@ func buildStringClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 
 func buildEnumClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 	cex := req.cex
-	declarations := req.declarations
 	left := buildLeftOperator(req)
 	name := req.fieldIdentifier
 	if req.isDependant {
 		name = fmt.Sprintf("%s.%s", req.fieldIdentifier, req.dependantFieldIdentifier)
 	}
 
-	enumType, found := declarations.LookupEnumIdent(name)
-	if found {
-		value := cex.Args[1].GetIdentExpr().Name
-		numValue := enumType.Descriptor().Values().ByName(protoreflect.Name(value)).Number()
-		switch cex.Function {
-		case filtering.FunctionEquals, filtering.FunctionNotEquals:
-			if req.isDependant && req.isDependantMulti {
-				return SingleClauseResponse{
-					ResolvedClause: fmt.Sprintf("JSON_CONTAINS(%s, '%d', '$')", left, numValue),
-				}, nil
-			}
-			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("%s %s %d", left, cex.Function, numValue),
-			}, nil
-		}
+	switch cex.Function {
+	case filtering.FunctionEquals, filtering.FunctionNotEquals:
+	default:
 		return SingleClauseResponse{}, errors.New("unsupported function for type single enum")
 	}
 
-	return SingleClauseResponse{}, errors.New("enum declaration not found")
+	numValue, err := resolveEnumValue(req, name)
+	if err != nil {
+		return SingleClauseResponse{}, err
+	}
+
+	if req.isDependant && req.isDependantMulti {
+		return SingleClauseResponse{
+			ResolvedClause: maybeNegate(jsonMemberEquals(req, fmt.Sprintf("%d", numValue)), cex.Function),
+		}, nil
+	}
+	if req.isDependant {
+		return SingleClauseResponse{
+			ResolvedClause: fmt.Sprintf("%s %s %d", jsonEnumOperand(left), cex.Function, numValue),
+		}, nil
+	}
+	return SingleClauseResponse{
+		ResolvedClause: fmt.Sprintf("%s %s %d", left, cex.Function, numValue),
+	}, nil
+}
+
+// resolveEnumValue turns the right-hand side of an enum comparison into the
+// number the column stores. Two spellings reach here, and both are supported on
+// both transports:
+//
+//   - an IDENT — `status = STATUS_ACTIVE` — which is what a gRPC client writes
+//     and what aip-go declares as a constant for every value of a declared enum;
+//   - a quoted STRING — `status = "active"` — which is what a REST client
+//     naturally writes, the proto prefix being an implementation detail it has
+//     no reason to know.
+//
+// The transports supply a value table built from the schema; it is the only
+// source that works for REST, which has no protobuf enum types to declare. The
+// aip enum declaration is the fallback for a caller that supplies no table.
+//
+// An unresolvable value is reported as a caller error. It used to be a panic:
+// Values().ByName() returns nil for an unknown name and .Number() was called on
+// it unguarded, so a typo'd enum value took down the request goroutine.
+func resolveEnumValue(req SingleClauseRequest, name string) (int64, error) {
+	raw := req.cex.Args[1].GetIdentExpr().GetName()
+	if raw == "" {
+		raw = req.cex.Args[1].GetConstExpr().GetStringValue()
+	}
+	if raw == "" {
+		return 0, fmt.Errorf("missing value for enum filter on %q", name)
+	}
+
+	if values, found := req.enumValues[name]; found {
+		if v, ok := values[raw]; ok {
+			return v, nil
+		}
+		for spelling, v := range values {
+			if strings.EqualFold(spelling, raw) {
+				return v, nil
+			}
+		}
+		return 0, fmt.Errorf("unknown value %q for enum field %q", raw, name)
+	}
+
+	enumType, found := req.declarations.LookupEnumIdent(name)
+	if !found {
+		return 0, fmt.Errorf("enum declaration not found for %q", name)
+	}
+	descValues := enumType.Descriptor().Values()
+	if v := descValues.ByName(protoreflect.Name(raw)); v != nil {
+		return int64(v.Number()), nil
+	}
+	for i := 0; i < descValues.Len(); i++ {
+		if strings.EqualFold(string(descValues.Get(i).Name()), raw) {
+			return int64(descValues.Get(i).Number()), nil
+		}
+	}
+	return 0, fmt.Errorf("unknown value %q for enum field %q", raw, name)
 }
 
 func buildIntClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 	cex := req.cex
 	left := buildLeftOperator(req)
 	right := cex.Args[1].GetConstExpr().GetInt64Value()
-	sqlType := "INT"
+	sqlType := sqlTypeInt
 	if req.isDependant {
 		if req.isDependantMulti {
 			json_table_name, json_table := resolveJSONTable(req, sqlType)
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("%s.%s %s %d", json_table_name, req.dependantFieldIdentifier, cex.Function, right),
+				ResolvedClause: fmt.Sprintf("%s %s %d", qualifiedColumn(json_table_name, req.dependantFieldIdentifier), cex.Function, right),
 				JSONTable:      json_table,
 				JSONTableName:  json_table_name,
 			}, nil
 		}
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("convert(%s, %s) %s %d", left, sqlType, cex.Function, right),
+			ResolvedClause: fmt.Sprintf("%s %s %d", sqlCast(left, sqlType), cex.Function, right),
 		}, nil
 	}
 	return SingleClauseResponse{
@@ -121,18 +199,18 @@ func buildFloatClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 	cex := req.cex
 	left := buildLeftOperator(req)
 	right := cex.Args[1].GetConstExpr().GetDoubleValue()
-	sqlType := "DOUBLE"
+	sqlType := sqlTypeFloat
 	if req.isDependant {
 		if req.isDependantMulti {
 			json_table_name, json_table := resolveJSONTable(req, sqlType)
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("%s.%s %s %f", json_table_name, req.dependantFieldIdentifier, cex.Function, right),
+				ResolvedClause: fmt.Sprintf("%s %s %f", qualifiedColumn(json_table_name, req.dependantFieldIdentifier), cex.Function, right),
 				JSONTable:      json_table,
 				JSONTableName:  json_table_name,
 			}, nil
 		}
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("convert(%s, %s) %s %f", left, sqlType, cex.Function, right),
+			ResolvedClause: fmt.Sprintf("%s %s %f", sqlCast(left, sqlType), cex.Function, right),
 		}, nil
 	}
 	return SingleClauseResponse{
@@ -147,41 +225,54 @@ func buildBooleanClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 	}
 	left := buildLeftOperator(req)
 	booleanIdent := cex.Args[1].GetIdentExpr().GetName()
-	numValue := 0
-	if booleanIdent == "true" {
-		numValue = 1
-	}
 	if req.isDependant {
 		if req.isDependantMulti {
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("JSON_CONTAINS(%s, '%s', '$')", left, booleanIdent),
+				ResolvedClause: jsonMemberEquals(req, booleanIdent),
 			}, nil
 		}
+		// The value is compared as the TEXT "true"/"false", so the extracted JSON
+		// value has to be text too — see jsonBooleanOperand.
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("%s %s '%s'", left, cex.Function, booleanIdent),
+			ResolvedClause: fmt.Sprintf("%s %s '%s'", jsonBooleanOperand(left), cex.Function, booleanIdent),
 		}, nil
 	}
+	// A real boolean COLUMN is compared against a boolean literal. Comparing it
+	// against the integer 0/1 instead is a MySQL-ism: Postgres has no
+	// boolean-to-integer comparison at all and rejects `is_public = 1` with
+	// `operator does not exist: boolean = integer`, so every filter over a boolean
+	// column was a 500 there. TRUE/FALSE mean the same thing to both engines.
 	return SingleClauseResponse{
-		ResolvedClause: fmt.Sprintf("%s %s %d", left, cex.Function, numValue),
+		ResolvedClause: fmt.Sprintf("%s %s %s", left, cex.Function, sqlBooleanLiteral(booleanIdent == "true")),
 	}, nil
+}
+
+// sqlBooleanLiteral renders a boolean constant. TRUE/FALSE are standard SQL and
+// accepted by both engines (MySQL treats them as 1/0), so this needs no dialect
+// branch — it lives here so the intent is stated once.
+func sqlBooleanLiteral(b bool) string {
+	if b {
+		return "TRUE"
+	}
+	return "FALSE"
 }
 
 func buildTimestampClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 	cex := req.cex
 	left := buildLeftOperator(req)
 	right := cex.Args[1].GetConstExpr().GetStringValue()
-	sqlType := "DATETIME"
+	sqlType := sqlTypeTimestamp
 	if req.isDependant {
 		if req.isDependantMulti {
 			json_table_name, json_table := resolveJSONTable(req, sqlType)
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("%s.%s %s '%s'", json_table_name, req.dependantFieldIdentifier, cex.Function, right),
+				ResolvedClause: fmt.Sprintf("%s %s '%s'", qualifiedColumn(json_table_name, req.dependantFieldIdentifier), cex.Function, right),
 				JSONTable:      json_table,
 				JSONTableName:  json_table_name,
 			}, nil
 		}
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("convert(%s, %s) %s '%s'", left, sqlType, cex.Function, right),
+			ResolvedClause: fmt.Sprintf("%s %s '%s'", sqlCast(left, sqlType), cex.Function, right),
 		}, nil
 	}
 
@@ -197,23 +288,23 @@ func buildArrayClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 		switch req.arrayType {
 		case entitytypes.StringFieldType, entitytypes.UUIDFieldType, entitytypes.RawJSONFieldType:
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("JSON_CONTAINS(%s,'\"%s\"','$')", req.fieldIdentifier, cex.Args[1].GetConstExpr().GetStringValue()),
+				ResolvedClause: maybeNegate(jsonArrayContains(qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), fmt.Sprintf("\"%s\"", cex.Args[1].GetConstExpr().GetStringValue())), cex.Function),
 			}, nil
 		case entitytypes.IntFieldType:
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("JSON_CONTAINS(%s,'%d','$')", req.fieldIdentifier, cex.Args[1].GetConstExpr().GetInt64Value()),
+				ResolvedClause: maybeNegate(jsonArrayContains(qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), fmt.Sprintf("%d", cex.Args[1].GetConstExpr().GetInt64Value())), cex.Function),
 			}, nil
 		case entitytypes.FloatFieldType:
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("JSON_CONTAINS(%s,'%f','$')", req.fieldIdentifier, cex.Args[1].GetConstExpr().GetDoubleValue()),
+				ResolvedClause: maybeNegate(jsonArrayContains(qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), fmt.Sprintf("%f", cex.Args[1].GetConstExpr().GetDoubleValue())), cex.Function),
 			}, nil
 		case entitytypes.BooleanFieldType:
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("JSON_CONTAINS(%s,'%s','$')", req.fieldIdentifier, cex.Args[1].GetConstExpr().GetStringValue()),
+				ResolvedClause: maybeNegate(jsonArrayContains(qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), cex.Args[1].GetConstExpr().GetStringValue()), cex.Function),
 			}, nil
 		case entitytypes.TimestampFieldType:
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("JSON_CONTAINS(%s,'\"%s\"','$')", req.fieldIdentifier, cex.Args[1].GetConstExpr().GetStringValue()),
+				ResolvedClause: maybeNegate(jsonArrayContains(qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), fmt.Sprintf("\"%s\"", cex.Args[1].GetConstExpr().GetStringValue())), cex.Function),
 			}, nil
 		}
 
@@ -222,18 +313,123 @@ func buildArrayClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 }
 
 // utilities
+
+// maybeNegate turns a containment test into its negation for `!=`. A containment
+// clause answers "does this multi-valued field contain v", so `!= v` means "does
+// NOT contain v". Previously `!=` reused the positive clause unchanged and so
+// behaved identically to `=`.
+func maybeNegate(clause, function string) string {
+	if function == filtering.FunctionNotEquals {
+		return fmt.Sprintf("NOT (%s)", clause)
+	}
+	return clause
+}
+
 func buildLeftOperator(req SingleClauseRequest) string {
 	if req.isDependant {
 		return buildJSONExtract(req)
 	}
-	return fmt.Sprintf("%s.%s", req.entity.EntityIdentifier(), req.fieldIdentifier)
+	return qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier)
 }
+
+// qualifiedColumn renders `table.column` with BOTH parts quoted by the engine's
+// own rules — the same rules create.sql and the sqlc queries already apply.
+//
+// Unquoted, an entity whose identifier is a reserved word broke its own list
+// endpoint: `user` is the SQL-standard shorthand for CURRENT_USER in Postgres,
+// so `SELECT user.id ... FROM user` failed the parser with
+// `syntax error at or near "."` — and `auth: jwt` REQUIRES an entity named
+// `user`. `order`, `group`, `session` and friends fail identically, as do
+// columns with those names. Quoting unconditionally is simpler and safer than
+// carrying a reserved-word list per engine.
+func qualifiedColumn(table, column string) string {
+	return fmt.Sprintf("%s.%s", quoteIdent(table), quoteIdent(column))
+}
+
+// --- dialect layer -----------------------------------------------------------
+//
+// Everything below is SQL-dialect specific and is emitted for one engine only.
+// These clauses are assembled with fmt.Sprintf at RUNTIME, so a dialect mistake
+// compiles cleanly and only fails when a request arrives — hence keeping all of
+// it in one clearly-marked block rather than scattered through the builders.
+
+const (
+	sqlTypeInt       = "INT"
+	sqlTypeFloat     = "DOUBLE"
+	sqlTypeTimestamp = "DATETIME"
+)
+
+// sqlCast is MySQL's convert(expr, TYPE).
+func sqlCast(expr, sqlType string) string {
+	return fmt.Sprintf("convert(%s, %s)", expr, sqlType)
+}
+
+// quoteIdent quotes a single SQL identifier. MySQL uses backticks; an embedded
+// backtick is escaped by doubling it.
+func quoteIdent(ident string) string {
+	return "`" + strings.ReplaceAll(ident, "`", "``") + "`"
+}
+
+// countDistinct counts distinct keys, used to de-duplicate a count over a query
+// that fans out. MySQL takes a plain column list.
+func countDistinct(columns []string) string {
+	return fmt.Sprintf("count(DISTINCT %s)", strings.Join(columns, ", "))
+}
+
+// jsonEnumOperand: MySQL compares an extracted JSON number to an integer
+// directly, so the operand needs no cast.
+func jsonEnumOperand(left string) string {
+	return left
+}
+
+// jsonBooleanOperand unwraps an extracted JSON value to text so it can be
+// compared against 'true'/'false'. JSON_EXTRACT yields a JSON value, and a JSON
+// boolean is NEVER equal to the string 'true'/'false' — the comparison is silently
+// false for every row, so a filter over a boolean inside a single-object embed
+// matched nothing. Postgres's ->> already yields text and needs no equivalent.
+func jsonBooleanOperand(left string) string {
+	return fmt.Sprintf("JSON_UNQUOTE(%s)", left)
+}
+
+// jsonArrayContains tests membership in a top-level JSON array of scalars.
+func jsonArrayContains(field, jsonLiteral string) string {
+	return fmt.Sprintf("JSON_CONTAINS(%s,'%s','$')", field, jsonLiteral)
+}
+
+// jsonMemberEquals tests "some element of this JSON array of objects has
+// <dependant field> = value". The value is a raw JSON literal (a number or
+// true/false), so it is not quoted.
+func jsonMemberEquals(req SingleClauseRequest, value string) string {
+	return fmt.Sprintf("JSON_CONTAINS(%s, '%s', '$')", buildJSONExtract(req), value)
+}
+
+// jsonMemberStringEquals is the string flavour of jsonMemberEquals: the JSON
+// literal for a string is quoted, so "ana" is searched for as '"ana"'.
+func jsonMemberStringEquals(req SingleClauseRequest, value string) string {
+	return fmt.Sprintf("JSON_CONTAINS(%s, '\"%s\"', '$')", buildJSONExtract(req), value)
+}
+
+// jsonMemberStringLike is the substring flavour. MySQL has no "like over a JSON
+// array", so JSON_SEARCH does the work: it returns the path of the first match
+// or NULL, which becomes a predicate via IS NOT NULL.
+//
+// Both sides are lowered because JSON string values collate as utf8mb4_bin —
+// JSON_SEARCH is case-SENSITIVE, while `like` on a normal column is case-
+// insensitive under the default collation. Without this, `has` would mean
+// different things depending on whether the field lives in a JSON array.
+func jsonMemberStringLike(req SingleClauseRequest, value string) string {
+	return fmt.Sprintf("JSON_SEARCH(LOWER(CAST(%s AS CHAR)), 'one', LOWER('%%%s%%')) IS NOT NULL", buildJSONExtract(req), value)
+}
+
+// sqlLike is the case-insensitive substring operator. MySQL's `like` already is
+// one under the default collation; Postgres spells it `ilike`.
+const sqlLike = "like"
 
 func buildJSONExtract(req SingleClauseRequest) string {
 	if req.isDependantMulti {
-		return fmt.Sprintf("JSON_EXTRACT(%s.%s, '$[*].%s')", req.entity.EntityIdentifier(), req.fieldIdentifier, req.dependantFieldIdentifier)
+		return fmt.Sprintf("JSON_EXTRACT(%s, '$[*].%s')", qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), req.dependantFieldIdentifier)
 	}
-	return fmt.Sprintf("JSON_EXTRACT(%s.%s, '$.%s')", req.entity.EntityIdentifier(), req.fieldIdentifier, req.dependantFieldIdentifier)
+	return fmt.Sprintf("JSON_EXTRACT(%s, '$.%s')", qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), req.dependantFieldIdentifier)
 }
 
 func resolveJSONTable(req SingleClauseRequest, sqlType string) (json_table_name, json_table string) {
@@ -243,9 +439,9 @@ func resolveJSONTable(req SingleClauseRequest, sqlType string) (json_table_name,
 				%s,
 				'$[*]'
 				COLUMNS(
-					%s %s PATH '$.%s'            
+					%s %s PATH '$.%s'
 				)
 			) AS %s
-			`, req.fieldIdentifier, req.dependantFieldIdentifier, sqlType, req.dependantFieldIdentifier, json_table_name)
+			`, qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), quoteIdent(req.dependantFieldIdentifier), sqlType, req.dependantFieldIdentifier, quoteIdent(json_table_name))
 	return
 }

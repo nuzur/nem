@@ -64,6 +64,7 @@ func BuildListAutomationRequest(ctx context.Context, request *pb.ListAutomationR
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            automationEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListAutomation(ctx context.Context, request *pb.ListAutomationR
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -135,13 +138,22 @@ func automationDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("name", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("operation", pb.AutomationOperation(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("operation", pb.AutomationOperation(0).Type()),
 
-		filtering.DeclareEnumIdent("action_type", pb.AutomationActionType(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("action_type", pb.AutomationActionType(0).Type()),
 
 		filtering.DeclareIdent("enabled", filtering.TypeBool),
 
-		filtering.DeclareEnumIdent("status", pb.AutomationStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.AutomationStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -155,4 +167,44 @@ func automationDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// automationEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func automationEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"operation": {
+			"invalid":                      0,
+			"AUTOMATION_OPERATION_INVALID": 0,
+			"create":                       1,
+			"AUTOMATION_OPERATION_CREATE":  1,
+			"update":                       2,
+			"AUTOMATION_OPERATION_UPDATE":  2,
+			"delete":                       3,
+			"AUTOMATION_OPERATION_DELETE":  3,
+			"any":                          4,
+			"AUTOMATION_OPERATION_ANY":     4,
+		},
+
+		"action_type": {
+			"invalid":                        0,
+			"AUTOMATION_ACTION_TYPE_INVALID": 0,
+			"webhook":                        1,
+			"AUTOMATION_ACTION_TYPE_WEBHOOK": 1,
+		},
+
+		"status": {
+			"invalid":                           0,
+			"AUTOMATION_STATUS_INVALID":         0,
+			"active":                            1,
+			"AUTOMATION_STATUS_ACTIVE":          1,
+			"needs_attention":                   2,
+			"AUTOMATION_STATUS_NEEDS_ATTENTION": 2,
+			"disabled":                          3,
+			"AUTOMATION_STATUS_DISABLED":        3,
+		},
+	}
 }

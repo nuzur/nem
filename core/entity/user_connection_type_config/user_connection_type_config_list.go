@@ -11,8 +11,8 @@ import (
 
 func (e UserConnectionTypeConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"local":  entitytypes.MultiDependantEntityFieldType,
-		"remote": entitytypes.MultiDependantEntityFieldType,
+		"local":  entitytypes.SingleDependantEntityFieldType,
+		"remote": entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

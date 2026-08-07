@@ -22,5 +22,7 @@ message DeploymentServer {
     string domain = 8;
     string public_url = 9;
     string data_manager_url = 10;
-    string local_agent_uuid = 11;    
+    string local_agent_uuid = 11;
+    string grpc_domain = 12;
+    string auth_domain = 13;    
 }

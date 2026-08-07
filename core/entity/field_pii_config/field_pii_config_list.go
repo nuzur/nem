@@ -12,7 +12,7 @@ func (e FieldPiiConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldT
 	return map[string]entitytypes.FieldType{
 		"mask_strategy":        entitytypes.SingleEnumFieldType,
 		"custom_mask_template": entitytypes.StringFieldType,
-		"visibility":           entitytypes.SingleDependantEntityFieldType,
+		"visibility":           entitytypes.MultiDependantEntityFieldType,
 	}
 }
 

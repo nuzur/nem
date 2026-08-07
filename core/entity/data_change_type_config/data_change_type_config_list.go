@@ -12,9 +12,9 @@ import (
 
 func (e DataChangeTypeConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"update": entitytypes.MultiDependantEntityFieldType,
-		"create": entitytypes.MultiDependantEntityFieldType,
-		"delete": entitytypes.MultiDependantEntityFieldType,
+		"update": entitytypes.SingleDependantEntityFieldType,
+		"create": entitytypes.SingleDependantEntityFieldType,
+		"delete": entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

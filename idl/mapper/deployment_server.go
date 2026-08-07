@@ -22,6 +22,8 @@ func DeploymentServerToProto(e main_entity.DeploymentServer) *pb.DeploymentServe
 		PublicUrl:      e.PublicURL.ValueOrZero(),
 		DataManagerUrl: e.DataManagerURL.ValueOrZero(),
 		LocalAgentUuid: StringFromUUIDPtr(e.LocalAgentUUID),
+		GrpcDomain:     e.GrpcDomain.ValueOrZero(),
+		AuthDomain:     e.AuthDomain.ValueOrZero(),
 	}
 }
 
@@ -49,6 +51,8 @@ func DeploymentServerFromProto(m *pb.DeploymentServer) main_entity.DeploymentSer
 		PublicURL:      null.StringFrom(m.PublicUrl),
 		DataManagerURL: null.StringFrom(m.DataManagerUrl),
 		LocalAgentUUID: StringToUUIDPtr(m.GetLocalAgentUuid()),
+		GrpcDomain:     null.StringFrom(m.GrpcDomain),
+		AuthDomain:     null.StringFrom(m.AuthDomain),
 	}
 }
 

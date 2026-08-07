@@ -64,6 +64,7 @@ func BuildListExtensionExecutionRequest(ctx context.Context, request *pb.ListExt
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            extension_executionEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListExtensionExecution(ctx context.Context, request *pb.ListExt
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -141,7 +144,10 @@ func extension_executionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("executed_by_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("status", pb.ExtensionExecutionStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.ExtensionExecutionStatus(0).Type()),
 
 		filtering.DeclareIdent("status_msg", filtering.TypeString),
 
@@ -157,4 +163,28 @@ func extension_executionDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// extension_executionEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func extension_executionEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"status": {
+			"invalid":                               0,
+			"EXTENSION_EXECUTION_STATUS_INVALID":    0,
+			"inprogress":                            1,
+			"EXTENSION_EXECUTION_STATUS_INPROGRESS": 1,
+			"succeeded":                             2,
+			"EXTENSION_EXECUTION_STATUS_SUCCEEDED":  2,
+			"failed":                                3,
+			"EXTENSION_EXECUTION_STATUS_FAILED":     3,
+			"cancelled":                             4,
+			"EXTENSION_EXECUTION_STATUS_CANCELLED":  4,
+			"queued":                                5,
+			"EXTENSION_EXECUTION_STATUS_QUEUED":     5,
+		},
+	}
 }

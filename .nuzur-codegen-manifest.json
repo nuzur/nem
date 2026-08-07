@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generator": "nuzur go-code-gen",
-  "generated_at": "2026-07-24T03:05:28Z",
+  "generated_at": "2026-08-07T18:28:28Z",
   "files": [
     "AI.md",
     "auth/keycloak/client.go",
@@ -709,6 +709,7 @@
     "enums/project_version_status.go",
     "enums/relationship_cardinality.go",
     "enums/relationship_node_type.go",
+    "enums/relationship_referential_action.go",
     "enums/relationship_status.go",
     "enums/review_config_review_user_roles.go",
     "enums/review_config_status.go",

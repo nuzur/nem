@@ -47,15 +47,35 @@ func AuthUnaryServerInterceptor(auth auth.Interface, exceptions []string) grpc.U
 	})
 }
 
+// bearerScheme is matched CASE-INSENSITIVELY: RFC 7235 defines the auth scheme
+// as case-insensitive, grpc-go's own credential helpers emit "Bearer", and every
+// string this project prints (deploy summary, info page, MCP prompt) says
+// "Bearer" — while this interceptor used to accept only the lowercase spelling
+// and rejected the documented form with "invalid token format".
+const bearerScheme = "bearer "
+
 func extractToken(header []string) (string, error) {
 	if len(header) != 1 {
-		return "", status.Error(codes.Unauthenticated, "invalid token format")
+		return "", status.Error(codes.Unauthenticated, `invalid token format, expected "authorization: Bearer <token>"`)
 	}
-	splitToken := strings.Split(header[0], "bearer ")
-	if len(splitToken) < 2 {
-		return "", status.Error(codes.Unauthenticated, "invalid token format")
+	token, ok := cutBearerScheme(header[0])
+	if !ok {
+		return "", status.Error(codes.Unauthenticated, `invalid token format, expected "authorization: Bearer <token>"`)
 	}
-	return splitToken[1], nil
+	return token, nil
+}
+
+// cutBearerScheme strips the auth scheme from an authorization header value.
+// It cuts the PREFIX rather than splitting on the literal: strings.Split takes
+// index 1 of every occurrence, so a token that happens to contain "bearer "
+// came back truncated instead of being returned whole (or rejected).
+func cutBearerScheme(header string) (string, bool) {
+	header = strings.TrimSpace(header)
+	if len(header) < len(bearerScheme) || !strings.EqualFold(header[:len(bearerScheme)], bearerScheme) {
+		return "", false
+	}
+	token := strings.TrimSpace(header[len(bearerScheme):])
+	return token, token != ""
 }
 
 func GetAuthorizationToken(ctx context.Context) (string, error) {

@@ -64,6 +64,7 @@ func BuildListDeploymentRevisionRequest(ctx context.Context, request *pb.ListDep
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            deployment_revisionEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListDeploymentRevision(ctx context.Context, request *pb.ListDep
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -125,67 +128,83 @@ func deployment_revisionDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("true", filtering.TypeBool),
 		filtering.DeclareIdent("false", filtering.TypeBool),
 
-		//deployment_provider
+		//provider
 
-		filtering.DeclareIdent("deployment_provider.name", filtering.TypeString),
+		filtering.DeclareIdent("provider.name", filtering.TypeString),
 
-		filtering.DeclareIdent("deployment_provider.region", filtering.TypeString),
+		filtering.DeclareIdent("provider.region", filtering.TypeString),
 
-		filtering.DeclareIdent("deployment_provider.size", filtering.TypeString),
+		filtering.DeclareIdent("provider.size", filtering.TypeString),
 
-		filtering.DeclareIdent("deployment_provider.image", filtering.TypeString),
+		filtering.DeclareIdent("provider.image", filtering.TypeString),
 
-		filtering.DeclareIdent("deployment_provider.ssh_key_name", filtering.TypeString),
+		filtering.DeclareIdent("provider.ssh_key_name", filtering.TypeString),
 
-		//deployment_server
+		//server
 
-		filtering.DeclareIdent("deployment_server.ssh_user", filtering.TypeString),
+		filtering.DeclareIdent("server.ssh_user", filtering.TypeString),
 
-		filtering.DeclareIdent("deployment_server.ssh_port", filtering.TypeInt),
+		filtering.DeclareIdent("server.ssh_port", filtering.TypeInt),
 
-		filtering.DeclareIdent("deployment_server.public_port", filtering.TypeInt),
+		filtering.DeclareIdent("server.public_port", filtering.TypeInt),
 
-		filtering.DeclareIdent("deployment_server.http_port", filtering.TypeInt),
+		filtering.DeclareIdent("server.http_port", filtering.TypeInt),
 
-		filtering.DeclareIdent("deployment_server.grpc_port", filtering.TypeInt),
+		filtering.DeclareIdent("server.grpc_port", filtering.TypeInt),
 
-		filtering.DeclareIdent("deployment_server.container_name", filtering.TypeString),
+		filtering.DeclareIdent("server.container_name", filtering.TypeString),
 
-		filtering.DeclareIdent("deployment_server.image_name", filtering.TypeString),
+		filtering.DeclareIdent("server.image_name", filtering.TypeString),
 
-		filtering.DeclareIdent("deployment_server.domain", filtering.TypeString),
+		filtering.DeclareIdent("server.domain", filtering.TypeString),
 
-		filtering.DeclareIdent("deployment_server.public_url", filtering.TypeString),
+		filtering.DeclareIdent("server.public_url", filtering.TypeString),
 
-		filtering.DeclareIdent("deployment_server.data_manager_url", filtering.TypeString),
+		filtering.DeclareIdent("server.data_manager_url", filtering.TypeString),
 
-		filtering.DeclareIdent("deployment_server.local_agent_uuid", filtering.TypeString),
+		filtering.DeclareIdent("server.local_agent_uuid", filtering.TypeString),
 
-		//deployment_database
+		filtering.DeclareIdent("server.grpc_domain", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("deployment_database.engine", pb.LocalAgentConnectionDbType(0).Type()),
+		filtering.DeclareIdent("server.auth_domain", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("deployment_database.location", pb.DeploymentDbLocation(0).Type()),
+		//database
 
-		filtering.DeclareIdent("deployment_database.port", filtering.TypeInt),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("database.engine", pb.LocalAgentConnectionDbType(0).Type()),
 
-		filtering.DeclareIdent("deployment_database.schema", filtering.TypeString),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("database.location", pb.DeploymentDbLocation(0).Type()),
 
-		filtering.DeclareIdent("deployment_database.connection_uuid", filtering.TypeString),
+		filtering.DeclareIdent("database.port", filtering.TypeInt),
 
-		//deployment_codegen
+		filtering.DeclareIdent("database.schema", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("deployment_codegen.mode", pb.DeploymentMode(0).Type()),
+		filtering.DeclareIdent("database.connection_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("deployment_codegen.rest_enabled", filtering.TypeBool),
+		//codegen
 
-		filtering.DeclareIdent("deployment_codegen.grpc_enabled", filtering.TypeBool),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("codegen.mode", pb.DeploymentMode(0).Type()),
 
-		filtering.DeclareEnumIdent("deployment_codegen.auth_type", pb.DeploymentAuthType(0).Type()),
+		filtering.DeclareIdent("codegen.rest_enabled", filtering.TypeBool),
 
-		filtering.DeclareIdent("deployment_codegen.custom", filtering.TypeBool),
+		filtering.DeclareIdent("codegen.grpc_enabled", filtering.TypeBool),
 
-		filtering.DeclareIdent("deployment_codegen.source_dir", filtering.TypeString),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("codegen.auth_type", pb.DeploymentAuthType(0).Type()),
+
+		filtering.DeclareIdent("codegen.custom", filtering.TypeBool),
+
+		filtering.DeclareIdent("codegen.source_dir", filtering.TypeString),
 
 		//deployment_revision
 
@@ -199,7 +218,10 @@ func deployment_revisionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("image_name", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("status", pb.DeploymentRevisionStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.DeploymentRevisionStatus(0).Type()),
 
 		filtering.DeclareIdent("deployed_at", filtering.TypeTimestamp),
 
@@ -217,4 +239,64 @@ func deployment_revisionDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// deployment_revisionEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func deployment_revisionEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"database.engine": {
+			"invalid":                                0,
+			"LOCAL_AGENT_CONNECTION_DB_TYPE_INVALID": 0,
+			"mysql":                                  1,
+			"LOCAL_AGENT_CONNECTION_DB_TYPE_MYSQL":   1,
+			"postgres":                               2,
+			"LOCAL_AGENT_CONNECTION_DB_TYPE_POSTGRES": 2,
+		},
+
+		"database.location": {
+			"invalid":                            0,
+			"DEPLOYMENT_DB_LOCATION_INVALID":     0,
+			"self_hosted":                        1,
+			"DEPLOYMENT_DB_LOCATION_SELF_HOSTED": 1,
+			"external":                           2,
+			"DEPLOYMENT_DB_LOCATION_EXTERNAL":    2,
+		},
+
+		"codegen.mode": {
+			"invalid":                  0,
+			"DEPLOYMENT_MODE_INVALID":  0,
+			"full_app":                 1,
+			"DEPLOYMENT_MODE_FULL_APP": 1,
+			"db_only":                  2,
+			"DEPLOYMENT_MODE_DB_ONLY":  2,
+		},
+
+		"codegen.auth_type": {
+			"invalid":                       0,
+			"DEPLOYMENT_AUTH_TYPE_INVALID":  0,
+			"none":                          1,
+			"DEPLOYMENT_AUTH_TYPE_NONE":     1,
+			"jwt":                           2,
+			"DEPLOYMENT_AUTH_TYPE_JWT":      2,
+			"keycloak":                      3,
+			"DEPLOYMENT_AUTH_TYPE_KEYCLOAK": 3,
+		},
+
+		"status": {
+			"invalid":                                0,
+			"DEPLOYMENT_REVISION_STATUS_INVALID":     0,
+			"active":                                 1,
+			"DEPLOYMENT_REVISION_STATUS_ACTIVE":      1,
+			"superseded":                             2,
+			"DEPLOYMENT_REVISION_STATUS_SUPERSEDED":  2,
+			"failed":                                 3,
+			"DEPLOYMENT_REVISION_STATUS_FAILED":      3,
+			"in_progress":                            4,
+			"DEPLOYMENT_REVISION_STATUS_IN_PROGRESS": 4,
+		},
+	}
 }

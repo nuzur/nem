@@ -64,6 +64,7 @@ func BuildListTeamRequest(ctx context.Context, request *pb.ListTeamRequest) (typ
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            teamEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListTeam(ctx context.Context, request *pb.ListTeamRequest) (*pb
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -125,519 +128,162 @@ func teamDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("true", filtering.TypeBool),
 		filtering.DeclareIdent("false", filtering.TypeBool),
 
-		//enviorment
+		//enviorments
 
-		filtering.DeclareIdent("enviorment.uuid", filtering.TypeString),
+		filtering.DeclareIdent("enviorments.uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("enviorment.identifier", filtering.TypeString),
+		filtering.DeclareIdent("enviorments.identifier", filtering.TypeString),
 
-		filtering.DeclareIdent("enviorment.critical", filtering.TypeBool),
+		filtering.DeclareIdent("enviorments.critical", filtering.TypeBool),
 
-		filtering.DeclareEnumIdent("enviorment.status", pb.EnviormentStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("enviorments.status", pb.EnviormentStatus(0).Type()),
 
-		filtering.DeclareIdent("enviorment.created_at", filtering.TypeTimestamp),
+		filtering.DeclareIdent("enviorments.created_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("enviorment.updated_at", filtering.TypeTimestamp),
+		filtering.DeclareIdent("enviorments.updated_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("enviorment.created_by_uuid", filtering.TypeString),
+		filtering.DeclareIdent("enviorments.created_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("enviorment.updated_by_uuid", filtering.TypeString),
+		filtering.DeclareIdent("enviorments.updated_by_uuid", filtering.TypeString),
 
-		//review_config
+		//review_configs
 
-		filtering.DeclareIdent("review_config.uuid", filtering.TypeString),
+		filtering.DeclareIdent("review_configs.uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("review_config.review_user_roles", pb.ReviewConfigReviewUserRoles(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("review_configs.review_user_roles", pb.ReviewConfigReviewUserRoles(0).Type()),
 
-		filtering.DeclareIdent("review_config.review_user_uuids", filtering.TypeString),
+		filtering.DeclareIdent("review_configs.review_user_uuids", filtering.TypeString),
 
-		filtering.DeclareIdent("review_config.min_reviews", filtering.TypeInt),
+		filtering.DeclareIdent("review_configs.min_reviews", filtering.TypeInt),
 
-		filtering.DeclareEnumIdent("review_config.status", pb.ReviewConfigStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("review_configs.status", pb.ReviewConfigStatus(0).Type()),
 
-		filtering.DeclareIdent("review_config.created_at", filtering.TypeTimestamp),
+		filtering.DeclareIdent("review_configs.created_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("review_config.updated_at", filtering.TypeTimestamp),
+		filtering.DeclareIdent("review_configs.updated_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("review_config.created_by_uuid", filtering.TypeString),
+		filtering.DeclareIdent("review_configs.created_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("review_config.updated_by_uuid", filtering.TypeString),
+		filtering.DeclareIdent("review_configs.updated_by_uuid", filtering.TypeString),
 
-		//store
+		//stores
 
-		filtering.DeclareIdent("store.uuid", filtering.TypeString),
+		filtering.DeclareIdent("stores.uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("store.identifier", filtering.TypeString),
+		filtering.DeclareIdent("stores.identifier", filtering.TypeString),
 
-		filtering.DeclareIdent("store.description", filtering.TypeString),
+		filtering.DeclareIdent("stores.description", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("store.status", pb.StoreStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("stores.status", pb.StoreStatus(0).Type()),
 
-		filtering.DeclareIdent("store.created_at", filtering.TypeTimestamp),
+		filtering.DeclareIdent("stores.created_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("store.updated_at", filtering.TypeTimestamp),
+		filtering.DeclareIdent("stores.updated_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("store.created_by_uuid", filtering.TypeString),
+		filtering.DeclareIdent("stores.created_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("store.updated_by_uuid", filtering.TypeString),
+		filtering.DeclareIdent("stores.updated_by_uuid", filtering.TypeString),
 
-		//db_type_postgres_config
+		//connections
 
-		filtering.DeclareIdent("db_type_postgres_config.database", filtering.TypeString),
+		filtering.DeclareIdent("connections.uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("db_type_postgres_config.sslmode", pb.DbTypePostgresConfigSslmode(0).Type()),
+		filtering.DeclareIdent("connections.version", filtering.TypeInt),
 
-		//db_type_mysql_config
+		filtering.DeclareIdent("connections.store_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("db_type_mysql_config.params", filtering.TypeString),
+		filtering.DeclareIdent("connections.enviorment_uuid", filtering.TypeString),
 
-		//db_type_config
+		filtering.DeclareIdent("connections.identifier", filtering.TypeString),
 
-		//tcp_ip_connection_type_config
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("connections.db_type", pb.ConnectionDbType(0).Type()),
 
-		filtering.DeclareIdent("tcp_ip_connection_type_config.hostname", filtering.TypeString),
+		filtering.DeclareIdent("connections.db_version", filtering.TypeString),
 
-		filtering.DeclareIdent("tcp_ip_connection_type_config.port", filtering.TypeString),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("connections.type", pb.ConnectionType(0).Type()),
 
-		filtering.DeclareIdent("tcp_ip_connection_type_config.username", filtering.TypeString),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("connections.status", pb.ConnectionStatus(0).Type()),
 
-		filtering.DeclareIdent("tcp_ip_connection_type_config.password", filtering.TypeString),
+		filtering.DeclareIdent("connections.created_at", filtering.TypeTimestamp),
 
-		//tcp_ip_ssh_connection_type_config
+		filtering.DeclareIdent("connections.updated_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("tcp_ip_ssh_connection_type_config.ssh_hostname", filtering.TypeString),
+		filtering.DeclareIdent("connections.created_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("tcp_ip_ssh_connection_type_config.ssh_username", filtering.TypeString),
+		filtering.DeclareIdent("connections.updated_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("tcp_ip_ssh_connection_type_config.ssh_password", filtering.TypeString),
+		//object_stores
 
-		filtering.DeclareIdent("tcp_ip_ssh_connection_type_config.ssh_key_file", filtering.TypeString),
+		filtering.DeclareIdent("object_stores.uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("tcp_ip_ssh_connection_type_config.use_ssh_key_file", filtering.TypeBool),
+		filtering.DeclareIdent("object_stores.identifier", filtering.TypeString),
 
-		filtering.DeclareIdent("tcp_ip_ssh_connection_type_config.hostname", filtering.TypeString),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("object_stores.type", pb.ObjectStoreType(0).Type()),
 
-		filtering.DeclareIdent("tcp_ip_ssh_connection_type_config.port", filtering.TypeString),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("object_stores.status", pb.ObjectStoreStatus(0).Type()),
 
-		filtering.DeclareIdent("tcp_ip_ssh_connection_type_config.username", filtering.TypeString),
+		filtering.DeclareIdent("object_stores.created_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("tcp_ip_ssh_connection_type_config.password", filtering.TypeString),
+		filtering.DeclareIdent("object_stores.updated_at", filtering.TypeTimestamp),
 
-		//connection_type_config
+		filtering.DeclareIdent("object_stores.created_by_uuid", filtering.TypeString),
 
-		//connection
+		filtering.DeclareIdent("object_stores.updated_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("connection.uuid", filtering.TypeString),
+		//default_entity
 
-		filtering.DeclareIdent("connection.version", filtering.TypeInt),
+		filtering.DeclareIdent("default_entity.uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("connection.store_uuid", filtering.TypeString),
+		filtering.DeclareIdent("default_entity.version", filtering.TypeInt),
 
-		filtering.DeclareIdent("connection.enviorment_uuid", filtering.TypeString),
+		filtering.DeclareIdent("default_entity.identifier", filtering.TypeString),
 
-		filtering.DeclareIdent("connection.identifier", filtering.TypeString),
+		filtering.DeclareIdent("default_entity.description", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("connection.db_type", pb.ConnectionDbType(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("default_entity.type", pb.EntityType(0).Type()),
 
-		filtering.DeclareIdent("connection.db_version", filtering.TypeString),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("default_entity.status", pb.EntityStatus(0).Type()),
 
-		filtering.DeclareEnumIdent("connection.type", pb.ConnectionType(0).Type()),
+		filtering.DeclareIdent("default_entity.created_at", filtering.TypeTimestamp),
 
-		filtering.DeclareEnumIdent("connection.status", pb.ConnectionStatus(0).Type()),
+		filtering.DeclareIdent("default_entity.updated_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("connection.created_at", filtering.TypeTimestamp),
+		filtering.DeclareIdent("default_entity.created_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("connection.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("connection.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("connection.updated_by_uuid", filtering.TypeString),
-
-		//object_store_s3_type_config
-
-		filtering.DeclareIdent("object_store_s3_type_config.region", filtering.TypeString),
-
-		filtering.DeclareIdent("object_store_s3_type_config.key", filtering.TypeString),
-
-		filtering.DeclareIdent("object_store_s3_type_config.secret", filtering.TypeString),
-
-		filtering.DeclareIdent("object_store_s3_type_config.bucket", filtering.TypeString),
-
-		//object_store_type_config
-
-		//object_store
-
-		filtering.DeclareIdent("object_store.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("object_store.identifier", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("object_store.type", pb.ObjectStoreType(0).Type()),
-
-		filtering.DeclareEnumIdent("object_store.status", pb.ObjectStoreStatus(0).Type()),
-
-		filtering.DeclareIdent("object_store.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("object_store.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("object_store.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("object_store.updated_by_uuid", filtering.TypeString),
-
-		//field_type_integer_config
-
-		filtering.DeclareEnumIdent("field_type_integer_config.size", pb.FieldTypeIntegerConfigSize(0).Type()),
-
-		filtering.DeclareIdent("field_type_integer_config.min_value", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_integer_config.min_value_inclusive", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_integer_config.max_value", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_integer_config.max_value_inclusive", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_integer_config.allow_negatives", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_integer_config.enable_limits", filtering.TypeBool),
-
-		//field_type_float_config
-
-		filtering.DeclareIdent("field_type_float_config.min_value", filtering.TypeFloat),
-
-		filtering.DeclareIdent("field_type_float_config.min_value_inclusive", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_float_config.max_value", filtering.TypeFloat),
-
-		filtering.DeclareIdent("field_type_float_config.max_value_inclusive", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_float_config.allow_negatives", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_float_config.number_of_decimals", filtering.TypeInt),
-
-		filtering.DeclareEnumIdent("field_type_float_config.separator", pb.FieldTypeFloatConfigSeparator(0).Type()),
-
-		filtering.DeclareIdent("field_type_float_config.enable_limits", filtering.TypeBool),
-
-		//field_type_decimal_config
-
-		filtering.DeclareIdent("field_type_decimal_config.min_value", filtering.TypeFloat),
-
-		filtering.DeclareIdent("field_type_decimal_config.min_value_inclusive", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_decimal_config.max_value", filtering.TypeFloat),
-
-		filtering.DeclareIdent("field_type_decimal_config.max_value_inclusive", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_decimal_config.allow_negatives", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_decimal_config.number_of_decimals", filtering.TypeInt),
-
-		filtering.DeclareEnumIdent("field_type_decimal_config.separator", pb.FieldTypeDecimalConfigSeparator(0).Type()),
-
-		filtering.DeclareIdent("field_type_decimal_config.is_currency", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_decimal_config.currency_code", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_decimal_config.enable_limits", filtering.TypeBool),
-
-		//field_type_char_config
-
-		filtering.DeclareIdent("field_type_char_config.min_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_char_config.max_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_char_config.regex_validation", filtering.TypeString),
-
-		//field_type_varchar_config
-
-		filtering.DeclareIdent("field_type_varchar_config.min_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_varchar_config.max_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_varchar_config.regex_validation", filtering.TypeString),
-
-		//field_type_text_config
-
-		filtering.DeclareIdent("field_type_text_config.min_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_text_config.max_size", filtering.TypeInt),
-
-		//field_type_encrypted_config
-
-		filtering.DeclareIdent("field_type_encrypted_config.min_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_encrypted_config.max_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_encrypted_config.regex_validation", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("field_type_encrypted_config.encryption_type", pb.FieldTypeEncryptedConfigEncryptionType(0).Type()),
-
-		filtering.DeclareIdent("field_type_encrypted_config.use_salt", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_encrypted_config.salt_field_uuids", filtering.TypeString),
-
-		//field_type_email_config
-
-		filtering.DeclareIdent("field_type_email_config.allow_domains", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_email_config.exclude_domains", filtering.TypeString),
-
-		//field_type_phone_config
-
-		filtering.DeclareIdent("field_type_phone_config.allow_countries", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_phone_config.exclude_countries", filtering.TypeString),
-
-		//field_type_url_config
-
-		filtering.DeclareIdent("field_type_url_config.allow_domains", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_url_config.exclude_domains", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_url_config.https_required", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_url_config.allowed_extensions", filtering.TypeString),
-
-		//file_object_storage_config
-
-		filtering.DeclareIdent("file_object_storage_config.object_store_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("file_object_storage_config.path", filtering.TypeString),
-
-		//file_storage_config
-
-		//field_type_file_config
-
-		filtering.DeclareEnumIdent("field_type_file_config.storage_type", pb.FieldTypeFileConfigStorageType(0).Type()),
-
-		filtering.DeclareIdent("field_type_file_config.allowed_extensions", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_file_config.max_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_file_config.allow_multiple", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_file_config.max_files", filtering.TypeInt),
-
-		//field_type_enum_config
-
-		filtering.DeclareIdent("field_type_enum_config.enum_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_enum_config.allow_multiple", filtering.TypeBool),
-
-		//field_type_json_config
-
-		filtering.DeclareIdent("field_type_json_config.enforce_schema_validation", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_json_config.json_schema", filtering.TypeString),
-
-		//field_type_date_config
-
-		filtering.DeclareIdent("field_type_date_config.enforce_future", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_date_config.enforce_past", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_date_config.display_timezone", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_date_config.storage_timezone", filtering.TypeString),
-
-		//field_type_datetime_config
-
-		filtering.DeclareIdent("field_type_datetime_config.enforce_future", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_datetime_config.enforce_past", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_datetime_config.display_timezone", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_datetime_config.storage_timezone", filtering.TypeString),
-
-		//array_type_config
-
-		//field_type_array_config
-
-		filtering.DeclareIdent("field_type_array_config.min_elements", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_array_config.max_elements", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_array_config.enforce_unique", filtering.TypeBool),
-
-		filtering.DeclareEnumIdent("field_type_array_config.type", pb.FieldTypeArrayConfigType(0).Type()),
-
-		//field_type_slug_config
-
-		filtering.DeclareIdent("field_type_slug_config.min_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_slug_config.max_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_slug_config.regex_validation", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_slug_config.based_on_field_uuids", filtering.TypeString),
-
-		//field_type_config
-
-		//visibility
-
-		filtering.DeclareIdent("visibility.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("visibility.description", filtering.TypeString),
-
-		filtering.DeclareIdent("visibility.organization_uuids", filtering.TypeString),
-
-		filtering.DeclareIdent("visibility.team_uuids", filtering.TypeString),
-
-		filtering.DeclareIdent("visibility.user_uuids", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("visibility.roles", pb.VisibilityRoles(0).Type()),
-
-		filtering.DeclareIdent("visibility.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("visibility.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("visibility.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("visibility.updated_by_uuid", filtering.TypeString),
-
-		//field_pii_config
-
-		filtering.DeclareEnumIdent("field_pii_config.mask_strategy", pb.FieldPiiConfigMaskStrategy(0).Type()),
-
-		filtering.DeclareIdent("field_pii_config.custom_mask_template", filtering.TypeString),
-
-		//field
-
-		filtering.DeclareIdent("field.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("field.version", filtering.TypeInt),
-
-		filtering.DeclareIdent("field.identifier", filtering.TypeString),
-
-		filtering.DeclareIdent("field.description", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("field.type", pb.FieldType(0).Type()),
-
-		filtering.DeclareIdent("field.required", filtering.TypeBool),
-
-		filtering.DeclareIdent("field.key", filtering.TypeBool),
-
-		filtering.DeclareIdent("field.key_auto_increment", filtering.TypeBool),
-
-		filtering.DeclareIdent("field.unique", filtering.TypeBool),
-
-		filtering.DeclareIdent("field.deprecated", filtering.TypeBool),
-
-		filtering.DeclareIdent("field.generated", filtering.TypeBool),
-
-		filtering.DeclareEnumIdent("field.status", pb.FieldStatus(0).Type()),
-
-		filtering.DeclareIdent("field.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("field.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("field.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("field.updated_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("field.pii", filtering.TypeBool),
-
-		//entity_version_type_field_config
-
-		filtering.DeclareIdent("entity_version_type_field_config.version_field_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity_version_type_field_config.append_only", filtering.TypeBool),
-
-		//entity_version_type_entity_config
-
-		filtering.DeclareIdent("entity_version_type_entity_config.entity_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity_version_type_entity_config.version_field_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity_version_type_entity_config.append_only", filtering.TypeBool),
-
-		//entity_version_type_config
-
-		//entity_version_config
-
-		filtering.DeclareEnumIdent("entity_version_config.type", pb.EntityVersionConfigType(0).Type()),
-
-		filtering.DeclareEnumIdent("entity_version_config.generator", pb.EntityVersionConfigGenerator(0).Type()),
-
-		//index_field
-
-		filtering.DeclareIdent("index_field.field_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("index_field.priority", filtering.TypeInt),
-
-		filtering.DeclareEnumIdent("index_field.order", pb.IndexFieldOrder(0).Type()),
-
-		filtering.DeclareIdent("index_field.length", filtering.TypeInt),
-
-		//index
-
-		filtering.DeclareIdent("index.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("index.identifier", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("index.type", pb.IndexType(0).Type()),
-
-		filtering.DeclareEnumIdent("index.status", pb.IndexStatus(0).Type()),
-
-		filtering.DeclareIdent("index.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("index.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("index.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("index.updated_by_uuid", filtering.TypeString),
-
-		//entity_type_standalone_config
-
-		filtering.DeclareIdent("entity_type_standalone_config.store_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity_type_standalone_config.versioned", filtering.TypeBool),
-
-		//entity_type_dependent_config
-
-		filtering.DeclareIdent("entity_type_dependent_config.service_source_uuids", filtering.TypeString),
-
-		filtering.DeclareIdent("entity_type_dependent_config.entity_source_uuids", filtering.TypeString),
-
-		//entity_type_config
-
-		//element_render
-
-		filtering.DeclareIdent("element_render.x", filtering.TypeFloat),
-
-		filtering.DeclareIdent("element_render.y", filtering.TypeFloat),
-
-		filtering.DeclareIdent("element_render.width", filtering.TypeFloat),
-
-		filtering.DeclareIdent("element_render.height", filtering.TypeFloat),
-
-		filtering.DeclareIdent("element_render.collapsed", filtering.TypeBool),
-
-		//entity_data_management_config
-
-		filtering.DeclareIdent("entity_data_management_config.list_display_fields", filtering.TypeString),
-
-		//entity
-
-		filtering.DeclareIdent("entity.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity.version", filtering.TypeInt),
-
-		filtering.DeclareIdent("entity.identifier", filtering.TypeString),
-
-		filtering.DeclareIdent("entity.description", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("entity.type", pb.EntityType(0).Type()),
-
-		filtering.DeclareEnumIdent("entity.status", pb.EntityStatus(0).Type()),
-
-		filtering.DeclareIdent("entity.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("entity.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("entity.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity.updated_by_uuid", filtering.TypeString),
+		filtering.DeclareIdent("default_entity.updated_by_uuid", filtering.TypeString),
 
 		//team
 
@@ -649,7 +295,10 @@ func teamDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("owner_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("status", pb.TeamStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.TeamStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -663,4 +312,125 @@ func teamDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// teamEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func teamEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"enviorments.status": {
+			"invalid":                    0,
+			"ENVIORMENT_STATUS_INVALID":  0,
+			"active":                     1,
+			"ENVIORMENT_STATUS_ACTIVE":   1,
+			"disabled":                   2,
+			"ENVIORMENT_STATUS_DISABLED": 2,
+		},
+
+		"review_configs.review_user_roles": {
+			"invalid": 0,
+			"REVIEW_CONFIG_REVIEW_USER_ROLES_INVALID": 0,
+			"admin":                                 1,
+			"REVIEW_CONFIG_REVIEW_USER_ROLES_ADMIN": 1,
+			"developer":                             2,
+			"REVIEW_CONFIG_REVIEW_USER_ROLES_DEVELOPER": 2,
+			"data_manager": 3,
+			"REVIEW_CONFIG_REVIEW_USER_ROLES_DATA_MANAGER": 3,
+			"data_analyst": 4,
+			"REVIEW_CONFIG_REVIEW_USER_ROLES_DATA_ANALYST": 4,
+			"viewer":                                 5,
+			"REVIEW_CONFIG_REVIEW_USER_ROLES_VIEWER": 5,
+		},
+
+		"review_configs.status": {
+			"invalid":                       0,
+			"REVIEW_CONFIG_STATUS_INVALID":  0,
+			"active":                        1,
+			"REVIEW_CONFIG_STATUS_ACTIVE":   1,
+			"disabled":                      2,
+			"REVIEW_CONFIG_STATUS_DISABLED": 2,
+		},
+
+		"stores.status": {
+			"invalid":               0,
+			"STORE_STATUS_INVALID":  0,
+			"active":                1,
+			"STORE_STATUS_ACTIVE":   1,
+			"disabled":              2,
+			"STORE_STATUS_DISABLED": 2,
+		},
+
+		"connections.db_type": {
+			"invalid":                     0,
+			"CONNECTION_DB_TYPE_INVALID":  0,
+			"mysql":                       1,
+			"CONNECTION_DB_TYPE_MYSQL":    1,
+			"postgres":                    2,
+			"CONNECTION_DB_TYPE_POSTGRES": 2,
+		},
+
+		"connections.type": {
+			"invalid":                    0,
+			"CONNECTION_TYPE_INVALID":    0,
+			"tcp_ip":                     1,
+			"CONNECTION_TYPE_TCP_IP":     1,
+			"tcp_ip_ssh":                 2,
+			"CONNECTION_TYPE_TCP_IP_SSH": 2,
+		},
+
+		"connections.status": {
+			"invalid":                    0,
+			"CONNECTION_STATUS_INVALID":  0,
+			"active":                     1,
+			"CONNECTION_STATUS_ACTIVE":   1,
+			"disabled":                   2,
+			"CONNECTION_STATUS_DISABLED": 2,
+		},
+
+		"object_stores.type": {
+			"invalid":                   0,
+			"OBJECT_STORE_TYPE_INVALID": 0,
+			"s3":                        1,
+			"OBJECT_STORE_TYPE_S_3":     1,
+		},
+
+		"object_stores.status": {
+			"invalid":                      0,
+			"OBJECT_STORE_STATUS_INVALID":  0,
+			"active":                       1,
+			"OBJECT_STORE_STATUS_ACTIVE":   1,
+			"disabled":                     2,
+			"OBJECT_STORE_STATUS_DISABLED": 2,
+		},
+
+		"default_entity.type": {
+			"invalid":                0,
+			"ENTITY_TYPE_INVALID":    0,
+			"standalone":             1,
+			"ENTITY_TYPE_STANDALONE": 1,
+			"dependent":              2,
+			"ENTITY_TYPE_DEPENDENT":  2,
+		},
+
+		"default_entity.status": {
+			"invalid":                0,
+			"ENTITY_STATUS_INVALID":  0,
+			"active":                 1,
+			"ENTITY_STATUS_ACTIVE":   1,
+			"disabled":               2,
+			"ENTITY_STATUS_DISABLED": 2,
+		},
+
+		"status": {
+			"invalid":              0,
+			"TEAM_STATUS_INVALID":  0,
+			"active":               1,
+			"TEAM_STATUS_ACTIVE":   1,
+			"disabled":             2,
+			"TEAM_STATUS_DISABLED": 2,
+		},
+	}
 }

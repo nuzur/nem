@@ -12,7 +12,7 @@ func (e LocalAgentConnection) FieldIdentifierToTypeMap() map[string]entitytypes.
 		"name":              entitytypes.StringFieldType,
 		"db_type":           entitytypes.SingleEnumFieldType,
 		"default_schema":    entitytypes.StringFieldType,
-		"shared_team_uuids": entitytypes.StringFieldType,
+		"shared_team_uuids": entitytypes.ArrayFieldType,
 	}
 }
 

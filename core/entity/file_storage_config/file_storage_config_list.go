@@ -10,7 +10,7 @@ import (
 
 func (e FileStorageConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"object_store": entitytypes.MultiDependantEntityFieldType,
+		"object_store": entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

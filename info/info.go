@@ -2,7 +2,24 @@
 
 package info
 
-import "net/http"
+import (
+	"html"
+	"net/http"
+	"strings"
+)
+
+// The page is rendered per request so that every copy-pasteable command targets
+// the address the visitor actually used to reach it. Deployments front the whole
+// app with a single proxy port (Caddy), and the container-internal HTTP/gRPC
+// ports are firewalled off — a command built from those ports cannot work from
+// wherever the reader is standing. These tokens are substituted in render();
+// they are deliberately not fmt verbs, so the HTML below stays readable and the
+// substitution stays order-independent.
+const (
+	tokenOrigin    = "__NUZUR_ORIGIN__"    // scheme://host[:port] the visitor used
+	tokenAddr      = "__NUZUR_ADDR__"      // host[:port] the visitor used, no scheme
+	tokenPlaintext = "__NUZUR_PLAINTEXT__" // "-plaintext " over http, "" over https
+)
 
 // infoHTML is the self-documenting "what's deployed" page for nuzur,
 // describing the API surface for whoever hits the app's HTTP root.
@@ -22,18 +39,20 @@ const infoHTML = `<!doctype html>
   code, pre { background: #8881; border-radius: 6px; font-family: ui-monospace, monospace; }
   code { padding: .1rem .35rem; }
   pre { padding: .75rem; overflow-x: auto; }
+  .note { color: #888; font-size: .85rem; margin: .6rem 0 0; }
   .tag { display:inline-block; font-size:.7rem; padding:.1rem .5rem; border-radius:999px; background:#6C72DB22; color:#6C72DB; margin-left:.4rem; vertical-align:middle; }
   ul { padding-left: 1.2rem; margin:.25rem 0; }
 </style>
 </head>
 <body>
 <h1>nuzur <span class="tag">nuzur</span></h1>
-<p class="sub">Deployed API — how to reach it.</p>
+<p class="sub">Deployed API — how to reach it. Every command below targets <code>__NUZUR_ORIGIN__</code>, the address you used to open this page.</p>
 
 <div class="card">
   <h2>gRPC API</h2>
-  <p>Port <code>6005</code>. List services:</p>
-  <pre><code>grpcurl -plaintext <span class="host">HOST</span>:6005 list</code></pre>
+  <p>Reachable at <code>__NUZUR_ADDR__</code> — the same address as this page. List services:</p>
+  <pre><code>grpcurl __NUZUR_PLAINTEXT____NUZUR_ADDR__ list</code></pre>
+  <p class="note">Inside the container gRPC listens on port <code>6005</code>, behind the proxy; that port is not reachable from outside.</p>
 </div>
 
 
@@ -71,9 +90,6 @@ const infoHTML = `<!doctype html>
   </ul>
 </div>
 
-<script>
-  document.querySelectorAll('.host').forEach(function(el){ el.textContent = location.hostname || 'HOST'; });
-</script>
 </body>
 </html>
 `
@@ -86,7 +102,61 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	_, _ = w.Write([]byte(infoHTML))
+	_, _ = w.Write([]byte(render(r)))
+}
+
+// render fills the request-derived tokens in infoHTML. Every example on the page
+// is therefore relative to the front door the reader already reached, which is
+// the only address they are known to be able to talk to.
+func render(r *http.Request) string {
+	scheme, addr := requestOrigin(r)
+	// addr comes from client-controlled headers, so escape it before it is
+	// interpolated into the page.
+	safeAddr := html.EscapeString(addr)
+	// grpcurl assumes TLS unless told otherwise; over a plain-http front door it
+	// needs -plaintext, over https it must not have it.
+	plaintext := "-plaintext "
+	if scheme == "https" {
+		plaintext = ""
+	}
+	return strings.NewReplacer(
+		tokenOrigin, scheme+"://"+safeAddr,
+		tokenAddr, safeAddr,
+		tokenPlaintext, plaintext,
+	).Replace(infoHTML)
+}
+
+// requestOrigin reports the scheme and host[:port] the visitor used, preferring
+// the proxy's forwarding headers over the local view. Behind the deploy's Caddy
+// front door the Host header is passed through unchanged, so it already carries
+// the public port — which is exactly what the internal listen ports are not.
+func requestOrigin(r *http.Request) (string, string) {
+	scheme := "http"
+	if r.TLS != nil {
+		scheme = "https"
+	}
+	if v := strings.ToLower(firstForwarded(r.Header.Get("X-Forwarded-Proto"))); v == "http" || v == "https" {
+		scheme = v
+	}
+	addr := r.Host
+	if v := firstForwarded(r.Header.Get("X-Forwarded-Host")); v != "" {
+		addr = v
+	}
+	if addr == "" {
+		// No Host header at all (HTTP/1.0). The in-container port is the only
+		// address left that is true of anything.
+		addr = "localhost:8085"
+	}
+	return scheme, addr
+}
+
+// firstForwarded takes the first entry of a proxy header that may carry a
+// comma-separated chain of hops.
+func firstForwarded(v string) string {
+	if i := strings.IndexByte(v, ','); i >= 0 {
+		v = v[:i]
+	}
+	return strings.TrimSpace(v)
 }
 
 // Register mounts the info page at "/" on the default mux. The gRPC-only

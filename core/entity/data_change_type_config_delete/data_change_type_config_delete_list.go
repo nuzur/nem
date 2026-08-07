@@ -11,7 +11,7 @@ import (
 func (e DataChangeTypeConfigDelete) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
 		"entity_uuid": entitytypes.StringFieldType,
-		"keys":        entitytypes.SingleDependantEntityFieldType,
+		"keys":        entitytypes.MultiDependantEntityFieldType,
 		"created_at":  entitytypes.TimestampFieldType,
 	}
 }

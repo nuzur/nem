@@ -11,8 +11,8 @@ import (
 
 func (e RelationshipNodeTypeConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"entity":  entitytypes.MultiDependantEntityFieldType,
-		"service": entitytypes.MultiDependantEntityFieldType,
+		"entity":  entitytypes.SingleDependantEntityFieldType,
+		"service": entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

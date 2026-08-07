@@ -28,13 +28,6 @@ message Relationship {
     google.protobuf.Timestamp updated_at = 11;
     string created_by_uuid = 12;
     string updated_by_uuid = 13;
-    // on_delete / on_update are the FK's referential actions. They are only
-    // meaningful together with use_foreign_key — without an enforced constraint
-    // there is nothing for the database to act on.
-    //
-    // SET_NULL requires the referencing column(s) to be nullable (required:false)
-    // and SET_DEFAULT requires them to have a default; both engines reject the
-    // constraint otherwise.
     RelationshipReferentialAction on_delete = 14;
-    RelationshipReferentialAction on_update = 15;
+    RelationshipReferentialAction on_update = 15;    
 }

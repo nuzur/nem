@@ -369,23 +369,7 @@ enum RelationshipCardinality {
     RELATIONSHIP_CARDINALITY_ONE_TO_MANY = 2;
 }
 
-// RelationshipReferentialAction is what the database does to the referencing
-// rows when the referenced row is deleted (on_delete) or its key is changed
-// (on_update).
-//
-// INVALID and NO_ACTION both render no clause: NO ACTION is the SQL default, so
-// emitting it would only make the generated DDL differ from what an introspected
-// schema reports without changing behavior.
-enum RelationshipReferentialAction {
-    RELATIONSHIP_REFERENTIAL_ACTION_INVALID = 0;
-    RELATIONSHIP_REFERENTIAL_ACTION_NO_ACTION = 1;
-    RELATIONSHIP_REFERENTIAL_ACTION_RESTRICT = 2;
-    RELATIONSHIP_REFERENTIAL_ACTION_CASCADE = 3;
-    RELATIONSHIP_REFERENTIAL_ACTION_SET_NULL = 4;
-    RELATIONSHIP_REFERENTIAL_ACTION_SET_DEFAULT = 5;
-}
-
-enum RelationshipNodeType {
+enum RelationshipNodeType { 
     RELATIONSHIP_NODE_TYPE_INVALID = 0;
     RELATIONSHIP_NODE_TYPE_ENTITY = 1;
     RELATIONSHIP_NODE_TYPE_SERVICE = 2;
@@ -582,4 +566,13 @@ enum FieldPiiConfigMaskStrategy {
     FIELD_PII_CONFIG_MASK_STRATEGY_EMAIL = 3;
     FIELD_PII_CONFIG_MASK_STRATEGY_LAST_4 = 4;
     FIELD_PII_CONFIG_MASK_STRATEGY_CUSTOM = 5;
+}
+
+enum RelationshipReferentialAction { 
+    RELATIONSHIP_REFERENTIAL_ACTION_INVALID = 0;
+    RELATIONSHIP_REFERENTIAL_ACTION_NO_ACTION = 1;
+    RELATIONSHIP_REFERENTIAL_ACTION_RESTRICT = 2;
+    RELATIONSHIP_REFERENTIAL_ACTION_CASCADE = 3;
+    RELATIONSHIP_REFERENTIAL_ACTION_SET_NULL = 4;
+    RELATIONSHIP_REFERENTIAL_ACTION_SET_DEFAULT = 5;
 }

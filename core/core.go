@@ -157,11 +157,120 @@ func New(params Params) (*Implementation, error) {
 		})
 	}
 
-	return &Implementation{
+	impl := &Implementation{
 		db:         db,
 		repository: repository,
 		logger:     logger,
-	}, nil
+	}
+
+	// Every module is built ONCE, here, and the accessors below just hand it
+	// back. The accessors used to build their module lazily on a VALUE receiver,
+	// so the assignment landed on a copy that was thrown away when the method
+	// returned: every one of the (hundreds of) accessor calls in the transports
+	// constructed a fresh module — with a fresh, empty 30s cache and its own
+	// janitor goroutine — which is why the per-entity cache never served a hit
+	// and WithSkipCache() meant nothing.
+	//
+	// Constructing eagerly rather than lazily on a POINTER receiver is
+	// deliberate: the lazy branch would otherwise be a data race, since the
+	// accessors are called concurrently from request handlers.
+
+	impl.extension = extension.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.extension_version = extension_version.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.user_project = user_project.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.local_agent = local_agent.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.extension_execution = extension_execution.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.project_version = project_version.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.user = user.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.user_project_version = user_project_version.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.project = project.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.membership = membership.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.team = team.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.ai_usage = ai_usage.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.change_request = change_request.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.user_connection = user_connection.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.user_team = user_team.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.automation = automation.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.automation_event = automation_event.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.deployment = deployment.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.deployment_revision = deployment_revision.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	return impl, nil
 }
 
 func (i *Implementation) Destroy() {
@@ -172,192 +281,154 @@ func (i *Implementation) DB() *sql.DB {
 	return i.db
 }
 
-func (i Implementation) Extension() extension.Module {
-	if i.extension == nil {
-		i.extension = extension.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// Extension returns the process-wide extension module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) Extension() extension.Module {
 	return i.extension
 }
 
-func (i Implementation) ExtensionVersion() extension_version.Module {
-	if i.extension_version == nil {
-		i.extension_version = extension_version.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// ExtensionVersion returns the process-wide extension_version module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) ExtensionVersion() extension_version.Module {
 	return i.extension_version
 }
 
-func (i Implementation) UserProject() user_project.Module {
-	if i.user_project == nil {
-		i.user_project = user_project.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// UserProject returns the process-wide user_project module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) UserProject() user_project.Module {
 	return i.user_project
 }
 
-func (i Implementation) LocalAgent() local_agent.Module {
-	if i.local_agent == nil {
-		i.local_agent = local_agent.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// LocalAgent returns the process-wide local_agent module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) LocalAgent() local_agent.Module {
 	return i.local_agent
 }
 
-func (i Implementation) ExtensionExecution() extension_execution.Module {
-	if i.extension_execution == nil {
-		i.extension_execution = extension_execution.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// ExtensionExecution returns the process-wide extension_execution module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) ExtensionExecution() extension_execution.Module {
 	return i.extension_execution
 }
 
-func (i Implementation) ProjectVersion() project_version.Module {
-	if i.project_version == nil {
-		i.project_version = project_version.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// ProjectVersion returns the process-wide project_version module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) ProjectVersion() project_version.Module {
 	return i.project_version
 }
 
-func (i Implementation) User() user.Module {
-	if i.user == nil {
-		i.user = user.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// User returns the process-wide user module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) User() user.Module {
 	return i.user
 }
 
-func (i Implementation) UserProjectVersion() user_project_version.Module {
-	if i.user_project_version == nil {
-		i.user_project_version = user_project_version.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// UserProjectVersion returns the process-wide user_project_version module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) UserProjectVersion() user_project_version.Module {
 	return i.user_project_version
 }
 
-func (i Implementation) Project() project.Module {
-	if i.project == nil {
-		i.project = project.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// Project returns the process-wide project module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) Project() project.Module {
 	return i.project
 }
 
-func (i Implementation) Membership() membership.Module {
-	if i.membership == nil {
-		i.membership = membership.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// Membership returns the process-wide membership module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) Membership() membership.Module {
 	return i.membership
 }
 
-func (i Implementation) Team() team.Module {
-	if i.team == nil {
-		i.team = team.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// Team returns the process-wide team module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) Team() team.Module {
 	return i.team
 }
 
-func (i Implementation) AiUsage() ai_usage.Module {
-	if i.ai_usage == nil {
-		i.ai_usage = ai_usage.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// AiUsage returns the process-wide ai_usage module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) AiUsage() ai_usage.Module {
 	return i.ai_usage
 }
 
-func (i Implementation) ChangeRequest() change_request.Module {
-	if i.change_request == nil {
-		i.change_request = change_request.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// ChangeRequest returns the process-wide change_request module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) ChangeRequest() change_request.Module {
 	return i.change_request
 }
 
-func (i Implementation) UserConnection() user_connection.Module {
-	if i.user_connection == nil {
-		i.user_connection = user_connection.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// UserConnection returns the process-wide user_connection module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) UserConnection() user_connection.Module {
 	return i.user_connection
 }
 
-func (i Implementation) UserTeam() user_team.Module {
-	if i.user_team == nil {
-		i.user_team = user_team.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// UserTeam returns the process-wide user_team module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) UserTeam() user_team.Module {
 	return i.user_team
 }
 
-func (i Implementation) Automation() automation.Module {
-	if i.automation == nil {
-		i.automation = automation.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// Automation returns the process-wide automation module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) Automation() automation.Module {
 	return i.automation
 }
 
-func (i Implementation) AutomationEvent() automation_event.Module {
-	if i.automation_event == nil {
-		i.automation_event = automation_event.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// AutomationEvent returns the process-wide automation_event module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) AutomationEvent() automation_event.Module {
 	return i.automation_event
 }
 
-func (i Implementation) Deployment() deployment.Module {
-	if i.deployment == nil {
-		i.deployment = deployment.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// Deployment returns the process-wide deployment module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) Deployment() deployment.Module {
 	return i.deployment
 }
 
-func (i Implementation) DeploymentRevision() deployment_revision.Module {
-	if i.deployment_revision == nil {
-		i.deployment_revision = deployment_revision.New(coretypes.ModuleParams{
-			Repository: i.repository,
-			Logger:     i.logger,
-		})
-	}
+// DeploymentRevision returns the process-wide deployment_revision module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) DeploymentRevision() deployment_revision.Module {
 	return i.deployment_revision
 }

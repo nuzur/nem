@@ -16,7 +16,7 @@ func (e LocalAgent) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType 
 		"machine_name":    entitytypes.StringFieldType,
 		"os":              entitytypes.StringFieldType,
 		"cli_version":     entitytypes.StringFieldType,
-		"connections":     entitytypes.SingleDependantEntityFieldType,
+		"connections":     entitytypes.MultiDependantEntityFieldType,
 		"status":          entitytypes.SingleEnumFieldType,
 		"last_seen_at":    entitytypes.TimestampFieldType,
 		"revoked_at":      entitytypes.TimestampFieldType,

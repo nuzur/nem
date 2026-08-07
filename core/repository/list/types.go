@@ -3,12 +3,37 @@
 package list
 
 import (
+	"fmt"
+
 	"go.einride.tech/aip/filtering"
 	"go.einride.tech/aip/ordering"
 
 	entitytypes "github.com/nuzur/nem/core/entity/types"
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 )
+
+// InvalidRequestError marks a list query that could not be built because of
+// something in the REQUEST — a filter or order_by expression that names a field
+// the entity does not have, or that applies an operator the field's type does not
+// support. It is not a server fault, so a transport must answer 4xx (HTTP 400 /
+// gRPC InvalidArgument), not 5xx.
+//
+// BadRequest() is the marker transports match on, via errors.As over an
+// anonymous interface, so no transport package has to import this one.
+type InvalidRequestError struct {
+	// Op is the request component at fault: "filter" or "order_by".
+	Op  string
+	Err error
+}
+
+func (e *InvalidRequestError) Error() string {
+	return fmt.Sprintf("invalid %s: %v", e.Op, e.Err)
+}
+
+func (e *InvalidRequestError) Unwrap() error { return e.Err }
+
+// BadRequest reports that the caller, not the server, is at fault.
+func (e *InvalidRequestError) BadRequest() bool { return true }
 
 type JoinParams struct {
 	JoinStatement    string
@@ -27,6 +52,17 @@ type ListEntity interface {
 type ListRequest interface {
 	GetFilter() filtering.Filter
 	GetFilteringDeclarations() *filtering.Declarations
+	// GetEnumValues maps a declared filter field ("status", or
+	// "<host field>.<sub field>" for an embed) to every accepted spelling of its
+	// enum values and the number the column stores. The transports build it from
+	// the schema, so an enum filter resolves WITHOUT a protobuf enum type — REST
+	// has none to declare (a REST-only app generates no proto package), and
+	// declaring enums as plain strings there is what left every REST enum filter
+	// failing with "enum declaration not found".
+	//
+	// May be nil: a caller that supplies none falls back to the aip enum
+	// declarations, which is what a gRPC-shaped caller carries.
+	GetEnumValues() map[string]map[string]int64
 	GetOrderBy() ordering.OrderBy
 	GetPageSize() int32
 	GetOffset() int64
@@ -38,6 +74,7 @@ type ListRequest interface {
 type SingleClauseRequest struct {
 	cex                      *expr.Expr_Call
 	declarations             *filtering.Declarations
+	enumValues               map[string]map[string]int64
 	fieldIdentifier          string
 	isDependant              bool
 	isDependantMulti         bool

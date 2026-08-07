@@ -18,17 +18,17 @@ func (e Entity) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 		"version":                entitytypes.IntFieldType,
 		"identifier":             entitytypes.StringFieldType,
 		"description":            entitytypes.StringFieldType,
-		"fields":                 entitytypes.SingleDependantEntityFieldType,
+		"fields":                 entitytypes.MultiDependantEntityFieldType,
 		"type":                   entitytypes.SingleEnumFieldType,
-		"type_config":            entitytypes.MultiDependantEntityFieldType,
-		"render":                 entitytypes.MultiDependantEntityFieldType,
+		"type_config":            entitytypes.SingleDependantEntityFieldType,
+		"render":                 entitytypes.SingleDependantEntityFieldType,
 		"status":                 entitytypes.SingleEnumFieldType,
 		"created_at":             entitytypes.TimestampFieldType,
 		"updated_at":             entitytypes.TimestampFieldType,
 		"created_by_uuid":        entitytypes.StringFieldType,
 		"updated_by_uuid":        entitytypes.StringFieldType,
-		"data_management_config": entitytypes.MultiDependantEntityFieldType,
-		"visibility":             entitytypes.SingleDependantEntityFieldType,
+		"data_management_config": entitytypes.SingleDependantEntityFieldType,
+		"visibility":             entitytypes.MultiDependantEntityFieldType,
 	}
 }
 

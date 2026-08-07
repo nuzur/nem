@@ -24,10 +24,10 @@ func (e DeploymentRevision) FieldIdentifierToTypeMap() map[string]entitytypes.Fi
 		"updated_at":           entitytypes.TimestampFieldType,
 		"created_by_uuid":      entitytypes.StringFieldType,
 		"updated_by_uuid":      entitytypes.StringFieldType,
-		"provider":             entitytypes.MultiDependantEntityFieldType,
-		"server":               entitytypes.MultiDependantEntityFieldType,
-		"database":             entitytypes.MultiDependantEntityFieldType,
-		"codegen":              entitytypes.MultiDependantEntityFieldType,
+		"provider":             entitytypes.SingleDependantEntityFieldType,
+		"server":               entitytypes.SingleDependantEntityFieldType,
+		"database":             entitytypes.SingleDependantEntityFieldType,
+		"codegen":              entitytypes.SingleDependantEntityFieldType,
 		"status_message":       entitytypes.StringFieldType,
 	}
 }

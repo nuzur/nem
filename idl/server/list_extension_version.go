@@ -64,6 +64,7 @@ func BuildListExtensionVersionRequest(ctx context.Context, request *pb.ListExten
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            extension_versionEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListExtensionVersion(ctx context.Context, request *pb.ListExten
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -139,11 +142,20 @@ func extension_versionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("repository_tag", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("execution_mode", pb.ExtensionVersionExecutionMode(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("execution_mode", pb.ExtensionVersionExecutionMode(0).Type()),
 
-		filtering.DeclareEnumIdent("review_status", pb.ExtensionVersionReviewStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("review_status", pb.ExtensionVersionReviewStatus(0).Type()),
 
-		filtering.DeclareEnumIdent("status", pb.ExtensionVersionStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.ExtensionVersionStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -157,4 +169,46 @@ func extension_versionDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// extension_versionEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func extension_versionEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"execution_mode": {
+			"invalid": 0,
+			"EXTENSION_VERSION_EXECUTION_MODE_INVALID": 0,
+			"manual": 1,
+			"EXTENSION_VERSION_EXECUTION_MODE_MANUAL": 1,
+			"automatic": 2,
+			"EXTENSION_VERSION_EXECUTION_MODE_AUTOMATIC": 2,
+		},
+
+		"review_status": {
+			"invalid": 0,
+			"EXTENSION_VERSION_REVIEW_STATUS_INVALID": 0,
+			"draft":                                 1,
+			"EXTENSION_VERSION_REVIEW_STATUS_DRAFT": 1,
+			"in_review":                             2,
+			"EXTENSION_VERSION_REVIEW_STATUS_IN_REVIEW": 2,
+			"approved": 3,
+			"EXTENSION_VERSION_REVIEW_STATUS_APPROVED": 3,
+			"rejected": 4,
+			"EXTENSION_VERSION_REVIEW_STATUS_REJECTED": 4,
+			"published": 5,
+			"EXTENSION_VERSION_REVIEW_STATUS_PUBLISHED": 5,
+		},
+
+		"status": {
+			"invalid":                           0,
+			"EXTENSION_VERSION_STATUS_INVALID":  0,
+			"active":                            1,
+			"EXTENSION_VERSION_STATUS_ACTIVE":   1,
+			"disabled":                          2,
+			"EXTENSION_VERSION_STATUS_DISABLED": 2,
+		},
+	}
 }

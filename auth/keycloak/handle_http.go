@@ -46,13 +46,31 @@ func (i *Implementation) TokenFromHeader(r *http.Request) (string, error) {
 	}
 
 	if reqToken == "" {
-		return "", errors.New("invalid token len")
+		return "", errors.New("missing authorization header")
 	}
 
-	splitToken := strings.Split(reqToken, "bearer ")
-	if len(splitToken) < 2 {
-		return "", errors.New("invalid token len")
+	token, ok := cutBearerScheme(reqToken)
+	if !ok {
+		return "", errors.New(`invalid authorization header format, expected "Authorization: Bearer <token>"`)
 	}
 
-	return splitToken[1], nil
+	return token, nil
+}
+
+// bearerScheme is matched CASE-INSENSITIVELY, per RFC 7235: clients — and every
+// string this project prints — spell it "Bearer", so accepting only the
+// lowercase form rejected correct callers with a misleading error.
+const bearerScheme = "bearer "
+
+// cutBearerScheme strips the auth scheme from an authorization header value.
+// It cuts the PREFIX rather than splitting on the literal: strings.Split takes
+// index 1 of every occurrence, so a token that happens to contain "bearer "
+// came back truncated instead of being returned whole (or rejected).
+func cutBearerScheme(header string) (string, bool) {
+	header = strings.TrimSpace(header)
+	if len(header) < len(bearerScheme) || !strings.EqualFold(header[:len(bearerScheme)], bearerScheme) {
+		return "", false
+	}
+	token := strings.TrimSpace(header[len(bearerScheme):])
+	return token, token != ""
 }

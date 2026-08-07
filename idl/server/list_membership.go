@@ -64,6 +64,7 @@ func BuildListMembershipRequest(ctx context.Context, request *pb.ListMembershipR
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            membershipEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListMembership(ctx context.Context, request *pb.ListMembershipR
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -131,11 +134,17 @@ func membershipDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("owner_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("type", pb.MembershipType(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("type", pb.MembershipType(0).Type()),
 
 		filtering.DeclareIdent("start_date", filtering.TypeTimestamp),
 
-		filtering.DeclareEnumIdent("status", pb.MembershipStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.MembershipStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -149,4 +158,41 @@ func membershipDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// membershipEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func membershipEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"type": {
+			"invalid":                    0,
+			"MEMBERSHIP_TYPE_INVALID":    0,
+			"starter":                    1,
+			"MEMBERSHIP_TYPE_STARTER":    1,
+			"pro":                        2,
+			"MEMBERSHIP_TYPE_PRO":        2,
+			"enterprise":                 3,
+			"MEMBERSHIP_TYPE_ENTERPRISE": 3,
+		},
+
+		"status": {
+			"invalid":                    0,
+			"MEMBERSHIP_STATUS_INVALID":  0,
+			"trial":                      1,
+			"MEMBERSHIP_STATUS_TRIAL":    1,
+			"active":                     2,
+			"MEMBERSHIP_STATUS_ACTIVE":   2,
+			"past_due":                   3,
+			"MEMBERSHIP_STATUS_PAST_DUE": 3,
+			"canceled":                   4,
+			"MEMBERSHIP_STATUS_CANCELED": 4,
+			"unpaid":                     5,
+			"MEMBERSHIP_STATUS_UNPAID":   5,
+			"disabled":                   6,
+			"MEMBERSHIP_STATUS_DISABLED": 6,
+		},
+	}
 }

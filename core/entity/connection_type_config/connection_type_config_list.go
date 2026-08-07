@@ -11,8 +11,8 @@ import (
 
 func (e ConnectionTypeConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"tcp_ip":     entitytypes.MultiDependantEntityFieldType,
-		"tcp_ip_ssh": entitytypes.MultiDependantEntityFieldType,
+		"tcp_ip":     entitytypes.SingleDependantEntityFieldType,
+		"tcp_ip_ssh": entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

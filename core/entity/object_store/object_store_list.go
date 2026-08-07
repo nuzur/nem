@@ -13,7 +13,7 @@ func (e ObjectStore) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType
 		"uuid":            entitytypes.StringFieldType,
 		"identifier":      entitytypes.StringFieldType,
 		"type":            entitytypes.SingleEnumFieldType,
-		"type_config":     entitytypes.MultiDependantEntityFieldType,
+		"type_config":     entitytypes.SingleDependantEntityFieldType,
 		"status":          entitytypes.SingleEnumFieldType,
 		"created_at":      entitytypes.TimestampFieldType,
 		"updated_at":      entitytypes.TimestampFieldType,

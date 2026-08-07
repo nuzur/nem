@@ -64,6 +64,7 @@ func BuildListAiUsageRequest(ctx context.Context, request *pb.ListAiUsageRequest
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            ai_usageEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListAiUsage(ctx context.Context, request *pb.ListAiUsageRequest
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -139,15 +142,24 @@ func ai_usageDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("step", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("context", pb.AiUsageContext(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("context", pb.AiUsageContext(0).Type()),
 
-		filtering.DeclareEnumIdent("provider", pb.AiUsageProvider(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("provider", pb.AiUsageProvider(0).Type()),
 
 		filtering.DeclareIdent("input_tokens", filtering.TypeInt),
 
 		filtering.DeclareIdent("output_tokens", filtering.TypeInt),
 
-		filtering.DeclareEnumIdent("status", pb.AiUsageStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.AiUsageStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -161,4 +173,40 @@ func ai_usageDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// ai_usageEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func ai_usageEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"context": {
+			"invalid":                           0,
+			"AI_USAGE_CONTEXT_INVALID":          0,
+			"editor_assistant":                  1,
+			"AI_USAGE_CONTEXT_EDITOR_ASSISTANT": 1,
+			"data_manager":                      2,
+			"AI_USAGE_CONTEXT_DATA_MANAGER":     2,
+			"editor_layout":                     3,
+			"AI_USAGE_CONTEXT_EDITOR_LAYOUT":    3,
+		},
+
+		"provider": {
+			"invalid":                   0,
+			"AI_USAGE_PROVIDER_INVALID": 0,
+			"claude":                    1,
+			"AI_USAGE_PROVIDER_CLAUDE":  1,
+		},
+
+		"status": {
+			"invalid":                  0,
+			"AI_USAGE_STATUS_INVALID":  0,
+			"active":                   1,
+			"AI_USAGE_STATUS_ACTIVE":   1,
+			"disabled":                 2,
+			"AI_USAGE_STATUS_DISABLED": 2,
+		},
+	}
 }

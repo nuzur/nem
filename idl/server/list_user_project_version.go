@@ -64,6 +64,7 @@ func BuildListUserProjectVersionRequest(ctx context.Context, request *pb.ListUse
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            user_project_versionEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListUserProjectVersion(ctx context.Context, request *pb.ListUse
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -135,7 +138,10 @@ func user_project_versionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("user_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("status", pb.UserProjectVersionStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.UserProjectVersionStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -149,4 +155,22 @@ func user_project_versionDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// user_project_versionEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func user_project_versionEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"status": {
+			"invalid":                              0,
+			"USER_PROJECT_VERSION_STATUS_INVALID":  0,
+			"active":                               1,
+			"USER_PROJECT_VERSION_STATUS_ACTIVE":   1,
+			"disabled":                             2,
+			"USER_PROJECT_VERSION_STATUS_DISABLED": 2,
+		},
+	}
 }

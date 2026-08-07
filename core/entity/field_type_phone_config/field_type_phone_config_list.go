@@ -8,8 +8,8 @@ import (
 
 func (e FieldTypePhoneConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"allow_countries":   entitytypes.StringFieldType,
-		"exclude_countries": entitytypes.StringFieldType,
+		"allow_countries":   entitytypes.ArrayFieldType,
+		"exclude_countries": entitytypes.ArrayFieldType,
 	}
 }
 

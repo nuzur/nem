@@ -12,7 +12,7 @@ func (e EntityVersionConfig) FieldIdentifierToTypeMap() map[string]entitytypes.F
 	return map[string]entitytypes.FieldType{
 		"type":      entitytypes.SingleEnumFieldType,
 		"generator": entitytypes.SingleEnumFieldType,
-		"config":    entitytypes.MultiDependantEntityFieldType,
+		"config":    entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

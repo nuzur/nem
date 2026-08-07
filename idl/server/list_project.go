@@ -64,6 +64,7 @@ func BuildListProjectRequest(ctx context.Context, request *pb.ListProjectRequest
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            projectEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListProject(ctx context.Context, request *pb.ListProjectRequest
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -125,27 +128,30 @@ func projectDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("true", filtering.TypeBool),
 		filtering.DeclareIdent("false", filtering.TypeBool),
 
-		//project_extension
+		//project_extensions
 
-		filtering.DeclareIdent("project_extension.uuid", filtering.TypeString),
+		filtering.DeclareIdent("project_extensions.uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("project_extension.extension_uuid", filtering.TypeString),
+		filtering.DeclareIdent("project_extensions.extension_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("project_extension.extension_version_uuid", filtering.TypeString),
+		filtering.DeclareIdent("project_extensions.extension_version_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("project_extension.configuration_entity_values", filtering.TypeString),
+		filtering.DeclareIdent("project_extensions.configuration_entity_values", filtering.TypeString),
 
-		filtering.DeclareIdent("project_extension.blocking", filtering.TypeBool),
+		filtering.DeclareIdent("project_extensions.blocking", filtering.TypeBool),
 
-		filtering.DeclareEnumIdent("project_extension.status", pb.ProjectExtensionStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("project_extensions.status", pb.ProjectExtensionStatus(0).Type()),
 
-		filtering.DeclareIdent("project_extension.created_at", filtering.TypeTimestamp),
+		filtering.DeclareIdent("project_extensions.created_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("project_extension.updated_at", filtering.TypeTimestamp),
+		filtering.DeclareIdent("project_extensions.updated_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("project_extension.created_by_uuid", filtering.TypeString),
+		filtering.DeclareIdent("project_extensions.created_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("project_extension.updated_by_uuid", filtering.TypeString),
+		filtering.DeclareIdent("project_extensions.updated_by_uuid", filtering.TypeString),
 
 		//project
 
@@ -165,9 +171,15 @@ func projectDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("team_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("access_type", pb.ProjectAccessType(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("access_type", pb.ProjectAccessType(0).Type()),
 
-		filtering.DeclareEnumIdent("status", pb.ProjectStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.ProjectStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -181,4 +193,40 @@ func projectDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// projectEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func projectEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"project_extensions.status": {
+			"invalid":                           0,
+			"PROJECT_EXTENSION_STATUS_INVALID":  0,
+			"active":                            1,
+			"PROJECT_EXTENSION_STATUS_ACTIVE":   1,
+			"disabled":                          2,
+			"PROJECT_EXTENSION_STATUS_DISABLED": 2,
+		},
+
+		"access_type": {
+			"invalid":                     0,
+			"PROJECT_ACCESS_TYPE_INVALID": 0,
+			"inherit":                     1,
+			"PROJECT_ACCESS_TYPE_INHERIT": 1,
+			"custom":                      2,
+			"PROJECT_ACCESS_TYPE_CUSTOM":  2,
+		},
+
+		"status": {
+			"invalid":                 0,
+			"PROJECT_STATUS_INVALID":  0,
+			"active":                  1,
+			"PROJECT_STATUS_ACTIVE":   1,
+			"disabled":                2,
+			"PROJECT_STATUS_DISABLED": 2,
+		},
+	}
 }

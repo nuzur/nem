@@ -12,7 +12,7 @@ func (e ChangeRequestDataChange) FieldIdentifierToTypeMap() map[string]entitytyp
 	return map[string]entitytypes.FieldType{
 		"uuid":                    entitytypes.StringFieldType,
 		"data_change_type":        entitytypes.SingleEnumFieldType,
-		"data_change_type_config": entitytypes.MultiDependantEntityFieldType,
+		"data_change_type_config": entitytypes.SingleDependantEntityFieldType,
 		"order":                   entitytypes.IntFieldType,
 	}
 }

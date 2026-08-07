@@ -64,6 +64,7 @@ func BuildListUserConnectionRequest(ctx context.Context, request *pb.ListUserCon
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            user_connectionEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListUserConnection(ctx context.Context, request *pb.ListUserCon
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -125,39 +128,28 @@ func user_connectionDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("true", filtering.TypeBool),
 		filtering.DeclareIdent("false", filtering.TypeBool),
 
-		//user_connection_local_config
+		//type_config
 
-		filtering.DeclareIdent("user_connection_local_config.local_agent_uuid", filtering.TypeString),
+		//executions
 
-		filtering.DeclareIdent("user_connection_local_config.local_agent_connection_uuid", filtering.TypeString),
+		filtering.DeclareIdent("executions.uuid", filtering.TypeString),
 
-		//user_connection_remote_config
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("executions.status", pb.UserConnectionExecutionStatus(0).Type()),
 
-		filtering.DeclareIdent("user_connection_remote_config.team_uuid", filtering.TypeString),
+		filtering.DeclareIdent("executions.results_path", filtering.TypeString),
 
-		filtering.DeclareIdent("user_connection_remote_config.store_uuid", filtering.TypeString),
+		filtering.DeclareIdent("executions.num_results", filtering.TypeInt),
 
-		filtering.DeclareIdent("user_connection_remote_config.connection_uuid", filtering.TypeString),
+		filtering.DeclareIdent("executions.started_at", filtering.TypeTimestamp),
 
-		//user_connection_type_config
+		filtering.DeclareIdent("executions.finished_at", filtering.TypeTimestamp),
 
-		//user_connection_execution
+		filtering.DeclareIdent("executions.estimated_time", filtering.TypeString),
 
-		filtering.DeclareIdent("user_connection_execution.uuid", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("user_connection_execution.status", pb.UserConnectionExecutionStatus(0).Type()),
-
-		filtering.DeclareIdent("user_connection_execution.results_path", filtering.TypeString),
-
-		filtering.DeclareIdent("user_connection_execution.num_results", filtering.TypeInt),
-
-		filtering.DeclareIdent("user_connection_execution.started_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("user_connection_execution.finished_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("user_connection_execution.estimated_time", filtering.TypeString),
-
-		filtering.DeclareIdent("user_connection_execution.user_msg", filtering.TypeString),
+		filtering.DeclareIdent("executions.user_msg", filtering.TypeString),
 
 		//user_connection
 
@@ -169,11 +161,17 @@ func user_connectionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("project_version_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("type", pb.UserConnectionType(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("type", pb.UserConnectionType(0).Type()),
 
 		filtering.DeclareIdent("db_schema", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("status", pb.UserConnectionStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.UserConnectionStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -183,4 +181,42 @@ func user_connectionDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// user_connectionEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func user_connectionEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"executions.status": {
+			"invalid": 0,
+			"USER_CONNECTION_EXECUTION_STATUS_INVALID": 0,
+			"succeeded": 1,
+			"USER_CONNECTION_EXECUTION_STATUS_SUCCEEDED": 1,
+			"failed": 2,
+			"USER_CONNECTION_EXECUTION_STATUS_FAILED": 2,
+			"cancelled": 3,
+			"USER_CONNECTION_EXECUTION_STATUS_CANCELLED": 3,
+		},
+
+		"type": {
+			"invalid":                      0,
+			"USER_CONNECTION_TYPE_INVALID": 0,
+			"local":                        1,
+			"USER_CONNECTION_TYPE_LOCAL":   1,
+			"remote":                       2,
+			"USER_CONNECTION_TYPE_REMOTE":  2,
+		},
+
+		"status": {
+			"invalid":                         0,
+			"USER_CONNECTION_STATUS_INVALID":  0,
+			"active":                          1,
+			"USER_CONNECTION_STATUS_ACTIVE":   1,
+			"disabled":                        2,
+			"USER_CONNECTION_STATUS_DISABLED": 2,
+		},
+	}
 }

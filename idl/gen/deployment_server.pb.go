@@ -36,6 +36,8 @@ type DeploymentServer struct {
 	PublicUrl      string                 `protobuf:"bytes,9,opt,name=public_url,json=publicUrl,proto3" json:"public_url,omitempty"`
 	DataManagerUrl string                 `protobuf:"bytes,10,opt,name=data_manager_url,json=dataManagerUrl,proto3" json:"data_manager_url,omitempty"`
 	LocalAgentUuid string                 `protobuf:"bytes,11,opt,name=local_agent_uuid,json=localAgentUuid,proto3" json:"local_agent_uuid,omitempty"`
+	GrpcDomain     string                 `protobuf:"bytes,12,opt,name=grpc_domain,json=grpcDomain,proto3" json:"grpc_domain,omitempty"`
+	AuthDomain     string                 `protobuf:"bytes,13,opt,name=auth_domain,json=authDomain,proto3" json:"auth_domain,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -147,11 +149,25 @@ func (x *DeploymentServer) GetLocalAgentUuid() string {
 	return ""
 }
 
+func (x *DeploymentServer) GetGrpcDomain() string {
+	if x != nil {
+		return x.GrpcDomain
+	}
+	return ""
+}
+
+func (x *DeploymentServer) GetAuthDomain() string {
+	if x != nil {
+		return x.AuthDomain
+	}
+	return ""
+}
+
 var File_deployment_server_proto protoreflect.FileDescriptor
 
 const file_deployment_server_proto_rawDesc = "" +
 	"\n" +
-	"\x17deployment_server.proto\x12\x03nem\"\xf4\x02\n" +
+	"\x17deployment_server.proto\x12\x03nem\"\xb6\x03\n" +
 	"\x10DeploymentServer\x12\x19\n" +
 	"\bssh_user\x18\x01 \x01(\tR\asshUser\x12\x19\n" +
 	"\bssh_port\x18\x02 \x01(\x03R\asshPort\x12\x1f\n" +
@@ -167,7 +183,11 @@ const file_deployment_server_proto_rawDesc = "" +
 	"public_url\x18\t \x01(\tR\tpublicUrl\x12(\n" +
 	"\x10data_manager_url\x18\n" +
 	" \x01(\tR\x0edataManagerUrl\x12(\n" +
-	"\x10local_agent_uuid\x18\v \x01(\tR\x0elocalAgentUuidB7\n" +
+	"\x10local_agent_uuid\x18\v \x01(\tR\x0elocalAgentUuid\x12\x1f\n" +
+	"\vgrpc_domain\x18\f \x01(\tR\n" +
+	"grpcDomain\x12\x1f\n" +
+	"\vauth_domain\x18\r \x01(\tR\n" +
+	"authDomainB7\n" +
 	"\x14github.com/nuzur/nemB\x10DeploymentServerP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

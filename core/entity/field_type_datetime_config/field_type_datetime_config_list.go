@@ -8,10 +8,13 @@ import (
 
 func (e FieldTypeDatetimeConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"enforce_future":   entitytypes.BooleanFieldType,
-		"enforce_past":     entitytypes.BooleanFieldType,
-		"display_timezone": entitytypes.StringFieldType,
-		"storage_timezone": entitytypes.StringFieldType,
+		"enforce_future":               entitytypes.BooleanFieldType,
+		"enforce_past":                 entitytypes.BooleanFieldType,
+		"display_timezone":             entitytypes.StringFieldType,
+		"storage_timezone":             entitytypes.StringFieldType,
+		"precision":                    entitytypes.IntFieldType,
+		"on_update_current_timestamp":  entitytypes.BooleanFieldType,
+		"no_default_current_timestamp": entitytypes.BooleanFieldType,
 	}
 }
 
@@ -21,6 +24,9 @@ func (e FieldTypeDatetimeConfig) OrderedFieldIdentifiers() []string {
 	res = append(res, "enforce_past")
 	res = append(res, "display_timezone")
 	res = append(res, "storage_timezone")
+	res = append(res, "precision")
+	res = append(res, "on_update_current_timestamp")
+	res = append(res, "no_default_current_timestamp")
 
 	return res
 }

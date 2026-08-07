@@ -81,6 +81,7 @@ func (e ObjectStore) ToJSON() json.RawMessage {
 	res, err := json.Marshal(e)
 	if err != nil {
 		log.Printf("marshal error ObjectStoreToJSON: %v\n", err)
+		return json.RawMessage("null")
 	}
 	return res
 }
@@ -89,17 +90,26 @@ func ObjectStoreToJSON(e ObjectStore) json.RawMessage {
 	res, err := json.Marshal(e)
 	if err != nil {
 		log.Printf("marshal error ObjectStoreToJSON: %v\n", err)
+		return json.RawMessage("null")
 	}
 	return res
 }
 
+// ObjectStoreSliceToJSON serializes a ONE_TO_MANY embed for its JSON column.
+// An absent embed is the EMPTY ARRAY, never a zero-length json.RawMessage: a
+// zero-length value reaches the driver as the empty string, which is not valid
+// JSON, so a create that simply omitted an optional array embed was rejected by
+// the database ("invalid input syntax for type json", MySQL error 3140) and
+// surfaced as a 500. "[]" is also exactly what an explicit `"field": []` stores,
+// so the omitted and the explicitly-empty request round-trip to the same value.
 func ObjectStoreSliceToJSON(e []ObjectStore) json.RawMessage {
 	if e == nil {
-		return json.RawMessage{}
+		return json.RawMessage("[]")
 	}
 	res, err := json.Marshal(e)
 	if err != nil {
 		log.Printf("marshal error ObjectStoreSliceToJSON: %v\n", err)
+		return json.RawMessage("[]")
 	}
 	return res
 }

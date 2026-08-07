@@ -13,7 +13,7 @@ func (e FieldTypeEncryptedConfig) FieldIdentifierToTypeMap() map[string]entityty
 		"regex_validation": entitytypes.StringFieldType,
 		"encryption_type":  entitytypes.SingleEnumFieldType,
 		"use_salt":         entitytypes.BooleanFieldType,
-		"salt_field_uuids": entitytypes.StringFieldType,
+		"salt_field_uuids": entitytypes.ArrayFieldType,
 	}
 }
 

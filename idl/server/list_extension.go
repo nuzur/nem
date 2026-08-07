@@ -64,6 +64,7 @@ func BuildListExtensionRequest(ctx context.Context, request *pb.ListExtensionReq
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            extensionEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListExtension(ctx context.Context, request *pb.ListExtensionReq
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -137,7 +140,10 @@ func extensionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("visibility.user_uuids", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("visibility.roles", pb.VisibilityRoles(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("visibility.roles", pb.VisibilityRoles(0).Type()),
 
 		filtering.DeclareIdent("visibility.created_at", filtering.TypeTimestamp),
 
@@ -167,7 +173,10 @@ func extensionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("repository", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("extension_type", pb.ExtensionType(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("extension_type", pb.ExtensionType(0).Type()),
 
 		filtering.DeclareIdent("tags", filtering.TypeString),
 
@@ -175,7 +184,10 @@ func extensionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("public", filtering.TypeBool),
 
-		filtering.DeclareEnumIdent("status", pb.ExtensionStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.ExtensionStatus(0).Type()),
 
 		filtering.DeclareIdent("owner_uuid", filtering.TypeString),
 
@@ -191,4 +203,48 @@ func extensionDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// extensionEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func extensionEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"visibility.roles": {
+			"invalid":                       0,
+			"VISIBILITY_ROLES_INVALID":      0,
+			"admin":                         1,
+			"VISIBILITY_ROLES_ADMIN":        1,
+			"developer":                     2,
+			"VISIBILITY_ROLES_DEVELOPER":    2,
+			"data_manager":                  3,
+			"VISIBILITY_ROLES_DATA_MANAGER": 3,
+			"data_analyst":                  4,
+			"VISIBILITY_ROLES_DATA_ANALYST": 4,
+			"viewer":                        5,
+			"VISIBILITY_ROLES_VIEWER":       5,
+		},
+
+		"extension_type": {
+			"invalid":                     0,
+			"EXTENSION_TYPE_INVALID":      0,
+			"importer":                    1,
+			"EXTENSION_TYPE_IMPORTER":     1,
+			"synchronizer":                2,
+			"EXTENSION_TYPE_SYNCHRONIZER": 2,
+			"generator":                   3,
+			"EXTENSION_TYPE_GENERATOR":    3,
+		},
+
+		"status": {
+			"invalid":                   0,
+			"EXTENSION_STATUS_INVALID":  0,
+			"active":                    1,
+			"EXTENSION_STATUS_ACTIVE":   1,
+			"disabled":                  2,
+			"EXTENSION_STATUS_DISABLED": 2,
+		},
+	}
 }

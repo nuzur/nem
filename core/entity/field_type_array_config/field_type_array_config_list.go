@@ -14,7 +14,7 @@ func (e FieldTypeArrayConfig) FieldIdentifierToTypeMap() map[string]entitytypes.
 		"max_elements":   entitytypes.IntFieldType,
 		"enforce_unique": entitytypes.BooleanFieldType,
 		"type":           entitytypes.SingleEnumFieldType,
-		"type_config":    entitytypes.MultiDependantEntityFieldType,
+		"type_config":    entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

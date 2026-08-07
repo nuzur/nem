@@ -11,8 +11,8 @@ import (
 func (e FieldTypeFileConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
 		"storage_type":       entitytypes.SingleEnumFieldType,
-		"storage_config":     entitytypes.MultiDependantEntityFieldType,
-		"allowed_extensions": entitytypes.StringFieldType,
+		"storage_config":     entitytypes.SingleDependantEntityFieldType,
+		"allowed_extensions": entitytypes.ArrayFieldType,
 		"max_size":           entitytypes.IntFieldType,
 		"allow_multiple":     entitytypes.BooleanFieldType,
 		"max_files":          entitytypes.IntFieldType,

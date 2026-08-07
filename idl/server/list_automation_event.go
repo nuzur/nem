@@ -64,6 +64,7 @@ func BuildListAutomationEventRequest(ctx context.Context, request *pb.ListAutoma
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            automation_eventEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListAutomationEvent(ctx context.Context, request *pb.ListAutoma
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -135,7 +138,10 @@ func automation_eventDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("change_request_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("status", pb.AutomationEventStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.AutomationEventStatus(0).Type()),
 
 		filtering.DeclareIdent("attempts", filtering.TypeInt),
 
@@ -157,4 +163,28 @@ func automation_eventDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// automation_eventEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func automation_eventEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"status": {
+			"invalid":                            0,
+			"AUTOMATION_EVENT_STATUS_INVALID":    0,
+			"pending":                            1,
+			"AUTOMATION_EVENT_STATUS_PENDING":    1,
+			"delivering":                         2,
+			"AUTOMATION_EVENT_STATUS_DELIVERING": 2,
+			"delivered":                          3,
+			"AUTOMATION_EVENT_STATUS_DELIVERED":  3,
+			"failed":                             4,
+			"AUTOMATION_EVENT_STATUS_FAILED":     4,
+			"dead":                               5,
+			"AUTOMATION_EVENT_STATUS_DEAD":       5,
+		},
+	}
 }

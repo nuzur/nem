@@ -10,7 +10,7 @@ import (
 
 func (e ObjectStoreTypeConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"s3": entitytypes.MultiDependantEntityFieldType,
+		"s3": entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

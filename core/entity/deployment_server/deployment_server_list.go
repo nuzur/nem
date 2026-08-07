@@ -19,6 +19,8 @@ func (e DeploymentServer) FieldIdentifierToTypeMap() map[string]entitytypes.Fiel
 		"public_url":       entitytypes.StringFieldType,
 		"data_manager_url": entitytypes.StringFieldType,
 		"local_agent_uuid": entitytypes.StringFieldType,
+		"grpc_domain":      entitytypes.StringFieldType,
+		"auth_domain":      entitytypes.StringFieldType,
 	}
 }
 
@@ -35,6 +37,8 @@ func (e DeploymentServer) OrderedFieldIdentifiers() []string {
 	res = append(res, "public_url")
 	res = append(res, "data_manager_url")
 	res = append(res, "local_agent_uuid")
+	res = append(res, "grpc_domain")
+	res = append(res, "auth_domain")
 
 	return res
 }

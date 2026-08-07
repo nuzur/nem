@@ -4,21 +4,78 @@ package server
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/nuzur/nem/core"
 	pb "github.com/nuzur/nem/idl/gen"
 	"net"
 
+	"go.einride.tech/aip/filtering"
 	"go.uber.org/config"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/health"
 	"google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/reflection"
+	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/reflect/protoreflect"
 
 	"github.com/nuzur/nem/auth"
 )
+
+// asInvalidArgument re-reports a core error the CALLER caused as
+// codes.InvalidArgument. The core layer marks those with a BadRequest() method
+// rather than a sentinel value, so this matches on the BEHAVIOUR and needs no
+// import of the package that raised it.
+//
+// The concrete case this exists for: a filter or order_by expression the list
+// clause builder cannot turn into SQL (list.InvalidRequestError). Anything else
+// is passed through untouched.
+func asInvalidArgument(err error) error {
+	if err == nil {
+		return nil
+	}
+	var badRequest interface{ BadRequest() bool }
+	if errors.As(err, &badRequest) && badRequest.BadRequest() {
+		return status.Error(codes.InvalidArgument, err.Error())
+	}
+	return err
+}
+
+// declareEnumIdent declares an enum filter ident the way aip-go does, and then
+// additionally allows its value to be written as a QUOTED STRING.
+//
+// filtering.DeclareEnumIdent only declares `=` / `!=` over (enum, enum), so
+// `status = "active"` — the form a REST-shaped client writes, and the form the
+// generated REST surface accepts — failed the type check here with "no matching
+// overload". The extra overloads make the two surfaces accept the same filter
+// strings; the value itself is resolved by the clause builder against the
+// entity's value table (see <entity>EnumValues), which understands both
+// spellings.
+func declareEnumIdent(name string, enumType protoreflect.EnumType) filtering.DeclarationOption {
+	return func(d *filtering.Declarations) error {
+		if err := filtering.DeclareEnumIdent(name, enumType)(d); err != nil {
+			return err
+		}
+		celType := filtering.TypeEnum(enumType)
+		for _, fn := range []string{filtering.FunctionEquals, filtering.FunctionNotEquals} {
+			overload := filtering.NewFunctionOverload(
+				fn+"_"+celType.GetMessageType()+"_string",
+				filtering.TypeBool,
+				celType,
+				filtering.TypeString,
+			)
+			// Declaring the same overload twice (two fields of the same enum
+			// type) is a no-op, not an error: aip compares the declarations.
+			if err := filtering.DeclareFunction(fn, overload)(d); err != nil {
+				return err
+			}
+		}
+		return nil
+	}
+}
 
 type server struct {
 	pb.UnimplementedNemServer

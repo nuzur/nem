@@ -14,14 +14,32 @@ import (
 	"strings"
 )
 
-func JSONToStringSlice(data json.RawMessage) []string {
-	res := []string{}
-	err := json.Unmarshal(data, &res)
-	if err != nil {
-		log.Printf("error unmarshaling json to string slice: %v \n", err)
-		return []string{}
+// jsonToSlice decodes an array field's JSON column into its slice type.
+//
+// A decode failure is deliberately NOT fatal: it logs and yields an empty slice,
+// so one malformed legacy row cannot fail a whole list response. That resilience
+// has a sharp edge, though — a MIS-TYPED field (an array of numbers whose Go type
+// was resolved as []string, say) fails on every row, and the field then reads back
+// as [] everywhere with no error on any layer, which looks like "there is no data"
+// rather than "this is a bug". So the log names the target type AND carries the
+// payload it could not decode: the loss stays non-fatal, but it stops being
+// invisible.
+//
+// An absent (NULL / empty) column is not a failure and is not logged.
+func jsonToSlice[T any](data json.RawMessage, elementType string) []T {
+	res := []T{}
+	if len(data) == 0 || string(data) == "null" {
+		return res
+	}
+	if err := json.Unmarshal(data, &res); err != nil {
+		log.Printf("error unmarshaling json to %s slice: %v (payload: %s) \n", elementType, err, string(data))
+		return []T{}
 	}
 	return res
+}
+
+func JSONToStringSlice(data json.RawMessage) []string {
+	return jsonToSlice[string](data, "string")
 }
 
 func JSONToUUIDSlice(data json.RawMessage) []uuid.UUID {
@@ -35,78 +53,33 @@ func JSONToUUIDSlice(data json.RawMessage) []uuid.UUID {
 }
 
 func JSONToIntSlice(data json.RawMessage) []int64 {
-	res := []int64{}
-	err := json.Unmarshal(data, &res)
-	if err != nil {
-		log.Printf("error unmarshaling json to int slice: %v \n", err)
-		return []int64{}
-	}
-	return res
+	return jsonToSlice[int64](data, "int")
 }
 
 // JSONToEnumSlice decodes a JSON array column (e.g. "[1,2]") into a slice of a
 // multi-enum type. The type parameter is any enum (its underlying type is int64).
 func JSONToEnumSlice[T ~int64](data json.RawMessage) []T {
-	res := []T{}
-	if len(data) == 0 {
-		return res
-	}
-	err := json.Unmarshal(data, &res)
-	if err != nil {
-		log.Printf("error unmarshaling json to enum slice: %v \n", err)
-		return []T{}
-	}
-	return res
+	return jsonToSlice[T](data, "enum")
 }
 
 func JSONToFloatSlice(data json.RawMessage) []float64 {
-	res := []float64{}
-	err := json.Unmarshal(data, &res)
-	if err != nil {
-		log.Printf("error unmarshaling json to float slice: %v \n", err)
-		return []float64{}
-	}
-	return res
+	return jsonToSlice[float64](data, "float")
 }
 
 func JSONToBooleanSlice(data json.RawMessage) []bool {
-	res := []bool{}
-	err := json.Unmarshal(data, &res)
-	if err != nil {
-		log.Printf("error unmarshaling json to boolean slice: %v \n", err)
-		return []bool{}
-	}
-	return res
+	return jsonToSlice[bool](data, "boolean")
 }
 
 func JSONToDateSlice(data json.RawMessage) []time.Time {
-	res := []time.Time{}
-	err := json.Unmarshal(data, &res)
-	if err != nil {
-		log.Printf("error unmarshaling json to date slice: %v \n", err)
-		return []time.Time{}
-	}
-	return res
+	return jsonToSlice[time.Time](data, "date")
 }
 
 func JSONToDatetimeSlice(data json.RawMessage) []time.Time {
-	res := []time.Time{}
-	err := json.Unmarshal(data, &res)
-	if err != nil {
-		log.Printf("error unmarshaling json to datetime slice: %v \n", err)
-		return []time.Time{}
-	}
-	return res
+	return jsonToSlice[time.Time](data, "datetime")
 }
 
 func JSONToTimeSlice(data json.RawMessage) []time.Time {
-	res := []time.Time{}
-	err := json.Unmarshal(data, &res)
-	if err != nil {
-		log.Printf("error unmarshaling json to datetime slice: %v \n", err)
-		return []time.Time{}
-	}
-	return res
+	return jsonToSlice[time.Time](data, "time")
 }
 
 // NullifyEmptyJSON returns nil for an empty json.RawMessage so it is written as
@@ -119,11 +92,16 @@ func NullifyEmptyJSON(data json.RawMessage) json.RawMessage {
 	return data
 }
 
+// SliceToJSON serializes a list-shaped field (array, multi-enum, multi-file)
+// into its JSON column. The failure branch returns the empty ARRAY, not a
+// zero-length json.RawMessage: a zero-length value reaches the driver as the
+// empty string, which no JSON column accepts, so a marshal error turned into a
+// 500 from the database instead of an empty list.
 func SliceToJSON(slice interface{}) json.RawMessage {
 	res, err := json.Marshal(slice)
 	if err != nil {
 		log.Printf("error marshaling slice to json: %v \n", err)
-		return json.RawMessage{}
+		return json.RawMessage("[]")
 	}
 	return res
 }

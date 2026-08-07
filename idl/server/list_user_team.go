@@ -64,6 +64,7 @@ func BuildListUserTeamRequest(ctx context.Context, request *pb.ListUserTeamReque
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            user_teamEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListUserTeam(ctx context.Context, request *pb.ListUserTeamReque
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -135,13 +138,19 @@ func user_teamDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("team_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("role", pb.UserTeamRole(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("role", pb.UserTeamRole(0).Type()),
 
 		filtering.DeclareIdent("review_required_structure", filtering.TypeBool),
 
 		filtering.DeclareIdent("review_required_data", filtering.TypeBool),
 
-		filtering.DeclareEnumIdent("status", pb.UserTeamStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.UserTeamStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -155,4 +164,39 @@ func user_teamDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// user_teamEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func user_teamEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"role": {
+			"invalid":                     0,
+			"USER_TEAM_ROLE_INVALID":      0,
+			"admin":                       1,
+			"USER_TEAM_ROLE_ADMIN":        1,
+			"developer":                   2,
+			"USER_TEAM_ROLE_DEVELOPER":    2,
+			"data_manager":                3,
+			"USER_TEAM_ROLE_DATA_MANAGER": 3,
+			"data_analyst":                4,
+			"USER_TEAM_ROLE_DATA_ANALYST": 4,
+			"viewer":                      5,
+			"USER_TEAM_ROLE_VIEWER":       5,
+		},
+
+		"status": {
+			"invalid":                   0,
+			"USER_TEAM_STATUS_INVALID":  0,
+			"active":                    1,
+			"USER_TEAM_STATUS_ACTIVE":   1,
+			"disabled":                  2,
+			"USER_TEAM_STATUS_DISABLED": 2,
+			"invited":                   3,
+			"USER_TEAM_STATUS_INVITED":  3,
+		},
+	}
 }

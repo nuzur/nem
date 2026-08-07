@@ -9,7 +9,7 @@ import (
 func (e RelationshipNodeTypeEntityConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
 		"entity_uuid":      entitytypes.StringFieldType,
-		"field_uuids":      entitytypes.StringFieldType,
+		"field_uuids":      entitytypes.ArrayFieldType,
 		"fields_generated": entitytypes.BooleanFieldType,
 	}
 }

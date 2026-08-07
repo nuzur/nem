@@ -1161,3 +1161,18 @@ func FieldPiiConfigMaskStrategySliceFromProto(s []pb.FieldPiiConfigMaskStrategy)
 	}
 	return res
 }
+
+func RelationshipReferentialActionSliceToProto(s []enums.RelationshipReferentialAction) []pb.RelationshipReferentialAction {
+	res := []pb.RelationshipReferentialAction{}
+	for _, e := range s {
+		res = append(res, pb.RelationshipReferentialAction(e))
+	}
+	return res
+}
+func RelationshipReferentialActionSliceFromProto(s []pb.RelationshipReferentialAction) []enums.RelationshipReferentialAction {
+	res := []enums.RelationshipReferentialAction{}
+	for _, e := range s {
+		res = append(res, enums.RelationshipReferentialAction(e))
+	}
+	return res
+}

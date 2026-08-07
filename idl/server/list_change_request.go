@@ -64,6 +64,7 @@ func BuildListChangeRequestRequest(ctx context.Context, request *pb.ListChangeRe
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            change_requestEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListChangeRequest(ctx context.Context, request *pb.ListChangeRe
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -125,87 +128,37 @@ func change_requestDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("true", filtering.TypeBool),
 		filtering.DeclareIdent("false", filtering.TypeBool),
 
-		//data_change_type_config_update_field
+		//data_changes
 
-		filtering.DeclareIdent("data_change_type_config_update_field.field_uuid", filtering.TypeString),
+		filtering.DeclareIdent("data_changes.uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("data_change_type_config_update_field.current_value", filtering.TypeString),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("data_changes.data_change_type", pb.ChangeRequestDataChangeDataChangeType(0).Type()),
 
-		filtering.DeclareIdent("data_change_type_config_update_field.new_value", filtering.TypeString),
+		filtering.DeclareIdent("data_changes.order", filtering.TypeInt),
 
-		//data_change_field_value
+		//metadata
 
-		filtering.DeclareIdent("data_change_field_value.field_uuid", filtering.TypeString),
+		//reviews
 
-		filtering.DeclareIdent("data_change_field_value.value", filtering.TypeString),
+		filtering.DeclareIdent("reviews.uuid", filtering.TypeString),
 
-		//data_change_type_config_update
+		filtering.DeclareIdent("reviews.user_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("data_change_type_config_update.entity_uuid", filtering.TypeString),
+		filtering.DeclareIdent("reviews.comment", filtering.TypeString),
 
-		filtering.DeclareIdent("data_change_type_config_update.created_at", filtering.TypeTimestamp),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("reviews.response", pb.ChangeRequestReviewResponse(0).Type()),
 
-		//data_change_type_config_create
+		filtering.DeclareIdent("reviews.created_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("data_change_type_config_create.entity_uuid", filtering.TypeString),
+		filtering.DeclareIdent("reviews.updated_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("data_change_type_config_create.created_at", filtering.TypeTimestamp),
-
-		//data_change_type_config_delete
-
-		filtering.DeclareIdent("data_change_type_config_delete.entity_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("data_change_type_config_delete.created_at", filtering.TypeTimestamp),
-
-		//data_change_type_config
-
-		//change_request_data_change
-
-		filtering.DeclareIdent("change_request_data_change.uuid", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("change_request_data_change.data_change_type", pb.ChangeRequestDataChangeDataChangeType(0).Type()),
-
-		filtering.DeclareIdent("change_request_data_change.order", filtering.TypeInt),
-
-		//change_request_metadata_data
-
-		filtering.DeclareIdent("change_request_metadata_data.store_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("change_request_metadata_data.connection_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("change_request_metadata_data.schema", filtering.TypeString),
-
-		//change_request_metadata
-
-		//change_request_review
-
-		filtering.DeclareIdent("change_request_review.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("change_request_review.user_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("change_request_review.comment", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("change_request_review.response", pb.ChangeRequestReviewResponse(0).Type()),
-
-		filtering.DeclareIdent("change_request_review.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("change_request_review.updated_at", filtering.TypeTimestamp),
-
-		//change_request_scope_config_local
-
-		filtering.DeclareIdent("change_request_scope_config_local.agent_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("change_request_scope_config_local.agent_connection_uuid", filtering.TypeString),
-
-		//change_request_scope_config_remote
-
-		filtering.DeclareIdent("change_request_scope_config_remote.team_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("change_request_scope_config_remote.store_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("change_request_scope_config_remote.connection_uuid", filtering.TypeString),
-
-		//change_request_scope_config
+		//scope_config
 
 		//change_request
 
@@ -221,13 +174,22 @@ func change_requestDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("project_version_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("change_type", pb.ChangeRequestChangeType(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("change_type", pb.ChangeRequestChangeType(0).Type()),
 
-		filtering.DeclareEnumIdent("review_status", pb.ChangeRequestReviewStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("review_status", pb.ChangeRequestReviewStatus(0).Type()),
 
 		filtering.DeclareIdent("owner_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("status", pb.ChangeRequestStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.ChangeRequestStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -239,10 +201,86 @@ func change_requestDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("ai_generated", filtering.TypeBool),
 
-		filtering.DeclareEnumIdent("scope", pb.ChangeRequestScope(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("scope", pb.ChangeRequestScope(0).Type()),
 	)
 	if err != nil {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// change_requestEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func change_requestEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"data_changes.data_change_type": {
+			"invalid": 0,
+			"CHANGE_REQUEST_DATA_CHANGE_DATA_CHANGE_TYPE_INVALID": 0,
+			"update_field": 1,
+			"CHANGE_REQUEST_DATA_CHANGE_DATA_CHANGE_TYPE_UPDATE_FIELD": 1,
+			"create_record": 2,
+			"CHANGE_REQUEST_DATA_CHANGE_DATA_CHANGE_TYPE_CREATE_RECORD": 2,
+			"delete_record": 3,
+			"CHANGE_REQUEST_DATA_CHANGE_DATA_CHANGE_TYPE_DELETE_RECORD": 3,
+		},
+
+		"reviews.response": {
+			"invalid":                                0,
+			"CHANGE_REQUEST_REVIEW_RESPONSE_INVALID": 0,
+			"approved":                               1,
+			"CHANGE_REQUEST_REVIEW_RESPONSE_APPROVED": 1,
+			"rejected": 2,
+			"CHANGE_REQUEST_REVIEW_RESPONSE_REJECTED": 2,
+		},
+
+		"change_type": {
+			"invalid":                                    0,
+			"CHANGE_REQUEST_CHANGE_TYPE_INVALID":         0,
+			"project_data":                               1,
+			"CHANGE_REQUEST_CHANGE_TYPE_PROJECT_DATA":    1,
+			"project_version":                            2,
+			"CHANGE_REQUEST_CHANGE_TYPE_PROJECT_VERSION": 2,
+		},
+
+		"review_status": {
+			"invalid":                                0,
+			"CHANGE_REQUEST_REVIEW_STATUS_INVALID":   0,
+			"draft":                                  1,
+			"CHANGE_REQUEST_REVIEW_STATUS_DRAFT":     1,
+			"in_review":                              2,
+			"CHANGE_REQUEST_REVIEW_STATUS_IN_REVIEW": 2,
+			"approved":                               3,
+			"CHANGE_REQUEST_REVIEW_STATUS_APPROVED":  3,
+			"rejected":                               4,
+			"CHANGE_REQUEST_REVIEW_STATUS_REJECTED":  4,
+			"discarded":                              5,
+			"CHANGE_REQUEST_REVIEW_STATUS_DISCARDED": 5,
+			"applied":                                6,
+			"CHANGE_REQUEST_REVIEW_STATUS_APPLIED":   6,
+		},
+
+		"status": {
+			"invalid":                        0,
+			"CHANGE_REQUEST_STATUS_INVALID":  0,
+			"active":                         1,
+			"CHANGE_REQUEST_STATUS_ACTIVE":   1,
+			"disabled":                       2,
+			"CHANGE_REQUEST_STATUS_DISABLED": 2,
+		},
+
+		"scope": {
+			"invalid":                      0,
+			"CHANGE_REQUEST_SCOPE_INVALID": 0,
+			"local":                        1,
+			"CHANGE_REQUEST_SCOPE_LOCAL":   1,
+			"remote":                       2,
+			"CHANGE_REQUEST_SCOPE_REMOTE":  2,
+		},
+	}
 }

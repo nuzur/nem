@@ -90,13 +90,19 @@ func FieldTypeIntegerConfigSizeSliceToJSON(in []FieldTypeIntegerConfigSize) json
 	jr, err := json.Marshal(res)
 	if err != nil {
 		log.Printf("error marshaling FieldTypeIntegerConfigSize slice to json: %v", err)
-		return json.RawMessage{}
+		// the empty ARRAY, not a zero-length RawMessage: the latter reaches the
+		// driver as an empty string, which no JSON column accepts
+		return json.RawMessage("[]")
 	}
 	return jr
 }
 
 func JSONToFieldTypeIntegerConfigSizeSlice(in json.RawMessage) []FieldTypeIntegerConfigSize {
 	res := []int64{}
+	// an absent column (NULL / empty / JSON null) is not a decode failure
+	if len(in) == 0 || string(in) == "null" {
+		return nil
+	}
 	err := json.Unmarshal(in, &res)
 	if err != nil {
 		log.Printf("error unmarshaling FieldTypeIntegerConfigSize slice to int slice: %v", err)

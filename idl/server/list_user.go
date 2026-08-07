@@ -64,6 +64,7 @@ func BuildListUserRequest(ctx context.Context, request *pb.ListUserRequest) (typ
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            userEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListUser(ctx context.Context, request *pb.ListUserRequest) (*pb
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -137,7 +140,10 @@ func userDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("email", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("user_type", pb.UserType(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("user_type", pb.UserType(0).Type()),
 
 		filtering.DeclareIdent("country_ios2", filtering.TypeString),
 
@@ -145,7 +151,10 @@ func userDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("metadata", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("status", pb.UserStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.UserStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -155,4 +164,31 @@ func userDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// userEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func userEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"user_type": {
+			"invalid":           0,
+			"USER_TYPE_INVALID": 0,
+			"admin":             1,
+			"USER_TYPE_ADMIN":   1,
+			"regular":           2,
+			"USER_TYPE_REGULAR": 2,
+		},
+
+		"status": {
+			"invalid":              0,
+			"USER_STATUS_INVALID":  0,
+			"active":               1,
+			"USER_STATUS_ACTIVE":   1,
+			"disabled":             2,
+			"USER_STATUS_DISABLED": 2,
+		},
+	}
 }

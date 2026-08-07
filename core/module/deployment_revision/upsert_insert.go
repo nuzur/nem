@@ -67,6 +67,13 @@ func (m *module) Insert(
 		}
 	}
 
+	// The rows this module caches have changed, so everything it holds is
+	// suspect: drop it rather than answer a later read from a snapshot that
+	// predates this write. The cache is per entity, so this discards only this
+	// entity's reads. (It is a no-op while a caller-supplied transaction is
+	// still open — those reads bypass the cache anyway.)
+	m.cache.Flush()
+
 	return buildInsertResponse(req), nil
 }
 

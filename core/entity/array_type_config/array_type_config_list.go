@@ -21,18 +21,18 @@ import (
 
 func (e ArrayTypeConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"integer":   entitytypes.MultiDependantEntityFieldType,
-		"float":     entitytypes.MultiDependantEntityFieldType,
-		"decimal":   entitytypes.MultiDependantEntityFieldType,
-		"char":      entitytypes.MultiDependantEntityFieldType,
-		"varchar":   entitytypes.MultiDependantEntityFieldType,
-		"encrypted": entitytypes.MultiDependantEntityFieldType,
-		"url":       entitytypes.MultiDependantEntityFieldType,
-		"email":     entitytypes.MultiDependantEntityFieldType,
-		"phone":     entitytypes.MultiDependantEntityFieldType,
-		"date":      entitytypes.MultiDependantEntityFieldType,
-		"datetime":  entitytypes.MultiDependantEntityFieldType,
-		"enum":      entitytypes.MultiDependantEntityFieldType,
+		"integer":   entitytypes.SingleDependantEntityFieldType,
+		"float":     entitytypes.SingleDependantEntityFieldType,
+		"decimal":   entitytypes.SingleDependantEntityFieldType,
+		"char":      entitytypes.SingleDependantEntityFieldType,
+		"varchar":   entitytypes.SingleDependantEntityFieldType,
+		"encrypted": entitytypes.SingleDependantEntityFieldType,
+		"url":       entitytypes.SingleDependantEntityFieldType,
+		"email":     entitytypes.SingleDependantEntityFieldType,
+		"phone":     entitytypes.SingleDependantEntityFieldType,
+		"date":      entitytypes.SingleDependantEntityFieldType,
+		"datetime":  entitytypes.SingleDependantEntityFieldType,
+		"enum":      entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

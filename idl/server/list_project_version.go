@@ -64,6 +64,7 @@ func BuildListProjectVersionRequest(ctx context.Context, request *pb.ListProject
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            project_versionEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListProjectVersion(ctx context.Context, request *pb.ListProject
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -125,467 +128,128 @@ func project_versionDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("true", filtering.TypeBool),
 		filtering.DeclareIdent("false", filtering.TypeBool),
 
-		//field_type_integer_config
+		//entities
 
-		filtering.DeclareEnumIdent("field_type_integer_config.size", pb.FieldTypeIntegerConfigSize(0).Type()),
+		filtering.DeclareIdent("entities.uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_integer_config.min_value", filtering.TypeInt),
+		filtering.DeclareIdent("entities.version", filtering.TypeInt),
 
-		filtering.DeclareIdent("field_type_integer_config.min_value_inclusive", filtering.TypeBool),
+		filtering.DeclareIdent("entities.identifier", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_integer_config.max_value", filtering.TypeInt),
+		filtering.DeclareIdent("entities.description", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_integer_config.max_value_inclusive", filtering.TypeBool),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("entities.type", pb.EntityType(0).Type()),
 
-		filtering.DeclareIdent("field_type_integer_config.allow_negatives", filtering.TypeBool),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("entities.status", pb.EntityStatus(0).Type()),
 
-		filtering.DeclareIdent("field_type_integer_config.enable_limits", filtering.TypeBool),
+		filtering.DeclareIdent("entities.created_at", filtering.TypeTimestamp),
 
-		//field_type_float_config
+		filtering.DeclareIdent("entities.updated_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("field_type_float_config.min_value", filtering.TypeFloat),
+		filtering.DeclareIdent("entities.created_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_float_config.min_value_inclusive", filtering.TypeBool),
+		filtering.DeclareIdent("entities.updated_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_float_config.max_value", filtering.TypeFloat),
+		//relationships
 
-		filtering.DeclareIdent("field_type_float_config.max_value_inclusive", filtering.TypeBool),
+		filtering.DeclareIdent("relationships.uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_float_config.allow_negatives", filtering.TypeBool),
+		filtering.DeclareIdent("relationships.version", filtering.TypeInt),
 
-		filtering.DeclareIdent("field_type_float_config.number_of_decimals", filtering.TypeInt),
+		filtering.DeclareIdent("relationships.identifier", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("field_type_float_config.separator", pb.FieldTypeFloatConfigSeparator(0).Type()),
+		filtering.DeclareIdent("relationships.description", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_float_config.enable_limits", filtering.TypeBool),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("relationships.cardinality", pb.RelationshipCardinality(0).Type()),
 
-		//field_type_decimal_config
+		filtering.DeclareIdent("relationships.use_foreign_key", filtering.TypeBool),
 
-		filtering.DeclareIdent("field_type_decimal_config.min_value", filtering.TypeFloat),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("relationships.status", pb.RelationshipStatus(0).Type()),
 
-		filtering.DeclareIdent("field_type_decimal_config.min_value_inclusive", filtering.TypeBool),
+		filtering.DeclareIdent("relationships.created_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("field_type_decimal_config.max_value", filtering.TypeFloat),
+		filtering.DeclareIdent("relationships.updated_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("field_type_decimal_config.max_value_inclusive", filtering.TypeBool),
+		filtering.DeclareIdent("relationships.created_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_decimal_config.allow_negatives", filtering.TypeBool),
+		filtering.DeclareIdent("relationships.updated_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_decimal_config.number_of_decimals", filtering.TypeInt),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("relationships.on_delete", pb.RelationshipReferentialAction(0).Type()),
 
-		filtering.DeclareEnumIdent("field_type_decimal_config.separator", pb.FieldTypeDecimalConfigSeparator(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("relationships.on_update", pb.RelationshipReferentialAction(0).Type()),
 
-		filtering.DeclareIdent("field_type_decimal_config.is_currency", filtering.TypeBool),
+		//enums
 
-		filtering.DeclareIdent("field_type_decimal_config.currency_code", filtering.TypeString),
+		filtering.DeclareIdent("enums.uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_decimal_config.enable_limits", filtering.TypeBool),
+		filtering.DeclareIdent("enums.version", filtering.TypeInt),
 
-		//field_type_char_config
+		filtering.DeclareIdent("enums.identifier", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_char_config.min_size", filtering.TypeInt),
+		filtering.DeclareIdent("enums.remote_values", filtering.TypeBool),
 
-		filtering.DeclareIdent("field_type_char_config.max_size", filtering.TypeInt),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("enums.status", pb.EnumStatus(0).Type()),
 
-		filtering.DeclareIdent("field_type_char_config.regex_validation", filtering.TypeString),
+		filtering.DeclareIdent("enums.created_at", filtering.TypeTimestamp),
 
-		//field_type_varchar_config
+		filtering.DeclareIdent("enums.updated_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("field_type_varchar_config.min_size", filtering.TypeInt),
+		filtering.DeclareIdent("enums.created_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_varchar_config.max_size", filtering.TypeInt),
+		filtering.DeclareIdent("enums.updated_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_varchar_config.regex_validation", filtering.TypeString),
+		//services
 
-		//field_type_text_config
+		filtering.DeclareIdent("services.uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_text_config.min_size", filtering.TypeInt),
+		filtering.DeclareIdent("services.version", filtering.TypeInt),
 
-		filtering.DeclareIdent("field_type_text_config.max_size", filtering.TypeInt),
+		filtering.DeclareIdent("services.identifier", filtering.TypeString),
 
-		//field_type_encrypted_config
+		filtering.DeclareIdent("services.description", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_encrypted_config.min_size", filtering.TypeInt),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("services.status", pb.ServiceStatus(0).Type()),
 
-		filtering.DeclareIdent("field_type_encrypted_config.max_size", filtering.TypeInt),
+		filtering.DeclareIdent("services.created_at", filtering.TypeTimestamp),
 
-		filtering.DeclareIdent("field_type_encrypted_config.regex_validation", filtering.TypeString),
+		filtering.DeclareIdent("services.updated_at", filtering.TypeTimestamp),
 
-		filtering.DeclareEnumIdent("field_type_encrypted_config.encryption_type", pb.FieldTypeEncryptedConfigEncryptionType(0).Type()),
+		filtering.DeclareIdent("services.created_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_encrypted_config.use_salt", filtering.TypeBool),
+		filtering.DeclareIdent("services.updated_by_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_encrypted_config.salt_field_uuids", filtering.TypeString),
+		//deployments
 
-		//field_type_email_config
+		filtering.DeclareIdent("deployments.enviroment_uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("field_type_email_config.allow_domains", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_email_config.exclude_domains", filtering.TypeString),
-
-		//field_type_phone_config
-
-		filtering.DeclareIdent("field_type_phone_config.allow_countries", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_phone_config.exclude_countries", filtering.TypeString),
-
-		//field_type_url_config
-
-		filtering.DeclareIdent("field_type_url_config.allow_domains", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_url_config.exclude_domains", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_url_config.https_required", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_url_config.allowed_extensions", filtering.TypeString),
-
-		//file_object_storage_config
-
-		filtering.DeclareIdent("file_object_storage_config.object_store_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("file_object_storage_config.path", filtering.TypeString),
-
-		//file_storage_config
-
-		//field_type_file_config
-
-		filtering.DeclareEnumIdent("field_type_file_config.storage_type", pb.FieldTypeFileConfigStorageType(0).Type()),
-
-		filtering.DeclareIdent("field_type_file_config.allowed_extensions", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_file_config.max_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_file_config.allow_multiple", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_file_config.max_files", filtering.TypeInt),
-
-		//field_type_enum_config
-
-		filtering.DeclareIdent("field_type_enum_config.enum_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_enum_config.allow_multiple", filtering.TypeBool),
-
-		//field_type_json_config
-
-		filtering.DeclareIdent("field_type_json_config.enforce_schema_validation", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_json_config.json_schema", filtering.TypeString),
-
-		//field_type_date_config
-
-		filtering.DeclareIdent("field_type_date_config.enforce_future", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_date_config.enforce_past", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_date_config.display_timezone", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_date_config.storage_timezone", filtering.TypeString),
-
-		//field_type_datetime_config
-
-		filtering.DeclareIdent("field_type_datetime_config.enforce_future", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_datetime_config.enforce_past", filtering.TypeBool),
-
-		filtering.DeclareIdent("field_type_datetime_config.display_timezone", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_datetime_config.storage_timezone", filtering.TypeString),
-
-		//array_type_config
-
-		//field_type_array_config
-
-		filtering.DeclareIdent("field_type_array_config.min_elements", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_array_config.max_elements", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_array_config.enforce_unique", filtering.TypeBool),
-
-		filtering.DeclareEnumIdent("field_type_array_config.type", pb.FieldTypeArrayConfigType(0).Type()),
-
-		//field_type_slug_config
-
-		filtering.DeclareIdent("field_type_slug_config.min_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_slug_config.max_size", filtering.TypeInt),
-
-		filtering.DeclareIdent("field_type_slug_config.regex_validation", filtering.TypeString),
-
-		filtering.DeclareIdent("field_type_slug_config.based_on_field_uuids", filtering.TypeString),
-
-		//field_type_config
-
-		//visibility
-
-		filtering.DeclareIdent("visibility.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("visibility.description", filtering.TypeString),
-
-		filtering.DeclareIdent("visibility.organization_uuids", filtering.TypeString),
-
-		filtering.DeclareIdent("visibility.team_uuids", filtering.TypeString),
-
-		filtering.DeclareIdent("visibility.user_uuids", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("visibility.roles", pb.VisibilityRoles(0).Type()),
-
-		filtering.DeclareIdent("visibility.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("visibility.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("visibility.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("visibility.updated_by_uuid", filtering.TypeString),
-
-		//field_pii_config
-
-		filtering.DeclareEnumIdent("field_pii_config.mask_strategy", pb.FieldPiiConfigMaskStrategy(0).Type()),
-
-		filtering.DeclareIdent("field_pii_config.custom_mask_template", filtering.TypeString),
-
-		//field
-
-		filtering.DeclareIdent("field.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("field.version", filtering.TypeInt),
-
-		filtering.DeclareIdent("field.identifier", filtering.TypeString),
-
-		filtering.DeclareIdent("field.description", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("field.type", pb.FieldType(0).Type()),
-
-		filtering.DeclareIdent("field.required", filtering.TypeBool),
-
-		filtering.DeclareIdent("field.key", filtering.TypeBool),
-
-		filtering.DeclareIdent("field.key_auto_increment", filtering.TypeBool),
-
-		filtering.DeclareIdent("field.unique", filtering.TypeBool),
-
-		filtering.DeclareIdent("field.deprecated", filtering.TypeBool),
-
-		filtering.DeclareIdent("field.generated", filtering.TypeBool),
-
-		filtering.DeclareEnumIdent("field.status", pb.FieldStatus(0).Type()),
-
-		filtering.DeclareIdent("field.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("field.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("field.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("field.updated_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("field.pii", filtering.TypeBool),
-
-		//entity_version_type_field_config
-
-		filtering.DeclareIdent("entity_version_type_field_config.version_field_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity_version_type_field_config.append_only", filtering.TypeBool),
-
-		//entity_version_type_entity_config
-
-		filtering.DeclareIdent("entity_version_type_entity_config.entity_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity_version_type_entity_config.version_field_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity_version_type_entity_config.append_only", filtering.TypeBool),
-
-		//entity_version_type_config
-
-		//entity_version_config
-
-		filtering.DeclareEnumIdent("entity_version_config.type", pb.EntityVersionConfigType(0).Type()),
-
-		filtering.DeclareEnumIdent("entity_version_config.generator", pb.EntityVersionConfigGenerator(0).Type()),
-
-		//index_field
-
-		filtering.DeclareIdent("index_field.field_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("index_field.priority", filtering.TypeInt),
-
-		filtering.DeclareEnumIdent("index_field.order", pb.IndexFieldOrder(0).Type()),
-
-		filtering.DeclareIdent("index_field.length", filtering.TypeInt),
-
-		//index
-
-		filtering.DeclareIdent("index.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("index.identifier", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("index.type", pb.IndexType(0).Type()),
-
-		filtering.DeclareEnumIdent("index.status", pb.IndexStatus(0).Type()),
-
-		filtering.DeclareIdent("index.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("index.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("index.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("index.updated_by_uuid", filtering.TypeString),
-
-		//entity_type_standalone_config
-
-		filtering.DeclareIdent("entity_type_standalone_config.store_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity_type_standalone_config.versioned", filtering.TypeBool),
-
-		//entity_type_dependent_config
-
-		filtering.DeclareIdent("entity_type_dependent_config.service_source_uuids", filtering.TypeString),
-
-		filtering.DeclareIdent("entity_type_dependent_config.entity_source_uuids", filtering.TypeString),
-
-		//entity_type_config
-
-		//element_render
-
-		filtering.DeclareIdent("element_render.x", filtering.TypeFloat),
-
-		filtering.DeclareIdent("element_render.y", filtering.TypeFloat),
-
-		filtering.DeclareIdent("element_render.width", filtering.TypeFloat),
-
-		filtering.DeclareIdent("element_render.height", filtering.TypeFloat),
-
-		filtering.DeclareIdent("element_render.collapsed", filtering.TypeBool),
-
-		//entity_data_management_config
-
-		filtering.DeclareIdent("entity_data_management_config.list_display_fields", filtering.TypeString),
-
-		//entity
-
-		filtering.DeclareIdent("entity.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity.version", filtering.TypeInt),
-
-		filtering.DeclareIdent("entity.identifier", filtering.TypeString),
-
-		filtering.DeclareIdent("entity.description", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("entity.type", pb.EntityType(0).Type()),
-
-		filtering.DeclareEnumIdent("entity.status", pb.EntityStatus(0).Type()),
-
-		filtering.DeclareIdent("entity.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("entity.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("entity.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("entity.updated_by_uuid", filtering.TypeString),
-
-		//relationship_node_type_entity_config
-
-		filtering.DeclareIdent("relationship_node_type_entity_config.entity_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("relationship_node_type_entity_config.field_uuids", filtering.TypeString),
-
-		filtering.DeclareIdent("relationship_node_type_entity_config.fields_generated", filtering.TypeBool),
-
-		//relationship_node_type_service_config
-
-		filtering.DeclareIdent("relationship_node_type_service_config.service_uuid", filtering.TypeString),
-
-		//relationship_node_type_config
-
-		//relationship_node
-
-		filtering.DeclareIdent("relationship_node.uuid", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("relationship_node.type", pb.RelationshipNodeType(0).Type()),
-
-		filtering.DeclareIdent("relationship_node.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("relationship_node.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("relationship_node.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("relationship_node.updated_by_uuid", filtering.TypeString),
-
-		//relationship
-
-		filtering.DeclareIdent("relationship.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("relationship.version", filtering.TypeInt),
-
-		filtering.DeclareIdent("relationship.identifier", filtering.TypeString),
-
-		filtering.DeclareIdent("relationship.description", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("relationship.cardinality", pb.RelationshipCardinality(0).Type()),
-
-		filtering.DeclareIdent("relationship.use_foreign_key", filtering.TypeBool),
-
-		filtering.DeclareEnumIdent("relationship.status", pb.RelationshipStatus(0).Type()),
-
-		filtering.DeclareIdent("relationship.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("relationship.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("relationship.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("relationship.updated_by_uuid", filtering.TypeString),
-
-		//enum_value
-
-		filtering.DeclareIdent("enum_value.identifier", filtering.TypeString),
-
-		filtering.DeclareIdent("enum_value.display", filtering.TypeString),
-
-		filtering.DeclareIdent("enum_value.numeric_value", filtering.TypeInt),
-
-		//enum
-
-		filtering.DeclareIdent("enum.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("enum.version", filtering.TypeInt),
-
-		filtering.DeclareIdent("enum.identifier", filtering.TypeString),
-
-		filtering.DeclareIdent("enum.remote_values", filtering.TypeBool),
-
-		filtering.DeclareEnumIdent("enum.status", pb.EnumStatus(0).Type()),
-
-		filtering.DeclareIdent("enum.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("enum.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("enum.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("enum.updated_by_uuid", filtering.TypeString),
-
-		//service
-
-		filtering.DeclareIdent("service.uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("service.version", filtering.TypeInt),
-
-		filtering.DeclareIdent("service.identifier", filtering.TypeString),
-
-		filtering.DeclareIdent("service.description", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("service.status", pb.ServiceStatus(0).Type()),
-
-		filtering.DeclareIdent("service.created_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("service.updated_at", filtering.TypeTimestamp),
-
-		filtering.DeclareIdent("service.created_by_uuid", filtering.TypeString),
-
-		filtering.DeclareIdent("service.updated_by_uuid", filtering.TypeString),
-
-		//project_version_deployment
-
-		filtering.DeclareIdent("project_version_deployment.enviroment_uuid", filtering.TypeString),
-
-		filtering.DeclareEnumIdent("project_version_deployment.status", pb.ProjectVersionDeploymentStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("deployments.status", pb.ProjectVersionDeploymentStatus(0).Type()),
 
 		//project_version
 
@@ -601,9 +265,15 @@ func project_versionDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("base_version_uuid", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("review_status", pb.ProjectVersionReviewStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("review_status", pb.ProjectVersionReviewStatus(0).Type()),
 
-		filtering.DeclareEnumIdent("status", pb.ProjectVersionStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.ProjectVersionStatus(0).Type()),
 
 		filtering.DeclareIdent("created_at", filtering.TypeTimestamp),
 
@@ -617,4 +287,136 @@ func project_versionDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// project_versionEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func project_versionEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"entities.type": {
+			"invalid":                0,
+			"ENTITY_TYPE_INVALID":    0,
+			"standalone":             1,
+			"ENTITY_TYPE_STANDALONE": 1,
+			"dependent":              2,
+			"ENTITY_TYPE_DEPENDENT":  2,
+		},
+
+		"entities.status": {
+			"invalid":                0,
+			"ENTITY_STATUS_INVALID":  0,
+			"active":                 1,
+			"ENTITY_STATUS_ACTIVE":   1,
+			"disabled":               2,
+			"ENTITY_STATUS_DISABLED": 2,
+		},
+
+		"relationships.cardinality": {
+			"invalid":                              0,
+			"RELATIONSHIP_CARDINALITY_INVALID":     0,
+			"one_to_one":                           1,
+			"RELATIONSHIP_CARDINALITY_ONE_TO_ONE":  1,
+			"one_to_many":                          2,
+			"RELATIONSHIP_CARDINALITY_ONE_TO_MANY": 2,
+		},
+
+		"relationships.status": {
+			"invalid":                      0,
+			"RELATIONSHIP_STATUS_INVALID":  0,
+			"active":                       1,
+			"RELATIONSHIP_STATUS_ACTIVE":   1,
+			"disabled":                     2,
+			"RELATIONSHIP_STATUS_DISABLED": 2,
+		},
+
+		"relationships.on_delete": {
+			"invalid": 0,
+			"RELATIONSHIP_REFERENTIAL_ACTION_INVALID": 0,
+			"no_action": 1,
+			"RELATIONSHIP_REFERENTIAL_ACTION_NO_ACTION": 1,
+			"restrict": 2,
+			"RELATIONSHIP_REFERENTIAL_ACTION_RESTRICT": 2,
+			"cascade": 3,
+			"RELATIONSHIP_REFERENTIAL_ACTION_CASCADE": 3,
+			"set_null": 4,
+			"RELATIONSHIP_REFERENTIAL_ACTION_SET_NULL": 4,
+			"set_default": 5,
+			"RELATIONSHIP_REFERENTIAL_ACTION_SET_DEFAULT": 5,
+		},
+
+		"relationships.on_update": {
+			"invalid": 0,
+			"RELATIONSHIP_REFERENTIAL_ACTION_INVALID": 0,
+			"no_action": 1,
+			"RELATIONSHIP_REFERENTIAL_ACTION_NO_ACTION": 1,
+			"restrict": 2,
+			"RELATIONSHIP_REFERENTIAL_ACTION_RESTRICT": 2,
+			"cascade": 3,
+			"RELATIONSHIP_REFERENTIAL_ACTION_CASCADE": 3,
+			"set_null": 4,
+			"RELATIONSHIP_REFERENTIAL_ACTION_SET_NULL": 4,
+			"set_default": 5,
+			"RELATIONSHIP_REFERENTIAL_ACTION_SET_DEFAULT": 5,
+		},
+
+		"enums.status": {
+			"invalid":              0,
+			"ENUM_STATUS_INVALID":  0,
+			"active":               1,
+			"ENUM_STATUS_ACTIVE":   1,
+			"disabled":             2,
+			"ENUM_STATUS_DISABLED": 2,
+		},
+
+		"services.status": {
+			"invalid":                 0,
+			"SERVICE_STATUS_INVALID":  0,
+			"active":                  1,
+			"SERVICE_STATUS_ACTIVE":   1,
+			"disabled":                2,
+			"SERVICE_STATUS_DISABLED": 2,
+		},
+
+		"deployments.status": {
+			"invalid": 0,
+			"PROJECT_VERSION_DEPLOYMENT_STATUS_INVALID": 0,
+			"not_started": 1,
+			"PROJECT_VERSION_DEPLOYMENT_STATUS_NOT_STARTED": 1,
+			"started": 2,
+			"PROJECT_VERSION_DEPLOYMENT_STATUS_STARTED": 2,
+			"completed": 3,
+			"PROJECT_VERSION_DEPLOYMENT_STATUS_COMPLETED": 3,
+			"failed": 4,
+			"PROJECT_VERSION_DEPLOYMENT_STATUS_FAILED": 4,
+			"rolled_back": 5,
+			"PROJECT_VERSION_DEPLOYMENT_STATUS_ROLLED_BACK": 5,
+		},
+
+		"review_status": {
+			"invalid":                               0,
+			"PROJECT_VERSION_REVIEW_STATUS_INVALID": 0,
+			"draft":                                 1,
+			"PROJECT_VERSION_REVIEW_STATUS_DRAFT":   1,
+			"in_review":                             2,
+			"PROJECT_VERSION_REVIEW_STATUS_IN_REVIEW": 2,
+			"approved":                                3,
+			"PROJECT_VERSION_REVIEW_STATUS_APPROVED":  3,
+			"rejected":                                4,
+			"PROJECT_VERSION_REVIEW_STATUS_REJECTED":  4,
+			"published":                               5,
+			"PROJECT_VERSION_REVIEW_STATUS_PUBLISHED": 5,
+		},
+
+		"status": {
+			"invalid":                         0,
+			"PROJECT_VERSION_STATUS_INVALID":  0,
+			"active":                          1,
+			"PROJECT_VERSION_STATUS_ACTIVE":   1,
+			"disabled":                        2,
+			"PROJECT_VERSION_STATUS_DISABLED": 2,
+		},
+	}
 }

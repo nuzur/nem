@@ -14,7 +14,7 @@ func (e Service) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 		"version":         entitytypes.IntFieldType,
 		"identifier":      entitytypes.StringFieldType,
 		"description":     entitytypes.StringFieldType,
-		"render":          entitytypes.MultiDependantEntityFieldType,
+		"render":          entitytypes.SingleDependantEntityFieldType,
 		"status":          entitytypes.SingleEnumFieldType,
 		"created_at":      entitytypes.TimestampFieldType,
 		"updated_at":      entitytypes.TimestampFieldType,

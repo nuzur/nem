@@ -35,7 +35,7 @@ func FieldToProto(e main_entity.Field) *pb.Field {
 		Pii:                      e.Pii,
 		PiiConfig:                FieldPiiConfigToProto(e.PiiConfig),
 		DefaultValue:             e.DefaultValue.ValueOrZero(),
-		DefaultValueIsExpression: e.DefaultValueIsExpression,
+		DefaultValueIsExpression: e.DefaultValueIsExpression.ValueOrZero(),
 	}
 }
 
@@ -72,7 +72,7 @@ func FieldFromProto(m *pb.Field) main_entity.Field {
 		Pii:                      m.GetPii(),
 		PiiConfig:                FieldPiiConfigFromProto(m.GetPiiConfig()),
 		DefaultValue:             null.StringFrom(m.DefaultValue),
-		DefaultValueIsExpression: m.GetDefaultValueIsExpression(),
+		DefaultValueIsExpression: null.BoolFrom(m.GetDefaultValueIsExpression()),
 	}
 }
 

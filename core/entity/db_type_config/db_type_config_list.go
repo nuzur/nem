@@ -11,8 +11,8 @@ import (
 
 func (e DbTypeConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"postgres": entitytypes.MultiDependantEntityFieldType,
-		"mysql":    entitytypes.MultiDependantEntityFieldType,
+		"postgres": entitytypes.SingleDependantEntityFieldType,
+		"mysql":    entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

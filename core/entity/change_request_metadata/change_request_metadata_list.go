@@ -10,7 +10,7 @@ import (
 
 func (e ChangeRequestMetadata) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"data": entitytypes.MultiDependantEntityFieldType,
+		"data": entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

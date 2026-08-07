@@ -13,7 +13,7 @@ func (e Index) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 		"uuid":            entitytypes.StringFieldType,
 		"identifier":      entitytypes.StringFieldType,
 		"type":            entitytypes.SingleEnumFieldType,
-		"fields":          entitytypes.SingleDependantEntityFieldType,
+		"fields":          entitytypes.MultiDependantEntityFieldType,
 		"status":          entitytypes.SingleEnumFieldType,
 		"created_at":      entitytypes.TimestampFieldType,
 		"updated_at":      entitytypes.TimestampFieldType,

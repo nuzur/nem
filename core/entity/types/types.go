@@ -17,6 +17,11 @@ const (
 	IntFieldType                   FieldType = "int"
 	FloatFieldType                 FieldType = "float"
 	ArrayFieldType                 FieldType = "array"
+	// BinaryFieldType is a blob column: a file/image/audio/video field whose
+	// bytes are stored inline instead of in the object store. It has no filter
+	// or sort clause on purpose — handleClauseByType leaves it unhandled, so a
+	// filter over it is reported as unsupported rather than mis-compared.
+	BinaryFieldType FieldType = "binary"
 )
 
 func FieldTypeToSQL(ft FieldType) string {

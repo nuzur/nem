@@ -64,6 +64,7 @@ func BuildListLocalAgentRequest(ctx context.Context, request *pb.ListLocalAgentR
 		PageSize:              request.GetPageSize(),
 		Filter:                filter,
 		FilteringDeclarations: declarations,
+		EnumValues:            local_agentEnumValues(),
 		OrderBy:               orderBy,
 		IncludeFields:         request.GetIncludeFields(),
 		ExcludeFields:         request.GetExcludeFields(),
@@ -88,7 +89,9 @@ func (s *server) ListLocalAgent(ctx context.Context, request *pb.ListLocalAgentR
 	}
 	if err != nil {
 
-		return nil, err
+		// A filter or order_by the clause builder cannot express is the caller's
+		// error: report InvalidArgument rather than letting it surface as Unknown.
+		return nil, asInvalidArgument(err)
 	}
 
 	// Build the response.
@@ -125,17 +128,20 @@ func local_agentDeclarations() *filtering.Declarations {
 		filtering.DeclareIdent("true", filtering.TypeBool),
 		filtering.DeclareIdent("false", filtering.TypeBool),
 
-		//local_agent_connection
+		//connections
 
-		filtering.DeclareIdent("local_agent_connection.uuid", filtering.TypeString),
+		filtering.DeclareIdent("connections.uuid", filtering.TypeString),
 
-		filtering.DeclareIdent("local_agent_connection.name", filtering.TypeString),
+		filtering.DeclareIdent("connections.name", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("local_agent_connection.db_type", pb.LocalAgentConnectionDbType(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("connections.db_type", pb.LocalAgentConnectionDbType(0).Type()),
 
-		filtering.DeclareIdent("local_agent_connection.default_schema", filtering.TypeString),
+		filtering.DeclareIdent("connections.default_schema", filtering.TypeString),
 
-		filtering.DeclareIdent("local_agent_connection.shared_team_uuids", filtering.TypeString),
+		filtering.DeclareIdent("connections.shared_team_uuids", filtering.TypeString),
 
 		//local_agent
 
@@ -151,7 +157,10 @@ func local_agentDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("cli_version", filtering.TypeString),
 
-		filtering.DeclareEnumIdent("status", pb.LocalAgentStatus(0).Type()),
+		// declareEnumIdent, not filtering.DeclareEnumIdent: it also
+		// accepts the value as a quoted string (status = "active"),
+		// so the same filter string works over REST and gRPC.
+		declareEnumIdent("status", pb.LocalAgentStatus(0).Type()),
 
 		filtering.DeclareIdent("last_seen_at", filtering.TypeTimestamp),
 
@@ -169,4 +178,33 @@ func local_agentDeclarations() *filtering.Declarations {
 		log.Printf("error creating declarations: %v", err)
 	}
 	return declarations
+}
+
+// local_agentEnumValues maps each enum filter field to every accepted
+// spelling of its values and the number the column stores, so the clause builder
+// resolves `status = STATUS_ACTIVE` and `status = "active"` identically — and
+// identically to the REST surface, which has no protobuf enums to fall back on.
+func local_agentEnumValues() map[string]map[string]int64 {
+	return map[string]map[string]int64{
+
+		"connections.db_type": {
+			"invalid":                                0,
+			"LOCAL_AGENT_CONNECTION_DB_TYPE_INVALID": 0,
+			"mysql":                                  1,
+			"LOCAL_AGENT_CONNECTION_DB_TYPE_MYSQL":   1,
+			"postgres":                               2,
+			"LOCAL_AGENT_CONNECTION_DB_TYPE_POSTGRES": 2,
+		},
+
+		"status": {
+			"invalid":                    0,
+			"LOCAL_AGENT_STATUS_INVALID": 0,
+			"online":                     1,
+			"LOCAL_AGENT_STATUS_ONLINE":  1,
+			"offline":                    2,
+			"LOCAL_AGENT_STATUS_OFFLINE": 2,
+			"revoked":                    3,
+			"LOCAL_AGENT_STATUS_REVOKED": 3,
+		},
+	}
 }

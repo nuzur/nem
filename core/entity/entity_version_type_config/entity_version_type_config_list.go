@@ -11,8 +11,8 @@ import (
 
 func (e EntityVersionTypeConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"field":  entitytypes.MultiDependantEntityFieldType,
-		"entity": entitytypes.MultiDependantEntityFieldType,
+		"field":  entitytypes.SingleDependantEntityFieldType,
+		"entity": entitytypes.SingleDependantEntityFieldType,
 	}
 }
 

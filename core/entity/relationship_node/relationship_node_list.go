@@ -12,7 +12,7 @@ func (e RelationshipNode) FieldIdentifierToTypeMap() map[string]entitytypes.Fiel
 	return map[string]entitytypes.FieldType{
 		"uuid":            entitytypes.StringFieldType,
 		"type":            entitytypes.SingleEnumFieldType,
-		"type_config":     entitytypes.MultiDependantEntityFieldType,
+		"type_config":     entitytypes.SingleDependantEntityFieldType,
 		"created_at":      entitytypes.TimestampFieldType,
 		"updated_at":      entitytypes.TimestampFieldType,
 		"created_by_uuid": entitytypes.StringFieldType,

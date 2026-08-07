@@ -15,14 +15,16 @@ func (e Relationship) FieldIdentifierToTypeMap() map[string]entitytypes.FieldTyp
 		"identifier":      entitytypes.StringFieldType,
 		"description":     entitytypes.StringFieldType,
 		"cardinality":     entitytypes.SingleEnumFieldType,
-		"from":            entitytypes.MultiDependantEntityFieldType,
-		"to":              entitytypes.MultiDependantEntityFieldType,
+		"from":            entitytypes.SingleDependantEntityFieldType,
+		"to":              entitytypes.SingleDependantEntityFieldType,
 		"use_foreign_key": entitytypes.BooleanFieldType,
 		"status":          entitytypes.SingleEnumFieldType,
 		"created_at":      entitytypes.TimestampFieldType,
 		"updated_at":      entitytypes.TimestampFieldType,
 		"created_by_uuid": entitytypes.StringFieldType,
 		"updated_by_uuid": entitytypes.StringFieldType,
+		"on_delete":       entitytypes.SingleEnumFieldType,
+		"on_update":       entitytypes.SingleEnumFieldType,
 	}
 }
 
@@ -41,6 +43,8 @@ func (e Relationship) OrderedFieldIdentifiers() []string {
 	res = append(res, "updated_at")
 	res = append(res, "created_by_uuid")
 	res = append(res, "updated_by_uuid")
+	res = append(res, "on_delete")
+	res = append(res, "on_update")
 
 	return res
 }

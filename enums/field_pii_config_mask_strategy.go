@@ -85,13 +85,19 @@ func FieldPiiConfigMaskStrategySliceToJSON(in []FieldPiiConfigMaskStrategy) json
 	jr, err := json.Marshal(res)
 	if err != nil {
 		log.Printf("error marshaling FieldPiiConfigMaskStrategy slice to json: %v", err)
-		return json.RawMessage{}
+		// the empty ARRAY, not a zero-length RawMessage: the latter reaches the
+		// driver as an empty string, which no JSON column accepts
+		return json.RawMessage("[]")
 	}
 	return jr
 }
 
 func JSONToFieldPiiConfigMaskStrategySlice(in json.RawMessage) []FieldPiiConfigMaskStrategy {
 	res := []int64{}
+	// an absent column (NULL / empty / JSON null) is not a decode failure
+	if len(in) == 0 || string(in) == "null" {
+		return nil
+	}
 	err := json.Unmarshal(in, &res)
 	if err != nil {
 		log.Printf("error unmarshaling FieldPiiConfigMaskStrategy slice to int slice: %v", err)
