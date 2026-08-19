@@ -395,6 +395,8 @@ func teamEnumValues() map[string]map[string]int64 {
 			"OBJECT_STORE_TYPE_INVALID": 0,
 			"s3":                        1,
 			"OBJECT_STORE_TYPE_S_3":     1,
+			"r2":                        2,
+			"OBJECT_STORE_TYPE_R_2":     2,
 		},
 
 		"object_stores.status": {

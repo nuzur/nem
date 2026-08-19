@@ -321,6 +321,9 @@ const (
 	Nem_ListFieldPiiConfig_FullMethodName                      = "/nem.Nem/ListFieldPiiConfig"
 	Nem_CreateFieldPiiConfig_FullMethodName                    = "/nem.Nem/CreateFieldPiiConfig"
 	Nem_UpdateFieldPiiConfig_FullMethodName                    = "/nem.Nem/UpdateFieldPiiConfig"
+	Nem_ListObjectStoreR2TypeConfig_FullMethodName             = "/nem.Nem/ListObjectStoreR2TypeConfig"
+	Nem_CreateObjectStoreR2TypeConfig_FullMethodName           = "/nem.Nem/CreateObjectStoreR2TypeConfig"
+	Nem_UpdateObjectStoreR2TypeConfig_FullMethodName           = "/nem.Nem/UpdateObjectStoreR2TypeConfig"
 )
 
 // NemClient is the client API for Nem service.
@@ -727,6 +730,10 @@ type NemClient interface {
 	ListFieldPiiConfig(ctx context.Context, in *ListFieldPiiConfigRequest, opts ...grpc.CallOption) (*ListFieldPiiConfigResponse, error)
 	CreateFieldPiiConfig(ctx context.Context, in *CreateFieldPiiConfigRequest, opts ...grpc.CallOption) (*FieldPiiConfig, error)
 	UpdateFieldPiiConfig(ctx context.Context, in *UpdateFieldPiiConfigRequest, opts ...grpc.CallOption) (*FieldPiiConfig, error)
+	// object_store_r2_type_config start
+	ListObjectStoreR2TypeConfig(ctx context.Context, in *ListObjectStoreR2TypeConfigRequest, opts ...grpc.CallOption) (*ListObjectStoreR2TypeConfigResponse, error)
+	CreateObjectStoreR2TypeConfig(ctx context.Context, in *CreateObjectStoreR2TypeConfigRequest, opts ...grpc.CallOption) (*ObjectStoreR2TypeConfig, error)
+	UpdateObjectStoreR2TypeConfig(ctx context.Context, in *UpdateObjectStoreR2TypeConfigRequest, opts ...grpc.CallOption) (*ObjectStoreR2TypeConfig, error)
 }
 
 type nemClient struct {
@@ -3737,6 +3744,36 @@ func (c *nemClient) UpdateFieldPiiConfig(ctx context.Context, in *UpdateFieldPii
 	return out, nil
 }
 
+func (c *nemClient) ListObjectStoreR2TypeConfig(ctx context.Context, in *ListObjectStoreR2TypeConfigRequest, opts ...grpc.CallOption) (*ListObjectStoreR2TypeConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListObjectStoreR2TypeConfigResponse)
+	err := c.cc.Invoke(ctx, Nem_ListObjectStoreR2TypeConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateObjectStoreR2TypeConfig(ctx context.Context, in *CreateObjectStoreR2TypeConfigRequest, opts ...grpc.CallOption) (*ObjectStoreR2TypeConfig, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ObjectStoreR2TypeConfig)
+	err := c.cc.Invoke(ctx, Nem_CreateObjectStoreR2TypeConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateObjectStoreR2TypeConfig(ctx context.Context, in *UpdateObjectStoreR2TypeConfigRequest, opts ...grpc.CallOption) (*ObjectStoreR2TypeConfig, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ObjectStoreR2TypeConfig)
+	err := c.cc.Invoke(ctx, Nem_UpdateObjectStoreR2TypeConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NemServer is the server API for Nem service.
 // All implementations must embed UnimplementedNemServer
 // for forward compatibility.
@@ -4141,6 +4178,10 @@ type NemServer interface {
 	ListFieldPiiConfig(context.Context, *ListFieldPiiConfigRequest) (*ListFieldPiiConfigResponse, error)
 	CreateFieldPiiConfig(context.Context, *CreateFieldPiiConfigRequest) (*FieldPiiConfig, error)
 	UpdateFieldPiiConfig(context.Context, *UpdateFieldPiiConfigRequest) (*FieldPiiConfig, error)
+	// object_store_r2_type_config start
+	ListObjectStoreR2TypeConfig(context.Context, *ListObjectStoreR2TypeConfigRequest) (*ListObjectStoreR2TypeConfigResponse, error)
+	CreateObjectStoreR2TypeConfig(context.Context, *CreateObjectStoreR2TypeConfigRequest) (*ObjectStoreR2TypeConfig, error)
+	UpdateObjectStoreR2TypeConfig(context.Context, *UpdateObjectStoreR2TypeConfigRequest) (*ObjectStoreR2TypeConfig, error)
 	mustEmbedUnimplementedNemServer()
 }
 
@@ -5050,6 +5091,15 @@ func (UnimplementedNemServer) CreateFieldPiiConfig(context.Context, *CreateField
 }
 func (UnimplementedNemServer) UpdateFieldPiiConfig(context.Context, *UpdateFieldPiiConfigRequest) (*FieldPiiConfig, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateFieldPiiConfig not implemented")
+}
+func (UnimplementedNemServer) ListObjectStoreR2TypeConfig(context.Context, *ListObjectStoreR2TypeConfigRequest) (*ListObjectStoreR2TypeConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListObjectStoreR2TypeConfig not implemented")
+}
+func (UnimplementedNemServer) CreateObjectStoreR2TypeConfig(context.Context, *CreateObjectStoreR2TypeConfigRequest) (*ObjectStoreR2TypeConfig, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateObjectStoreR2TypeConfig not implemented")
+}
+func (UnimplementedNemServer) UpdateObjectStoreR2TypeConfig(context.Context, *UpdateObjectStoreR2TypeConfigRequest) (*ObjectStoreR2TypeConfig, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateObjectStoreR2TypeConfig not implemented")
 }
 func (UnimplementedNemServer) mustEmbedUnimplementedNemServer() {}
 func (UnimplementedNemServer) testEmbeddedByValue()             {}
@@ -10472,6 +10522,60 @@ func _Nem_UpdateFieldPiiConfig_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Nem_ListObjectStoreR2TypeConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListObjectStoreR2TypeConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListObjectStoreR2TypeConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListObjectStoreR2TypeConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListObjectStoreR2TypeConfig(ctx, req.(*ListObjectStoreR2TypeConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateObjectStoreR2TypeConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateObjectStoreR2TypeConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateObjectStoreR2TypeConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateObjectStoreR2TypeConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateObjectStoreR2TypeConfig(ctx, req.(*CreateObjectStoreR2TypeConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateObjectStoreR2TypeConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateObjectStoreR2TypeConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateObjectStoreR2TypeConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateObjectStoreR2TypeConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateObjectStoreR2TypeConfig(ctx, req.(*UpdateObjectStoreR2TypeConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Nem_ServiceDesc is the grpc.ServiceDesc for Nem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -11678,6 +11782,18 @@ var Nem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateFieldPiiConfig",
 			Handler:    _Nem_UpdateFieldPiiConfig_Handler,
+		},
+		{
+			MethodName: "ListObjectStoreR2TypeConfig",
+			Handler:    _Nem_ListObjectStoreR2TypeConfig_Handler,
+		},
+		{
+			MethodName: "CreateObjectStoreR2TypeConfig",
+			Handler:    _Nem_CreateObjectStoreR2TypeConfig_Handler,
+		},
+		{
+			MethodName: "UpdateObjectStoreR2TypeConfig",
+			Handler:    _Nem_UpdateObjectStoreR2TypeConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

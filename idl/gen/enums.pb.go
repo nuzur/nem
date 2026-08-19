@@ -2186,6 +2186,7 @@ type ObjectStoreType int32
 const (
 	ObjectStoreType_OBJECT_STORE_TYPE_INVALID ObjectStoreType = 0
 	ObjectStoreType_OBJECT_STORE_TYPE_S_3     ObjectStoreType = 1
+	ObjectStoreType_OBJECT_STORE_TYPE_R_2     ObjectStoreType = 2
 )
 
 // Enum value maps for ObjectStoreType.
@@ -2193,10 +2194,12 @@ var (
 	ObjectStoreType_name = map[int32]string{
 		0: "OBJECT_STORE_TYPE_INVALID",
 		1: "OBJECT_STORE_TYPE_S_3",
+		2: "OBJECT_STORE_TYPE_R_2",
 	}
 	ObjectStoreType_value = map[string]int32{
 		"OBJECT_STORE_TYPE_INVALID": 0,
 		"OBJECT_STORE_TYPE_S_3":     1,
+		"OBJECT_STORE_TYPE_R_2":     2,
 	}
 )
 
@@ -4376,10 +4379,11 @@ const file_enums_proto_rawDesc = "" +
 	"\x11ObjectStoreStatus\x12\x1f\n" +
 	"\x1bOBJECT_STORE_STATUS_INVALID\x10\x00\x12\x1e\n" +
 	"\x1aOBJECT_STORE_STATUS_ACTIVE\x10\x01\x12 \n" +
-	"\x1cOBJECT_STORE_STATUS_DISABLED\x10\x02*K\n" +
+	"\x1cOBJECT_STORE_STATUS_DISABLED\x10\x02*f\n" +
 	"\x0fObjectStoreType\x12\x1d\n" +
 	"\x19OBJECT_STORE_TYPE_INVALID\x10\x00\x12\x19\n" +
-	"\x15OBJECT_STORE_TYPE_S_3\x10\x01*u\n" +
+	"\x15OBJECT_STORE_TYPE_S_3\x10\x01\x12\x19\n" +
+	"\x15OBJECT_STORE_TYPE_R_2\x10\x02*u\n" +
 	"\x11ProjectAccessType\x12\x1f\n" +
 	"\x1bPROJECT_ACCESS_TYPE_INVALID\x10\x00\x12\x1f\n" +
 	"\x1bPROJECT_ACCESS_TYPE_INHERIT\x10\x01\x12\x1e\n" +

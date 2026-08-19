@@ -5,18 +5,21 @@ package object_store_type_config
 import (
 	entitytypes "github.com/nuzur/nem/core/entity/types"
 
+	"github.com/nuzur/nem/core/entity/object_store_r2_type_config"
 	"github.com/nuzur/nem/core/entity/object_store_s3_type_config"
 )
 
 func (e ObjectStoreTypeConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
 		"s3": entitytypes.SingleDependantEntityFieldType,
+		"r2": entitytypes.SingleDependantEntityFieldType,
 	}
 }
 
 func (e ObjectStoreTypeConfig) OrderedFieldIdentifiers() []string {
 	res := []string{}
 	res = append(res, "s3")
+	res = append(res, "r2")
 
 	return res
 }
@@ -25,6 +28,7 @@ func (e ObjectStoreTypeConfig) DependantFieldIdentifierToTypeMap() map[string]ma
 	res := make(map[string]map[string]entitytypes.FieldType)
 
 	res["s3"] = object_store_s3_type_config.ObjectStoreS3TypeConfig{}.FieldIdentifierToTypeMap()
+	res["r2"] = object_store_r2_type_config.ObjectStoreR2TypeConfig{}.FieldIdentifierToTypeMap()
 	return res
 }
 

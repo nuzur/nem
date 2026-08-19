@@ -26,6 +26,7 @@ const (
 type ObjectStoreTypeConfig struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
 	S3            *ObjectStoreS3TypeConfig `protobuf:"bytes,1,opt,name=s3,proto3" json:"s3,omitempty"`
+	R2            *ObjectStoreR2TypeConfig `protobuf:"bytes,2,opt,name=r2,proto3" json:"r2,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -67,13 +68,21 @@ func (x *ObjectStoreTypeConfig) GetS3() *ObjectStoreS3TypeConfig {
 	return nil
 }
 
+func (x *ObjectStoreTypeConfig) GetR2() *ObjectStoreR2TypeConfig {
+	if x != nil {
+		return x.R2
+	}
+	return nil
+}
+
 var File_object_store_type_config_proto protoreflect.FileDescriptor
 
 const file_object_store_type_config_proto_rawDesc = "" +
 	"\n" +
-	"\x1eobject_store_type_config.proto\x12\x03nem\x1a\"object_store_s_3_type_config.proto\"E\n" +
+	"\x1eobject_store_type_config.proto\x12\x03nem\x1a\"object_store_r_2_type_config.proto\x1a\"object_store_s_3_type_config.proto\"s\n" +
 	"\x15ObjectStoreTypeConfig\x12,\n" +
-	"\x02s3\x18\x01 \x01(\v2\x1c.nem.ObjectStoreS3TypeConfigR\x02s3B<\n" +
+	"\x02s3\x18\x01 \x01(\v2\x1c.nem.ObjectStoreS3TypeConfigR\x02s3\x12,\n" +
+	"\x02r2\x18\x02 \x01(\v2\x1c.nem.ObjectStoreR2TypeConfigR\x02r2B<\n" +
 	"\x14github.com/nuzur/nemB\x15ObjectStoreTypeConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -92,14 +101,16 @@ var file_object_store_type_config_proto_msgTypes = make([]protoimpl.MessageInfo,
 var file_object_store_type_config_proto_goTypes = []any{
 	(*ObjectStoreTypeConfig)(nil),   // 0: nem.ObjectStoreTypeConfig
 	(*ObjectStoreS3TypeConfig)(nil), // 1: nem.ObjectStoreS3TypeConfig
+	(*ObjectStoreR2TypeConfig)(nil), // 2: nem.ObjectStoreR2TypeConfig
 }
 var file_object_store_type_config_proto_depIdxs = []int32{
 	1, // 0: nem.ObjectStoreTypeConfig.s3:type_name -> nem.ObjectStoreS3TypeConfig
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: nem.ObjectStoreTypeConfig.r2:type_name -> nem.ObjectStoreR2TypeConfig
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_object_store_type_config_proto_init() }
@@ -107,6 +118,7 @@ func file_object_store_type_config_proto_init() {
 	if File_object_store_type_config_proto != nil {
 		return
 	}
+	file_object_store_r_2_type_config_proto_init()
 	file_object_store_s_3_type_config_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

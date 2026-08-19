@@ -14,6 +14,7 @@ type ObjectStoreType int64
 const (
 	OBJECT_STORE_TYPE_INVALID = iota
 	OBJECT_STORE_TYPE_S3
+	OBJECT_STORE_TYPE_R2
 )
 
 func (e ObjectStoreType) ToInt64() int64 {
@@ -30,6 +31,8 @@ func ObjectStoreTypeFromString(in string) ObjectStoreType {
 		return OBJECT_STORE_TYPE_INVALID
 	case "s3":
 		return OBJECT_STORE_TYPE_S3
+	case "r2":
+		return OBJECT_STORE_TYPE_R2
 	}
 	return OBJECT_STORE_TYPE_INVALID
 }
@@ -47,6 +50,8 @@ func (e ObjectStoreType) String() string {
 		return "invalid"
 	case OBJECT_STORE_TYPE_S3:
 		return "s3"
+	case OBJECT_STORE_TYPE_R2:
+		return "r2"
 	}
 
 	return "invalid"

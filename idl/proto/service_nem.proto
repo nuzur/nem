@@ -211,6 +211,8 @@ import "deployment_revision.proto";
 
 import "field_pii_config.proto";
 
+import "object_store_r_2_type_config.proto";
+
 
 service Nem {    
     
@@ -813,6 +815,12 @@ service Nem {
     rpc CreateFieldPiiConfig(CreateFieldPiiConfigRequest) returns (FieldPiiConfig) {}
     rpc UpdateFieldPiiConfig(UpdateFieldPiiConfigRequest) returns (FieldPiiConfig) {}
     // field_pii_config end
+    
+    // object_store_r2_type_config start
+    rpc ListObjectStoreR2TypeConfig(ListObjectStoreR2TypeConfigRequest) returns (ListObjectStoreR2TypeConfigResponse){}
+    rpc CreateObjectStoreR2TypeConfig(CreateObjectStoreR2TypeConfigRequest) returns (ObjectStoreR2TypeConfig) {}
+    rpc UpdateObjectStoreR2TypeConfig(UpdateObjectStoreR2TypeConfigRequest) returns (ObjectStoreR2TypeConfig) {}
+    // object_store_r2_type_config end
     
 }
 
@@ -4916,3 +4924,44 @@ message UpdateFieldPiiConfigRequest {
     google.protobuf.FieldMask update_mask = 2;
 }
 // field_pii_config end
+
+// object_store_r2_type_config start
+message ListObjectStoreR2TypeConfigRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;  
+    repeated string include_fields = 5;
+    repeated string exclude_fields = 6;
+    bool skip_cache = 7;
+}
+
+message ListObjectStoreR2TypeConfigResponse {
+    repeated ObjectStoreR2TypeConfig object_store_r_2_type_config = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateObjectStoreR2TypeConfigRequest {
+    ObjectStoreR2TypeConfig object_store_r_2_type_config = 1;
+}
+
+message UpdateObjectStoreR2TypeConfigRequest {
+   
+    ObjectStoreR2TypeConfig object_store_r_2_type_config = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// object_store_r2_type_config end

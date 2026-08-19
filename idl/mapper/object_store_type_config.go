@@ -10,6 +10,7 @@ import (
 func ObjectStoreTypeConfigToProto(e main_entity.ObjectStoreTypeConfig) *pb.ObjectStoreTypeConfig {
 	return &pb.ObjectStoreTypeConfig{
 		S3: ObjectStoreS3TypeConfigToProto(e.S3),
+		R2: ObjectStoreR2TypeConfigToProto(e.R2),
 	}
 }
 
@@ -27,6 +28,7 @@ func ObjectStoreTypeConfigFromProto(m *pb.ObjectStoreTypeConfig) main_entity.Obj
 	}
 	return main_entity.ObjectStoreTypeConfig{
 		S3: ObjectStoreS3TypeConfigFromProto(m.GetS3()),
+		R2: ObjectStoreR2TypeConfigFromProto(m.GetR2()),
 	}
 }
 

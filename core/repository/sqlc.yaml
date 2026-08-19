@@ -13,6 +13,7 @@ sql:
         emit_json_tags: true
         rename: 
           access_type: AccessType
+          account_id: AccountId
           action_config: ActionConfig
           action_type: ActionType
           active_revision_uuid: ActiveRevisionUUID
@@ -101,6 +102,7 @@ sql:
           enabled: Enabled
           encrypted: Encrypted
           encryption_type: EncryptionType
+          endpoint: Endpoint
           enforce_future: EnforceFuture
           enforce_past: EnforcePast
           enforce_schema_validation: EnforceSchemaValidation
@@ -223,6 +225,7 @@ sql:
           public_port: PublicPort
           public_url: PublicURL
           queue_priority: QueuePriority
+          r2: R2
           regex_validation: RegexValidation
           region: Region
           relationships: Relationships
@@ -566,6 +569,7 @@ overrides:
       local_agent_connection: LocalAgentConnection
       membership: Membership
       object_store: ObjectStore
+      object_store_r2_type_config: ObjectStoreR2TypeConfig
       object_store_s3_type_config: ObjectStoreS3TypeConfig
       object_store_type_config: ObjectStoreTypeConfig
       project: Project

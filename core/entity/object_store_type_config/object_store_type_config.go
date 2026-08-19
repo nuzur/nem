@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"log"
 
+	"github.com/nuzur/nem/core/entity/object_store_r2_type_config"
 	"github.com/nuzur/nem/core/entity/object_store_s3_type_config"
 
 	"github.com/nuzur/nem/core/entity/mapper"
@@ -13,6 +14,7 @@ import (
 
 type ObjectStoreTypeConfig struct {
 	S3 object_store_s3_type_config.ObjectStoreS3TypeConfig `json:"s3"`
+	R2 object_store_r2_type_config.ObjectStoreR2TypeConfig `json:"r2"`
 }
 
 func (e ObjectStoreTypeConfig) String() string {

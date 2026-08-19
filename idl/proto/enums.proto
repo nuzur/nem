@@ -319,6 +319,7 @@ enum ObjectStoreStatus {
 enum ObjectStoreType { 
     OBJECT_STORE_TYPE_INVALID = 0;
     OBJECT_STORE_TYPE_S_3 = 1;
+    OBJECT_STORE_TYPE_R_2 = 2;
 }
 
 enum ProjectAccessType { 
