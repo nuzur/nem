@@ -42,7 +42,10 @@ func (e ExtensionExecution) PrimaryKeyValues() []string {
 	}
 }
 
-func ExtensionExecutionFromJSON(data json.RawMessage) ExtensionExecution {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ExtensionExecutionFromJSON(data []byte) ExtensionExecution {
 	entity := ExtensionExecution{}
 	if data == nil {
 		return entity
@@ -59,7 +62,7 @@ func ExtensionExecutionFromJSON(data json.RawMessage) ExtensionExecution {
 	return entity
 }
 
-func ExtensionExecutionSliceFromJSON(data json.RawMessage) []ExtensionExecution {
+func ExtensionExecutionSliceFromJSON(data []byte) []ExtensionExecution {
 	entity := []ExtensionExecution{}
 	if data == nil {
 		return entity

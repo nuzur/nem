@@ -25,7 +25,7 @@ func mapModelToEntity(m nemdb.UserProjectVersion) main_entity.UserProjectVersion
 		Version:            int64(m.Version),
 		ProjectVersionUUID: mapper.StringToUUID(m.ProjectVersionUUID),
 		UserUUID:           mapper.StringToUUID(m.UserUUID),
-		Data:               m.Data,
+		Data:               mapper.JSONToRawMessage(m.Data),
 		Status:             enums.UserProjectVersionStatus(m.Status),
 		CreatedAt:          m.CreatedAt,
 		UpdatedAt:          m.UpdatedAt,

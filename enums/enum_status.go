@@ -77,7 +77,7 @@ func EnumStatusSliceToJSON(in []EnumStatus) json.RawMessage {
 	return jr
 }
 
-func JSONToEnumStatusSlice(in json.RawMessage) []EnumStatus {
+func JSONToEnumStatusSlice(in []byte) []EnumStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

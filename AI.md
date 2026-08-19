@@ -64,6 +64,39 @@ change or configuration change.
 
 ---
 
+## Deploying
+
+If this app has been deployed at least once, **`.nuzur/last-deploy.json`** records
+exactly how: provider, server, hostnames, image repository, project version and
+database connection. Repeat that deploy with
+
+```
+nuzur-cli deploy --deploy-config .nuzur/last-deploy.json
+```
+
+Read that file before asking the user how the app is deployed — it is the answer,
+and it is the only place the answer lives in this repository.
+
+Three things to know about it:
+
+* **It is generated.** The CLI rewrites it after every successful deploy, so do not
+  hand-edit it. Unlike the rest of the generated tree it carries no `DO NOT EDIT`
+  marker (it is not produced by `go-code-gen`), but the same rule applies. Keep a
+  separate file if you want a deploy spec you maintain, and pass it explicitly.
+* **It carries no credentials.** The database password, the SSH key path and the
+  local workspace path are deliberately excluded, which is what makes it safe to
+  commit. The database is named by a connection uuid that resolves server-side.
+* **It works from a fresh clone.** The workspace is recovered from the file's own
+  location, so the command above runs on a machine that has never deployed this
+  app.
+
+If the file is absent, this app has either never been deployed or was last deployed
+by a CLI too old to write one. Ask the user for the deploy command rather than
+guessing at one — a deploy that resolves fewer hostnames than the release serves
+will take a live front door offline.
+
+---
+
 ## Project Specifications
 
 * **Project Identifier**: `nem`

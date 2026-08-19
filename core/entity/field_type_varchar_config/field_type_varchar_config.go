@@ -26,7 +26,10 @@ func (e FieldTypeVarcharConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FieldTypeVarcharConfigFromJSON(data json.RawMessage) FieldTypeVarcharConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FieldTypeVarcharConfigFromJSON(data []byte) FieldTypeVarcharConfig {
 	entity := FieldTypeVarcharConfig{}
 	if data == nil {
 		return entity
@@ -43,7 +46,7 @@ func FieldTypeVarcharConfigFromJSON(data json.RawMessage) FieldTypeVarcharConfig
 	return entity
 }
 
-func FieldTypeVarcharConfigSliceFromJSON(data json.RawMessage) []FieldTypeVarcharConfig {
+func FieldTypeVarcharConfigSliceFromJSON(data []byte) []FieldTypeVarcharConfig {
 	entity := []FieldTypeVarcharConfig{}
 	if data == nil {
 		return entity

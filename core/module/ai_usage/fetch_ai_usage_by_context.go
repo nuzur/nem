@@ -54,6 +54,113 @@ func (m *module) FetchAiUsageByContext(
 			}, nil
 		}
 
+		timeFields := []string{
+			"created_at", "updated_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchAiUsageByContextResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchAiUsageByContextResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAiUsageByContextOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchAiUsageByContextOrderedByCreatedAtASCParams{
+						Context: req.Context.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByContextResponse{}, err
+				}
+				return types.FetchAiUsageByContextResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAiUsageByContextOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchAiUsageByContextOrderedByCreatedAtDESCParams{
+						Context: req.Context.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByContextResponse{}, err
+				}
+				return types.FetchAiUsageByContextResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAiUsageByContextOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchAiUsageByContextOrderedByUpdatedAtASCParams{
+						Context: req.Context.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByContextResponse{}, err
+				}
+				return types.FetchAiUsageByContextResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAiUsageByContextOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchAiUsageByContextOrderedByUpdatedAtDESCParams{
+						Context: req.Context.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByContextResponse{}, err
+				}
+				return types.FetchAiUsageByContextResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchAiUsageByContextResponse{}, err

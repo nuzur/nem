@@ -54,6 +54,113 @@ func (m *module) FetchUserByEmail(
 			}, nil
 		}
 
+		timeFields := []string{
+			"updated_at", "created_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchUserByEmailResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchUserByEmailResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserByEmailOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchUserByEmailOrderedByUpdatedAtASCParams{
+						Email: req.Email,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserByEmailResponse{}, err
+				}
+				return types.FetchUserByEmailResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserByEmailOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchUserByEmailOrderedByUpdatedAtDESCParams{
+						Email: req.Email,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserByEmailResponse{}, err
+				}
+				return types.FetchUserByEmailResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserByEmailOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchUserByEmailOrderedByCreatedAtASCParams{
+						Email: req.Email,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserByEmailResponse{}, err
+				}
+				return types.FetchUserByEmailResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserByEmailOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchUserByEmailOrderedByCreatedAtDESCParams{
+						Email: req.Email,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserByEmailResponse{}, err
+				}
+				return types.FetchUserByEmailResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchUserByEmailResponse{}, err

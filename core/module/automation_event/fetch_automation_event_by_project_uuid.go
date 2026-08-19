@@ -54,6 +54,113 @@ func (m *module) FetchAutomationEventByProjectUUID(
 			}, nil
 		}
 
+		timeFields := []string{
+			"created_at", "updated_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchAutomationEventByProjectUUIDResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchAutomationEventByProjectUUIDResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAutomationEventByProjectUUIDOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchAutomationEventByProjectUUIDOrderedByCreatedAtASCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationEventByProjectUUIDResponse{}, err
+				}
+				return types.FetchAutomationEventByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAutomationEventByProjectUUIDOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchAutomationEventByProjectUUIDOrderedByCreatedAtDESCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationEventByProjectUUIDResponse{}, err
+				}
+				return types.FetchAutomationEventByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAutomationEventByProjectUUIDOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchAutomationEventByProjectUUIDOrderedByUpdatedAtASCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationEventByProjectUUIDResponse{}, err
+				}
+				return types.FetchAutomationEventByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAutomationEventByProjectUUIDOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchAutomationEventByProjectUUIDOrderedByUpdatedAtDESCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationEventByProjectUUIDResponse{}, err
+				}
+				return types.FetchAutomationEventByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchAutomationEventByProjectUUIDResponse{}, err

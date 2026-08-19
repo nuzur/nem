@@ -77,7 +77,7 @@ func LocalAgentConnectionDbTypeSliceToJSON(in []LocalAgentConnectionDbType) json
 	return jr
 }
 
-func JSONToLocalAgentConnectionDbTypeSlice(in json.RawMessage) []LocalAgentConnectionDbType {
+func JSONToLocalAgentConnectionDbTypeSlice(in []byte) []LocalAgentConnectionDbType {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

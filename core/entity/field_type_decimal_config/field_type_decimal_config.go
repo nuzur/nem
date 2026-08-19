@@ -34,7 +34,10 @@ func (e FieldTypeDecimalConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FieldTypeDecimalConfigFromJSON(data json.RawMessage) FieldTypeDecimalConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FieldTypeDecimalConfigFromJSON(data []byte) FieldTypeDecimalConfig {
 	entity := FieldTypeDecimalConfig{}
 	if data == nil {
 		return entity
@@ -51,7 +54,7 @@ func FieldTypeDecimalConfigFromJSON(data json.RawMessage) FieldTypeDecimalConfig
 	return entity
 }
 
-func FieldTypeDecimalConfigSliceFromJSON(data json.RawMessage) []FieldTypeDecimalConfig {
+func FieldTypeDecimalConfigSliceFromJSON(data []byte) []FieldTypeDecimalConfig {
 	entity := []FieldTypeDecimalConfig{}
 	if data == nil {
 		return entity

@@ -54,6 +54,113 @@ func (m *module) FetchUserTeamByTeamUUID(
 			}, nil
 		}
 
+		timeFields := []string{
+			"updated_at", "created_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchUserTeamByTeamUUIDResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchUserTeamByTeamUUIDResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserTeamByTeamUUIDOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchUserTeamByTeamUUIDOrderedByUpdatedAtASCParams{
+						TeamUUID: req.TeamUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserTeamByTeamUUIDResponse{}, err
+				}
+				return types.FetchUserTeamByTeamUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserTeamByTeamUUIDOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchUserTeamByTeamUUIDOrderedByUpdatedAtDESCParams{
+						TeamUUID: req.TeamUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserTeamByTeamUUIDResponse{}, err
+				}
+				return types.FetchUserTeamByTeamUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserTeamByTeamUUIDOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchUserTeamByTeamUUIDOrderedByCreatedAtASCParams{
+						TeamUUID: req.TeamUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserTeamByTeamUUIDResponse{}, err
+				}
+				return types.FetchUserTeamByTeamUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserTeamByTeamUUIDOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchUserTeamByTeamUUIDOrderedByCreatedAtDESCParams{
+						TeamUUID: req.TeamUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserTeamByTeamUUIDResponse{}, err
+				}
+				return types.FetchUserTeamByTeamUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchUserTeamByTeamUUIDResponse{}, err

@@ -25,7 +25,10 @@ func (e TcpIpConnectionTypeConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func TcpIpConnectionTypeConfigFromJSON(data json.RawMessage) TcpIpConnectionTypeConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func TcpIpConnectionTypeConfigFromJSON(data []byte) TcpIpConnectionTypeConfig {
 	entity := TcpIpConnectionTypeConfig{}
 	if data == nil {
 		return entity
@@ -42,7 +45,7 @@ func TcpIpConnectionTypeConfigFromJSON(data json.RawMessage) TcpIpConnectionType
 	return entity
 }
 
-func TcpIpConnectionTypeConfigSliceFromJSON(data json.RawMessage) []TcpIpConnectionTypeConfig {
+func TcpIpConnectionTypeConfigSliceFromJSON(data []byte) []TcpIpConnectionTypeConfig {
 	entity := []TcpIpConnectionTypeConfig{}
 	if data == nil {
 		return entity

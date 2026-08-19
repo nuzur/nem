@@ -82,7 +82,7 @@ func LocalAgentStatusSliceToJSON(in []LocalAgentStatus) json.RawMessage {
 	return jr
 }
 
-func JSONToLocalAgentStatusSlice(in json.RawMessage) []LocalAgentStatus {
+func JSONToLocalAgentStatusSlice(in []byte) []LocalAgentStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

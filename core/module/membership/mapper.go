@@ -25,7 +25,7 @@ func mapModelToEntity(m nemdb.Membership) main_entity.Membership {
 		OwnerUUID:       mapper.StringToUUID(m.OwnerUUID),
 		Type:            enums.MembershipType(m.Type),
 		StartDate:       m.StartDate,
-		BillingMetadata: m.BillingMetadata,
+		BillingMetadata: mapper.JSONToRawMessage(m.BillingMetadata),
 		Status:          enums.MembershipStatus(m.Status),
 		CreatedAt:       m.CreatedAt,
 		UpdatedAt:       m.UpdatedAt,

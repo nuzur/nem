@@ -77,7 +77,7 @@ func ProjectExtensionStatusSliceToJSON(in []ProjectExtensionStatus) json.RawMess
 	return jr
 }
 
-func JSONToProjectExtensionStatusSlice(in json.RawMessage) []ProjectExtensionStatus {
+func JSONToProjectExtensionStatusSlice(in []byte) []ProjectExtensionStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

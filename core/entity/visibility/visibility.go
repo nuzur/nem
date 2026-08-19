@@ -36,7 +36,10 @@ func (e Visibility) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func VisibilityFromJSON(data json.RawMessage) Visibility {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func VisibilityFromJSON(data []byte) Visibility {
 	entity := Visibility{}
 	if data == nil {
 		return entity
@@ -53,7 +56,7 @@ func VisibilityFromJSON(data json.RawMessage) Visibility {
 	return entity
 }
 
-func VisibilitySliceFromJSON(data json.RawMessage) []Visibility {
+func VisibilitySliceFromJSON(data []byte) []Visibility {
 	entity := []Visibility{}
 	if data == nil {
 		return entity

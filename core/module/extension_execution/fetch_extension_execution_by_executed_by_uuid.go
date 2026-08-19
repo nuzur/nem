@@ -54,6 +54,113 @@ func (m *module) FetchExtensionExecutionByExecutedByUUID(
 			}, nil
 		}
 
+		timeFields := []string{
+			"created_at", "updated_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchExtensionExecutionByExecutedByUUIDResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchExtensionExecutionByExecutedByUUIDResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtASCParams{
+						ExecutedByUUID: req.ExecutedByUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionExecutionByExecutedByUUIDResponse{}, err
+				}
+				return types.FetchExtensionExecutionByExecutedByUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchExtensionExecutionByExecutedByUUIDOrderedByCreatedAtDESCParams{
+						ExecutedByUUID: req.ExecutedByUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionExecutionByExecutedByUUIDResponse{}, err
+				}
+				return types.FetchExtensionExecutionByExecutedByUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtASCParams{
+						ExecutedByUUID: req.ExecutedByUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionExecutionByExecutedByUUIDResponse{}, err
+				}
+				return types.FetchExtensionExecutionByExecutedByUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchExtensionExecutionByExecutedByUUIDOrderedByUpdatedAtDESCParams{
+						ExecutedByUUID: req.ExecutedByUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionExecutionByExecutedByUUIDResponse{}, err
+				}
+				return types.FetchExtensionExecutionByExecutedByUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchExtensionExecutionByExecutedByUUIDResponse{}, err

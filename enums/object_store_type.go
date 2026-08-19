@@ -77,7 +77,7 @@ func ObjectStoreTypeSliceToJSON(in []ObjectStoreType) json.RawMessage {
 	return jr
 }
 
-func JSONToObjectStoreTypeSlice(in json.RawMessage) []ObjectStoreType {
+func JSONToObjectStoreTypeSlice(in []byte) []ObjectStoreType {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

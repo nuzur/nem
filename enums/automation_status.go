@@ -82,7 +82,7 @@ func AutomationStatusSliceToJSON(in []AutomationStatus) json.RawMessage {
 	return jr
 }
 
-func JSONToAutomationStatusSlice(in json.RawMessage) []AutomationStatus {
+func JSONToAutomationStatusSlice(in []byte) []AutomationStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

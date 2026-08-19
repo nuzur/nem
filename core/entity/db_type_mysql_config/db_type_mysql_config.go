@@ -24,7 +24,10 @@ func (e DbTypeMysqlConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func DbTypeMysqlConfigFromJSON(data json.RawMessage) DbTypeMysqlConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func DbTypeMysqlConfigFromJSON(data []byte) DbTypeMysqlConfig {
 	entity := DbTypeMysqlConfig{}
 	if data == nil {
 		return entity
@@ -41,7 +44,7 @@ func DbTypeMysqlConfigFromJSON(data json.RawMessage) DbTypeMysqlConfig {
 	return entity
 }
 
-func DbTypeMysqlConfigSliceFromJSON(data json.RawMessage) []DbTypeMysqlConfig {
+func DbTypeMysqlConfigSliceFromJSON(data []byte) []DbTypeMysqlConfig {
 	entity := []DbTypeMysqlConfig{}
 	if data == nil {
 		return entity

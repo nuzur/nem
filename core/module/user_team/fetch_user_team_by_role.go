@@ -54,6 +54,113 @@ func (m *module) FetchUserTeamByRole(
 			}, nil
 		}
 
+		timeFields := []string{
+			"updated_at", "created_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchUserTeamByRoleResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchUserTeamByRoleResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserTeamByRoleOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchUserTeamByRoleOrderedByUpdatedAtASCParams{
+						Role: req.Role.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserTeamByRoleResponse{}, err
+				}
+				return types.FetchUserTeamByRoleResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserTeamByRoleOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchUserTeamByRoleOrderedByUpdatedAtDESCParams{
+						Role: req.Role.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserTeamByRoleResponse{}, err
+				}
+				return types.FetchUserTeamByRoleResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserTeamByRoleOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchUserTeamByRoleOrderedByCreatedAtASCParams{
+						Role: req.Role.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserTeamByRoleResponse{}, err
+				}
+				return types.FetchUserTeamByRoleResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserTeamByRoleOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchUserTeamByRoleOrderedByCreatedAtDESCParams{
+						Role: req.Role.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserTeamByRoleResponse{}, err
+				}
+				return types.FetchUserTeamByRoleResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchUserTeamByRoleResponse{}, err

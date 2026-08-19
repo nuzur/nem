@@ -28,7 +28,10 @@ func (e IndexField) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func IndexFieldFromJSON(data json.RawMessage) IndexField {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func IndexFieldFromJSON(data []byte) IndexField {
 	entity := IndexField{}
 	if data == nil {
 		return entity
@@ -45,7 +48,7 @@ func IndexFieldFromJSON(data json.RawMessage) IndexField {
 	return entity
 }
 
-func IndexFieldSliceFromJSON(data json.RawMessage) []IndexField {
+func IndexFieldSliceFromJSON(data []byte) []IndexField {
 	entity := []IndexField{}
 	if data == nil {
 		return entity

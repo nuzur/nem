@@ -92,7 +92,7 @@ func UserTeamRoleSliceToJSON(in []UserTeamRole) json.RawMessage {
 	return jr
 }
 
-func JSONToUserTeamRoleSlice(in json.RawMessage) []UserTeamRole {
+func JSONToUserTeamRoleSlice(in []byte) []UserTeamRole {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

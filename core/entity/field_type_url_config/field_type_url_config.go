@@ -25,7 +25,10 @@ func (e FieldTypeURLConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FieldTypeURLConfigFromJSON(data json.RawMessage) FieldTypeURLConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FieldTypeURLConfigFromJSON(data []byte) FieldTypeURLConfig {
 	entity := FieldTypeURLConfig{}
 	if data == nil {
 		return entity
@@ -42,7 +45,7 @@ func FieldTypeURLConfigFromJSON(data json.RawMessage) FieldTypeURLConfig {
 	return entity
 }
 
-func FieldTypeURLConfigSliceFromJSON(data json.RawMessage) []FieldTypeURLConfig {
+func FieldTypeURLConfigSliceFromJSON(data []byte) []FieldTypeURLConfig {
 	entity := []FieldTypeURLConfig{}
 	if data == nil {
 		return entity

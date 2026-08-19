@@ -31,7 +31,10 @@ func (e FieldTypeEncryptedConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FieldTypeEncryptedConfigFromJSON(data json.RawMessage) FieldTypeEncryptedConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FieldTypeEncryptedConfigFromJSON(data []byte) FieldTypeEncryptedConfig {
 	entity := FieldTypeEncryptedConfig{}
 	if data == nil {
 		return entity
@@ -48,7 +51,7 @@ func FieldTypeEncryptedConfigFromJSON(data json.RawMessage) FieldTypeEncryptedCo
 	return entity
 }
 
-func FieldTypeEncryptedConfigSliceFromJSON(data json.RawMessage) []FieldTypeEncryptedConfig {
+func FieldTypeEncryptedConfigSliceFromJSON(data []byte) []FieldTypeEncryptedConfig {
 	entity := []FieldTypeEncryptedConfig{}
 	if data == nil {
 		return entity

@@ -97,7 +97,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertExtensi
 
 		ExecutedByUUID: req.ExtensionExecution.ExecutedByUUID.String(),
 
-		Metadata: mapper.NullifyEmptyJSON(req.ExtensionExecution.Metadata),
+		Metadata: mapper.JSON(req.ExtensionExecution.Metadata),
 
 		Status: req.ExtensionExecution.Status.ToInt64(),
 

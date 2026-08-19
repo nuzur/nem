@@ -26,7 +26,10 @@ func (e EntityVersionTypeConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func EntityVersionTypeConfigFromJSON(data json.RawMessage) EntityVersionTypeConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func EntityVersionTypeConfigFromJSON(data []byte) EntityVersionTypeConfig {
 	entity := EntityVersionTypeConfig{}
 	if data == nil {
 		return entity
@@ -43,7 +46,7 @@ func EntityVersionTypeConfigFromJSON(data json.RawMessage) EntityVersionTypeConf
 	return entity
 }
 
-func EntityVersionTypeConfigSliceFromJSON(data json.RawMessage) []EntityVersionTypeConfig {
+func EntityVersionTypeConfigSliceFromJSON(data []byte) []EntityVersionTypeConfig {
 	entity := []EntityVersionTypeConfig{}
 	if data == nil {
 		return entity

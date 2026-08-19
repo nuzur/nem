@@ -54,6 +54,113 @@ func (m *module) FetchAutomationEventByAutomationUUID(
 			}, nil
 		}
 
+		timeFields := []string{
+			"created_at", "updated_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchAutomationEventByAutomationUUIDResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchAutomationEventByAutomationUUIDResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAutomationEventByAutomationUUIDOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchAutomationEventByAutomationUUIDOrderedByCreatedAtASCParams{
+						AutomationUUID: req.AutomationUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationEventByAutomationUUIDResponse{}, err
+				}
+				return types.FetchAutomationEventByAutomationUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAutomationEventByAutomationUUIDOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchAutomationEventByAutomationUUIDOrderedByCreatedAtDESCParams{
+						AutomationUUID: req.AutomationUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationEventByAutomationUUIDResponse{}, err
+				}
+				return types.FetchAutomationEventByAutomationUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtASCParams{
+						AutomationUUID: req.AutomationUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationEventByAutomationUUIDResponse{}, err
+				}
+				return types.FetchAutomationEventByAutomationUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchAutomationEventByAutomationUUIDOrderedByUpdatedAtDESCParams{
+						AutomationUUID: req.AutomationUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationEventByAutomationUUIDResponse{}, err
+				}
+				return types.FetchAutomationEventByAutomationUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchAutomationEventByAutomationUUIDResponse{}, err

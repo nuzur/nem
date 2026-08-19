@@ -27,7 +27,10 @@ func (e ChangeRequestMetadataData) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func ChangeRequestMetadataDataFromJSON(data json.RawMessage) ChangeRequestMetadataData {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ChangeRequestMetadataDataFromJSON(data []byte) ChangeRequestMetadataData {
 	entity := ChangeRequestMetadataData{}
 	if data == nil {
 		return entity
@@ -44,7 +47,7 @@ func ChangeRequestMetadataDataFromJSON(data json.RawMessage) ChangeRequestMetada
 	return entity
 }
 
-func ChangeRequestMetadataDataSliceFromJSON(data json.RawMessage) []ChangeRequestMetadataData {
+func ChangeRequestMetadataDataSliceFromJSON(data []byte) []ChangeRequestMetadataData {
 	entity := []ChangeRequestMetadataData{}
 	if data == nil {
 		return entity

@@ -25,7 +25,10 @@ func (e ChangeRequestScopeConfigLocal) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func ChangeRequestScopeConfigLocalFromJSON(data json.RawMessage) ChangeRequestScopeConfigLocal {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ChangeRequestScopeConfigLocalFromJSON(data []byte) ChangeRequestScopeConfigLocal {
 	entity := ChangeRequestScopeConfigLocal{}
 	if data == nil {
 		return entity
@@ -42,7 +45,7 @@ func ChangeRequestScopeConfigLocalFromJSON(data json.RawMessage) ChangeRequestSc
 	return entity
 }
 
-func ChangeRequestScopeConfigLocalSliceFromJSON(data json.RawMessage) []ChangeRequestScopeConfigLocal {
+func ChangeRequestScopeConfigLocalSliceFromJSON(data []byte) []ChangeRequestScopeConfigLocal {
 	entity := []ChangeRequestScopeConfigLocal{}
 	if data == nil {
 		return entity

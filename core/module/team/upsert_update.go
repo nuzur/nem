@@ -17,6 +17,8 @@ import (
 	"github.com/nuzur/nem/core/entity/store"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -118,17 +120,17 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateTeamPar
 
 		Name: req.Team.Name,
 
-		Enviorments: enviorment.EnviormentSliceToJSON(req.Team.Enviorments),
+		Enviorments: mapper.JSON(enviorment.EnviormentSliceToJSON(req.Team.Enviorments)),
 
-		ReviewConfigs: review_config.ReviewConfigSliceToJSON(req.Team.ReviewConfigs),
+		ReviewConfigs: mapper.JSON(review_config.ReviewConfigSliceToJSON(req.Team.ReviewConfigs)),
 
-		Stores: store.StoreSliceToJSON(req.Team.Stores),
+		Stores: mapper.JSON(store.StoreSliceToJSON(req.Team.Stores)),
 
-		Connections: connection.ConnectionSliceToJSON(req.Team.Connections),
+		Connections: mapper.JSON(connection.ConnectionSliceToJSON(req.Team.Connections)),
 
-		ObjectStores: object_store.ObjectStoreSliceToJSON(req.Team.ObjectStores),
+		ObjectStores: mapper.JSON(object_store.ObjectStoreSliceToJSON(req.Team.ObjectStores)),
 
-		DefaultEntity: entity.EntityToJSON(req.Team.DefaultEntity),
+		DefaultEntity: mapper.JSON(entity.EntityToJSON(req.Team.DefaultEntity)),
 
 		OwnerUUID: req.Team.OwnerUUID.String(),
 

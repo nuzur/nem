@@ -28,7 +28,10 @@ func (e DeploymentProvider) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func DeploymentProviderFromJSON(data json.RawMessage) DeploymentProvider {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func DeploymentProviderFromJSON(data []byte) DeploymentProvider {
 	entity := DeploymentProvider{}
 	if data == nil {
 		return entity
@@ -45,7 +48,7 @@ func DeploymentProviderFromJSON(data json.RawMessage) DeploymentProvider {
 	return entity
 }
 
-func DeploymentProviderSliceFromJSON(data json.RawMessage) []DeploymentProvider {
+func DeploymentProviderSliceFromJSON(data []byte) []DeploymentProvider {
 	entity := []DeploymentProvider{}
 	if data == nil {
 		return entity

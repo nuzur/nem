@@ -123,19 +123,19 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateProject
 
 		ProjectUUID: req.ProjectVersion.ProjectUUID.String(),
 
-		Entities: entity.EntitySliceToJSON(req.ProjectVersion.Entities),
+		Entities: mapper.JSON(entity.EntitySliceToJSON(req.ProjectVersion.Entities)),
 
-		Relationships: relationship.RelationshipSliceToJSON(req.ProjectVersion.Relationships),
+		Relationships: mapper.JSON(relationship.RelationshipSliceToJSON(req.ProjectVersion.Relationships)),
 
-		Enums: enum.EnumSliceToJSON(req.ProjectVersion.Enums),
+		Enums: mapper.JSON(enum.EnumSliceToJSON(req.ProjectVersion.Enums)),
 
-		Services: service.ServiceSliceToJSON(req.ProjectVersion.Services),
+		Services: mapper.JSON(service.ServiceSliceToJSON(req.ProjectVersion.Services)),
 
 		BaseVersionUUID: mapper.UUIDPtrToNullString(req.ProjectVersion.BaseVersionUUID),
 
 		ReviewStatus: req.ProjectVersion.ReviewStatus.ToInt64(),
 
-		Deployments: project_version_deployment.ProjectVersionDeploymentSliceToJSON(req.ProjectVersion.Deployments),
+		Deployments: mapper.JSON(project_version_deployment.ProjectVersionDeploymentSliceToJSON(req.ProjectVersion.Deployments)),
 
 		Status: req.ProjectVersion.Status.ToInt64(),
 

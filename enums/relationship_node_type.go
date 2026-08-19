@@ -77,7 +77,7 @@ func RelationshipNodeTypeSliceToJSON(in []RelationshipNodeType) json.RawMessage 
 	return jr
 }
 
-func JSONToRelationshipNodeTypeSlice(in json.RawMessage) []RelationshipNodeType {
+func JSONToRelationshipNodeTypeSlice(in []byte) []RelationshipNodeType {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

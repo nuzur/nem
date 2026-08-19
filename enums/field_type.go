@@ -207,7 +207,7 @@ func FieldTypeSliceToJSON(in []FieldType) json.RawMessage {
 	return jr
 }
 
-func JSONToFieldTypeSlice(in json.RawMessage) []FieldType {
+func JSONToFieldTypeSlice(in []byte) []FieldType {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

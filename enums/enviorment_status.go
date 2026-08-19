@@ -77,7 +77,7 @@ func EnviormentStatusSliceToJSON(in []EnviormentStatus) json.RawMessage {
 	return jr
 }
 
-func JSONToEnviormentStatusSlice(in json.RawMessage) []EnviormentStatus {
+func JSONToEnviormentStatusSlice(in []byte) []EnviormentStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

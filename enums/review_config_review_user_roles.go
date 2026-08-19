@@ -92,7 +92,7 @@ func ReviewConfigReviewUserRolesSliceToJSON(in []ReviewConfigReviewUserRoles) js
 	return jr
 }
 
-func JSONToReviewConfigReviewUserRolesSlice(in json.RawMessage) []ReviewConfigReviewUserRoles {
+func JSONToReviewConfigReviewUserRolesSlice(in []byte) []ReviewConfigReviewUserRoles {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

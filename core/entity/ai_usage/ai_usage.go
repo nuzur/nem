@@ -42,7 +42,10 @@ func (e AiUsage) PrimaryKeyValues() []string {
 	}
 }
 
-func AiUsageFromJSON(data json.RawMessage) AiUsage {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func AiUsageFromJSON(data []byte) AiUsage {
 	entity := AiUsage{}
 	if data == nil {
 		return entity
@@ -59,7 +62,7 @@ func AiUsageFromJSON(data json.RawMessage) AiUsage {
 	return entity
 }
 
-func AiUsageSliceFromJSON(data json.RawMessage) []AiUsage {
+func AiUsageSliceFromJSON(data []byte) []AiUsage {
 	entity := []AiUsage{}
 	if data == nil {
 		return entity

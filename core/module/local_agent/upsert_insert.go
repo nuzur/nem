@@ -13,6 +13,8 @@ import (
 	"github.com/nuzur/nem/core/entity/local_agent_connection"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -95,7 +97,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertLocalAg
 
 		CliVersion: req.LocalAgent.CliVersion,
 
-		Connections: local_agent_connection.LocalAgentConnectionSliceToJSON(req.LocalAgent.Connections),
+		Connections: mapper.JSON(local_agent_connection.LocalAgentConnectionSliceToJSON(req.LocalAgent.Connections)),
 
 		Status: req.LocalAgent.Status.ToInt64(),
 

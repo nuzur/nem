@@ -119,9 +119,9 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateExtensi
 
 		RepositoryTag: req.ExtensionVersion.RepositoryTag,
 
-		ConfigurationEntity: mapper.NullifyEmptyJSON(req.ExtensionVersion.ConfigurationEntity),
+		ConfigurationEntity: mapper.JSON(req.ExtensionVersion.ConfigurationEntity),
 
-		ExecutionMode: mapper.SliceToJSON(req.ExtensionVersion.ExecutionMode),
+		ExecutionMode: mapper.JSON(mapper.SliceToJSON(req.ExtensionVersion.ExecutionMode)),
 
 		ReviewStatus: req.ExtensionVersion.ReviewStatus.ToInt64(),
 

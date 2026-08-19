@@ -4,15 +4,107 @@ package mapper
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"time"
 
 	"database/sql"
+	"database/sql/driver"
 	"github.com/gofrs/uuid"
 	"github.com/guregu/null/v6"
 	"reflect"
 	"strings"
 )
+
+// JSON is the Go type every JSON column maps to in the sqlc-generated repository
+// layer (see the go_type overrides in core/repository/sqlc.yaml).
+//
+// It exists for one reason: the STATIC type of a query parameter decides what
+// go-sql-driver/mysql writes for it. With interpolateParams=true in the DSN the
+// driver renders the SQL text itself, and its []byte branch emits a BINARY string
+// literal — _binary'{"a":1}' — which MySQL refuses to store in a JSON column
+// ("Error 3144 (22032): Cannot create a JSON value from a string with CHARACTER
+// SET 'binary'"). Every insert/update of an entity with a JSON column failed on
+// such a DSN and worked without it, because the binary protocol sends a typed
+// parameter instead. Wrapping the VALUE cannot fix that: a json.RawMessage
+// assigned into a []byte struct field is erased back to []byte before the driver
+// ever sees it. Only the field's type can carry the information.
+//
+// json.RawMessage cannot be the column type either: database/sql cannot scan SQL
+// NULL into a plain named slice type ("unsupported Scan, storing driver.Value
+// type <nil> into type *json.RawMessage"). That is what the previous []byte
+// override was working around. JSON implements sql.Scanner, so it handles both.
+type JSON []byte
+
+// Value implements driver.Valuer.
+//
+// A non-empty value is returned as a STRING, never []byte — that is the whole
+// point of the type (see above), and it is also the only thing that works:
+// go-sql-driver/mysql's converter checks driver.IsValue on the Valuer's RESULT,
+// which json.RawMessage fails ("non-Value type json.RawMessage returned from
+// Value"). A string takes the driver's plain-quoted-literal branch, which MySQL
+// parses as JSON. Under lib/pq a string and a []byte encode identically for a
+// non-bytea column, so Postgres is unaffected either way.
+//
+// An empty value is SQL NULL: a zero-length value would otherwise reach the
+// database as the empty string, which no JSON column accepts (MySQL error 3140,
+// "Invalid JSON text: The document is empty").
+func (j JSON) Value() (driver.Value, error) {
+	if len(j) == 0 {
+		return nil, nil
+	}
+	return string(j), nil
+}
+
+// Scan implements sql.Scanner.
+//
+// The pointer receiver and the COPY are both load-bearing: the generated list
+// layer scans straight into the repository model's fields
+// (rows.Scan(&i.SomeJSONColumn)), and the []byte a driver hands to Scan is only
+// valid until the next call — retaining it would alias one row's buffer into
+// every row of the response.
+func (j *JSON) Scan(src any) error {
+	switch v := src.(type) {
+	case nil:
+		*j = nil
+	case []byte:
+		*j = append(JSON(nil), v...)
+	case string:
+		*j = JSON(v)
+	default:
+		return fmt.Errorf("cannot scan %T into mapper.JSON", src)
+	}
+	return nil
+}
+
+// MarshalJSON and UnmarshalJSON make JSON behave like json.RawMessage when a
+// repository model is marshaled (sqlc emits json tags): the column's contents are
+// embedded verbatim rather than base64-encoded as a byte slice.
+func (j JSON) MarshalJSON() ([]byte, error) {
+	if len(j) == 0 {
+		return []byte("null"), nil
+	}
+	return j, nil
+}
+
+func (j *JSON) UnmarshalJSON(data []byte) error {
+	if j == nil {
+		return fmt.Errorf("mapper.JSON: UnmarshalJSON on nil pointer")
+	}
+	*j = append((*j)[0:0], data...)
+	return nil
+}
+
+// JSONToRawMessage converts a repository JSON column into the json.RawMessage a
+// raw-json entity field holds.
+//
+// It is a helper rather than a conversion at the call site because the generated
+// core mapper derives its imports from the expression TEXT — a "mapper." prefix
+// turns the mapper import on — and it does not import encoding/json, so
+// `json.RawMessage(m.X)` would not compile there.
+func JSONToRawMessage(data []byte) json.RawMessage {
+	return json.RawMessage(data)
+}
 
 // jsonToSlice decodes an array field's JSON column into its slice type.
 //
@@ -26,7 +118,7 @@ import (
 // invisible.
 //
 // An absent (NULL / empty) column is not a failure and is not logged.
-func jsonToSlice[T any](data json.RawMessage, elementType string) []T {
+func jsonToSlice[T any](data []byte, elementType string) []T {
 	res := []T{}
 	if len(data) == 0 || string(data) == "null" {
 		return res
@@ -38,11 +130,11 @@ func jsonToSlice[T any](data json.RawMessage, elementType string) []T {
 	return res
 }
 
-func JSONToStringSlice(data json.RawMessage) []string {
+func JSONToStringSlice(data []byte) []string {
 	return jsonToSlice[string](data, "string")
 }
 
-func JSONToUUIDSlice(data json.RawMessage) []uuid.UUID {
+func JSONToUUIDSlice(data []byte) []uuid.UUID {
 	stringSlice := JSONToStringSlice(data)
 
 	res := []uuid.UUID{}
@@ -52,40 +144,44 @@ func JSONToUUIDSlice(data json.RawMessage) []uuid.UUID {
 	return res
 }
 
-func JSONToIntSlice(data json.RawMessage) []int64 {
+func JSONToIntSlice(data []byte) []int64 {
 	return jsonToSlice[int64](data, "int")
 }
 
 // JSONToEnumSlice decodes a JSON array column (e.g. "[1,2]") into a slice of a
 // multi-enum type. The type parameter is any enum (its underlying type is int64).
-func JSONToEnumSlice[T ~int64](data json.RawMessage) []T {
+func JSONToEnumSlice[T ~int64](data []byte) []T {
 	return jsonToSlice[T](data, "enum")
 }
 
-func JSONToFloatSlice(data json.RawMessage) []float64 {
+func JSONToFloatSlice(data []byte) []float64 {
 	return jsonToSlice[float64](data, "float")
 }
 
-func JSONToBooleanSlice(data json.RawMessage) []bool {
+func JSONToBooleanSlice(data []byte) []bool {
 	return jsonToSlice[bool](data, "boolean")
 }
 
-func JSONToDateSlice(data json.RawMessage) []time.Time {
+func JSONToDateSlice(data []byte) []time.Time {
 	return jsonToSlice[time.Time](data, "date")
 }
 
-func JSONToDatetimeSlice(data json.RawMessage) []time.Time {
+func JSONToDatetimeSlice(data []byte) []time.Time {
 	return jsonToSlice[time.Time](data, "datetime")
 }
 
-func JSONToTimeSlice(data json.RawMessage) []time.Time {
+func JSONToTimeSlice(data []byte) []time.Time {
 	return jsonToSlice[time.Time](data, "time")
 }
 
-// NullifyEmptyJSON returns nil for an empty json.RawMessage so it is written as
-// SQL NULL rather than an empty string, which a JSON column rejects
-// ("Invalid JSON text: The document is empty", MySQL error 3140).
-func NullifyEmptyJSON(data json.RawMessage) json.RawMessage {
+// NullifyEmptyJSON returns nil for an empty value so it is written as SQL NULL
+// rather than an empty string, which a JSON column rejects ("Invalid JSON text:
+// The document is empty", MySQL error 3140).
+//
+// The generated repository mappers no longer call this: JSON.Value does the same
+// coercion for every JSON column, required or not. It is kept for hand-written
+// code that builds query parameters itself.
+func NullifyEmptyJSON(data []byte) json.RawMessage {
 	if len(data) == 0 {
 		return nil
 	}
@@ -172,7 +268,7 @@ func UUIDPtrToNullString(u *uuid.UUID) null.String {
 //   - date-only strings ("2024-11-08") are converted to RFC3339 ("2024-11-08T00:00:00Z")
 //     for time.Time and null.Time fields
 //   - JSON numbers 0/1 are converted to false/true for bool and null.Bool fields
-func FlexibleUnmarshal(data json.RawMessage, target interface{}) error {
+func FlexibleUnmarshal(data []byte, target interface{}) error {
 	var rawMap map[string]json.RawMessage
 	if err := json.Unmarshal(data, &rawMap); err != nil {
 		return err

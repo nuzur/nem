@@ -54,6 +54,113 @@ func (m *module) FetchUserByIdentifier(
 			}, nil
 		}
 
+		timeFields := []string{
+			"updated_at", "created_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchUserByIdentifierResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchUserByIdentifierResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserByIdentifierOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchUserByIdentifierOrderedByUpdatedAtASCParams{
+						Identifier: req.Identifier,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserByIdentifierResponse{}, err
+				}
+				return types.FetchUserByIdentifierResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserByIdentifierOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchUserByIdentifierOrderedByUpdatedAtDESCParams{
+						Identifier: req.Identifier,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserByIdentifierResponse{}, err
+				}
+				return types.FetchUserByIdentifierResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserByIdentifierOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchUserByIdentifierOrderedByCreatedAtASCParams{
+						Identifier: req.Identifier,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserByIdentifierResponse{}, err
+				}
+				return types.FetchUserByIdentifierResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserByIdentifierOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchUserByIdentifierOrderedByCreatedAtDESCParams{
+						Identifier: req.Identifier,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserByIdentifierResponse{}, err
+				}
+				return types.FetchUserByIdentifierResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchUserByIdentifierResponse{}, err

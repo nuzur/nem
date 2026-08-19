@@ -23,7 +23,10 @@ func (e FieldTypePhoneConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FieldTypePhoneConfigFromJSON(data json.RawMessage) FieldTypePhoneConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FieldTypePhoneConfigFromJSON(data []byte) FieldTypePhoneConfig {
 	entity := FieldTypePhoneConfig{}
 	if data == nil {
 		return entity
@@ -40,7 +43,7 @@ func FieldTypePhoneConfigFromJSON(data json.RawMessage) FieldTypePhoneConfig {
 	return entity
 }
 
-func FieldTypePhoneConfigSliceFromJSON(data json.RawMessage) []FieldTypePhoneConfig {
+func FieldTypePhoneConfigSliceFromJSON(data []byte) []FieldTypePhoneConfig {
 	entity := []FieldTypePhoneConfig{}
 	if data == nil {
 		return entity

@@ -77,7 +77,7 @@ func UserConnectionTypeSliceToJSON(in []UserConnectionType) json.RawMessage {
 	return jr
 }
 
-func JSONToUserConnectionTypeSlice(in json.RawMessage) []UserConnectionType {
+func JSONToUserConnectionTypeSlice(in []byte) []UserConnectionType {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

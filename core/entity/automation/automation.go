@@ -41,7 +41,10 @@ func (e Automation) PrimaryKeyValues() []string {
 	}
 }
 
-func AutomationFromJSON(data json.RawMessage) Automation {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func AutomationFromJSON(data []byte) Automation {
 	entity := Automation{}
 	if data == nil {
 		return entity
@@ -58,7 +61,7 @@ func AutomationFromJSON(data json.RawMessage) Automation {
 	return entity
 }
 
-func AutomationSliceFromJSON(data json.RawMessage) []Automation {
+func AutomationSliceFromJSON(data []byte) []Automation {
 	entity := []Automation{}
 	if data == nil {
 		return entity

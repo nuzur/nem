@@ -28,7 +28,10 @@ func (e FieldPiiConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FieldPiiConfigFromJSON(data json.RawMessage) FieldPiiConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FieldPiiConfigFromJSON(data []byte) FieldPiiConfig {
 	entity := FieldPiiConfig{}
 	if data == nil {
 		return entity
@@ -45,7 +48,7 @@ func FieldPiiConfigFromJSON(data json.RawMessage) FieldPiiConfig {
 	return entity
 }
 
-func FieldPiiConfigSliceFromJSON(data json.RawMessage) []FieldPiiConfig {
+func FieldPiiConfigSliceFromJSON(data []byte) []FieldPiiConfig {
 	entity := []FieldPiiConfig{}
 	if data == nil {
 		return entity

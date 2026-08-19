@@ -20,6 +20,12 @@ db:
     port: << Database Port Here>>
     user: << Database User Here>>
     pswd: << Database Password Here>>
+    # On MySQL, include interpolateParams=true. List queries pass their filter
+    # values as bind arguments; without the flag go-sql-driver/mysql runs a
+    # PREPARE / EXECUTE / CLOSE round trip for each one (3 round trips per query
+    # instead of 1). Interpolating client-side is safe — the driver escapes the
+    # values itself, charset-aware — and it is not the interpolation this
+    # replaced, which pasted values into the SQL text before the driver saw it.
     params: << Database Params Here>>
     driver: "<< Database Driver Here >>"
 

@@ -117,7 +117,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateProject
 
 		Description: req.Project.Description,
 
-		Tags: mapper.SliceToJSON(req.Project.Tags),
+		Tags: mapper.JSON(mapper.SliceToJSON(req.Project.Tags)),
 
 		URL: req.Project.URL,
 
@@ -127,7 +127,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateProject
 
 		AccessType: req.Project.AccessType.ToInt64(),
 
-		ProjectExtensions: project_extension.ProjectExtensionSliceToJSON(req.Project.ProjectExtensions),
+		ProjectExtensions: mapper.JSON(project_extension.ProjectExtensionSliceToJSON(req.Project.ProjectExtensions)),
 
 		Status: req.Project.Status.ToInt64(),
 

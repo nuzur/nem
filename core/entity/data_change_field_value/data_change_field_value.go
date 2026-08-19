@@ -25,7 +25,10 @@ func (e DataChangeFieldValue) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func DataChangeFieldValueFromJSON(data json.RawMessage) DataChangeFieldValue {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func DataChangeFieldValueFromJSON(data []byte) DataChangeFieldValue {
 	entity := DataChangeFieldValue{}
 	if data == nil {
 		return entity
@@ -42,7 +45,7 @@ func DataChangeFieldValueFromJSON(data json.RawMessage) DataChangeFieldValue {
 	return entity
 }
 
-func DataChangeFieldValueSliceFromJSON(data json.RawMessage) []DataChangeFieldValue {
+func DataChangeFieldValueSliceFromJSON(data []byte) []DataChangeFieldValue {
 	entity := []DataChangeFieldValue{}
 	if data == nil {
 		return entity

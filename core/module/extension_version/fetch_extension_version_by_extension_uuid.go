@@ -54,6 +54,113 @@ func (m *module) FetchExtensionVersionByExtensionUUID(
 			}, nil
 		}
 
+		timeFields := []string{
+			"created_at", "updated_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchExtensionVersionByExtensionUUIDResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchExtensionVersionByExtensionUUIDResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtASCParams{
+						ExtensionUUID: req.ExtensionUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionVersionByExtensionUUIDResponse{}, err
+				}
+				return types.FetchExtensionVersionByExtensionUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchExtensionVersionByExtensionUUIDOrderedByCreatedAtDESCParams{
+						ExtensionUUID: req.ExtensionUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionVersionByExtensionUUIDResponse{}, err
+				}
+				return types.FetchExtensionVersionByExtensionUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtASCParams{
+						ExtensionUUID: req.ExtensionUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionVersionByExtensionUUIDResponse{}, err
+				}
+				return types.FetchExtensionVersionByExtensionUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchExtensionVersionByExtensionUUIDOrderedByUpdatedAtDESCParams{
+						ExtensionUUID: req.ExtensionUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionVersionByExtensionUUIDResponse{}, err
+				}
+				return types.FetchExtensionVersionByExtensionUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchExtensionVersionByExtensionUUIDResponse{}, err

@@ -77,7 +77,7 @@ func RelationshipStatusSliceToJSON(in []RelationshipStatus) json.RawMessage {
 	return jr
 }
 
-func JSONToRelationshipStatusSlice(in json.RawMessage) []RelationshipStatus {
+func JSONToRelationshipStatusSlice(in []byte) []RelationshipStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

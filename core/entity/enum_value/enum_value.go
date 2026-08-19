@@ -24,7 +24,10 @@ func (e EnumValue) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func EnumValueFromJSON(data json.RawMessage) EnumValue {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func EnumValueFromJSON(data []byte) EnumValue {
 	entity := EnumValue{}
 	if data == nil {
 		return entity
@@ -41,7 +44,7 @@ func EnumValueFromJSON(data json.RawMessage) EnumValue {
 	return entity
 }
 
-func EnumValueSliceFromJSON(data json.RawMessage) []EnumValue {
+func EnumValueSliceFromJSON(data []byte) []EnumValue {
 	entity := []EnumValue{}
 	if data == nil {
 		return entity

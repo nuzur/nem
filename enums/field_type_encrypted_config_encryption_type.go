@@ -77,7 +77,7 @@ func FieldTypeEncryptedConfigEncryptionTypeSliceToJSON(in []FieldTypeEncryptedCo
 	return jr
 }
 
-func JSONToFieldTypeEncryptedConfigEncryptionTypeSlice(in json.RawMessage) []FieldTypeEncryptedConfigEncryptionType {
+func JSONToFieldTypeEncryptedConfigEncryptionTypeSlice(in []byte) []FieldTypeEncryptedConfigEncryptionType {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

@@ -40,7 +40,10 @@ func (e UserProject) PrimaryKeyValues() []string {
 	}
 }
 
-func UserProjectFromJSON(data json.RawMessage) UserProject {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func UserProjectFromJSON(data []byte) UserProject {
 	entity := UserProject{}
 	if data == nil {
 		return entity
@@ -57,7 +60,7 @@ func UserProjectFromJSON(data json.RawMessage) UserProject {
 	return entity
 }
 
-func UserProjectSliceFromJSON(data json.RawMessage) []UserProject {
+func UserProjectSliceFromJSON(data []byte) []UserProject {
 	entity := []UserProject{}
 	if data == nil {
 		return entity

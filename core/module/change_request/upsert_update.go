@@ -15,6 +15,8 @@ import (
 	"github.com/nuzur/nem/core/entity/change_request_scope_config"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -124,11 +126,11 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateChangeR
 
 		ChangeType: req.ChangeRequest.ChangeType.ToInt64(),
 
-		DataChanges: change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges),
+		DataChanges: mapper.JSON(change_request_data_change.ChangeRequestDataChangeSliceToJSON(req.ChangeRequest.DataChanges)),
 
-		Metadata: change_request_metadata.ChangeRequestMetadataToJSON(req.ChangeRequest.Metadata),
+		Metadata: mapper.JSON(change_request_metadata.ChangeRequestMetadataToJSON(req.ChangeRequest.Metadata)),
 
-		Reviews: change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews),
+		Reviews: mapper.JSON(change_request_review.ChangeRequestReviewSliceToJSON(req.ChangeRequest.Reviews)),
 
 		ReviewStatus: req.ChangeRequest.ReviewStatus.ToInt64(),
 
@@ -148,6 +150,6 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateChangeR
 
 		Scope: req.ChangeRequest.Scope.ToNullInt(),
 
-		ScopeConfig: change_request_scope_config.ChangeRequestScopeConfigToJSON(req.ChangeRequest.ScopeConfig),
+		ScopeConfig: mapper.JSON(change_request_scope_config.ChangeRequestScopeConfigToJSON(req.ChangeRequest.ScopeConfig)),
 	}
 }

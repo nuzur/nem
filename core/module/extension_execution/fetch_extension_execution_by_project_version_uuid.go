@@ -54,6 +54,113 @@ func (m *module) FetchExtensionExecutionByProjectVersionUUID(
 			}, nil
 		}
 
+		timeFields := []string{
+			"created_at", "updated_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchExtensionExecutionByProjectVersionUUIDResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchExtensionExecutionByProjectVersionUUIDResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtASCParams{
+						ProjectVersionUUID: req.ProjectVersionUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionExecutionByProjectVersionUUIDResponse{}, err
+				}
+				return types.FetchExtensionExecutionByProjectVersionUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchExtensionExecutionByProjectVersionUUIDOrderedByCreatedAtDESCParams{
+						ProjectVersionUUID: req.ProjectVersionUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionExecutionByProjectVersionUUIDResponse{}, err
+				}
+				return types.FetchExtensionExecutionByProjectVersionUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtASCParams{
+						ProjectVersionUUID: req.ProjectVersionUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionExecutionByProjectVersionUUIDResponse{}, err
+				}
+				return types.FetchExtensionExecutionByProjectVersionUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchExtensionExecutionByProjectVersionUUIDOrderedByUpdatedAtDESCParams{
+						ProjectVersionUUID: req.ProjectVersionUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionExecutionByProjectVersionUUIDResponse{}, err
+				}
+				return types.FetchExtensionExecutionByProjectVersionUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchExtensionExecutionByProjectVersionUUIDResponse{}, err

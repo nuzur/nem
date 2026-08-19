@@ -77,7 +77,7 @@ func ProjectAccessTypeSliceToJSON(in []ProjectAccessType) json.RawMessage {
 	return jr
 }
 
-func JSONToProjectAccessTypeSlice(in json.RawMessage) []ProjectAccessType {
+func JSONToProjectAccessTypeSlice(in []byte) []ProjectAccessType {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

@@ -54,6 +54,113 @@ func (m *module) FetchProjectByOwnerUUID(
 			}, nil
 		}
 
+		timeFields := []string{
+			"updated_at", "created_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchProjectByOwnerUUIDResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchProjectByOwnerUUIDResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchProjectByOwnerUUIDOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchProjectByOwnerUUIDOrderedByUpdatedAtASCParams{
+						OwnerUUID: req.OwnerUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchProjectByOwnerUUIDResponse{}, err
+				}
+				return types.FetchProjectByOwnerUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchProjectByOwnerUUIDOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchProjectByOwnerUUIDOrderedByUpdatedAtDESCParams{
+						OwnerUUID: req.OwnerUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchProjectByOwnerUUIDResponse{}, err
+				}
+				return types.FetchProjectByOwnerUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchProjectByOwnerUUIDOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchProjectByOwnerUUIDOrderedByCreatedAtASCParams{
+						OwnerUUID: req.OwnerUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchProjectByOwnerUUIDResponse{}, err
+				}
+				return types.FetchProjectByOwnerUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchProjectByOwnerUUIDOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchProjectByOwnerUUIDOrderedByCreatedAtDESCParams{
+						OwnerUUID: req.OwnerUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchProjectByOwnerUUIDResponse{}, err
+				}
+				return types.FetchProjectByOwnerUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchProjectByOwnerUUIDResponse{}, err

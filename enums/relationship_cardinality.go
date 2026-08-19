@@ -77,7 +77,7 @@ func RelationshipCardinalitySliceToJSON(in []RelationshipCardinality) json.RawMe
 	return jr
 }
 
-func JSONToRelationshipCardinalitySlice(in json.RawMessage) []RelationshipCardinality {
+func JSONToRelationshipCardinalitySlice(in []byte) []RelationshipCardinality {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

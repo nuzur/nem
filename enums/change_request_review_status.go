@@ -97,7 +97,7 @@ func ChangeRequestReviewStatusSliceToJSON(in []ChangeRequestReviewStatus) json.R
 	return jr
 }
 
-func JSONToChangeRequestReviewStatusSlice(in json.RawMessage) []ChangeRequestReviewStatus {
+func JSONToChangeRequestReviewStatusSlice(in []byte) []ChangeRequestReviewStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

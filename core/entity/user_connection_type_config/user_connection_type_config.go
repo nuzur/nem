@@ -26,7 +26,10 @@ func (e UserConnectionTypeConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func UserConnectionTypeConfigFromJSON(data json.RawMessage) UserConnectionTypeConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func UserConnectionTypeConfigFromJSON(data []byte) UserConnectionTypeConfig {
 	entity := UserConnectionTypeConfig{}
 	if data == nil {
 		return entity
@@ -43,7 +46,7 @@ func UserConnectionTypeConfigFromJSON(data json.RawMessage) UserConnectionTypeCo
 	return entity
 }
 
-func UserConnectionTypeConfigSliceFromJSON(data json.RawMessage) []UserConnectionTypeConfig {
+func UserConnectionTypeConfigSliceFromJSON(data []byte) []UserConnectionTypeConfig {
 	entity := []UserConnectionTypeConfig{}
 	if data == nil {
 		return entity

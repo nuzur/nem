@@ -34,7 +34,10 @@ func (e ReviewConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func ReviewConfigFromJSON(data json.RawMessage) ReviewConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ReviewConfigFromJSON(data []byte) ReviewConfig {
 	entity := ReviewConfig{}
 	if data == nil {
 		return entity
@@ -51,7 +54,7 @@ func ReviewConfigFromJSON(data json.RawMessage) ReviewConfig {
 	return entity
 }
 
-func ReviewConfigSliceFromJSON(data json.RawMessage) []ReviewConfig {
+func ReviewConfigSliceFromJSON(data []byte) []ReviewConfig {
 	entity := []ReviewConfig{}
 	if data == nil {
 		return entity

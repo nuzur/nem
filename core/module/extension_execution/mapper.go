@@ -29,7 +29,7 @@ func mapModelToEntity(m nemdb.ExtensionExecution) main_entity.ExtensionExecution
 		ProjectUUID:          mapper.StringToUUID(m.ProjectUUID),
 		ProjectVersionUUID:   mapper.StringToUUID(m.ProjectVersionUUID),
 		ExecutedByUUID:       mapper.StringToUUID(m.ExecutedByUUID),
-		Metadata:             m.Metadata,
+		Metadata:             mapper.JSONToRawMessage(m.Metadata),
 		Status:               enums.ExtensionExecutionStatus(m.Status),
 		StatusMsg:            null.NewString(m.StatusMsg.String, m.StatusMsg.Valid),
 		CreatedAt:            m.CreatedAt,

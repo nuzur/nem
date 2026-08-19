@@ -16,6 +16,8 @@ import (
 	"github.com/nuzur/nem/core/entity/deployment_server"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -108,13 +110,13 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertDeploym
 
 		UpdatedByUUID: req.DeploymentRevision.UpdatedByUUID.String(),
 
-		Provider: deployment_provider.DeploymentProviderToJSON(req.DeploymentRevision.Provider),
+		Provider: mapper.JSON(deployment_provider.DeploymentProviderToJSON(req.DeploymentRevision.Provider)),
 
-		Server: deployment_server.DeploymentServerToJSON(req.DeploymentRevision.Server),
+		Server: mapper.JSON(deployment_server.DeploymentServerToJSON(req.DeploymentRevision.Server)),
 
-		Database: deployment_database.DeploymentDatabaseToJSON(req.DeploymentRevision.Database),
+		Database: mapper.JSON(deployment_database.DeploymentDatabaseToJSON(req.DeploymentRevision.Database)),
 
-		Codegen: deployment_codegen.DeploymentCodegenToJSON(req.DeploymentRevision.Codegen),
+		Codegen: mapper.JSON(deployment_codegen.DeploymentCodegenToJSON(req.DeploymentRevision.Codegen)),
 
 		StatusMessage: req.DeploymentRevision.StatusMessage,
 	}

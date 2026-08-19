@@ -29,7 +29,10 @@ func (e EntityTypeStandaloneConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func EntityTypeStandaloneConfigFromJSON(data json.RawMessage) EntityTypeStandaloneConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func EntityTypeStandaloneConfigFromJSON(data []byte) EntityTypeStandaloneConfig {
 	entity := EntityTypeStandaloneConfig{}
 	if data == nil {
 		return entity
@@ -46,7 +49,7 @@ func EntityTypeStandaloneConfigFromJSON(data json.RawMessage) EntityTypeStandalo
 	return entity
 }
 
-func EntityTypeStandaloneConfigSliceFromJSON(data json.RawMessage) []EntityTypeStandaloneConfig {
+func EntityTypeStandaloneConfigSliceFromJSON(data []byte) []EntityTypeStandaloneConfig {
 	entity := []EntityTypeStandaloneConfig{}
 	if data == nil {
 		return entity

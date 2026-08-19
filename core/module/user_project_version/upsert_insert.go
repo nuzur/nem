@@ -93,7 +93,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertUserPro
 
 		UserUUID: req.UserProjectVersion.UserUUID.String(),
 
-		Data: mapper.NullifyEmptyJSON(req.UserProjectVersion.Data),
+		Data: mapper.JSON(req.UserProjectVersion.Data),
 
 		Status: req.UserProjectVersion.Status.ToInt64(),
 

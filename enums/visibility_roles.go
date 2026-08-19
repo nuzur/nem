@@ -92,7 +92,7 @@ func VisibilityRolesSliceToJSON(in []VisibilityRoles) json.RawMessage {
 	return jr
 }
 
-func JSONToVisibilityRolesSlice(in json.RawMessage) []VisibilityRoles {
+func JSONToVisibilityRolesSlice(in []byte) []VisibilityRoles {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

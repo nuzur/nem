@@ -26,7 +26,10 @@ func (e FileObjectStorageConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FileObjectStorageConfigFromJSON(data json.RawMessage) FileObjectStorageConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FileObjectStorageConfigFromJSON(data []byte) FileObjectStorageConfig {
 	entity := FileObjectStorageConfig{}
 	if data == nil {
 		return entity
@@ -43,7 +46,7 @@ func FileObjectStorageConfigFromJSON(data json.RawMessage) FileObjectStorageConf
 	return entity
 }
 
-func FileObjectStorageConfigSliceFromJSON(data json.RawMessage) []FileObjectStorageConfig {
+func FileObjectStorageConfigSliceFromJSON(data []byte) []FileObjectStorageConfig {
 	entity := []FileObjectStorageConfig{}
 	if data == nil {
 		return entity

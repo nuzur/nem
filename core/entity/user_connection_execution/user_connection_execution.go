@@ -33,7 +33,10 @@ func (e UserConnectionExecution) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func UserConnectionExecutionFromJSON(data json.RawMessage) UserConnectionExecution {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func UserConnectionExecutionFromJSON(data []byte) UserConnectionExecution {
 	entity := UserConnectionExecution{}
 	if data == nil {
 		return entity
@@ -50,7 +53,7 @@ func UserConnectionExecutionFromJSON(data json.RawMessage) UserConnectionExecuti
 	return entity
 }
 
-func UserConnectionExecutionSliceFromJSON(data json.RawMessage) []UserConnectionExecution {
+func UserConnectionExecutionSliceFromJSON(data []byte) []UserConnectionExecution {
 	entity := []UserConnectionExecution{}
 	if data == nil {
 		return entity

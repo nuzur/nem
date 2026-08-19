@@ -87,7 +87,7 @@ func IndexTypeSliceToJSON(in []IndexType) json.RawMessage {
 	return jr
 }
 
-func JSONToIndexTypeSlice(in json.RawMessage) []IndexType {
+func JSONToIndexTypeSlice(in []byte) []IndexType {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

@@ -32,7 +32,10 @@ func (e ChangeRequestReview) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func ChangeRequestReviewFromJSON(data json.RawMessage) ChangeRequestReview {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ChangeRequestReviewFromJSON(data []byte) ChangeRequestReview {
 	entity := ChangeRequestReview{}
 	if data == nil {
 		return entity
@@ -49,7 +52,7 @@ func ChangeRequestReviewFromJSON(data json.RawMessage) ChangeRequestReview {
 	return entity
 }
 
-func ChangeRequestReviewSliceFromJSON(data json.RawMessage) []ChangeRequestReview {
+func ChangeRequestReviewSliceFromJSON(data []byte) []ChangeRequestReview {
 	entity := []ChangeRequestReview{}
 	if data == nil {
 		return entity

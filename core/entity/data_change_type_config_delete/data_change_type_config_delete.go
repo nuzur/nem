@@ -28,7 +28,10 @@ func (e DataChangeTypeConfigDelete) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func DataChangeTypeConfigDeleteFromJSON(data json.RawMessage) DataChangeTypeConfigDelete {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func DataChangeTypeConfigDeleteFromJSON(data []byte) DataChangeTypeConfigDelete {
 	entity := DataChangeTypeConfigDelete{}
 	if data == nil {
 		return entity
@@ -45,7 +48,7 @@ func DataChangeTypeConfigDeleteFromJSON(data json.RawMessage) DataChangeTypeConf
 	return entity
 }
 
-func DataChangeTypeConfigDeleteSliceFromJSON(data json.RawMessage) []DataChangeTypeConfigDelete {
+func DataChangeTypeConfigDeleteSliceFromJSON(data []byte) []DataChangeTypeConfigDelete {
 	entity := []DataChangeTypeConfigDelete{}
 	if data == nil {
 		return entity

@@ -107,13 +107,13 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertExtensi
 
 		ExtensionType: req.Extension.ExtensionType.ToInt64(),
 
-		Tags: mapper.SliceToJSON(req.Extension.Tags),
+		Tags: mapper.JSON(mapper.SliceToJSON(req.Extension.Tags)),
 
 		Pro: req.Extension.Pro,
 
 		Public: req.Extension.Public,
 
-		Visibility: visibility.VisibilitySliceToJSON(req.Extension.Visibility),
+		Visibility: mapper.JSON(visibility.VisibilitySliceToJSON(req.Extension.Visibility)),
 
 		Status: req.Extension.Status.ToInt64(),
 

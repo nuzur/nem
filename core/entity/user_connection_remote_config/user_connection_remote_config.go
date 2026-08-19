@@ -26,7 +26,10 @@ func (e UserConnectionRemoteConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func UserConnectionRemoteConfigFromJSON(data json.RawMessage) UserConnectionRemoteConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func UserConnectionRemoteConfigFromJSON(data []byte) UserConnectionRemoteConfig {
 	entity := UserConnectionRemoteConfig{}
 	if data == nil {
 		return entity
@@ -43,7 +46,7 @@ func UserConnectionRemoteConfigFromJSON(data json.RawMessage) UserConnectionRemo
 	return entity
 }
 
-func UserConnectionRemoteConfigSliceFromJSON(data json.RawMessage) []UserConnectionRemoteConfig {
+func UserConnectionRemoteConfigSliceFromJSON(data []byte) []UserConnectionRemoteConfig {
 	entity := []UserConnectionRemoteConfig{}
 	if data == nil {
 		return entity

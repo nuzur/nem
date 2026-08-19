@@ -98,11 +98,11 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateAutomat
 
 		Operation: req.Automation.Operation.ToInt64(),
 
-		Condition: mapper.NullifyEmptyJSON(req.Automation.Condition),
+		Condition: mapper.JSON(req.Automation.Condition),
 
 		ActionType: req.Automation.ActionType.ToInt64(),
 
-		ActionConfig: mapper.NullifyEmptyJSON(req.Automation.ActionConfig),
+		ActionConfig: mapper.JSON(req.Automation.ActionConfig),
 
 		Enabled: req.Automation.Enabled,
 

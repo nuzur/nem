@@ -35,7 +35,10 @@ func (e Index) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func IndexFromJSON(data json.RawMessage) Index {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func IndexFromJSON(data []byte) Index {
 	entity := Index{}
 	if data == nil {
 		return entity
@@ -52,7 +55,7 @@ func IndexFromJSON(data json.RawMessage) Index {
 	return entity
 }
 
-func IndexSliceFromJSON(data json.RawMessage) []Index {
+func IndexSliceFromJSON(data []byte) []Index {
 	entity := []Index{}
 	if data == nil {
 		return entity

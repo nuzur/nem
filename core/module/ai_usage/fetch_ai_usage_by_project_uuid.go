@@ -54,6 +54,113 @@ func (m *module) FetchAiUsageByProjectUUID(
 			}, nil
 		}
 
+		timeFields := []string{
+			"created_at", "updated_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchAiUsageByProjectUUIDResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchAiUsageByProjectUUIDResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAiUsageByProjectUUIDOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchAiUsageByProjectUUIDOrderedByCreatedAtASCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByProjectUUIDResponse{}, err
+				}
+				return types.FetchAiUsageByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAiUsageByProjectUUIDOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchAiUsageByProjectUUIDOrderedByCreatedAtDESCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByProjectUUIDResponse{}, err
+				}
+				return types.FetchAiUsageByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAiUsageByProjectUUIDOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchAiUsageByProjectUUIDOrderedByUpdatedAtASCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByProjectUUIDResponse{}, err
+				}
+				return types.FetchAiUsageByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAiUsageByProjectUUIDOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchAiUsageByProjectUUIDOrderedByUpdatedAtDESCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByProjectUUIDResponse{}, err
+				}
+				return types.FetchAiUsageByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchAiUsageByProjectUUIDResponse{}, err

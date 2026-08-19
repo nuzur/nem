@@ -67,7 +67,10 @@ func (e FieldTypeConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FieldTypeConfigFromJSON(data json.RawMessage) FieldTypeConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FieldTypeConfigFromJSON(data []byte) FieldTypeConfig {
 	entity := FieldTypeConfig{}
 	if data == nil {
 		return entity
@@ -84,7 +87,7 @@ func FieldTypeConfigFromJSON(data json.RawMessage) FieldTypeConfig {
 	return entity
 }
 
-func FieldTypeConfigSliceFromJSON(data json.RawMessage) []FieldTypeConfig {
+func FieldTypeConfigSliceFromJSON(data []byte) []FieldTypeConfig {
 	entity := []FieldTypeConfig{}
 	if data == nil {
 		return entity

@@ -96,11 +96,11 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertUserCon
 
 		Type: req.UserConnection.Type.ToInt64(),
 
-		TypeConfig: user_connection_type_config.UserConnectionTypeConfigToJSON(req.UserConnection.TypeConfig),
+		TypeConfig: mapper.JSON(user_connection_type_config.UserConnectionTypeConfigToJSON(req.UserConnection.TypeConfig)),
 
 		DbSchema: req.UserConnection.DbSchema,
 
-		Executions: user_connection_execution.UserConnectionExecutionSliceToJSON(req.UserConnection.Executions),
+		Executions: mapper.JSON(user_connection_execution.UserConnectionExecutionSliceToJSON(req.UserConnection.Executions)),
 
 		Status: req.UserConnection.Status.ToInt64(),
 

@@ -77,7 +77,7 @@ func EntityStatusSliceToJSON(in []EntityStatus) json.RawMessage {
 	return jr
 }
 
-func JSONToEntityStatusSlice(in json.RawMessage) []EntityStatus {
+func JSONToEntityStatusSlice(in []byte) []EntityStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

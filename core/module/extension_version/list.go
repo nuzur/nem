@@ -8,6 +8,7 @@ import (
 	main_entity "github.com/nuzur/nem/core/entity/extension_version"
 	"github.com/nuzur/nem/core/module/extension_version/types"
 	repogen "github.com/nuzur/nem/core/repository/gen"
+	"github.com/nuzur/nem/core/repository/list"
 
 	"go.uber.org/zap"
 	"slices"
@@ -20,7 +21,7 @@ func (m *module) List(ctx context.Context,
 	reqPlusOne := request
 	reqPlusOne.PageSize = request.PageSize + 1
 
-	query, err := m.repository.BuildListEntityQuery(
+	query, args, err := m.repository.BuildListEntityQuery(
 		ctx,
 		reqPlusOne,
 		main_entity.ExtensionVersion{},
@@ -42,24 +43,40 @@ func (m *module) List(ctx context.Context,
 		querier = resolvedOpts.SQLTx
 	}
 	skipShared := resolvedOpts.SkipCache || resolvedOpts.SQLTx != nil
-	// Keyed on the BUILT QUERY, which already encodes the filter, the ordering,
-	// the projection and the page. Formatting the request instead put the
-	// *filtering.Declarations POINTER in the key — a fresh allocation on every
-	// request — so no two keys could ever match: the cache only grew, and the
-	// singleflight group never collapsed anything.
-	cacheKey := "ListExtensionVersion:" + query
+	// Keyed on the BUILT QUERY *and its arguments*, which together encode the
+	// filter, the ordering, the projection and the page. Formatting the request
+	// instead put the *filtering.Declarations POINTER in the key — a fresh
+	// allocation on every request — so no two keys could ever match: the cache
+	// only grew, and the singleflight group never collapsed anything.
+	//
+	// The args are in the key because the filter VALUES are no longer in the
+	// query text: two callers filtering on different values now build the SAME
+	// text, so keying on the text alone would serve one of them the other's rows
+	// — and the singleflight group shares this key, so it would not even take a
+	// cache hit to do it.
+	cacheKey := list.CacheKey("ListExtensionVersion", query, args)
 	if !skipShared {
 		if cached, found := m.cache.Get(cacheKey); found {
 			return cached.(types.ListResponse), nil
 		}
 	}
 
-	list := func() (any, error) {
+	// Named runList, not list: the `list` identifier now refers to the repository
+	// list package (CacheKey above), and a local of the same name would shadow it
+	// for anything added below.
+	runList := func() (any, error) {
 		var rows *sql.Rows
-		rows, err = querier.QueryContext(ctx, query)
+		// The args MUST be passed: the built query carries placeholders where the
+		// filter values used to be interpolated, so calling QueryContext without
+		// them is a bind error, and interpolating them back into the text is the
+		// injection this replaced.
+		rows, err = querier.QueryContext(ctx, query, args...)
 		if err != nil {
 
-			m.logger.Error("error in executing query for ListExtensionVersion", zap.String("query", query), zap.Error(err))
+			// The query text is logged; the ARGS are not, only their count. The
+			// values are caller data, and they are exactly what used to end up in
+			// the text — logging them would put them back in every log sink.
+			m.logger.Error("error in executing query for ListExtensionVersion", zap.String("query", query), zap.Int("args", len(args)), zap.Error(err))
 			return types.ListResponse{}, err
 		}
 		defer rows.Close()
@@ -118,9 +135,9 @@ func (m *module) List(ctx context.Context,
 	var v any
 	var listErr error
 	if skipShared {
-		v, listErr = list()
+		v, listErr = runList()
 	} else {
-		v, listErr, _ = m.sg.Do(cacheKey, list)
+		v, listErr, _ = m.sg.Do(cacheKey, runList)
 	}
 	if listErr != nil {
 		return types.ListResponse{}, listErr

@@ -46,7 +46,10 @@ func (e Entity) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func EntityFromJSON(data json.RawMessage) Entity {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func EntityFromJSON(data []byte) Entity {
 	entity := Entity{}
 	if data == nil {
 		return entity
@@ -63,7 +66,7 @@ func EntityFromJSON(data json.RawMessage) Entity {
 	return entity
 }
 
-func EntitySliceFromJSON(data json.RawMessage) []Entity {
+func EntitySliceFromJSON(data []byte) []Entity {
 	entity := []Entity{}
 	if data == nil {
 		return entity

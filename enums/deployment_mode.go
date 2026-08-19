@@ -77,7 +77,7 @@ func DeploymentModeSliceToJSON(in []DeploymentMode) json.RawMessage {
 	return jr
 }
 
-func JSONToDeploymentModeSlice(in json.RawMessage) []DeploymentMode {
+func JSONToDeploymentModeSlice(in []byte) []DeploymentMode {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

@@ -46,7 +46,10 @@ func (e ArrayTypeConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func ArrayTypeConfigFromJSON(data json.RawMessage) ArrayTypeConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ArrayTypeConfigFromJSON(data []byte) ArrayTypeConfig {
 	entity := ArrayTypeConfig{}
 	if data == nil {
 		return entity
@@ -63,7 +66,7 @@ func ArrayTypeConfigFromJSON(data json.RawMessage) ArrayTypeConfig {
 	return entity
 }
 
-func ArrayTypeConfigSliceFromJSON(data json.RawMessage) []ArrayTypeConfig {
+func ArrayTypeConfigSliceFromJSON(data []byte) []ArrayTypeConfig {
 	entity := []ArrayTypeConfig{}
 	if data == nil {
 		return entity

@@ -97,7 +97,7 @@ func DbTypePostgresConfigSslmodeSliceToJSON(in []DbTypePostgresConfigSslmode) js
 	return jr
 }
 
-func JSONToDbTypePostgresConfigSslmodeSlice(in json.RawMessage) []DbTypePostgresConfigSslmode {
+func JSONToDbTypePostgresConfigSslmodeSlice(in []byte) []DbTypePostgresConfigSslmode {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

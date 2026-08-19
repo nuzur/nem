@@ -37,7 +37,10 @@ func (e UserProjectVersion) PrimaryKeyValues() []string {
 	}
 }
 
-func UserProjectVersionFromJSON(data json.RawMessage) UserProjectVersion {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func UserProjectVersionFromJSON(data []byte) UserProjectVersion {
 	entity := UserProjectVersion{}
 	if data == nil {
 		return entity
@@ -54,7 +57,7 @@ func UserProjectVersionFromJSON(data json.RawMessage) UserProjectVersion {
 	return entity
 }
 
-func UserProjectVersionSliceFromJSON(data json.RawMessage) []UserProjectVersion {
+func UserProjectVersionSliceFromJSON(data []byte) []UserProjectVersion {
 	entity := []UserProjectVersion{}
 	if data == nil {
 		return entity

@@ -54,6 +54,113 @@ func (m *module) FetchExtensionByVersion(
 			}, nil
 		}
 
+		timeFields := []string{
+			"updated_at", "created_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchExtensionByVersionResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchExtensionByVersionResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchExtensionByVersionOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchExtensionByVersionOrderedByUpdatedAtASCParams{
+						Version: req.Version,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionByVersionResponse{}, err
+				}
+				return types.FetchExtensionByVersionResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchExtensionByVersionOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchExtensionByVersionOrderedByUpdatedAtDESCParams{
+						Version: req.Version,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionByVersionResponse{}, err
+				}
+				return types.FetchExtensionByVersionResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchExtensionByVersionOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchExtensionByVersionOrderedByCreatedAtASCParams{
+						Version: req.Version,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionByVersionResponse{}, err
+				}
+				return types.FetchExtensionByVersionResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchExtensionByVersionOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchExtensionByVersionOrderedByCreatedAtDESCParams{
+						Version: req.Version,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchExtensionByVersionResponse{}, err
+				}
+				return types.FetchExtensionByVersionResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchExtensionByVersionResponse{}, err

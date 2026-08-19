@@ -40,6 +40,33 @@ type JoinParams struct {
 	JoinWhereClauses string
 }
 
+// queryArgs collects the values bound to a list query while its text is built.
+//
+// No caller-supplied byte is ever part of the statement text: every value a
+// filter carries is appended here and referenced from the SQL by a placeholder.
+// That is not only the injection fix — it is also what stops squash() from
+// collapsing whitespace INSIDE a value, and what stops %f from rounding a float
+// filter to six decimals.
+//
+// bind returns the placeholder for the value it just appended. Postgres numbers
+// its placeholders ($1, $2, ...) and the numbers must match the ARGUMENT order,
+// so this is only correct because the clause walker emits text in the same order
+// it binds: buildWhereClauses recurses left, then right, then formats
+// "(left op right)", and no other part of the query binds anything — ORDER BY
+// and the JSON_TABLE/LATERAL fragments are built from schema identifiers alone,
+// and LIMIT/OFFSET are ints formatted with %d.
+type queryArgs struct{ values []any }
+
+func newQueryArgs() *queryArgs { return &queryArgs{} }
+
+// bind appends v and returns the placeholder that refers to it.
+func (a *queryArgs) bind(v any) string {
+	a.values = append(a.values, v)
+	return placeholder(len(a.values))
+}
+
+func (a *queryArgs) list() []any { return a.values }
+
 type ListEntity interface {
 	FieldIdentifierToTypeMap() map[string]entitytypes.FieldType
 	OrderedFieldIdentifiers() []string
@@ -82,6 +109,12 @@ type SingleClauseRequest struct {
 	isArray                  bool
 	arrayType                entitytypes.FieldType
 	entity                   ListEntity
+	// args is the binder every clause builder appends its VALUES to; the clause
+	// text only ever carries the placeholder bind() hands back. Always non-nil:
+	// BuildListEntityQuery allocates it and sets it on every request it builds,
+	// including the ones buildOrderByClause makes, so no builder has to guard a
+	// nil case.
+	args *queryArgs
 }
 
 type SingleClauseResponse struct {

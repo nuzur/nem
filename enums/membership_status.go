@@ -97,7 +97,7 @@ func MembershipStatusSliceToJSON(in []MembershipStatus) json.RawMessage {
 	return jr
 }
 
-func JSONToMembershipStatusSlice(in json.RawMessage) []MembershipStatus {
+func JSONToMembershipStatusSlice(in []byte) []MembershipStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

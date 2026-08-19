@@ -42,7 +42,10 @@ func (e Relationship) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func RelationshipFromJSON(data json.RawMessage) Relationship {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func RelationshipFromJSON(data []byte) Relationship {
 	entity := Relationship{}
 	if data == nil {
 		return entity
@@ -59,7 +62,7 @@ func RelationshipFromJSON(data json.RawMessage) Relationship {
 	return entity
 }
 
-func RelationshipSliceFromJSON(data json.RawMessage) []Relationship {
+func RelationshipSliceFromJSON(data []byte) []Relationship {
 	entity := []Relationship{}
 	if data == nil {
 		return entity

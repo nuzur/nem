@@ -27,7 +27,10 @@ func (e FieldTypeDateConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FieldTypeDateConfigFromJSON(data json.RawMessage) FieldTypeDateConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FieldTypeDateConfigFromJSON(data []byte) FieldTypeDateConfig {
 	entity := FieldTypeDateConfig{}
 	if data == nil {
 		return entity
@@ -44,7 +47,7 @@ func FieldTypeDateConfigFromJSON(data json.RawMessage) FieldTypeDateConfig {
 	return entity
 }
 
-func FieldTypeDateConfigSliceFromJSON(data json.RawMessage) []FieldTypeDateConfig {
+func FieldTypeDateConfigSliceFromJSON(data []byte) []FieldTypeDateConfig {
 	entity := []FieldTypeDateConfig{}
 	if data == nil {
 		return entity

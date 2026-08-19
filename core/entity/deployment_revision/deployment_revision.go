@@ -48,7 +48,10 @@ func (e DeploymentRevision) PrimaryKeyValues() []string {
 	}
 }
 
-func DeploymentRevisionFromJSON(data json.RawMessage) DeploymentRevision {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func DeploymentRevisionFromJSON(data []byte) DeploymentRevision {
 	entity := DeploymentRevision{}
 	if data == nil {
 		return entity
@@ -65,7 +68,7 @@ func DeploymentRevisionFromJSON(data json.RawMessage) DeploymentRevision {
 	return entity
 }
 
-func DeploymentRevisionSliceFromJSON(data json.RawMessage) []DeploymentRevision {
+func DeploymentRevisionSliceFromJSON(data []byte) []DeploymentRevision {
 	entity := []DeploymentRevision{}
 	if data == nil {
 		return entity

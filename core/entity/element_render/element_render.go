@@ -26,7 +26,10 @@ func (e ElementRender) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func ElementRenderFromJSON(data json.RawMessage) ElementRender {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ElementRenderFromJSON(data []byte) ElementRender {
 	entity := ElementRender{}
 	if data == nil {
 		return entity
@@ -43,7 +46,7 @@ func ElementRenderFromJSON(data json.RawMessage) ElementRender {
 	return entity
 }
 
-func ElementRenderSliceFromJSON(data json.RawMessage) []ElementRender {
+func ElementRenderSliceFromJSON(data []byte) []ElementRender {
 	entity := []ElementRender{}
 	if data == nil {
 		return entity

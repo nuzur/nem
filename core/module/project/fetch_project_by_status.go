@@ -54,6 +54,113 @@ func (m *module) FetchProjectByStatus(
 			}, nil
 		}
 
+		timeFields := []string{
+			"updated_at", "created_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchProjectByStatusResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchProjectByStatusResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchProjectByStatusOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchProjectByStatusOrderedByUpdatedAtASCParams{
+						Status: req.Status.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchProjectByStatusResponse{}, err
+				}
+				return types.FetchProjectByStatusResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchProjectByStatusOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchProjectByStatusOrderedByUpdatedAtDESCParams{
+						Status: req.Status.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchProjectByStatusResponse{}, err
+				}
+				return types.FetchProjectByStatusResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchProjectByStatusOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchProjectByStatusOrderedByCreatedAtASCParams{
+						Status: req.Status.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchProjectByStatusResponse{}, err
+				}
+				return types.FetchProjectByStatusResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchProjectByStatusOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchProjectByStatusOrderedByCreatedAtDESCParams{
+						Status: req.Status.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchProjectByStatusResponse{}, err
+				}
+				return types.FetchProjectByStatusResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchProjectByStatusResponse{}, err

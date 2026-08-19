@@ -25,7 +25,10 @@ func (e UserConnectionLocalConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func UserConnectionLocalConfigFromJSON(data json.RawMessage) UserConnectionLocalConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func UserConnectionLocalConfigFromJSON(data []byte) UserConnectionLocalConfig {
 	entity := UserConnectionLocalConfig{}
 	if data == nil {
 		return entity
@@ -42,7 +45,7 @@ func UserConnectionLocalConfigFromJSON(data json.RawMessage) UserConnectionLocal
 	return entity
 }
 
-func UserConnectionLocalConfigSliceFromJSON(data json.RawMessage) []UserConnectionLocalConfig {
+func UserConnectionLocalConfigSliceFromJSON(data []byte) []UserConnectionLocalConfig {
 	entity := []UserConnectionLocalConfig{}
 	if data == nil {
 		return entity

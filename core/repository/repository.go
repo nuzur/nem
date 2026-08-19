@@ -26,6 +26,10 @@ func New(db *sql.DB) *Implementation {
 	}
 }
 
-func (i *Implementation) BuildListEntityQuery(ctx context.Context, request list.ListRequest, entity list.ListEntity, onlyCount bool) (string, error) {
+// BuildListEntityQuery returns the query text and the arguments bound into it.
+// The two must travel together: the text carries only placeholders now, so
+// running it without the args is a "bind message supplies 0 parameters" error,
+// not a query with the filter silently ignored.
+func (i *Implementation) BuildListEntityQuery(ctx context.Context, request list.ListRequest, entity list.ListEntity, onlyCount bool) (string, []any, error) {
 	return i.List.BuildListEntityQuery(ctx, request, entity, onlyCount)
 }

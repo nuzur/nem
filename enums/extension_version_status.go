@@ -77,7 +77,7 @@ func ExtensionVersionStatusSliceToJSON(in []ExtensionVersionStatus) json.RawMess
 	return jr
 }
 
-func JSONToExtensionVersionStatusSlice(in json.RawMessage) []ExtensionVersionStatus {
+func JSONToExtensionVersionStatusSlice(in []byte) []ExtensionVersionStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

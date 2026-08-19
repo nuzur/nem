@@ -26,7 +26,10 @@ func (e DbTypeConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func DbTypeConfigFromJSON(data json.RawMessage) DbTypeConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func DbTypeConfigFromJSON(data []byte) DbTypeConfig {
 	entity := DbTypeConfig{}
 	if data == nil {
 		return entity
@@ -43,7 +46,7 @@ func DbTypeConfigFromJSON(data json.RawMessage) DbTypeConfig {
 	return entity
 }
 
-func DbTypeConfigSliceFromJSON(data json.RawMessage) []DbTypeConfig {
+func DbTypeConfigSliceFromJSON(data []byte) []DbTypeConfig {
 	entity := []DbTypeConfig{}
 	if data == nil {
 		return entity

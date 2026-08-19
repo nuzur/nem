@@ -72,7 +72,7 @@ func AiUsageProviderSliceToJSON(in []AiUsageProvider) json.RawMessage {
 	return jr
 }
 
-func JSONToAiUsageProviderSlice(in json.RawMessage) []AiUsageProvider {
+func JSONToAiUsageProviderSlice(in []byte) []AiUsageProvider {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

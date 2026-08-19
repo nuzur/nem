@@ -91,7 +91,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertAutomat
 
 		ChangeRequestUUID: req.AutomationEvent.ChangeRequestUUID.String(),
 
-		Payload: mapper.NullifyEmptyJSON(req.AutomationEvent.Payload),
+		Payload: mapper.JSON(req.AutomationEvent.Payload),
 
 		Status: req.AutomationEvent.Status.ToInt64(),
 

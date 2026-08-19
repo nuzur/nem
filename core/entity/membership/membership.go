@@ -37,7 +37,10 @@ func (e Membership) PrimaryKeyValues() []string {
 	}
 }
 
-func MembershipFromJSON(data json.RawMessage) Membership {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func MembershipFromJSON(data []byte) Membership {
 	entity := Membership{}
 	if data == nil {
 		return entity
@@ -54,7 +57,7 @@ func MembershipFromJSON(data json.RawMessage) Membership {
 	return entity
 }
 
-func MembershipSliceFromJSON(data json.RawMessage) []Membership {
+func MembershipSliceFromJSON(data []byte) []Membership {
 	entity := []Membership{}
 	if data == nil {
 		return entity

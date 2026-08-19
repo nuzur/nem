@@ -27,7 +27,10 @@ func (e ObjectStoreS3TypeConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func ObjectStoreS3TypeConfigFromJSON(data json.RawMessage) ObjectStoreS3TypeConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ObjectStoreS3TypeConfigFromJSON(data []byte) ObjectStoreS3TypeConfig {
 	entity := ObjectStoreS3TypeConfig{}
 	if data == nil {
 		return entity
@@ -44,7 +47,7 @@ func ObjectStoreS3TypeConfigFromJSON(data json.RawMessage) ObjectStoreS3TypeConf
 	return entity
 }
 
-func ObjectStoreS3TypeConfigSliceFromJSON(data json.RawMessage) []ObjectStoreS3TypeConfig {
+func ObjectStoreS3TypeConfigSliceFromJSON(data []byte) []ObjectStoreS3TypeConfig {
 	entity := []ObjectStoreS3TypeConfig{}
 	if data == nil {
 		return entity

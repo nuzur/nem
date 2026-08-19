@@ -23,7 +23,10 @@ func (e FieldTypeEmailConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FieldTypeEmailConfigFromJSON(data json.RawMessage) FieldTypeEmailConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FieldTypeEmailConfigFromJSON(data []byte) FieldTypeEmailConfig {
 	entity := FieldTypeEmailConfig{}
 	if data == nil {
 		return entity
@@ -40,7 +43,7 @@ func FieldTypeEmailConfigFromJSON(data json.RawMessage) FieldTypeEmailConfig {
 	return entity
 }
 
-func FieldTypeEmailConfigSliceFromJSON(data json.RawMessage) []FieldTypeEmailConfig {
+func FieldTypeEmailConfigSliceFromJSON(data []byte) []FieldTypeEmailConfig {
 	entity := []FieldTypeEmailConfig{}
 	if data == nil {
 		return entity

@@ -29,7 +29,10 @@ func (e LocalAgentConnection) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func LocalAgentConnectionFromJSON(data json.RawMessage) LocalAgentConnection {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func LocalAgentConnectionFromJSON(data []byte) LocalAgentConnection {
 	entity := LocalAgentConnection{}
 	if data == nil {
 		return entity
@@ -46,7 +49,7 @@ func LocalAgentConnectionFromJSON(data json.RawMessage) LocalAgentConnection {
 	return entity
 }
 
-func LocalAgentConnectionSliceFromJSON(data json.RawMessage) []LocalAgentConnection {
+func LocalAgentConnectionSliceFromJSON(data []byte) []LocalAgentConnection {
 	entity := []LocalAgentConnection{}
 	if data == nil {
 		return entity

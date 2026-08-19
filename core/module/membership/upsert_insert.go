@@ -11,6 +11,8 @@ import (
 	"github.com/gofrs/uuid"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Insert(
@@ -89,7 +91,7 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertMembers
 
 		StartDate: req.Membership.StartDate,
 
-		BillingMetadata: req.Membership.BillingMetadata,
+		BillingMetadata: mapper.JSON(req.Membership.BillingMetadata),
 
 		Status: req.Membership.Status.ToInt64(),
 

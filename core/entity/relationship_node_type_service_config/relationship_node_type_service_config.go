@@ -24,7 +24,10 @@ func (e RelationshipNodeTypeServiceConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func RelationshipNodeTypeServiceConfigFromJSON(data json.RawMessage) RelationshipNodeTypeServiceConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func RelationshipNodeTypeServiceConfigFromJSON(data []byte) RelationshipNodeTypeServiceConfig {
 	entity := RelationshipNodeTypeServiceConfig{}
 	if data == nil {
 		return entity
@@ -41,7 +44,7 @@ func RelationshipNodeTypeServiceConfigFromJSON(data json.RawMessage) Relationshi
 	return entity
 }
 
-func RelationshipNodeTypeServiceConfigSliceFromJSON(data json.RawMessage) []RelationshipNodeTypeServiceConfig {
+func RelationshipNodeTypeServiceConfigSliceFromJSON(data []byte) []RelationshipNodeTypeServiceConfig {
 	entity := []RelationshipNodeTypeServiceConfig{}
 	if data == nil {
 		return entity

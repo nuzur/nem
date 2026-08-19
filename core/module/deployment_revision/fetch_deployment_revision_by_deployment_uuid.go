@@ -54,6 +54,76 @@ func (m *module) FetchDeploymentRevisionByDeploymentUUID(
 			}, nil
 		}
 
+		timeFields := []string{
+			"deployed_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchDeploymentRevisionByDeploymentUUIDResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchDeploymentRevisionByDeploymentUUIDResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "deployed_at":
+			if sort == "ASC" {
+				models, err := queries.FetchDeploymentRevisionByDeploymentUUIDOrderedByDeployedAtASC(
+					ctx,
+					nemdb.FetchDeploymentRevisionByDeploymentUUIDOrderedByDeployedAtASCParams{
+						DeploymentUUID: req.DeploymentUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchDeploymentRevisionByDeploymentUUIDResponse{}, err
+				}
+				return types.FetchDeploymentRevisionByDeploymentUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchDeploymentRevisionByDeploymentUUIDOrderedByDeployedAtDESC(
+					ctx,
+					nemdb.FetchDeploymentRevisionByDeploymentUUIDOrderedByDeployedAtDESCParams{
+						DeploymentUUID: req.DeploymentUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchDeploymentRevisionByDeploymentUUIDResponse{}, err
+				}
+				return types.FetchDeploymentRevisionByDeploymentUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchDeploymentRevisionByDeploymentUUIDResponse{}, err

@@ -24,7 +24,10 @@ func (e EntityDataManagementConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func EntityDataManagementConfigFromJSON(data json.RawMessage) EntityDataManagementConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func EntityDataManagementConfigFromJSON(data []byte) EntityDataManagementConfig {
 	entity := EntityDataManagementConfig{}
 	if data == nil {
 		return entity
@@ -41,7 +44,7 @@ func EntityDataManagementConfigFromJSON(data json.RawMessage) EntityDataManageme
 	return entity
 }
 
-func EntityDataManagementConfigSliceFromJSON(data json.RawMessage) []EntityDataManagementConfig {
+func EntityDataManagementConfigSliceFromJSON(data []byte) []EntityDataManagementConfig {
 	entity := []EntityDataManagementConfig{}
 	if data == nil {
 		return entity

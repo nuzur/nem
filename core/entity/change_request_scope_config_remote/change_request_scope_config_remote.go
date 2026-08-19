@@ -26,7 +26,10 @@ func (e ChangeRequestScopeConfigRemote) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func ChangeRequestScopeConfigRemoteFromJSON(data json.RawMessage) ChangeRequestScopeConfigRemote {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ChangeRequestScopeConfigRemoteFromJSON(data []byte) ChangeRequestScopeConfigRemote {
 	entity := ChangeRequestScopeConfigRemote{}
 	if data == nil {
 		return entity
@@ -43,7 +46,7 @@ func ChangeRequestScopeConfigRemoteFromJSON(data json.RawMessage) ChangeRequestS
 	return entity
 }
 
-func ChangeRequestScopeConfigRemoteSliceFromJSON(data json.RawMessage) []ChangeRequestScopeConfigRemote {
+func ChangeRequestScopeConfigRemoteSliceFromJSON(data []byte) []ChangeRequestScopeConfigRemote {
 	entity := []ChangeRequestScopeConfigRemote{}
 	if data == nil {
 		return entity

@@ -30,7 +30,10 @@ func (e DeploymentCodegen) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func DeploymentCodegenFromJSON(data json.RawMessage) DeploymentCodegen {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func DeploymentCodegenFromJSON(data []byte) DeploymentCodegen {
 	entity := DeploymentCodegen{}
 	if data == nil {
 		return entity
@@ -47,7 +50,7 @@ func DeploymentCodegenFromJSON(data json.RawMessage) DeploymentCodegen {
 	return entity
 }
 
-func DeploymentCodegenSliceFromJSON(data json.RawMessage) []DeploymentCodegen {
+func DeploymentCodegenSliceFromJSON(data []byte) []DeploymentCodegen {
 	entity := []DeploymentCodegen{}
 	if data == nil {
 		return entity

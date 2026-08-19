@@ -77,7 +77,7 @@ func UserProjectVersionStatusSliceToJSON(in []UserProjectVersionStatus) json.Raw
 	return jr
 }
 
-func JSONToUserProjectVersionStatusSlice(in json.RawMessage) []UserProjectVersionStatus {
+func JSONToUserProjectVersionStatusSlice(in []byte) []UserProjectVersionStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

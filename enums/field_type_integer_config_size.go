@@ -97,7 +97,7 @@ func FieldTypeIntegerConfigSizeSliceToJSON(in []FieldTypeIntegerConfigSize) json
 	return jr
 }
 
-func JSONToFieldTypeIntegerConfigSizeSlice(in json.RawMessage) []FieldTypeIntegerConfigSize {
+func JSONToFieldTypeIntegerConfigSizeSlice(in []byte) []FieldTypeIntegerConfigSize {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

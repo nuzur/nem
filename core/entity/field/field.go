@@ -49,7 +49,10 @@ func (e Field) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FieldFromJSON(data json.RawMessage) Field {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FieldFromJSON(data []byte) Field {
 	entity := Field{}
 	if data == nil {
 		return entity
@@ -66,7 +69,7 @@ func FieldFromJSON(data json.RawMessage) Field {
 	return entity
 }
 
-func FieldSliceFromJSON(data json.RawMessage) []Field {
+func FieldSliceFromJSON(data []byte) []Field {
 	entity := []Field{}
 	if data == nil {
 		return entity

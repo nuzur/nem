@@ -28,7 +28,10 @@ func (e ObjectStoreR2TypeConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func ObjectStoreR2TypeConfigFromJSON(data json.RawMessage) ObjectStoreR2TypeConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ObjectStoreR2TypeConfigFromJSON(data []byte) ObjectStoreR2TypeConfig {
 	entity := ObjectStoreR2TypeConfig{}
 	if data == nil {
 		return entity
@@ -45,7 +48,7 @@ func ObjectStoreR2TypeConfigFromJSON(data json.RawMessage) ObjectStoreR2TypeConf
 	return entity
 }
 
-func ObjectStoreR2TypeConfigSliceFromJSON(data json.RawMessage) []ObjectStoreR2TypeConfig {
+func ObjectStoreR2TypeConfigSliceFromJSON(data []byte) []ObjectStoreR2TypeConfig {
 	entity := []ObjectStoreR2TypeConfig{}
 	if data == nil {
 		return entity

@@ -92,7 +92,7 @@ func RelationshipReferentialActionSliceToJSON(in []RelationshipReferentialAction
 	return jr
 }
 
-func JSONToRelationshipReferentialActionSlice(in json.RawMessage) []RelationshipReferentialAction {
+func JSONToRelationshipReferentialActionSlice(in []byte) []RelationshipReferentialAction {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

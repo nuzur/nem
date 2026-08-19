@@ -77,7 +77,7 @@ func UserConnectionStatusSliceToJSON(in []UserConnectionStatus) json.RawMessage 
 	return jr
 }
 
-func JSONToUserConnectionStatusSlice(in json.RawMessage) []UserConnectionStatus {
+func JSONToUserConnectionStatusSlice(in []byte) []UserConnectionStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

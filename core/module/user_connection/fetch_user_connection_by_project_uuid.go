@@ -54,6 +54,113 @@ func (m *module) FetchUserConnectionByProjectUUID(
 			}, nil
 		}
 
+		timeFields := []string{
+			"updated_at", "created_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchUserConnectionByProjectUUIDResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchUserConnectionByProjectUUIDResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserConnectionByProjectUUIDOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchUserConnectionByProjectUUIDOrderedByUpdatedAtASCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserConnectionByProjectUUIDResponse{}, err
+				}
+				return types.FetchUserConnectionByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserConnectionByProjectUUIDOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchUserConnectionByProjectUUIDOrderedByUpdatedAtDESCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserConnectionByProjectUUIDResponse{}, err
+				}
+				return types.FetchUserConnectionByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserConnectionByProjectUUIDOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchUserConnectionByProjectUUIDOrderedByCreatedAtASCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserConnectionByProjectUUIDResponse{}, err
+				}
+				return types.FetchUserConnectionByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserConnectionByProjectUUIDOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchUserConnectionByProjectUUIDOrderedByCreatedAtDESCParams{
+						ProjectUUID: req.ProjectUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserConnectionByProjectUUIDResponse{}, err
+				}
+				return types.FetchUserConnectionByProjectUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchUserConnectionByProjectUUIDResponse{}, err

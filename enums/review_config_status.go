@@ -77,7 +77,7 @@ func ReviewConfigStatusSliceToJSON(in []ReviewConfigStatus) json.RawMessage {
 	return jr
 }
 
-func JSONToReviewConfigStatusSlice(in json.RawMessage) []ReviewConfigStatus {
+func JSONToReviewConfigStatusSlice(in []byte) []ReviewConfigStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

@@ -34,7 +34,10 @@ func (e Store) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func StoreFromJSON(data json.RawMessage) Store {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func StoreFromJSON(data []byte) Store {
 	entity := Store{}
 	if data == nil {
 		return entity
@@ -51,7 +54,7 @@ func StoreFromJSON(data json.RawMessage) Store {
 	return entity
 }
 
-func StoreSliceFromJSON(data json.RawMessage) []Store {
+func StoreSliceFromJSON(data []byte) []Store {
 	entity := []Store{}
 	if data == nil {
 		return entity

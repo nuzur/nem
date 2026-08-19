@@ -33,7 +33,10 @@ func (e RelationshipNode) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func RelationshipNodeFromJSON(data json.RawMessage) RelationshipNode {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func RelationshipNodeFromJSON(data []byte) RelationshipNode {
 	entity := RelationshipNode{}
 	if data == nil {
 		return entity
@@ -50,7 +53,7 @@ func RelationshipNodeFromJSON(data json.RawMessage) RelationshipNode {
 	return entity
 }
 
-func RelationshipNodeSliceFromJSON(data json.RawMessage) []RelationshipNode {
+func RelationshipNodeSliceFromJSON(data []byte) []RelationshipNode {
 	entity := []RelationshipNode{}
 	if data == nil {
 		return entity

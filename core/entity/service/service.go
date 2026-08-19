@@ -36,7 +36,10 @@ func (e Service) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func ServiceFromJSON(data json.RawMessage) Service {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ServiceFromJSON(data []byte) Service {
 	entity := Service{}
 	if data == nil {
 		return entity
@@ -53,7 +56,7 @@ func ServiceFromJSON(data json.RawMessage) Service {
 	return entity
 }
 
-func ServiceSliceFromJSON(data json.RawMessage) []Service {
+func ServiceSliceFromJSON(data []byte) []Service {
 	entity := []Service{}
 	if data == nil {
 		return entity

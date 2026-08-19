@@ -25,7 +25,10 @@ func (e FieldTypeEnumConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func FieldTypeEnumConfigFromJSON(data json.RawMessage) FieldTypeEnumConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func FieldTypeEnumConfigFromJSON(data []byte) FieldTypeEnumConfig {
 	entity := FieldTypeEnumConfig{}
 	if data == nil {
 		return entity
@@ -42,7 +45,7 @@ func FieldTypeEnumConfigFromJSON(data json.RawMessage) FieldTypeEnumConfig {
 	return entity
 }
 
-func FieldTypeEnumConfigSliceFromJSON(data json.RawMessage) []FieldTypeEnumConfig {
+func FieldTypeEnumConfigSliceFromJSON(data []byte) []FieldTypeEnumConfig {
 	entity := []FieldTypeEnumConfig{}
 	if data == nil {
 		return entity

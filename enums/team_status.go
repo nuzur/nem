@@ -77,7 +77,7 @@ func TeamStatusSliceToJSON(in []TeamStatus) json.RawMessage {
 	return jr
 }
 
-func JSONToTeamStatusSlice(in json.RawMessage) []TeamStatus {
+func JSONToTeamStatusSlice(in []byte) []TeamStatus {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

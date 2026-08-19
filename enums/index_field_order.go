@@ -77,7 +77,7 @@ func IndexFieldOrderSliceToJSON(in []IndexFieldOrder) json.RawMessage {
 	return jr
 }
 
-func JSONToIndexFieldOrderSlice(in json.RawMessage) []IndexFieldOrder {
+func JSONToIndexFieldOrderSlice(in []byte) []IndexFieldOrder {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

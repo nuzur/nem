@@ -10,6 +10,8 @@ import (
 	nemdb "github.com/nuzur/nem/core/repository/gen"
 
 	"time"
+
+	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 func (m *module) Update(
@@ -94,7 +96,7 @@ func mapUpsertRequestToUpdateParams(req types.UpsertRequest) nemdb.UpdateMembers
 
 		StartDate: req.Membership.StartDate,
 
-		BillingMetadata: req.Membership.BillingMetadata,
+		BillingMetadata: mapper.JSON(req.Membership.BillingMetadata),
 
 		Status: req.Membership.Status.ToInt64(),
 

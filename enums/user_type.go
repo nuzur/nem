@@ -77,7 +77,7 @@ func UserTypeSliceToJSON(in []UserType) json.RawMessage {
 	return jr
 }
 
-func JSONToUserTypeSlice(in json.RawMessage) []UserType {
+func JSONToUserTypeSlice(in []byte) []UserType {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

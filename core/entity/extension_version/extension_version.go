@@ -42,7 +42,10 @@ func (e ExtensionVersion) PrimaryKeyValues() []string {
 	}
 }
 
-func ExtensionVersionFromJSON(data json.RawMessage) ExtensionVersion {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func ExtensionVersionFromJSON(data []byte) ExtensionVersion {
 	entity := ExtensionVersion{}
 	if data == nil {
 		return entity
@@ -59,7 +62,7 @@ func ExtensionVersionFromJSON(data json.RawMessage) ExtensionVersion {
 	return entity
 }
 
-func ExtensionVersionSliceFromJSON(data json.RawMessage) []ExtensionVersion {
+func ExtensionVersionSliceFromJSON(data []byte) []ExtensionVersion {
 	entity := []ExtensionVersion{}
 	if data == nil {
 		return entity

@@ -26,7 +26,7 @@ func mapModelToEntity(m nemdb.AutomationEvent) main_entity.AutomationEvent {
 		AutomationUUID:    mapper.StringToUUID(m.AutomationUUID),
 		ProjectUUID:       mapper.StringToUUID(m.ProjectUUID),
 		ChangeRequestUUID: mapper.StringToUUID(m.ChangeRequestUUID),
-		Payload:           m.Payload,
+		Payload:           mapper.JSONToRawMessage(m.Payload),
 		Status:            enums.AutomationEventStatus(m.Status),
 		Attempts:          int64(m.Attempts),
 		NextAttemptAt:     null.NewTime(m.NextAttemptAt.Time, m.NextAttemptAt.Valid),

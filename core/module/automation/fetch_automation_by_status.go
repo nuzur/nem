@@ -54,6 +54,113 @@ func (m *module) FetchAutomationByStatus(
 			}, nil
 		}
 
+		timeFields := []string{
+			"created_at", "updated_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchAutomationByStatusResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchAutomationByStatusResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAutomationByStatusOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchAutomationByStatusOrderedByCreatedAtASCParams{
+						Status: req.Status.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationByStatusResponse{}, err
+				}
+				return types.FetchAutomationByStatusResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAutomationByStatusOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchAutomationByStatusOrderedByCreatedAtDESCParams{
+						Status: req.Status.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationByStatusResponse{}, err
+				}
+				return types.FetchAutomationByStatusResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAutomationByStatusOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchAutomationByStatusOrderedByUpdatedAtASCParams{
+						Status: req.Status.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationByStatusResponse{}, err
+				}
+				return types.FetchAutomationByStatusResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAutomationByStatusOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchAutomationByStatusOrderedByUpdatedAtDESCParams{
+						Status: req.Status.ToInt64(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAutomationByStatusResponse{}, err
+				}
+				return types.FetchAutomationByStatusResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchAutomationByStatusResponse{}, err

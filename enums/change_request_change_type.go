@@ -77,7 +77,7 @@ func ChangeRequestChangeTypeSliceToJSON(in []ChangeRequestChangeType) json.RawMe
 	return jr
 }
 
-func JSONToChangeRequestChangeTypeSlice(in json.RawMessage) []ChangeRequestChangeType {
+func JSONToChangeRequestChangeTypeSlice(in []byte) []ChangeRequestChangeType {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {

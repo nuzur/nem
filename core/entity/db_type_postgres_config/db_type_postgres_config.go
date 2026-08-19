@@ -25,7 +25,10 @@ func (e DbTypePostgresConfig) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func DbTypePostgresConfigFromJSON(data json.RawMessage) DbTypePostgresConfig {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func DbTypePostgresConfigFromJSON(data []byte) DbTypePostgresConfig {
 	entity := DbTypePostgresConfig{}
 	if data == nil {
 		return entity
@@ -42,7 +45,7 @@ func DbTypePostgresConfigFromJSON(data json.RawMessage) DbTypePostgresConfig {
 	return entity
 }
 
-func DbTypePostgresConfigSliceFromJSON(data json.RawMessage) []DbTypePostgresConfig {
+func DbTypePostgresConfigSliceFromJSON(data []byte) []DbTypePostgresConfig {
 	entity := []DbTypePostgresConfig{}
 	if data == nil {
 		return entity

@@ -33,7 +33,10 @@ func (e Enviorment) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func EnviormentFromJSON(data json.RawMessage) Enviorment {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func EnviormentFromJSON(data []byte) Enviorment {
 	entity := Enviorment{}
 	if data == nil {
 		return entity
@@ -50,7 +53,7 @@ func EnviormentFromJSON(data json.RawMessage) Enviorment {
 	return entity
 }
 
-func EnviormentSliceFromJSON(data json.RawMessage) []Enviorment {
+func EnviormentSliceFromJSON(data []byte) []Enviorment {
 	entity := []Enviorment{}
 	if data == nil {
 		return entity

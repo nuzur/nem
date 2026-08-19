@@ -54,6 +54,113 @@ func (m *module) FetchUserProjectByUserEmail(
 			}, nil
 		}
 
+		timeFields := []string{
+			"updated_at", "created_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchUserProjectByUserEmailResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchUserProjectByUserEmailResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserProjectByUserEmailOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchUserProjectByUserEmailOrderedByUpdatedAtASCParams{
+						UserEmail: req.UserEmail,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserProjectByUserEmailResponse{}, err
+				}
+				return types.FetchUserProjectByUserEmailResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserProjectByUserEmailOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchUserProjectByUserEmailOrderedByUpdatedAtDESCParams{
+						UserEmail: req.UserEmail,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserProjectByUserEmailResponse{}, err
+				}
+				return types.FetchUserProjectByUserEmailResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchUserProjectByUserEmailOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchUserProjectByUserEmailOrderedByCreatedAtASCParams{
+						UserEmail: req.UserEmail,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserProjectByUserEmailResponse{}, err
+				}
+				return types.FetchUserProjectByUserEmailResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchUserProjectByUserEmailOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchUserProjectByUserEmailOrderedByCreatedAtDESCParams{
+						UserEmail: req.UserEmail,
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchUserProjectByUserEmailResponse{}, err
+				}
+				return types.FetchUserProjectByUserEmailResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchUserProjectByUserEmailResponse{}, err

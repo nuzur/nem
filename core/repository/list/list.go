@@ -4,8 +4,11 @@ package list
 
 import (
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
 	"errors"
 	"fmt"
+	"io"
 	"slices"
 	"strings"
 
@@ -26,14 +29,20 @@ func (i *Implementation) BuildListEntityQuery(
 	request ListRequest,
 	entity ListEntity,
 	onlyCount bool,
-) (string, error) {
+) (string, []any, error) {
+
+	// Every VALUE the filter carries is bound here and referenced from the query
+	// text by a placeholder; the returned args go to QueryContext alongside the
+	// query. Interpolating them into the text instead is what let a value
+	// containing a quote close the literal and continue the statement.
+	args := newQueryArgs()
 
 	includeColumns := request.GetIncludeFields()
 	excludeColumns := request.GetExcludeFields()
 
 	columnsFinal := fmt.Sprintf("%s.*", quoteIdent(entity.EntityIdentifier()))
 	if len(includeColumns) > 0 && len(excludeColumns) > 0 {
-		return "", errors.New("cannot use includeColumns and excludeColumns at the same time")
+		return "", nil, errors.New("cannot use includeColumns and excludeColumns at the same time")
 	}
 	if len(includeColumns) > 0 {
 		columns := []string{}
@@ -68,27 +77,39 @@ func (i *Implementation) BuildListEntityQuery(
 			entity,
 			request.GetFilteringDeclarations(),
 			request.GetEnumValues(),
-			jsonTables)
+			jsonTables,
+			args)
 		if err != nil {
 			// A clause the builder cannot express is the CALLER's problem, and it
 			// is reported as one. It must never fall through: an unreported
 			// failure here left whereClause empty and emitted `... WHERE  LIMIT
 			// 10 OFFSET 0`, i.e. a syntax error surfacing as a 500.
-			return "", &InvalidRequestError{Op: "filter", Err: err}
+			return "", nil, &InvalidRequestError{Op: "filter", Err: err}
 		}
 	}
 
 	orderByClause := ""
 	if len(request.GetOrderBy().Fields) > 0 {
-		orderByClause, err = buildOrderByClause(request, entity, jsonTables)
+		orderByClause, err = buildOrderByClause(request, entity, jsonTables, args)
 		if err != nil {
-			return "", &InvalidRequestError{Op: "order_by", Err: err}
+			return "", nil, &InvalidRequestError{Op: "order_by", Err: err}
 		}
 	}
 
-	jsonTablesSlice := []string{}
-	for _, jt := range jsonTables {
-		jsonTablesSlice = append(jsonTablesSlice, jt)
+	// Iterated in sorted key order, not map order: the fragments are part of the
+	// query TEXT, which is what the list cache and the singleflight group are
+	// keyed on, so a randomized join order would make the same request miss the
+	// cache at random. These fragments are built from schema identifiers only and
+	// must never carry a bound value — the placeholder ordinals are assigned by
+	// the clause walker, and anything binding here would land out of order.
+	jsonTableNames := make([]string, 0, len(jsonTables))
+	for name := range jsonTables {
+		jsonTableNames = append(jsonTableNames, name)
+	}
+	slices.Sort(jsonTableNames)
+	jsonTablesSlice := make([]string, 0, len(jsonTables))
+	for _, name := range jsonTableNames {
+		jsonTablesSlice = append(jsonTablesSlice, jsonTables[name])
 	}
 
 	jsonTablesFinal := strings.Join(jsonTablesSlice, " ")
@@ -98,6 +119,17 @@ func (i *Implementation) BuildListEntityQuery(
 	joinStatement := ""
 	if request.GetJoinParams() != nil {
 		joinStatement = request.GetJoinParams().JoinStatement
+		// Join SQL is spliced into the text BEFORE the filter (the statement, in
+		// the FROM clause) and AFTER it (the where clauses), while the arguments
+		// belong to the filter alone. A `?` in either would therefore consume one
+		// of the filter's arguments on MySQL and collide with an ordinal on
+		// Postgres. It has never worked — the query used to run with zero args at
+		// all — so reject it by name rather than misbind it silently.
+		if strings.Contains(joinStatement, "?") || strings.Contains(request.GetJoinParams().JoinWhereClauses, "?") {
+			// Only `?` is checked: `$` legitimately appears inside quoted
+			// identifiers.
+			return "", nil, &InvalidRequestError{Op: "join", Err: errors.New("join clauses must not contain bind placeholders")}
+		}
 		if request.GetJoinParams().JoinWhereClauses != "" {
 			whereClause = fmt.Sprintf("%s AND (%s)", whereClause, request.GetJoinParams().JoinWhereClauses)
 		}
@@ -152,12 +184,13 @@ func (i *Implementation) BuildListEntityQuery(
 				countExpr = fmt.Sprintf("count(%s)", pks[0])
 			}
 		}
+		// The same WHERE clause, so the same arguments in the same order.
 		return squash(fmt.Sprintf(
 			"SELECT %s FROM %s WHERE %s",
 			countExpr,
 			fromClause,
 			whereClause,
-		)), nil
+		)), args.list(), nil
 	}
 
 	return squash(fmt.Sprintf(
@@ -169,7 +202,30 @@ func (i *Implementation) BuildListEntityQuery(
 		groupByClause,
 		orderByClause,
 		limit,
-	)), nil
+	)), args.list(), nil
+}
+
+// CacheKey builds the list cache / singleflight key for a built query and the
+// arguments bound into it.
+//
+// The ARGUMENTS are part of the key. Before the filter values were bound they
+// were part of the query text, so the text alone distinguished two requests;
+// now it does not, and keying on it would hand one caller another caller's rows
+// (the singleflight group uses the same key, so it would not even be a cache
+// miss away from correct).
+//
+// Each argument contributes its TYPE and its formatted value, length-prefixed so
+// no two argument lists can encode to the same bytes. The result is hashed:
+// the key lives in a process-wide cache and can surface in a heap dump, and the
+// filter values are caller data.
+func CacheKey(prefix, query string, args []any) string {
+	h := sha256.New()
+	io.WriteString(h, query)
+	for _, a := range args {
+		s := fmt.Sprintf("%T\x00%v", a, a)
+		fmt.Fprintf(h, "\x00%d\x00%s", len(s), s)
+	}
+	return prefix + ":" + hex.EncodeToString(h.Sum(nil))
 }
 
 // qualifyColumns prefixes each column with the entity table so that a column
@@ -190,11 +246,17 @@ func squash(query string) string {
 	return strings.Join(strings.Fields(query), " ")
 }
 
-func buildWhereClauses(ex *expr.Expr, entity ListEntity, declarations *filtering.Declarations, enumValues map[string]map[string]int64, jsonTables map[string]string) (string, error) {
+// buildWhereClauses walks the checked filter expression and returns its SQL.
+//
+// args is threaded through rather than collected per clause because the
+// placeholder ordinals Postgres uses must match the ARGUMENT order: the text is
+// emitted left, then right, then "(left op right)", which is the same order the
+// recursion binds in.
+func buildWhereClauses(ex *expr.Expr, entity ListEntity, declarations *filtering.Declarations, enumValues map[string]map[string]int64, jsonTables map[string]string, args *queryArgs) (string, error) {
 	cex := ex.GetCallExpr()
 	if cex != nil {
 		if isBaseFunction(cex.Function) {
-			res, err := buildSingleClause(cex, entity, declarations, enumValues)
+			res, err := buildSingleClause(cex, entity, declarations, enumValues, args)
 			if err != nil {
 				// Propagate. Discarding the error here (`return "", nil`) is what
 				// turned "this filter cannot be built" into an EMPTY where clause
@@ -217,11 +279,11 @@ func buildWhereClauses(ex *expr.Expr, entity ListEntity, declarations *filtering
 			operator = "OR"
 		}
 
-		left, err := buildWhereClauses(cex.Args[0], entity, declarations, enumValues, jsonTables)
+		left, err := buildWhereClauses(cex.Args[0], entity, declarations, enumValues, jsonTables, args)
 		if err != nil {
 			return "", err
 		}
-		right, err := buildWhereClauses(cex.Args[1], entity, declarations, enumValues, jsonTables)
+		right, err := buildWhereClauses(cex.Args[1], entity, declarations, enumValues, jsonTables, args)
 		if err != nil {
 			return "", err
 		}
@@ -230,7 +292,7 @@ func buildWhereClauses(ex *expr.Expr, entity ListEntity, declarations *filtering
 	return "", errors.New("invalid call expression")
 }
 
-func buildSingleClause(cex *expr.Expr_Call, entity ListEntity, declarations *filtering.Declarations, enumValues map[string]map[string]int64) (SingleClauseResponse, error) {
+func buildSingleClause(cex *expr.Expr_Call, entity ListEntity, declarations *filtering.Declarations, enumValues map[string]map[string]int64, args *queryArgs) (SingleClauseResponse, error) {
 	if len(cex.Args) != 2 {
 		return SingleClauseResponse{}, errors.New("invalid argument count")
 	}
@@ -255,6 +317,9 @@ func buildSingleClause(cex *expr.Expr_Call, entity ListEntity, declarations *fil
 		isDependant:              isDependant,
 		dependantFieldIdentifier: dependantField,
 		entity:                   entity,
+		// The one binder for the whole query: a clause builder appends its VALUES
+		// here and puts only the returned placeholder in the SQL it emits.
+		args: args,
 	}
 
 	// FieldIdentifierToTypeMap is keyed by the entity's own FIELD identifier —
@@ -294,7 +359,7 @@ func isBaseFunction(f string) bool {
 	return false
 }
 
-func buildOrderByClause(request ListRequest, entity ListEntity, jsonTables map[string]string) (string, error) {
+func buildOrderByClause(request ListRequest, entity ListEntity, jsonTables map[string]string, args *queryArgs) (string, error) {
 	ofs, err := isValidOrderby(request, entity)
 	if err != nil {
 		return "", err
@@ -322,6 +387,7 @@ func buildOrderByClause(request ListRequest, entity ListEntity, jsonTables map[s
 						dependantFieldIdentifier: f.dependantFieldIdentifier,
 						isDependant:             f.isDependant,
 						isDependantMulti:        f.isDependantMulti,
+						args:                    args,
 					}, entitytypes.FieldTypeToSQL(f.fieldType))
 					jsonTables[json_table_name] = json_table
 					orderByPairs = append(orderByPairs, fmt.Sprintf("%s.%s %s", json_table_name, f.dependantFieldIdentifier, order))
@@ -337,6 +403,11 @@ func buildOrderByClause(request ListRequest, entity ListEntity, jsonTables map[s
 					// it. Leaving it nil panicked on any order-by over a dependant
 					// field.
 					entity: entity,
+					// ORDER BY binds nothing — buildJSONExtract is built from schema
+					// identifiers alone — but the binder is set anyway so that
+					// req.args is non-nil on EVERY SingleClauseRequest and no builder
+					// has a nil case to get wrong later.
+					args: args,
 				})
 				orderByPairs = append(orderByPairs, fmt.Sprintf("%s %s", left, order))
 			}

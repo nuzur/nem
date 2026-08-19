@@ -43,7 +43,10 @@ func (e LocalAgent) PrimaryKeyValues() []string {
 	}
 }
 
-func LocalAgentFromJSON(data json.RawMessage) LocalAgent {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func LocalAgentFromJSON(data []byte) LocalAgent {
 	entity := LocalAgent{}
 	if data == nil {
 		return entity
@@ -60,7 +63,7 @@ func LocalAgentFromJSON(data json.RawMessage) LocalAgent {
 	return entity
 }
 
-func LocalAgentSliceFromJSON(data json.RawMessage) []LocalAgent {
+func LocalAgentSliceFromJSON(data []byte) []LocalAgent {
 	entity := []LocalAgent{}
 	if data == nil {
 		return entity

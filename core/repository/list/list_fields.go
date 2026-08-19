@@ -3,12 +3,16 @@
 package list
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
+	"strconv"
 	"strings"
+	"time"
 
 	entitytypes "github.com/nuzur/nem/core/entity/types"
 	"go.einride.tech/aip/filtering"
+	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
@@ -74,11 +78,11 @@ func buildStringClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 	switch cex.Function {
 	case filtering.FunctionEquals, filtering.FunctionNotEquals:
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("%s %s '%s'", left, cex.Function, cex.Args[1].GetConstExpr().GetStringValue()),
+			ResolvedClause: fmt.Sprintf("%s %s %s", left, cex.Function, req.args.bind(cex.Args[1].GetConstExpr().GetStringValue())),
 		}, nil
 	case filtering.FunctionHas:
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("%s %s '%%%s%%'", left, sqlLike, cex.Args[1].GetConstExpr().GetStringValue()),
+			ResolvedClause: fmt.Sprintf("%s %s %s", left, sqlLike, req.args.bind(likePattern(cex.Args[1].GetConstExpr().GetStringValue()))),
 		}, nil
 	}
 	return SingleClauseResponse{}, errors.New("unsupported function for type string")
@@ -110,11 +114,11 @@ func buildEnumClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 	}
 	if req.isDependant {
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("%s %s %d", jsonEnumOperand(left), cex.Function, numValue),
+			ResolvedClause: fmt.Sprintf("%s %s %s", jsonEnumOperand(left), cex.Function, req.args.bind(numValue)),
 		}, nil
 	}
 	return SingleClauseResponse{
-		ResolvedClause: fmt.Sprintf("%s %s %d", left, cex.Function, numValue),
+		ResolvedClause: fmt.Sprintf("%s %s %s", left, cex.Function, req.args.bind(numValue)),
 	}, nil
 }
 
@@ -181,40 +185,43 @@ func buildIntClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 		if req.isDependantMulti {
 			json_table_name, json_table := resolveJSONTable(req, sqlType)
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("%s %s %d", qualifiedColumn(json_table_name, req.dependantFieldIdentifier), cex.Function, right),
+				ResolvedClause: fmt.Sprintf("%s %s %s", qualifiedColumn(json_table_name, req.dependantFieldIdentifier), cex.Function, req.args.bind(right)),
 				JSONTable:      json_table,
 				JSONTableName:  json_table_name,
 			}, nil
 		}
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("%s %s %d", sqlCast(left, sqlType), cex.Function, right),
+			ResolvedClause: fmt.Sprintf("%s %s %s", sqlCast(left, sqlType), cex.Function, req.args.bind(right)),
 		}, nil
 	}
 	return SingleClauseResponse{
-		ResolvedClause: fmt.Sprintf("%s %s %d", left, cex.Function, right),
+		ResolvedClause: fmt.Sprintf("%s %s %s", left, cex.Function, req.args.bind(right)),
 	}, nil
 }
 
 func buildFloatClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 	cex := req.cex
 	left := buildLeftOperator(req)
-	right := cex.Args[1].GetConstExpr().GetDoubleValue()
+	right, ok := numericValue(cex.Args[1])
+	if !ok {
+		return SingleClauseResponse{}, fmt.Errorf("invalid numeric value for field %q", req.fieldIdentifier)
+	}
 	sqlType := sqlTypeFloat
 	if req.isDependant {
 		if req.isDependantMulti {
 			json_table_name, json_table := resolveJSONTable(req, sqlType)
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("%s %s %f", qualifiedColumn(json_table_name, req.dependantFieldIdentifier), cex.Function, right),
+				ResolvedClause: fmt.Sprintf("%s %s %s", qualifiedColumn(json_table_name, req.dependantFieldIdentifier), cex.Function, req.args.bind(right)),
 				JSONTable:      json_table,
 				JSONTableName:  json_table_name,
 			}, nil
 		}
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("%s %s %f", sqlCast(left, sqlType), cex.Function, right),
+			ResolvedClause: fmt.Sprintf("%s %s %s", sqlCast(left, sqlType), cex.Function, req.args.bind(right)),
 		}, nil
 	}
 	return SingleClauseResponse{
-		ResolvedClause: fmt.Sprintf("%s %s %f", left, cex.Function, right),
+		ResolvedClause: fmt.Sprintf("%s %s %s", left, cex.Function, req.args.bind(right)),
 	}, nil
 }
 
@@ -232,9 +239,11 @@ func buildBooleanClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 			}, nil
 		}
 		// The value is compared as the TEXT "true"/"false", so the extracted JSON
-		// value has to be text too — see jsonBooleanOperand.
+		// value has to be text too — see jsonBooleanOperand — and the bound value
+		// is the STRING, not a Go bool: a bound bool is sent as a boolean
+		// parameter and Postgres then rejects `text = boolean`.
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("%s %s '%s'", jsonBooleanOperand(left), cex.Function, booleanIdent),
+			ResolvedClause: fmt.Sprintf("%s %s %s", jsonBooleanOperand(left), cex.Function, req.args.bind(booleanIdent)),
 		}, nil
 	}
 	// A real boolean COLUMN is compared against a boolean literal. Comparing it
@@ -250,6 +259,11 @@ func buildBooleanClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 // sqlBooleanLiteral renders a boolean constant. TRUE/FALSE are standard SQL and
 // accepted by both engines (MySQL treats them as 1/0), so this needs no dialect
 // branch — it lives here so the intent is stated once.
+//
+// This is the one value the builder still writes into the statement TEXT, and
+// deliberately so: it is a SQL keyword chosen by an if over an ident the aip
+// checker already restricted to `true`/`false`, so no caller byte reaches the
+// query — there is nothing here to bind.
 func sqlBooleanLiteral(b bool) string {
 	if b {
 		return "TRUE"
@@ -260,27 +274,35 @@ func sqlBooleanLiteral(b bool) string {
 func buildTimestampClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 	cex := req.cex
 	left := buildLeftOperator(req)
-	right := cex.Args[1].GetConstExpr().GetStringValue()
+	right, err := timestampValue(cex.Args[1])
+	if err != nil {
+		return SingleClauseResponse{}, err
+	}
 	sqlType := sqlTypeTimestamp
 	if req.isDependant {
 		if req.isDependantMulti {
 			json_table_name, json_table := resolveJSONTable(req, sqlType)
 			return SingleClauseResponse{
-				ResolvedClause: fmt.Sprintf("%s %s '%s'", qualifiedColumn(json_table_name, req.dependantFieldIdentifier), cex.Function, right),
+				ResolvedClause: fmt.Sprintf("%s %s %s", qualifiedColumn(json_table_name, req.dependantFieldIdentifier), cex.Function, req.args.bind(right)),
 				JSONTable:      json_table,
 				JSONTableName:  json_table_name,
 			}, nil
 		}
 		return SingleClauseResponse{
-			ResolvedClause: fmt.Sprintf("%s %s '%s'", sqlCast(left, sqlType), cex.Function, right),
+			ResolvedClause: fmt.Sprintf("%s %s %s", sqlCast(left, sqlType), cex.Function, req.args.bind(right)),
 		}, nil
 	}
 
 	return SingleClauseResponse{
-		ResolvedClause: fmt.Sprintf("%s %s '%s'", left, cex.Function, right),
+		ResolvedClause: fmt.Sprintf("%s %s %s", left, cex.Function, req.args.bind(right)),
 	}, nil
 }
 
+// buildArrayClause tests membership in a top-level JSON array of scalars. The
+// operand is a one-element JSON DOCUMENT, built here and bound as a whole by
+// jsonArrayContains — so the caller's value is escaped by the JSON encoder
+// (jsonString) rather than pasted between quotes, and the document itself never
+// reaches the statement text.
 func buildArrayClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 	cex := req.cex
 	switch cex.Function {
@@ -288,23 +310,44 @@ func buildArrayClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 		switch req.arrayType {
 		case entitytypes.StringFieldType, entitytypes.UUIDFieldType, entitytypes.RawJSONFieldType:
 			return SingleClauseResponse{
-				ResolvedClause: maybeNegate(jsonArrayContains(qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), fmt.Sprintf("\"%s\"", cex.Args[1].GetConstExpr().GetStringValue())), cex.Function),
+				ResolvedClause: maybeNegate(jsonArrayContains(req, jsonString(cex.Args[1].GetConstExpr().GetStringValue())), cex.Function),
 			}, nil
 		case entitytypes.IntFieldType:
 			return SingleClauseResponse{
-				ResolvedClause: maybeNegate(jsonArrayContains(qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), fmt.Sprintf("%d", cex.Args[1].GetConstExpr().GetInt64Value())), cex.Function),
+				ResolvedClause: maybeNegate(jsonArrayContains(req, strconv.FormatInt(cex.Args[1].GetConstExpr().GetInt64Value(), 10)), cex.Function),
 			}, nil
 		case entitytypes.FloatFieldType:
+			num, ok := numericValue(cex.Args[1])
+			if !ok {
+				return SingleClauseResponse{}, fmt.Errorf("invalid numeric value for field %q", req.fieldIdentifier)
+			}
+			// 'g' with -1 precision round-trips the value exactly; %f rounded it to
+			// six decimals, so `3.1415926535 IN <array>` searched for 3.141593 and
+			// matched nothing.
 			return SingleClauseResponse{
-				ResolvedClause: maybeNegate(jsonArrayContains(qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), fmt.Sprintf("%f", cex.Args[1].GetConstExpr().GetDoubleValue())), cex.Function),
+				ResolvedClause: maybeNegate(jsonArrayContains(req, strconv.FormatFloat(num, 'g', -1, 64)), cex.Function),
 			}, nil
 		case entitytypes.BooleanFieldType:
+			// `true`/`false` are declared IDENTS, not string constants, so
+			// GetConstExpr() is nil on them: reading the constant yielded "" and the
+			// JSON document was empty, i.e. every boolean array filter was malformed
+			// SQL. Read the ident, exactly as buildBooleanClause does.
+			booleanIdent := cex.Args[1].GetIdentExpr().GetName()
+			if booleanIdent != "true" && booleanIdent != "false" {
+				return SingleClauseResponse{}, fmt.Errorf("invalid boolean value for field %q", req.fieldIdentifier)
+			}
 			return SingleClauseResponse{
-				ResolvedClause: maybeNegate(jsonArrayContains(qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), cex.Args[1].GetConstExpr().GetStringValue()), cex.Function),
+				ResolvedClause: maybeNegate(jsonArrayContains(req, booleanIdent), cex.Function),
 			}, nil
 		case entitytypes.TimestampFieldType:
+			ts, err := timestampValue(cex.Args[1])
+			if err != nil {
+				return SingleClauseResponse{}, err
+			}
+			// Inside a JSON document a timestamp is text, so it stays formatted —
+			// the whole document is what gets bound.
 			return SingleClauseResponse{
-				ResolvedClause: maybeNegate(jsonArrayContains(qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), fmt.Sprintf("\"%s\"", cex.Args[1].GetConstExpr().GetStringValue())), cex.Function),
+				ResolvedClause: maybeNegate(jsonArrayContains(req, jsonString(ts.Format(time.RFC3339))), cex.Function),
 			}, nil
 		}
 
@@ -313,6 +356,73 @@ func buildArrayClause(req SingleClauseRequest) (SingleClauseResponse, error) {
 }
 
 // utilities
+
+// timestampValue extracts the instant a timestamp comparison carries.
+// Two spellings reach here and BOTH type-check against the standard aip
+// declarations (<op>_timestamp and <op>_timestamp_string overloads):
+//   - a bare string — `created_at > "2024-01-01T00:00:00Z"` — a constant, which
+//     aip's checker has already validated as RFC3339;
+//   - the timestamp() conversion — `created_at > timestamp("...")` — a CALL
+//     expression: GetConstExpr() is nil on it, so reading the constant directly
+//     yielded "" and the builder emitted `created_at > ”` (silent wrong results
+//     on MySQL, a type error on Postgres).
+//
+// The value is parsed and BOUND as a time.Time rather than as text: MySQL's
+// literal parser rejects the trailing Z of an RFC3339 string, and a text
+// timestamp is read in whatever zone the session carries; a time.Time is
+// rendered by the driver in the form the engine expects, offset intact.
+func timestampValue(e *expr.Expr) (time.Time, error) {
+	raw := e.GetConstExpr().GetStringValue()
+	if call := e.GetCallExpr(); call != nil {
+		if call.GetFunction() != filtering.FunctionTimestamp || len(call.GetArgs()) != 1 {
+			return time.Time{}, fmt.Errorf("unsupported timestamp expression %q", call.GetFunction())
+		}
+		raw = call.GetArgs()[0].GetConstExpr().GetStringValue()
+	}
+	if raw == "" {
+		return time.Time{}, errors.New("missing timestamp value")
+	}
+	ts, err := time.Parse(time.RFC3339, raw)
+	if err != nil {
+		return time.Time{}, fmt.Errorf("invalid timestamp %q: must be RFC3339", raw)
+	}
+	return ts, nil
+}
+
+// numericValue reads a numeric constant that may be spelled as an int or a
+// float: `price > 3` parses as an Int64 constant, and GetDoubleValue() on that
+// returns 0 — so the filter silently became `price > 0`.
+func numericValue(e *expr.Expr) (float64, bool) {
+	c := e.GetConstExpr()
+	switch c.GetConstantKind().(type) {
+	case *expr.Constant_DoubleValue:
+		return c.GetDoubleValue(), true
+	case *expr.Constant_Int64Value:
+		return float64(c.GetInt64Value()), true
+	}
+	return 0, false
+}
+
+// jsonString renders a Go string as a JSON string literal. Sprintf("\"%s\"") was
+// not JSON: a value containing a quote or backslash produced a malformed
+// document, which MySQL rejects outright and Postgres rejects at the ::jsonb
+// cast.
+func jsonString(v string) string {
+	b, err := json.Marshal(v)
+	if err != nil {
+		// Unreachable: encoding/json never fails on a string.
+		return `""`
+	}
+	return string(b)
+}
+
+// likePattern turns the caller's substring into a LIKE pattern. `%` and `_`
+// inside the value are DELIBERATELY left as wildcards — that is today's
+// behaviour for the `:` operator, and changing match semantics is out of scope
+// for the binding fix. (Escaping them is a recorded follow-up.)
+func likePattern(value string) string {
+	return "%" + value + "%"
+}
 
 // maybeNegate turns a containment test into its negation for `!=`. A containment
 // clause answers "does this multi-valued field contain v", so `!= v` means "does
@@ -370,6 +480,13 @@ func quoteIdent(ident string) string {
 	return "`" + strings.ReplaceAll(ident, "`", "``") + "`"
 }
 
+// placeholder renders the bind marker for the n-th argument. MySQL's markers are
+// positional and identical, so n is unused here — it is in the signature because
+// Postgres numbers its own and the two dialects share every caller.
+func placeholder(n int) string {
+	return "?"
+}
+
 // countDistinct counts distinct keys, used to de-duplicate a count over a query
 // that fans out. MySQL takes a plain column list.
 func countDistinct(columns []string) string {
@@ -391,22 +508,30 @@ func jsonBooleanOperand(left string) string {
 	return fmt.Sprintf("JSON_UNQUOTE(%s)", left)
 }
 
-// jsonArrayContains tests membership in a top-level JSON array of scalars.
-func jsonArrayContains(field, jsonLiteral string) string {
-	return fmt.Sprintf("JSON_CONTAINS(%s,'%s','$')", field, jsonLiteral)
+// jsonArrayContains tests membership in a top-level JSON array of scalars. The
+// JSON document is a bound STRING — never a []byte or json.RawMessage, which
+// go-sql-driver/mysql renders as _binary'...' and the server then rejects with
+// Error 3144 ("cannot create a JSON value from a string with CHARACTER SET
+// 'binary'"). CAST(? AS JSON) is what turns that string parameter back into a
+// JSON value; JSON_TABLE already requires MySQL 8, so the syntax is available.
+func jsonArrayContains(req SingleClauseRequest, jsonLiteral string) string {
+	return fmt.Sprintf("JSON_CONTAINS(%s, CAST(%s AS JSON), '$')",
+		qualifiedColumn(req.entity.EntityIdentifier(), req.fieldIdentifier), req.args.bind(jsonLiteral))
 }
 
 // jsonMemberEquals tests "some element of this JSON array of objects has
 // <dependant field> = value". The value is a raw JSON literal (a number or
-// true/false), so it is not quoted.
-func jsonMemberEquals(req SingleClauseRequest, value string) string {
-	return fmt.Sprintf("JSON_CONTAINS(%s, '%s', '$')", buildJSONExtract(req), value)
+// true/false), bound as a string and cast back to JSON — see jsonArrayContains.
+func jsonMemberEquals(req SingleClauseRequest, jsonLiteral string) string {
+	return fmt.Sprintf("JSON_CONTAINS(%s, CAST(%s AS JSON), '$')", buildJSONExtract(req), req.args.bind(jsonLiteral))
 }
 
 // jsonMemberStringEquals is the string flavour of jsonMemberEquals: the JSON
-// literal for a string is quoted, so "ana" is searched for as '"ana"'.
+// literal for a string is quoted, so "ana" is searched for as the document
+// `"ana"` — built by the JSON encoder, so a value carrying a quote or a
+// backslash stays a valid document instead of breaking it.
 func jsonMemberStringEquals(req SingleClauseRequest, value string) string {
-	return fmt.Sprintf("JSON_CONTAINS(%s, '\"%s\"', '$')", buildJSONExtract(req), value)
+	return jsonMemberEquals(req, jsonString(value))
 }
 
 // jsonMemberStringLike is the substring flavour. MySQL has no "like over a JSON
@@ -418,7 +543,7 @@ func jsonMemberStringEquals(req SingleClauseRequest, value string) string {
 // insensitive under the default collation. Without this, `has` would mean
 // different things depending on whether the field lives in a JSON array.
 func jsonMemberStringLike(req SingleClauseRequest, value string) string {
-	return fmt.Sprintf("JSON_SEARCH(LOWER(CAST(%s AS CHAR)), 'one', LOWER('%%%s%%')) IS NOT NULL", buildJSONExtract(req), value)
+	return fmt.Sprintf("JSON_SEARCH(LOWER(CAST(%s AS CHAR)), 'one', LOWER(%s)) IS NOT NULL", buildJSONExtract(req), req.args.bind(likePattern(value)))
 }
 
 // sqlLike is the case-insensitive substring operator. MySQL's `like` already is

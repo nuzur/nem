@@ -54,6 +54,113 @@ func (m *module) FetchAiUsageByUserUUID(
 			}, nil
 		}
 
+		timeFields := []string{
+			"created_at", "updated_at",
+		}
+
+		orderByFieldFound := false
+		for _, tf := range timeFields {
+			if tf == req.OrderBy {
+				orderByFieldFound = true
+				break
+			}
+		}
+
+		if !orderByFieldFound {
+			err := errors.New("order by field not found")
+
+			return types.FetchAiUsageByUserUUIDResponse{}, err
+		}
+
+		sort := "ASC"
+		if req.Sort != "" {
+			if req.Sort == "ASC" || req.Sort == "DESC" {
+				sort = req.Sort
+			} else {
+				err := errors.New("invalid sort value only ASC or DESC are valid")
+
+				return types.FetchAiUsageByUserUUIDResponse{}, err
+			}
+		}
+
+		switch req.OrderBy {
+
+		case "created_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAiUsageByUserUUIDOrderedByCreatedAtASC(
+					ctx,
+					nemdb.FetchAiUsageByUserUUIDOrderedByCreatedAtASCParams{
+						UserUUID: req.UserUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByUserUUIDResponse{}, err
+				}
+				return types.FetchAiUsageByUserUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAiUsageByUserUUIDOrderedByCreatedAtDESC(
+					ctx,
+					nemdb.FetchAiUsageByUserUUIDOrderedByCreatedAtDESCParams{
+						UserUUID: req.UserUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByUserUUIDResponse{}, err
+				}
+				return types.FetchAiUsageByUserUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		case "updated_at":
+			if sort == "ASC" {
+				models, err := queries.FetchAiUsageByUserUUIDOrderedByUpdatedAtASC(
+					ctx,
+					nemdb.FetchAiUsageByUserUUIDOrderedByUpdatedAtASCParams{
+						UserUUID: req.UserUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByUserUUIDResponse{}, err
+				}
+				return types.FetchAiUsageByUserUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			} else {
+				models, err := queries.FetchAiUsageByUserUUIDOrderedByUpdatedAtDESC(
+					ctx,
+					nemdb.FetchAiUsageByUserUUIDOrderedByUpdatedAtDESCParams{
+						UserUUID: req.UserUUID.String(),
+
+						Offset: req.Offset,
+						Limit:  req.Limit,
+					},
+				)
+				if err != nil {
+
+					return types.FetchAiUsageByUserUUIDResponse{}, err
+				}
+				return types.FetchAiUsageByUserUUIDResponse{
+					Results: mapModelsToEntities(models),
+				}, nil
+			}
+
+		}
+
 		err := errors.New("could not process request")
 
 		return types.FetchAiUsageByUserUUIDResponse{}, err

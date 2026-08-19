@@ -26,7 +26,10 @@ func (e DataChangeTypeConfigUpdateField) PrimaryKeyValues() []string {
 	return []string{}
 }
 
-func DataChangeTypeConfigUpdateFieldFromJSON(data json.RawMessage) DataChangeTypeConfigUpdateField {
+// The parameter is a plain []byte rather than json.RawMessage so that both a
+// json.RawMessage and the mapper.JSON a repository model holds can be passed
+// without a conversion at the call site.
+func DataChangeTypeConfigUpdateFieldFromJSON(data []byte) DataChangeTypeConfigUpdateField {
 	entity := DataChangeTypeConfigUpdateField{}
 	if data == nil {
 		return entity
@@ -43,7 +46,7 @@ func DataChangeTypeConfigUpdateFieldFromJSON(data json.RawMessage) DataChangeTyp
 	return entity
 }
 
-func DataChangeTypeConfigUpdateFieldSliceFromJSON(data json.RawMessage) []DataChangeTypeConfigUpdateField {
+func DataChangeTypeConfigUpdateFieldSliceFromJSON(data []byte) []DataChangeTypeConfigUpdateField {
 	entity := []DataChangeTypeConfigUpdateField{}
 	if data == nil {
 		return entity

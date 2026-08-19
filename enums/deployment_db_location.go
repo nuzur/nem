@@ -77,7 +77,7 @@ func DeploymentDbLocationSliceToJSON(in []DeploymentDbLocation) json.RawMessage 
 	return jr
 }
 
-func JSONToDeploymentDbLocationSlice(in json.RawMessage) []DeploymentDbLocation {
+func JSONToDeploymentDbLocationSlice(in []byte) []DeploymentDbLocation {
 	res := []int64{}
 	// an absent column (NULL / empty / JSON null) is not a decode failure
 	if len(in) == 0 || string(in) == "null" {
