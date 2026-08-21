@@ -29,6 +29,8 @@ type ChangeRequestDataChange struct {
 	DataChangeType       ChangeRequestDataChangeDataChangeType `protobuf:"varint,2,opt,name=data_change_type,json=dataChangeType,proto3,enum=nem.ChangeRequestDataChangeDataChangeType" json:"data_change_type,omitempty"`
 	DataChangeTypeConfig *DataChangeTypeConfig                 `protobuf:"bytes,3,opt,name=data_change_type_config,json=dataChangeTypeConfig,proto3" json:"data_change_type_config,omitempty"`
 	Order                int64                                 `protobuf:"varint,4,opt,name=order,proto3" json:"order,omitempty"`
+	BeforeImage          *DataChangeBeforeImage                `protobuf:"bytes,5,opt,name=before_image,json=beforeImage,proto3" json:"before_image,omitempty"`
+	ValuesAreRaw         bool                                  `protobuf:"varint,6,opt,name=values_are_raw,json=valuesAreRaw,proto3" json:"values_are_raw,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -91,16 +93,32 @@ func (x *ChangeRequestDataChange) GetOrder() int64 {
 	return 0
 }
 
+func (x *ChangeRequestDataChange) GetBeforeImage() *DataChangeBeforeImage {
+	if x != nil {
+		return x.BeforeImage
+	}
+	return nil
+}
+
+func (x *ChangeRequestDataChange) GetValuesAreRaw() bool {
+	if x != nil {
+		return x.ValuesAreRaw
+	}
+	return false
+}
+
 var File_change_request_data_change_proto protoreflect.FileDescriptor
 
 const file_change_request_data_change_proto_rawDesc = "" +
 	"\n" +
-	" change_request_data_change.proto\x12\x03nem\x1a\x1ddata_change_type_config.proto\x1a\venums.proto\"\xeb\x01\n" +
+	" change_request_data_change.proto\x12\x03nem\x1a\x1edata_change_before_image.proto\x1a\x1ddata_change_type_config.proto\x1a\venums.proto\"\xd0\x02\n" +
 	"\x17ChangeRequestDataChange\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12T\n" +
 	"\x10data_change_type\x18\x02 \x01(\x0e2*.nem.ChangeRequestDataChangeDataChangeTypeR\x0edataChangeType\x12P\n" +
 	"\x17data_change_type_config\x18\x03 \x01(\v2\x19.nem.DataChangeTypeConfigR\x14dataChangeTypeConfig\x12\x14\n" +
-	"\x05order\x18\x04 \x01(\x03R\x05orderB>\n" +
+	"\x05order\x18\x04 \x01(\x03R\x05order\x12=\n" +
+	"\fbefore_image\x18\x05 \x01(\v2\x1a.nem.DataChangeBeforeImageR\vbeforeImage\x12$\n" +
+	"\x0evalues_are_raw\x18\x06 \x01(\bR\fvaluesAreRawB>\n" +
 	"\x14github.com/nuzur/nemB\x17ChangeRequestDataChangeP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -120,15 +138,17 @@ var file_change_request_data_change_proto_goTypes = []any{
 	(*ChangeRequestDataChange)(nil),            // 0: nem.ChangeRequestDataChange
 	(ChangeRequestDataChangeDataChangeType)(0), // 1: nem.ChangeRequestDataChangeDataChangeType
 	(*DataChangeTypeConfig)(nil),               // 2: nem.DataChangeTypeConfig
+	(*DataChangeBeforeImage)(nil),              // 3: nem.DataChangeBeforeImage
 }
 var file_change_request_data_change_proto_depIdxs = []int32{
 	1, // 0: nem.ChangeRequestDataChange.data_change_type:type_name -> nem.ChangeRequestDataChangeDataChangeType
 	2, // 1: nem.ChangeRequestDataChange.data_change_type_config:type_name -> nem.DataChangeTypeConfig
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3, // 2: nem.ChangeRequestDataChange.before_image:type_name -> nem.DataChangeBeforeImage
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_change_request_data_change_proto_init() }
@@ -136,6 +156,7 @@ func file_change_request_data_change_proto_init() {
 	if File_change_request_data_change_proto != nil {
 		return
 	}
+	file_data_change_before_image_proto_init()
 	file_data_change_type_config_proto_init()
 	file_enums_proto_init()
 	type x struct{}

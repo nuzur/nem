@@ -24,6 +24,7 @@ type Module interface {
 	FetchChangeRequestByOwnerUUID(ctx context.Context, req types.FetchChangeRequestByOwnerUUIDRequest, opts ...Option) (types.FetchChangeRequestByOwnerUUIDResponse, error)
 	FetchChangeRequestByReviewStatus(ctx context.Context, req types.FetchChangeRequestByReviewStatusRequest, opts ...Option) (types.FetchChangeRequestByReviewStatusResponse, error)
 	FetchChangeRequestByStatus(ctx context.Context, req types.FetchChangeRequestByStatusRequest, opts ...Option) (types.FetchChangeRequestByStatusResponse, error)
+	FetchChangeRequestByRevertsChangeRequestUUID(ctx context.Context, req types.FetchChangeRequestByRevertsChangeRequestUUIDRequest, opts ...Option) (types.FetchChangeRequestByRevertsChangeRequestUUIDResponse, error)
 
 	List(ctx context.Context, req types.ListRequest, opts ...Option) (types.ListResponse, error)
 

@@ -1176,3 +1176,18 @@ func RelationshipReferentialActionSliceFromProto(s []pb.RelationshipReferentialA
 	}
 	return res
 }
+
+func DataChangeBeforeImageStatusSliceToProto(s []enums.DataChangeBeforeImageStatus) []pb.DataChangeBeforeImageStatus {
+	res := []pb.DataChangeBeforeImageStatus{}
+	for _, e := range s {
+		res = append(res, pb.DataChangeBeforeImageStatus(e))
+	}
+	return res
+}
+func DataChangeBeforeImageStatusSliceFromProto(s []pb.DataChangeBeforeImageStatus) []enums.DataChangeBeforeImageStatus {
+	res := []enums.DataChangeBeforeImageStatus{}
+	for _, e := range s {
+		res = append(res, enums.DataChangeBeforeImageStatus(e))
+	}
+	return res
+}

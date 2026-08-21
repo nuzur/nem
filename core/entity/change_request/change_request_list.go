@@ -13,26 +13,28 @@ import (
 
 func (e ChangeRequest) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"uuid":                 entitytypes.StringFieldType,
-		"version":              entitytypes.IntFieldType,
-		"title":                entitytypes.StringFieldType,
-		"description":          entitytypes.StringFieldType,
-		"project_uuid":         entitytypes.StringFieldType,
-		"project_version_uuid": entitytypes.StringFieldType,
-		"change_type":          entitytypes.SingleEnumFieldType,
-		"data_changes":         entitytypes.MultiDependantEntityFieldType,
-		"metadata":             entitytypes.SingleDependantEntityFieldType,
-		"reviews":              entitytypes.MultiDependantEntityFieldType,
-		"review_status":        entitytypes.SingleEnumFieldType,
-		"owner_uuid":           entitytypes.StringFieldType,
-		"status":               entitytypes.SingleEnumFieldType,
-		"created_at":           entitytypes.TimestampFieldType,
-		"updated_at":           entitytypes.TimestampFieldType,
-		"created_by_uuid":      entitytypes.StringFieldType,
-		"updated_by_uuid":      entitytypes.StringFieldType,
-		"ai_generated":         entitytypes.BooleanFieldType,
-		"scope":                entitytypes.SingleEnumFieldType,
-		"scope_config":         entitytypes.SingleDependantEntityFieldType,
+		"uuid":                            entitytypes.StringFieldType,
+		"version":                         entitytypes.IntFieldType,
+		"title":                           entitytypes.StringFieldType,
+		"description":                     entitytypes.StringFieldType,
+		"project_uuid":                    entitytypes.StringFieldType,
+		"project_version_uuid":            entitytypes.StringFieldType,
+		"change_type":                     entitytypes.SingleEnumFieldType,
+		"data_changes":                    entitytypes.MultiDependantEntityFieldType,
+		"metadata":                        entitytypes.SingleDependantEntityFieldType,
+		"reviews":                         entitytypes.MultiDependantEntityFieldType,
+		"review_status":                   entitytypes.SingleEnumFieldType,
+		"owner_uuid":                      entitytypes.StringFieldType,
+		"status":                          entitytypes.SingleEnumFieldType,
+		"created_at":                      entitytypes.TimestampFieldType,
+		"updated_at":                      entitytypes.TimestampFieldType,
+		"created_by_uuid":                 entitytypes.StringFieldType,
+		"updated_by_uuid":                 entitytypes.StringFieldType,
+		"ai_generated":                    entitytypes.BooleanFieldType,
+		"scope":                           entitytypes.SingleEnumFieldType,
+		"scope_config":                    entitytypes.SingleDependantEntityFieldType,
+		"reverts_change_request_uuid":     entitytypes.StringFieldType,
+		"reverted_by_change_request_uuid": entitytypes.StringFieldType,
 	}
 }
 
@@ -58,6 +60,8 @@ func (e ChangeRequest) OrderedFieldIdentifiers() []string {
 	res = append(res, "ai_generated")
 	res = append(res, "scope")
 	res = append(res, "scope_config")
+	res = append(res, "reverts_change_request_uuid")
+	res = append(res, "reverted_by_change_request_uuid")
 
 	return res
 }

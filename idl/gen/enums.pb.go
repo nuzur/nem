@@ -4145,6 +4145,61 @@ func (RelationshipReferentialAction) EnumDescriptor() ([]byte, []int) {
 	return file_enums_proto_rawDescGZIP(), []int{77}
 }
 
+type DataChangeBeforeImageStatus int32
+
+const (
+	DataChangeBeforeImageStatus_DATA_CHANGE_BEFORE_IMAGE_STATUS_INVALID             DataChangeBeforeImageStatus = 0
+	DataChangeBeforeImageStatus_DATA_CHANGE_BEFORE_IMAGE_STATUS_CAPTURED            DataChangeBeforeImageStatus = 1
+	DataChangeBeforeImageStatus_DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_UNSUPPORTED DataChangeBeforeImageStatus = 2
+	DataChangeBeforeImageStatus_DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_ROW_ABSENT  DataChangeBeforeImageStatus = 3
+	DataChangeBeforeImageStatus_DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_ERROR       DataChangeBeforeImageStatus = 4
+)
+
+// Enum value maps for DataChangeBeforeImageStatus.
+var (
+	DataChangeBeforeImageStatus_name = map[int32]string{
+		0: "DATA_CHANGE_BEFORE_IMAGE_STATUS_INVALID",
+		1: "DATA_CHANGE_BEFORE_IMAGE_STATUS_CAPTURED",
+		2: "DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_UNSUPPORTED",
+		3: "DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_ROW_ABSENT",
+		4: "DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_ERROR",
+	}
+	DataChangeBeforeImageStatus_value = map[string]int32{
+		"DATA_CHANGE_BEFORE_IMAGE_STATUS_INVALID":             0,
+		"DATA_CHANGE_BEFORE_IMAGE_STATUS_CAPTURED":            1,
+		"DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_UNSUPPORTED": 2,
+		"DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_ROW_ABSENT":  3,
+		"DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_ERROR":       4,
+	}
+)
+
+func (x DataChangeBeforeImageStatus) Enum() *DataChangeBeforeImageStatus {
+	p := new(DataChangeBeforeImageStatus)
+	*p = x
+	return p
+}
+
+func (x DataChangeBeforeImageStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DataChangeBeforeImageStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[78].Descriptor()
+}
+
+func (DataChangeBeforeImageStatus) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[78]
+}
+
+func (x DataChangeBeforeImageStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DataChangeBeforeImageStatus.Descriptor instead.
+func (DataChangeBeforeImageStatus) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{78}
+}
+
 var File_enums_proto protoreflect.FileDescriptor
 
 const file_enums_proto_rawDesc = "" +
@@ -4567,7 +4622,13 @@ const file_enums_proto_rawDesc = "" +
 	"(RELATIONSHIP_REFERENTIAL_ACTION_RESTRICT\x10\x02\x12+\n" +
 	"'RELATIONSHIP_REFERENTIAL_ACTION_CASCADE\x10\x03\x12,\n" +
 	"(RELATIONSHIP_REFERENTIAL_ACTION_SET_NULL\x10\x04\x12/\n" +
-	"+RELATIONSHIP_REFERENTIAL_ACTION_SET_DEFAULT\x10\x05B+\n" +
+	"+RELATIONSHIP_REFERENTIAL_ACTION_SET_DEFAULT\x10\x05*\x9c\x02\n" +
+	"\x1bDataChangeBeforeImageStatus\x12+\n" +
+	"'DATA_CHANGE_BEFORE_IMAGE_STATUS_INVALID\x10\x00\x12,\n" +
+	"(DATA_CHANGE_BEFORE_IMAGE_STATUS_CAPTURED\x10\x01\x127\n" +
+	"3DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_UNSUPPORTED\x10\x02\x126\n" +
+	"2DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_ROW_ABSENT\x10\x03\x121\n" +
+	"-DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_ERROR\x10\x04B+\n" +
 	"\x14github.com/nuzur/nemB\x04EnumP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -4582,7 +4643,7 @@ func file_enums_proto_rawDescGZIP() []byte {
 	return file_enums_proto_rawDescData
 }
 
-var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 78)
+var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 79)
 var file_enums_proto_goTypes = []any{
 	(AiUsageContext)(0),                         // 0: nem.AiUsageContext
 	(AiUsageProvider)(0),                        // 1: nem.AiUsageProvider
@@ -4662,6 +4723,7 @@ var file_enums_proto_goTypes = []any{
 	(DeploymentRevisionStatus)(0),               // 75: nem.DeploymentRevisionStatus
 	(FieldPiiConfigMaskStrategy)(0),             // 76: nem.FieldPiiConfigMaskStrategy
 	(RelationshipReferentialAction)(0),          // 77: nem.RelationshipReferentialAction
+	(DataChangeBeforeImageStatus)(0),            // 78: nem.DataChangeBeforeImageStatus
 }
 var file_enums_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -4681,7 +4743,7 @@ func file_enums_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_enums_proto_rawDesc), len(file_enums_proto_rawDesc)),
-			NumEnums:      78,
+			NumEnums:      79,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,

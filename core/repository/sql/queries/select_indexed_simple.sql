@@ -2893,77 +2893,84 @@ LIMIT ?, ?;
 
 -- change_request selects:
 -- name: FetchChangeRequestByUUID :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `uuid` = ? ;
 
         
 -- name: FetchChangeRequestByVersion :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `version` = ? 
 LIMIT ?, ?;
         
 -- name: FetchChangeRequestByAiGenerated :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `ai_generated` = ? 
 LIMIT ?, ?;
         
 -- name: FetchChangeRequestByChangeType :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `change_type` = ? 
 LIMIT ?, ?;
         
 -- name: FetchChangeRequestByProjectUUID :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `project_uuid` = ? 
 LIMIT ?, ?;
         
 -- name: FetchChangeRequestByProjectVersionUUID :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `project_version_uuid` = ? 
 LIMIT ?, ?;
         
 -- name: FetchChangeRequestByOwnerUUID :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `owner_uuid` = ? 
 LIMIT ?, ?;
         
 -- name: FetchChangeRequestByReviewStatus :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `review_status` = ? 
 LIMIT ?, ?;
         
 -- name: FetchChangeRequestByStatus :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `status` = ? 
 LIMIT ?, ?;
         
+-- name: FetchChangeRequestByRevertsChangeRequestUUID :many
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
+FROM `change_request`
+WHERE 
+    `reverts_change_request_uuid` = ? 
+LIMIT ?, ?;
+        
 -- name: FetchChangeRequestByUUIDForUpdate :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `uuid` = ? 
 FOR UPDATE;
         
 -- name: FetchChangeRequestByVersionOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `version` = ?  
@@ -2971,7 +2978,7 @@ ORDER BY updated_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByVersionOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `version` = ?  
@@ -2980,7 +2987,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByVersionOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `version` = ?  
@@ -2988,7 +2995,7 @@ ORDER BY created_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByVersionOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `version` = ?  
@@ -2997,7 +3004,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByAiGeneratedOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `ai_generated` = ?  
@@ -3005,7 +3012,7 @@ ORDER BY updated_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `ai_generated` = ?  
@@ -3014,7 +3021,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByAiGeneratedOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `ai_generated` = ?  
@@ -3022,7 +3029,7 @@ ORDER BY created_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByAiGeneratedOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `ai_generated` = ?  
@@ -3031,7 +3038,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByChangeTypeOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `change_type` = ?  
@@ -3039,7 +3046,7 @@ ORDER BY updated_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `change_type` = ?  
@@ -3048,7 +3055,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByChangeTypeOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `change_type` = ?  
@@ -3056,7 +3063,7 @@ ORDER BY created_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByChangeTypeOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `change_type` = ?  
@@ -3065,7 +3072,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByProjectUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `project_uuid` = ?  
@@ -3073,7 +3080,7 @@ ORDER BY updated_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `project_uuid` = ?  
@@ -3082,7 +3089,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByProjectUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `project_uuid` = ?  
@@ -3090,7 +3097,7 @@ ORDER BY created_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByProjectUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `project_uuid` = ?  
@@ -3099,7 +3106,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `project_version_uuid` = ?  
@@ -3107,7 +3114,7 @@ ORDER BY updated_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `project_version_uuid` = ?  
@@ -3116,7 +3123,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `project_version_uuid` = ?  
@@ -3124,7 +3131,7 @@ ORDER BY created_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `project_version_uuid` = ?  
@@ -3133,7 +3140,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `owner_uuid` = ?  
@@ -3141,7 +3148,7 @@ ORDER BY updated_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `owner_uuid` = ?  
@@ -3150,7 +3157,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByOwnerUUIDOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `owner_uuid` = ?  
@@ -3158,7 +3165,7 @@ ORDER BY created_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `owner_uuid` = ?  
@@ -3167,7 +3174,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByReviewStatusOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `review_status` = ?  
@@ -3175,7 +3182,7 @@ ORDER BY updated_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `review_status` = ?  
@@ -3184,7 +3191,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByReviewStatusOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `review_status` = ?  
@@ -3192,7 +3199,7 @@ ORDER BY created_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByReviewStatusOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `review_status` = ?  
@@ -3201,7 +3208,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByStatusOrderedByUpdatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `status` = ?  
@@ -3209,7 +3216,7 @@ ORDER BY updated_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByStatusOrderedByUpdatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `status` = ?  
@@ -3218,7 +3225,7 @@ LIMIT ?, ?;
 
             
 -- name: FetchChangeRequestByStatusOrderedByCreatedAtASC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `status` = ?  
@@ -3226,10 +3233,44 @@ ORDER BY created_at ASC
 LIMIT ?, ?;
 
 -- name: FetchChangeRequestByStatusOrderedByCreatedAtDESC :many
-SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
 FROM `change_request`
 WHERE 
     `status` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtASC :many
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
+FROM `change_request`
+WHERE 
+    `reverts_change_request_uuid` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?;
+
+-- name: FetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtDESC :many
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
+FROM `change_request`
+WHERE 
+    `reverts_change_request_uuid` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?;
+
+            
+-- name: FetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtASC :many
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
+FROM `change_request`
+WHERE 
+    `reverts_change_request_uuid` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?;
+
+-- name: FetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtDESC :many
+SELECT `uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`
+FROM `change_request`
+WHERE 
+    `reverts_change_request_uuid` = ?  
 ORDER BY created_at DESC
 LIMIT ?, ?;
 

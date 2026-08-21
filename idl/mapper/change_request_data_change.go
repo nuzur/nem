@@ -7,6 +7,8 @@ import (
 	pb "github.com/nuzur/nem/idl/gen"
 
 	"github.com/nuzur/nem/enums"
+
+	"github.com/guregu/null/v6"
 )
 
 func ChangeRequestDataChangeToProto(e main_entity.ChangeRequestDataChange) *pb.ChangeRequestDataChange {
@@ -15,6 +17,8 @@ func ChangeRequestDataChangeToProto(e main_entity.ChangeRequestDataChange) *pb.C
 		DataChangeType:       pb.ChangeRequestDataChangeDataChangeType(e.DataChangeType),
 		DataChangeTypeConfig: DataChangeTypeConfigToProto(e.DataChangeTypeConfig),
 		Order:                int64(e.Order),
+		BeforeImage:          DataChangeBeforeImageToProto(e.BeforeImage),
+		ValuesAreRaw:         e.ValuesAreRaw.ValueOrZero(),
 	}
 }
 
@@ -35,6 +39,8 @@ func ChangeRequestDataChangeFromProto(m *pb.ChangeRequestDataChange) main_entity
 		DataChangeType:       enums.ChangeRequestDataChangeDataChangeType(m.GetDataChangeType()),
 		DataChangeTypeConfig: DataChangeTypeConfigFromProto(m.GetDataChangeTypeConfig()),
 		Order:                int64(m.GetOrder()),
+		BeforeImage:          DataChangeBeforeImageFromProto(m.GetBeforeImage()),
+		ValuesAreRaw:         null.BoolFrom(m.GetValuesAreRaw()),
 	}
 }
 

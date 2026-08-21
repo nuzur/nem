@@ -139,6 +139,8 @@ func change_requestDeclarations() *filtering.Declarations {
 
 		filtering.DeclareIdent("data_changes.order", filtering.TypeInt),
 
+		filtering.DeclareIdent("data_changes.values_are_raw", filtering.TypeBool),
+
 		//metadata
 
 		//reviews
@@ -205,6 +207,10 @@ func change_requestDeclarations() *filtering.Declarations {
 		// accepts the value as a quoted string (status = "active"),
 		// so the same filter string works over REST and gRPC.
 		declareEnumIdent("scope", pb.ChangeRequestScope(0).Type()),
+
+		filtering.DeclareIdent("reverts_change_request_uuid", filtering.TypeString),
+
+		filtering.DeclareIdent("reverted_by_change_request_uuid", filtering.TypeString),
 	)
 	if err != nil {
 		log.Printf("error creating declarations: %v", err)

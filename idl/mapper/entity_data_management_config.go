@@ -5,11 +5,14 @@ package mapper
 import (
 	main_entity "github.com/nuzur/nem/core/entity/entity_data_management_config"
 	pb "github.com/nuzur/nem/idl/gen"
+
+	"github.com/guregu/null/v6"
 )
 
 func EntityDataManagementConfigToProto(e main_entity.EntityDataManagementConfig) *pb.EntityDataManagementConfig {
 	return &pb.EntityDataManagementConfig{
-		ListDisplayFields: UUIDSliceToStringSlice(e.ListDisplayFields),
+		ListDisplayFields:  UUIDSliceToStringSlice(e.ListDisplayFields),
+		CaptureBeforeImage: e.CaptureBeforeImage.ValueOrZero(),
 	}
 }
 
@@ -26,7 +29,8 @@ func EntityDataManagementConfigFromProto(m *pb.EntityDataManagementConfig) main_
 		return main_entity.EntityDataManagementConfig{}
 	}
 	return main_entity.EntityDataManagementConfig{
-		ListDisplayFields: StringSliceToUUIDSlice(m.GetListDisplayFields()),
+		ListDisplayFields:  StringSliceToUUIDSlice(m.GetListDisplayFields()),
+		CaptureBeforeImage: null.BoolFrom(m.GetCaptureBeforeImage()),
 	}
 }
 

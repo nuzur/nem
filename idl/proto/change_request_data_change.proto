@@ -10,6 +10,7 @@ option java_outer_classname = "ChangeRequestDataChange";
 package nem;
 
 
+import "data_change_before_image.proto";
 import "data_change_type_config.proto";
 import "enums.proto";
 
@@ -17,5 +18,7 @@ message ChangeRequestDataChange {
     string uuid = 1;
     ChangeRequestDataChangeDataChangeType data_change_type = 2;
     DataChangeTypeConfig data_change_type_config = 3;
-    int64 order = 4;    
+    int64 order = 4;
+    DataChangeBeforeImage before_image = 5;
+    bool values_are_raw = 6;    
 }

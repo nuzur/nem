@@ -8,13 +8,15 @@ import (
 
 func (e EntityDataManagementConfig) FieldIdentifierToTypeMap() map[string]entitytypes.FieldType {
 	return map[string]entitytypes.FieldType{
-		"list_display_fields": entitytypes.ArrayFieldType,
+		"list_display_fields":  entitytypes.ArrayFieldType,
+		"capture_before_image": entitytypes.BooleanFieldType,
 	}
 }
 
 func (e EntityDataManagementConfig) OrderedFieldIdentifiers() []string {
 	res := []string{}
 	res = append(res, "list_display_fields")
+	res = append(res, "capture_before_image")
 
 	return res
 }

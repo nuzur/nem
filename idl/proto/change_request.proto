@@ -37,5 +37,7 @@ message ChangeRequest {
     string updated_by_uuid = 17;
     bool ai_generated = 18;
     ChangeRequestScope scope = 19;
-    ChangeRequestScopeConfig scope_config = 20;    
+    ChangeRequestScopeConfig scope_config = 20;
+    string reverts_change_request_uuid = 21;
+    string reverted_by_change_request_uuid = 22;    
 }

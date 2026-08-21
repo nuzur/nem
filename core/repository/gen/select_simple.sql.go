@@ -140,7 +140,7 @@ func (q *Queries) FetchAutomationEvent(ctx context.Context) ([]AutomationEvent, 
 }
 
 const fetchChangeRequest = `-- name: FetchChangeRequest :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 `
 
@@ -174,6 +174,8 @@ func (q *Queries) FetchChangeRequest(ctx context.Context) ([]ChangeRequest, erro
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}

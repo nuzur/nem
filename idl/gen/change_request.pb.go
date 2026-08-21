@@ -25,29 +25,31 @@ const (
 )
 
 type ChangeRequest struct {
-	state              protoimpl.MessageState     `protogen:"open.v1"`
-	Uuid               string                     `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	Version            int64                      `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
-	Title              string                     `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	Description        string                     `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	ProjectUuid        string                     `protobuf:"bytes,5,opt,name=project_uuid,json=projectUuid,proto3" json:"project_uuid,omitempty"`
-	ProjectVersionUuid string                     `protobuf:"bytes,6,opt,name=project_version_uuid,json=projectVersionUuid,proto3" json:"project_version_uuid,omitempty"`
-	ChangeType         ChangeRequestChangeType    `protobuf:"varint,7,opt,name=change_type,json=changeType,proto3,enum=nem.ChangeRequestChangeType" json:"change_type,omitempty"`
-	DataChanges        []*ChangeRequestDataChange `protobuf:"bytes,8,rep,name=data_changes,json=dataChanges,proto3" json:"data_changes,omitempty"`
-	Metadata           *ChangeRequestMetadata     `protobuf:"bytes,9,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	Reviews            []*ChangeRequestReview     `protobuf:"bytes,10,rep,name=reviews,proto3" json:"reviews,omitempty"`
-	ReviewStatus       ChangeRequestReviewStatus  `protobuf:"varint,11,opt,name=review_status,json=reviewStatus,proto3,enum=nem.ChangeRequestReviewStatus" json:"review_status,omitempty"`
-	OwnerUuid          string                     `protobuf:"bytes,12,opt,name=owner_uuid,json=ownerUuid,proto3" json:"owner_uuid,omitempty"`
-	Status             ChangeRequestStatus        `protobuf:"varint,13,opt,name=status,proto3,enum=nem.ChangeRequestStatus" json:"status,omitempty"`
-	CreatedAt          *timestamppb.Timestamp     `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt          *timestamppb.Timestamp     `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CreatedByUuid      string                     `protobuf:"bytes,16,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
-	UpdatedByUuid      string                     `protobuf:"bytes,17,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
-	AiGenerated        bool                       `protobuf:"varint,18,opt,name=ai_generated,json=aiGenerated,proto3" json:"ai_generated,omitempty"`
-	Scope              ChangeRequestScope         `protobuf:"varint,19,opt,name=scope,proto3,enum=nem.ChangeRequestScope" json:"scope,omitempty"`
-	ScopeConfig        *ChangeRequestScopeConfig  `protobuf:"bytes,20,opt,name=scope_config,json=scopeConfig,proto3" json:"scope_config,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                       protoimpl.MessageState     `protogen:"open.v1"`
+	Uuid                        string                     `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Version                     int64                      `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
+	Title                       string                     `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Description                 string                     `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	ProjectUuid                 string                     `protobuf:"bytes,5,opt,name=project_uuid,json=projectUuid,proto3" json:"project_uuid,omitempty"`
+	ProjectVersionUuid          string                     `protobuf:"bytes,6,opt,name=project_version_uuid,json=projectVersionUuid,proto3" json:"project_version_uuid,omitempty"`
+	ChangeType                  ChangeRequestChangeType    `protobuf:"varint,7,opt,name=change_type,json=changeType,proto3,enum=nem.ChangeRequestChangeType" json:"change_type,omitempty"`
+	DataChanges                 []*ChangeRequestDataChange `protobuf:"bytes,8,rep,name=data_changes,json=dataChanges,proto3" json:"data_changes,omitempty"`
+	Metadata                    *ChangeRequestMetadata     `protobuf:"bytes,9,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Reviews                     []*ChangeRequestReview     `protobuf:"bytes,10,rep,name=reviews,proto3" json:"reviews,omitempty"`
+	ReviewStatus                ChangeRequestReviewStatus  `protobuf:"varint,11,opt,name=review_status,json=reviewStatus,proto3,enum=nem.ChangeRequestReviewStatus" json:"review_status,omitempty"`
+	OwnerUuid                   string                     `protobuf:"bytes,12,opt,name=owner_uuid,json=ownerUuid,proto3" json:"owner_uuid,omitempty"`
+	Status                      ChangeRequestStatus        `protobuf:"varint,13,opt,name=status,proto3,enum=nem.ChangeRequestStatus" json:"status,omitempty"`
+	CreatedAt                   *timestamppb.Timestamp     `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                   *timestamppb.Timestamp     `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedByUuid               string                     `protobuf:"bytes,16,opt,name=created_by_uuid,json=createdByUuid,proto3" json:"created_by_uuid,omitempty"`
+	UpdatedByUuid               string                     `protobuf:"bytes,17,opt,name=updated_by_uuid,json=updatedByUuid,proto3" json:"updated_by_uuid,omitempty"`
+	AiGenerated                 bool                       `protobuf:"varint,18,opt,name=ai_generated,json=aiGenerated,proto3" json:"ai_generated,omitempty"`
+	Scope                       ChangeRequestScope         `protobuf:"varint,19,opt,name=scope,proto3,enum=nem.ChangeRequestScope" json:"scope,omitempty"`
+	ScopeConfig                 *ChangeRequestScopeConfig  `protobuf:"bytes,20,opt,name=scope_config,json=scopeConfig,proto3" json:"scope_config,omitempty"`
+	RevertsChangeRequestUuid    string                     `protobuf:"bytes,21,opt,name=reverts_change_request_uuid,json=revertsChangeRequestUuid,proto3" json:"reverts_change_request_uuid,omitempty"`
+	RevertedByChangeRequestUuid string                     `protobuf:"bytes,22,opt,name=reverted_by_change_request_uuid,json=revertedByChangeRequestUuid,proto3" json:"reverted_by_change_request_uuid,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ChangeRequest) Reset() {
@@ -220,11 +222,25 @@ func (x *ChangeRequest) GetScopeConfig() *ChangeRequestScopeConfig {
 	return nil
 }
 
+func (x *ChangeRequest) GetRevertsChangeRequestUuid() string {
+	if x != nil {
+		return x.RevertsChangeRequestUuid
+	}
+	return ""
+}
+
+func (x *ChangeRequest) GetRevertedByChangeRequestUuid() string {
+	if x != nil {
+		return x.RevertedByChangeRequestUuid
+	}
+	return ""
+}
+
 var File_change_request_proto protoreflect.FileDescriptor
 
 const file_change_request_proto_rawDesc = "" +
 	"\n" +
-	"\x14change_request.proto\x12\x03nem\x1a change_request_data_change.proto\x1a\x1dchange_request_metadata.proto\x1a\x1bchange_request_review.proto\x1a!change_request_scope_config.proto\x1a\venums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa6\a\n" +
+	"\x14change_request.proto\x12\x03nem\x1a change_request_data_change.proto\x1a\x1dchange_request_metadata.proto\x1a\x1bchange_request_review.proto\x1a!change_request_scope_config.proto\x1a\venums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xab\b\n" +
 	"\rChangeRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x14\n" +
@@ -250,7 +266,9 @@ const file_change_request_proto_rawDesc = "" +
 	"\x0fupdated_by_uuid\x18\x11 \x01(\tR\rupdatedByUuid\x12!\n" +
 	"\fai_generated\x18\x12 \x01(\bR\vaiGenerated\x12-\n" +
 	"\x05scope\x18\x13 \x01(\x0e2\x17.nem.ChangeRequestScopeR\x05scope\x12@\n" +
-	"\fscope_config\x18\x14 \x01(\v2\x1d.nem.ChangeRequestScopeConfigR\vscopeConfigB4\n" +
+	"\fscope_config\x18\x14 \x01(\v2\x1d.nem.ChangeRequestScopeConfigR\vscopeConfig\x12=\n" +
+	"\x1breverts_change_request_uuid\x18\x15 \x01(\tR\x18revertsChangeRequestUuid\x12D\n" +
+	"\x1freverted_by_change_request_uuid\x18\x16 \x01(\tR\x1brevertedByChangeRequestUuidB4\n" +
 	"\x14github.com/nuzur/nemB\rChangeRequestP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

@@ -190,6 +190,10 @@ var listFields = []string{
 	"scope",
 
 	"scope_config",
+
+	"reverts_change_request_uuid",
+
+	"reverted_by_change_request_uuid",
 }
 
 var listFieldRegistry = map[string]func(*repogen.ChangeRequest) any{
@@ -233,4 +237,8 @@ var listFieldRegistry = map[string]func(*repogen.ChangeRequest) any{
 	"scope": func(i *repogen.ChangeRequest) any { return &i.Scope },
 
 	"scope_config": func(i *repogen.ChangeRequest) any { return &i.ScopeConfig },
+
+	"reverts_change_request_uuid": func(i *repogen.ChangeRequest) any { return &i.RevertsChangeRequestUUID },
+
+	"reverted_by_change_request_uuid": func(i *repogen.ChangeRequest) any { return &i.RevertedByChangeRequestUUID },
 }

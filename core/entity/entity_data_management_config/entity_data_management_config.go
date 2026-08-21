@@ -7,12 +7,14 @@ import (
 	"log"
 
 	"github.com/gofrs/uuid"
+	"github.com/guregu/null/v6"
 
 	"github.com/nuzur/nem/core/entity/mapper"
 )
 
 type EntityDataManagementConfig struct {
-	ListDisplayFields []uuid.UUID `json:"list_display_fields"`
+	ListDisplayFields  []uuid.UUID `json:"list_display_fields"`
+	CaptureBeforeImage null.Bool   `json:"capture_before_image"`
 }
 
 func (e EntityDataManagementConfig) String() string {

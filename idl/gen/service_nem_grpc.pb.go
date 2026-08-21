@@ -324,6 +324,12 @@ const (
 	Nem_ListObjectStoreR2TypeConfig_FullMethodName             = "/nem.Nem/ListObjectStoreR2TypeConfig"
 	Nem_CreateObjectStoreR2TypeConfig_FullMethodName           = "/nem.Nem/CreateObjectStoreR2TypeConfig"
 	Nem_UpdateObjectStoreR2TypeConfig_FullMethodName           = "/nem.Nem/UpdateObjectStoreR2TypeConfig"
+	Nem_ListDataChangeBeforeImageValue_FullMethodName          = "/nem.Nem/ListDataChangeBeforeImageValue"
+	Nem_CreateDataChangeBeforeImageValue_FullMethodName        = "/nem.Nem/CreateDataChangeBeforeImageValue"
+	Nem_UpdateDataChangeBeforeImageValue_FullMethodName        = "/nem.Nem/UpdateDataChangeBeforeImageValue"
+	Nem_ListDataChangeBeforeImage_FullMethodName               = "/nem.Nem/ListDataChangeBeforeImage"
+	Nem_CreateDataChangeBeforeImage_FullMethodName             = "/nem.Nem/CreateDataChangeBeforeImage"
+	Nem_UpdateDataChangeBeforeImage_FullMethodName             = "/nem.Nem/UpdateDataChangeBeforeImage"
 )
 
 // NemClient is the client API for Nem service.
@@ -734,6 +740,14 @@ type NemClient interface {
 	ListObjectStoreR2TypeConfig(ctx context.Context, in *ListObjectStoreR2TypeConfigRequest, opts ...grpc.CallOption) (*ListObjectStoreR2TypeConfigResponse, error)
 	CreateObjectStoreR2TypeConfig(ctx context.Context, in *CreateObjectStoreR2TypeConfigRequest, opts ...grpc.CallOption) (*ObjectStoreR2TypeConfig, error)
 	UpdateObjectStoreR2TypeConfig(ctx context.Context, in *UpdateObjectStoreR2TypeConfigRequest, opts ...grpc.CallOption) (*ObjectStoreR2TypeConfig, error)
+	// data_change_before_image_value start
+	ListDataChangeBeforeImageValue(ctx context.Context, in *ListDataChangeBeforeImageValueRequest, opts ...grpc.CallOption) (*ListDataChangeBeforeImageValueResponse, error)
+	CreateDataChangeBeforeImageValue(ctx context.Context, in *CreateDataChangeBeforeImageValueRequest, opts ...grpc.CallOption) (*DataChangeBeforeImageValue, error)
+	UpdateDataChangeBeforeImageValue(ctx context.Context, in *UpdateDataChangeBeforeImageValueRequest, opts ...grpc.CallOption) (*DataChangeBeforeImageValue, error)
+	// data_change_before_image start
+	ListDataChangeBeforeImage(ctx context.Context, in *ListDataChangeBeforeImageRequest, opts ...grpc.CallOption) (*ListDataChangeBeforeImageResponse, error)
+	CreateDataChangeBeforeImage(ctx context.Context, in *CreateDataChangeBeforeImageRequest, opts ...grpc.CallOption) (*DataChangeBeforeImage, error)
+	UpdateDataChangeBeforeImage(ctx context.Context, in *UpdateDataChangeBeforeImageRequest, opts ...grpc.CallOption) (*DataChangeBeforeImage, error)
 }
 
 type nemClient struct {
@@ -3774,6 +3788,66 @@ func (c *nemClient) UpdateObjectStoreR2TypeConfig(ctx context.Context, in *Updat
 	return out, nil
 }
 
+func (c *nemClient) ListDataChangeBeforeImageValue(ctx context.Context, in *ListDataChangeBeforeImageValueRequest, opts ...grpc.CallOption) (*ListDataChangeBeforeImageValueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDataChangeBeforeImageValueResponse)
+	err := c.cc.Invoke(ctx, Nem_ListDataChangeBeforeImageValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateDataChangeBeforeImageValue(ctx context.Context, in *CreateDataChangeBeforeImageValueRequest, opts ...grpc.CallOption) (*DataChangeBeforeImageValue, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DataChangeBeforeImageValue)
+	err := c.cc.Invoke(ctx, Nem_CreateDataChangeBeforeImageValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateDataChangeBeforeImageValue(ctx context.Context, in *UpdateDataChangeBeforeImageValueRequest, opts ...grpc.CallOption) (*DataChangeBeforeImageValue, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DataChangeBeforeImageValue)
+	err := c.cc.Invoke(ctx, Nem_UpdateDataChangeBeforeImageValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) ListDataChangeBeforeImage(ctx context.Context, in *ListDataChangeBeforeImageRequest, opts ...grpc.CallOption) (*ListDataChangeBeforeImageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDataChangeBeforeImageResponse)
+	err := c.cc.Invoke(ctx, Nem_ListDataChangeBeforeImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateDataChangeBeforeImage(ctx context.Context, in *CreateDataChangeBeforeImageRequest, opts ...grpc.CallOption) (*DataChangeBeforeImage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DataChangeBeforeImage)
+	err := c.cc.Invoke(ctx, Nem_CreateDataChangeBeforeImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateDataChangeBeforeImage(ctx context.Context, in *UpdateDataChangeBeforeImageRequest, opts ...grpc.CallOption) (*DataChangeBeforeImage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DataChangeBeforeImage)
+	err := c.cc.Invoke(ctx, Nem_UpdateDataChangeBeforeImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NemServer is the server API for Nem service.
 // All implementations must embed UnimplementedNemServer
 // for forward compatibility.
@@ -4182,6 +4256,14 @@ type NemServer interface {
 	ListObjectStoreR2TypeConfig(context.Context, *ListObjectStoreR2TypeConfigRequest) (*ListObjectStoreR2TypeConfigResponse, error)
 	CreateObjectStoreR2TypeConfig(context.Context, *CreateObjectStoreR2TypeConfigRequest) (*ObjectStoreR2TypeConfig, error)
 	UpdateObjectStoreR2TypeConfig(context.Context, *UpdateObjectStoreR2TypeConfigRequest) (*ObjectStoreR2TypeConfig, error)
+	// data_change_before_image_value start
+	ListDataChangeBeforeImageValue(context.Context, *ListDataChangeBeforeImageValueRequest) (*ListDataChangeBeforeImageValueResponse, error)
+	CreateDataChangeBeforeImageValue(context.Context, *CreateDataChangeBeforeImageValueRequest) (*DataChangeBeforeImageValue, error)
+	UpdateDataChangeBeforeImageValue(context.Context, *UpdateDataChangeBeforeImageValueRequest) (*DataChangeBeforeImageValue, error)
+	// data_change_before_image start
+	ListDataChangeBeforeImage(context.Context, *ListDataChangeBeforeImageRequest) (*ListDataChangeBeforeImageResponse, error)
+	CreateDataChangeBeforeImage(context.Context, *CreateDataChangeBeforeImageRequest) (*DataChangeBeforeImage, error)
+	UpdateDataChangeBeforeImage(context.Context, *UpdateDataChangeBeforeImageRequest) (*DataChangeBeforeImage, error)
 	mustEmbedUnimplementedNemServer()
 }
 
@@ -5100,6 +5182,24 @@ func (UnimplementedNemServer) CreateObjectStoreR2TypeConfig(context.Context, *Cr
 }
 func (UnimplementedNemServer) UpdateObjectStoreR2TypeConfig(context.Context, *UpdateObjectStoreR2TypeConfigRequest) (*ObjectStoreR2TypeConfig, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateObjectStoreR2TypeConfig not implemented")
+}
+func (UnimplementedNemServer) ListDataChangeBeforeImageValue(context.Context, *ListDataChangeBeforeImageValueRequest) (*ListDataChangeBeforeImageValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDataChangeBeforeImageValue not implemented")
+}
+func (UnimplementedNemServer) CreateDataChangeBeforeImageValue(context.Context, *CreateDataChangeBeforeImageValueRequest) (*DataChangeBeforeImageValue, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateDataChangeBeforeImageValue not implemented")
+}
+func (UnimplementedNemServer) UpdateDataChangeBeforeImageValue(context.Context, *UpdateDataChangeBeforeImageValueRequest) (*DataChangeBeforeImageValue, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateDataChangeBeforeImageValue not implemented")
+}
+func (UnimplementedNemServer) ListDataChangeBeforeImage(context.Context, *ListDataChangeBeforeImageRequest) (*ListDataChangeBeforeImageResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDataChangeBeforeImage not implemented")
+}
+func (UnimplementedNemServer) CreateDataChangeBeforeImage(context.Context, *CreateDataChangeBeforeImageRequest) (*DataChangeBeforeImage, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateDataChangeBeforeImage not implemented")
+}
+func (UnimplementedNemServer) UpdateDataChangeBeforeImage(context.Context, *UpdateDataChangeBeforeImageRequest) (*DataChangeBeforeImage, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateDataChangeBeforeImage not implemented")
 }
 func (UnimplementedNemServer) mustEmbedUnimplementedNemServer() {}
 func (UnimplementedNemServer) testEmbeddedByValue()             {}
@@ -10576,6 +10676,114 @@ func _Nem_UpdateObjectStoreR2TypeConfig_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Nem_ListDataChangeBeforeImageValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDataChangeBeforeImageValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListDataChangeBeforeImageValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListDataChangeBeforeImageValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListDataChangeBeforeImageValue(ctx, req.(*ListDataChangeBeforeImageValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateDataChangeBeforeImageValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDataChangeBeforeImageValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateDataChangeBeforeImageValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateDataChangeBeforeImageValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateDataChangeBeforeImageValue(ctx, req.(*CreateDataChangeBeforeImageValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateDataChangeBeforeImageValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDataChangeBeforeImageValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateDataChangeBeforeImageValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateDataChangeBeforeImageValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateDataChangeBeforeImageValue(ctx, req.(*UpdateDataChangeBeforeImageValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_ListDataChangeBeforeImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDataChangeBeforeImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListDataChangeBeforeImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListDataChangeBeforeImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListDataChangeBeforeImage(ctx, req.(*ListDataChangeBeforeImageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateDataChangeBeforeImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDataChangeBeforeImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateDataChangeBeforeImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateDataChangeBeforeImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateDataChangeBeforeImage(ctx, req.(*CreateDataChangeBeforeImageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateDataChangeBeforeImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDataChangeBeforeImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateDataChangeBeforeImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateDataChangeBeforeImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateDataChangeBeforeImage(ctx, req.(*UpdateDataChangeBeforeImageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Nem_ServiceDesc is the grpc.ServiceDesc for Nem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -11794,6 +12002,30 @@ var Nem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateObjectStoreR2TypeConfig",
 			Handler:    _Nem_UpdateObjectStoreR2TypeConfig_Handler,
+		},
+		{
+			MethodName: "ListDataChangeBeforeImageValue",
+			Handler:    _Nem_ListDataChangeBeforeImageValue_Handler,
+		},
+		{
+			MethodName: "CreateDataChangeBeforeImageValue",
+			Handler:    _Nem_CreateDataChangeBeforeImageValue_Handler,
+		},
+		{
+			MethodName: "UpdateDataChangeBeforeImageValue",
+			Handler:    _Nem_UpdateDataChangeBeforeImageValue_Handler,
+		},
+		{
+			MethodName: "ListDataChangeBeforeImage",
+			Handler:    _Nem_ListDataChangeBeforeImage_Handler,
+		},
+		{
+			MethodName: "CreateDataChangeBeforeImage",
+			Handler:    _Nem_CreateDataChangeBeforeImage_Handler,
+		},
+		{
+			MethodName: "UpdateDataChangeBeforeImage",
+			Handler:    _Nem_UpdateDataChangeBeforeImage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

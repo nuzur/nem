@@ -64,26 +64,28 @@ type AutomationEvent struct {
 }
 
 type ChangeRequest struct {
-	UUID               string      `json:"uuid"`
-	Version            int64       `json:"version"`
-	Title              string      `json:"title"`
-	Description        null.String `json:"description"`
-	ProjectUUID        string      `json:"project_uuid"`
-	ProjectVersionUUID string      `json:"project_version_uuid"`
-	ChangeType         int64       `json:"change_type"`
-	DataChanges        mapper.JSON `json:"data_changes"`
-	Metadata           mapper.JSON `json:"metadata"`
-	Reviews            mapper.JSON `json:"reviews"`
-	ReviewStatus       int64       `json:"review_status"`
-	OwnerUUID          string      `json:"owner_uuid"`
-	Status             int64       `json:"status"`
-	CreatedAt          time.Time   `json:"created_at"`
-	UpdatedAt          time.Time   `json:"updated_at"`
-	CreatedByUUID      string      `json:"created_by_uuid"`
-	UpdatedByUUID      string      `json:"updated_by_uuid"`
-	AiGenerated        null.Bool   `json:"ai_generated"`
-	Scope              null.Int    `json:"scope"`
-	ScopeConfig        mapper.JSON `json:"scope_config"`
+	UUID                        string      `json:"uuid"`
+	Version                     int64       `json:"version"`
+	Title                       string      `json:"title"`
+	Description                 null.String `json:"description"`
+	ProjectUUID                 string      `json:"project_uuid"`
+	ProjectVersionUUID          string      `json:"project_version_uuid"`
+	ChangeType                  int64       `json:"change_type"`
+	DataChanges                 mapper.JSON `json:"data_changes"`
+	Metadata                    mapper.JSON `json:"metadata"`
+	Reviews                     mapper.JSON `json:"reviews"`
+	ReviewStatus                int64       `json:"review_status"`
+	OwnerUUID                   string      `json:"owner_uuid"`
+	Status                      int64       `json:"status"`
+	CreatedAt                   time.Time   `json:"created_at"`
+	UpdatedAt                   time.Time   `json:"updated_at"`
+	CreatedByUUID               string      `json:"created_by_uuid"`
+	UpdatedByUUID               string      `json:"updated_by_uuid"`
+	AiGenerated                 null.Bool   `json:"ai_generated"`
+	Scope                       null.Int    `json:"scope"`
+	ScopeConfig                 mapper.JSON `json:"scope_config"`
+	RevertsChangeRequestUUID    null.String `json:"reverts_change_request_uuid"`
+	RevertedByChangeRequestUUID null.String `json:"reverted_by_change_request_uuid"`
 }
 
 type Deployment struct {

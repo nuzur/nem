@@ -147,32 +147,34 @@ func (q *Queries) InsertAutomationEvent(ctx context.Context, arg InsertAutomatio
 
 const insertChangeRequest = `-- name: InsertChangeRequest :execresult
 INSERT INTO ` + "`" + `change_request` + "`" + `
-(` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `)
+(` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 type InsertChangeRequestParams struct {
-	UUID               string      `json:"uuid"`
-	Version            int64       `json:"version"`
-	Title              string      `json:"title"`
-	Description        null.String `json:"description"`
-	ProjectUUID        string      `json:"project_uuid"`
-	ProjectVersionUUID string      `json:"project_version_uuid"`
-	ChangeType         int64       `json:"change_type"`
-	DataChanges        mapper.JSON `json:"data_changes"`
-	Metadata           mapper.JSON `json:"metadata"`
-	Reviews            mapper.JSON `json:"reviews"`
-	ReviewStatus       int64       `json:"review_status"`
-	OwnerUUID          string      `json:"owner_uuid"`
-	Status             int64       `json:"status"`
-	CreatedAt          time.Time   `json:"created_at"`
-	UpdatedAt          time.Time   `json:"updated_at"`
-	CreatedByUUID      string      `json:"created_by_uuid"`
-	UpdatedByUUID      string      `json:"updated_by_uuid"`
-	AiGenerated        null.Bool   `json:"ai_generated"`
-	Scope              null.Int    `json:"scope"`
-	ScopeConfig        mapper.JSON `json:"scope_config"`
+	UUID                        string      `json:"uuid"`
+	Version                     int64       `json:"version"`
+	Title                       string      `json:"title"`
+	Description                 null.String `json:"description"`
+	ProjectUUID                 string      `json:"project_uuid"`
+	ProjectVersionUUID          string      `json:"project_version_uuid"`
+	ChangeType                  int64       `json:"change_type"`
+	DataChanges                 mapper.JSON `json:"data_changes"`
+	Metadata                    mapper.JSON `json:"metadata"`
+	Reviews                     mapper.JSON `json:"reviews"`
+	ReviewStatus                int64       `json:"review_status"`
+	OwnerUUID                   string      `json:"owner_uuid"`
+	Status                      int64       `json:"status"`
+	CreatedAt                   time.Time   `json:"created_at"`
+	UpdatedAt                   time.Time   `json:"updated_at"`
+	CreatedByUUID               string      `json:"created_by_uuid"`
+	UpdatedByUUID               string      `json:"updated_by_uuid"`
+	AiGenerated                 null.Bool   `json:"ai_generated"`
+	Scope                       null.Int    `json:"scope"`
+	ScopeConfig                 mapper.JSON `json:"scope_config"`
+	RevertsChangeRequestUUID    null.String `json:"reverts_change_request_uuid"`
+	RevertedByChangeRequestUUID null.String `json:"reverted_by_change_request_uuid"`
 }
 
 func (q *Queries) InsertChangeRequest(ctx context.Context, arg InsertChangeRequestParams) (sql.Result, error) {
@@ -197,6 +199,8 @@ func (q *Queries) InsertChangeRequest(ctx context.Context, arg InsertChangeReque
 		arg.AiGenerated,
 		arg.Scope,
 		arg.ScopeConfig,
+		arg.RevertsChangeRequestUUID,
+		arg.RevertedByChangeRequestUUID,
 	)
 }
 

@@ -100,7 +100,7 @@ WHERE
 -- name: UpdateChangeRequest :exec
 UPDATE `change_request`
 SET
-`version` = ?, `title` = ?, `description` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `change_type` = ?, `data_changes` = ?, `metadata` = ?, `reviews` = ?, `review_status` = ?, `owner_uuid` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?, `ai_generated` = ?, `scope` = ?, `scope_config` = ?
+`version` = ?, `title` = ?, `description` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `change_type` = ?, `data_changes` = ?, `metadata` = ?, `reviews` = ?, `review_status` = ?, `owner_uuid` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?, `ai_generated` = ?, `scope` = ?, `scope_config` = ?, `reverts_change_request_uuid` = ?, `reverted_by_change_request_uuid` = ?
 WHERE
 `uuid` = ?;
 

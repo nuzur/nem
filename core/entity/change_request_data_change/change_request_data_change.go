@@ -7,6 +7,8 @@ import (
 	"log"
 
 	"github.com/gofrs/uuid"
+	"github.com/guregu/null/v6"
+	"github.com/nuzur/nem/core/entity/data_change_before_image"
 	"github.com/nuzur/nem/core/entity/data_change_type_config"
 	"github.com/nuzur/nem/enums"
 
@@ -14,10 +16,12 @@ import (
 )
 
 type ChangeRequestDataChange struct {
-	UUID                 uuid.UUID                                    `json:"uuid"`
-	DataChangeType       enums.ChangeRequestDataChangeDataChangeType  `json:"data_change_type"`
-	DataChangeTypeConfig data_change_type_config.DataChangeTypeConfig `json:"data_change_type_config"`
-	Order                int64                                        `json:"order"`
+	UUID                 uuid.UUID                                      `json:"uuid"`
+	DataChangeType       enums.ChangeRequestDataChangeDataChangeType    `json:"data_change_type"`
+	DataChangeTypeConfig data_change_type_config.DataChangeTypeConfig   `json:"data_change_type_config"`
+	Order                int64                                          `json:"order"`
+	BeforeImage          data_change_before_image.DataChangeBeforeImage `json:"before_image"`
+	ValuesAreRaw         null.Bool                                      `json:"values_are_raw"`
 }
 
 func (e ChangeRequestDataChange) String() string {

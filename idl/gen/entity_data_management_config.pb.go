@@ -24,10 +24,11 @@ const (
 )
 
 type EntityDataManagementConfig struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	ListDisplayFields []string               `protobuf:"bytes,1,rep,name=list_display_fields,json=listDisplayFields,proto3" json:"list_display_fields,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	ListDisplayFields  []string               `protobuf:"bytes,1,rep,name=list_display_fields,json=listDisplayFields,proto3" json:"list_display_fields,omitempty"`
+	CaptureBeforeImage bool                   `protobuf:"varint,2,opt,name=capture_before_image,json=captureBeforeImage,proto3" json:"capture_before_image,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *EntityDataManagementConfig) Reset() {
@@ -67,13 +68,21 @@ func (x *EntityDataManagementConfig) GetListDisplayFields() []string {
 	return nil
 }
 
+func (x *EntityDataManagementConfig) GetCaptureBeforeImage() bool {
+	if x != nil {
+		return x.CaptureBeforeImage
+	}
+	return false
+}
+
 var File_entity_data_management_config_proto protoreflect.FileDescriptor
 
 const file_entity_data_management_config_proto_rawDesc = "" +
 	"\n" +
-	"#entity_data_management_config.proto\x12\x03nem\"L\n" +
+	"#entity_data_management_config.proto\x12\x03nem\"~\n" +
 	"\x1aEntityDataManagementConfig\x12.\n" +
-	"\x13list_display_fields\x18\x01 \x03(\tR\x11listDisplayFieldsBA\n" +
+	"\x13list_display_fields\x18\x01 \x03(\tR\x11listDisplayFields\x120\n" +
+	"\x14capture_before_image\x18\x02 \x01(\bR\x12captureBeforeImageBA\n" +
 	"\x14github.com/nuzur/nemB\x1aEntityDataManagementConfigP\x01Z\vnem/idl/genb\x06proto3"
 
 var (

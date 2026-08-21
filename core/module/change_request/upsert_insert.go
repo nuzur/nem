@@ -129,5 +129,9 @@ func mapUpsertRequestToInsertParams(req types.UpsertRequest) nemdb.InsertChangeR
 		Scope: req.ChangeRequest.Scope.ToNullInt(),
 
 		ScopeConfig: mapper.JSON(change_request_scope_config.ChangeRequestScopeConfigToJSON(req.ChangeRequest.ScopeConfig)),
+
+		RevertsChangeRequestUUID: mapper.UUIDPtrToNullString(req.ChangeRequest.RevertsChangeRequestUUID),
+
+		RevertedByChangeRequestUUID: mapper.UUIDPtrToNullString(req.ChangeRequest.RevertedByChangeRequestUUID),
 	}
 }

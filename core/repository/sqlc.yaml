@@ -34,10 +34,13 @@ sql:
           automation_uuid: AutomationUUID
           base_version_uuid: BaseVersionUUID
           based_on_field_uuids: BasedOnFieldUUIDs
+          before_image: BeforeImage
           billing_metadata: BillingMetadata
           blocking: Blocking
           boolean: Boolean
           bucket: Bucket
+          capture_before_image: CaptureBeforeImage
+          captured_at: CapturedAt
           cardinality: Cardinality
           change_request_uuid: ChangeRequestUUID
           change_type: ChangeType
@@ -153,6 +156,8 @@ sql:
           input_tokens: InputTokens
           integer: Integer
           is_currency: IsCurrency
+          is_null: IsNull
+          is_pii: IsPii
           json: JSON
           json_schema: JSONSchema
           key: Key
@@ -238,6 +243,8 @@ sql:
           response: Response
           rest_enabled: RestEnabled
           results_path: ResultsPath
+          reverted_by_change_request_uuid: RevertedByChangeRequestUUID
+          reverts_change_request_uuid: RevertsChangeRequestUUID
           review_configs: ReviewConfigs
           review_required_data: ReviewRequiredData
           review_required_structure: ReviewRequiredStructure
@@ -249,6 +256,7 @@ sql:
           rich_text: RichText
           role: Role
           roles: Roles
+          row_digest: RowDigest
           s3: S3
           salt_field_uuids: SaltFieldUUIDs
           schema: Schema
@@ -316,6 +324,7 @@ sql:
           uuid: UUID
           value: Value
           values: Values
+          values_are_raw: ValuesAreRaw
           varchar: Varchar
           verified: Verified
           version: Version
@@ -522,6 +531,8 @@ overrides:
       change_request_scope_config_remote: ChangeRequestScopeConfigRemote
       connection: Connection
       connection_type_config: ConnectionTypeConfig
+      data_change_before_image: DataChangeBeforeImage
+      data_change_before_image_value: DataChangeBeforeImageValue
       data_change_field_value: DataChangeFieldValue
       data_change_type_config: DataChangeTypeConfig
       data_change_type_config_create: DataChangeTypeConfigCreate

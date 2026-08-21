@@ -19,26 +19,28 @@ import (
 )
 
 type ChangeRequest struct {
-	UUID               uuid.UUID                                            `json:"uuid"`
-	Version            int64                                                `json:"version"`
-	Title              string                                               `json:"title"`
-	Description        null.String                                          `json:"description"`
-	ProjectUUID        uuid.UUID                                            `json:"project_uuid"`
-	ProjectVersionUUID uuid.UUID                                            `json:"project_version_uuid"`
-	ChangeType         enums.ChangeRequestChangeType                        `json:"change_type"`
-	DataChanges        []change_request_data_change.ChangeRequestDataChange `json:"data_changes"`
-	Metadata           change_request_metadata.ChangeRequestMetadata        `json:"metadata"`
-	Reviews            []change_request_review.ChangeRequestReview          `json:"reviews"`
-	ReviewStatus       enums.ChangeRequestReviewStatus                      `json:"review_status"`
-	OwnerUUID          uuid.UUID                                            `json:"owner_uuid"`
-	Status             enums.ChangeRequestStatus                            `json:"status"`
-	CreatedAt          time.Time                                            `json:"created_at"`
-	UpdatedAt          time.Time                                            `json:"updated_at"`
-	CreatedByUUID      uuid.UUID                                            `json:"created_by_uuid"`
-	UpdatedByUUID      uuid.UUID                                            `json:"updated_by_uuid"`
-	AiGenerated        null.Bool                                            `json:"ai_generated"`
-	Scope              enums.ChangeRequestScope                             `json:"scope"`
-	ScopeConfig        change_request_scope_config.ChangeRequestScopeConfig `json:"scope_config"`
+	UUID                        uuid.UUID                                            `json:"uuid"`
+	Version                     int64                                                `json:"version"`
+	Title                       string                                               `json:"title"`
+	Description                 null.String                                          `json:"description"`
+	ProjectUUID                 uuid.UUID                                            `json:"project_uuid"`
+	ProjectVersionUUID          uuid.UUID                                            `json:"project_version_uuid"`
+	ChangeType                  enums.ChangeRequestChangeType                        `json:"change_type"`
+	DataChanges                 []change_request_data_change.ChangeRequestDataChange `json:"data_changes"`
+	Metadata                    change_request_metadata.ChangeRequestMetadata        `json:"metadata"`
+	Reviews                     []change_request_review.ChangeRequestReview          `json:"reviews"`
+	ReviewStatus                enums.ChangeRequestReviewStatus                      `json:"review_status"`
+	OwnerUUID                   uuid.UUID                                            `json:"owner_uuid"`
+	Status                      enums.ChangeRequestStatus                            `json:"status"`
+	CreatedAt                   time.Time                                            `json:"created_at"`
+	UpdatedAt                   time.Time                                            `json:"updated_at"`
+	CreatedByUUID               uuid.UUID                                            `json:"created_by_uuid"`
+	UpdatedByUUID               uuid.UUID                                            `json:"updated_by_uuid"`
+	AiGenerated                 null.Bool                                            `json:"ai_generated"`
+	Scope                       enums.ChangeRequestScope                             `json:"scope"`
+	ScopeConfig                 change_request_scope_config.ChangeRequestScopeConfig `json:"scope_config"`
+	RevertsChangeRequestUUID    *uuid.UUID                                           `json:"reverts_change_request_uuid"`
+	RevertedByChangeRequestUUID *uuid.UUID                                           `json:"reverted_by_change_request_uuid"`
 }
 
 func (e ChangeRequest) String() string {

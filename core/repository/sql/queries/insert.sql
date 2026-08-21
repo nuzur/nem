@@ -85,9 +85,9 @@ VALUES
 
 -- name: InsertChangeRequest :execresult
 INSERT INTO `change_request`
-(`uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`)
+(`uuid`,`version`,`title`,`description`,`project_uuid`,`project_version_uuid`,`change_type`,`data_changes`,`metadata`,`reviews`,`review_status`,`owner_uuid`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`ai_generated`,`scope`,`scope_config`,`reverts_change_request_uuid`,`reverted_by_change_request_uuid`)
 VALUES
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 -- name: InsertUserConnection :execresult
 INSERT INTO `user_connection`

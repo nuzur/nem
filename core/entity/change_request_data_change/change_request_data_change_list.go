@@ -5,6 +5,7 @@ package change_request_data_change
 import (
 	entitytypes "github.com/nuzur/nem/core/entity/types"
 
+	"github.com/nuzur/nem/core/entity/data_change_before_image"
 	"github.com/nuzur/nem/core/entity/data_change_type_config"
 )
 
@@ -14,6 +15,8 @@ func (e ChangeRequestDataChange) FieldIdentifierToTypeMap() map[string]entitytyp
 		"data_change_type":        entitytypes.SingleEnumFieldType,
 		"data_change_type_config": entitytypes.SingleDependantEntityFieldType,
 		"order":                   entitytypes.IntFieldType,
+		"before_image":            entitytypes.SingleDependantEntityFieldType,
+		"values_are_raw":          entitytypes.BooleanFieldType,
 	}
 }
 
@@ -23,6 +26,8 @@ func (e ChangeRequestDataChange) OrderedFieldIdentifiers() []string {
 	res = append(res, "data_change_type")
 	res = append(res, "data_change_type_config")
 	res = append(res, "order")
+	res = append(res, "before_image")
+	res = append(res, "values_are_raw")
 
 	return res
 }
@@ -31,6 +36,7 @@ func (e ChangeRequestDataChange) DependantFieldIdentifierToTypeMap() map[string]
 	res := make(map[string]map[string]entitytypes.FieldType)
 
 	res["data_change_type_config"] = data_change_type_config.DataChangeTypeConfig{}.FieldIdentifierToTypeMap()
+	res["before_image"] = data_change_before_image.DataChangeBeforeImage{}.FieldIdentifierToTypeMap()
 	return res
 }
 

@@ -32,6 +32,11 @@ type AWS struct {
 	KeyID  string `yaml:"key_id"`
 	Secret string `yaml:"secret"`
 	Bucket string `yaml:"bucket"`
+	// Endpoint selects the S3-compatible service to talk to. Empty means AWS
+	// S3 (the SDK resolves the regional endpoint itself); set it to the
+	// account endpoint of another S3-compatible store — e.g. Cloudflare R2's
+	// https://<account-id>.r2.cloudflarestorage.com — to use that instead.
+	Endpoint string `yaml:"endpoint"`
 }
 
 func (db DB) Path() string {

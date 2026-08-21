@@ -3528,7 +3528,7 @@ func (q *Queries) FetchAutomationEventByUUIDForUpdate(ctx context.Context, uuid 
 }
 
 const fetchChangeRequestByAiGenerated = `-- name: FetchChangeRequestByAiGenerated :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `ai_generated` + "`" + ` = ? 
@@ -3571,6 +3571,8 @@ func (q *Queries) FetchChangeRequestByAiGenerated(ctx context.Context, arg Fetch
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -3586,7 +3588,7 @@ func (q *Queries) FetchChangeRequestByAiGenerated(ctx context.Context, arg Fetch
 }
 
 const fetchChangeRequestByAiGeneratedOrderedByCreatedAtASC = `-- name: FetchChangeRequestByAiGeneratedOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `ai_generated` + "`" + ` = ?  
@@ -3630,6 +3632,8 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByCreatedAtASC(ctx conte
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -3645,7 +3649,7 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByCreatedAtASC(ctx conte
 }
 
 const fetchChangeRequestByAiGeneratedOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByAiGeneratedOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `ai_generated` + "`" + ` = ?  
@@ -3689,6 +3693,8 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByCreatedAtDESC(ctx cont
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -3704,7 +3710,7 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByCreatedAtDESC(ctx cont
 }
 
 const fetchChangeRequestByAiGeneratedOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByAiGeneratedOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `ai_generated` + "`" + ` = ?  
@@ -3748,6 +3754,8 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByUpdatedAtASC(ctx conte
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -3763,7 +3771,7 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByUpdatedAtASC(ctx conte
 }
 
 const fetchChangeRequestByAiGeneratedOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByAiGeneratedOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `ai_generated` + "`" + ` = ?  
@@ -3807,6 +3815,8 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByUpdatedAtDESC(ctx cont
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -3822,7 +3832,7 @@ func (q *Queries) FetchChangeRequestByAiGeneratedOrderedByUpdatedAtDESC(ctx cont
 }
 
 const fetchChangeRequestByChangeType = `-- name: FetchChangeRequestByChangeType :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `change_type` + "`" + ` = ? 
@@ -3865,6 +3875,8 @@ func (q *Queries) FetchChangeRequestByChangeType(ctx context.Context, arg FetchC
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -3880,7 +3892,7 @@ func (q *Queries) FetchChangeRequestByChangeType(ctx context.Context, arg FetchC
 }
 
 const fetchChangeRequestByChangeTypeOrderedByCreatedAtASC = `-- name: FetchChangeRequestByChangeTypeOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `change_type` + "`" + ` = ?  
@@ -3924,6 +3936,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByCreatedAtASC(ctx contex
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -3939,7 +3953,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByCreatedAtASC(ctx contex
 }
 
 const fetchChangeRequestByChangeTypeOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByChangeTypeOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `change_type` + "`" + ` = ?  
@@ -3983,6 +3997,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByCreatedAtDESC(ctx conte
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -3998,7 +4014,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByCreatedAtDESC(ctx conte
 }
 
 const fetchChangeRequestByChangeTypeOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByChangeTypeOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `change_type` + "`" + ` = ?  
@@ -4042,6 +4058,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByUpdatedAtASC(ctx contex
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4057,7 +4075,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByUpdatedAtASC(ctx contex
 }
 
 const fetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `change_type` + "`" + ` = ?  
@@ -4101,6 +4119,8 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC(ctx conte
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4116,7 +4136,7 @@ func (q *Queries) FetchChangeRequestByChangeTypeOrderedByUpdatedAtDESC(ctx conte
 }
 
 const fetchChangeRequestByOwnerUUID = `-- name: FetchChangeRequestByOwnerUUID :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `owner_uuid` + "`" + ` = ? 
@@ -4159,6 +4179,8 @@ func (q *Queries) FetchChangeRequestByOwnerUUID(ctx context.Context, arg FetchCh
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4174,7 +4196,7 @@ func (q *Queries) FetchChangeRequestByOwnerUUID(ctx context.Context, arg FetchCh
 }
 
 const fetchChangeRequestByOwnerUUIDOrderedByCreatedAtASC = `-- name: FetchChangeRequestByOwnerUUIDOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `owner_uuid` + "`" + ` = ?  
@@ -4218,6 +4240,8 @@ func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByCreatedAtASC(ctx context
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4233,7 +4257,7 @@ func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByCreatedAtASC(ctx context
 }
 
 const fetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `owner_uuid` + "`" + ` = ?  
@@ -4277,6 +4301,8 @@ func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESC(ctx contex
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4292,7 +4318,7 @@ func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByCreatedAtDESC(ctx contex
 }
 
 const fetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `owner_uuid` + "`" + ` = ?  
@@ -4336,6 +4362,8 @@ func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASC(ctx context
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4351,7 +4379,7 @@ func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtASC(ctx context
 }
 
 const fetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `owner_uuid` + "`" + ` = ?  
@@ -4395,6 +4423,8 @@ func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESC(ctx contex
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4410,7 +4440,7 @@ func (q *Queries) FetchChangeRequestByOwnerUUIDOrderedByUpdatedAtDESC(ctx contex
 }
 
 const fetchChangeRequestByProjectUUID = `-- name: FetchChangeRequestByProjectUUID :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `project_uuid` + "`" + ` = ? 
@@ -4453,6 +4483,8 @@ func (q *Queries) FetchChangeRequestByProjectUUID(ctx context.Context, arg Fetch
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4468,7 +4500,7 @@ func (q *Queries) FetchChangeRequestByProjectUUID(ctx context.Context, arg Fetch
 }
 
 const fetchChangeRequestByProjectUUIDOrderedByCreatedAtASC = `-- name: FetchChangeRequestByProjectUUIDOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `project_uuid` + "`" + ` = ?  
@@ -4512,6 +4544,8 @@ func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByCreatedAtASC(ctx conte
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4527,7 +4561,7 @@ func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByCreatedAtASC(ctx conte
 }
 
 const fetchChangeRequestByProjectUUIDOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByProjectUUIDOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `project_uuid` + "`" + ` = ?  
@@ -4571,6 +4605,8 @@ func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByCreatedAtDESC(ctx cont
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4586,7 +4622,7 @@ func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByCreatedAtDESC(ctx cont
 }
 
 const fetchChangeRequestByProjectUUIDOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByProjectUUIDOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `project_uuid` + "`" + ` = ?  
@@ -4630,6 +4666,8 @@ func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByUpdatedAtASC(ctx conte
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4645,7 +4683,7 @@ func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByUpdatedAtASC(ctx conte
 }
 
 const fetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `project_uuid` + "`" + ` = ?  
@@ -4689,6 +4727,8 @@ func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESC(ctx cont
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4704,7 +4744,7 @@ func (q *Queries) FetchChangeRequestByProjectUUIDOrderedByUpdatedAtDESC(ctx cont
 }
 
 const fetchChangeRequestByProjectVersionUUID = `-- name: FetchChangeRequestByProjectVersionUUID :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `project_version_uuid` + "`" + ` = ? 
@@ -4747,6 +4787,8 @@ func (q *Queries) FetchChangeRequestByProjectVersionUUID(ctx context.Context, ar
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4762,7 +4804,7 @@ func (q *Queries) FetchChangeRequestByProjectVersionUUID(ctx context.Context, ar
 }
 
 const fetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASC = `-- name: FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `project_version_uuid` + "`" + ` = ?  
@@ -4806,6 +4848,8 @@ func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASC(ct
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4821,7 +4865,7 @@ func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtASC(ct
 }
 
 const fetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `project_version_uuid` + "`" + ` = ?  
@@ -4865,6 +4909,8 @@ func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESC(c
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4880,7 +4926,7 @@ func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByCreatedAtDESC(c
 }
 
 const fetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `project_version_uuid` + "`" + ` = ?  
@@ -4924,6 +4970,8 @@ func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASC(ct
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4939,7 +4987,7 @@ func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtASC(ct
 }
 
 const fetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `project_version_uuid` + "`" + ` = ?  
@@ -4983,6 +5031,312 @@ func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESC(c
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByRevertsChangeRequestUUID = `-- name: FetchChangeRequestByRevertsChangeRequestUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
+FROM ` + "`" + `change_request` + "`" + `
+WHERE 
+    ` + "`" + `reverts_change_request_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchChangeRequestByRevertsChangeRequestUUIDParams struct {
+	RevertsChangeRequestUUID null.String `json:"reverts_change_request_uuid"`
+	Offset                   int32       `json:"offset"`
+	Limit                    int32       `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByRevertsChangeRequestUUID(ctx context.Context, arg FetchChangeRequestByRevertsChangeRequestUUIDParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByRevertsChangeRequestUUID, arg.RevertsChangeRequestUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.Metadata,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtASC = `-- name: FetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
+FROM ` + "`" + `change_request` + "`" + `
+WHERE 
+    ` + "`" + `reverts_change_request_uuid` + "`" + ` = ?  
+ORDER BY created_at ASC
+LIMIT ?, ?
+`
+
+type FetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtASCParams struct {
+	RevertsChangeRequestUUID null.String `json:"reverts_change_request_uuid"`
+	Offset                   int32       `json:"offset"`
+	Limit                    int32       `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtASC(ctx context.Context, arg FetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtASC, arg.RevertsChangeRequestUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.Metadata,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
+FROM ` + "`" + `change_request` + "`" + `
+WHERE 
+    ` + "`" + `reverts_change_request_uuid` + "`" + ` = ?  
+ORDER BY created_at DESC
+LIMIT ?, ?
+`
+
+type FetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtDESCParams struct {
+	RevertsChangeRequestUUID null.String `json:"reverts_change_request_uuid"`
+	Offset                   int32       `json:"offset"`
+	Limit                    int32       `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtDESC(ctx context.Context, arg FetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByRevertsChangeRequestUUIDOrderedByCreatedAtDESC, arg.RevertsChangeRequestUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.Metadata,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtASC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
+FROM ` + "`" + `change_request` + "`" + `
+WHERE 
+    ` + "`" + `reverts_change_request_uuid` + "`" + ` = ?  
+ORDER BY updated_at ASC
+LIMIT ?, ?
+`
+
+type FetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtASCParams struct {
+	RevertsChangeRequestUUID null.String `json:"reverts_change_request_uuid"`
+	Offset                   int32       `json:"offset"`
+	Limit                    int32       `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtASC(ctx context.Context, arg FetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtASCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtASC, arg.RevertsChangeRequestUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.Metadata,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtDESC :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
+FROM ` + "`" + `change_request` + "`" + `
+WHERE 
+    ` + "`" + `reverts_change_request_uuid` + "`" + ` = ?  
+ORDER BY updated_at DESC
+LIMIT ?, ?
+`
+
+type FetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtDESCParams struct {
+	RevertsChangeRequestUUID null.String `json:"reverts_change_request_uuid"`
+	Offset                   int32       `json:"offset"`
+	Limit                    int32       `json:"limit"`
+}
+
+func (q *Queries) FetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtDESC(ctx context.Context, arg FetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtDESCParams) ([]ChangeRequest, error) {
+	rows, err := q.db.QueryContext(ctx, fetchChangeRequestByRevertsChangeRequestUUIDOrderedByUpdatedAtDESC, arg.RevertsChangeRequestUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ChangeRequest
+	for rows.Next() {
+		var i ChangeRequest
+		if err := rows.Scan(
+			&i.UUID,
+			&i.Version,
+			&i.Title,
+			&i.Description,
+			&i.ProjectUUID,
+			&i.ProjectVersionUUID,
+			&i.ChangeType,
+			&i.DataChanges,
+			&i.Metadata,
+			&i.Reviews,
+			&i.ReviewStatus,
+			&i.OwnerUUID,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+			&i.AiGenerated,
+			&i.Scope,
+			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -4998,7 +5352,7 @@ func (q *Queries) FetchChangeRequestByProjectVersionUUIDOrderedByUpdatedAtDESC(c
 }
 
 const fetchChangeRequestByReviewStatus = `-- name: FetchChangeRequestByReviewStatus :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `review_status` + "`" + ` = ? 
@@ -5041,6 +5395,8 @@ func (q *Queries) FetchChangeRequestByReviewStatus(ctx context.Context, arg Fetc
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5056,7 +5412,7 @@ func (q *Queries) FetchChangeRequestByReviewStatus(ctx context.Context, arg Fetc
 }
 
 const fetchChangeRequestByReviewStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByReviewStatusOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `review_status` + "`" + ` = ?  
@@ -5100,6 +5456,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByCreatedAtASC(ctx cont
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5115,7 +5473,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByCreatedAtASC(ctx cont
 }
 
 const fetchChangeRequestByReviewStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByReviewStatusOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `review_status` + "`" + ` = ?  
@@ -5159,6 +5517,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByCreatedAtDESC(ctx con
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5174,7 +5534,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByCreatedAtDESC(ctx con
 }
 
 const fetchChangeRequestByReviewStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByReviewStatusOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `review_status` + "`" + ` = ?  
@@ -5218,6 +5578,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByUpdatedAtASC(ctx cont
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5233,7 +5595,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByUpdatedAtASC(ctx cont
 }
 
 const fetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `review_status` + "`" + ` = ?  
@@ -5277,6 +5639,8 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC(ctx con
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5292,7 +5656,7 @@ func (q *Queries) FetchChangeRequestByReviewStatusOrderedByUpdatedAtDESC(ctx con
 }
 
 const fetchChangeRequestByStatus = `-- name: FetchChangeRequestByStatus :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `status` + "`" + ` = ? 
@@ -5335,6 +5699,8 @@ func (q *Queries) FetchChangeRequestByStatus(ctx context.Context, arg FetchChang
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5350,7 +5716,7 @@ func (q *Queries) FetchChangeRequestByStatus(ctx context.Context, arg FetchChang
 }
 
 const fetchChangeRequestByStatusOrderedByCreatedAtASC = `-- name: FetchChangeRequestByStatusOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `status` + "`" + ` = ?  
@@ -5394,6 +5760,8 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByCreatedAtASC(ctx context.Co
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5409,7 +5777,7 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByCreatedAtASC(ctx context.Co
 }
 
 const fetchChangeRequestByStatusOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByStatusOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `status` + "`" + ` = ?  
@@ -5453,6 +5821,8 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByCreatedAtDESC(ctx context.C
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5468,7 +5838,7 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByCreatedAtDESC(ctx context.C
 }
 
 const fetchChangeRequestByStatusOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByStatusOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `status` + "`" + ` = ?  
@@ -5512,6 +5882,8 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByUpdatedAtASC(ctx context.Co
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5527,7 +5899,7 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByUpdatedAtASC(ctx context.Co
 }
 
 const fetchChangeRequestByStatusOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByStatusOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `status` + "`" + ` = ?  
@@ -5571,6 +5943,8 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByUpdatedAtDESC(ctx context.C
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5586,7 +5960,7 @@ func (q *Queries) FetchChangeRequestByStatusOrderedByUpdatedAtDESC(ctx context.C
 }
 
 const fetchChangeRequestByUUID = `-- name: FetchChangeRequestByUUID :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `uuid` + "`" + ` = ?
@@ -5623,6 +5997,8 @@ func (q *Queries) FetchChangeRequestByUUID(ctx context.Context, uuid string) ([]
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5638,7 +6014,7 @@ func (q *Queries) FetchChangeRequestByUUID(ctx context.Context, uuid string) ([]
 }
 
 const fetchChangeRequestByUUIDForUpdate = `-- name: FetchChangeRequestByUUIDForUpdate :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `uuid` + "`" + ` = ? 
@@ -5675,6 +6051,8 @@ func (q *Queries) FetchChangeRequestByUUIDForUpdate(ctx context.Context, uuid st
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5690,7 +6068,7 @@ func (q *Queries) FetchChangeRequestByUUIDForUpdate(ctx context.Context, uuid st
 }
 
 const fetchChangeRequestByVersion = `-- name: FetchChangeRequestByVersion :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `version` + "`" + ` = ? 
@@ -5733,6 +6111,8 @@ func (q *Queries) FetchChangeRequestByVersion(ctx context.Context, arg FetchChan
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5748,7 +6128,7 @@ func (q *Queries) FetchChangeRequestByVersion(ctx context.Context, arg FetchChan
 }
 
 const fetchChangeRequestByVersionOrderedByCreatedAtASC = `-- name: FetchChangeRequestByVersionOrderedByCreatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `version` + "`" + ` = ?  
@@ -5792,6 +6172,8 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByCreatedAtASC(ctx context.C
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5807,7 +6189,7 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByCreatedAtASC(ctx context.C
 }
 
 const fetchChangeRequestByVersionOrderedByCreatedAtDESC = `-- name: FetchChangeRequestByVersionOrderedByCreatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `version` + "`" + ` = ?  
@@ -5851,6 +6233,8 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByCreatedAtDESC(ctx context.
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5866,7 +6250,7 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByCreatedAtDESC(ctx context.
 }
 
 const fetchChangeRequestByVersionOrderedByUpdatedAtASC = `-- name: FetchChangeRequestByVersionOrderedByUpdatedAtASC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `version` + "`" + ` = ?  
@@ -5910,6 +6294,8 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByUpdatedAtASC(ctx context.C
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}
@@ -5925,7 +6311,7 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByUpdatedAtASC(ctx context.C
 }
 
 const fetchChangeRequestByVersionOrderedByUpdatedAtDESC = `-- name: FetchChangeRequestByVersionOrderedByUpdatedAtDESC :many
-SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `title` + "`" + `,` + "`" + `description` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `project_version_uuid` + "`" + `,` + "`" + `change_type` + "`" + `,` + "`" + `data_changes` + "`" + `,` + "`" + `metadata` + "`" + `,` + "`" + `reviews` + "`" + `,` + "`" + `review_status` + "`" + `,` + "`" + `owner_uuid` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `ai_generated` + "`" + `,` + "`" + `scope` + "`" + `,` + "`" + `scope_config` + "`" + `,` + "`" + `reverts_change_request_uuid` + "`" + `,` + "`" + `reverted_by_change_request_uuid` + "`" + `
 FROM ` + "`" + `change_request` + "`" + `
 WHERE 
     ` + "`" + `version` + "`" + ` = ?  
@@ -5969,6 +6355,8 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByUpdatedAtDESC(ctx context.
 			&i.AiGenerated,
 			&i.Scope,
 			&i.ScopeConfig,
+			&i.RevertsChangeRequestUUID,
+			&i.RevertedByChangeRequestUUID,
 		); err != nil {
 			return nil, err
 		}

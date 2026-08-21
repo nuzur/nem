@@ -362,6 +362,8 @@ CREATE TABLE IF NOT EXISTS `change_request` (
     `ai_generated` TINYINT(1),
     `scope` INT,
     `scope_config` JSON,
+    `reverts_change_request_uuid` CHAR(36),
+    `reverted_by_change_request_uuid` CHAR(36),
     PRIMARY KEY (`uuid`),
     INDEX `version` (`version`),
     INDEX `ai_generated` (`ai_generated`),
@@ -372,7 +374,8 @@ CREATE TABLE IF NOT EXISTS `change_request` (
     INDEX `created_at` (`created_at`),
     INDEX `owner_uuid` (`owner_uuid`),
     INDEX `review_status` (`review_status`),
-    INDEX `status` (`status`)
+    INDEX `status` (`status`),
+    INDEX `reverts_change_request_uuid` (`reverts_change_request_uuid`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `user_connection` (
