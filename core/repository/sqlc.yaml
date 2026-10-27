@@ -38,6 +38,7 @@ sql:
           billing_metadata: BillingMetadata
           blocking: Blocking
           boolean: Boolean
+          branch: Branch
           bucket: Bucket
           capture_before_image: CaptureBeforeImage
           captured_at: CapturedAt
@@ -47,10 +48,15 @@ sql:
           char: Char
           cli_version: CliVersion
           code: Code
+          codebase_uuid: CodebaseUUID
           codegen: Codegen
           collapsed: Collapsed
           color: Color
           comment: Comment
+          commit_sha: CommitSha
+          committed_at: CommittedAt
+          component_id: ComponentId
+          components: Components
           condition: Condition
           config: Config
           configuration_entity: ConfigurationEntity
@@ -82,6 +88,7 @@ sql:
           db_type_config: DbTypeConfig
           db_version: DbVersion
           decimal: Decimal
+          default_branch: DefaultBranch
           default_entity: DefaultEntity
           default_schema: DefaultSchema
           default_value: DefaultValue
@@ -94,6 +101,7 @@ sql:
           deployments: Deployments
           deprecated: Deprecated
           description: Description
+          dirty: Dirty
           display: Display
           display_author_name: DisplayAuthorName
           display_name: DisplayName
@@ -130,6 +138,8 @@ sql:
           extension_type: ExtensionType
           extension_uuid: ExtensionUUID
           extension_version_uuid: ExtensionVersionUUID
+          facts: Facts
+          facts_schema_version: FactsSchemaVersion
           field: Field
           field_uuid: FieldUUID
           field_uuids: FieldUUIDs
@@ -163,6 +173,7 @@ sql:
           key: Key
           key_auto_increment: KeyAutoIncrement
           keys: Keys
+          language: Language
           last_error: LastError
           last_heartbeat_at: LastHeartbeatAt
           last_name: LastName
@@ -189,6 +200,7 @@ sql:
           min_value: MinValue
           min_value_inclusive: MinValueInclusive
           mode: Mode
+          module_dir: ModuleDir
           mysql: Mysql
           name: Name
           new_value: NewValue
@@ -237,10 +249,12 @@ sql:
           remote: Remote
           remote_values: RemoteValues
           render: Render
+          repo_url: RepoURL
           repository: Repository
           repository_tag: RepositoryTag
           required: Required
           response: Response
+          responsibilities: Responsibilities
           rest_enabled: RestEnabled
           results_path: ResultsPath
           reverted_by_change_request_uuid: RevertedByChangeRequestUUID
@@ -259,6 +273,7 @@ sql:
           row_digest: RowDigest
           s3: S3
           salt_field_uuids: SaltFieldUUIDs
+          scanner_version: ScannerVersion
           schema: Schema
           scope: Scope
           scope_config: ScopeConfig
@@ -294,6 +309,7 @@ sql:
           storage_type: StorageType
           store_uuid: StoreUUID
           stores: Stores
+          summary: Summary
           tags: Tags
           tcp_ip: TcpIp
           tcp_ip_ssh: TcpIpSsh
@@ -529,6 +545,10 @@ overrides:
       change_request_scope_config: ChangeRequestScopeConfig
       change_request_scope_config_local: ChangeRequestScopeConfigLocal
       change_request_scope_config_remote: ChangeRequestScopeConfigRemote
+      code_model: CodeModel
+      code_model_component: CodeModelComponent
+      code_snapshot: CodeSnapshot
+      codebase: Codebase
       connection: Connection
       connection_type_config: ConnectionTypeConfig
       data_change_before_image: DataChangeBeforeImage

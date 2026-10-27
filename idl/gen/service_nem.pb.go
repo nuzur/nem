@@ -25877,6 +25877,1010 @@ func (x *UpdateDataChangeBeforeImageRequest) GetUpdateMask() *fieldmaskpb.FieldM
 	return nil
 }
 
+// codebase start
+type ListCodebaseRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The maximum number of records to return. The service may return fewer than
+	// this value.
+	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// A page token, received from a previous call.
+	// Provide this to retrieve the subsequent page.
+	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// https://google.aip.dev/160
+	// https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+	// https://github.com/einride/aip-go
+	Filter        string   `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
+	OrderBy       string   `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	IncludeFields []string `protobuf:"bytes,5,rep,name=include_fields,json=includeFields,proto3" json:"include_fields,omitempty"`
+	ExcludeFields []string `protobuf:"bytes,6,rep,name=exclude_fields,json=excludeFields,proto3" json:"exclude_fields,omitempty"`
+	SkipCache     bool     `protobuf:"varint,7,opt,name=skip_cache,json=skipCache,proto3" json:"skip_cache,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCodebaseRequest) Reset() {
+	*x = ListCodebaseRequest{}
+	mi := &file_service_nem_proto_msgTypes[412]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCodebaseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCodebaseRequest) ProtoMessage() {}
+
+func (x *ListCodebaseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[412]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCodebaseRequest.ProtoReflect.Descriptor instead.
+func (*ListCodebaseRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{412}
+}
+
+func (x *ListCodebaseRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListCodebaseRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListCodebaseRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListCodebaseRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
+}
+
+func (x *ListCodebaseRequest) GetIncludeFields() []string {
+	if x != nil {
+		return x.IncludeFields
+	}
+	return nil
+}
+
+func (x *ListCodebaseRequest) GetExcludeFields() []string {
+	if x != nil {
+		return x.ExcludeFields
+	}
+	return nil
+}
+
+func (x *ListCodebaseRequest) GetSkipCache() bool {
+	if x != nil {
+		return x.SkipCache
+	}
+	return false
+}
+
+type ListCodebaseResponse struct {
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	Codebase []*Codebase            `protobuf:"bytes,1,rep,name=codebase,proto3" json:"codebase,omitempty"`
+	// A token that can be sent as `page_token` to retrieve the next page.
+	// If this field is omitted, there are no subsequent pages.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCodebaseResponse) Reset() {
+	*x = ListCodebaseResponse{}
+	mi := &file_service_nem_proto_msgTypes[413]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCodebaseResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCodebaseResponse) ProtoMessage() {}
+
+func (x *ListCodebaseResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[413]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCodebaseResponse.ProtoReflect.Descriptor instead.
+func (*ListCodebaseResponse) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{413}
+}
+
+func (x *ListCodebaseResponse) GetCodebase() []*Codebase {
+	if x != nil {
+		return x.Codebase
+	}
+	return nil
+}
+
+func (x *ListCodebaseResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type CreateCodebaseRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Codebase      *Codebase              `protobuf:"bytes,1,opt,name=codebase,proto3" json:"codebase,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateCodebaseRequest) Reset() {
+	*x = CreateCodebaseRequest{}
+	mi := &file_service_nem_proto_msgTypes[414]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateCodebaseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateCodebaseRequest) ProtoMessage() {}
+
+func (x *CreateCodebaseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[414]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateCodebaseRequest.ProtoReflect.Descriptor instead.
+func (*CreateCodebaseRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{414}
+}
+
+func (x *CreateCodebaseRequest) GetCodebase() *Codebase {
+	if x != nil {
+		return x.Codebase
+	}
+	return nil
+}
+
+type UpdateCodebaseRequest struct {
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	Codebase *Codebase              `protobuf:"bytes,1,opt,name=codebase,proto3" json:"codebase,omitempty"`
+	// The list of fields to update.
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateCodebaseRequest) Reset() {
+	*x = UpdateCodebaseRequest{}
+	mi := &file_service_nem_proto_msgTypes[415]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateCodebaseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCodebaseRequest) ProtoMessage() {}
+
+func (x *UpdateCodebaseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[415]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCodebaseRequest.ProtoReflect.Descriptor instead.
+func (*UpdateCodebaseRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{415}
+}
+
+func (x *UpdateCodebaseRequest) GetCodebase() *Codebase {
+	if x != nil {
+		return x.Codebase
+	}
+	return nil
+}
+
+func (x *UpdateCodebaseRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
+	}
+	return nil
+}
+
+// code_snapshot start
+type ListCodeSnapshotRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The maximum number of records to return. The service may return fewer than
+	// this value.
+	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// A page token, received from a previous call.
+	// Provide this to retrieve the subsequent page.
+	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// https://google.aip.dev/160
+	// https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+	// https://github.com/einride/aip-go
+	Filter        string   `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
+	OrderBy       string   `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	IncludeFields []string `protobuf:"bytes,5,rep,name=include_fields,json=includeFields,proto3" json:"include_fields,omitempty"`
+	ExcludeFields []string `protobuf:"bytes,6,rep,name=exclude_fields,json=excludeFields,proto3" json:"exclude_fields,omitempty"`
+	SkipCache     bool     `protobuf:"varint,7,opt,name=skip_cache,json=skipCache,proto3" json:"skip_cache,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCodeSnapshotRequest) Reset() {
+	*x = ListCodeSnapshotRequest{}
+	mi := &file_service_nem_proto_msgTypes[416]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCodeSnapshotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCodeSnapshotRequest) ProtoMessage() {}
+
+func (x *ListCodeSnapshotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[416]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCodeSnapshotRequest.ProtoReflect.Descriptor instead.
+func (*ListCodeSnapshotRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{416}
+}
+
+func (x *ListCodeSnapshotRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListCodeSnapshotRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListCodeSnapshotRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListCodeSnapshotRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
+}
+
+func (x *ListCodeSnapshotRequest) GetIncludeFields() []string {
+	if x != nil {
+		return x.IncludeFields
+	}
+	return nil
+}
+
+func (x *ListCodeSnapshotRequest) GetExcludeFields() []string {
+	if x != nil {
+		return x.ExcludeFields
+	}
+	return nil
+}
+
+func (x *ListCodeSnapshotRequest) GetSkipCache() bool {
+	if x != nil {
+		return x.SkipCache
+	}
+	return false
+}
+
+type ListCodeSnapshotResponse struct {
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	CodeSnapshot []*CodeSnapshot        `protobuf:"bytes,1,rep,name=code_snapshot,json=codeSnapshot,proto3" json:"code_snapshot,omitempty"`
+	// A token that can be sent as `page_token` to retrieve the next page.
+	// If this field is omitted, there are no subsequent pages.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCodeSnapshotResponse) Reset() {
+	*x = ListCodeSnapshotResponse{}
+	mi := &file_service_nem_proto_msgTypes[417]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCodeSnapshotResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCodeSnapshotResponse) ProtoMessage() {}
+
+func (x *ListCodeSnapshotResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[417]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCodeSnapshotResponse.ProtoReflect.Descriptor instead.
+func (*ListCodeSnapshotResponse) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{417}
+}
+
+func (x *ListCodeSnapshotResponse) GetCodeSnapshot() []*CodeSnapshot {
+	if x != nil {
+		return x.CodeSnapshot
+	}
+	return nil
+}
+
+func (x *ListCodeSnapshotResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type CreateCodeSnapshotRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CodeSnapshot  *CodeSnapshot          `protobuf:"bytes,1,opt,name=code_snapshot,json=codeSnapshot,proto3" json:"code_snapshot,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateCodeSnapshotRequest) Reset() {
+	*x = CreateCodeSnapshotRequest{}
+	mi := &file_service_nem_proto_msgTypes[418]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateCodeSnapshotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateCodeSnapshotRequest) ProtoMessage() {}
+
+func (x *CreateCodeSnapshotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[418]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateCodeSnapshotRequest.ProtoReflect.Descriptor instead.
+func (*CreateCodeSnapshotRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{418}
+}
+
+func (x *CreateCodeSnapshotRequest) GetCodeSnapshot() *CodeSnapshot {
+	if x != nil {
+		return x.CodeSnapshot
+	}
+	return nil
+}
+
+type UpdateCodeSnapshotRequest struct {
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	CodeSnapshot *CodeSnapshot          `protobuf:"bytes,1,opt,name=code_snapshot,json=codeSnapshot,proto3" json:"code_snapshot,omitempty"`
+	// The list of fields to update.
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateCodeSnapshotRequest) Reset() {
+	*x = UpdateCodeSnapshotRequest{}
+	mi := &file_service_nem_proto_msgTypes[419]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateCodeSnapshotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCodeSnapshotRequest) ProtoMessage() {}
+
+func (x *UpdateCodeSnapshotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[419]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCodeSnapshotRequest.ProtoReflect.Descriptor instead.
+func (*UpdateCodeSnapshotRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{419}
+}
+
+func (x *UpdateCodeSnapshotRequest) GetCodeSnapshot() *CodeSnapshot {
+	if x != nil {
+		return x.CodeSnapshot
+	}
+	return nil
+}
+
+func (x *UpdateCodeSnapshotRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
+	}
+	return nil
+}
+
+// code_model_component start
+type ListCodeModelComponentRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The maximum number of records to return. The service may return fewer than
+	// this value.
+	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// A page token, received from a previous call.
+	// Provide this to retrieve the subsequent page.
+	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// https://google.aip.dev/160
+	// https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+	// https://github.com/einride/aip-go
+	Filter        string   `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
+	OrderBy       string   `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	IncludeFields []string `protobuf:"bytes,5,rep,name=include_fields,json=includeFields,proto3" json:"include_fields,omitempty"`
+	ExcludeFields []string `protobuf:"bytes,6,rep,name=exclude_fields,json=excludeFields,proto3" json:"exclude_fields,omitempty"`
+	SkipCache     bool     `protobuf:"varint,7,opt,name=skip_cache,json=skipCache,proto3" json:"skip_cache,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCodeModelComponentRequest) Reset() {
+	*x = ListCodeModelComponentRequest{}
+	mi := &file_service_nem_proto_msgTypes[420]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCodeModelComponentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCodeModelComponentRequest) ProtoMessage() {}
+
+func (x *ListCodeModelComponentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[420]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCodeModelComponentRequest.ProtoReflect.Descriptor instead.
+func (*ListCodeModelComponentRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{420}
+}
+
+func (x *ListCodeModelComponentRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListCodeModelComponentRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListCodeModelComponentRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListCodeModelComponentRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
+}
+
+func (x *ListCodeModelComponentRequest) GetIncludeFields() []string {
+	if x != nil {
+		return x.IncludeFields
+	}
+	return nil
+}
+
+func (x *ListCodeModelComponentRequest) GetExcludeFields() []string {
+	if x != nil {
+		return x.ExcludeFields
+	}
+	return nil
+}
+
+func (x *ListCodeModelComponentRequest) GetSkipCache() bool {
+	if x != nil {
+		return x.SkipCache
+	}
+	return false
+}
+
+type ListCodeModelComponentResponse struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	CodeModelComponent []*CodeModelComponent  `protobuf:"bytes,1,rep,name=code_model_component,json=codeModelComponent,proto3" json:"code_model_component,omitempty"`
+	// A token that can be sent as `page_token` to retrieve the next page.
+	// If this field is omitted, there are no subsequent pages.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCodeModelComponentResponse) Reset() {
+	*x = ListCodeModelComponentResponse{}
+	mi := &file_service_nem_proto_msgTypes[421]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCodeModelComponentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCodeModelComponentResponse) ProtoMessage() {}
+
+func (x *ListCodeModelComponentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[421]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCodeModelComponentResponse.ProtoReflect.Descriptor instead.
+func (*ListCodeModelComponentResponse) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{421}
+}
+
+func (x *ListCodeModelComponentResponse) GetCodeModelComponent() []*CodeModelComponent {
+	if x != nil {
+		return x.CodeModelComponent
+	}
+	return nil
+}
+
+func (x *ListCodeModelComponentResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type CreateCodeModelComponentRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	CodeModelComponent *CodeModelComponent    `protobuf:"bytes,1,opt,name=code_model_component,json=codeModelComponent,proto3" json:"code_model_component,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *CreateCodeModelComponentRequest) Reset() {
+	*x = CreateCodeModelComponentRequest{}
+	mi := &file_service_nem_proto_msgTypes[422]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateCodeModelComponentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateCodeModelComponentRequest) ProtoMessage() {}
+
+func (x *CreateCodeModelComponentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[422]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateCodeModelComponentRequest.ProtoReflect.Descriptor instead.
+func (*CreateCodeModelComponentRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{422}
+}
+
+func (x *CreateCodeModelComponentRequest) GetCodeModelComponent() *CodeModelComponent {
+	if x != nil {
+		return x.CodeModelComponent
+	}
+	return nil
+}
+
+type UpdateCodeModelComponentRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	CodeModelComponent *CodeModelComponent    `protobuf:"bytes,1,opt,name=code_model_component,json=codeModelComponent,proto3" json:"code_model_component,omitempty"`
+	// The list of fields to update.
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateCodeModelComponentRequest) Reset() {
+	*x = UpdateCodeModelComponentRequest{}
+	mi := &file_service_nem_proto_msgTypes[423]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateCodeModelComponentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCodeModelComponentRequest) ProtoMessage() {}
+
+func (x *UpdateCodeModelComponentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[423]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCodeModelComponentRequest.ProtoReflect.Descriptor instead.
+func (*UpdateCodeModelComponentRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{423}
+}
+
+func (x *UpdateCodeModelComponentRequest) GetCodeModelComponent() *CodeModelComponent {
+	if x != nil {
+		return x.CodeModelComponent
+	}
+	return nil
+}
+
+func (x *UpdateCodeModelComponentRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
+	}
+	return nil
+}
+
+// code_model start
+type ListCodeModelRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The maximum number of records to return. The service may return fewer than
+	// this value.
+	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// A page token, received from a previous call.
+	// Provide this to retrieve the subsequent page.
+	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// https://google.aip.dev/160
+	// https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+	// https://github.com/einride/aip-go
+	Filter        string   `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
+	OrderBy       string   `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	IncludeFields []string `protobuf:"bytes,5,rep,name=include_fields,json=includeFields,proto3" json:"include_fields,omitempty"`
+	ExcludeFields []string `protobuf:"bytes,6,rep,name=exclude_fields,json=excludeFields,proto3" json:"exclude_fields,omitempty"`
+	SkipCache     bool     `protobuf:"varint,7,opt,name=skip_cache,json=skipCache,proto3" json:"skip_cache,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCodeModelRequest) Reset() {
+	*x = ListCodeModelRequest{}
+	mi := &file_service_nem_proto_msgTypes[424]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCodeModelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCodeModelRequest) ProtoMessage() {}
+
+func (x *ListCodeModelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[424]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCodeModelRequest.ProtoReflect.Descriptor instead.
+func (*ListCodeModelRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{424}
+}
+
+func (x *ListCodeModelRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListCodeModelRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListCodeModelRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListCodeModelRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
+}
+
+func (x *ListCodeModelRequest) GetIncludeFields() []string {
+	if x != nil {
+		return x.IncludeFields
+	}
+	return nil
+}
+
+func (x *ListCodeModelRequest) GetExcludeFields() []string {
+	if x != nil {
+		return x.ExcludeFields
+	}
+	return nil
+}
+
+func (x *ListCodeModelRequest) GetSkipCache() bool {
+	if x != nil {
+		return x.SkipCache
+	}
+	return false
+}
+
+type ListCodeModelResponse struct {
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	CodeModel []*CodeModel           `protobuf:"bytes,1,rep,name=code_model,json=codeModel,proto3" json:"code_model,omitempty"`
+	// A token that can be sent as `page_token` to retrieve the next page.
+	// If this field is omitted, there are no subsequent pages.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCodeModelResponse) Reset() {
+	*x = ListCodeModelResponse{}
+	mi := &file_service_nem_proto_msgTypes[425]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCodeModelResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCodeModelResponse) ProtoMessage() {}
+
+func (x *ListCodeModelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[425]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCodeModelResponse.ProtoReflect.Descriptor instead.
+func (*ListCodeModelResponse) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{425}
+}
+
+func (x *ListCodeModelResponse) GetCodeModel() []*CodeModel {
+	if x != nil {
+		return x.CodeModel
+	}
+	return nil
+}
+
+func (x *ListCodeModelResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type CreateCodeModelRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CodeModel     *CodeModel             `protobuf:"bytes,1,opt,name=code_model,json=codeModel,proto3" json:"code_model,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateCodeModelRequest) Reset() {
+	*x = CreateCodeModelRequest{}
+	mi := &file_service_nem_proto_msgTypes[426]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateCodeModelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateCodeModelRequest) ProtoMessage() {}
+
+func (x *CreateCodeModelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[426]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateCodeModelRequest.ProtoReflect.Descriptor instead.
+func (*CreateCodeModelRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{426}
+}
+
+func (x *CreateCodeModelRequest) GetCodeModel() *CodeModel {
+	if x != nil {
+		return x.CodeModel
+	}
+	return nil
+}
+
+type UpdateCodeModelRequest struct {
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	CodeModel *CodeModel             `protobuf:"bytes,1,opt,name=code_model,json=codeModel,proto3" json:"code_model,omitempty"`
+	// The list of fields to update.
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateCodeModelRequest) Reset() {
+	*x = UpdateCodeModelRequest{}
+	mi := &file_service_nem_proto_msgTypes[427]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateCodeModelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCodeModelRequest) ProtoMessage() {}
+
+func (x *UpdateCodeModelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_nem_proto_msgTypes[427]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCodeModelRequest.ProtoReflect.Descriptor instead.
+func (*UpdateCodeModelRequest) Descriptor() ([]byte, []int) {
+	return file_service_nem_proto_rawDescGZIP(), []int{427}
+}
+
+func (x *UpdateCodeModelRequest) GetCodeModel() *CodeModel {
+	if x != nil {
+		return x.CodeModel
+	}
+	return nil
+}
+
+func (x *UpdateCodeModelRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
+	}
+	return nil
+}
+
 var File_service_nem_proto protoreflect.FileDescriptor
 
 const file_service_nem_proto_rawDesc = "" +
@@ -25884,7 +26888,7 @@ const file_service_nem_proto_rawDesc = "" +
 	"\x11service_nem.proto\x12\x03nem\x1a google/protobuf/field_mask.proto\x1a\x0fextension.proto\x1a\x17extension_version.proto\x1a\x12user_project.proto\x1a\x11local_agent.proto\x1a\x19extension_execution.proto\x1a\x15project_version.proto\x1a\n" +
 	"user.proto\x1a\x1auser_project_version.proto\x1a\rproject.proto\x1a\x10membership.proto\x1a\n" +
 	"team.proto\x1a\x0eai_usage.proto\x1a\x14change_request.proto\x1a\x15user_connection.proto\x1a\x0fuser_team.proto\x1a\x17array_type_config.proto\x1a change_request_data_change.proto\x1a\x1dchange_request_metadata.proto\x1a\"change_request_metadata_data.proto\x1a\x1bchange_request_review.proto\x1a!change_request_scope_config.proto\x1a\x10connection.proto\x1a\x1cconnection_type_config.proto\x1a\x1ddata_change_field_value.proto\x1a\x1ddata_change_type_config.proto\x1a$data_change_type_config_create.proto\x1a$data_change_type_config_delete.proto\x1a$data_change_type_config_update.proto\x1a*data_change_type_config_update_field.proto\x1a\x14db_type_config.proto\x1a\x1adb_type_mysql_config.proto\x1a\x1ddb_type_postgres_config.proto\x1a\x14element_render.proto\x1a\fentity.proto\x1a#entity_data_management_config.proto\x1a\x18entity_type_config.proto\x1a\"entity_type_dependent_config.proto\x1a#entity_type_standalone_config.proto\x1a\x1bentity_version_config.proto\x1a entity_version_type_config.proto\x1a'entity_version_type_entity_config.proto\x1a&entity_version_type_field_config.proto\x1a\n" +
-	"enum.proto\x1a\x10enum_value.proto\x1a\x10enviorment.proto\x1a\vfield.proto\x1a\x1dfield_type_array_config.proto\x1a\x1cfield_type_char_config.proto\x1a\x17field_type_config.proto\x1a\x1cfield_type_date_config.proto\x1a field_type_datetime_config.proto\x1a\x1ffield_type_decimal_config.proto\x1a\x1dfield_type_email_config.proto\x1a!field_type_encrypted_config.proto\x1a\x1cfield_type_enum_config.proto\x1a\x1cfield_type_file_config.proto\x1a\x1dfield_type_float_config.proto\x1a\x1ffield_type_integer_config.proto\x1a\x1cfield_type_json_config.proto\x1a\x1dfield_type_phone_config.proto\x1a\x1cfield_type_slug_config.proto\x1a\x1cfield_type_text_config.proto\x1a\x1bfield_type_url_config.proto\x1a\x1ffield_type_varchar_config.proto\x1a file_object_storage_config.proto\x1a\x19file_storage_config.proto\x1a\vindex.proto\x1a\x11index_field.proto\x1a\x1clocal_agent_connection.proto\x1a\x12object_store.proto\x1a\"object_store_s_3_type_config.proto\x1a\x1eobject_store_type_config.proto\x1a\x17project_extension.proto\x1a project_version_deployment.proto\x1a\x12relationship.proto\x1a\x17relationship_node.proto\x1a#relationship_node_type_config.proto\x1a*relationship_node_type_entity_config.proto\x1a+relationship_node_type_service_config.proto\x1a\x13review_config.proto\x1a\rservice.proto\x1a\vstore.proto\x1a#tcp_ip_connection_type_config.proto\x1a'tcp_ip_ssh_connection_type_config.proto\x1a\x1fuser_connection_execution.proto\x1a\"user_connection_local_config.proto\x1a#user_connection_remote_config.proto\x1a!user_connection_type_config.proto\x1a\x10visibility.proto\x1a'change_request_scope_config_local.proto\x1a(change_request_scope_config_remote.proto\x1a\x10automation.proto\x1a\x16automation_event.proto\x1a\x10deployment.proto\x1a\x19deployment_provider.proto\x1a\x17deployment_server.proto\x1a\x19deployment_database.proto\x1a\x18deployment_codegen.proto\x1a\x19deployment_revision.proto\x1a\x16field_pii_config.proto\x1a\"object_store_r_2_type_config.proto\x1a$data_change_before_image_value.proto\x1a\x1edata_change_before_image.proto\"\xf2\x01\n" +
+	"enum.proto\x1a\x10enum_value.proto\x1a\x10enviorment.proto\x1a\vfield.proto\x1a\x1dfield_type_array_config.proto\x1a\x1cfield_type_char_config.proto\x1a\x17field_type_config.proto\x1a\x1cfield_type_date_config.proto\x1a field_type_datetime_config.proto\x1a\x1ffield_type_decimal_config.proto\x1a\x1dfield_type_email_config.proto\x1a!field_type_encrypted_config.proto\x1a\x1cfield_type_enum_config.proto\x1a\x1cfield_type_file_config.proto\x1a\x1dfield_type_float_config.proto\x1a\x1ffield_type_integer_config.proto\x1a\x1cfield_type_json_config.proto\x1a\x1dfield_type_phone_config.proto\x1a\x1cfield_type_slug_config.proto\x1a\x1cfield_type_text_config.proto\x1a\x1bfield_type_url_config.proto\x1a\x1ffield_type_varchar_config.proto\x1a file_object_storage_config.proto\x1a\x19file_storage_config.proto\x1a\vindex.proto\x1a\x11index_field.proto\x1a\x1clocal_agent_connection.proto\x1a\x12object_store.proto\x1a\"object_store_s_3_type_config.proto\x1a\x1eobject_store_type_config.proto\x1a\x17project_extension.proto\x1a project_version_deployment.proto\x1a\x12relationship.proto\x1a\x17relationship_node.proto\x1a#relationship_node_type_config.proto\x1a*relationship_node_type_entity_config.proto\x1a+relationship_node_type_service_config.proto\x1a\x13review_config.proto\x1a\rservice.proto\x1a\vstore.proto\x1a#tcp_ip_connection_type_config.proto\x1a'tcp_ip_ssh_connection_type_config.proto\x1a\x1fuser_connection_execution.proto\x1a\"user_connection_local_config.proto\x1a#user_connection_remote_config.proto\x1a!user_connection_type_config.proto\x1a\x10visibility.proto\x1a'change_request_scope_config_local.proto\x1a(change_request_scope_config_remote.proto\x1a\x10automation.proto\x1a\x16automation_event.proto\x1a\x10deployment.proto\x1a\x19deployment_provider.proto\x1a\x17deployment_server.proto\x1a\x19deployment_database.proto\x1a\x18deployment_codegen.proto\x1a\x19deployment_revision.proto\x1a\x16field_pii_config.proto\x1a\"object_store_r_2_type_config.proto\x1a$data_change_before_image_value.proto\x1a\x1edata_change_before_image.proto\x1a\x0ecodebase.proto\x1a\x13code_snapshot.proto\x1a\x1acode_model_component.proto\x1a\x10code_model.proto\"\xf2\x01\n" +
 	"\x14ListExtensionRequest\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
@@ -27895,7 +28899,86 @@ const file_service_nem_proto_rawDesc = "" +
 	"\"UpdateDataChangeBeforeImageRequest\x12S\n" +
 	"\x18data_change_before_image\x18\x01 \x01(\v2\x1a.nem.DataChangeBeforeImageR\x15dataChangeBeforeImage\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask2\x95\xe7\x01\n" +
+	"updateMask\"\xf1\x01\n" +
+	"\x13ListCodebaseRequest\x12\x1b\n" +
+	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x03 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x04 \x01(\tR\aorderBy\x12%\n" +
+	"\x0einclude_fields\x18\x05 \x03(\tR\rincludeFields\x12%\n" +
+	"\x0eexclude_fields\x18\x06 \x03(\tR\rexcludeFields\x12\x1d\n" +
+	"\n" +
+	"skip_cache\x18\a \x01(\bR\tskipCache\"i\n" +
+	"\x14ListCodebaseResponse\x12)\n" +
+	"\bcodebase\x18\x01 \x03(\v2\r.nem.CodebaseR\bcodebase\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"B\n" +
+	"\x15CreateCodebaseRequest\x12)\n" +
+	"\bcodebase\x18\x01 \x01(\v2\r.nem.CodebaseR\bcodebase\"\x7f\n" +
+	"\x15UpdateCodebaseRequest\x12)\n" +
+	"\bcodebase\x18\x01 \x01(\v2\r.nem.CodebaseR\bcodebase\x12;\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"updateMask\"\xf5\x01\n" +
+	"\x17ListCodeSnapshotRequest\x12\x1b\n" +
+	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x03 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x04 \x01(\tR\aorderBy\x12%\n" +
+	"\x0einclude_fields\x18\x05 \x03(\tR\rincludeFields\x12%\n" +
+	"\x0eexclude_fields\x18\x06 \x03(\tR\rexcludeFields\x12\x1d\n" +
+	"\n" +
+	"skip_cache\x18\a \x01(\bR\tskipCache\"z\n" +
+	"\x18ListCodeSnapshotResponse\x126\n" +
+	"\rcode_snapshot\x18\x01 \x03(\v2\x11.nem.CodeSnapshotR\fcodeSnapshot\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"S\n" +
+	"\x19CreateCodeSnapshotRequest\x126\n" +
+	"\rcode_snapshot\x18\x01 \x01(\v2\x11.nem.CodeSnapshotR\fcodeSnapshot\"\x90\x01\n" +
+	"\x19UpdateCodeSnapshotRequest\x126\n" +
+	"\rcode_snapshot\x18\x01 \x01(\v2\x11.nem.CodeSnapshotR\fcodeSnapshot\x12;\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"updateMask\"\xfb\x01\n" +
+	"\x1dListCodeModelComponentRequest\x12\x1b\n" +
+	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x03 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x04 \x01(\tR\aorderBy\x12%\n" +
+	"\x0einclude_fields\x18\x05 \x03(\tR\rincludeFields\x12%\n" +
+	"\x0eexclude_fields\x18\x06 \x03(\tR\rexcludeFields\x12\x1d\n" +
+	"\n" +
+	"skip_cache\x18\a \x01(\bR\tskipCache\"\x93\x01\n" +
+	"\x1eListCodeModelComponentResponse\x12I\n" +
+	"\x14code_model_component\x18\x01 \x03(\v2\x17.nem.CodeModelComponentR\x12codeModelComponent\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"l\n" +
+	"\x1fCreateCodeModelComponentRequest\x12I\n" +
+	"\x14code_model_component\x18\x01 \x01(\v2\x17.nem.CodeModelComponentR\x12codeModelComponent\"\xa9\x01\n" +
+	"\x1fUpdateCodeModelComponentRequest\x12I\n" +
+	"\x14code_model_component\x18\x01 \x01(\v2\x17.nem.CodeModelComponentR\x12codeModelComponent\x12;\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"updateMask\"\xf2\x01\n" +
+	"\x14ListCodeModelRequest\x12\x1b\n" +
+	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x03 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x04 \x01(\tR\aorderBy\x12%\n" +
+	"\x0einclude_fields\x18\x05 \x03(\tR\rincludeFields\x12%\n" +
+	"\x0eexclude_fields\x18\x06 \x03(\tR\rexcludeFields\x12\x1d\n" +
+	"\n" +
+	"skip_cache\x18\a \x01(\bR\tskipCache\"n\n" +
+	"\x15ListCodeModelResponse\x12-\n" +
+	"\n" +
+	"code_model\x18\x01 \x03(\v2\x0e.nem.CodeModelR\tcodeModel\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"G\n" +
+	"\x16CreateCodeModelRequest\x12-\n" +
+	"\n" +
+	"code_model\x18\x01 \x01(\v2\x0e.nem.CodeModelR\tcodeModel\"\x84\x01\n" +
+	"\x16UpdateCodeModelRequest\x12-\n" +
+	"\n" +
+	"code_model\x18\x01 \x01(\v2\x0e.nem.CodeModelR\tcodeModel\x12;\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"updateMask2\xb0\xee\x01\n" +
 	"\x03Nem\x12H\n" +
 	"\rListExtension\x12\x19.nem.ListExtensionRequest\x1a\x1a.nem.ListExtensionResponse\"\x00\x12@\n" +
 	"\x0fCreateExtension\x12\x1b.nem.CreateExtensionRequest\x1a\x0e.nem.Extension\"\x00\x12@\n" +
@@ -28218,7 +29301,19 @@ const file_service_nem_proto_rawDesc = "" +
 	" UpdateDataChangeBeforeImageValue\x12,.nem.UpdateDataChangeBeforeImageValueRequest\x1a\x1f.nem.DataChangeBeforeImageValue\"\x00\x12l\n" +
 	"\x19ListDataChangeBeforeImage\x12%.nem.ListDataChangeBeforeImageRequest\x1a&.nem.ListDataChangeBeforeImageResponse\"\x00\x12d\n" +
 	"\x1bCreateDataChangeBeforeImage\x12'.nem.CreateDataChangeBeforeImageRequest\x1a\x1a.nem.DataChangeBeforeImage\"\x00\x12d\n" +
-	"\x1bUpdateDataChangeBeforeImage\x12'.nem.UpdateDataChangeBeforeImageRequest\x1a\x1a.nem.DataChangeBeforeImage\"\x00B*\n" +
+	"\x1bUpdateDataChangeBeforeImage\x12'.nem.UpdateDataChangeBeforeImageRequest\x1a\x1a.nem.DataChangeBeforeImage\"\x00\x12E\n" +
+	"\fListCodebase\x12\x18.nem.ListCodebaseRequest\x1a\x19.nem.ListCodebaseResponse\"\x00\x12=\n" +
+	"\x0eCreateCodebase\x12\x1a.nem.CreateCodebaseRequest\x1a\r.nem.Codebase\"\x00\x12=\n" +
+	"\x0eUpdateCodebase\x12\x1a.nem.UpdateCodebaseRequest\x1a\r.nem.Codebase\"\x00\x12Q\n" +
+	"\x10ListCodeSnapshot\x12\x1c.nem.ListCodeSnapshotRequest\x1a\x1d.nem.ListCodeSnapshotResponse\"\x00\x12I\n" +
+	"\x12CreateCodeSnapshot\x12\x1e.nem.CreateCodeSnapshotRequest\x1a\x11.nem.CodeSnapshot\"\x00\x12I\n" +
+	"\x12UpdateCodeSnapshot\x12\x1e.nem.UpdateCodeSnapshotRequest\x1a\x11.nem.CodeSnapshot\"\x00\x12c\n" +
+	"\x16ListCodeModelComponent\x12\".nem.ListCodeModelComponentRequest\x1a#.nem.ListCodeModelComponentResponse\"\x00\x12[\n" +
+	"\x18CreateCodeModelComponent\x12$.nem.CreateCodeModelComponentRequest\x1a\x17.nem.CodeModelComponent\"\x00\x12[\n" +
+	"\x18UpdateCodeModelComponent\x12$.nem.UpdateCodeModelComponentRequest\x1a\x17.nem.CodeModelComponent\"\x00\x12H\n" +
+	"\rListCodeModel\x12\x19.nem.ListCodeModelRequest\x1a\x1a.nem.ListCodeModelResponse\"\x00\x12@\n" +
+	"\x0fCreateCodeModel\x12\x1b.nem.CreateCodeModelRequest\x1a\x0e.nem.CodeModel\"\x00\x12@\n" +
+	"\x0fUpdateCodeModel\x12\x1b.nem.UpdateCodeModelRequest\x1a\x0e.nem.CodeModel\"\x00B*\n" +
 	"\x14github.com/nuzur/nemB\x03NemP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -28233,7 +29328,7 @@ func file_service_nem_proto_rawDescGZIP() []byte {
 	return file_service_nem_proto_rawDescData
 }
 
-var file_service_nem_proto_msgTypes = make([]protoimpl.MessageInfo, 412)
+var file_service_nem_proto_msgTypes = make([]protoimpl.MessageInfo, 428)
 var file_service_nem_proto_goTypes = []any{
 	(*ListExtensionRequest)(nil),                           // 0: nem.ListExtensionRequest
 	(*ListExtensionResponse)(nil),                          // 1: nem.ListExtensionResponse
@@ -28647,1147 +29742,1207 @@ var file_service_nem_proto_goTypes = []any{
 	(*ListDataChangeBeforeImageResponse)(nil),              // 409: nem.ListDataChangeBeforeImageResponse
 	(*CreateDataChangeBeforeImageRequest)(nil),             // 410: nem.CreateDataChangeBeforeImageRequest
 	(*UpdateDataChangeBeforeImageRequest)(nil),             // 411: nem.UpdateDataChangeBeforeImageRequest
-	(*Extension)(nil),                                      // 412: nem.Extension
-	(*fieldmaskpb.FieldMask)(nil),                          // 413: google.protobuf.FieldMask
-	(*ExtensionVersion)(nil),                               // 414: nem.ExtensionVersion
-	(*UserProject)(nil),                                    // 415: nem.UserProject
-	(*LocalAgent)(nil),                                     // 416: nem.LocalAgent
-	(*ExtensionExecution)(nil),                             // 417: nem.ExtensionExecution
-	(*ProjectVersion)(nil),                                 // 418: nem.ProjectVersion
-	(*User)(nil),                                           // 419: nem.User
-	(*UserProjectVersion)(nil),                             // 420: nem.UserProjectVersion
-	(*Project)(nil),                                        // 421: nem.Project
-	(*Membership)(nil),                                     // 422: nem.Membership
-	(*Team)(nil),                                           // 423: nem.Team
-	(*AiUsage)(nil),                                        // 424: nem.AiUsage
-	(*ChangeRequest)(nil),                                  // 425: nem.ChangeRequest
-	(*UserConnection)(nil),                                 // 426: nem.UserConnection
-	(*UserTeam)(nil),                                       // 427: nem.UserTeam
-	(*ArrayTypeConfig)(nil),                                // 428: nem.ArrayTypeConfig
-	(*ChangeRequestDataChange)(nil),                        // 429: nem.ChangeRequestDataChange
-	(*ChangeRequestMetadata)(nil),                          // 430: nem.ChangeRequestMetadata
-	(*ChangeRequestMetadataData)(nil),                      // 431: nem.ChangeRequestMetadataData
-	(*ChangeRequestReview)(nil),                            // 432: nem.ChangeRequestReview
-	(*ChangeRequestScopeConfig)(nil),                       // 433: nem.ChangeRequestScopeConfig
-	(*Connection)(nil),                                     // 434: nem.Connection
-	(*ConnectionTypeConfig)(nil),                           // 435: nem.ConnectionTypeConfig
-	(*DataChangeFieldValue)(nil),                           // 436: nem.DataChangeFieldValue
-	(*DataChangeTypeConfig)(nil),                           // 437: nem.DataChangeTypeConfig
-	(*DataChangeTypeConfigCreate)(nil),                     // 438: nem.DataChangeTypeConfigCreate
-	(*DataChangeTypeConfigDelete)(nil),                     // 439: nem.DataChangeTypeConfigDelete
-	(*DataChangeTypeConfigUpdate)(nil),                     // 440: nem.DataChangeTypeConfigUpdate
-	(*DataChangeTypeConfigUpdateField)(nil),                // 441: nem.DataChangeTypeConfigUpdateField
-	(*DbTypeConfig)(nil),                                   // 442: nem.DbTypeConfig
-	(*DbTypeMysqlConfig)(nil),                              // 443: nem.DbTypeMysqlConfig
-	(*DbTypePostgresConfig)(nil),                           // 444: nem.DbTypePostgresConfig
-	(*ElementRender)(nil),                                  // 445: nem.ElementRender
-	(*Entity)(nil),                                         // 446: nem.Entity
-	(*EntityDataManagementConfig)(nil),                     // 447: nem.EntityDataManagementConfig
-	(*EntityTypeConfig)(nil),                               // 448: nem.EntityTypeConfig
-	(*EntityTypeDependentConfig)(nil),                      // 449: nem.EntityTypeDependentConfig
-	(*EntityTypeStandaloneConfig)(nil),                     // 450: nem.EntityTypeStandaloneConfig
-	(*EntityVersionConfig)(nil),                            // 451: nem.EntityVersionConfig
-	(*EntityVersionTypeConfig)(nil),                        // 452: nem.EntityVersionTypeConfig
-	(*EntityVersionTypeEntityConfig)(nil),                  // 453: nem.EntityVersionTypeEntityConfig
-	(*EntityVersionTypeFieldConfig)(nil),                   // 454: nem.EntityVersionTypeFieldConfig
-	(*Enum)(nil),                                           // 455: nem.Enum
-	(*EnumValue)(nil),                                      // 456: nem.EnumValue
-	(*Enviorment)(nil),                                     // 457: nem.Enviorment
-	(*Field)(nil),                                          // 458: nem.Field
-	(*FieldTypeArrayConfig)(nil),                           // 459: nem.FieldTypeArrayConfig
-	(*FieldTypeCharConfig)(nil),                            // 460: nem.FieldTypeCharConfig
-	(*FieldTypeConfig)(nil),                                // 461: nem.FieldTypeConfig
-	(*FieldTypeDateConfig)(nil),                            // 462: nem.FieldTypeDateConfig
-	(*FieldTypeDatetimeConfig)(nil),                        // 463: nem.FieldTypeDatetimeConfig
-	(*FieldTypeDecimalConfig)(nil),                         // 464: nem.FieldTypeDecimalConfig
-	(*FieldTypeEmailConfig)(nil),                           // 465: nem.FieldTypeEmailConfig
-	(*FieldTypeEncryptedConfig)(nil),                       // 466: nem.FieldTypeEncryptedConfig
-	(*FieldTypeEnumConfig)(nil),                            // 467: nem.FieldTypeEnumConfig
-	(*FieldTypeFileConfig)(nil),                            // 468: nem.FieldTypeFileConfig
-	(*FieldTypeFloatConfig)(nil),                           // 469: nem.FieldTypeFloatConfig
-	(*FieldTypeIntegerConfig)(nil),                         // 470: nem.FieldTypeIntegerConfig
-	(*FieldTypeJSONConfig)(nil),                            // 471: nem.FieldTypeJSONConfig
-	(*FieldTypePhoneConfig)(nil),                           // 472: nem.FieldTypePhoneConfig
-	(*FieldTypeSlugConfig)(nil),                            // 473: nem.FieldTypeSlugConfig
-	(*FieldTypeTextConfig)(nil),                            // 474: nem.FieldTypeTextConfig
-	(*FieldTypeURLConfig)(nil),                             // 475: nem.FieldTypeURLConfig
-	(*FieldTypeVarcharConfig)(nil),                         // 476: nem.FieldTypeVarcharConfig
-	(*FileObjectStorageConfig)(nil),                        // 477: nem.FileObjectStorageConfig
-	(*FileStorageConfig)(nil),                              // 478: nem.FileStorageConfig
-	(*Index)(nil),                                          // 479: nem.Index
-	(*IndexField)(nil),                                     // 480: nem.IndexField
-	(*LocalAgentConnection)(nil),                           // 481: nem.LocalAgentConnection
-	(*ObjectStore)(nil),                                    // 482: nem.ObjectStore
-	(*ObjectStoreS3TypeConfig)(nil),                        // 483: nem.ObjectStoreS3TypeConfig
-	(*ObjectStoreTypeConfig)(nil),                          // 484: nem.ObjectStoreTypeConfig
-	(*ProjectExtension)(nil),                               // 485: nem.ProjectExtension
-	(*ProjectVersionDeployment)(nil),                       // 486: nem.ProjectVersionDeployment
-	(*Relationship)(nil),                                   // 487: nem.Relationship
-	(*RelationshipNode)(nil),                               // 488: nem.RelationshipNode
-	(*RelationshipNodeTypeConfig)(nil),                     // 489: nem.RelationshipNodeTypeConfig
-	(*RelationshipNodeTypeEntityConfig)(nil),               // 490: nem.RelationshipNodeTypeEntityConfig
-	(*RelationshipNodeTypeServiceConfig)(nil),              // 491: nem.RelationshipNodeTypeServiceConfig
-	(*ReviewConfig)(nil),                                   // 492: nem.ReviewConfig
-	(*Service)(nil),                                        // 493: nem.Service
-	(*Store)(nil),                                          // 494: nem.Store
-	(*TcpIpConnectionTypeConfig)(nil),                      // 495: nem.TcpIpConnectionTypeConfig
-	(*TcpIpSshConnectionTypeConfig)(nil),                   // 496: nem.TcpIpSshConnectionTypeConfig
-	(*UserConnectionExecution)(nil),                        // 497: nem.UserConnectionExecution
-	(*UserConnectionLocalConfig)(nil),                      // 498: nem.UserConnectionLocalConfig
-	(*UserConnectionRemoteConfig)(nil),                     // 499: nem.UserConnectionRemoteConfig
-	(*UserConnectionTypeConfig)(nil),                       // 500: nem.UserConnectionTypeConfig
-	(*Visibility)(nil),                                     // 501: nem.Visibility
-	(*ChangeRequestScopeConfigLocal)(nil),                  // 502: nem.ChangeRequestScopeConfigLocal
-	(*ChangeRequestScopeConfigRemote)(nil),                 // 503: nem.ChangeRequestScopeConfigRemote
-	(*Automation)(nil),                                     // 504: nem.Automation
-	(*AutomationEvent)(nil),                                // 505: nem.AutomationEvent
-	(*Deployment)(nil),                                     // 506: nem.Deployment
-	(*DeploymentProvider)(nil),                             // 507: nem.DeploymentProvider
-	(*DeploymentServer)(nil),                               // 508: nem.DeploymentServer
-	(*DeploymentDatabase)(nil),                             // 509: nem.DeploymentDatabase
-	(*DeploymentCodegen)(nil),                              // 510: nem.DeploymentCodegen
-	(*DeploymentRevision)(nil),                             // 511: nem.DeploymentRevision
-	(*FieldPiiConfig)(nil),                                 // 512: nem.FieldPiiConfig
-	(*ObjectStoreR2TypeConfig)(nil),                        // 513: nem.ObjectStoreR2TypeConfig
-	(*DataChangeBeforeImageValue)(nil),                     // 514: nem.DataChangeBeforeImageValue
-	(*DataChangeBeforeImage)(nil),                          // 515: nem.DataChangeBeforeImage
+	(*ListCodebaseRequest)(nil),                            // 412: nem.ListCodebaseRequest
+	(*ListCodebaseResponse)(nil),                           // 413: nem.ListCodebaseResponse
+	(*CreateCodebaseRequest)(nil),                          // 414: nem.CreateCodebaseRequest
+	(*UpdateCodebaseRequest)(nil),                          // 415: nem.UpdateCodebaseRequest
+	(*ListCodeSnapshotRequest)(nil),                        // 416: nem.ListCodeSnapshotRequest
+	(*ListCodeSnapshotResponse)(nil),                       // 417: nem.ListCodeSnapshotResponse
+	(*CreateCodeSnapshotRequest)(nil),                      // 418: nem.CreateCodeSnapshotRequest
+	(*UpdateCodeSnapshotRequest)(nil),                      // 419: nem.UpdateCodeSnapshotRequest
+	(*ListCodeModelComponentRequest)(nil),                  // 420: nem.ListCodeModelComponentRequest
+	(*ListCodeModelComponentResponse)(nil),                 // 421: nem.ListCodeModelComponentResponse
+	(*CreateCodeModelComponentRequest)(nil),                // 422: nem.CreateCodeModelComponentRequest
+	(*UpdateCodeModelComponentRequest)(nil),                // 423: nem.UpdateCodeModelComponentRequest
+	(*ListCodeModelRequest)(nil),                           // 424: nem.ListCodeModelRequest
+	(*ListCodeModelResponse)(nil),                          // 425: nem.ListCodeModelResponse
+	(*CreateCodeModelRequest)(nil),                         // 426: nem.CreateCodeModelRequest
+	(*UpdateCodeModelRequest)(nil),                         // 427: nem.UpdateCodeModelRequest
+	(*Extension)(nil),                                      // 428: nem.Extension
+	(*fieldmaskpb.FieldMask)(nil),                          // 429: google.protobuf.FieldMask
+	(*ExtensionVersion)(nil),                               // 430: nem.ExtensionVersion
+	(*UserProject)(nil),                                    // 431: nem.UserProject
+	(*LocalAgent)(nil),                                     // 432: nem.LocalAgent
+	(*ExtensionExecution)(nil),                             // 433: nem.ExtensionExecution
+	(*ProjectVersion)(nil),                                 // 434: nem.ProjectVersion
+	(*User)(nil),                                           // 435: nem.User
+	(*UserProjectVersion)(nil),                             // 436: nem.UserProjectVersion
+	(*Project)(nil),                                        // 437: nem.Project
+	(*Membership)(nil),                                     // 438: nem.Membership
+	(*Team)(nil),                                           // 439: nem.Team
+	(*AiUsage)(nil),                                        // 440: nem.AiUsage
+	(*ChangeRequest)(nil),                                  // 441: nem.ChangeRequest
+	(*UserConnection)(nil),                                 // 442: nem.UserConnection
+	(*UserTeam)(nil),                                       // 443: nem.UserTeam
+	(*ArrayTypeConfig)(nil),                                // 444: nem.ArrayTypeConfig
+	(*ChangeRequestDataChange)(nil),                        // 445: nem.ChangeRequestDataChange
+	(*ChangeRequestMetadata)(nil),                          // 446: nem.ChangeRequestMetadata
+	(*ChangeRequestMetadataData)(nil),                      // 447: nem.ChangeRequestMetadataData
+	(*ChangeRequestReview)(nil),                            // 448: nem.ChangeRequestReview
+	(*ChangeRequestScopeConfig)(nil),                       // 449: nem.ChangeRequestScopeConfig
+	(*Connection)(nil),                                     // 450: nem.Connection
+	(*ConnectionTypeConfig)(nil),                           // 451: nem.ConnectionTypeConfig
+	(*DataChangeFieldValue)(nil),                           // 452: nem.DataChangeFieldValue
+	(*DataChangeTypeConfig)(nil),                           // 453: nem.DataChangeTypeConfig
+	(*DataChangeTypeConfigCreate)(nil),                     // 454: nem.DataChangeTypeConfigCreate
+	(*DataChangeTypeConfigDelete)(nil),                     // 455: nem.DataChangeTypeConfigDelete
+	(*DataChangeTypeConfigUpdate)(nil),                     // 456: nem.DataChangeTypeConfigUpdate
+	(*DataChangeTypeConfigUpdateField)(nil),                // 457: nem.DataChangeTypeConfigUpdateField
+	(*DbTypeConfig)(nil),                                   // 458: nem.DbTypeConfig
+	(*DbTypeMysqlConfig)(nil),                              // 459: nem.DbTypeMysqlConfig
+	(*DbTypePostgresConfig)(nil),                           // 460: nem.DbTypePostgresConfig
+	(*ElementRender)(nil),                                  // 461: nem.ElementRender
+	(*Entity)(nil),                                         // 462: nem.Entity
+	(*EntityDataManagementConfig)(nil),                     // 463: nem.EntityDataManagementConfig
+	(*EntityTypeConfig)(nil),                               // 464: nem.EntityTypeConfig
+	(*EntityTypeDependentConfig)(nil),                      // 465: nem.EntityTypeDependentConfig
+	(*EntityTypeStandaloneConfig)(nil),                     // 466: nem.EntityTypeStandaloneConfig
+	(*EntityVersionConfig)(nil),                            // 467: nem.EntityVersionConfig
+	(*EntityVersionTypeConfig)(nil),                        // 468: nem.EntityVersionTypeConfig
+	(*EntityVersionTypeEntityConfig)(nil),                  // 469: nem.EntityVersionTypeEntityConfig
+	(*EntityVersionTypeFieldConfig)(nil),                   // 470: nem.EntityVersionTypeFieldConfig
+	(*Enum)(nil),                                           // 471: nem.Enum
+	(*EnumValue)(nil),                                      // 472: nem.EnumValue
+	(*Enviorment)(nil),                                     // 473: nem.Enviorment
+	(*Field)(nil),                                          // 474: nem.Field
+	(*FieldTypeArrayConfig)(nil),                           // 475: nem.FieldTypeArrayConfig
+	(*FieldTypeCharConfig)(nil),                            // 476: nem.FieldTypeCharConfig
+	(*FieldTypeConfig)(nil),                                // 477: nem.FieldTypeConfig
+	(*FieldTypeDateConfig)(nil),                            // 478: nem.FieldTypeDateConfig
+	(*FieldTypeDatetimeConfig)(nil),                        // 479: nem.FieldTypeDatetimeConfig
+	(*FieldTypeDecimalConfig)(nil),                         // 480: nem.FieldTypeDecimalConfig
+	(*FieldTypeEmailConfig)(nil),                           // 481: nem.FieldTypeEmailConfig
+	(*FieldTypeEncryptedConfig)(nil),                       // 482: nem.FieldTypeEncryptedConfig
+	(*FieldTypeEnumConfig)(nil),                            // 483: nem.FieldTypeEnumConfig
+	(*FieldTypeFileConfig)(nil),                            // 484: nem.FieldTypeFileConfig
+	(*FieldTypeFloatConfig)(nil),                           // 485: nem.FieldTypeFloatConfig
+	(*FieldTypeIntegerConfig)(nil),                         // 486: nem.FieldTypeIntegerConfig
+	(*FieldTypeJSONConfig)(nil),                            // 487: nem.FieldTypeJSONConfig
+	(*FieldTypePhoneConfig)(nil),                           // 488: nem.FieldTypePhoneConfig
+	(*FieldTypeSlugConfig)(nil),                            // 489: nem.FieldTypeSlugConfig
+	(*FieldTypeTextConfig)(nil),                            // 490: nem.FieldTypeTextConfig
+	(*FieldTypeURLConfig)(nil),                             // 491: nem.FieldTypeURLConfig
+	(*FieldTypeVarcharConfig)(nil),                         // 492: nem.FieldTypeVarcharConfig
+	(*FileObjectStorageConfig)(nil),                        // 493: nem.FileObjectStorageConfig
+	(*FileStorageConfig)(nil),                              // 494: nem.FileStorageConfig
+	(*Index)(nil),                                          // 495: nem.Index
+	(*IndexField)(nil),                                     // 496: nem.IndexField
+	(*LocalAgentConnection)(nil),                           // 497: nem.LocalAgentConnection
+	(*ObjectStore)(nil),                                    // 498: nem.ObjectStore
+	(*ObjectStoreS3TypeConfig)(nil),                        // 499: nem.ObjectStoreS3TypeConfig
+	(*ObjectStoreTypeConfig)(nil),                          // 500: nem.ObjectStoreTypeConfig
+	(*ProjectExtension)(nil),                               // 501: nem.ProjectExtension
+	(*ProjectVersionDeployment)(nil),                       // 502: nem.ProjectVersionDeployment
+	(*Relationship)(nil),                                   // 503: nem.Relationship
+	(*RelationshipNode)(nil),                               // 504: nem.RelationshipNode
+	(*RelationshipNodeTypeConfig)(nil),                     // 505: nem.RelationshipNodeTypeConfig
+	(*RelationshipNodeTypeEntityConfig)(nil),               // 506: nem.RelationshipNodeTypeEntityConfig
+	(*RelationshipNodeTypeServiceConfig)(nil),              // 507: nem.RelationshipNodeTypeServiceConfig
+	(*ReviewConfig)(nil),                                   // 508: nem.ReviewConfig
+	(*Service)(nil),                                        // 509: nem.Service
+	(*Store)(nil),                                          // 510: nem.Store
+	(*TcpIpConnectionTypeConfig)(nil),                      // 511: nem.TcpIpConnectionTypeConfig
+	(*TcpIpSshConnectionTypeConfig)(nil),                   // 512: nem.TcpIpSshConnectionTypeConfig
+	(*UserConnectionExecution)(nil),                        // 513: nem.UserConnectionExecution
+	(*UserConnectionLocalConfig)(nil),                      // 514: nem.UserConnectionLocalConfig
+	(*UserConnectionRemoteConfig)(nil),                     // 515: nem.UserConnectionRemoteConfig
+	(*UserConnectionTypeConfig)(nil),                       // 516: nem.UserConnectionTypeConfig
+	(*Visibility)(nil),                                     // 517: nem.Visibility
+	(*ChangeRequestScopeConfigLocal)(nil),                  // 518: nem.ChangeRequestScopeConfigLocal
+	(*ChangeRequestScopeConfigRemote)(nil),                 // 519: nem.ChangeRequestScopeConfigRemote
+	(*Automation)(nil),                                     // 520: nem.Automation
+	(*AutomationEvent)(nil),                                // 521: nem.AutomationEvent
+	(*Deployment)(nil),                                     // 522: nem.Deployment
+	(*DeploymentProvider)(nil),                             // 523: nem.DeploymentProvider
+	(*DeploymentServer)(nil),                               // 524: nem.DeploymentServer
+	(*DeploymentDatabase)(nil),                             // 525: nem.DeploymentDatabase
+	(*DeploymentCodegen)(nil),                              // 526: nem.DeploymentCodegen
+	(*DeploymentRevision)(nil),                             // 527: nem.DeploymentRevision
+	(*FieldPiiConfig)(nil),                                 // 528: nem.FieldPiiConfig
+	(*ObjectStoreR2TypeConfig)(nil),                        // 529: nem.ObjectStoreR2TypeConfig
+	(*DataChangeBeforeImageValue)(nil),                     // 530: nem.DataChangeBeforeImageValue
+	(*DataChangeBeforeImage)(nil),                          // 531: nem.DataChangeBeforeImage
+	(*Codebase)(nil),                                       // 532: nem.Codebase
+	(*CodeSnapshot)(nil),                                   // 533: nem.CodeSnapshot
+	(*CodeModelComponent)(nil),                             // 534: nem.CodeModelComponent
+	(*CodeModel)(nil),                                      // 535: nem.CodeModel
 }
 var file_service_nem_proto_depIdxs = []int32{
-	412, // 0: nem.ListExtensionResponse.extension:type_name -> nem.Extension
-	412, // 1: nem.CreateExtensionRequest.extension:type_name -> nem.Extension
-	412, // 2: nem.UpdateExtensionRequest.extension:type_name -> nem.Extension
-	413, // 3: nem.UpdateExtensionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	414, // 4: nem.ListExtensionVersionResponse.extension_version:type_name -> nem.ExtensionVersion
-	414, // 5: nem.CreateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
-	414, // 6: nem.UpdateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
-	413, // 7: nem.UpdateExtensionVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	415, // 8: nem.ListUserProjectResponse.user_project:type_name -> nem.UserProject
-	415, // 9: nem.CreateUserProjectRequest.user_project:type_name -> nem.UserProject
-	415, // 10: nem.UpdateUserProjectRequest.user_project:type_name -> nem.UserProject
-	413, // 11: nem.UpdateUserProjectRequest.update_mask:type_name -> google.protobuf.FieldMask
-	416, // 12: nem.ListLocalAgentResponse.local_agent:type_name -> nem.LocalAgent
-	416, // 13: nem.CreateLocalAgentRequest.local_agent:type_name -> nem.LocalAgent
-	416, // 14: nem.UpdateLocalAgentRequest.local_agent:type_name -> nem.LocalAgent
-	413, // 15: nem.UpdateLocalAgentRequest.update_mask:type_name -> google.protobuf.FieldMask
-	417, // 16: nem.ListExtensionExecutionResponse.extension_execution:type_name -> nem.ExtensionExecution
-	417, // 17: nem.CreateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
-	417, // 18: nem.UpdateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
-	413, // 19: nem.UpdateExtensionExecutionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	418, // 20: nem.ListProjectVersionResponse.project_version:type_name -> nem.ProjectVersion
-	418, // 21: nem.CreateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
-	418, // 22: nem.UpdateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
-	413, // 23: nem.UpdateProjectVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	419, // 24: nem.ListUserResponse.user:type_name -> nem.User
-	419, // 25: nem.CreateUserRequest.user:type_name -> nem.User
-	419, // 26: nem.UpdateUserRequest.user:type_name -> nem.User
-	413, // 27: nem.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
-	420, // 28: nem.ListUserProjectVersionResponse.user_project_version:type_name -> nem.UserProjectVersion
-	420, // 29: nem.CreateUserProjectVersionRequest.user_project_version:type_name -> nem.UserProjectVersion
-	420, // 30: nem.UpdateUserProjectVersionRequest.user_project_version:type_name -> nem.UserProjectVersion
-	413, // 31: nem.UpdateUserProjectVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	421, // 32: nem.ListProjectResponse.project:type_name -> nem.Project
-	421, // 33: nem.CreateProjectRequest.project:type_name -> nem.Project
-	421, // 34: nem.UpdateProjectRequest.project:type_name -> nem.Project
-	413, // 35: nem.UpdateProjectRequest.update_mask:type_name -> google.protobuf.FieldMask
-	422, // 36: nem.ListMembershipResponse.membership:type_name -> nem.Membership
-	422, // 37: nem.CreateMembershipRequest.membership:type_name -> nem.Membership
-	422, // 38: nem.UpdateMembershipRequest.membership:type_name -> nem.Membership
-	413, // 39: nem.UpdateMembershipRequest.update_mask:type_name -> google.protobuf.FieldMask
-	423, // 40: nem.ListTeamResponse.team:type_name -> nem.Team
-	423, // 41: nem.CreateTeamRequest.team:type_name -> nem.Team
-	423, // 42: nem.UpdateTeamRequest.team:type_name -> nem.Team
-	413, // 43: nem.UpdateTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
-	424, // 44: nem.ListAiUsageResponse.ai_usage:type_name -> nem.AiUsage
-	424, // 45: nem.CreateAiUsageRequest.ai_usage:type_name -> nem.AiUsage
-	424, // 46: nem.UpdateAiUsageRequest.ai_usage:type_name -> nem.AiUsage
-	413, // 47: nem.UpdateAiUsageRequest.update_mask:type_name -> google.protobuf.FieldMask
-	425, // 48: nem.ListChangeRequestResponse.change_request:type_name -> nem.ChangeRequest
-	425, // 49: nem.CreateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
-	425, // 50: nem.UpdateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
-	413, // 51: nem.UpdateChangeRequestRequest.update_mask:type_name -> google.protobuf.FieldMask
-	426, // 52: nem.ListUserConnectionResponse.user_connection:type_name -> nem.UserConnection
-	426, // 53: nem.CreateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
-	426, // 54: nem.UpdateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
-	413, // 55: nem.UpdateUserConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	427, // 56: nem.ListUserTeamResponse.user_team:type_name -> nem.UserTeam
-	427, // 57: nem.CreateUserTeamRequest.user_team:type_name -> nem.UserTeam
-	427, // 58: nem.UpdateUserTeamRequest.user_team:type_name -> nem.UserTeam
-	413, // 59: nem.UpdateUserTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
-	428, // 60: nem.ListArrayTypeConfigResponse.array_type_config:type_name -> nem.ArrayTypeConfig
-	428, // 61: nem.CreateArrayTypeConfigRequest.array_type_config:type_name -> nem.ArrayTypeConfig
-	428, // 62: nem.UpdateArrayTypeConfigRequest.array_type_config:type_name -> nem.ArrayTypeConfig
-	413, // 63: nem.UpdateArrayTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	429, // 64: nem.ListChangeRequestDataChangeResponse.change_request_data_change:type_name -> nem.ChangeRequestDataChange
-	429, // 65: nem.CreateChangeRequestDataChangeRequest.change_request_data_change:type_name -> nem.ChangeRequestDataChange
-	429, // 66: nem.UpdateChangeRequestDataChangeRequest.change_request_data_change:type_name -> nem.ChangeRequestDataChange
-	413, // 67: nem.UpdateChangeRequestDataChangeRequest.update_mask:type_name -> google.protobuf.FieldMask
-	430, // 68: nem.ListChangeRequestMetadataResponse.change_request_metadata:type_name -> nem.ChangeRequestMetadata
-	430, // 69: nem.CreateChangeRequestMetadataRequest.change_request_metadata:type_name -> nem.ChangeRequestMetadata
-	430, // 70: nem.UpdateChangeRequestMetadataRequest.change_request_metadata:type_name -> nem.ChangeRequestMetadata
-	413, // 71: nem.UpdateChangeRequestMetadataRequest.update_mask:type_name -> google.protobuf.FieldMask
-	431, // 72: nem.ListChangeRequestMetadataDataResponse.change_request_metadata_data:type_name -> nem.ChangeRequestMetadataData
-	431, // 73: nem.CreateChangeRequestMetadataDataRequest.change_request_metadata_data:type_name -> nem.ChangeRequestMetadataData
-	431, // 74: nem.UpdateChangeRequestMetadataDataRequest.change_request_metadata_data:type_name -> nem.ChangeRequestMetadataData
-	413, // 75: nem.UpdateChangeRequestMetadataDataRequest.update_mask:type_name -> google.protobuf.FieldMask
-	432, // 76: nem.ListChangeRequestReviewResponse.change_request_review:type_name -> nem.ChangeRequestReview
-	432, // 77: nem.CreateChangeRequestReviewRequest.change_request_review:type_name -> nem.ChangeRequestReview
-	432, // 78: nem.UpdateChangeRequestReviewRequest.change_request_review:type_name -> nem.ChangeRequestReview
-	413, // 79: nem.UpdateChangeRequestReviewRequest.update_mask:type_name -> google.protobuf.FieldMask
-	433, // 80: nem.ListChangeRequestScopeConfigResponse.change_request_scope_config:type_name -> nem.ChangeRequestScopeConfig
-	433, // 81: nem.CreateChangeRequestScopeConfigRequest.change_request_scope_config:type_name -> nem.ChangeRequestScopeConfig
-	433, // 82: nem.UpdateChangeRequestScopeConfigRequest.change_request_scope_config:type_name -> nem.ChangeRequestScopeConfig
-	413, // 83: nem.UpdateChangeRequestScopeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	434, // 84: nem.ListConnectionResponse.connection:type_name -> nem.Connection
-	434, // 85: nem.CreateConnectionRequest.connection:type_name -> nem.Connection
-	434, // 86: nem.UpdateConnectionRequest.connection:type_name -> nem.Connection
-	413, // 87: nem.UpdateConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	435, // 88: nem.ListConnectionTypeConfigResponse.connection_type_config:type_name -> nem.ConnectionTypeConfig
-	435, // 89: nem.CreateConnectionTypeConfigRequest.connection_type_config:type_name -> nem.ConnectionTypeConfig
-	435, // 90: nem.UpdateConnectionTypeConfigRequest.connection_type_config:type_name -> nem.ConnectionTypeConfig
-	413, // 91: nem.UpdateConnectionTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	436, // 92: nem.ListDataChangeFieldValueResponse.data_change_field_value:type_name -> nem.DataChangeFieldValue
-	436, // 93: nem.CreateDataChangeFieldValueRequest.data_change_field_value:type_name -> nem.DataChangeFieldValue
-	436, // 94: nem.UpdateDataChangeFieldValueRequest.data_change_field_value:type_name -> nem.DataChangeFieldValue
-	413, // 95: nem.UpdateDataChangeFieldValueRequest.update_mask:type_name -> google.protobuf.FieldMask
-	437, // 96: nem.ListDataChangeTypeConfigResponse.data_change_type_config:type_name -> nem.DataChangeTypeConfig
-	437, // 97: nem.CreateDataChangeTypeConfigRequest.data_change_type_config:type_name -> nem.DataChangeTypeConfig
-	437, // 98: nem.UpdateDataChangeTypeConfigRequest.data_change_type_config:type_name -> nem.DataChangeTypeConfig
-	413, // 99: nem.UpdateDataChangeTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	438, // 100: nem.ListDataChangeTypeConfigCreateResponse.data_change_type_config_create:type_name -> nem.DataChangeTypeConfigCreate
-	438, // 101: nem.CreateDataChangeTypeConfigCreateRequest.data_change_type_config_create:type_name -> nem.DataChangeTypeConfigCreate
-	438, // 102: nem.UpdateDataChangeTypeConfigCreateRequest.data_change_type_config_create:type_name -> nem.DataChangeTypeConfigCreate
-	413, // 103: nem.UpdateDataChangeTypeConfigCreateRequest.update_mask:type_name -> google.protobuf.FieldMask
-	439, // 104: nem.ListDataChangeTypeConfigDeleteResponse.data_change_type_config_delete:type_name -> nem.DataChangeTypeConfigDelete
-	439, // 105: nem.CreateDataChangeTypeConfigDeleteRequest.data_change_type_config_delete:type_name -> nem.DataChangeTypeConfigDelete
-	439, // 106: nem.UpdateDataChangeTypeConfigDeleteRequest.data_change_type_config_delete:type_name -> nem.DataChangeTypeConfigDelete
-	413, // 107: nem.UpdateDataChangeTypeConfigDeleteRequest.update_mask:type_name -> google.protobuf.FieldMask
-	440, // 108: nem.ListDataChangeTypeConfigUpdateResponse.data_change_type_config_update:type_name -> nem.DataChangeTypeConfigUpdate
-	440, // 109: nem.CreateDataChangeTypeConfigUpdateRequest.data_change_type_config_update:type_name -> nem.DataChangeTypeConfigUpdate
-	440, // 110: nem.UpdateDataChangeTypeConfigUpdateRequest.data_change_type_config_update:type_name -> nem.DataChangeTypeConfigUpdate
-	413, // 111: nem.UpdateDataChangeTypeConfigUpdateRequest.update_mask:type_name -> google.protobuf.FieldMask
-	441, // 112: nem.ListDataChangeTypeConfigUpdateFieldResponse.data_change_type_config_update_field:type_name -> nem.DataChangeTypeConfigUpdateField
-	441, // 113: nem.CreateDataChangeTypeConfigUpdateFieldRequest.data_change_type_config_update_field:type_name -> nem.DataChangeTypeConfigUpdateField
-	441, // 114: nem.UpdateDataChangeTypeConfigUpdateFieldRequest.data_change_type_config_update_field:type_name -> nem.DataChangeTypeConfigUpdateField
-	413, // 115: nem.UpdateDataChangeTypeConfigUpdateFieldRequest.update_mask:type_name -> google.protobuf.FieldMask
-	442, // 116: nem.ListDbTypeConfigResponse.db_type_config:type_name -> nem.DbTypeConfig
-	442, // 117: nem.CreateDbTypeConfigRequest.db_type_config:type_name -> nem.DbTypeConfig
-	442, // 118: nem.UpdateDbTypeConfigRequest.db_type_config:type_name -> nem.DbTypeConfig
-	413, // 119: nem.UpdateDbTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	443, // 120: nem.ListDbTypeMysqlConfigResponse.db_type_mysql_config:type_name -> nem.DbTypeMysqlConfig
-	443, // 121: nem.CreateDbTypeMysqlConfigRequest.db_type_mysql_config:type_name -> nem.DbTypeMysqlConfig
-	443, // 122: nem.UpdateDbTypeMysqlConfigRequest.db_type_mysql_config:type_name -> nem.DbTypeMysqlConfig
-	413, // 123: nem.UpdateDbTypeMysqlConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	444, // 124: nem.ListDbTypePostgresConfigResponse.db_type_postgres_config:type_name -> nem.DbTypePostgresConfig
-	444, // 125: nem.CreateDbTypePostgresConfigRequest.db_type_postgres_config:type_name -> nem.DbTypePostgresConfig
-	444, // 126: nem.UpdateDbTypePostgresConfigRequest.db_type_postgres_config:type_name -> nem.DbTypePostgresConfig
-	413, // 127: nem.UpdateDbTypePostgresConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	445, // 128: nem.ListElementRenderResponse.element_render:type_name -> nem.ElementRender
-	445, // 129: nem.CreateElementRenderRequest.element_render:type_name -> nem.ElementRender
-	445, // 130: nem.UpdateElementRenderRequest.element_render:type_name -> nem.ElementRender
-	413, // 131: nem.UpdateElementRenderRequest.update_mask:type_name -> google.protobuf.FieldMask
-	446, // 132: nem.ListEntityResponse.entity:type_name -> nem.Entity
-	446, // 133: nem.CreateEntityRequest.entity:type_name -> nem.Entity
-	446, // 134: nem.UpdateEntityRequest.entity:type_name -> nem.Entity
-	413, // 135: nem.UpdateEntityRequest.update_mask:type_name -> google.protobuf.FieldMask
-	447, // 136: nem.ListEntityDataManagementConfigResponse.entity_data_management_config:type_name -> nem.EntityDataManagementConfig
-	447, // 137: nem.CreateEntityDataManagementConfigRequest.entity_data_management_config:type_name -> nem.EntityDataManagementConfig
-	447, // 138: nem.UpdateEntityDataManagementConfigRequest.entity_data_management_config:type_name -> nem.EntityDataManagementConfig
-	413, // 139: nem.UpdateEntityDataManagementConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	448, // 140: nem.ListEntityTypeConfigResponse.entity_type_config:type_name -> nem.EntityTypeConfig
-	448, // 141: nem.CreateEntityTypeConfigRequest.entity_type_config:type_name -> nem.EntityTypeConfig
-	448, // 142: nem.UpdateEntityTypeConfigRequest.entity_type_config:type_name -> nem.EntityTypeConfig
-	413, // 143: nem.UpdateEntityTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	449, // 144: nem.ListEntityTypeDependentConfigResponse.entity_type_dependent_config:type_name -> nem.EntityTypeDependentConfig
-	449, // 145: nem.CreateEntityTypeDependentConfigRequest.entity_type_dependent_config:type_name -> nem.EntityTypeDependentConfig
-	449, // 146: nem.UpdateEntityTypeDependentConfigRequest.entity_type_dependent_config:type_name -> nem.EntityTypeDependentConfig
-	413, // 147: nem.UpdateEntityTypeDependentConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	450, // 148: nem.ListEntityTypeStandaloneConfigResponse.entity_type_standalone_config:type_name -> nem.EntityTypeStandaloneConfig
-	450, // 149: nem.CreateEntityTypeStandaloneConfigRequest.entity_type_standalone_config:type_name -> nem.EntityTypeStandaloneConfig
-	450, // 150: nem.UpdateEntityTypeStandaloneConfigRequest.entity_type_standalone_config:type_name -> nem.EntityTypeStandaloneConfig
-	413, // 151: nem.UpdateEntityTypeStandaloneConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	451, // 152: nem.ListEntityVersionConfigResponse.entity_version_config:type_name -> nem.EntityVersionConfig
-	451, // 153: nem.CreateEntityVersionConfigRequest.entity_version_config:type_name -> nem.EntityVersionConfig
-	451, // 154: nem.UpdateEntityVersionConfigRequest.entity_version_config:type_name -> nem.EntityVersionConfig
-	413, // 155: nem.UpdateEntityVersionConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	452, // 156: nem.ListEntityVersionTypeConfigResponse.entity_version_type_config:type_name -> nem.EntityVersionTypeConfig
-	452, // 157: nem.CreateEntityVersionTypeConfigRequest.entity_version_type_config:type_name -> nem.EntityVersionTypeConfig
-	452, // 158: nem.UpdateEntityVersionTypeConfigRequest.entity_version_type_config:type_name -> nem.EntityVersionTypeConfig
-	413, // 159: nem.UpdateEntityVersionTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	453, // 160: nem.ListEntityVersionTypeEntityConfigResponse.entity_version_type_entity_config:type_name -> nem.EntityVersionTypeEntityConfig
-	453, // 161: nem.CreateEntityVersionTypeEntityConfigRequest.entity_version_type_entity_config:type_name -> nem.EntityVersionTypeEntityConfig
-	453, // 162: nem.UpdateEntityVersionTypeEntityConfigRequest.entity_version_type_entity_config:type_name -> nem.EntityVersionTypeEntityConfig
-	413, // 163: nem.UpdateEntityVersionTypeEntityConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	454, // 164: nem.ListEntityVersionTypeFieldConfigResponse.entity_version_type_field_config:type_name -> nem.EntityVersionTypeFieldConfig
-	454, // 165: nem.CreateEntityVersionTypeFieldConfigRequest.entity_version_type_field_config:type_name -> nem.EntityVersionTypeFieldConfig
-	454, // 166: nem.UpdateEntityVersionTypeFieldConfigRequest.entity_version_type_field_config:type_name -> nem.EntityVersionTypeFieldConfig
-	413, // 167: nem.UpdateEntityVersionTypeFieldConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	455, // 168: nem.ListEnumResponse.enum:type_name -> nem.Enum
-	455, // 169: nem.CreateEnumRequest.enum:type_name -> nem.Enum
-	455, // 170: nem.UpdateEnumRequest.enum:type_name -> nem.Enum
-	413, // 171: nem.UpdateEnumRequest.update_mask:type_name -> google.protobuf.FieldMask
-	456, // 172: nem.ListEnumValueResponse.enum_value:type_name -> nem.EnumValue
-	456, // 173: nem.CreateEnumValueRequest.enum_value:type_name -> nem.EnumValue
-	456, // 174: nem.UpdateEnumValueRequest.enum_value:type_name -> nem.EnumValue
-	413, // 175: nem.UpdateEnumValueRequest.update_mask:type_name -> google.protobuf.FieldMask
-	457, // 176: nem.ListEnviormentResponse.enviorment:type_name -> nem.Enviorment
-	457, // 177: nem.CreateEnviormentRequest.enviorment:type_name -> nem.Enviorment
-	457, // 178: nem.UpdateEnviormentRequest.enviorment:type_name -> nem.Enviorment
-	413, // 179: nem.UpdateEnviormentRequest.update_mask:type_name -> google.protobuf.FieldMask
-	458, // 180: nem.ListFieldResponse.field:type_name -> nem.Field
-	458, // 181: nem.CreateFieldRequest.field:type_name -> nem.Field
-	458, // 182: nem.UpdateFieldRequest.field:type_name -> nem.Field
-	413, // 183: nem.UpdateFieldRequest.update_mask:type_name -> google.protobuf.FieldMask
-	459, // 184: nem.ListFieldTypeArrayConfigResponse.field_type_array_config:type_name -> nem.FieldTypeArrayConfig
-	459, // 185: nem.CreateFieldTypeArrayConfigRequest.field_type_array_config:type_name -> nem.FieldTypeArrayConfig
-	459, // 186: nem.UpdateFieldTypeArrayConfigRequest.field_type_array_config:type_name -> nem.FieldTypeArrayConfig
-	413, // 187: nem.UpdateFieldTypeArrayConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	460, // 188: nem.ListFieldTypeCharConfigResponse.field_type_char_config:type_name -> nem.FieldTypeCharConfig
-	460, // 189: nem.CreateFieldTypeCharConfigRequest.field_type_char_config:type_name -> nem.FieldTypeCharConfig
-	460, // 190: nem.UpdateFieldTypeCharConfigRequest.field_type_char_config:type_name -> nem.FieldTypeCharConfig
-	413, // 191: nem.UpdateFieldTypeCharConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	461, // 192: nem.ListFieldTypeConfigResponse.field_type_config:type_name -> nem.FieldTypeConfig
-	461, // 193: nem.CreateFieldTypeConfigRequest.field_type_config:type_name -> nem.FieldTypeConfig
-	461, // 194: nem.UpdateFieldTypeConfigRequest.field_type_config:type_name -> nem.FieldTypeConfig
-	413, // 195: nem.UpdateFieldTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	462, // 196: nem.ListFieldTypeDateConfigResponse.field_type_date_config:type_name -> nem.FieldTypeDateConfig
-	462, // 197: nem.CreateFieldTypeDateConfigRequest.field_type_date_config:type_name -> nem.FieldTypeDateConfig
-	462, // 198: nem.UpdateFieldTypeDateConfigRequest.field_type_date_config:type_name -> nem.FieldTypeDateConfig
-	413, // 199: nem.UpdateFieldTypeDateConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	463, // 200: nem.ListFieldTypeDatetimeConfigResponse.field_type_datetime_config:type_name -> nem.FieldTypeDatetimeConfig
-	463, // 201: nem.CreateFieldTypeDatetimeConfigRequest.field_type_datetime_config:type_name -> nem.FieldTypeDatetimeConfig
-	463, // 202: nem.UpdateFieldTypeDatetimeConfigRequest.field_type_datetime_config:type_name -> nem.FieldTypeDatetimeConfig
-	413, // 203: nem.UpdateFieldTypeDatetimeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	464, // 204: nem.ListFieldTypeDecimalConfigResponse.field_type_decimal_config:type_name -> nem.FieldTypeDecimalConfig
-	464, // 205: nem.CreateFieldTypeDecimalConfigRequest.field_type_decimal_config:type_name -> nem.FieldTypeDecimalConfig
-	464, // 206: nem.UpdateFieldTypeDecimalConfigRequest.field_type_decimal_config:type_name -> nem.FieldTypeDecimalConfig
-	413, // 207: nem.UpdateFieldTypeDecimalConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	465, // 208: nem.ListFieldTypeEmailConfigResponse.field_type_email_config:type_name -> nem.FieldTypeEmailConfig
-	465, // 209: nem.CreateFieldTypeEmailConfigRequest.field_type_email_config:type_name -> nem.FieldTypeEmailConfig
-	465, // 210: nem.UpdateFieldTypeEmailConfigRequest.field_type_email_config:type_name -> nem.FieldTypeEmailConfig
-	413, // 211: nem.UpdateFieldTypeEmailConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	466, // 212: nem.ListFieldTypeEncryptedConfigResponse.field_type_encrypted_config:type_name -> nem.FieldTypeEncryptedConfig
-	466, // 213: nem.CreateFieldTypeEncryptedConfigRequest.field_type_encrypted_config:type_name -> nem.FieldTypeEncryptedConfig
-	466, // 214: nem.UpdateFieldTypeEncryptedConfigRequest.field_type_encrypted_config:type_name -> nem.FieldTypeEncryptedConfig
-	413, // 215: nem.UpdateFieldTypeEncryptedConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	467, // 216: nem.ListFieldTypeEnumConfigResponse.field_type_enum_config:type_name -> nem.FieldTypeEnumConfig
-	467, // 217: nem.CreateFieldTypeEnumConfigRequest.field_type_enum_config:type_name -> nem.FieldTypeEnumConfig
-	467, // 218: nem.UpdateFieldTypeEnumConfigRequest.field_type_enum_config:type_name -> nem.FieldTypeEnumConfig
-	413, // 219: nem.UpdateFieldTypeEnumConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	468, // 220: nem.ListFieldTypeFileConfigResponse.field_type_file_config:type_name -> nem.FieldTypeFileConfig
-	468, // 221: nem.CreateFieldTypeFileConfigRequest.field_type_file_config:type_name -> nem.FieldTypeFileConfig
-	468, // 222: nem.UpdateFieldTypeFileConfigRequest.field_type_file_config:type_name -> nem.FieldTypeFileConfig
-	413, // 223: nem.UpdateFieldTypeFileConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	469, // 224: nem.ListFieldTypeFloatConfigResponse.field_type_float_config:type_name -> nem.FieldTypeFloatConfig
-	469, // 225: nem.CreateFieldTypeFloatConfigRequest.field_type_float_config:type_name -> nem.FieldTypeFloatConfig
-	469, // 226: nem.UpdateFieldTypeFloatConfigRequest.field_type_float_config:type_name -> nem.FieldTypeFloatConfig
-	413, // 227: nem.UpdateFieldTypeFloatConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	470, // 228: nem.ListFieldTypeIntegerConfigResponse.field_type_integer_config:type_name -> nem.FieldTypeIntegerConfig
-	470, // 229: nem.CreateFieldTypeIntegerConfigRequest.field_type_integer_config:type_name -> nem.FieldTypeIntegerConfig
-	470, // 230: nem.UpdateFieldTypeIntegerConfigRequest.field_type_integer_config:type_name -> nem.FieldTypeIntegerConfig
-	413, // 231: nem.UpdateFieldTypeIntegerConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	471, // 232: nem.ListFieldTypeJSONConfigResponse.field_type_json_config:type_name -> nem.FieldTypeJSONConfig
-	471, // 233: nem.CreateFieldTypeJSONConfigRequest.field_type_json_config:type_name -> nem.FieldTypeJSONConfig
-	471, // 234: nem.UpdateFieldTypeJSONConfigRequest.field_type_json_config:type_name -> nem.FieldTypeJSONConfig
-	413, // 235: nem.UpdateFieldTypeJSONConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	472, // 236: nem.ListFieldTypePhoneConfigResponse.field_type_phone_config:type_name -> nem.FieldTypePhoneConfig
-	472, // 237: nem.CreateFieldTypePhoneConfigRequest.field_type_phone_config:type_name -> nem.FieldTypePhoneConfig
-	472, // 238: nem.UpdateFieldTypePhoneConfigRequest.field_type_phone_config:type_name -> nem.FieldTypePhoneConfig
-	413, // 239: nem.UpdateFieldTypePhoneConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	473, // 240: nem.ListFieldTypeSlugConfigResponse.field_type_slug_config:type_name -> nem.FieldTypeSlugConfig
-	473, // 241: nem.CreateFieldTypeSlugConfigRequest.field_type_slug_config:type_name -> nem.FieldTypeSlugConfig
-	473, // 242: nem.UpdateFieldTypeSlugConfigRequest.field_type_slug_config:type_name -> nem.FieldTypeSlugConfig
-	413, // 243: nem.UpdateFieldTypeSlugConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	474, // 244: nem.ListFieldTypeTextConfigResponse.field_type_text_config:type_name -> nem.FieldTypeTextConfig
-	474, // 245: nem.CreateFieldTypeTextConfigRequest.field_type_text_config:type_name -> nem.FieldTypeTextConfig
-	474, // 246: nem.UpdateFieldTypeTextConfigRequest.field_type_text_config:type_name -> nem.FieldTypeTextConfig
-	413, // 247: nem.UpdateFieldTypeTextConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	475, // 248: nem.ListFieldTypeURLConfigResponse.field_type_url_config:type_name -> nem.FieldTypeURLConfig
-	475, // 249: nem.CreateFieldTypeURLConfigRequest.field_type_url_config:type_name -> nem.FieldTypeURLConfig
-	475, // 250: nem.UpdateFieldTypeURLConfigRequest.field_type_url_config:type_name -> nem.FieldTypeURLConfig
-	413, // 251: nem.UpdateFieldTypeURLConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	476, // 252: nem.ListFieldTypeVarcharConfigResponse.field_type_varchar_config:type_name -> nem.FieldTypeVarcharConfig
-	476, // 253: nem.CreateFieldTypeVarcharConfigRequest.field_type_varchar_config:type_name -> nem.FieldTypeVarcharConfig
-	476, // 254: nem.UpdateFieldTypeVarcharConfigRequest.field_type_varchar_config:type_name -> nem.FieldTypeVarcharConfig
-	413, // 255: nem.UpdateFieldTypeVarcharConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	477, // 256: nem.ListFileObjectStorageConfigResponse.file_object_storage_config:type_name -> nem.FileObjectStorageConfig
-	477, // 257: nem.CreateFileObjectStorageConfigRequest.file_object_storage_config:type_name -> nem.FileObjectStorageConfig
-	477, // 258: nem.UpdateFileObjectStorageConfigRequest.file_object_storage_config:type_name -> nem.FileObjectStorageConfig
-	413, // 259: nem.UpdateFileObjectStorageConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	478, // 260: nem.ListFileStorageConfigResponse.file_storage_config:type_name -> nem.FileStorageConfig
-	478, // 261: nem.CreateFileStorageConfigRequest.file_storage_config:type_name -> nem.FileStorageConfig
-	478, // 262: nem.UpdateFileStorageConfigRequest.file_storage_config:type_name -> nem.FileStorageConfig
-	413, // 263: nem.UpdateFileStorageConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	479, // 264: nem.ListIndexResponse.index:type_name -> nem.Index
-	479, // 265: nem.CreateIndexRequest.index:type_name -> nem.Index
-	479, // 266: nem.UpdateIndexRequest.index:type_name -> nem.Index
-	413, // 267: nem.UpdateIndexRequest.update_mask:type_name -> google.protobuf.FieldMask
-	480, // 268: nem.ListIndexFieldResponse.index_field:type_name -> nem.IndexField
-	480, // 269: nem.CreateIndexFieldRequest.index_field:type_name -> nem.IndexField
-	480, // 270: nem.UpdateIndexFieldRequest.index_field:type_name -> nem.IndexField
-	413, // 271: nem.UpdateIndexFieldRequest.update_mask:type_name -> google.protobuf.FieldMask
-	481, // 272: nem.ListLocalAgentConnectionResponse.local_agent_connection:type_name -> nem.LocalAgentConnection
-	481, // 273: nem.CreateLocalAgentConnectionRequest.local_agent_connection:type_name -> nem.LocalAgentConnection
-	481, // 274: nem.UpdateLocalAgentConnectionRequest.local_agent_connection:type_name -> nem.LocalAgentConnection
-	413, // 275: nem.UpdateLocalAgentConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	482, // 276: nem.ListObjectStoreResponse.object_store:type_name -> nem.ObjectStore
-	482, // 277: nem.CreateObjectStoreRequest.object_store:type_name -> nem.ObjectStore
-	482, // 278: nem.UpdateObjectStoreRequest.object_store:type_name -> nem.ObjectStore
-	413, // 279: nem.UpdateObjectStoreRequest.update_mask:type_name -> google.protobuf.FieldMask
-	483, // 280: nem.ListObjectStoreS3TypeConfigResponse.object_store_s_3_type_config:type_name -> nem.ObjectStoreS3TypeConfig
-	483, // 281: nem.CreateObjectStoreS3TypeConfigRequest.object_store_s_3_type_config:type_name -> nem.ObjectStoreS3TypeConfig
-	483, // 282: nem.UpdateObjectStoreS3TypeConfigRequest.object_store_s_3_type_config:type_name -> nem.ObjectStoreS3TypeConfig
-	413, // 283: nem.UpdateObjectStoreS3TypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	484, // 284: nem.ListObjectStoreTypeConfigResponse.object_store_type_config:type_name -> nem.ObjectStoreTypeConfig
-	484, // 285: nem.CreateObjectStoreTypeConfigRequest.object_store_type_config:type_name -> nem.ObjectStoreTypeConfig
-	484, // 286: nem.UpdateObjectStoreTypeConfigRequest.object_store_type_config:type_name -> nem.ObjectStoreTypeConfig
-	413, // 287: nem.UpdateObjectStoreTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	485, // 288: nem.ListProjectExtensionResponse.project_extension:type_name -> nem.ProjectExtension
-	485, // 289: nem.CreateProjectExtensionRequest.project_extension:type_name -> nem.ProjectExtension
-	485, // 290: nem.UpdateProjectExtensionRequest.project_extension:type_name -> nem.ProjectExtension
-	413, // 291: nem.UpdateProjectExtensionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	486, // 292: nem.ListProjectVersionDeploymentResponse.project_version_deployment:type_name -> nem.ProjectVersionDeployment
-	486, // 293: nem.CreateProjectVersionDeploymentRequest.project_version_deployment:type_name -> nem.ProjectVersionDeployment
-	486, // 294: nem.UpdateProjectVersionDeploymentRequest.project_version_deployment:type_name -> nem.ProjectVersionDeployment
-	413, // 295: nem.UpdateProjectVersionDeploymentRequest.update_mask:type_name -> google.protobuf.FieldMask
-	487, // 296: nem.ListRelationshipResponse.relationship:type_name -> nem.Relationship
-	487, // 297: nem.CreateRelationshipRequest.relationship:type_name -> nem.Relationship
-	487, // 298: nem.UpdateRelationshipRequest.relationship:type_name -> nem.Relationship
-	413, // 299: nem.UpdateRelationshipRequest.update_mask:type_name -> google.protobuf.FieldMask
-	488, // 300: nem.ListRelationshipNodeResponse.relationship_node:type_name -> nem.RelationshipNode
-	488, // 301: nem.CreateRelationshipNodeRequest.relationship_node:type_name -> nem.RelationshipNode
-	488, // 302: nem.UpdateRelationshipNodeRequest.relationship_node:type_name -> nem.RelationshipNode
-	413, // 303: nem.UpdateRelationshipNodeRequest.update_mask:type_name -> google.protobuf.FieldMask
-	489, // 304: nem.ListRelationshipNodeTypeConfigResponse.relationship_node_type_config:type_name -> nem.RelationshipNodeTypeConfig
-	489, // 305: nem.CreateRelationshipNodeTypeConfigRequest.relationship_node_type_config:type_name -> nem.RelationshipNodeTypeConfig
-	489, // 306: nem.UpdateRelationshipNodeTypeConfigRequest.relationship_node_type_config:type_name -> nem.RelationshipNodeTypeConfig
-	413, // 307: nem.UpdateRelationshipNodeTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	490, // 308: nem.ListRelationshipNodeTypeEntityConfigResponse.relationship_node_type_entity_config:type_name -> nem.RelationshipNodeTypeEntityConfig
-	490, // 309: nem.CreateRelationshipNodeTypeEntityConfigRequest.relationship_node_type_entity_config:type_name -> nem.RelationshipNodeTypeEntityConfig
-	490, // 310: nem.UpdateRelationshipNodeTypeEntityConfigRequest.relationship_node_type_entity_config:type_name -> nem.RelationshipNodeTypeEntityConfig
-	413, // 311: nem.UpdateRelationshipNodeTypeEntityConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	491, // 312: nem.ListRelationshipNodeTypeServiceConfigResponse.relationship_node_type_service_config:type_name -> nem.RelationshipNodeTypeServiceConfig
-	491, // 313: nem.CreateRelationshipNodeTypeServiceConfigRequest.relationship_node_type_service_config:type_name -> nem.RelationshipNodeTypeServiceConfig
-	491, // 314: nem.UpdateRelationshipNodeTypeServiceConfigRequest.relationship_node_type_service_config:type_name -> nem.RelationshipNodeTypeServiceConfig
-	413, // 315: nem.UpdateRelationshipNodeTypeServiceConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	492, // 316: nem.ListReviewConfigResponse.review_config:type_name -> nem.ReviewConfig
-	492, // 317: nem.CreateReviewConfigRequest.review_config:type_name -> nem.ReviewConfig
-	492, // 318: nem.UpdateReviewConfigRequest.review_config:type_name -> nem.ReviewConfig
-	413, // 319: nem.UpdateReviewConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	493, // 320: nem.ListServiceResponse.service:type_name -> nem.Service
-	493, // 321: nem.CreateServiceRequest.service:type_name -> nem.Service
-	493, // 322: nem.UpdateServiceRequest.service:type_name -> nem.Service
-	413, // 323: nem.UpdateServiceRequest.update_mask:type_name -> google.protobuf.FieldMask
-	494, // 324: nem.ListStoreResponse.store:type_name -> nem.Store
-	494, // 325: nem.CreateStoreRequest.store:type_name -> nem.Store
-	494, // 326: nem.UpdateStoreRequest.store:type_name -> nem.Store
-	413, // 327: nem.UpdateStoreRequest.update_mask:type_name -> google.protobuf.FieldMask
-	495, // 328: nem.ListTcpIpConnectionTypeConfigResponse.tcp_ip_connection_type_config:type_name -> nem.TcpIpConnectionTypeConfig
-	495, // 329: nem.CreateTcpIpConnectionTypeConfigRequest.tcp_ip_connection_type_config:type_name -> nem.TcpIpConnectionTypeConfig
-	495, // 330: nem.UpdateTcpIpConnectionTypeConfigRequest.tcp_ip_connection_type_config:type_name -> nem.TcpIpConnectionTypeConfig
-	413, // 331: nem.UpdateTcpIpConnectionTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	496, // 332: nem.ListTcpIpSshConnectionTypeConfigResponse.tcp_ip_ssh_connection_type_config:type_name -> nem.TcpIpSshConnectionTypeConfig
-	496, // 333: nem.CreateTcpIpSshConnectionTypeConfigRequest.tcp_ip_ssh_connection_type_config:type_name -> nem.TcpIpSshConnectionTypeConfig
-	496, // 334: nem.UpdateTcpIpSshConnectionTypeConfigRequest.tcp_ip_ssh_connection_type_config:type_name -> nem.TcpIpSshConnectionTypeConfig
-	413, // 335: nem.UpdateTcpIpSshConnectionTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	497, // 336: nem.ListUserConnectionExecutionResponse.user_connection_execution:type_name -> nem.UserConnectionExecution
-	497, // 337: nem.CreateUserConnectionExecutionRequest.user_connection_execution:type_name -> nem.UserConnectionExecution
-	497, // 338: nem.UpdateUserConnectionExecutionRequest.user_connection_execution:type_name -> nem.UserConnectionExecution
-	413, // 339: nem.UpdateUserConnectionExecutionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	498, // 340: nem.ListUserConnectionLocalConfigResponse.user_connection_local_config:type_name -> nem.UserConnectionLocalConfig
-	498, // 341: nem.CreateUserConnectionLocalConfigRequest.user_connection_local_config:type_name -> nem.UserConnectionLocalConfig
-	498, // 342: nem.UpdateUserConnectionLocalConfigRequest.user_connection_local_config:type_name -> nem.UserConnectionLocalConfig
-	413, // 343: nem.UpdateUserConnectionLocalConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	499, // 344: nem.ListUserConnectionRemoteConfigResponse.user_connection_remote_config:type_name -> nem.UserConnectionRemoteConfig
-	499, // 345: nem.CreateUserConnectionRemoteConfigRequest.user_connection_remote_config:type_name -> nem.UserConnectionRemoteConfig
-	499, // 346: nem.UpdateUserConnectionRemoteConfigRequest.user_connection_remote_config:type_name -> nem.UserConnectionRemoteConfig
-	413, // 347: nem.UpdateUserConnectionRemoteConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	500, // 348: nem.ListUserConnectionTypeConfigResponse.user_connection_type_config:type_name -> nem.UserConnectionTypeConfig
-	500, // 349: nem.CreateUserConnectionTypeConfigRequest.user_connection_type_config:type_name -> nem.UserConnectionTypeConfig
-	500, // 350: nem.UpdateUserConnectionTypeConfigRequest.user_connection_type_config:type_name -> nem.UserConnectionTypeConfig
-	413, // 351: nem.UpdateUserConnectionTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	501, // 352: nem.ListVisibilityResponse.visibility:type_name -> nem.Visibility
-	501, // 353: nem.CreateVisibilityRequest.visibility:type_name -> nem.Visibility
-	501, // 354: nem.UpdateVisibilityRequest.visibility:type_name -> nem.Visibility
-	413, // 355: nem.UpdateVisibilityRequest.update_mask:type_name -> google.protobuf.FieldMask
-	502, // 356: nem.ListChangeRequestScopeConfigLocalResponse.change_request_scope_config_local:type_name -> nem.ChangeRequestScopeConfigLocal
-	502, // 357: nem.CreateChangeRequestScopeConfigLocalRequest.change_request_scope_config_local:type_name -> nem.ChangeRequestScopeConfigLocal
-	502, // 358: nem.UpdateChangeRequestScopeConfigLocalRequest.change_request_scope_config_local:type_name -> nem.ChangeRequestScopeConfigLocal
-	413, // 359: nem.UpdateChangeRequestScopeConfigLocalRequest.update_mask:type_name -> google.protobuf.FieldMask
-	503, // 360: nem.ListChangeRequestScopeConfigRemoteResponse.change_request_scope_config_remote:type_name -> nem.ChangeRequestScopeConfigRemote
-	503, // 361: nem.CreateChangeRequestScopeConfigRemoteRequest.change_request_scope_config_remote:type_name -> nem.ChangeRequestScopeConfigRemote
-	503, // 362: nem.UpdateChangeRequestScopeConfigRemoteRequest.change_request_scope_config_remote:type_name -> nem.ChangeRequestScopeConfigRemote
-	413, // 363: nem.UpdateChangeRequestScopeConfigRemoteRequest.update_mask:type_name -> google.protobuf.FieldMask
-	504, // 364: nem.ListAutomationResponse.automation:type_name -> nem.Automation
-	504, // 365: nem.CreateAutomationRequest.automation:type_name -> nem.Automation
-	504, // 366: nem.UpdateAutomationRequest.automation:type_name -> nem.Automation
-	413, // 367: nem.UpdateAutomationRequest.update_mask:type_name -> google.protobuf.FieldMask
-	505, // 368: nem.ListAutomationEventResponse.automation_event:type_name -> nem.AutomationEvent
-	505, // 369: nem.CreateAutomationEventRequest.automation_event:type_name -> nem.AutomationEvent
-	505, // 370: nem.UpdateAutomationEventRequest.automation_event:type_name -> nem.AutomationEvent
-	413, // 371: nem.UpdateAutomationEventRequest.update_mask:type_name -> google.protobuf.FieldMask
-	506, // 372: nem.ListDeploymentResponse.deployment:type_name -> nem.Deployment
-	506, // 373: nem.CreateDeploymentRequest.deployment:type_name -> nem.Deployment
-	506, // 374: nem.UpdateDeploymentRequest.deployment:type_name -> nem.Deployment
-	413, // 375: nem.UpdateDeploymentRequest.update_mask:type_name -> google.protobuf.FieldMask
-	507, // 376: nem.ListDeploymentProviderResponse.deployment_provider:type_name -> nem.DeploymentProvider
-	507, // 377: nem.CreateDeploymentProviderRequest.deployment_provider:type_name -> nem.DeploymentProvider
-	507, // 378: nem.UpdateDeploymentProviderRequest.deployment_provider:type_name -> nem.DeploymentProvider
-	413, // 379: nem.UpdateDeploymentProviderRequest.update_mask:type_name -> google.protobuf.FieldMask
-	508, // 380: nem.ListDeploymentServerResponse.deployment_server:type_name -> nem.DeploymentServer
-	508, // 381: nem.CreateDeploymentServerRequest.deployment_server:type_name -> nem.DeploymentServer
-	508, // 382: nem.UpdateDeploymentServerRequest.deployment_server:type_name -> nem.DeploymentServer
-	413, // 383: nem.UpdateDeploymentServerRequest.update_mask:type_name -> google.protobuf.FieldMask
-	509, // 384: nem.ListDeploymentDatabaseResponse.deployment_database:type_name -> nem.DeploymentDatabase
-	509, // 385: nem.CreateDeploymentDatabaseRequest.deployment_database:type_name -> nem.DeploymentDatabase
-	509, // 386: nem.UpdateDeploymentDatabaseRequest.deployment_database:type_name -> nem.DeploymentDatabase
-	413, // 387: nem.UpdateDeploymentDatabaseRequest.update_mask:type_name -> google.protobuf.FieldMask
-	510, // 388: nem.ListDeploymentCodegenResponse.deployment_codegen:type_name -> nem.DeploymentCodegen
-	510, // 389: nem.CreateDeploymentCodegenRequest.deployment_codegen:type_name -> nem.DeploymentCodegen
-	510, // 390: nem.UpdateDeploymentCodegenRequest.deployment_codegen:type_name -> nem.DeploymentCodegen
-	413, // 391: nem.UpdateDeploymentCodegenRequest.update_mask:type_name -> google.protobuf.FieldMask
-	511, // 392: nem.ListDeploymentRevisionResponse.deployment_revision:type_name -> nem.DeploymentRevision
-	511, // 393: nem.CreateDeploymentRevisionRequest.deployment_revision:type_name -> nem.DeploymentRevision
-	511, // 394: nem.UpdateDeploymentRevisionRequest.deployment_revision:type_name -> nem.DeploymentRevision
-	413, // 395: nem.UpdateDeploymentRevisionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	512, // 396: nem.ListFieldPiiConfigResponse.field_pii_config:type_name -> nem.FieldPiiConfig
-	512, // 397: nem.CreateFieldPiiConfigRequest.field_pii_config:type_name -> nem.FieldPiiConfig
-	512, // 398: nem.UpdateFieldPiiConfigRequest.field_pii_config:type_name -> nem.FieldPiiConfig
-	413, // 399: nem.UpdateFieldPiiConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	513, // 400: nem.ListObjectStoreR2TypeConfigResponse.object_store_r_2_type_config:type_name -> nem.ObjectStoreR2TypeConfig
-	513, // 401: nem.CreateObjectStoreR2TypeConfigRequest.object_store_r_2_type_config:type_name -> nem.ObjectStoreR2TypeConfig
-	513, // 402: nem.UpdateObjectStoreR2TypeConfigRequest.object_store_r_2_type_config:type_name -> nem.ObjectStoreR2TypeConfig
-	413, // 403: nem.UpdateObjectStoreR2TypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
-	514, // 404: nem.ListDataChangeBeforeImageValueResponse.data_change_before_image_value:type_name -> nem.DataChangeBeforeImageValue
-	514, // 405: nem.CreateDataChangeBeforeImageValueRequest.data_change_before_image_value:type_name -> nem.DataChangeBeforeImageValue
-	514, // 406: nem.UpdateDataChangeBeforeImageValueRequest.data_change_before_image_value:type_name -> nem.DataChangeBeforeImageValue
-	413, // 407: nem.UpdateDataChangeBeforeImageValueRequest.update_mask:type_name -> google.protobuf.FieldMask
-	515, // 408: nem.ListDataChangeBeforeImageResponse.data_change_before_image:type_name -> nem.DataChangeBeforeImage
-	515, // 409: nem.CreateDataChangeBeforeImageRequest.data_change_before_image:type_name -> nem.DataChangeBeforeImage
-	515, // 410: nem.UpdateDataChangeBeforeImageRequest.data_change_before_image:type_name -> nem.DataChangeBeforeImage
-	413, // 411: nem.UpdateDataChangeBeforeImageRequest.update_mask:type_name -> google.protobuf.FieldMask
-	0,   // 412: nem.Nem.ListExtension:input_type -> nem.ListExtensionRequest
-	2,   // 413: nem.Nem.CreateExtension:input_type -> nem.CreateExtensionRequest
-	3,   // 414: nem.Nem.UpdateExtension:input_type -> nem.UpdateExtensionRequest
-	4,   // 415: nem.Nem.ListExtensionVersion:input_type -> nem.ListExtensionVersionRequest
-	6,   // 416: nem.Nem.CreateExtensionVersion:input_type -> nem.CreateExtensionVersionRequest
-	7,   // 417: nem.Nem.UpdateExtensionVersion:input_type -> nem.UpdateExtensionVersionRequest
-	8,   // 418: nem.Nem.ListUserProject:input_type -> nem.ListUserProjectRequest
-	10,  // 419: nem.Nem.CreateUserProject:input_type -> nem.CreateUserProjectRequest
-	11,  // 420: nem.Nem.UpdateUserProject:input_type -> nem.UpdateUserProjectRequest
-	12,  // 421: nem.Nem.ListLocalAgent:input_type -> nem.ListLocalAgentRequest
-	14,  // 422: nem.Nem.CreateLocalAgent:input_type -> nem.CreateLocalAgentRequest
-	15,  // 423: nem.Nem.UpdateLocalAgent:input_type -> nem.UpdateLocalAgentRequest
-	16,  // 424: nem.Nem.ListExtensionExecution:input_type -> nem.ListExtensionExecutionRequest
-	18,  // 425: nem.Nem.CreateExtensionExecution:input_type -> nem.CreateExtensionExecutionRequest
-	19,  // 426: nem.Nem.UpdateExtensionExecution:input_type -> nem.UpdateExtensionExecutionRequest
-	20,  // 427: nem.Nem.ListProjectVersion:input_type -> nem.ListProjectVersionRequest
-	22,  // 428: nem.Nem.CreateProjectVersion:input_type -> nem.CreateProjectVersionRequest
-	23,  // 429: nem.Nem.UpdateProjectVersion:input_type -> nem.UpdateProjectVersionRequest
-	24,  // 430: nem.Nem.ListUser:input_type -> nem.ListUserRequest
-	26,  // 431: nem.Nem.CreateUser:input_type -> nem.CreateUserRequest
-	27,  // 432: nem.Nem.UpdateUser:input_type -> nem.UpdateUserRequest
-	28,  // 433: nem.Nem.ListUserProjectVersion:input_type -> nem.ListUserProjectVersionRequest
-	30,  // 434: nem.Nem.CreateUserProjectVersion:input_type -> nem.CreateUserProjectVersionRequest
-	31,  // 435: nem.Nem.UpdateUserProjectVersion:input_type -> nem.UpdateUserProjectVersionRequest
-	32,  // 436: nem.Nem.ListProject:input_type -> nem.ListProjectRequest
-	34,  // 437: nem.Nem.CreateProject:input_type -> nem.CreateProjectRequest
-	35,  // 438: nem.Nem.UpdateProject:input_type -> nem.UpdateProjectRequest
-	36,  // 439: nem.Nem.ListMembership:input_type -> nem.ListMembershipRequest
-	38,  // 440: nem.Nem.CreateMembership:input_type -> nem.CreateMembershipRequest
-	39,  // 441: nem.Nem.UpdateMembership:input_type -> nem.UpdateMembershipRequest
-	40,  // 442: nem.Nem.ListTeam:input_type -> nem.ListTeamRequest
-	42,  // 443: nem.Nem.CreateTeam:input_type -> nem.CreateTeamRequest
-	43,  // 444: nem.Nem.UpdateTeam:input_type -> nem.UpdateTeamRequest
-	44,  // 445: nem.Nem.ListAiUsage:input_type -> nem.ListAiUsageRequest
-	46,  // 446: nem.Nem.CreateAiUsage:input_type -> nem.CreateAiUsageRequest
-	47,  // 447: nem.Nem.UpdateAiUsage:input_type -> nem.UpdateAiUsageRequest
-	48,  // 448: nem.Nem.ListChangeRequest:input_type -> nem.ListChangeRequestRequest
-	50,  // 449: nem.Nem.CreateChangeRequest:input_type -> nem.CreateChangeRequestRequest
-	51,  // 450: nem.Nem.UpdateChangeRequest:input_type -> nem.UpdateChangeRequestRequest
-	52,  // 451: nem.Nem.ListUserConnection:input_type -> nem.ListUserConnectionRequest
-	54,  // 452: nem.Nem.CreateUserConnection:input_type -> nem.CreateUserConnectionRequest
-	55,  // 453: nem.Nem.UpdateUserConnection:input_type -> nem.UpdateUserConnectionRequest
-	56,  // 454: nem.Nem.ListUserTeam:input_type -> nem.ListUserTeamRequest
-	58,  // 455: nem.Nem.CreateUserTeam:input_type -> nem.CreateUserTeamRequest
-	59,  // 456: nem.Nem.UpdateUserTeam:input_type -> nem.UpdateUserTeamRequest
-	60,  // 457: nem.Nem.ListArrayTypeConfig:input_type -> nem.ListArrayTypeConfigRequest
-	62,  // 458: nem.Nem.CreateArrayTypeConfig:input_type -> nem.CreateArrayTypeConfigRequest
-	63,  // 459: nem.Nem.UpdateArrayTypeConfig:input_type -> nem.UpdateArrayTypeConfigRequest
-	64,  // 460: nem.Nem.ListChangeRequestDataChange:input_type -> nem.ListChangeRequestDataChangeRequest
-	66,  // 461: nem.Nem.CreateChangeRequestDataChange:input_type -> nem.CreateChangeRequestDataChangeRequest
-	67,  // 462: nem.Nem.UpdateChangeRequestDataChange:input_type -> nem.UpdateChangeRequestDataChangeRequest
-	68,  // 463: nem.Nem.ListChangeRequestMetadata:input_type -> nem.ListChangeRequestMetadataRequest
-	70,  // 464: nem.Nem.CreateChangeRequestMetadata:input_type -> nem.CreateChangeRequestMetadataRequest
-	71,  // 465: nem.Nem.UpdateChangeRequestMetadata:input_type -> nem.UpdateChangeRequestMetadataRequest
-	72,  // 466: nem.Nem.ListChangeRequestMetadataData:input_type -> nem.ListChangeRequestMetadataDataRequest
-	74,  // 467: nem.Nem.CreateChangeRequestMetadataData:input_type -> nem.CreateChangeRequestMetadataDataRequest
-	75,  // 468: nem.Nem.UpdateChangeRequestMetadataData:input_type -> nem.UpdateChangeRequestMetadataDataRequest
-	76,  // 469: nem.Nem.ListChangeRequestReview:input_type -> nem.ListChangeRequestReviewRequest
-	78,  // 470: nem.Nem.CreateChangeRequestReview:input_type -> nem.CreateChangeRequestReviewRequest
-	79,  // 471: nem.Nem.UpdateChangeRequestReview:input_type -> nem.UpdateChangeRequestReviewRequest
-	80,  // 472: nem.Nem.ListChangeRequestScopeConfig:input_type -> nem.ListChangeRequestScopeConfigRequest
-	82,  // 473: nem.Nem.CreateChangeRequestScopeConfig:input_type -> nem.CreateChangeRequestScopeConfigRequest
-	83,  // 474: nem.Nem.UpdateChangeRequestScopeConfig:input_type -> nem.UpdateChangeRequestScopeConfigRequest
-	84,  // 475: nem.Nem.ListConnection:input_type -> nem.ListConnectionRequest
-	86,  // 476: nem.Nem.CreateConnection:input_type -> nem.CreateConnectionRequest
-	87,  // 477: nem.Nem.UpdateConnection:input_type -> nem.UpdateConnectionRequest
-	88,  // 478: nem.Nem.ListConnectionTypeConfig:input_type -> nem.ListConnectionTypeConfigRequest
-	90,  // 479: nem.Nem.CreateConnectionTypeConfig:input_type -> nem.CreateConnectionTypeConfigRequest
-	91,  // 480: nem.Nem.UpdateConnectionTypeConfig:input_type -> nem.UpdateConnectionTypeConfigRequest
-	92,  // 481: nem.Nem.ListDataChangeFieldValue:input_type -> nem.ListDataChangeFieldValueRequest
-	94,  // 482: nem.Nem.CreateDataChangeFieldValue:input_type -> nem.CreateDataChangeFieldValueRequest
-	95,  // 483: nem.Nem.UpdateDataChangeFieldValue:input_type -> nem.UpdateDataChangeFieldValueRequest
-	96,  // 484: nem.Nem.ListDataChangeTypeConfig:input_type -> nem.ListDataChangeTypeConfigRequest
-	98,  // 485: nem.Nem.CreateDataChangeTypeConfig:input_type -> nem.CreateDataChangeTypeConfigRequest
-	99,  // 486: nem.Nem.UpdateDataChangeTypeConfig:input_type -> nem.UpdateDataChangeTypeConfigRequest
-	100, // 487: nem.Nem.ListDataChangeTypeConfigCreate:input_type -> nem.ListDataChangeTypeConfigCreateRequest
-	102, // 488: nem.Nem.CreateDataChangeTypeConfigCreate:input_type -> nem.CreateDataChangeTypeConfigCreateRequest
-	103, // 489: nem.Nem.UpdateDataChangeTypeConfigCreate:input_type -> nem.UpdateDataChangeTypeConfigCreateRequest
-	104, // 490: nem.Nem.ListDataChangeTypeConfigDelete:input_type -> nem.ListDataChangeTypeConfigDeleteRequest
-	106, // 491: nem.Nem.CreateDataChangeTypeConfigDelete:input_type -> nem.CreateDataChangeTypeConfigDeleteRequest
-	107, // 492: nem.Nem.UpdateDataChangeTypeConfigDelete:input_type -> nem.UpdateDataChangeTypeConfigDeleteRequest
-	108, // 493: nem.Nem.ListDataChangeTypeConfigUpdate:input_type -> nem.ListDataChangeTypeConfigUpdateRequest
-	110, // 494: nem.Nem.CreateDataChangeTypeConfigUpdate:input_type -> nem.CreateDataChangeTypeConfigUpdateRequest
-	111, // 495: nem.Nem.UpdateDataChangeTypeConfigUpdate:input_type -> nem.UpdateDataChangeTypeConfigUpdateRequest
-	112, // 496: nem.Nem.ListDataChangeTypeConfigUpdateField:input_type -> nem.ListDataChangeTypeConfigUpdateFieldRequest
-	114, // 497: nem.Nem.CreateDataChangeTypeConfigUpdateField:input_type -> nem.CreateDataChangeTypeConfigUpdateFieldRequest
-	115, // 498: nem.Nem.UpdateDataChangeTypeConfigUpdateField:input_type -> nem.UpdateDataChangeTypeConfigUpdateFieldRequest
-	116, // 499: nem.Nem.ListDbTypeConfig:input_type -> nem.ListDbTypeConfigRequest
-	118, // 500: nem.Nem.CreateDbTypeConfig:input_type -> nem.CreateDbTypeConfigRequest
-	119, // 501: nem.Nem.UpdateDbTypeConfig:input_type -> nem.UpdateDbTypeConfigRequest
-	120, // 502: nem.Nem.ListDbTypeMysqlConfig:input_type -> nem.ListDbTypeMysqlConfigRequest
-	122, // 503: nem.Nem.CreateDbTypeMysqlConfig:input_type -> nem.CreateDbTypeMysqlConfigRequest
-	123, // 504: nem.Nem.UpdateDbTypeMysqlConfig:input_type -> nem.UpdateDbTypeMysqlConfigRequest
-	124, // 505: nem.Nem.ListDbTypePostgresConfig:input_type -> nem.ListDbTypePostgresConfigRequest
-	126, // 506: nem.Nem.CreateDbTypePostgresConfig:input_type -> nem.CreateDbTypePostgresConfigRequest
-	127, // 507: nem.Nem.UpdateDbTypePostgresConfig:input_type -> nem.UpdateDbTypePostgresConfigRequest
-	128, // 508: nem.Nem.ListElementRender:input_type -> nem.ListElementRenderRequest
-	130, // 509: nem.Nem.CreateElementRender:input_type -> nem.CreateElementRenderRequest
-	131, // 510: nem.Nem.UpdateElementRender:input_type -> nem.UpdateElementRenderRequest
-	132, // 511: nem.Nem.ListEntity:input_type -> nem.ListEntityRequest
-	134, // 512: nem.Nem.CreateEntity:input_type -> nem.CreateEntityRequest
-	135, // 513: nem.Nem.UpdateEntity:input_type -> nem.UpdateEntityRequest
-	136, // 514: nem.Nem.ListEntityDataManagementConfig:input_type -> nem.ListEntityDataManagementConfigRequest
-	138, // 515: nem.Nem.CreateEntityDataManagementConfig:input_type -> nem.CreateEntityDataManagementConfigRequest
-	139, // 516: nem.Nem.UpdateEntityDataManagementConfig:input_type -> nem.UpdateEntityDataManagementConfigRequest
-	140, // 517: nem.Nem.ListEntityTypeConfig:input_type -> nem.ListEntityTypeConfigRequest
-	142, // 518: nem.Nem.CreateEntityTypeConfig:input_type -> nem.CreateEntityTypeConfigRequest
-	143, // 519: nem.Nem.UpdateEntityTypeConfig:input_type -> nem.UpdateEntityTypeConfigRequest
-	144, // 520: nem.Nem.ListEntityTypeDependentConfig:input_type -> nem.ListEntityTypeDependentConfigRequest
-	146, // 521: nem.Nem.CreateEntityTypeDependentConfig:input_type -> nem.CreateEntityTypeDependentConfigRequest
-	147, // 522: nem.Nem.UpdateEntityTypeDependentConfig:input_type -> nem.UpdateEntityTypeDependentConfigRequest
-	148, // 523: nem.Nem.ListEntityTypeStandaloneConfig:input_type -> nem.ListEntityTypeStandaloneConfigRequest
-	150, // 524: nem.Nem.CreateEntityTypeStandaloneConfig:input_type -> nem.CreateEntityTypeStandaloneConfigRequest
-	151, // 525: nem.Nem.UpdateEntityTypeStandaloneConfig:input_type -> nem.UpdateEntityTypeStandaloneConfigRequest
-	152, // 526: nem.Nem.ListEntityVersionConfig:input_type -> nem.ListEntityVersionConfigRequest
-	154, // 527: nem.Nem.CreateEntityVersionConfig:input_type -> nem.CreateEntityVersionConfigRequest
-	155, // 528: nem.Nem.UpdateEntityVersionConfig:input_type -> nem.UpdateEntityVersionConfigRequest
-	156, // 529: nem.Nem.ListEntityVersionTypeConfig:input_type -> nem.ListEntityVersionTypeConfigRequest
-	158, // 530: nem.Nem.CreateEntityVersionTypeConfig:input_type -> nem.CreateEntityVersionTypeConfigRequest
-	159, // 531: nem.Nem.UpdateEntityVersionTypeConfig:input_type -> nem.UpdateEntityVersionTypeConfigRequest
-	160, // 532: nem.Nem.ListEntityVersionTypeEntityConfig:input_type -> nem.ListEntityVersionTypeEntityConfigRequest
-	162, // 533: nem.Nem.CreateEntityVersionTypeEntityConfig:input_type -> nem.CreateEntityVersionTypeEntityConfigRequest
-	163, // 534: nem.Nem.UpdateEntityVersionTypeEntityConfig:input_type -> nem.UpdateEntityVersionTypeEntityConfigRequest
-	164, // 535: nem.Nem.ListEntityVersionTypeFieldConfig:input_type -> nem.ListEntityVersionTypeFieldConfigRequest
-	166, // 536: nem.Nem.CreateEntityVersionTypeFieldConfig:input_type -> nem.CreateEntityVersionTypeFieldConfigRequest
-	167, // 537: nem.Nem.UpdateEntityVersionTypeFieldConfig:input_type -> nem.UpdateEntityVersionTypeFieldConfigRequest
-	168, // 538: nem.Nem.ListEnum:input_type -> nem.ListEnumRequest
-	170, // 539: nem.Nem.CreateEnum:input_type -> nem.CreateEnumRequest
-	171, // 540: nem.Nem.UpdateEnum:input_type -> nem.UpdateEnumRequest
-	172, // 541: nem.Nem.ListEnumValue:input_type -> nem.ListEnumValueRequest
-	174, // 542: nem.Nem.CreateEnumValue:input_type -> nem.CreateEnumValueRequest
-	175, // 543: nem.Nem.UpdateEnumValue:input_type -> nem.UpdateEnumValueRequest
-	176, // 544: nem.Nem.ListEnviorment:input_type -> nem.ListEnviormentRequest
-	178, // 545: nem.Nem.CreateEnviorment:input_type -> nem.CreateEnviormentRequest
-	179, // 546: nem.Nem.UpdateEnviorment:input_type -> nem.UpdateEnviormentRequest
-	180, // 547: nem.Nem.ListField:input_type -> nem.ListFieldRequest
-	182, // 548: nem.Nem.CreateField:input_type -> nem.CreateFieldRequest
-	183, // 549: nem.Nem.UpdateField:input_type -> nem.UpdateFieldRequest
-	184, // 550: nem.Nem.ListFieldTypeArrayConfig:input_type -> nem.ListFieldTypeArrayConfigRequest
-	186, // 551: nem.Nem.CreateFieldTypeArrayConfig:input_type -> nem.CreateFieldTypeArrayConfigRequest
-	187, // 552: nem.Nem.UpdateFieldTypeArrayConfig:input_type -> nem.UpdateFieldTypeArrayConfigRequest
-	188, // 553: nem.Nem.ListFieldTypeCharConfig:input_type -> nem.ListFieldTypeCharConfigRequest
-	190, // 554: nem.Nem.CreateFieldTypeCharConfig:input_type -> nem.CreateFieldTypeCharConfigRequest
-	191, // 555: nem.Nem.UpdateFieldTypeCharConfig:input_type -> nem.UpdateFieldTypeCharConfigRequest
-	192, // 556: nem.Nem.ListFieldTypeConfig:input_type -> nem.ListFieldTypeConfigRequest
-	194, // 557: nem.Nem.CreateFieldTypeConfig:input_type -> nem.CreateFieldTypeConfigRequest
-	195, // 558: nem.Nem.UpdateFieldTypeConfig:input_type -> nem.UpdateFieldTypeConfigRequest
-	196, // 559: nem.Nem.ListFieldTypeDateConfig:input_type -> nem.ListFieldTypeDateConfigRequest
-	198, // 560: nem.Nem.CreateFieldTypeDateConfig:input_type -> nem.CreateFieldTypeDateConfigRequest
-	199, // 561: nem.Nem.UpdateFieldTypeDateConfig:input_type -> nem.UpdateFieldTypeDateConfigRequest
-	200, // 562: nem.Nem.ListFieldTypeDatetimeConfig:input_type -> nem.ListFieldTypeDatetimeConfigRequest
-	202, // 563: nem.Nem.CreateFieldTypeDatetimeConfig:input_type -> nem.CreateFieldTypeDatetimeConfigRequest
-	203, // 564: nem.Nem.UpdateFieldTypeDatetimeConfig:input_type -> nem.UpdateFieldTypeDatetimeConfigRequest
-	204, // 565: nem.Nem.ListFieldTypeDecimalConfig:input_type -> nem.ListFieldTypeDecimalConfigRequest
-	206, // 566: nem.Nem.CreateFieldTypeDecimalConfig:input_type -> nem.CreateFieldTypeDecimalConfigRequest
-	207, // 567: nem.Nem.UpdateFieldTypeDecimalConfig:input_type -> nem.UpdateFieldTypeDecimalConfigRequest
-	208, // 568: nem.Nem.ListFieldTypeEmailConfig:input_type -> nem.ListFieldTypeEmailConfigRequest
-	210, // 569: nem.Nem.CreateFieldTypeEmailConfig:input_type -> nem.CreateFieldTypeEmailConfigRequest
-	211, // 570: nem.Nem.UpdateFieldTypeEmailConfig:input_type -> nem.UpdateFieldTypeEmailConfigRequest
-	212, // 571: nem.Nem.ListFieldTypeEncryptedConfig:input_type -> nem.ListFieldTypeEncryptedConfigRequest
-	214, // 572: nem.Nem.CreateFieldTypeEncryptedConfig:input_type -> nem.CreateFieldTypeEncryptedConfigRequest
-	215, // 573: nem.Nem.UpdateFieldTypeEncryptedConfig:input_type -> nem.UpdateFieldTypeEncryptedConfigRequest
-	216, // 574: nem.Nem.ListFieldTypeEnumConfig:input_type -> nem.ListFieldTypeEnumConfigRequest
-	218, // 575: nem.Nem.CreateFieldTypeEnumConfig:input_type -> nem.CreateFieldTypeEnumConfigRequest
-	219, // 576: nem.Nem.UpdateFieldTypeEnumConfig:input_type -> nem.UpdateFieldTypeEnumConfigRequest
-	220, // 577: nem.Nem.ListFieldTypeFileConfig:input_type -> nem.ListFieldTypeFileConfigRequest
-	222, // 578: nem.Nem.CreateFieldTypeFileConfig:input_type -> nem.CreateFieldTypeFileConfigRequest
-	223, // 579: nem.Nem.UpdateFieldTypeFileConfig:input_type -> nem.UpdateFieldTypeFileConfigRequest
-	224, // 580: nem.Nem.ListFieldTypeFloatConfig:input_type -> nem.ListFieldTypeFloatConfigRequest
-	226, // 581: nem.Nem.CreateFieldTypeFloatConfig:input_type -> nem.CreateFieldTypeFloatConfigRequest
-	227, // 582: nem.Nem.UpdateFieldTypeFloatConfig:input_type -> nem.UpdateFieldTypeFloatConfigRequest
-	228, // 583: nem.Nem.ListFieldTypeIntegerConfig:input_type -> nem.ListFieldTypeIntegerConfigRequest
-	230, // 584: nem.Nem.CreateFieldTypeIntegerConfig:input_type -> nem.CreateFieldTypeIntegerConfigRequest
-	231, // 585: nem.Nem.UpdateFieldTypeIntegerConfig:input_type -> nem.UpdateFieldTypeIntegerConfigRequest
-	232, // 586: nem.Nem.ListFieldTypeJSONConfig:input_type -> nem.ListFieldTypeJSONConfigRequest
-	234, // 587: nem.Nem.CreateFieldTypeJSONConfig:input_type -> nem.CreateFieldTypeJSONConfigRequest
-	235, // 588: nem.Nem.UpdateFieldTypeJSONConfig:input_type -> nem.UpdateFieldTypeJSONConfigRequest
-	236, // 589: nem.Nem.ListFieldTypePhoneConfig:input_type -> nem.ListFieldTypePhoneConfigRequest
-	238, // 590: nem.Nem.CreateFieldTypePhoneConfig:input_type -> nem.CreateFieldTypePhoneConfigRequest
-	239, // 591: nem.Nem.UpdateFieldTypePhoneConfig:input_type -> nem.UpdateFieldTypePhoneConfigRequest
-	240, // 592: nem.Nem.ListFieldTypeSlugConfig:input_type -> nem.ListFieldTypeSlugConfigRequest
-	242, // 593: nem.Nem.CreateFieldTypeSlugConfig:input_type -> nem.CreateFieldTypeSlugConfigRequest
-	243, // 594: nem.Nem.UpdateFieldTypeSlugConfig:input_type -> nem.UpdateFieldTypeSlugConfigRequest
-	244, // 595: nem.Nem.ListFieldTypeTextConfig:input_type -> nem.ListFieldTypeTextConfigRequest
-	246, // 596: nem.Nem.CreateFieldTypeTextConfig:input_type -> nem.CreateFieldTypeTextConfigRequest
-	247, // 597: nem.Nem.UpdateFieldTypeTextConfig:input_type -> nem.UpdateFieldTypeTextConfigRequest
-	248, // 598: nem.Nem.ListFieldTypeURLConfig:input_type -> nem.ListFieldTypeURLConfigRequest
-	250, // 599: nem.Nem.CreateFieldTypeURLConfig:input_type -> nem.CreateFieldTypeURLConfigRequest
-	251, // 600: nem.Nem.UpdateFieldTypeURLConfig:input_type -> nem.UpdateFieldTypeURLConfigRequest
-	252, // 601: nem.Nem.ListFieldTypeVarcharConfig:input_type -> nem.ListFieldTypeVarcharConfigRequest
-	254, // 602: nem.Nem.CreateFieldTypeVarcharConfig:input_type -> nem.CreateFieldTypeVarcharConfigRequest
-	255, // 603: nem.Nem.UpdateFieldTypeVarcharConfig:input_type -> nem.UpdateFieldTypeVarcharConfigRequest
-	256, // 604: nem.Nem.ListFileObjectStorageConfig:input_type -> nem.ListFileObjectStorageConfigRequest
-	258, // 605: nem.Nem.CreateFileObjectStorageConfig:input_type -> nem.CreateFileObjectStorageConfigRequest
-	259, // 606: nem.Nem.UpdateFileObjectStorageConfig:input_type -> nem.UpdateFileObjectStorageConfigRequest
-	260, // 607: nem.Nem.ListFileStorageConfig:input_type -> nem.ListFileStorageConfigRequest
-	262, // 608: nem.Nem.CreateFileStorageConfig:input_type -> nem.CreateFileStorageConfigRequest
-	263, // 609: nem.Nem.UpdateFileStorageConfig:input_type -> nem.UpdateFileStorageConfigRequest
-	264, // 610: nem.Nem.ListIndex:input_type -> nem.ListIndexRequest
-	266, // 611: nem.Nem.CreateIndex:input_type -> nem.CreateIndexRequest
-	267, // 612: nem.Nem.UpdateIndex:input_type -> nem.UpdateIndexRequest
-	268, // 613: nem.Nem.ListIndexField:input_type -> nem.ListIndexFieldRequest
-	270, // 614: nem.Nem.CreateIndexField:input_type -> nem.CreateIndexFieldRequest
-	271, // 615: nem.Nem.UpdateIndexField:input_type -> nem.UpdateIndexFieldRequest
-	272, // 616: nem.Nem.ListLocalAgentConnection:input_type -> nem.ListLocalAgentConnectionRequest
-	274, // 617: nem.Nem.CreateLocalAgentConnection:input_type -> nem.CreateLocalAgentConnectionRequest
-	275, // 618: nem.Nem.UpdateLocalAgentConnection:input_type -> nem.UpdateLocalAgentConnectionRequest
-	276, // 619: nem.Nem.ListObjectStore:input_type -> nem.ListObjectStoreRequest
-	278, // 620: nem.Nem.CreateObjectStore:input_type -> nem.CreateObjectStoreRequest
-	279, // 621: nem.Nem.UpdateObjectStore:input_type -> nem.UpdateObjectStoreRequest
-	280, // 622: nem.Nem.ListObjectStoreS3TypeConfig:input_type -> nem.ListObjectStoreS3TypeConfigRequest
-	282, // 623: nem.Nem.CreateObjectStoreS3TypeConfig:input_type -> nem.CreateObjectStoreS3TypeConfigRequest
-	283, // 624: nem.Nem.UpdateObjectStoreS3TypeConfig:input_type -> nem.UpdateObjectStoreS3TypeConfigRequest
-	284, // 625: nem.Nem.ListObjectStoreTypeConfig:input_type -> nem.ListObjectStoreTypeConfigRequest
-	286, // 626: nem.Nem.CreateObjectStoreTypeConfig:input_type -> nem.CreateObjectStoreTypeConfigRequest
-	287, // 627: nem.Nem.UpdateObjectStoreTypeConfig:input_type -> nem.UpdateObjectStoreTypeConfigRequest
-	288, // 628: nem.Nem.ListProjectExtension:input_type -> nem.ListProjectExtensionRequest
-	290, // 629: nem.Nem.CreateProjectExtension:input_type -> nem.CreateProjectExtensionRequest
-	291, // 630: nem.Nem.UpdateProjectExtension:input_type -> nem.UpdateProjectExtensionRequest
-	292, // 631: nem.Nem.ListProjectVersionDeployment:input_type -> nem.ListProjectVersionDeploymentRequest
-	294, // 632: nem.Nem.CreateProjectVersionDeployment:input_type -> nem.CreateProjectVersionDeploymentRequest
-	295, // 633: nem.Nem.UpdateProjectVersionDeployment:input_type -> nem.UpdateProjectVersionDeploymentRequest
-	296, // 634: nem.Nem.ListRelationship:input_type -> nem.ListRelationshipRequest
-	298, // 635: nem.Nem.CreateRelationship:input_type -> nem.CreateRelationshipRequest
-	299, // 636: nem.Nem.UpdateRelationship:input_type -> nem.UpdateRelationshipRequest
-	300, // 637: nem.Nem.ListRelationshipNode:input_type -> nem.ListRelationshipNodeRequest
-	302, // 638: nem.Nem.CreateRelationshipNode:input_type -> nem.CreateRelationshipNodeRequest
-	303, // 639: nem.Nem.UpdateRelationshipNode:input_type -> nem.UpdateRelationshipNodeRequest
-	304, // 640: nem.Nem.ListRelationshipNodeTypeConfig:input_type -> nem.ListRelationshipNodeTypeConfigRequest
-	306, // 641: nem.Nem.CreateRelationshipNodeTypeConfig:input_type -> nem.CreateRelationshipNodeTypeConfigRequest
-	307, // 642: nem.Nem.UpdateRelationshipNodeTypeConfig:input_type -> nem.UpdateRelationshipNodeTypeConfigRequest
-	308, // 643: nem.Nem.ListRelationshipNodeTypeEntityConfig:input_type -> nem.ListRelationshipNodeTypeEntityConfigRequest
-	310, // 644: nem.Nem.CreateRelationshipNodeTypeEntityConfig:input_type -> nem.CreateRelationshipNodeTypeEntityConfigRequest
-	311, // 645: nem.Nem.UpdateRelationshipNodeTypeEntityConfig:input_type -> nem.UpdateRelationshipNodeTypeEntityConfigRequest
-	312, // 646: nem.Nem.ListRelationshipNodeTypeServiceConfig:input_type -> nem.ListRelationshipNodeTypeServiceConfigRequest
-	314, // 647: nem.Nem.CreateRelationshipNodeTypeServiceConfig:input_type -> nem.CreateRelationshipNodeTypeServiceConfigRequest
-	315, // 648: nem.Nem.UpdateRelationshipNodeTypeServiceConfig:input_type -> nem.UpdateRelationshipNodeTypeServiceConfigRequest
-	316, // 649: nem.Nem.ListReviewConfig:input_type -> nem.ListReviewConfigRequest
-	318, // 650: nem.Nem.CreateReviewConfig:input_type -> nem.CreateReviewConfigRequest
-	319, // 651: nem.Nem.UpdateReviewConfig:input_type -> nem.UpdateReviewConfigRequest
-	320, // 652: nem.Nem.ListService:input_type -> nem.ListServiceRequest
-	322, // 653: nem.Nem.CreateService:input_type -> nem.CreateServiceRequest
-	323, // 654: nem.Nem.UpdateService:input_type -> nem.UpdateServiceRequest
-	324, // 655: nem.Nem.ListStore:input_type -> nem.ListStoreRequest
-	326, // 656: nem.Nem.CreateStore:input_type -> nem.CreateStoreRequest
-	327, // 657: nem.Nem.UpdateStore:input_type -> nem.UpdateStoreRequest
-	328, // 658: nem.Nem.ListTcpIpConnectionTypeConfig:input_type -> nem.ListTcpIpConnectionTypeConfigRequest
-	330, // 659: nem.Nem.CreateTcpIpConnectionTypeConfig:input_type -> nem.CreateTcpIpConnectionTypeConfigRequest
-	331, // 660: nem.Nem.UpdateTcpIpConnectionTypeConfig:input_type -> nem.UpdateTcpIpConnectionTypeConfigRequest
-	332, // 661: nem.Nem.ListTcpIpSshConnectionTypeConfig:input_type -> nem.ListTcpIpSshConnectionTypeConfigRequest
-	334, // 662: nem.Nem.CreateTcpIpSshConnectionTypeConfig:input_type -> nem.CreateTcpIpSshConnectionTypeConfigRequest
-	335, // 663: nem.Nem.UpdateTcpIpSshConnectionTypeConfig:input_type -> nem.UpdateTcpIpSshConnectionTypeConfigRequest
-	336, // 664: nem.Nem.ListUserConnectionExecution:input_type -> nem.ListUserConnectionExecutionRequest
-	338, // 665: nem.Nem.CreateUserConnectionExecution:input_type -> nem.CreateUserConnectionExecutionRequest
-	339, // 666: nem.Nem.UpdateUserConnectionExecution:input_type -> nem.UpdateUserConnectionExecutionRequest
-	340, // 667: nem.Nem.ListUserConnectionLocalConfig:input_type -> nem.ListUserConnectionLocalConfigRequest
-	342, // 668: nem.Nem.CreateUserConnectionLocalConfig:input_type -> nem.CreateUserConnectionLocalConfigRequest
-	343, // 669: nem.Nem.UpdateUserConnectionLocalConfig:input_type -> nem.UpdateUserConnectionLocalConfigRequest
-	344, // 670: nem.Nem.ListUserConnectionRemoteConfig:input_type -> nem.ListUserConnectionRemoteConfigRequest
-	346, // 671: nem.Nem.CreateUserConnectionRemoteConfig:input_type -> nem.CreateUserConnectionRemoteConfigRequest
-	347, // 672: nem.Nem.UpdateUserConnectionRemoteConfig:input_type -> nem.UpdateUserConnectionRemoteConfigRequest
-	348, // 673: nem.Nem.ListUserConnectionTypeConfig:input_type -> nem.ListUserConnectionTypeConfigRequest
-	350, // 674: nem.Nem.CreateUserConnectionTypeConfig:input_type -> nem.CreateUserConnectionTypeConfigRequest
-	351, // 675: nem.Nem.UpdateUserConnectionTypeConfig:input_type -> nem.UpdateUserConnectionTypeConfigRequest
-	352, // 676: nem.Nem.ListVisibility:input_type -> nem.ListVisibilityRequest
-	354, // 677: nem.Nem.CreateVisibility:input_type -> nem.CreateVisibilityRequest
-	355, // 678: nem.Nem.UpdateVisibility:input_type -> nem.UpdateVisibilityRequest
-	356, // 679: nem.Nem.ListChangeRequestScopeConfigLocal:input_type -> nem.ListChangeRequestScopeConfigLocalRequest
-	358, // 680: nem.Nem.CreateChangeRequestScopeConfigLocal:input_type -> nem.CreateChangeRequestScopeConfigLocalRequest
-	359, // 681: nem.Nem.UpdateChangeRequestScopeConfigLocal:input_type -> nem.UpdateChangeRequestScopeConfigLocalRequest
-	360, // 682: nem.Nem.ListChangeRequestScopeConfigRemote:input_type -> nem.ListChangeRequestScopeConfigRemoteRequest
-	362, // 683: nem.Nem.CreateChangeRequestScopeConfigRemote:input_type -> nem.CreateChangeRequestScopeConfigRemoteRequest
-	363, // 684: nem.Nem.UpdateChangeRequestScopeConfigRemote:input_type -> nem.UpdateChangeRequestScopeConfigRemoteRequest
-	364, // 685: nem.Nem.ListAutomation:input_type -> nem.ListAutomationRequest
-	366, // 686: nem.Nem.CreateAutomation:input_type -> nem.CreateAutomationRequest
-	367, // 687: nem.Nem.UpdateAutomation:input_type -> nem.UpdateAutomationRequest
-	368, // 688: nem.Nem.ListAutomationEvent:input_type -> nem.ListAutomationEventRequest
-	370, // 689: nem.Nem.CreateAutomationEvent:input_type -> nem.CreateAutomationEventRequest
-	371, // 690: nem.Nem.UpdateAutomationEvent:input_type -> nem.UpdateAutomationEventRequest
-	372, // 691: nem.Nem.ListDeployment:input_type -> nem.ListDeploymentRequest
-	374, // 692: nem.Nem.CreateDeployment:input_type -> nem.CreateDeploymentRequest
-	375, // 693: nem.Nem.UpdateDeployment:input_type -> nem.UpdateDeploymentRequest
-	376, // 694: nem.Nem.ListDeploymentProvider:input_type -> nem.ListDeploymentProviderRequest
-	378, // 695: nem.Nem.CreateDeploymentProvider:input_type -> nem.CreateDeploymentProviderRequest
-	379, // 696: nem.Nem.UpdateDeploymentProvider:input_type -> nem.UpdateDeploymentProviderRequest
-	380, // 697: nem.Nem.ListDeploymentServer:input_type -> nem.ListDeploymentServerRequest
-	382, // 698: nem.Nem.CreateDeploymentServer:input_type -> nem.CreateDeploymentServerRequest
-	383, // 699: nem.Nem.UpdateDeploymentServer:input_type -> nem.UpdateDeploymentServerRequest
-	384, // 700: nem.Nem.ListDeploymentDatabase:input_type -> nem.ListDeploymentDatabaseRequest
-	386, // 701: nem.Nem.CreateDeploymentDatabase:input_type -> nem.CreateDeploymentDatabaseRequest
-	387, // 702: nem.Nem.UpdateDeploymentDatabase:input_type -> nem.UpdateDeploymentDatabaseRequest
-	388, // 703: nem.Nem.ListDeploymentCodegen:input_type -> nem.ListDeploymentCodegenRequest
-	390, // 704: nem.Nem.CreateDeploymentCodegen:input_type -> nem.CreateDeploymentCodegenRequest
-	391, // 705: nem.Nem.UpdateDeploymentCodegen:input_type -> nem.UpdateDeploymentCodegenRequest
-	392, // 706: nem.Nem.ListDeploymentRevision:input_type -> nem.ListDeploymentRevisionRequest
-	394, // 707: nem.Nem.CreateDeploymentRevision:input_type -> nem.CreateDeploymentRevisionRequest
-	395, // 708: nem.Nem.UpdateDeploymentRevision:input_type -> nem.UpdateDeploymentRevisionRequest
-	396, // 709: nem.Nem.ListFieldPiiConfig:input_type -> nem.ListFieldPiiConfigRequest
-	398, // 710: nem.Nem.CreateFieldPiiConfig:input_type -> nem.CreateFieldPiiConfigRequest
-	399, // 711: nem.Nem.UpdateFieldPiiConfig:input_type -> nem.UpdateFieldPiiConfigRequest
-	400, // 712: nem.Nem.ListObjectStoreR2TypeConfig:input_type -> nem.ListObjectStoreR2TypeConfigRequest
-	402, // 713: nem.Nem.CreateObjectStoreR2TypeConfig:input_type -> nem.CreateObjectStoreR2TypeConfigRequest
-	403, // 714: nem.Nem.UpdateObjectStoreR2TypeConfig:input_type -> nem.UpdateObjectStoreR2TypeConfigRequest
-	404, // 715: nem.Nem.ListDataChangeBeforeImageValue:input_type -> nem.ListDataChangeBeforeImageValueRequest
-	406, // 716: nem.Nem.CreateDataChangeBeforeImageValue:input_type -> nem.CreateDataChangeBeforeImageValueRequest
-	407, // 717: nem.Nem.UpdateDataChangeBeforeImageValue:input_type -> nem.UpdateDataChangeBeforeImageValueRequest
-	408, // 718: nem.Nem.ListDataChangeBeforeImage:input_type -> nem.ListDataChangeBeforeImageRequest
-	410, // 719: nem.Nem.CreateDataChangeBeforeImage:input_type -> nem.CreateDataChangeBeforeImageRequest
-	411, // 720: nem.Nem.UpdateDataChangeBeforeImage:input_type -> nem.UpdateDataChangeBeforeImageRequest
-	1,   // 721: nem.Nem.ListExtension:output_type -> nem.ListExtensionResponse
-	412, // 722: nem.Nem.CreateExtension:output_type -> nem.Extension
-	412, // 723: nem.Nem.UpdateExtension:output_type -> nem.Extension
-	5,   // 724: nem.Nem.ListExtensionVersion:output_type -> nem.ListExtensionVersionResponse
-	414, // 725: nem.Nem.CreateExtensionVersion:output_type -> nem.ExtensionVersion
-	414, // 726: nem.Nem.UpdateExtensionVersion:output_type -> nem.ExtensionVersion
-	9,   // 727: nem.Nem.ListUserProject:output_type -> nem.ListUserProjectResponse
-	415, // 728: nem.Nem.CreateUserProject:output_type -> nem.UserProject
-	415, // 729: nem.Nem.UpdateUserProject:output_type -> nem.UserProject
-	13,  // 730: nem.Nem.ListLocalAgent:output_type -> nem.ListLocalAgentResponse
-	416, // 731: nem.Nem.CreateLocalAgent:output_type -> nem.LocalAgent
-	416, // 732: nem.Nem.UpdateLocalAgent:output_type -> nem.LocalAgent
-	17,  // 733: nem.Nem.ListExtensionExecution:output_type -> nem.ListExtensionExecutionResponse
-	417, // 734: nem.Nem.CreateExtensionExecution:output_type -> nem.ExtensionExecution
-	417, // 735: nem.Nem.UpdateExtensionExecution:output_type -> nem.ExtensionExecution
-	21,  // 736: nem.Nem.ListProjectVersion:output_type -> nem.ListProjectVersionResponse
-	418, // 737: nem.Nem.CreateProjectVersion:output_type -> nem.ProjectVersion
-	418, // 738: nem.Nem.UpdateProjectVersion:output_type -> nem.ProjectVersion
-	25,  // 739: nem.Nem.ListUser:output_type -> nem.ListUserResponse
-	419, // 740: nem.Nem.CreateUser:output_type -> nem.User
-	419, // 741: nem.Nem.UpdateUser:output_type -> nem.User
-	29,  // 742: nem.Nem.ListUserProjectVersion:output_type -> nem.ListUserProjectVersionResponse
-	420, // 743: nem.Nem.CreateUserProjectVersion:output_type -> nem.UserProjectVersion
-	420, // 744: nem.Nem.UpdateUserProjectVersion:output_type -> nem.UserProjectVersion
-	33,  // 745: nem.Nem.ListProject:output_type -> nem.ListProjectResponse
-	421, // 746: nem.Nem.CreateProject:output_type -> nem.Project
-	421, // 747: nem.Nem.UpdateProject:output_type -> nem.Project
-	37,  // 748: nem.Nem.ListMembership:output_type -> nem.ListMembershipResponse
-	422, // 749: nem.Nem.CreateMembership:output_type -> nem.Membership
-	422, // 750: nem.Nem.UpdateMembership:output_type -> nem.Membership
-	41,  // 751: nem.Nem.ListTeam:output_type -> nem.ListTeamResponse
-	423, // 752: nem.Nem.CreateTeam:output_type -> nem.Team
-	423, // 753: nem.Nem.UpdateTeam:output_type -> nem.Team
-	45,  // 754: nem.Nem.ListAiUsage:output_type -> nem.ListAiUsageResponse
-	424, // 755: nem.Nem.CreateAiUsage:output_type -> nem.AiUsage
-	424, // 756: nem.Nem.UpdateAiUsage:output_type -> nem.AiUsage
-	49,  // 757: nem.Nem.ListChangeRequest:output_type -> nem.ListChangeRequestResponse
-	425, // 758: nem.Nem.CreateChangeRequest:output_type -> nem.ChangeRequest
-	425, // 759: nem.Nem.UpdateChangeRequest:output_type -> nem.ChangeRequest
-	53,  // 760: nem.Nem.ListUserConnection:output_type -> nem.ListUserConnectionResponse
-	426, // 761: nem.Nem.CreateUserConnection:output_type -> nem.UserConnection
-	426, // 762: nem.Nem.UpdateUserConnection:output_type -> nem.UserConnection
-	57,  // 763: nem.Nem.ListUserTeam:output_type -> nem.ListUserTeamResponse
-	427, // 764: nem.Nem.CreateUserTeam:output_type -> nem.UserTeam
-	427, // 765: nem.Nem.UpdateUserTeam:output_type -> nem.UserTeam
-	61,  // 766: nem.Nem.ListArrayTypeConfig:output_type -> nem.ListArrayTypeConfigResponse
-	428, // 767: nem.Nem.CreateArrayTypeConfig:output_type -> nem.ArrayTypeConfig
-	428, // 768: nem.Nem.UpdateArrayTypeConfig:output_type -> nem.ArrayTypeConfig
-	65,  // 769: nem.Nem.ListChangeRequestDataChange:output_type -> nem.ListChangeRequestDataChangeResponse
-	429, // 770: nem.Nem.CreateChangeRequestDataChange:output_type -> nem.ChangeRequestDataChange
-	429, // 771: nem.Nem.UpdateChangeRequestDataChange:output_type -> nem.ChangeRequestDataChange
-	69,  // 772: nem.Nem.ListChangeRequestMetadata:output_type -> nem.ListChangeRequestMetadataResponse
-	430, // 773: nem.Nem.CreateChangeRequestMetadata:output_type -> nem.ChangeRequestMetadata
-	430, // 774: nem.Nem.UpdateChangeRequestMetadata:output_type -> nem.ChangeRequestMetadata
-	73,  // 775: nem.Nem.ListChangeRequestMetadataData:output_type -> nem.ListChangeRequestMetadataDataResponse
-	431, // 776: nem.Nem.CreateChangeRequestMetadataData:output_type -> nem.ChangeRequestMetadataData
-	431, // 777: nem.Nem.UpdateChangeRequestMetadataData:output_type -> nem.ChangeRequestMetadataData
-	77,  // 778: nem.Nem.ListChangeRequestReview:output_type -> nem.ListChangeRequestReviewResponse
-	432, // 779: nem.Nem.CreateChangeRequestReview:output_type -> nem.ChangeRequestReview
-	432, // 780: nem.Nem.UpdateChangeRequestReview:output_type -> nem.ChangeRequestReview
-	81,  // 781: nem.Nem.ListChangeRequestScopeConfig:output_type -> nem.ListChangeRequestScopeConfigResponse
-	433, // 782: nem.Nem.CreateChangeRequestScopeConfig:output_type -> nem.ChangeRequestScopeConfig
-	433, // 783: nem.Nem.UpdateChangeRequestScopeConfig:output_type -> nem.ChangeRequestScopeConfig
-	85,  // 784: nem.Nem.ListConnection:output_type -> nem.ListConnectionResponse
-	434, // 785: nem.Nem.CreateConnection:output_type -> nem.Connection
-	434, // 786: nem.Nem.UpdateConnection:output_type -> nem.Connection
-	89,  // 787: nem.Nem.ListConnectionTypeConfig:output_type -> nem.ListConnectionTypeConfigResponse
-	435, // 788: nem.Nem.CreateConnectionTypeConfig:output_type -> nem.ConnectionTypeConfig
-	435, // 789: nem.Nem.UpdateConnectionTypeConfig:output_type -> nem.ConnectionTypeConfig
-	93,  // 790: nem.Nem.ListDataChangeFieldValue:output_type -> nem.ListDataChangeFieldValueResponse
-	436, // 791: nem.Nem.CreateDataChangeFieldValue:output_type -> nem.DataChangeFieldValue
-	436, // 792: nem.Nem.UpdateDataChangeFieldValue:output_type -> nem.DataChangeFieldValue
-	97,  // 793: nem.Nem.ListDataChangeTypeConfig:output_type -> nem.ListDataChangeTypeConfigResponse
-	437, // 794: nem.Nem.CreateDataChangeTypeConfig:output_type -> nem.DataChangeTypeConfig
-	437, // 795: nem.Nem.UpdateDataChangeTypeConfig:output_type -> nem.DataChangeTypeConfig
-	101, // 796: nem.Nem.ListDataChangeTypeConfigCreate:output_type -> nem.ListDataChangeTypeConfigCreateResponse
-	438, // 797: nem.Nem.CreateDataChangeTypeConfigCreate:output_type -> nem.DataChangeTypeConfigCreate
-	438, // 798: nem.Nem.UpdateDataChangeTypeConfigCreate:output_type -> nem.DataChangeTypeConfigCreate
-	105, // 799: nem.Nem.ListDataChangeTypeConfigDelete:output_type -> nem.ListDataChangeTypeConfigDeleteResponse
-	439, // 800: nem.Nem.CreateDataChangeTypeConfigDelete:output_type -> nem.DataChangeTypeConfigDelete
-	439, // 801: nem.Nem.UpdateDataChangeTypeConfigDelete:output_type -> nem.DataChangeTypeConfigDelete
-	109, // 802: nem.Nem.ListDataChangeTypeConfigUpdate:output_type -> nem.ListDataChangeTypeConfigUpdateResponse
-	440, // 803: nem.Nem.CreateDataChangeTypeConfigUpdate:output_type -> nem.DataChangeTypeConfigUpdate
-	440, // 804: nem.Nem.UpdateDataChangeTypeConfigUpdate:output_type -> nem.DataChangeTypeConfigUpdate
-	113, // 805: nem.Nem.ListDataChangeTypeConfigUpdateField:output_type -> nem.ListDataChangeTypeConfigUpdateFieldResponse
-	441, // 806: nem.Nem.CreateDataChangeTypeConfigUpdateField:output_type -> nem.DataChangeTypeConfigUpdateField
-	441, // 807: nem.Nem.UpdateDataChangeTypeConfigUpdateField:output_type -> nem.DataChangeTypeConfigUpdateField
-	117, // 808: nem.Nem.ListDbTypeConfig:output_type -> nem.ListDbTypeConfigResponse
-	442, // 809: nem.Nem.CreateDbTypeConfig:output_type -> nem.DbTypeConfig
-	442, // 810: nem.Nem.UpdateDbTypeConfig:output_type -> nem.DbTypeConfig
-	121, // 811: nem.Nem.ListDbTypeMysqlConfig:output_type -> nem.ListDbTypeMysqlConfigResponse
-	443, // 812: nem.Nem.CreateDbTypeMysqlConfig:output_type -> nem.DbTypeMysqlConfig
-	443, // 813: nem.Nem.UpdateDbTypeMysqlConfig:output_type -> nem.DbTypeMysqlConfig
-	125, // 814: nem.Nem.ListDbTypePostgresConfig:output_type -> nem.ListDbTypePostgresConfigResponse
-	444, // 815: nem.Nem.CreateDbTypePostgresConfig:output_type -> nem.DbTypePostgresConfig
-	444, // 816: nem.Nem.UpdateDbTypePostgresConfig:output_type -> nem.DbTypePostgresConfig
-	129, // 817: nem.Nem.ListElementRender:output_type -> nem.ListElementRenderResponse
-	445, // 818: nem.Nem.CreateElementRender:output_type -> nem.ElementRender
-	445, // 819: nem.Nem.UpdateElementRender:output_type -> nem.ElementRender
-	133, // 820: nem.Nem.ListEntity:output_type -> nem.ListEntityResponse
-	446, // 821: nem.Nem.CreateEntity:output_type -> nem.Entity
-	446, // 822: nem.Nem.UpdateEntity:output_type -> nem.Entity
-	137, // 823: nem.Nem.ListEntityDataManagementConfig:output_type -> nem.ListEntityDataManagementConfigResponse
-	447, // 824: nem.Nem.CreateEntityDataManagementConfig:output_type -> nem.EntityDataManagementConfig
-	447, // 825: nem.Nem.UpdateEntityDataManagementConfig:output_type -> nem.EntityDataManagementConfig
-	141, // 826: nem.Nem.ListEntityTypeConfig:output_type -> nem.ListEntityTypeConfigResponse
-	448, // 827: nem.Nem.CreateEntityTypeConfig:output_type -> nem.EntityTypeConfig
-	448, // 828: nem.Nem.UpdateEntityTypeConfig:output_type -> nem.EntityTypeConfig
-	145, // 829: nem.Nem.ListEntityTypeDependentConfig:output_type -> nem.ListEntityTypeDependentConfigResponse
-	449, // 830: nem.Nem.CreateEntityTypeDependentConfig:output_type -> nem.EntityTypeDependentConfig
-	449, // 831: nem.Nem.UpdateEntityTypeDependentConfig:output_type -> nem.EntityTypeDependentConfig
-	149, // 832: nem.Nem.ListEntityTypeStandaloneConfig:output_type -> nem.ListEntityTypeStandaloneConfigResponse
-	450, // 833: nem.Nem.CreateEntityTypeStandaloneConfig:output_type -> nem.EntityTypeStandaloneConfig
-	450, // 834: nem.Nem.UpdateEntityTypeStandaloneConfig:output_type -> nem.EntityTypeStandaloneConfig
-	153, // 835: nem.Nem.ListEntityVersionConfig:output_type -> nem.ListEntityVersionConfigResponse
-	451, // 836: nem.Nem.CreateEntityVersionConfig:output_type -> nem.EntityVersionConfig
-	451, // 837: nem.Nem.UpdateEntityVersionConfig:output_type -> nem.EntityVersionConfig
-	157, // 838: nem.Nem.ListEntityVersionTypeConfig:output_type -> nem.ListEntityVersionTypeConfigResponse
-	452, // 839: nem.Nem.CreateEntityVersionTypeConfig:output_type -> nem.EntityVersionTypeConfig
-	452, // 840: nem.Nem.UpdateEntityVersionTypeConfig:output_type -> nem.EntityVersionTypeConfig
-	161, // 841: nem.Nem.ListEntityVersionTypeEntityConfig:output_type -> nem.ListEntityVersionTypeEntityConfigResponse
-	453, // 842: nem.Nem.CreateEntityVersionTypeEntityConfig:output_type -> nem.EntityVersionTypeEntityConfig
-	453, // 843: nem.Nem.UpdateEntityVersionTypeEntityConfig:output_type -> nem.EntityVersionTypeEntityConfig
-	165, // 844: nem.Nem.ListEntityVersionTypeFieldConfig:output_type -> nem.ListEntityVersionTypeFieldConfigResponse
-	454, // 845: nem.Nem.CreateEntityVersionTypeFieldConfig:output_type -> nem.EntityVersionTypeFieldConfig
-	454, // 846: nem.Nem.UpdateEntityVersionTypeFieldConfig:output_type -> nem.EntityVersionTypeFieldConfig
-	169, // 847: nem.Nem.ListEnum:output_type -> nem.ListEnumResponse
-	455, // 848: nem.Nem.CreateEnum:output_type -> nem.Enum
-	455, // 849: nem.Nem.UpdateEnum:output_type -> nem.Enum
-	173, // 850: nem.Nem.ListEnumValue:output_type -> nem.ListEnumValueResponse
-	456, // 851: nem.Nem.CreateEnumValue:output_type -> nem.EnumValue
-	456, // 852: nem.Nem.UpdateEnumValue:output_type -> nem.EnumValue
-	177, // 853: nem.Nem.ListEnviorment:output_type -> nem.ListEnviormentResponse
-	457, // 854: nem.Nem.CreateEnviorment:output_type -> nem.Enviorment
-	457, // 855: nem.Nem.UpdateEnviorment:output_type -> nem.Enviorment
-	181, // 856: nem.Nem.ListField:output_type -> nem.ListFieldResponse
-	458, // 857: nem.Nem.CreateField:output_type -> nem.Field
-	458, // 858: nem.Nem.UpdateField:output_type -> nem.Field
-	185, // 859: nem.Nem.ListFieldTypeArrayConfig:output_type -> nem.ListFieldTypeArrayConfigResponse
-	459, // 860: nem.Nem.CreateFieldTypeArrayConfig:output_type -> nem.FieldTypeArrayConfig
-	459, // 861: nem.Nem.UpdateFieldTypeArrayConfig:output_type -> nem.FieldTypeArrayConfig
-	189, // 862: nem.Nem.ListFieldTypeCharConfig:output_type -> nem.ListFieldTypeCharConfigResponse
-	460, // 863: nem.Nem.CreateFieldTypeCharConfig:output_type -> nem.FieldTypeCharConfig
-	460, // 864: nem.Nem.UpdateFieldTypeCharConfig:output_type -> nem.FieldTypeCharConfig
-	193, // 865: nem.Nem.ListFieldTypeConfig:output_type -> nem.ListFieldTypeConfigResponse
-	461, // 866: nem.Nem.CreateFieldTypeConfig:output_type -> nem.FieldTypeConfig
-	461, // 867: nem.Nem.UpdateFieldTypeConfig:output_type -> nem.FieldTypeConfig
-	197, // 868: nem.Nem.ListFieldTypeDateConfig:output_type -> nem.ListFieldTypeDateConfigResponse
-	462, // 869: nem.Nem.CreateFieldTypeDateConfig:output_type -> nem.FieldTypeDateConfig
-	462, // 870: nem.Nem.UpdateFieldTypeDateConfig:output_type -> nem.FieldTypeDateConfig
-	201, // 871: nem.Nem.ListFieldTypeDatetimeConfig:output_type -> nem.ListFieldTypeDatetimeConfigResponse
-	463, // 872: nem.Nem.CreateFieldTypeDatetimeConfig:output_type -> nem.FieldTypeDatetimeConfig
-	463, // 873: nem.Nem.UpdateFieldTypeDatetimeConfig:output_type -> nem.FieldTypeDatetimeConfig
-	205, // 874: nem.Nem.ListFieldTypeDecimalConfig:output_type -> nem.ListFieldTypeDecimalConfigResponse
-	464, // 875: nem.Nem.CreateFieldTypeDecimalConfig:output_type -> nem.FieldTypeDecimalConfig
-	464, // 876: nem.Nem.UpdateFieldTypeDecimalConfig:output_type -> nem.FieldTypeDecimalConfig
-	209, // 877: nem.Nem.ListFieldTypeEmailConfig:output_type -> nem.ListFieldTypeEmailConfigResponse
-	465, // 878: nem.Nem.CreateFieldTypeEmailConfig:output_type -> nem.FieldTypeEmailConfig
-	465, // 879: nem.Nem.UpdateFieldTypeEmailConfig:output_type -> nem.FieldTypeEmailConfig
-	213, // 880: nem.Nem.ListFieldTypeEncryptedConfig:output_type -> nem.ListFieldTypeEncryptedConfigResponse
-	466, // 881: nem.Nem.CreateFieldTypeEncryptedConfig:output_type -> nem.FieldTypeEncryptedConfig
-	466, // 882: nem.Nem.UpdateFieldTypeEncryptedConfig:output_type -> nem.FieldTypeEncryptedConfig
-	217, // 883: nem.Nem.ListFieldTypeEnumConfig:output_type -> nem.ListFieldTypeEnumConfigResponse
-	467, // 884: nem.Nem.CreateFieldTypeEnumConfig:output_type -> nem.FieldTypeEnumConfig
-	467, // 885: nem.Nem.UpdateFieldTypeEnumConfig:output_type -> nem.FieldTypeEnumConfig
-	221, // 886: nem.Nem.ListFieldTypeFileConfig:output_type -> nem.ListFieldTypeFileConfigResponse
-	468, // 887: nem.Nem.CreateFieldTypeFileConfig:output_type -> nem.FieldTypeFileConfig
-	468, // 888: nem.Nem.UpdateFieldTypeFileConfig:output_type -> nem.FieldTypeFileConfig
-	225, // 889: nem.Nem.ListFieldTypeFloatConfig:output_type -> nem.ListFieldTypeFloatConfigResponse
-	469, // 890: nem.Nem.CreateFieldTypeFloatConfig:output_type -> nem.FieldTypeFloatConfig
-	469, // 891: nem.Nem.UpdateFieldTypeFloatConfig:output_type -> nem.FieldTypeFloatConfig
-	229, // 892: nem.Nem.ListFieldTypeIntegerConfig:output_type -> nem.ListFieldTypeIntegerConfigResponse
-	470, // 893: nem.Nem.CreateFieldTypeIntegerConfig:output_type -> nem.FieldTypeIntegerConfig
-	470, // 894: nem.Nem.UpdateFieldTypeIntegerConfig:output_type -> nem.FieldTypeIntegerConfig
-	233, // 895: nem.Nem.ListFieldTypeJSONConfig:output_type -> nem.ListFieldTypeJSONConfigResponse
-	471, // 896: nem.Nem.CreateFieldTypeJSONConfig:output_type -> nem.FieldTypeJSONConfig
-	471, // 897: nem.Nem.UpdateFieldTypeJSONConfig:output_type -> nem.FieldTypeJSONConfig
-	237, // 898: nem.Nem.ListFieldTypePhoneConfig:output_type -> nem.ListFieldTypePhoneConfigResponse
-	472, // 899: nem.Nem.CreateFieldTypePhoneConfig:output_type -> nem.FieldTypePhoneConfig
-	472, // 900: nem.Nem.UpdateFieldTypePhoneConfig:output_type -> nem.FieldTypePhoneConfig
-	241, // 901: nem.Nem.ListFieldTypeSlugConfig:output_type -> nem.ListFieldTypeSlugConfigResponse
-	473, // 902: nem.Nem.CreateFieldTypeSlugConfig:output_type -> nem.FieldTypeSlugConfig
-	473, // 903: nem.Nem.UpdateFieldTypeSlugConfig:output_type -> nem.FieldTypeSlugConfig
-	245, // 904: nem.Nem.ListFieldTypeTextConfig:output_type -> nem.ListFieldTypeTextConfigResponse
-	474, // 905: nem.Nem.CreateFieldTypeTextConfig:output_type -> nem.FieldTypeTextConfig
-	474, // 906: nem.Nem.UpdateFieldTypeTextConfig:output_type -> nem.FieldTypeTextConfig
-	249, // 907: nem.Nem.ListFieldTypeURLConfig:output_type -> nem.ListFieldTypeURLConfigResponse
-	475, // 908: nem.Nem.CreateFieldTypeURLConfig:output_type -> nem.FieldTypeURLConfig
-	475, // 909: nem.Nem.UpdateFieldTypeURLConfig:output_type -> nem.FieldTypeURLConfig
-	253, // 910: nem.Nem.ListFieldTypeVarcharConfig:output_type -> nem.ListFieldTypeVarcharConfigResponse
-	476, // 911: nem.Nem.CreateFieldTypeVarcharConfig:output_type -> nem.FieldTypeVarcharConfig
-	476, // 912: nem.Nem.UpdateFieldTypeVarcharConfig:output_type -> nem.FieldTypeVarcharConfig
-	257, // 913: nem.Nem.ListFileObjectStorageConfig:output_type -> nem.ListFileObjectStorageConfigResponse
-	477, // 914: nem.Nem.CreateFileObjectStorageConfig:output_type -> nem.FileObjectStorageConfig
-	477, // 915: nem.Nem.UpdateFileObjectStorageConfig:output_type -> nem.FileObjectStorageConfig
-	261, // 916: nem.Nem.ListFileStorageConfig:output_type -> nem.ListFileStorageConfigResponse
-	478, // 917: nem.Nem.CreateFileStorageConfig:output_type -> nem.FileStorageConfig
-	478, // 918: nem.Nem.UpdateFileStorageConfig:output_type -> nem.FileStorageConfig
-	265, // 919: nem.Nem.ListIndex:output_type -> nem.ListIndexResponse
-	479, // 920: nem.Nem.CreateIndex:output_type -> nem.Index
-	479, // 921: nem.Nem.UpdateIndex:output_type -> nem.Index
-	269, // 922: nem.Nem.ListIndexField:output_type -> nem.ListIndexFieldResponse
-	480, // 923: nem.Nem.CreateIndexField:output_type -> nem.IndexField
-	480, // 924: nem.Nem.UpdateIndexField:output_type -> nem.IndexField
-	273, // 925: nem.Nem.ListLocalAgentConnection:output_type -> nem.ListLocalAgentConnectionResponse
-	481, // 926: nem.Nem.CreateLocalAgentConnection:output_type -> nem.LocalAgentConnection
-	481, // 927: nem.Nem.UpdateLocalAgentConnection:output_type -> nem.LocalAgentConnection
-	277, // 928: nem.Nem.ListObjectStore:output_type -> nem.ListObjectStoreResponse
-	482, // 929: nem.Nem.CreateObjectStore:output_type -> nem.ObjectStore
-	482, // 930: nem.Nem.UpdateObjectStore:output_type -> nem.ObjectStore
-	281, // 931: nem.Nem.ListObjectStoreS3TypeConfig:output_type -> nem.ListObjectStoreS3TypeConfigResponse
-	483, // 932: nem.Nem.CreateObjectStoreS3TypeConfig:output_type -> nem.ObjectStoreS3TypeConfig
-	483, // 933: nem.Nem.UpdateObjectStoreS3TypeConfig:output_type -> nem.ObjectStoreS3TypeConfig
-	285, // 934: nem.Nem.ListObjectStoreTypeConfig:output_type -> nem.ListObjectStoreTypeConfigResponse
-	484, // 935: nem.Nem.CreateObjectStoreTypeConfig:output_type -> nem.ObjectStoreTypeConfig
-	484, // 936: nem.Nem.UpdateObjectStoreTypeConfig:output_type -> nem.ObjectStoreTypeConfig
-	289, // 937: nem.Nem.ListProjectExtension:output_type -> nem.ListProjectExtensionResponse
-	485, // 938: nem.Nem.CreateProjectExtension:output_type -> nem.ProjectExtension
-	485, // 939: nem.Nem.UpdateProjectExtension:output_type -> nem.ProjectExtension
-	293, // 940: nem.Nem.ListProjectVersionDeployment:output_type -> nem.ListProjectVersionDeploymentResponse
-	486, // 941: nem.Nem.CreateProjectVersionDeployment:output_type -> nem.ProjectVersionDeployment
-	486, // 942: nem.Nem.UpdateProjectVersionDeployment:output_type -> nem.ProjectVersionDeployment
-	297, // 943: nem.Nem.ListRelationship:output_type -> nem.ListRelationshipResponse
-	487, // 944: nem.Nem.CreateRelationship:output_type -> nem.Relationship
-	487, // 945: nem.Nem.UpdateRelationship:output_type -> nem.Relationship
-	301, // 946: nem.Nem.ListRelationshipNode:output_type -> nem.ListRelationshipNodeResponse
-	488, // 947: nem.Nem.CreateRelationshipNode:output_type -> nem.RelationshipNode
-	488, // 948: nem.Nem.UpdateRelationshipNode:output_type -> nem.RelationshipNode
-	305, // 949: nem.Nem.ListRelationshipNodeTypeConfig:output_type -> nem.ListRelationshipNodeTypeConfigResponse
-	489, // 950: nem.Nem.CreateRelationshipNodeTypeConfig:output_type -> nem.RelationshipNodeTypeConfig
-	489, // 951: nem.Nem.UpdateRelationshipNodeTypeConfig:output_type -> nem.RelationshipNodeTypeConfig
-	309, // 952: nem.Nem.ListRelationshipNodeTypeEntityConfig:output_type -> nem.ListRelationshipNodeTypeEntityConfigResponse
-	490, // 953: nem.Nem.CreateRelationshipNodeTypeEntityConfig:output_type -> nem.RelationshipNodeTypeEntityConfig
-	490, // 954: nem.Nem.UpdateRelationshipNodeTypeEntityConfig:output_type -> nem.RelationshipNodeTypeEntityConfig
-	313, // 955: nem.Nem.ListRelationshipNodeTypeServiceConfig:output_type -> nem.ListRelationshipNodeTypeServiceConfigResponse
-	491, // 956: nem.Nem.CreateRelationshipNodeTypeServiceConfig:output_type -> nem.RelationshipNodeTypeServiceConfig
-	491, // 957: nem.Nem.UpdateRelationshipNodeTypeServiceConfig:output_type -> nem.RelationshipNodeTypeServiceConfig
-	317, // 958: nem.Nem.ListReviewConfig:output_type -> nem.ListReviewConfigResponse
-	492, // 959: nem.Nem.CreateReviewConfig:output_type -> nem.ReviewConfig
-	492, // 960: nem.Nem.UpdateReviewConfig:output_type -> nem.ReviewConfig
-	321, // 961: nem.Nem.ListService:output_type -> nem.ListServiceResponse
-	493, // 962: nem.Nem.CreateService:output_type -> nem.Service
-	493, // 963: nem.Nem.UpdateService:output_type -> nem.Service
-	325, // 964: nem.Nem.ListStore:output_type -> nem.ListStoreResponse
-	494, // 965: nem.Nem.CreateStore:output_type -> nem.Store
-	494, // 966: nem.Nem.UpdateStore:output_type -> nem.Store
-	329, // 967: nem.Nem.ListTcpIpConnectionTypeConfig:output_type -> nem.ListTcpIpConnectionTypeConfigResponse
-	495, // 968: nem.Nem.CreateTcpIpConnectionTypeConfig:output_type -> nem.TcpIpConnectionTypeConfig
-	495, // 969: nem.Nem.UpdateTcpIpConnectionTypeConfig:output_type -> nem.TcpIpConnectionTypeConfig
-	333, // 970: nem.Nem.ListTcpIpSshConnectionTypeConfig:output_type -> nem.ListTcpIpSshConnectionTypeConfigResponse
-	496, // 971: nem.Nem.CreateTcpIpSshConnectionTypeConfig:output_type -> nem.TcpIpSshConnectionTypeConfig
-	496, // 972: nem.Nem.UpdateTcpIpSshConnectionTypeConfig:output_type -> nem.TcpIpSshConnectionTypeConfig
-	337, // 973: nem.Nem.ListUserConnectionExecution:output_type -> nem.ListUserConnectionExecutionResponse
-	497, // 974: nem.Nem.CreateUserConnectionExecution:output_type -> nem.UserConnectionExecution
-	497, // 975: nem.Nem.UpdateUserConnectionExecution:output_type -> nem.UserConnectionExecution
-	341, // 976: nem.Nem.ListUserConnectionLocalConfig:output_type -> nem.ListUserConnectionLocalConfigResponse
-	498, // 977: nem.Nem.CreateUserConnectionLocalConfig:output_type -> nem.UserConnectionLocalConfig
-	498, // 978: nem.Nem.UpdateUserConnectionLocalConfig:output_type -> nem.UserConnectionLocalConfig
-	345, // 979: nem.Nem.ListUserConnectionRemoteConfig:output_type -> nem.ListUserConnectionRemoteConfigResponse
-	499, // 980: nem.Nem.CreateUserConnectionRemoteConfig:output_type -> nem.UserConnectionRemoteConfig
-	499, // 981: nem.Nem.UpdateUserConnectionRemoteConfig:output_type -> nem.UserConnectionRemoteConfig
-	349, // 982: nem.Nem.ListUserConnectionTypeConfig:output_type -> nem.ListUserConnectionTypeConfigResponse
-	500, // 983: nem.Nem.CreateUserConnectionTypeConfig:output_type -> nem.UserConnectionTypeConfig
-	500, // 984: nem.Nem.UpdateUserConnectionTypeConfig:output_type -> nem.UserConnectionTypeConfig
-	353, // 985: nem.Nem.ListVisibility:output_type -> nem.ListVisibilityResponse
-	501, // 986: nem.Nem.CreateVisibility:output_type -> nem.Visibility
-	501, // 987: nem.Nem.UpdateVisibility:output_type -> nem.Visibility
-	357, // 988: nem.Nem.ListChangeRequestScopeConfigLocal:output_type -> nem.ListChangeRequestScopeConfigLocalResponse
-	502, // 989: nem.Nem.CreateChangeRequestScopeConfigLocal:output_type -> nem.ChangeRequestScopeConfigLocal
-	502, // 990: nem.Nem.UpdateChangeRequestScopeConfigLocal:output_type -> nem.ChangeRequestScopeConfigLocal
-	361, // 991: nem.Nem.ListChangeRequestScopeConfigRemote:output_type -> nem.ListChangeRequestScopeConfigRemoteResponse
-	503, // 992: nem.Nem.CreateChangeRequestScopeConfigRemote:output_type -> nem.ChangeRequestScopeConfigRemote
-	503, // 993: nem.Nem.UpdateChangeRequestScopeConfigRemote:output_type -> nem.ChangeRequestScopeConfigRemote
-	365, // 994: nem.Nem.ListAutomation:output_type -> nem.ListAutomationResponse
-	504, // 995: nem.Nem.CreateAutomation:output_type -> nem.Automation
-	504, // 996: nem.Nem.UpdateAutomation:output_type -> nem.Automation
-	369, // 997: nem.Nem.ListAutomationEvent:output_type -> nem.ListAutomationEventResponse
-	505, // 998: nem.Nem.CreateAutomationEvent:output_type -> nem.AutomationEvent
-	505, // 999: nem.Nem.UpdateAutomationEvent:output_type -> nem.AutomationEvent
-	373, // 1000: nem.Nem.ListDeployment:output_type -> nem.ListDeploymentResponse
-	506, // 1001: nem.Nem.CreateDeployment:output_type -> nem.Deployment
-	506, // 1002: nem.Nem.UpdateDeployment:output_type -> nem.Deployment
-	377, // 1003: nem.Nem.ListDeploymentProvider:output_type -> nem.ListDeploymentProviderResponse
-	507, // 1004: nem.Nem.CreateDeploymentProvider:output_type -> nem.DeploymentProvider
-	507, // 1005: nem.Nem.UpdateDeploymentProvider:output_type -> nem.DeploymentProvider
-	381, // 1006: nem.Nem.ListDeploymentServer:output_type -> nem.ListDeploymentServerResponse
-	508, // 1007: nem.Nem.CreateDeploymentServer:output_type -> nem.DeploymentServer
-	508, // 1008: nem.Nem.UpdateDeploymentServer:output_type -> nem.DeploymentServer
-	385, // 1009: nem.Nem.ListDeploymentDatabase:output_type -> nem.ListDeploymentDatabaseResponse
-	509, // 1010: nem.Nem.CreateDeploymentDatabase:output_type -> nem.DeploymentDatabase
-	509, // 1011: nem.Nem.UpdateDeploymentDatabase:output_type -> nem.DeploymentDatabase
-	389, // 1012: nem.Nem.ListDeploymentCodegen:output_type -> nem.ListDeploymentCodegenResponse
-	510, // 1013: nem.Nem.CreateDeploymentCodegen:output_type -> nem.DeploymentCodegen
-	510, // 1014: nem.Nem.UpdateDeploymentCodegen:output_type -> nem.DeploymentCodegen
-	393, // 1015: nem.Nem.ListDeploymentRevision:output_type -> nem.ListDeploymentRevisionResponse
-	511, // 1016: nem.Nem.CreateDeploymentRevision:output_type -> nem.DeploymentRevision
-	511, // 1017: nem.Nem.UpdateDeploymentRevision:output_type -> nem.DeploymentRevision
-	397, // 1018: nem.Nem.ListFieldPiiConfig:output_type -> nem.ListFieldPiiConfigResponse
-	512, // 1019: nem.Nem.CreateFieldPiiConfig:output_type -> nem.FieldPiiConfig
-	512, // 1020: nem.Nem.UpdateFieldPiiConfig:output_type -> nem.FieldPiiConfig
-	401, // 1021: nem.Nem.ListObjectStoreR2TypeConfig:output_type -> nem.ListObjectStoreR2TypeConfigResponse
-	513, // 1022: nem.Nem.CreateObjectStoreR2TypeConfig:output_type -> nem.ObjectStoreR2TypeConfig
-	513, // 1023: nem.Nem.UpdateObjectStoreR2TypeConfig:output_type -> nem.ObjectStoreR2TypeConfig
-	405, // 1024: nem.Nem.ListDataChangeBeforeImageValue:output_type -> nem.ListDataChangeBeforeImageValueResponse
-	514, // 1025: nem.Nem.CreateDataChangeBeforeImageValue:output_type -> nem.DataChangeBeforeImageValue
-	514, // 1026: nem.Nem.UpdateDataChangeBeforeImageValue:output_type -> nem.DataChangeBeforeImageValue
-	409, // 1027: nem.Nem.ListDataChangeBeforeImage:output_type -> nem.ListDataChangeBeforeImageResponse
-	515, // 1028: nem.Nem.CreateDataChangeBeforeImage:output_type -> nem.DataChangeBeforeImage
-	515, // 1029: nem.Nem.UpdateDataChangeBeforeImage:output_type -> nem.DataChangeBeforeImage
-	721, // [721:1030] is the sub-list for method output_type
-	412, // [412:721] is the sub-list for method input_type
-	412, // [412:412] is the sub-list for extension type_name
-	412, // [412:412] is the sub-list for extension extendee
-	0,   // [0:412] is the sub-list for field type_name
+	428, // 0: nem.ListExtensionResponse.extension:type_name -> nem.Extension
+	428, // 1: nem.CreateExtensionRequest.extension:type_name -> nem.Extension
+	428, // 2: nem.UpdateExtensionRequest.extension:type_name -> nem.Extension
+	429, // 3: nem.UpdateExtensionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	430, // 4: nem.ListExtensionVersionResponse.extension_version:type_name -> nem.ExtensionVersion
+	430, // 5: nem.CreateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
+	430, // 6: nem.UpdateExtensionVersionRequest.extension_version:type_name -> nem.ExtensionVersion
+	429, // 7: nem.UpdateExtensionVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	431, // 8: nem.ListUserProjectResponse.user_project:type_name -> nem.UserProject
+	431, // 9: nem.CreateUserProjectRequest.user_project:type_name -> nem.UserProject
+	431, // 10: nem.UpdateUserProjectRequest.user_project:type_name -> nem.UserProject
+	429, // 11: nem.UpdateUserProjectRequest.update_mask:type_name -> google.protobuf.FieldMask
+	432, // 12: nem.ListLocalAgentResponse.local_agent:type_name -> nem.LocalAgent
+	432, // 13: nem.CreateLocalAgentRequest.local_agent:type_name -> nem.LocalAgent
+	432, // 14: nem.UpdateLocalAgentRequest.local_agent:type_name -> nem.LocalAgent
+	429, // 15: nem.UpdateLocalAgentRequest.update_mask:type_name -> google.protobuf.FieldMask
+	433, // 16: nem.ListExtensionExecutionResponse.extension_execution:type_name -> nem.ExtensionExecution
+	433, // 17: nem.CreateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
+	433, // 18: nem.UpdateExtensionExecutionRequest.extension_execution:type_name -> nem.ExtensionExecution
+	429, // 19: nem.UpdateExtensionExecutionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	434, // 20: nem.ListProjectVersionResponse.project_version:type_name -> nem.ProjectVersion
+	434, // 21: nem.CreateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
+	434, // 22: nem.UpdateProjectVersionRequest.project_version:type_name -> nem.ProjectVersion
+	429, // 23: nem.UpdateProjectVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	435, // 24: nem.ListUserResponse.user:type_name -> nem.User
+	435, // 25: nem.CreateUserRequest.user:type_name -> nem.User
+	435, // 26: nem.UpdateUserRequest.user:type_name -> nem.User
+	429, // 27: nem.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
+	436, // 28: nem.ListUserProjectVersionResponse.user_project_version:type_name -> nem.UserProjectVersion
+	436, // 29: nem.CreateUserProjectVersionRequest.user_project_version:type_name -> nem.UserProjectVersion
+	436, // 30: nem.UpdateUserProjectVersionRequest.user_project_version:type_name -> nem.UserProjectVersion
+	429, // 31: nem.UpdateUserProjectVersionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	437, // 32: nem.ListProjectResponse.project:type_name -> nem.Project
+	437, // 33: nem.CreateProjectRequest.project:type_name -> nem.Project
+	437, // 34: nem.UpdateProjectRequest.project:type_name -> nem.Project
+	429, // 35: nem.UpdateProjectRequest.update_mask:type_name -> google.protobuf.FieldMask
+	438, // 36: nem.ListMembershipResponse.membership:type_name -> nem.Membership
+	438, // 37: nem.CreateMembershipRequest.membership:type_name -> nem.Membership
+	438, // 38: nem.UpdateMembershipRequest.membership:type_name -> nem.Membership
+	429, // 39: nem.UpdateMembershipRequest.update_mask:type_name -> google.protobuf.FieldMask
+	439, // 40: nem.ListTeamResponse.team:type_name -> nem.Team
+	439, // 41: nem.CreateTeamRequest.team:type_name -> nem.Team
+	439, // 42: nem.UpdateTeamRequest.team:type_name -> nem.Team
+	429, // 43: nem.UpdateTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
+	440, // 44: nem.ListAiUsageResponse.ai_usage:type_name -> nem.AiUsage
+	440, // 45: nem.CreateAiUsageRequest.ai_usage:type_name -> nem.AiUsage
+	440, // 46: nem.UpdateAiUsageRequest.ai_usage:type_name -> nem.AiUsage
+	429, // 47: nem.UpdateAiUsageRequest.update_mask:type_name -> google.protobuf.FieldMask
+	441, // 48: nem.ListChangeRequestResponse.change_request:type_name -> nem.ChangeRequest
+	441, // 49: nem.CreateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
+	441, // 50: nem.UpdateChangeRequestRequest.change_request:type_name -> nem.ChangeRequest
+	429, // 51: nem.UpdateChangeRequestRequest.update_mask:type_name -> google.protobuf.FieldMask
+	442, // 52: nem.ListUserConnectionResponse.user_connection:type_name -> nem.UserConnection
+	442, // 53: nem.CreateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
+	442, // 54: nem.UpdateUserConnectionRequest.user_connection:type_name -> nem.UserConnection
+	429, // 55: nem.UpdateUserConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	443, // 56: nem.ListUserTeamResponse.user_team:type_name -> nem.UserTeam
+	443, // 57: nem.CreateUserTeamRequest.user_team:type_name -> nem.UserTeam
+	443, // 58: nem.UpdateUserTeamRequest.user_team:type_name -> nem.UserTeam
+	429, // 59: nem.UpdateUserTeamRequest.update_mask:type_name -> google.protobuf.FieldMask
+	444, // 60: nem.ListArrayTypeConfigResponse.array_type_config:type_name -> nem.ArrayTypeConfig
+	444, // 61: nem.CreateArrayTypeConfigRequest.array_type_config:type_name -> nem.ArrayTypeConfig
+	444, // 62: nem.UpdateArrayTypeConfigRequest.array_type_config:type_name -> nem.ArrayTypeConfig
+	429, // 63: nem.UpdateArrayTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	445, // 64: nem.ListChangeRequestDataChangeResponse.change_request_data_change:type_name -> nem.ChangeRequestDataChange
+	445, // 65: nem.CreateChangeRequestDataChangeRequest.change_request_data_change:type_name -> nem.ChangeRequestDataChange
+	445, // 66: nem.UpdateChangeRequestDataChangeRequest.change_request_data_change:type_name -> nem.ChangeRequestDataChange
+	429, // 67: nem.UpdateChangeRequestDataChangeRequest.update_mask:type_name -> google.protobuf.FieldMask
+	446, // 68: nem.ListChangeRequestMetadataResponse.change_request_metadata:type_name -> nem.ChangeRequestMetadata
+	446, // 69: nem.CreateChangeRequestMetadataRequest.change_request_metadata:type_name -> nem.ChangeRequestMetadata
+	446, // 70: nem.UpdateChangeRequestMetadataRequest.change_request_metadata:type_name -> nem.ChangeRequestMetadata
+	429, // 71: nem.UpdateChangeRequestMetadataRequest.update_mask:type_name -> google.protobuf.FieldMask
+	447, // 72: nem.ListChangeRequestMetadataDataResponse.change_request_metadata_data:type_name -> nem.ChangeRequestMetadataData
+	447, // 73: nem.CreateChangeRequestMetadataDataRequest.change_request_metadata_data:type_name -> nem.ChangeRequestMetadataData
+	447, // 74: nem.UpdateChangeRequestMetadataDataRequest.change_request_metadata_data:type_name -> nem.ChangeRequestMetadataData
+	429, // 75: nem.UpdateChangeRequestMetadataDataRequest.update_mask:type_name -> google.protobuf.FieldMask
+	448, // 76: nem.ListChangeRequestReviewResponse.change_request_review:type_name -> nem.ChangeRequestReview
+	448, // 77: nem.CreateChangeRequestReviewRequest.change_request_review:type_name -> nem.ChangeRequestReview
+	448, // 78: nem.UpdateChangeRequestReviewRequest.change_request_review:type_name -> nem.ChangeRequestReview
+	429, // 79: nem.UpdateChangeRequestReviewRequest.update_mask:type_name -> google.protobuf.FieldMask
+	449, // 80: nem.ListChangeRequestScopeConfigResponse.change_request_scope_config:type_name -> nem.ChangeRequestScopeConfig
+	449, // 81: nem.CreateChangeRequestScopeConfigRequest.change_request_scope_config:type_name -> nem.ChangeRequestScopeConfig
+	449, // 82: nem.UpdateChangeRequestScopeConfigRequest.change_request_scope_config:type_name -> nem.ChangeRequestScopeConfig
+	429, // 83: nem.UpdateChangeRequestScopeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	450, // 84: nem.ListConnectionResponse.connection:type_name -> nem.Connection
+	450, // 85: nem.CreateConnectionRequest.connection:type_name -> nem.Connection
+	450, // 86: nem.UpdateConnectionRequest.connection:type_name -> nem.Connection
+	429, // 87: nem.UpdateConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	451, // 88: nem.ListConnectionTypeConfigResponse.connection_type_config:type_name -> nem.ConnectionTypeConfig
+	451, // 89: nem.CreateConnectionTypeConfigRequest.connection_type_config:type_name -> nem.ConnectionTypeConfig
+	451, // 90: nem.UpdateConnectionTypeConfigRequest.connection_type_config:type_name -> nem.ConnectionTypeConfig
+	429, // 91: nem.UpdateConnectionTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	452, // 92: nem.ListDataChangeFieldValueResponse.data_change_field_value:type_name -> nem.DataChangeFieldValue
+	452, // 93: nem.CreateDataChangeFieldValueRequest.data_change_field_value:type_name -> nem.DataChangeFieldValue
+	452, // 94: nem.UpdateDataChangeFieldValueRequest.data_change_field_value:type_name -> nem.DataChangeFieldValue
+	429, // 95: nem.UpdateDataChangeFieldValueRequest.update_mask:type_name -> google.protobuf.FieldMask
+	453, // 96: nem.ListDataChangeTypeConfigResponse.data_change_type_config:type_name -> nem.DataChangeTypeConfig
+	453, // 97: nem.CreateDataChangeTypeConfigRequest.data_change_type_config:type_name -> nem.DataChangeTypeConfig
+	453, // 98: nem.UpdateDataChangeTypeConfigRequest.data_change_type_config:type_name -> nem.DataChangeTypeConfig
+	429, // 99: nem.UpdateDataChangeTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	454, // 100: nem.ListDataChangeTypeConfigCreateResponse.data_change_type_config_create:type_name -> nem.DataChangeTypeConfigCreate
+	454, // 101: nem.CreateDataChangeTypeConfigCreateRequest.data_change_type_config_create:type_name -> nem.DataChangeTypeConfigCreate
+	454, // 102: nem.UpdateDataChangeTypeConfigCreateRequest.data_change_type_config_create:type_name -> nem.DataChangeTypeConfigCreate
+	429, // 103: nem.UpdateDataChangeTypeConfigCreateRequest.update_mask:type_name -> google.protobuf.FieldMask
+	455, // 104: nem.ListDataChangeTypeConfigDeleteResponse.data_change_type_config_delete:type_name -> nem.DataChangeTypeConfigDelete
+	455, // 105: nem.CreateDataChangeTypeConfigDeleteRequest.data_change_type_config_delete:type_name -> nem.DataChangeTypeConfigDelete
+	455, // 106: nem.UpdateDataChangeTypeConfigDeleteRequest.data_change_type_config_delete:type_name -> nem.DataChangeTypeConfigDelete
+	429, // 107: nem.UpdateDataChangeTypeConfigDeleteRequest.update_mask:type_name -> google.protobuf.FieldMask
+	456, // 108: nem.ListDataChangeTypeConfigUpdateResponse.data_change_type_config_update:type_name -> nem.DataChangeTypeConfigUpdate
+	456, // 109: nem.CreateDataChangeTypeConfigUpdateRequest.data_change_type_config_update:type_name -> nem.DataChangeTypeConfigUpdate
+	456, // 110: nem.UpdateDataChangeTypeConfigUpdateRequest.data_change_type_config_update:type_name -> nem.DataChangeTypeConfigUpdate
+	429, // 111: nem.UpdateDataChangeTypeConfigUpdateRequest.update_mask:type_name -> google.protobuf.FieldMask
+	457, // 112: nem.ListDataChangeTypeConfigUpdateFieldResponse.data_change_type_config_update_field:type_name -> nem.DataChangeTypeConfigUpdateField
+	457, // 113: nem.CreateDataChangeTypeConfigUpdateFieldRequest.data_change_type_config_update_field:type_name -> nem.DataChangeTypeConfigUpdateField
+	457, // 114: nem.UpdateDataChangeTypeConfigUpdateFieldRequest.data_change_type_config_update_field:type_name -> nem.DataChangeTypeConfigUpdateField
+	429, // 115: nem.UpdateDataChangeTypeConfigUpdateFieldRequest.update_mask:type_name -> google.protobuf.FieldMask
+	458, // 116: nem.ListDbTypeConfigResponse.db_type_config:type_name -> nem.DbTypeConfig
+	458, // 117: nem.CreateDbTypeConfigRequest.db_type_config:type_name -> nem.DbTypeConfig
+	458, // 118: nem.UpdateDbTypeConfigRequest.db_type_config:type_name -> nem.DbTypeConfig
+	429, // 119: nem.UpdateDbTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	459, // 120: nem.ListDbTypeMysqlConfigResponse.db_type_mysql_config:type_name -> nem.DbTypeMysqlConfig
+	459, // 121: nem.CreateDbTypeMysqlConfigRequest.db_type_mysql_config:type_name -> nem.DbTypeMysqlConfig
+	459, // 122: nem.UpdateDbTypeMysqlConfigRequest.db_type_mysql_config:type_name -> nem.DbTypeMysqlConfig
+	429, // 123: nem.UpdateDbTypeMysqlConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	460, // 124: nem.ListDbTypePostgresConfigResponse.db_type_postgres_config:type_name -> nem.DbTypePostgresConfig
+	460, // 125: nem.CreateDbTypePostgresConfigRequest.db_type_postgres_config:type_name -> nem.DbTypePostgresConfig
+	460, // 126: nem.UpdateDbTypePostgresConfigRequest.db_type_postgres_config:type_name -> nem.DbTypePostgresConfig
+	429, // 127: nem.UpdateDbTypePostgresConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	461, // 128: nem.ListElementRenderResponse.element_render:type_name -> nem.ElementRender
+	461, // 129: nem.CreateElementRenderRequest.element_render:type_name -> nem.ElementRender
+	461, // 130: nem.UpdateElementRenderRequest.element_render:type_name -> nem.ElementRender
+	429, // 131: nem.UpdateElementRenderRequest.update_mask:type_name -> google.protobuf.FieldMask
+	462, // 132: nem.ListEntityResponse.entity:type_name -> nem.Entity
+	462, // 133: nem.CreateEntityRequest.entity:type_name -> nem.Entity
+	462, // 134: nem.UpdateEntityRequest.entity:type_name -> nem.Entity
+	429, // 135: nem.UpdateEntityRequest.update_mask:type_name -> google.protobuf.FieldMask
+	463, // 136: nem.ListEntityDataManagementConfigResponse.entity_data_management_config:type_name -> nem.EntityDataManagementConfig
+	463, // 137: nem.CreateEntityDataManagementConfigRequest.entity_data_management_config:type_name -> nem.EntityDataManagementConfig
+	463, // 138: nem.UpdateEntityDataManagementConfigRequest.entity_data_management_config:type_name -> nem.EntityDataManagementConfig
+	429, // 139: nem.UpdateEntityDataManagementConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	464, // 140: nem.ListEntityTypeConfigResponse.entity_type_config:type_name -> nem.EntityTypeConfig
+	464, // 141: nem.CreateEntityTypeConfigRequest.entity_type_config:type_name -> nem.EntityTypeConfig
+	464, // 142: nem.UpdateEntityTypeConfigRequest.entity_type_config:type_name -> nem.EntityTypeConfig
+	429, // 143: nem.UpdateEntityTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	465, // 144: nem.ListEntityTypeDependentConfigResponse.entity_type_dependent_config:type_name -> nem.EntityTypeDependentConfig
+	465, // 145: nem.CreateEntityTypeDependentConfigRequest.entity_type_dependent_config:type_name -> nem.EntityTypeDependentConfig
+	465, // 146: nem.UpdateEntityTypeDependentConfigRequest.entity_type_dependent_config:type_name -> nem.EntityTypeDependentConfig
+	429, // 147: nem.UpdateEntityTypeDependentConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	466, // 148: nem.ListEntityTypeStandaloneConfigResponse.entity_type_standalone_config:type_name -> nem.EntityTypeStandaloneConfig
+	466, // 149: nem.CreateEntityTypeStandaloneConfigRequest.entity_type_standalone_config:type_name -> nem.EntityTypeStandaloneConfig
+	466, // 150: nem.UpdateEntityTypeStandaloneConfigRequest.entity_type_standalone_config:type_name -> nem.EntityTypeStandaloneConfig
+	429, // 151: nem.UpdateEntityTypeStandaloneConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	467, // 152: nem.ListEntityVersionConfigResponse.entity_version_config:type_name -> nem.EntityVersionConfig
+	467, // 153: nem.CreateEntityVersionConfigRequest.entity_version_config:type_name -> nem.EntityVersionConfig
+	467, // 154: nem.UpdateEntityVersionConfigRequest.entity_version_config:type_name -> nem.EntityVersionConfig
+	429, // 155: nem.UpdateEntityVersionConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	468, // 156: nem.ListEntityVersionTypeConfigResponse.entity_version_type_config:type_name -> nem.EntityVersionTypeConfig
+	468, // 157: nem.CreateEntityVersionTypeConfigRequest.entity_version_type_config:type_name -> nem.EntityVersionTypeConfig
+	468, // 158: nem.UpdateEntityVersionTypeConfigRequest.entity_version_type_config:type_name -> nem.EntityVersionTypeConfig
+	429, // 159: nem.UpdateEntityVersionTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	469, // 160: nem.ListEntityVersionTypeEntityConfigResponse.entity_version_type_entity_config:type_name -> nem.EntityVersionTypeEntityConfig
+	469, // 161: nem.CreateEntityVersionTypeEntityConfigRequest.entity_version_type_entity_config:type_name -> nem.EntityVersionTypeEntityConfig
+	469, // 162: nem.UpdateEntityVersionTypeEntityConfigRequest.entity_version_type_entity_config:type_name -> nem.EntityVersionTypeEntityConfig
+	429, // 163: nem.UpdateEntityVersionTypeEntityConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	470, // 164: nem.ListEntityVersionTypeFieldConfigResponse.entity_version_type_field_config:type_name -> nem.EntityVersionTypeFieldConfig
+	470, // 165: nem.CreateEntityVersionTypeFieldConfigRequest.entity_version_type_field_config:type_name -> nem.EntityVersionTypeFieldConfig
+	470, // 166: nem.UpdateEntityVersionTypeFieldConfigRequest.entity_version_type_field_config:type_name -> nem.EntityVersionTypeFieldConfig
+	429, // 167: nem.UpdateEntityVersionTypeFieldConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	471, // 168: nem.ListEnumResponse.enum:type_name -> nem.Enum
+	471, // 169: nem.CreateEnumRequest.enum:type_name -> nem.Enum
+	471, // 170: nem.UpdateEnumRequest.enum:type_name -> nem.Enum
+	429, // 171: nem.UpdateEnumRequest.update_mask:type_name -> google.protobuf.FieldMask
+	472, // 172: nem.ListEnumValueResponse.enum_value:type_name -> nem.EnumValue
+	472, // 173: nem.CreateEnumValueRequest.enum_value:type_name -> nem.EnumValue
+	472, // 174: nem.UpdateEnumValueRequest.enum_value:type_name -> nem.EnumValue
+	429, // 175: nem.UpdateEnumValueRequest.update_mask:type_name -> google.protobuf.FieldMask
+	473, // 176: nem.ListEnviormentResponse.enviorment:type_name -> nem.Enviorment
+	473, // 177: nem.CreateEnviormentRequest.enviorment:type_name -> nem.Enviorment
+	473, // 178: nem.UpdateEnviormentRequest.enviorment:type_name -> nem.Enviorment
+	429, // 179: nem.UpdateEnviormentRequest.update_mask:type_name -> google.protobuf.FieldMask
+	474, // 180: nem.ListFieldResponse.field:type_name -> nem.Field
+	474, // 181: nem.CreateFieldRequest.field:type_name -> nem.Field
+	474, // 182: nem.UpdateFieldRequest.field:type_name -> nem.Field
+	429, // 183: nem.UpdateFieldRequest.update_mask:type_name -> google.protobuf.FieldMask
+	475, // 184: nem.ListFieldTypeArrayConfigResponse.field_type_array_config:type_name -> nem.FieldTypeArrayConfig
+	475, // 185: nem.CreateFieldTypeArrayConfigRequest.field_type_array_config:type_name -> nem.FieldTypeArrayConfig
+	475, // 186: nem.UpdateFieldTypeArrayConfigRequest.field_type_array_config:type_name -> nem.FieldTypeArrayConfig
+	429, // 187: nem.UpdateFieldTypeArrayConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	476, // 188: nem.ListFieldTypeCharConfigResponse.field_type_char_config:type_name -> nem.FieldTypeCharConfig
+	476, // 189: nem.CreateFieldTypeCharConfigRequest.field_type_char_config:type_name -> nem.FieldTypeCharConfig
+	476, // 190: nem.UpdateFieldTypeCharConfigRequest.field_type_char_config:type_name -> nem.FieldTypeCharConfig
+	429, // 191: nem.UpdateFieldTypeCharConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	477, // 192: nem.ListFieldTypeConfigResponse.field_type_config:type_name -> nem.FieldTypeConfig
+	477, // 193: nem.CreateFieldTypeConfigRequest.field_type_config:type_name -> nem.FieldTypeConfig
+	477, // 194: nem.UpdateFieldTypeConfigRequest.field_type_config:type_name -> nem.FieldTypeConfig
+	429, // 195: nem.UpdateFieldTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	478, // 196: nem.ListFieldTypeDateConfigResponse.field_type_date_config:type_name -> nem.FieldTypeDateConfig
+	478, // 197: nem.CreateFieldTypeDateConfigRequest.field_type_date_config:type_name -> nem.FieldTypeDateConfig
+	478, // 198: nem.UpdateFieldTypeDateConfigRequest.field_type_date_config:type_name -> nem.FieldTypeDateConfig
+	429, // 199: nem.UpdateFieldTypeDateConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	479, // 200: nem.ListFieldTypeDatetimeConfigResponse.field_type_datetime_config:type_name -> nem.FieldTypeDatetimeConfig
+	479, // 201: nem.CreateFieldTypeDatetimeConfigRequest.field_type_datetime_config:type_name -> nem.FieldTypeDatetimeConfig
+	479, // 202: nem.UpdateFieldTypeDatetimeConfigRequest.field_type_datetime_config:type_name -> nem.FieldTypeDatetimeConfig
+	429, // 203: nem.UpdateFieldTypeDatetimeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	480, // 204: nem.ListFieldTypeDecimalConfigResponse.field_type_decimal_config:type_name -> nem.FieldTypeDecimalConfig
+	480, // 205: nem.CreateFieldTypeDecimalConfigRequest.field_type_decimal_config:type_name -> nem.FieldTypeDecimalConfig
+	480, // 206: nem.UpdateFieldTypeDecimalConfigRequest.field_type_decimal_config:type_name -> nem.FieldTypeDecimalConfig
+	429, // 207: nem.UpdateFieldTypeDecimalConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	481, // 208: nem.ListFieldTypeEmailConfigResponse.field_type_email_config:type_name -> nem.FieldTypeEmailConfig
+	481, // 209: nem.CreateFieldTypeEmailConfigRequest.field_type_email_config:type_name -> nem.FieldTypeEmailConfig
+	481, // 210: nem.UpdateFieldTypeEmailConfigRequest.field_type_email_config:type_name -> nem.FieldTypeEmailConfig
+	429, // 211: nem.UpdateFieldTypeEmailConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	482, // 212: nem.ListFieldTypeEncryptedConfigResponse.field_type_encrypted_config:type_name -> nem.FieldTypeEncryptedConfig
+	482, // 213: nem.CreateFieldTypeEncryptedConfigRequest.field_type_encrypted_config:type_name -> nem.FieldTypeEncryptedConfig
+	482, // 214: nem.UpdateFieldTypeEncryptedConfigRequest.field_type_encrypted_config:type_name -> nem.FieldTypeEncryptedConfig
+	429, // 215: nem.UpdateFieldTypeEncryptedConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	483, // 216: nem.ListFieldTypeEnumConfigResponse.field_type_enum_config:type_name -> nem.FieldTypeEnumConfig
+	483, // 217: nem.CreateFieldTypeEnumConfigRequest.field_type_enum_config:type_name -> nem.FieldTypeEnumConfig
+	483, // 218: nem.UpdateFieldTypeEnumConfigRequest.field_type_enum_config:type_name -> nem.FieldTypeEnumConfig
+	429, // 219: nem.UpdateFieldTypeEnumConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	484, // 220: nem.ListFieldTypeFileConfigResponse.field_type_file_config:type_name -> nem.FieldTypeFileConfig
+	484, // 221: nem.CreateFieldTypeFileConfigRequest.field_type_file_config:type_name -> nem.FieldTypeFileConfig
+	484, // 222: nem.UpdateFieldTypeFileConfigRequest.field_type_file_config:type_name -> nem.FieldTypeFileConfig
+	429, // 223: nem.UpdateFieldTypeFileConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	485, // 224: nem.ListFieldTypeFloatConfigResponse.field_type_float_config:type_name -> nem.FieldTypeFloatConfig
+	485, // 225: nem.CreateFieldTypeFloatConfigRequest.field_type_float_config:type_name -> nem.FieldTypeFloatConfig
+	485, // 226: nem.UpdateFieldTypeFloatConfigRequest.field_type_float_config:type_name -> nem.FieldTypeFloatConfig
+	429, // 227: nem.UpdateFieldTypeFloatConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	486, // 228: nem.ListFieldTypeIntegerConfigResponse.field_type_integer_config:type_name -> nem.FieldTypeIntegerConfig
+	486, // 229: nem.CreateFieldTypeIntegerConfigRequest.field_type_integer_config:type_name -> nem.FieldTypeIntegerConfig
+	486, // 230: nem.UpdateFieldTypeIntegerConfigRequest.field_type_integer_config:type_name -> nem.FieldTypeIntegerConfig
+	429, // 231: nem.UpdateFieldTypeIntegerConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	487, // 232: nem.ListFieldTypeJSONConfigResponse.field_type_json_config:type_name -> nem.FieldTypeJSONConfig
+	487, // 233: nem.CreateFieldTypeJSONConfigRequest.field_type_json_config:type_name -> nem.FieldTypeJSONConfig
+	487, // 234: nem.UpdateFieldTypeJSONConfigRequest.field_type_json_config:type_name -> nem.FieldTypeJSONConfig
+	429, // 235: nem.UpdateFieldTypeJSONConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	488, // 236: nem.ListFieldTypePhoneConfigResponse.field_type_phone_config:type_name -> nem.FieldTypePhoneConfig
+	488, // 237: nem.CreateFieldTypePhoneConfigRequest.field_type_phone_config:type_name -> nem.FieldTypePhoneConfig
+	488, // 238: nem.UpdateFieldTypePhoneConfigRequest.field_type_phone_config:type_name -> nem.FieldTypePhoneConfig
+	429, // 239: nem.UpdateFieldTypePhoneConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	489, // 240: nem.ListFieldTypeSlugConfigResponse.field_type_slug_config:type_name -> nem.FieldTypeSlugConfig
+	489, // 241: nem.CreateFieldTypeSlugConfigRequest.field_type_slug_config:type_name -> nem.FieldTypeSlugConfig
+	489, // 242: nem.UpdateFieldTypeSlugConfigRequest.field_type_slug_config:type_name -> nem.FieldTypeSlugConfig
+	429, // 243: nem.UpdateFieldTypeSlugConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	490, // 244: nem.ListFieldTypeTextConfigResponse.field_type_text_config:type_name -> nem.FieldTypeTextConfig
+	490, // 245: nem.CreateFieldTypeTextConfigRequest.field_type_text_config:type_name -> nem.FieldTypeTextConfig
+	490, // 246: nem.UpdateFieldTypeTextConfigRequest.field_type_text_config:type_name -> nem.FieldTypeTextConfig
+	429, // 247: nem.UpdateFieldTypeTextConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	491, // 248: nem.ListFieldTypeURLConfigResponse.field_type_url_config:type_name -> nem.FieldTypeURLConfig
+	491, // 249: nem.CreateFieldTypeURLConfigRequest.field_type_url_config:type_name -> nem.FieldTypeURLConfig
+	491, // 250: nem.UpdateFieldTypeURLConfigRequest.field_type_url_config:type_name -> nem.FieldTypeURLConfig
+	429, // 251: nem.UpdateFieldTypeURLConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	492, // 252: nem.ListFieldTypeVarcharConfigResponse.field_type_varchar_config:type_name -> nem.FieldTypeVarcharConfig
+	492, // 253: nem.CreateFieldTypeVarcharConfigRequest.field_type_varchar_config:type_name -> nem.FieldTypeVarcharConfig
+	492, // 254: nem.UpdateFieldTypeVarcharConfigRequest.field_type_varchar_config:type_name -> nem.FieldTypeVarcharConfig
+	429, // 255: nem.UpdateFieldTypeVarcharConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	493, // 256: nem.ListFileObjectStorageConfigResponse.file_object_storage_config:type_name -> nem.FileObjectStorageConfig
+	493, // 257: nem.CreateFileObjectStorageConfigRequest.file_object_storage_config:type_name -> nem.FileObjectStorageConfig
+	493, // 258: nem.UpdateFileObjectStorageConfigRequest.file_object_storage_config:type_name -> nem.FileObjectStorageConfig
+	429, // 259: nem.UpdateFileObjectStorageConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	494, // 260: nem.ListFileStorageConfigResponse.file_storage_config:type_name -> nem.FileStorageConfig
+	494, // 261: nem.CreateFileStorageConfigRequest.file_storage_config:type_name -> nem.FileStorageConfig
+	494, // 262: nem.UpdateFileStorageConfigRequest.file_storage_config:type_name -> nem.FileStorageConfig
+	429, // 263: nem.UpdateFileStorageConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	495, // 264: nem.ListIndexResponse.index:type_name -> nem.Index
+	495, // 265: nem.CreateIndexRequest.index:type_name -> nem.Index
+	495, // 266: nem.UpdateIndexRequest.index:type_name -> nem.Index
+	429, // 267: nem.UpdateIndexRequest.update_mask:type_name -> google.protobuf.FieldMask
+	496, // 268: nem.ListIndexFieldResponse.index_field:type_name -> nem.IndexField
+	496, // 269: nem.CreateIndexFieldRequest.index_field:type_name -> nem.IndexField
+	496, // 270: nem.UpdateIndexFieldRequest.index_field:type_name -> nem.IndexField
+	429, // 271: nem.UpdateIndexFieldRequest.update_mask:type_name -> google.protobuf.FieldMask
+	497, // 272: nem.ListLocalAgentConnectionResponse.local_agent_connection:type_name -> nem.LocalAgentConnection
+	497, // 273: nem.CreateLocalAgentConnectionRequest.local_agent_connection:type_name -> nem.LocalAgentConnection
+	497, // 274: nem.UpdateLocalAgentConnectionRequest.local_agent_connection:type_name -> nem.LocalAgentConnection
+	429, // 275: nem.UpdateLocalAgentConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	498, // 276: nem.ListObjectStoreResponse.object_store:type_name -> nem.ObjectStore
+	498, // 277: nem.CreateObjectStoreRequest.object_store:type_name -> nem.ObjectStore
+	498, // 278: nem.UpdateObjectStoreRequest.object_store:type_name -> nem.ObjectStore
+	429, // 279: nem.UpdateObjectStoreRequest.update_mask:type_name -> google.protobuf.FieldMask
+	499, // 280: nem.ListObjectStoreS3TypeConfigResponse.object_store_s_3_type_config:type_name -> nem.ObjectStoreS3TypeConfig
+	499, // 281: nem.CreateObjectStoreS3TypeConfigRequest.object_store_s_3_type_config:type_name -> nem.ObjectStoreS3TypeConfig
+	499, // 282: nem.UpdateObjectStoreS3TypeConfigRequest.object_store_s_3_type_config:type_name -> nem.ObjectStoreS3TypeConfig
+	429, // 283: nem.UpdateObjectStoreS3TypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	500, // 284: nem.ListObjectStoreTypeConfigResponse.object_store_type_config:type_name -> nem.ObjectStoreTypeConfig
+	500, // 285: nem.CreateObjectStoreTypeConfigRequest.object_store_type_config:type_name -> nem.ObjectStoreTypeConfig
+	500, // 286: nem.UpdateObjectStoreTypeConfigRequest.object_store_type_config:type_name -> nem.ObjectStoreTypeConfig
+	429, // 287: nem.UpdateObjectStoreTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	501, // 288: nem.ListProjectExtensionResponse.project_extension:type_name -> nem.ProjectExtension
+	501, // 289: nem.CreateProjectExtensionRequest.project_extension:type_name -> nem.ProjectExtension
+	501, // 290: nem.UpdateProjectExtensionRequest.project_extension:type_name -> nem.ProjectExtension
+	429, // 291: nem.UpdateProjectExtensionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	502, // 292: nem.ListProjectVersionDeploymentResponse.project_version_deployment:type_name -> nem.ProjectVersionDeployment
+	502, // 293: nem.CreateProjectVersionDeploymentRequest.project_version_deployment:type_name -> nem.ProjectVersionDeployment
+	502, // 294: nem.UpdateProjectVersionDeploymentRequest.project_version_deployment:type_name -> nem.ProjectVersionDeployment
+	429, // 295: nem.UpdateProjectVersionDeploymentRequest.update_mask:type_name -> google.protobuf.FieldMask
+	503, // 296: nem.ListRelationshipResponse.relationship:type_name -> nem.Relationship
+	503, // 297: nem.CreateRelationshipRequest.relationship:type_name -> nem.Relationship
+	503, // 298: nem.UpdateRelationshipRequest.relationship:type_name -> nem.Relationship
+	429, // 299: nem.UpdateRelationshipRequest.update_mask:type_name -> google.protobuf.FieldMask
+	504, // 300: nem.ListRelationshipNodeResponse.relationship_node:type_name -> nem.RelationshipNode
+	504, // 301: nem.CreateRelationshipNodeRequest.relationship_node:type_name -> nem.RelationshipNode
+	504, // 302: nem.UpdateRelationshipNodeRequest.relationship_node:type_name -> nem.RelationshipNode
+	429, // 303: nem.UpdateRelationshipNodeRequest.update_mask:type_name -> google.protobuf.FieldMask
+	505, // 304: nem.ListRelationshipNodeTypeConfigResponse.relationship_node_type_config:type_name -> nem.RelationshipNodeTypeConfig
+	505, // 305: nem.CreateRelationshipNodeTypeConfigRequest.relationship_node_type_config:type_name -> nem.RelationshipNodeTypeConfig
+	505, // 306: nem.UpdateRelationshipNodeTypeConfigRequest.relationship_node_type_config:type_name -> nem.RelationshipNodeTypeConfig
+	429, // 307: nem.UpdateRelationshipNodeTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	506, // 308: nem.ListRelationshipNodeTypeEntityConfigResponse.relationship_node_type_entity_config:type_name -> nem.RelationshipNodeTypeEntityConfig
+	506, // 309: nem.CreateRelationshipNodeTypeEntityConfigRequest.relationship_node_type_entity_config:type_name -> nem.RelationshipNodeTypeEntityConfig
+	506, // 310: nem.UpdateRelationshipNodeTypeEntityConfigRequest.relationship_node_type_entity_config:type_name -> nem.RelationshipNodeTypeEntityConfig
+	429, // 311: nem.UpdateRelationshipNodeTypeEntityConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	507, // 312: nem.ListRelationshipNodeTypeServiceConfigResponse.relationship_node_type_service_config:type_name -> nem.RelationshipNodeTypeServiceConfig
+	507, // 313: nem.CreateRelationshipNodeTypeServiceConfigRequest.relationship_node_type_service_config:type_name -> nem.RelationshipNodeTypeServiceConfig
+	507, // 314: nem.UpdateRelationshipNodeTypeServiceConfigRequest.relationship_node_type_service_config:type_name -> nem.RelationshipNodeTypeServiceConfig
+	429, // 315: nem.UpdateRelationshipNodeTypeServiceConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	508, // 316: nem.ListReviewConfigResponse.review_config:type_name -> nem.ReviewConfig
+	508, // 317: nem.CreateReviewConfigRequest.review_config:type_name -> nem.ReviewConfig
+	508, // 318: nem.UpdateReviewConfigRequest.review_config:type_name -> nem.ReviewConfig
+	429, // 319: nem.UpdateReviewConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	509, // 320: nem.ListServiceResponse.service:type_name -> nem.Service
+	509, // 321: nem.CreateServiceRequest.service:type_name -> nem.Service
+	509, // 322: nem.UpdateServiceRequest.service:type_name -> nem.Service
+	429, // 323: nem.UpdateServiceRequest.update_mask:type_name -> google.protobuf.FieldMask
+	510, // 324: nem.ListStoreResponse.store:type_name -> nem.Store
+	510, // 325: nem.CreateStoreRequest.store:type_name -> nem.Store
+	510, // 326: nem.UpdateStoreRequest.store:type_name -> nem.Store
+	429, // 327: nem.UpdateStoreRequest.update_mask:type_name -> google.protobuf.FieldMask
+	511, // 328: nem.ListTcpIpConnectionTypeConfigResponse.tcp_ip_connection_type_config:type_name -> nem.TcpIpConnectionTypeConfig
+	511, // 329: nem.CreateTcpIpConnectionTypeConfigRequest.tcp_ip_connection_type_config:type_name -> nem.TcpIpConnectionTypeConfig
+	511, // 330: nem.UpdateTcpIpConnectionTypeConfigRequest.tcp_ip_connection_type_config:type_name -> nem.TcpIpConnectionTypeConfig
+	429, // 331: nem.UpdateTcpIpConnectionTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	512, // 332: nem.ListTcpIpSshConnectionTypeConfigResponse.tcp_ip_ssh_connection_type_config:type_name -> nem.TcpIpSshConnectionTypeConfig
+	512, // 333: nem.CreateTcpIpSshConnectionTypeConfigRequest.tcp_ip_ssh_connection_type_config:type_name -> nem.TcpIpSshConnectionTypeConfig
+	512, // 334: nem.UpdateTcpIpSshConnectionTypeConfigRequest.tcp_ip_ssh_connection_type_config:type_name -> nem.TcpIpSshConnectionTypeConfig
+	429, // 335: nem.UpdateTcpIpSshConnectionTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	513, // 336: nem.ListUserConnectionExecutionResponse.user_connection_execution:type_name -> nem.UserConnectionExecution
+	513, // 337: nem.CreateUserConnectionExecutionRequest.user_connection_execution:type_name -> nem.UserConnectionExecution
+	513, // 338: nem.UpdateUserConnectionExecutionRequest.user_connection_execution:type_name -> nem.UserConnectionExecution
+	429, // 339: nem.UpdateUserConnectionExecutionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	514, // 340: nem.ListUserConnectionLocalConfigResponse.user_connection_local_config:type_name -> nem.UserConnectionLocalConfig
+	514, // 341: nem.CreateUserConnectionLocalConfigRequest.user_connection_local_config:type_name -> nem.UserConnectionLocalConfig
+	514, // 342: nem.UpdateUserConnectionLocalConfigRequest.user_connection_local_config:type_name -> nem.UserConnectionLocalConfig
+	429, // 343: nem.UpdateUserConnectionLocalConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	515, // 344: nem.ListUserConnectionRemoteConfigResponse.user_connection_remote_config:type_name -> nem.UserConnectionRemoteConfig
+	515, // 345: nem.CreateUserConnectionRemoteConfigRequest.user_connection_remote_config:type_name -> nem.UserConnectionRemoteConfig
+	515, // 346: nem.UpdateUserConnectionRemoteConfigRequest.user_connection_remote_config:type_name -> nem.UserConnectionRemoteConfig
+	429, // 347: nem.UpdateUserConnectionRemoteConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	516, // 348: nem.ListUserConnectionTypeConfigResponse.user_connection_type_config:type_name -> nem.UserConnectionTypeConfig
+	516, // 349: nem.CreateUserConnectionTypeConfigRequest.user_connection_type_config:type_name -> nem.UserConnectionTypeConfig
+	516, // 350: nem.UpdateUserConnectionTypeConfigRequest.user_connection_type_config:type_name -> nem.UserConnectionTypeConfig
+	429, // 351: nem.UpdateUserConnectionTypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	517, // 352: nem.ListVisibilityResponse.visibility:type_name -> nem.Visibility
+	517, // 353: nem.CreateVisibilityRequest.visibility:type_name -> nem.Visibility
+	517, // 354: nem.UpdateVisibilityRequest.visibility:type_name -> nem.Visibility
+	429, // 355: nem.UpdateVisibilityRequest.update_mask:type_name -> google.protobuf.FieldMask
+	518, // 356: nem.ListChangeRequestScopeConfigLocalResponse.change_request_scope_config_local:type_name -> nem.ChangeRequestScopeConfigLocal
+	518, // 357: nem.CreateChangeRequestScopeConfigLocalRequest.change_request_scope_config_local:type_name -> nem.ChangeRequestScopeConfigLocal
+	518, // 358: nem.UpdateChangeRequestScopeConfigLocalRequest.change_request_scope_config_local:type_name -> nem.ChangeRequestScopeConfigLocal
+	429, // 359: nem.UpdateChangeRequestScopeConfigLocalRequest.update_mask:type_name -> google.protobuf.FieldMask
+	519, // 360: nem.ListChangeRequestScopeConfigRemoteResponse.change_request_scope_config_remote:type_name -> nem.ChangeRequestScopeConfigRemote
+	519, // 361: nem.CreateChangeRequestScopeConfigRemoteRequest.change_request_scope_config_remote:type_name -> nem.ChangeRequestScopeConfigRemote
+	519, // 362: nem.UpdateChangeRequestScopeConfigRemoteRequest.change_request_scope_config_remote:type_name -> nem.ChangeRequestScopeConfigRemote
+	429, // 363: nem.UpdateChangeRequestScopeConfigRemoteRequest.update_mask:type_name -> google.protobuf.FieldMask
+	520, // 364: nem.ListAutomationResponse.automation:type_name -> nem.Automation
+	520, // 365: nem.CreateAutomationRequest.automation:type_name -> nem.Automation
+	520, // 366: nem.UpdateAutomationRequest.automation:type_name -> nem.Automation
+	429, // 367: nem.UpdateAutomationRequest.update_mask:type_name -> google.protobuf.FieldMask
+	521, // 368: nem.ListAutomationEventResponse.automation_event:type_name -> nem.AutomationEvent
+	521, // 369: nem.CreateAutomationEventRequest.automation_event:type_name -> nem.AutomationEvent
+	521, // 370: nem.UpdateAutomationEventRequest.automation_event:type_name -> nem.AutomationEvent
+	429, // 371: nem.UpdateAutomationEventRequest.update_mask:type_name -> google.protobuf.FieldMask
+	522, // 372: nem.ListDeploymentResponse.deployment:type_name -> nem.Deployment
+	522, // 373: nem.CreateDeploymentRequest.deployment:type_name -> nem.Deployment
+	522, // 374: nem.UpdateDeploymentRequest.deployment:type_name -> nem.Deployment
+	429, // 375: nem.UpdateDeploymentRequest.update_mask:type_name -> google.protobuf.FieldMask
+	523, // 376: nem.ListDeploymentProviderResponse.deployment_provider:type_name -> nem.DeploymentProvider
+	523, // 377: nem.CreateDeploymentProviderRequest.deployment_provider:type_name -> nem.DeploymentProvider
+	523, // 378: nem.UpdateDeploymentProviderRequest.deployment_provider:type_name -> nem.DeploymentProvider
+	429, // 379: nem.UpdateDeploymentProviderRequest.update_mask:type_name -> google.protobuf.FieldMask
+	524, // 380: nem.ListDeploymentServerResponse.deployment_server:type_name -> nem.DeploymentServer
+	524, // 381: nem.CreateDeploymentServerRequest.deployment_server:type_name -> nem.DeploymentServer
+	524, // 382: nem.UpdateDeploymentServerRequest.deployment_server:type_name -> nem.DeploymentServer
+	429, // 383: nem.UpdateDeploymentServerRequest.update_mask:type_name -> google.protobuf.FieldMask
+	525, // 384: nem.ListDeploymentDatabaseResponse.deployment_database:type_name -> nem.DeploymentDatabase
+	525, // 385: nem.CreateDeploymentDatabaseRequest.deployment_database:type_name -> nem.DeploymentDatabase
+	525, // 386: nem.UpdateDeploymentDatabaseRequest.deployment_database:type_name -> nem.DeploymentDatabase
+	429, // 387: nem.UpdateDeploymentDatabaseRequest.update_mask:type_name -> google.protobuf.FieldMask
+	526, // 388: nem.ListDeploymentCodegenResponse.deployment_codegen:type_name -> nem.DeploymentCodegen
+	526, // 389: nem.CreateDeploymentCodegenRequest.deployment_codegen:type_name -> nem.DeploymentCodegen
+	526, // 390: nem.UpdateDeploymentCodegenRequest.deployment_codegen:type_name -> nem.DeploymentCodegen
+	429, // 391: nem.UpdateDeploymentCodegenRequest.update_mask:type_name -> google.protobuf.FieldMask
+	527, // 392: nem.ListDeploymentRevisionResponse.deployment_revision:type_name -> nem.DeploymentRevision
+	527, // 393: nem.CreateDeploymentRevisionRequest.deployment_revision:type_name -> nem.DeploymentRevision
+	527, // 394: nem.UpdateDeploymentRevisionRequest.deployment_revision:type_name -> nem.DeploymentRevision
+	429, // 395: nem.UpdateDeploymentRevisionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	528, // 396: nem.ListFieldPiiConfigResponse.field_pii_config:type_name -> nem.FieldPiiConfig
+	528, // 397: nem.CreateFieldPiiConfigRequest.field_pii_config:type_name -> nem.FieldPiiConfig
+	528, // 398: nem.UpdateFieldPiiConfigRequest.field_pii_config:type_name -> nem.FieldPiiConfig
+	429, // 399: nem.UpdateFieldPiiConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	529, // 400: nem.ListObjectStoreR2TypeConfigResponse.object_store_r_2_type_config:type_name -> nem.ObjectStoreR2TypeConfig
+	529, // 401: nem.CreateObjectStoreR2TypeConfigRequest.object_store_r_2_type_config:type_name -> nem.ObjectStoreR2TypeConfig
+	529, // 402: nem.UpdateObjectStoreR2TypeConfigRequest.object_store_r_2_type_config:type_name -> nem.ObjectStoreR2TypeConfig
+	429, // 403: nem.UpdateObjectStoreR2TypeConfigRequest.update_mask:type_name -> google.protobuf.FieldMask
+	530, // 404: nem.ListDataChangeBeforeImageValueResponse.data_change_before_image_value:type_name -> nem.DataChangeBeforeImageValue
+	530, // 405: nem.CreateDataChangeBeforeImageValueRequest.data_change_before_image_value:type_name -> nem.DataChangeBeforeImageValue
+	530, // 406: nem.UpdateDataChangeBeforeImageValueRequest.data_change_before_image_value:type_name -> nem.DataChangeBeforeImageValue
+	429, // 407: nem.UpdateDataChangeBeforeImageValueRequest.update_mask:type_name -> google.protobuf.FieldMask
+	531, // 408: nem.ListDataChangeBeforeImageResponse.data_change_before_image:type_name -> nem.DataChangeBeforeImage
+	531, // 409: nem.CreateDataChangeBeforeImageRequest.data_change_before_image:type_name -> nem.DataChangeBeforeImage
+	531, // 410: nem.UpdateDataChangeBeforeImageRequest.data_change_before_image:type_name -> nem.DataChangeBeforeImage
+	429, // 411: nem.UpdateDataChangeBeforeImageRequest.update_mask:type_name -> google.protobuf.FieldMask
+	532, // 412: nem.ListCodebaseResponse.codebase:type_name -> nem.Codebase
+	532, // 413: nem.CreateCodebaseRequest.codebase:type_name -> nem.Codebase
+	532, // 414: nem.UpdateCodebaseRequest.codebase:type_name -> nem.Codebase
+	429, // 415: nem.UpdateCodebaseRequest.update_mask:type_name -> google.protobuf.FieldMask
+	533, // 416: nem.ListCodeSnapshotResponse.code_snapshot:type_name -> nem.CodeSnapshot
+	533, // 417: nem.CreateCodeSnapshotRequest.code_snapshot:type_name -> nem.CodeSnapshot
+	533, // 418: nem.UpdateCodeSnapshotRequest.code_snapshot:type_name -> nem.CodeSnapshot
+	429, // 419: nem.UpdateCodeSnapshotRequest.update_mask:type_name -> google.protobuf.FieldMask
+	534, // 420: nem.ListCodeModelComponentResponse.code_model_component:type_name -> nem.CodeModelComponent
+	534, // 421: nem.CreateCodeModelComponentRequest.code_model_component:type_name -> nem.CodeModelComponent
+	534, // 422: nem.UpdateCodeModelComponentRequest.code_model_component:type_name -> nem.CodeModelComponent
+	429, // 423: nem.UpdateCodeModelComponentRequest.update_mask:type_name -> google.protobuf.FieldMask
+	535, // 424: nem.ListCodeModelResponse.code_model:type_name -> nem.CodeModel
+	535, // 425: nem.CreateCodeModelRequest.code_model:type_name -> nem.CodeModel
+	535, // 426: nem.UpdateCodeModelRequest.code_model:type_name -> nem.CodeModel
+	429, // 427: nem.UpdateCodeModelRequest.update_mask:type_name -> google.protobuf.FieldMask
+	0,   // 428: nem.Nem.ListExtension:input_type -> nem.ListExtensionRequest
+	2,   // 429: nem.Nem.CreateExtension:input_type -> nem.CreateExtensionRequest
+	3,   // 430: nem.Nem.UpdateExtension:input_type -> nem.UpdateExtensionRequest
+	4,   // 431: nem.Nem.ListExtensionVersion:input_type -> nem.ListExtensionVersionRequest
+	6,   // 432: nem.Nem.CreateExtensionVersion:input_type -> nem.CreateExtensionVersionRequest
+	7,   // 433: nem.Nem.UpdateExtensionVersion:input_type -> nem.UpdateExtensionVersionRequest
+	8,   // 434: nem.Nem.ListUserProject:input_type -> nem.ListUserProjectRequest
+	10,  // 435: nem.Nem.CreateUserProject:input_type -> nem.CreateUserProjectRequest
+	11,  // 436: nem.Nem.UpdateUserProject:input_type -> nem.UpdateUserProjectRequest
+	12,  // 437: nem.Nem.ListLocalAgent:input_type -> nem.ListLocalAgentRequest
+	14,  // 438: nem.Nem.CreateLocalAgent:input_type -> nem.CreateLocalAgentRequest
+	15,  // 439: nem.Nem.UpdateLocalAgent:input_type -> nem.UpdateLocalAgentRequest
+	16,  // 440: nem.Nem.ListExtensionExecution:input_type -> nem.ListExtensionExecutionRequest
+	18,  // 441: nem.Nem.CreateExtensionExecution:input_type -> nem.CreateExtensionExecutionRequest
+	19,  // 442: nem.Nem.UpdateExtensionExecution:input_type -> nem.UpdateExtensionExecutionRequest
+	20,  // 443: nem.Nem.ListProjectVersion:input_type -> nem.ListProjectVersionRequest
+	22,  // 444: nem.Nem.CreateProjectVersion:input_type -> nem.CreateProjectVersionRequest
+	23,  // 445: nem.Nem.UpdateProjectVersion:input_type -> nem.UpdateProjectVersionRequest
+	24,  // 446: nem.Nem.ListUser:input_type -> nem.ListUserRequest
+	26,  // 447: nem.Nem.CreateUser:input_type -> nem.CreateUserRequest
+	27,  // 448: nem.Nem.UpdateUser:input_type -> nem.UpdateUserRequest
+	28,  // 449: nem.Nem.ListUserProjectVersion:input_type -> nem.ListUserProjectVersionRequest
+	30,  // 450: nem.Nem.CreateUserProjectVersion:input_type -> nem.CreateUserProjectVersionRequest
+	31,  // 451: nem.Nem.UpdateUserProjectVersion:input_type -> nem.UpdateUserProjectVersionRequest
+	32,  // 452: nem.Nem.ListProject:input_type -> nem.ListProjectRequest
+	34,  // 453: nem.Nem.CreateProject:input_type -> nem.CreateProjectRequest
+	35,  // 454: nem.Nem.UpdateProject:input_type -> nem.UpdateProjectRequest
+	36,  // 455: nem.Nem.ListMembership:input_type -> nem.ListMembershipRequest
+	38,  // 456: nem.Nem.CreateMembership:input_type -> nem.CreateMembershipRequest
+	39,  // 457: nem.Nem.UpdateMembership:input_type -> nem.UpdateMembershipRequest
+	40,  // 458: nem.Nem.ListTeam:input_type -> nem.ListTeamRequest
+	42,  // 459: nem.Nem.CreateTeam:input_type -> nem.CreateTeamRequest
+	43,  // 460: nem.Nem.UpdateTeam:input_type -> nem.UpdateTeamRequest
+	44,  // 461: nem.Nem.ListAiUsage:input_type -> nem.ListAiUsageRequest
+	46,  // 462: nem.Nem.CreateAiUsage:input_type -> nem.CreateAiUsageRequest
+	47,  // 463: nem.Nem.UpdateAiUsage:input_type -> nem.UpdateAiUsageRequest
+	48,  // 464: nem.Nem.ListChangeRequest:input_type -> nem.ListChangeRequestRequest
+	50,  // 465: nem.Nem.CreateChangeRequest:input_type -> nem.CreateChangeRequestRequest
+	51,  // 466: nem.Nem.UpdateChangeRequest:input_type -> nem.UpdateChangeRequestRequest
+	52,  // 467: nem.Nem.ListUserConnection:input_type -> nem.ListUserConnectionRequest
+	54,  // 468: nem.Nem.CreateUserConnection:input_type -> nem.CreateUserConnectionRequest
+	55,  // 469: nem.Nem.UpdateUserConnection:input_type -> nem.UpdateUserConnectionRequest
+	56,  // 470: nem.Nem.ListUserTeam:input_type -> nem.ListUserTeamRequest
+	58,  // 471: nem.Nem.CreateUserTeam:input_type -> nem.CreateUserTeamRequest
+	59,  // 472: nem.Nem.UpdateUserTeam:input_type -> nem.UpdateUserTeamRequest
+	60,  // 473: nem.Nem.ListArrayTypeConfig:input_type -> nem.ListArrayTypeConfigRequest
+	62,  // 474: nem.Nem.CreateArrayTypeConfig:input_type -> nem.CreateArrayTypeConfigRequest
+	63,  // 475: nem.Nem.UpdateArrayTypeConfig:input_type -> nem.UpdateArrayTypeConfigRequest
+	64,  // 476: nem.Nem.ListChangeRequestDataChange:input_type -> nem.ListChangeRequestDataChangeRequest
+	66,  // 477: nem.Nem.CreateChangeRequestDataChange:input_type -> nem.CreateChangeRequestDataChangeRequest
+	67,  // 478: nem.Nem.UpdateChangeRequestDataChange:input_type -> nem.UpdateChangeRequestDataChangeRequest
+	68,  // 479: nem.Nem.ListChangeRequestMetadata:input_type -> nem.ListChangeRequestMetadataRequest
+	70,  // 480: nem.Nem.CreateChangeRequestMetadata:input_type -> nem.CreateChangeRequestMetadataRequest
+	71,  // 481: nem.Nem.UpdateChangeRequestMetadata:input_type -> nem.UpdateChangeRequestMetadataRequest
+	72,  // 482: nem.Nem.ListChangeRequestMetadataData:input_type -> nem.ListChangeRequestMetadataDataRequest
+	74,  // 483: nem.Nem.CreateChangeRequestMetadataData:input_type -> nem.CreateChangeRequestMetadataDataRequest
+	75,  // 484: nem.Nem.UpdateChangeRequestMetadataData:input_type -> nem.UpdateChangeRequestMetadataDataRequest
+	76,  // 485: nem.Nem.ListChangeRequestReview:input_type -> nem.ListChangeRequestReviewRequest
+	78,  // 486: nem.Nem.CreateChangeRequestReview:input_type -> nem.CreateChangeRequestReviewRequest
+	79,  // 487: nem.Nem.UpdateChangeRequestReview:input_type -> nem.UpdateChangeRequestReviewRequest
+	80,  // 488: nem.Nem.ListChangeRequestScopeConfig:input_type -> nem.ListChangeRequestScopeConfigRequest
+	82,  // 489: nem.Nem.CreateChangeRequestScopeConfig:input_type -> nem.CreateChangeRequestScopeConfigRequest
+	83,  // 490: nem.Nem.UpdateChangeRequestScopeConfig:input_type -> nem.UpdateChangeRequestScopeConfigRequest
+	84,  // 491: nem.Nem.ListConnection:input_type -> nem.ListConnectionRequest
+	86,  // 492: nem.Nem.CreateConnection:input_type -> nem.CreateConnectionRequest
+	87,  // 493: nem.Nem.UpdateConnection:input_type -> nem.UpdateConnectionRequest
+	88,  // 494: nem.Nem.ListConnectionTypeConfig:input_type -> nem.ListConnectionTypeConfigRequest
+	90,  // 495: nem.Nem.CreateConnectionTypeConfig:input_type -> nem.CreateConnectionTypeConfigRequest
+	91,  // 496: nem.Nem.UpdateConnectionTypeConfig:input_type -> nem.UpdateConnectionTypeConfigRequest
+	92,  // 497: nem.Nem.ListDataChangeFieldValue:input_type -> nem.ListDataChangeFieldValueRequest
+	94,  // 498: nem.Nem.CreateDataChangeFieldValue:input_type -> nem.CreateDataChangeFieldValueRequest
+	95,  // 499: nem.Nem.UpdateDataChangeFieldValue:input_type -> nem.UpdateDataChangeFieldValueRequest
+	96,  // 500: nem.Nem.ListDataChangeTypeConfig:input_type -> nem.ListDataChangeTypeConfigRequest
+	98,  // 501: nem.Nem.CreateDataChangeTypeConfig:input_type -> nem.CreateDataChangeTypeConfigRequest
+	99,  // 502: nem.Nem.UpdateDataChangeTypeConfig:input_type -> nem.UpdateDataChangeTypeConfigRequest
+	100, // 503: nem.Nem.ListDataChangeTypeConfigCreate:input_type -> nem.ListDataChangeTypeConfigCreateRequest
+	102, // 504: nem.Nem.CreateDataChangeTypeConfigCreate:input_type -> nem.CreateDataChangeTypeConfigCreateRequest
+	103, // 505: nem.Nem.UpdateDataChangeTypeConfigCreate:input_type -> nem.UpdateDataChangeTypeConfigCreateRequest
+	104, // 506: nem.Nem.ListDataChangeTypeConfigDelete:input_type -> nem.ListDataChangeTypeConfigDeleteRequest
+	106, // 507: nem.Nem.CreateDataChangeTypeConfigDelete:input_type -> nem.CreateDataChangeTypeConfigDeleteRequest
+	107, // 508: nem.Nem.UpdateDataChangeTypeConfigDelete:input_type -> nem.UpdateDataChangeTypeConfigDeleteRequest
+	108, // 509: nem.Nem.ListDataChangeTypeConfigUpdate:input_type -> nem.ListDataChangeTypeConfigUpdateRequest
+	110, // 510: nem.Nem.CreateDataChangeTypeConfigUpdate:input_type -> nem.CreateDataChangeTypeConfigUpdateRequest
+	111, // 511: nem.Nem.UpdateDataChangeTypeConfigUpdate:input_type -> nem.UpdateDataChangeTypeConfigUpdateRequest
+	112, // 512: nem.Nem.ListDataChangeTypeConfigUpdateField:input_type -> nem.ListDataChangeTypeConfigUpdateFieldRequest
+	114, // 513: nem.Nem.CreateDataChangeTypeConfigUpdateField:input_type -> nem.CreateDataChangeTypeConfigUpdateFieldRequest
+	115, // 514: nem.Nem.UpdateDataChangeTypeConfigUpdateField:input_type -> nem.UpdateDataChangeTypeConfigUpdateFieldRequest
+	116, // 515: nem.Nem.ListDbTypeConfig:input_type -> nem.ListDbTypeConfigRequest
+	118, // 516: nem.Nem.CreateDbTypeConfig:input_type -> nem.CreateDbTypeConfigRequest
+	119, // 517: nem.Nem.UpdateDbTypeConfig:input_type -> nem.UpdateDbTypeConfigRequest
+	120, // 518: nem.Nem.ListDbTypeMysqlConfig:input_type -> nem.ListDbTypeMysqlConfigRequest
+	122, // 519: nem.Nem.CreateDbTypeMysqlConfig:input_type -> nem.CreateDbTypeMysqlConfigRequest
+	123, // 520: nem.Nem.UpdateDbTypeMysqlConfig:input_type -> nem.UpdateDbTypeMysqlConfigRequest
+	124, // 521: nem.Nem.ListDbTypePostgresConfig:input_type -> nem.ListDbTypePostgresConfigRequest
+	126, // 522: nem.Nem.CreateDbTypePostgresConfig:input_type -> nem.CreateDbTypePostgresConfigRequest
+	127, // 523: nem.Nem.UpdateDbTypePostgresConfig:input_type -> nem.UpdateDbTypePostgresConfigRequest
+	128, // 524: nem.Nem.ListElementRender:input_type -> nem.ListElementRenderRequest
+	130, // 525: nem.Nem.CreateElementRender:input_type -> nem.CreateElementRenderRequest
+	131, // 526: nem.Nem.UpdateElementRender:input_type -> nem.UpdateElementRenderRequest
+	132, // 527: nem.Nem.ListEntity:input_type -> nem.ListEntityRequest
+	134, // 528: nem.Nem.CreateEntity:input_type -> nem.CreateEntityRequest
+	135, // 529: nem.Nem.UpdateEntity:input_type -> nem.UpdateEntityRequest
+	136, // 530: nem.Nem.ListEntityDataManagementConfig:input_type -> nem.ListEntityDataManagementConfigRequest
+	138, // 531: nem.Nem.CreateEntityDataManagementConfig:input_type -> nem.CreateEntityDataManagementConfigRequest
+	139, // 532: nem.Nem.UpdateEntityDataManagementConfig:input_type -> nem.UpdateEntityDataManagementConfigRequest
+	140, // 533: nem.Nem.ListEntityTypeConfig:input_type -> nem.ListEntityTypeConfigRequest
+	142, // 534: nem.Nem.CreateEntityTypeConfig:input_type -> nem.CreateEntityTypeConfigRequest
+	143, // 535: nem.Nem.UpdateEntityTypeConfig:input_type -> nem.UpdateEntityTypeConfigRequest
+	144, // 536: nem.Nem.ListEntityTypeDependentConfig:input_type -> nem.ListEntityTypeDependentConfigRequest
+	146, // 537: nem.Nem.CreateEntityTypeDependentConfig:input_type -> nem.CreateEntityTypeDependentConfigRequest
+	147, // 538: nem.Nem.UpdateEntityTypeDependentConfig:input_type -> nem.UpdateEntityTypeDependentConfigRequest
+	148, // 539: nem.Nem.ListEntityTypeStandaloneConfig:input_type -> nem.ListEntityTypeStandaloneConfigRequest
+	150, // 540: nem.Nem.CreateEntityTypeStandaloneConfig:input_type -> nem.CreateEntityTypeStandaloneConfigRequest
+	151, // 541: nem.Nem.UpdateEntityTypeStandaloneConfig:input_type -> nem.UpdateEntityTypeStandaloneConfigRequest
+	152, // 542: nem.Nem.ListEntityVersionConfig:input_type -> nem.ListEntityVersionConfigRequest
+	154, // 543: nem.Nem.CreateEntityVersionConfig:input_type -> nem.CreateEntityVersionConfigRequest
+	155, // 544: nem.Nem.UpdateEntityVersionConfig:input_type -> nem.UpdateEntityVersionConfigRequest
+	156, // 545: nem.Nem.ListEntityVersionTypeConfig:input_type -> nem.ListEntityVersionTypeConfigRequest
+	158, // 546: nem.Nem.CreateEntityVersionTypeConfig:input_type -> nem.CreateEntityVersionTypeConfigRequest
+	159, // 547: nem.Nem.UpdateEntityVersionTypeConfig:input_type -> nem.UpdateEntityVersionTypeConfigRequest
+	160, // 548: nem.Nem.ListEntityVersionTypeEntityConfig:input_type -> nem.ListEntityVersionTypeEntityConfigRequest
+	162, // 549: nem.Nem.CreateEntityVersionTypeEntityConfig:input_type -> nem.CreateEntityVersionTypeEntityConfigRequest
+	163, // 550: nem.Nem.UpdateEntityVersionTypeEntityConfig:input_type -> nem.UpdateEntityVersionTypeEntityConfigRequest
+	164, // 551: nem.Nem.ListEntityVersionTypeFieldConfig:input_type -> nem.ListEntityVersionTypeFieldConfigRequest
+	166, // 552: nem.Nem.CreateEntityVersionTypeFieldConfig:input_type -> nem.CreateEntityVersionTypeFieldConfigRequest
+	167, // 553: nem.Nem.UpdateEntityVersionTypeFieldConfig:input_type -> nem.UpdateEntityVersionTypeFieldConfigRequest
+	168, // 554: nem.Nem.ListEnum:input_type -> nem.ListEnumRequest
+	170, // 555: nem.Nem.CreateEnum:input_type -> nem.CreateEnumRequest
+	171, // 556: nem.Nem.UpdateEnum:input_type -> nem.UpdateEnumRequest
+	172, // 557: nem.Nem.ListEnumValue:input_type -> nem.ListEnumValueRequest
+	174, // 558: nem.Nem.CreateEnumValue:input_type -> nem.CreateEnumValueRequest
+	175, // 559: nem.Nem.UpdateEnumValue:input_type -> nem.UpdateEnumValueRequest
+	176, // 560: nem.Nem.ListEnviorment:input_type -> nem.ListEnviormentRequest
+	178, // 561: nem.Nem.CreateEnviorment:input_type -> nem.CreateEnviormentRequest
+	179, // 562: nem.Nem.UpdateEnviorment:input_type -> nem.UpdateEnviormentRequest
+	180, // 563: nem.Nem.ListField:input_type -> nem.ListFieldRequest
+	182, // 564: nem.Nem.CreateField:input_type -> nem.CreateFieldRequest
+	183, // 565: nem.Nem.UpdateField:input_type -> nem.UpdateFieldRequest
+	184, // 566: nem.Nem.ListFieldTypeArrayConfig:input_type -> nem.ListFieldTypeArrayConfigRequest
+	186, // 567: nem.Nem.CreateFieldTypeArrayConfig:input_type -> nem.CreateFieldTypeArrayConfigRequest
+	187, // 568: nem.Nem.UpdateFieldTypeArrayConfig:input_type -> nem.UpdateFieldTypeArrayConfigRequest
+	188, // 569: nem.Nem.ListFieldTypeCharConfig:input_type -> nem.ListFieldTypeCharConfigRequest
+	190, // 570: nem.Nem.CreateFieldTypeCharConfig:input_type -> nem.CreateFieldTypeCharConfigRequest
+	191, // 571: nem.Nem.UpdateFieldTypeCharConfig:input_type -> nem.UpdateFieldTypeCharConfigRequest
+	192, // 572: nem.Nem.ListFieldTypeConfig:input_type -> nem.ListFieldTypeConfigRequest
+	194, // 573: nem.Nem.CreateFieldTypeConfig:input_type -> nem.CreateFieldTypeConfigRequest
+	195, // 574: nem.Nem.UpdateFieldTypeConfig:input_type -> nem.UpdateFieldTypeConfigRequest
+	196, // 575: nem.Nem.ListFieldTypeDateConfig:input_type -> nem.ListFieldTypeDateConfigRequest
+	198, // 576: nem.Nem.CreateFieldTypeDateConfig:input_type -> nem.CreateFieldTypeDateConfigRequest
+	199, // 577: nem.Nem.UpdateFieldTypeDateConfig:input_type -> nem.UpdateFieldTypeDateConfigRequest
+	200, // 578: nem.Nem.ListFieldTypeDatetimeConfig:input_type -> nem.ListFieldTypeDatetimeConfigRequest
+	202, // 579: nem.Nem.CreateFieldTypeDatetimeConfig:input_type -> nem.CreateFieldTypeDatetimeConfigRequest
+	203, // 580: nem.Nem.UpdateFieldTypeDatetimeConfig:input_type -> nem.UpdateFieldTypeDatetimeConfigRequest
+	204, // 581: nem.Nem.ListFieldTypeDecimalConfig:input_type -> nem.ListFieldTypeDecimalConfigRequest
+	206, // 582: nem.Nem.CreateFieldTypeDecimalConfig:input_type -> nem.CreateFieldTypeDecimalConfigRequest
+	207, // 583: nem.Nem.UpdateFieldTypeDecimalConfig:input_type -> nem.UpdateFieldTypeDecimalConfigRequest
+	208, // 584: nem.Nem.ListFieldTypeEmailConfig:input_type -> nem.ListFieldTypeEmailConfigRequest
+	210, // 585: nem.Nem.CreateFieldTypeEmailConfig:input_type -> nem.CreateFieldTypeEmailConfigRequest
+	211, // 586: nem.Nem.UpdateFieldTypeEmailConfig:input_type -> nem.UpdateFieldTypeEmailConfigRequest
+	212, // 587: nem.Nem.ListFieldTypeEncryptedConfig:input_type -> nem.ListFieldTypeEncryptedConfigRequest
+	214, // 588: nem.Nem.CreateFieldTypeEncryptedConfig:input_type -> nem.CreateFieldTypeEncryptedConfigRequest
+	215, // 589: nem.Nem.UpdateFieldTypeEncryptedConfig:input_type -> nem.UpdateFieldTypeEncryptedConfigRequest
+	216, // 590: nem.Nem.ListFieldTypeEnumConfig:input_type -> nem.ListFieldTypeEnumConfigRequest
+	218, // 591: nem.Nem.CreateFieldTypeEnumConfig:input_type -> nem.CreateFieldTypeEnumConfigRequest
+	219, // 592: nem.Nem.UpdateFieldTypeEnumConfig:input_type -> nem.UpdateFieldTypeEnumConfigRequest
+	220, // 593: nem.Nem.ListFieldTypeFileConfig:input_type -> nem.ListFieldTypeFileConfigRequest
+	222, // 594: nem.Nem.CreateFieldTypeFileConfig:input_type -> nem.CreateFieldTypeFileConfigRequest
+	223, // 595: nem.Nem.UpdateFieldTypeFileConfig:input_type -> nem.UpdateFieldTypeFileConfigRequest
+	224, // 596: nem.Nem.ListFieldTypeFloatConfig:input_type -> nem.ListFieldTypeFloatConfigRequest
+	226, // 597: nem.Nem.CreateFieldTypeFloatConfig:input_type -> nem.CreateFieldTypeFloatConfigRequest
+	227, // 598: nem.Nem.UpdateFieldTypeFloatConfig:input_type -> nem.UpdateFieldTypeFloatConfigRequest
+	228, // 599: nem.Nem.ListFieldTypeIntegerConfig:input_type -> nem.ListFieldTypeIntegerConfigRequest
+	230, // 600: nem.Nem.CreateFieldTypeIntegerConfig:input_type -> nem.CreateFieldTypeIntegerConfigRequest
+	231, // 601: nem.Nem.UpdateFieldTypeIntegerConfig:input_type -> nem.UpdateFieldTypeIntegerConfigRequest
+	232, // 602: nem.Nem.ListFieldTypeJSONConfig:input_type -> nem.ListFieldTypeJSONConfigRequest
+	234, // 603: nem.Nem.CreateFieldTypeJSONConfig:input_type -> nem.CreateFieldTypeJSONConfigRequest
+	235, // 604: nem.Nem.UpdateFieldTypeJSONConfig:input_type -> nem.UpdateFieldTypeJSONConfigRequest
+	236, // 605: nem.Nem.ListFieldTypePhoneConfig:input_type -> nem.ListFieldTypePhoneConfigRequest
+	238, // 606: nem.Nem.CreateFieldTypePhoneConfig:input_type -> nem.CreateFieldTypePhoneConfigRequest
+	239, // 607: nem.Nem.UpdateFieldTypePhoneConfig:input_type -> nem.UpdateFieldTypePhoneConfigRequest
+	240, // 608: nem.Nem.ListFieldTypeSlugConfig:input_type -> nem.ListFieldTypeSlugConfigRequest
+	242, // 609: nem.Nem.CreateFieldTypeSlugConfig:input_type -> nem.CreateFieldTypeSlugConfigRequest
+	243, // 610: nem.Nem.UpdateFieldTypeSlugConfig:input_type -> nem.UpdateFieldTypeSlugConfigRequest
+	244, // 611: nem.Nem.ListFieldTypeTextConfig:input_type -> nem.ListFieldTypeTextConfigRequest
+	246, // 612: nem.Nem.CreateFieldTypeTextConfig:input_type -> nem.CreateFieldTypeTextConfigRequest
+	247, // 613: nem.Nem.UpdateFieldTypeTextConfig:input_type -> nem.UpdateFieldTypeTextConfigRequest
+	248, // 614: nem.Nem.ListFieldTypeURLConfig:input_type -> nem.ListFieldTypeURLConfigRequest
+	250, // 615: nem.Nem.CreateFieldTypeURLConfig:input_type -> nem.CreateFieldTypeURLConfigRequest
+	251, // 616: nem.Nem.UpdateFieldTypeURLConfig:input_type -> nem.UpdateFieldTypeURLConfigRequest
+	252, // 617: nem.Nem.ListFieldTypeVarcharConfig:input_type -> nem.ListFieldTypeVarcharConfigRequest
+	254, // 618: nem.Nem.CreateFieldTypeVarcharConfig:input_type -> nem.CreateFieldTypeVarcharConfigRequest
+	255, // 619: nem.Nem.UpdateFieldTypeVarcharConfig:input_type -> nem.UpdateFieldTypeVarcharConfigRequest
+	256, // 620: nem.Nem.ListFileObjectStorageConfig:input_type -> nem.ListFileObjectStorageConfigRequest
+	258, // 621: nem.Nem.CreateFileObjectStorageConfig:input_type -> nem.CreateFileObjectStorageConfigRequest
+	259, // 622: nem.Nem.UpdateFileObjectStorageConfig:input_type -> nem.UpdateFileObjectStorageConfigRequest
+	260, // 623: nem.Nem.ListFileStorageConfig:input_type -> nem.ListFileStorageConfigRequest
+	262, // 624: nem.Nem.CreateFileStorageConfig:input_type -> nem.CreateFileStorageConfigRequest
+	263, // 625: nem.Nem.UpdateFileStorageConfig:input_type -> nem.UpdateFileStorageConfigRequest
+	264, // 626: nem.Nem.ListIndex:input_type -> nem.ListIndexRequest
+	266, // 627: nem.Nem.CreateIndex:input_type -> nem.CreateIndexRequest
+	267, // 628: nem.Nem.UpdateIndex:input_type -> nem.UpdateIndexRequest
+	268, // 629: nem.Nem.ListIndexField:input_type -> nem.ListIndexFieldRequest
+	270, // 630: nem.Nem.CreateIndexField:input_type -> nem.CreateIndexFieldRequest
+	271, // 631: nem.Nem.UpdateIndexField:input_type -> nem.UpdateIndexFieldRequest
+	272, // 632: nem.Nem.ListLocalAgentConnection:input_type -> nem.ListLocalAgentConnectionRequest
+	274, // 633: nem.Nem.CreateLocalAgentConnection:input_type -> nem.CreateLocalAgentConnectionRequest
+	275, // 634: nem.Nem.UpdateLocalAgentConnection:input_type -> nem.UpdateLocalAgentConnectionRequest
+	276, // 635: nem.Nem.ListObjectStore:input_type -> nem.ListObjectStoreRequest
+	278, // 636: nem.Nem.CreateObjectStore:input_type -> nem.CreateObjectStoreRequest
+	279, // 637: nem.Nem.UpdateObjectStore:input_type -> nem.UpdateObjectStoreRequest
+	280, // 638: nem.Nem.ListObjectStoreS3TypeConfig:input_type -> nem.ListObjectStoreS3TypeConfigRequest
+	282, // 639: nem.Nem.CreateObjectStoreS3TypeConfig:input_type -> nem.CreateObjectStoreS3TypeConfigRequest
+	283, // 640: nem.Nem.UpdateObjectStoreS3TypeConfig:input_type -> nem.UpdateObjectStoreS3TypeConfigRequest
+	284, // 641: nem.Nem.ListObjectStoreTypeConfig:input_type -> nem.ListObjectStoreTypeConfigRequest
+	286, // 642: nem.Nem.CreateObjectStoreTypeConfig:input_type -> nem.CreateObjectStoreTypeConfigRequest
+	287, // 643: nem.Nem.UpdateObjectStoreTypeConfig:input_type -> nem.UpdateObjectStoreTypeConfigRequest
+	288, // 644: nem.Nem.ListProjectExtension:input_type -> nem.ListProjectExtensionRequest
+	290, // 645: nem.Nem.CreateProjectExtension:input_type -> nem.CreateProjectExtensionRequest
+	291, // 646: nem.Nem.UpdateProjectExtension:input_type -> nem.UpdateProjectExtensionRequest
+	292, // 647: nem.Nem.ListProjectVersionDeployment:input_type -> nem.ListProjectVersionDeploymentRequest
+	294, // 648: nem.Nem.CreateProjectVersionDeployment:input_type -> nem.CreateProjectVersionDeploymentRequest
+	295, // 649: nem.Nem.UpdateProjectVersionDeployment:input_type -> nem.UpdateProjectVersionDeploymentRequest
+	296, // 650: nem.Nem.ListRelationship:input_type -> nem.ListRelationshipRequest
+	298, // 651: nem.Nem.CreateRelationship:input_type -> nem.CreateRelationshipRequest
+	299, // 652: nem.Nem.UpdateRelationship:input_type -> nem.UpdateRelationshipRequest
+	300, // 653: nem.Nem.ListRelationshipNode:input_type -> nem.ListRelationshipNodeRequest
+	302, // 654: nem.Nem.CreateRelationshipNode:input_type -> nem.CreateRelationshipNodeRequest
+	303, // 655: nem.Nem.UpdateRelationshipNode:input_type -> nem.UpdateRelationshipNodeRequest
+	304, // 656: nem.Nem.ListRelationshipNodeTypeConfig:input_type -> nem.ListRelationshipNodeTypeConfigRequest
+	306, // 657: nem.Nem.CreateRelationshipNodeTypeConfig:input_type -> nem.CreateRelationshipNodeTypeConfigRequest
+	307, // 658: nem.Nem.UpdateRelationshipNodeTypeConfig:input_type -> nem.UpdateRelationshipNodeTypeConfigRequest
+	308, // 659: nem.Nem.ListRelationshipNodeTypeEntityConfig:input_type -> nem.ListRelationshipNodeTypeEntityConfigRequest
+	310, // 660: nem.Nem.CreateRelationshipNodeTypeEntityConfig:input_type -> nem.CreateRelationshipNodeTypeEntityConfigRequest
+	311, // 661: nem.Nem.UpdateRelationshipNodeTypeEntityConfig:input_type -> nem.UpdateRelationshipNodeTypeEntityConfigRequest
+	312, // 662: nem.Nem.ListRelationshipNodeTypeServiceConfig:input_type -> nem.ListRelationshipNodeTypeServiceConfigRequest
+	314, // 663: nem.Nem.CreateRelationshipNodeTypeServiceConfig:input_type -> nem.CreateRelationshipNodeTypeServiceConfigRequest
+	315, // 664: nem.Nem.UpdateRelationshipNodeTypeServiceConfig:input_type -> nem.UpdateRelationshipNodeTypeServiceConfigRequest
+	316, // 665: nem.Nem.ListReviewConfig:input_type -> nem.ListReviewConfigRequest
+	318, // 666: nem.Nem.CreateReviewConfig:input_type -> nem.CreateReviewConfigRequest
+	319, // 667: nem.Nem.UpdateReviewConfig:input_type -> nem.UpdateReviewConfigRequest
+	320, // 668: nem.Nem.ListService:input_type -> nem.ListServiceRequest
+	322, // 669: nem.Nem.CreateService:input_type -> nem.CreateServiceRequest
+	323, // 670: nem.Nem.UpdateService:input_type -> nem.UpdateServiceRequest
+	324, // 671: nem.Nem.ListStore:input_type -> nem.ListStoreRequest
+	326, // 672: nem.Nem.CreateStore:input_type -> nem.CreateStoreRequest
+	327, // 673: nem.Nem.UpdateStore:input_type -> nem.UpdateStoreRequest
+	328, // 674: nem.Nem.ListTcpIpConnectionTypeConfig:input_type -> nem.ListTcpIpConnectionTypeConfigRequest
+	330, // 675: nem.Nem.CreateTcpIpConnectionTypeConfig:input_type -> nem.CreateTcpIpConnectionTypeConfigRequest
+	331, // 676: nem.Nem.UpdateTcpIpConnectionTypeConfig:input_type -> nem.UpdateTcpIpConnectionTypeConfigRequest
+	332, // 677: nem.Nem.ListTcpIpSshConnectionTypeConfig:input_type -> nem.ListTcpIpSshConnectionTypeConfigRequest
+	334, // 678: nem.Nem.CreateTcpIpSshConnectionTypeConfig:input_type -> nem.CreateTcpIpSshConnectionTypeConfigRequest
+	335, // 679: nem.Nem.UpdateTcpIpSshConnectionTypeConfig:input_type -> nem.UpdateTcpIpSshConnectionTypeConfigRequest
+	336, // 680: nem.Nem.ListUserConnectionExecution:input_type -> nem.ListUserConnectionExecutionRequest
+	338, // 681: nem.Nem.CreateUserConnectionExecution:input_type -> nem.CreateUserConnectionExecutionRequest
+	339, // 682: nem.Nem.UpdateUserConnectionExecution:input_type -> nem.UpdateUserConnectionExecutionRequest
+	340, // 683: nem.Nem.ListUserConnectionLocalConfig:input_type -> nem.ListUserConnectionLocalConfigRequest
+	342, // 684: nem.Nem.CreateUserConnectionLocalConfig:input_type -> nem.CreateUserConnectionLocalConfigRequest
+	343, // 685: nem.Nem.UpdateUserConnectionLocalConfig:input_type -> nem.UpdateUserConnectionLocalConfigRequest
+	344, // 686: nem.Nem.ListUserConnectionRemoteConfig:input_type -> nem.ListUserConnectionRemoteConfigRequest
+	346, // 687: nem.Nem.CreateUserConnectionRemoteConfig:input_type -> nem.CreateUserConnectionRemoteConfigRequest
+	347, // 688: nem.Nem.UpdateUserConnectionRemoteConfig:input_type -> nem.UpdateUserConnectionRemoteConfigRequest
+	348, // 689: nem.Nem.ListUserConnectionTypeConfig:input_type -> nem.ListUserConnectionTypeConfigRequest
+	350, // 690: nem.Nem.CreateUserConnectionTypeConfig:input_type -> nem.CreateUserConnectionTypeConfigRequest
+	351, // 691: nem.Nem.UpdateUserConnectionTypeConfig:input_type -> nem.UpdateUserConnectionTypeConfigRequest
+	352, // 692: nem.Nem.ListVisibility:input_type -> nem.ListVisibilityRequest
+	354, // 693: nem.Nem.CreateVisibility:input_type -> nem.CreateVisibilityRequest
+	355, // 694: nem.Nem.UpdateVisibility:input_type -> nem.UpdateVisibilityRequest
+	356, // 695: nem.Nem.ListChangeRequestScopeConfigLocal:input_type -> nem.ListChangeRequestScopeConfigLocalRequest
+	358, // 696: nem.Nem.CreateChangeRequestScopeConfigLocal:input_type -> nem.CreateChangeRequestScopeConfigLocalRequest
+	359, // 697: nem.Nem.UpdateChangeRequestScopeConfigLocal:input_type -> nem.UpdateChangeRequestScopeConfigLocalRequest
+	360, // 698: nem.Nem.ListChangeRequestScopeConfigRemote:input_type -> nem.ListChangeRequestScopeConfigRemoteRequest
+	362, // 699: nem.Nem.CreateChangeRequestScopeConfigRemote:input_type -> nem.CreateChangeRequestScopeConfigRemoteRequest
+	363, // 700: nem.Nem.UpdateChangeRequestScopeConfigRemote:input_type -> nem.UpdateChangeRequestScopeConfigRemoteRequest
+	364, // 701: nem.Nem.ListAutomation:input_type -> nem.ListAutomationRequest
+	366, // 702: nem.Nem.CreateAutomation:input_type -> nem.CreateAutomationRequest
+	367, // 703: nem.Nem.UpdateAutomation:input_type -> nem.UpdateAutomationRequest
+	368, // 704: nem.Nem.ListAutomationEvent:input_type -> nem.ListAutomationEventRequest
+	370, // 705: nem.Nem.CreateAutomationEvent:input_type -> nem.CreateAutomationEventRequest
+	371, // 706: nem.Nem.UpdateAutomationEvent:input_type -> nem.UpdateAutomationEventRequest
+	372, // 707: nem.Nem.ListDeployment:input_type -> nem.ListDeploymentRequest
+	374, // 708: nem.Nem.CreateDeployment:input_type -> nem.CreateDeploymentRequest
+	375, // 709: nem.Nem.UpdateDeployment:input_type -> nem.UpdateDeploymentRequest
+	376, // 710: nem.Nem.ListDeploymentProvider:input_type -> nem.ListDeploymentProviderRequest
+	378, // 711: nem.Nem.CreateDeploymentProvider:input_type -> nem.CreateDeploymentProviderRequest
+	379, // 712: nem.Nem.UpdateDeploymentProvider:input_type -> nem.UpdateDeploymentProviderRequest
+	380, // 713: nem.Nem.ListDeploymentServer:input_type -> nem.ListDeploymentServerRequest
+	382, // 714: nem.Nem.CreateDeploymentServer:input_type -> nem.CreateDeploymentServerRequest
+	383, // 715: nem.Nem.UpdateDeploymentServer:input_type -> nem.UpdateDeploymentServerRequest
+	384, // 716: nem.Nem.ListDeploymentDatabase:input_type -> nem.ListDeploymentDatabaseRequest
+	386, // 717: nem.Nem.CreateDeploymentDatabase:input_type -> nem.CreateDeploymentDatabaseRequest
+	387, // 718: nem.Nem.UpdateDeploymentDatabase:input_type -> nem.UpdateDeploymentDatabaseRequest
+	388, // 719: nem.Nem.ListDeploymentCodegen:input_type -> nem.ListDeploymentCodegenRequest
+	390, // 720: nem.Nem.CreateDeploymentCodegen:input_type -> nem.CreateDeploymentCodegenRequest
+	391, // 721: nem.Nem.UpdateDeploymentCodegen:input_type -> nem.UpdateDeploymentCodegenRequest
+	392, // 722: nem.Nem.ListDeploymentRevision:input_type -> nem.ListDeploymentRevisionRequest
+	394, // 723: nem.Nem.CreateDeploymentRevision:input_type -> nem.CreateDeploymentRevisionRequest
+	395, // 724: nem.Nem.UpdateDeploymentRevision:input_type -> nem.UpdateDeploymentRevisionRequest
+	396, // 725: nem.Nem.ListFieldPiiConfig:input_type -> nem.ListFieldPiiConfigRequest
+	398, // 726: nem.Nem.CreateFieldPiiConfig:input_type -> nem.CreateFieldPiiConfigRequest
+	399, // 727: nem.Nem.UpdateFieldPiiConfig:input_type -> nem.UpdateFieldPiiConfigRequest
+	400, // 728: nem.Nem.ListObjectStoreR2TypeConfig:input_type -> nem.ListObjectStoreR2TypeConfigRequest
+	402, // 729: nem.Nem.CreateObjectStoreR2TypeConfig:input_type -> nem.CreateObjectStoreR2TypeConfigRequest
+	403, // 730: nem.Nem.UpdateObjectStoreR2TypeConfig:input_type -> nem.UpdateObjectStoreR2TypeConfigRequest
+	404, // 731: nem.Nem.ListDataChangeBeforeImageValue:input_type -> nem.ListDataChangeBeforeImageValueRequest
+	406, // 732: nem.Nem.CreateDataChangeBeforeImageValue:input_type -> nem.CreateDataChangeBeforeImageValueRequest
+	407, // 733: nem.Nem.UpdateDataChangeBeforeImageValue:input_type -> nem.UpdateDataChangeBeforeImageValueRequest
+	408, // 734: nem.Nem.ListDataChangeBeforeImage:input_type -> nem.ListDataChangeBeforeImageRequest
+	410, // 735: nem.Nem.CreateDataChangeBeforeImage:input_type -> nem.CreateDataChangeBeforeImageRequest
+	411, // 736: nem.Nem.UpdateDataChangeBeforeImage:input_type -> nem.UpdateDataChangeBeforeImageRequest
+	412, // 737: nem.Nem.ListCodebase:input_type -> nem.ListCodebaseRequest
+	414, // 738: nem.Nem.CreateCodebase:input_type -> nem.CreateCodebaseRequest
+	415, // 739: nem.Nem.UpdateCodebase:input_type -> nem.UpdateCodebaseRequest
+	416, // 740: nem.Nem.ListCodeSnapshot:input_type -> nem.ListCodeSnapshotRequest
+	418, // 741: nem.Nem.CreateCodeSnapshot:input_type -> nem.CreateCodeSnapshotRequest
+	419, // 742: nem.Nem.UpdateCodeSnapshot:input_type -> nem.UpdateCodeSnapshotRequest
+	420, // 743: nem.Nem.ListCodeModelComponent:input_type -> nem.ListCodeModelComponentRequest
+	422, // 744: nem.Nem.CreateCodeModelComponent:input_type -> nem.CreateCodeModelComponentRequest
+	423, // 745: nem.Nem.UpdateCodeModelComponent:input_type -> nem.UpdateCodeModelComponentRequest
+	424, // 746: nem.Nem.ListCodeModel:input_type -> nem.ListCodeModelRequest
+	426, // 747: nem.Nem.CreateCodeModel:input_type -> nem.CreateCodeModelRequest
+	427, // 748: nem.Nem.UpdateCodeModel:input_type -> nem.UpdateCodeModelRequest
+	1,   // 749: nem.Nem.ListExtension:output_type -> nem.ListExtensionResponse
+	428, // 750: nem.Nem.CreateExtension:output_type -> nem.Extension
+	428, // 751: nem.Nem.UpdateExtension:output_type -> nem.Extension
+	5,   // 752: nem.Nem.ListExtensionVersion:output_type -> nem.ListExtensionVersionResponse
+	430, // 753: nem.Nem.CreateExtensionVersion:output_type -> nem.ExtensionVersion
+	430, // 754: nem.Nem.UpdateExtensionVersion:output_type -> nem.ExtensionVersion
+	9,   // 755: nem.Nem.ListUserProject:output_type -> nem.ListUserProjectResponse
+	431, // 756: nem.Nem.CreateUserProject:output_type -> nem.UserProject
+	431, // 757: nem.Nem.UpdateUserProject:output_type -> nem.UserProject
+	13,  // 758: nem.Nem.ListLocalAgent:output_type -> nem.ListLocalAgentResponse
+	432, // 759: nem.Nem.CreateLocalAgent:output_type -> nem.LocalAgent
+	432, // 760: nem.Nem.UpdateLocalAgent:output_type -> nem.LocalAgent
+	17,  // 761: nem.Nem.ListExtensionExecution:output_type -> nem.ListExtensionExecutionResponse
+	433, // 762: nem.Nem.CreateExtensionExecution:output_type -> nem.ExtensionExecution
+	433, // 763: nem.Nem.UpdateExtensionExecution:output_type -> nem.ExtensionExecution
+	21,  // 764: nem.Nem.ListProjectVersion:output_type -> nem.ListProjectVersionResponse
+	434, // 765: nem.Nem.CreateProjectVersion:output_type -> nem.ProjectVersion
+	434, // 766: nem.Nem.UpdateProjectVersion:output_type -> nem.ProjectVersion
+	25,  // 767: nem.Nem.ListUser:output_type -> nem.ListUserResponse
+	435, // 768: nem.Nem.CreateUser:output_type -> nem.User
+	435, // 769: nem.Nem.UpdateUser:output_type -> nem.User
+	29,  // 770: nem.Nem.ListUserProjectVersion:output_type -> nem.ListUserProjectVersionResponse
+	436, // 771: nem.Nem.CreateUserProjectVersion:output_type -> nem.UserProjectVersion
+	436, // 772: nem.Nem.UpdateUserProjectVersion:output_type -> nem.UserProjectVersion
+	33,  // 773: nem.Nem.ListProject:output_type -> nem.ListProjectResponse
+	437, // 774: nem.Nem.CreateProject:output_type -> nem.Project
+	437, // 775: nem.Nem.UpdateProject:output_type -> nem.Project
+	37,  // 776: nem.Nem.ListMembership:output_type -> nem.ListMembershipResponse
+	438, // 777: nem.Nem.CreateMembership:output_type -> nem.Membership
+	438, // 778: nem.Nem.UpdateMembership:output_type -> nem.Membership
+	41,  // 779: nem.Nem.ListTeam:output_type -> nem.ListTeamResponse
+	439, // 780: nem.Nem.CreateTeam:output_type -> nem.Team
+	439, // 781: nem.Nem.UpdateTeam:output_type -> nem.Team
+	45,  // 782: nem.Nem.ListAiUsage:output_type -> nem.ListAiUsageResponse
+	440, // 783: nem.Nem.CreateAiUsage:output_type -> nem.AiUsage
+	440, // 784: nem.Nem.UpdateAiUsage:output_type -> nem.AiUsage
+	49,  // 785: nem.Nem.ListChangeRequest:output_type -> nem.ListChangeRequestResponse
+	441, // 786: nem.Nem.CreateChangeRequest:output_type -> nem.ChangeRequest
+	441, // 787: nem.Nem.UpdateChangeRequest:output_type -> nem.ChangeRequest
+	53,  // 788: nem.Nem.ListUserConnection:output_type -> nem.ListUserConnectionResponse
+	442, // 789: nem.Nem.CreateUserConnection:output_type -> nem.UserConnection
+	442, // 790: nem.Nem.UpdateUserConnection:output_type -> nem.UserConnection
+	57,  // 791: nem.Nem.ListUserTeam:output_type -> nem.ListUserTeamResponse
+	443, // 792: nem.Nem.CreateUserTeam:output_type -> nem.UserTeam
+	443, // 793: nem.Nem.UpdateUserTeam:output_type -> nem.UserTeam
+	61,  // 794: nem.Nem.ListArrayTypeConfig:output_type -> nem.ListArrayTypeConfigResponse
+	444, // 795: nem.Nem.CreateArrayTypeConfig:output_type -> nem.ArrayTypeConfig
+	444, // 796: nem.Nem.UpdateArrayTypeConfig:output_type -> nem.ArrayTypeConfig
+	65,  // 797: nem.Nem.ListChangeRequestDataChange:output_type -> nem.ListChangeRequestDataChangeResponse
+	445, // 798: nem.Nem.CreateChangeRequestDataChange:output_type -> nem.ChangeRequestDataChange
+	445, // 799: nem.Nem.UpdateChangeRequestDataChange:output_type -> nem.ChangeRequestDataChange
+	69,  // 800: nem.Nem.ListChangeRequestMetadata:output_type -> nem.ListChangeRequestMetadataResponse
+	446, // 801: nem.Nem.CreateChangeRequestMetadata:output_type -> nem.ChangeRequestMetadata
+	446, // 802: nem.Nem.UpdateChangeRequestMetadata:output_type -> nem.ChangeRequestMetadata
+	73,  // 803: nem.Nem.ListChangeRequestMetadataData:output_type -> nem.ListChangeRequestMetadataDataResponse
+	447, // 804: nem.Nem.CreateChangeRequestMetadataData:output_type -> nem.ChangeRequestMetadataData
+	447, // 805: nem.Nem.UpdateChangeRequestMetadataData:output_type -> nem.ChangeRequestMetadataData
+	77,  // 806: nem.Nem.ListChangeRequestReview:output_type -> nem.ListChangeRequestReviewResponse
+	448, // 807: nem.Nem.CreateChangeRequestReview:output_type -> nem.ChangeRequestReview
+	448, // 808: nem.Nem.UpdateChangeRequestReview:output_type -> nem.ChangeRequestReview
+	81,  // 809: nem.Nem.ListChangeRequestScopeConfig:output_type -> nem.ListChangeRequestScopeConfigResponse
+	449, // 810: nem.Nem.CreateChangeRequestScopeConfig:output_type -> nem.ChangeRequestScopeConfig
+	449, // 811: nem.Nem.UpdateChangeRequestScopeConfig:output_type -> nem.ChangeRequestScopeConfig
+	85,  // 812: nem.Nem.ListConnection:output_type -> nem.ListConnectionResponse
+	450, // 813: nem.Nem.CreateConnection:output_type -> nem.Connection
+	450, // 814: nem.Nem.UpdateConnection:output_type -> nem.Connection
+	89,  // 815: nem.Nem.ListConnectionTypeConfig:output_type -> nem.ListConnectionTypeConfigResponse
+	451, // 816: nem.Nem.CreateConnectionTypeConfig:output_type -> nem.ConnectionTypeConfig
+	451, // 817: nem.Nem.UpdateConnectionTypeConfig:output_type -> nem.ConnectionTypeConfig
+	93,  // 818: nem.Nem.ListDataChangeFieldValue:output_type -> nem.ListDataChangeFieldValueResponse
+	452, // 819: nem.Nem.CreateDataChangeFieldValue:output_type -> nem.DataChangeFieldValue
+	452, // 820: nem.Nem.UpdateDataChangeFieldValue:output_type -> nem.DataChangeFieldValue
+	97,  // 821: nem.Nem.ListDataChangeTypeConfig:output_type -> nem.ListDataChangeTypeConfigResponse
+	453, // 822: nem.Nem.CreateDataChangeTypeConfig:output_type -> nem.DataChangeTypeConfig
+	453, // 823: nem.Nem.UpdateDataChangeTypeConfig:output_type -> nem.DataChangeTypeConfig
+	101, // 824: nem.Nem.ListDataChangeTypeConfigCreate:output_type -> nem.ListDataChangeTypeConfigCreateResponse
+	454, // 825: nem.Nem.CreateDataChangeTypeConfigCreate:output_type -> nem.DataChangeTypeConfigCreate
+	454, // 826: nem.Nem.UpdateDataChangeTypeConfigCreate:output_type -> nem.DataChangeTypeConfigCreate
+	105, // 827: nem.Nem.ListDataChangeTypeConfigDelete:output_type -> nem.ListDataChangeTypeConfigDeleteResponse
+	455, // 828: nem.Nem.CreateDataChangeTypeConfigDelete:output_type -> nem.DataChangeTypeConfigDelete
+	455, // 829: nem.Nem.UpdateDataChangeTypeConfigDelete:output_type -> nem.DataChangeTypeConfigDelete
+	109, // 830: nem.Nem.ListDataChangeTypeConfigUpdate:output_type -> nem.ListDataChangeTypeConfigUpdateResponse
+	456, // 831: nem.Nem.CreateDataChangeTypeConfigUpdate:output_type -> nem.DataChangeTypeConfigUpdate
+	456, // 832: nem.Nem.UpdateDataChangeTypeConfigUpdate:output_type -> nem.DataChangeTypeConfigUpdate
+	113, // 833: nem.Nem.ListDataChangeTypeConfigUpdateField:output_type -> nem.ListDataChangeTypeConfigUpdateFieldResponse
+	457, // 834: nem.Nem.CreateDataChangeTypeConfigUpdateField:output_type -> nem.DataChangeTypeConfigUpdateField
+	457, // 835: nem.Nem.UpdateDataChangeTypeConfigUpdateField:output_type -> nem.DataChangeTypeConfigUpdateField
+	117, // 836: nem.Nem.ListDbTypeConfig:output_type -> nem.ListDbTypeConfigResponse
+	458, // 837: nem.Nem.CreateDbTypeConfig:output_type -> nem.DbTypeConfig
+	458, // 838: nem.Nem.UpdateDbTypeConfig:output_type -> nem.DbTypeConfig
+	121, // 839: nem.Nem.ListDbTypeMysqlConfig:output_type -> nem.ListDbTypeMysqlConfigResponse
+	459, // 840: nem.Nem.CreateDbTypeMysqlConfig:output_type -> nem.DbTypeMysqlConfig
+	459, // 841: nem.Nem.UpdateDbTypeMysqlConfig:output_type -> nem.DbTypeMysqlConfig
+	125, // 842: nem.Nem.ListDbTypePostgresConfig:output_type -> nem.ListDbTypePostgresConfigResponse
+	460, // 843: nem.Nem.CreateDbTypePostgresConfig:output_type -> nem.DbTypePostgresConfig
+	460, // 844: nem.Nem.UpdateDbTypePostgresConfig:output_type -> nem.DbTypePostgresConfig
+	129, // 845: nem.Nem.ListElementRender:output_type -> nem.ListElementRenderResponse
+	461, // 846: nem.Nem.CreateElementRender:output_type -> nem.ElementRender
+	461, // 847: nem.Nem.UpdateElementRender:output_type -> nem.ElementRender
+	133, // 848: nem.Nem.ListEntity:output_type -> nem.ListEntityResponse
+	462, // 849: nem.Nem.CreateEntity:output_type -> nem.Entity
+	462, // 850: nem.Nem.UpdateEntity:output_type -> nem.Entity
+	137, // 851: nem.Nem.ListEntityDataManagementConfig:output_type -> nem.ListEntityDataManagementConfigResponse
+	463, // 852: nem.Nem.CreateEntityDataManagementConfig:output_type -> nem.EntityDataManagementConfig
+	463, // 853: nem.Nem.UpdateEntityDataManagementConfig:output_type -> nem.EntityDataManagementConfig
+	141, // 854: nem.Nem.ListEntityTypeConfig:output_type -> nem.ListEntityTypeConfigResponse
+	464, // 855: nem.Nem.CreateEntityTypeConfig:output_type -> nem.EntityTypeConfig
+	464, // 856: nem.Nem.UpdateEntityTypeConfig:output_type -> nem.EntityTypeConfig
+	145, // 857: nem.Nem.ListEntityTypeDependentConfig:output_type -> nem.ListEntityTypeDependentConfigResponse
+	465, // 858: nem.Nem.CreateEntityTypeDependentConfig:output_type -> nem.EntityTypeDependentConfig
+	465, // 859: nem.Nem.UpdateEntityTypeDependentConfig:output_type -> nem.EntityTypeDependentConfig
+	149, // 860: nem.Nem.ListEntityTypeStandaloneConfig:output_type -> nem.ListEntityTypeStandaloneConfigResponse
+	466, // 861: nem.Nem.CreateEntityTypeStandaloneConfig:output_type -> nem.EntityTypeStandaloneConfig
+	466, // 862: nem.Nem.UpdateEntityTypeStandaloneConfig:output_type -> nem.EntityTypeStandaloneConfig
+	153, // 863: nem.Nem.ListEntityVersionConfig:output_type -> nem.ListEntityVersionConfigResponse
+	467, // 864: nem.Nem.CreateEntityVersionConfig:output_type -> nem.EntityVersionConfig
+	467, // 865: nem.Nem.UpdateEntityVersionConfig:output_type -> nem.EntityVersionConfig
+	157, // 866: nem.Nem.ListEntityVersionTypeConfig:output_type -> nem.ListEntityVersionTypeConfigResponse
+	468, // 867: nem.Nem.CreateEntityVersionTypeConfig:output_type -> nem.EntityVersionTypeConfig
+	468, // 868: nem.Nem.UpdateEntityVersionTypeConfig:output_type -> nem.EntityVersionTypeConfig
+	161, // 869: nem.Nem.ListEntityVersionTypeEntityConfig:output_type -> nem.ListEntityVersionTypeEntityConfigResponse
+	469, // 870: nem.Nem.CreateEntityVersionTypeEntityConfig:output_type -> nem.EntityVersionTypeEntityConfig
+	469, // 871: nem.Nem.UpdateEntityVersionTypeEntityConfig:output_type -> nem.EntityVersionTypeEntityConfig
+	165, // 872: nem.Nem.ListEntityVersionTypeFieldConfig:output_type -> nem.ListEntityVersionTypeFieldConfigResponse
+	470, // 873: nem.Nem.CreateEntityVersionTypeFieldConfig:output_type -> nem.EntityVersionTypeFieldConfig
+	470, // 874: nem.Nem.UpdateEntityVersionTypeFieldConfig:output_type -> nem.EntityVersionTypeFieldConfig
+	169, // 875: nem.Nem.ListEnum:output_type -> nem.ListEnumResponse
+	471, // 876: nem.Nem.CreateEnum:output_type -> nem.Enum
+	471, // 877: nem.Nem.UpdateEnum:output_type -> nem.Enum
+	173, // 878: nem.Nem.ListEnumValue:output_type -> nem.ListEnumValueResponse
+	472, // 879: nem.Nem.CreateEnumValue:output_type -> nem.EnumValue
+	472, // 880: nem.Nem.UpdateEnumValue:output_type -> nem.EnumValue
+	177, // 881: nem.Nem.ListEnviorment:output_type -> nem.ListEnviormentResponse
+	473, // 882: nem.Nem.CreateEnviorment:output_type -> nem.Enviorment
+	473, // 883: nem.Nem.UpdateEnviorment:output_type -> nem.Enviorment
+	181, // 884: nem.Nem.ListField:output_type -> nem.ListFieldResponse
+	474, // 885: nem.Nem.CreateField:output_type -> nem.Field
+	474, // 886: nem.Nem.UpdateField:output_type -> nem.Field
+	185, // 887: nem.Nem.ListFieldTypeArrayConfig:output_type -> nem.ListFieldTypeArrayConfigResponse
+	475, // 888: nem.Nem.CreateFieldTypeArrayConfig:output_type -> nem.FieldTypeArrayConfig
+	475, // 889: nem.Nem.UpdateFieldTypeArrayConfig:output_type -> nem.FieldTypeArrayConfig
+	189, // 890: nem.Nem.ListFieldTypeCharConfig:output_type -> nem.ListFieldTypeCharConfigResponse
+	476, // 891: nem.Nem.CreateFieldTypeCharConfig:output_type -> nem.FieldTypeCharConfig
+	476, // 892: nem.Nem.UpdateFieldTypeCharConfig:output_type -> nem.FieldTypeCharConfig
+	193, // 893: nem.Nem.ListFieldTypeConfig:output_type -> nem.ListFieldTypeConfigResponse
+	477, // 894: nem.Nem.CreateFieldTypeConfig:output_type -> nem.FieldTypeConfig
+	477, // 895: nem.Nem.UpdateFieldTypeConfig:output_type -> nem.FieldTypeConfig
+	197, // 896: nem.Nem.ListFieldTypeDateConfig:output_type -> nem.ListFieldTypeDateConfigResponse
+	478, // 897: nem.Nem.CreateFieldTypeDateConfig:output_type -> nem.FieldTypeDateConfig
+	478, // 898: nem.Nem.UpdateFieldTypeDateConfig:output_type -> nem.FieldTypeDateConfig
+	201, // 899: nem.Nem.ListFieldTypeDatetimeConfig:output_type -> nem.ListFieldTypeDatetimeConfigResponse
+	479, // 900: nem.Nem.CreateFieldTypeDatetimeConfig:output_type -> nem.FieldTypeDatetimeConfig
+	479, // 901: nem.Nem.UpdateFieldTypeDatetimeConfig:output_type -> nem.FieldTypeDatetimeConfig
+	205, // 902: nem.Nem.ListFieldTypeDecimalConfig:output_type -> nem.ListFieldTypeDecimalConfigResponse
+	480, // 903: nem.Nem.CreateFieldTypeDecimalConfig:output_type -> nem.FieldTypeDecimalConfig
+	480, // 904: nem.Nem.UpdateFieldTypeDecimalConfig:output_type -> nem.FieldTypeDecimalConfig
+	209, // 905: nem.Nem.ListFieldTypeEmailConfig:output_type -> nem.ListFieldTypeEmailConfigResponse
+	481, // 906: nem.Nem.CreateFieldTypeEmailConfig:output_type -> nem.FieldTypeEmailConfig
+	481, // 907: nem.Nem.UpdateFieldTypeEmailConfig:output_type -> nem.FieldTypeEmailConfig
+	213, // 908: nem.Nem.ListFieldTypeEncryptedConfig:output_type -> nem.ListFieldTypeEncryptedConfigResponse
+	482, // 909: nem.Nem.CreateFieldTypeEncryptedConfig:output_type -> nem.FieldTypeEncryptedConfig
+	482, // 910: nem.Nem.UpdateFieldTypeEncryptedConfig:output_type -> nem.FieldTypeEncryptedConfig
+	217, // 911: nem.Nem.ListFieldTypeEnumConfig:output_type -> nem.ListFieldTypeEnumConfigResponse
+	483, // 912: nem.Nem.CreateFieldTypeEnumConfig:output_type -> nem.FieldTypeEnumConfig
+	483, // 913: nem.Nem.UpdateFieldTypeEnumConfig:output_type -> nem.FieldTypeEnumConfig
+	221, // 914: nem.Nem.ListFieldTypeFileConfig:output_type -> nem.ListFieldTypeFileConfigResponse
+	484, // 915: nem.Nem.CreateFieldTypeFileConfig:output_type -> nem.FieldTypeFileConfig
+	484, // 916: nem.Nem.UpdateFieldTypeFileConfig:output_type -> nem.FieldTypeFileConfig
+	225, // 917: nem.Nem.ListFieldTypeFloatConfig:output_type -> nem.ListFieldTypeFloatConfigResponse
+	485, // 918: nem.Nem.CreateFieldTypeFloatConfig:output_type -> nem.FieldTypeFloatConfig
+	485, // 919: nem.Nem.UpdateFieldTypeFloatConfig:output_type -> nem.FieldTypeFloatConfig
+	229, // 920: nem.Nem.ListFieldTypeIntegerConfig:output_type -> nem.ListFieldTypeIntegerConfigResponse
+	486, // 921: nem.Nem.CreateFieldTypeIntegerConfig:output_type -> nem.FieldTypeIntegerConfig
+	486, // 922: nem.Nem.UpdateFieldTypeIntegerConfig:output_type -> nem.FieldTypeIntegerConfig
+	233, // 923: nem.Nem.ListFieldTypeJSONConfig:output_type -> nem.ListFieldTypeJSONConfigResponse
+	487, // 924: nem.Nem.CreateFieldTypeJSONConfig:output_type -> nem.FieldTypeJSONConfig
+	487, // 925: nem.Nem.UpdateFieldTypeJSONConfig:output_type -> nem.FieldTypeJSONConfig
+	237, // 926: nem.Nem.ListFieldTypePhoneConfig:output_type -> nem.ListFieldTypePhoneConfigResponse
+	488, // 927: nem.Nem.CreateFieldTypePhoneConfig:output_type -> nem.FieldTypePhoneConfig
+	488, // 928: nem.Nem.UpdateFieldTypePhoneConfig:output_type -> nem.FieldTypePhoneConfig
+	241, // 929: nem.Nem.ListFieldTypeSlugConfig:output_type -> nem.ListFieldTypeSlugConfigResponse
+	489, // 930: nem.Nem.CreateFieldTypeSlugConfig:output_type -> nem.FieldTypeSlugConfig
+	489, // 931: nem.Nem.UpdateFieldTypeSlugConfig:output_type -> nem.FieldTypeSlugConfig
+	245, // 932: nem.Nem.ListFieldTypeTextConfig:output_type -> nem.ListFieldTypeTextConfigResponse
+	490, // 933: nem.Nem.CreateFieldTypeTextConfig:output_type -> nem.FieldTypeTextConfig
+	490, // 934: nem.Nem.UpdateFieldTypeTextConfig:output_type -> nem.FieldTypeTextConfig
+	249, // 935: nem.Nem.ListFieldTypeURLConfig:output_type -> nem.ListFieldTypeURLConfigResponse
+	491, // 936: nem.Nem.CreateFieldTypeURLConfig:output_type -> nem.FieldTypeURLConfig
+	491, // 937: nem.Nem.UpdateFieldTypeURLConfig:output_type -> nem.FieldTypeURLConfig
+	253, // 938: nem.Nem.ListFieldTypeVarcharConfig:output_type -> nem.ListFieldTypeVarcharConfigResponse
+	492, // 939: nem.Nem.CreateFieldTypeVarcharConfig:output_type -> nem.FieldTypeVarcharConfig
+	492, // 940: nem.Nem.UpdateFieldTypeVarcharConfig:output_type -> nem.FieldTypeVarcharConfig
+	257, // 941: nem.Nem.ListFileObjectStorageConfig:output_type -> nem.ListFileObjectStorageConfigResponse
+	493, // 942: nem.Nem.CreateFileObjectStorageConfig:output_type -> nem.FileObjectStorageConfig
+	493, // 943: nem.Nem.UpdateFileObjectStorageConfig:output_type -> nem.FileObjectStorageConfig
+	261, // 944: nem.Nem.ListFileStorageConfig:output_type -> nem.ListFileStorageConfigResponse
+	494, // 945: nem.Nem.CreateFileStorageConfig:output_type -> nem.FileStorageConfig
+	494, // 946: nem.Nem.UpdateFileStorageConfig:output_type -> nem.FileStorageConfig
+	265, // 947: nem.Nem.ListIndex:output_type -> nem.ListIndexResponse
+	495, // 948: nem.Nem.CreateIndex:output_type -> nem.Index
+	495, // 949: nem.Nem.UpdateIndex:output_type -> nem.Index
+	269, // 950: nem.Nem.ListIndexField:output_type -> nem.ListIndexFieldResponse
+	496, // 951: nem.Nem.CreateIndexField:output_type -> nem.IndexField
+	496, // 952: nem.Nem.UpdateIndexField:output_type -> nem.IndexField
+	273, // 953: nem.Nem.ListLocalAgentConnection:output_type -> nem.ListLocalAgentConnectionResponse
+	497, // 954: nem.Nem.CreateLocalAgentConnection:output_type -> nem.LocalAgentConnection
+	497, // 955: nem.Nem.UpdateLocalAgentConnection:output_type -> nem.LocalAgentConnection
+	277, // 956: nem.Nem.ListObjectStore:output_type -> nem.ListObjectStoreResponse
+	498, // 957: nem.Nem.CreateObjectStore:output_type -> nem.ObjectStore
+	498, // 958: nem.Nem.UpdateObjectStore:output_type -> nem.ObjectStore
+	281, // 959: nem.Nem.ListObjectStoreS3TypeConfig:output_type -> nem.ListObjectStoreS3TypeConfigResponse
+	499, // 960: nem.Nem.CreateObjectStoreS3TypeConfig:output_type -> nem.ObjectStoreS3TypeConfig
+	499, // 961: nem.Nem.UpdateObjectStoreS3TypeConfig:output_type -> nem.ObjectStoreS3TypeConfig
+	285, // 962: nem.Nem.ListObjectStoreTypeConfig:output_type -> nem.ListObjectStoreTypeConfigResponse
+	500, // 963: nem.Nem.CreateObjectStoreTypeConfig:output_type -> nem.ObjectStoreTypeConfig
+	500, // 964: nem.Nem.UpdateObjectStoreTypeConfig:output_type -> nem.ObjectStoreTypeConfig
+	289, // 965: nem.Nem.ListProjectExtension:output_type -> nem.ListProjectExtensionResponse
+	501, // 966: nem.Nem.CreateProjectExtension:output_type -> nem.ProjectExtension
+	501, // 967: nem.Nem.UpdateProjectExtension:output_type -> nem.ProjectExtension
+	293, // 968: nem.Nem.ListProjectVersionDeployment:output_type -> nem.ListProjectVersionDeploymentResponse
+	502, // 969: nem.Nem.CreateProjectVersionDeployment:output_type -> nem.ProjectVersionDeployment
+	502, // 970: nem.Nem.UpdateProjectVersionDeployment:output_type -> nem.ProjectVersionDeployment
+	297, // 971: nem.Nem.ListRelationship:output_type -> nem.ListRelationshipResponse
+	503, // 972: nem.Nem.CreateRelationship:output_type -> nem.Relationship
+	503, // 973: nem.Nem.UpdateRelationship:output_type -> nem.Relationship
+	301, // 974: nem.Nem.ListRelationshipNode:output_type -> nem.ListRelationshipNodeResponse
+	504, // 975: nem.Nem.CreateRelationshipNode:output_type -> nem.RelationshipNode
+	504, // 976: nem.Nem.UpdateRelationshipNode:output_type -> nem.RelationshipNode
+	305, // 977: nem.Nem.ListRelationshipNodeTypeConfig:output_type -> nem.ListRelationshipNodeTypeConfigResponse
+	505, // 978: nem.Nem.CreateRelationshipNodeTypeConfig:output_type -> nem.RelationshipNodeTypeConfig
+	505, // 979: nem.Nem.UpdateRelationshipNodeTypeConfig:output_type -> nem.RelationshipNodeTypeConfig
+	309, // 980: nem.Nem.ListRelationshipNodeTypeEntityConfig:output_type -> nem.ListRelationshipNodeTypeEntityConfigResponse
+	506, // 981: nem.Nem.CreateRelationshipNodeTypeEntityConfig:output_type -> nem.RelationshipNodeTypeEntityConfig
+	506, // 982: nem.Nem.UpdateRelationshipNodeTypeEntityConfig:output_type -> nem.RelationshipNodeTypeEntityConfig
+	313, // 983: nem.Nem.ListRelationshipNodeTypeServiceConfig:output_type -> nem.ListRelationshipNodeTypeServiceConfigResponse
+	507, // 984: nem.Nem.CreateRelationshipNodeTypeServiceConfig:output_type -> nem.RelationshipNodeTypeServiceConfig
+	507, // 985: nem.Nem.UpdateRelationshipNodeTypeServiceConfig:output_type -> nem.RelationshipNodeTypeServiceConfig
+	317, // 986: nem.Nem.ListReviewConfig:output_type -> nem.ListReviewConfigResponse
+	508, // 987: nem.Nem.CreateReviewConfig:output_type -> nem.ReviewConfig
+	508, // 988: nem.Nem.UpdateReviewConfig:output_type -> nem.ReviewConfig
+	321, // 989: nem.Nem.ListService:output_type -> nem.ListServiceResponse
+	509, // 990: nem.Nem.CreateService:output_type -> nem.Service
+	509, // 991: nem.Nem.UpdateService:output_type -> nem.Service
+	325, // 992: nem.Nem.ListStore:output_type -> nem.ListStoreResponse
+	510, // 993: nem.Nem.CreateStore:output_type -> nem.Store
+	510, // 994: nem.Nem.UpdateStore:output_type -> nem.Store
+	329, // 995: nem.Nem.ListTcpIpConnectionTypeConfig:output_type -> nem.ListTcpIpConnectionTypeConfigResponse
+	511, // 996: nem.Nem.CreateTcpIpConnectionTypeConfig:output_type -> nem.TcpIpConnectionTypeConfig
+	511, // 997: nem.Nem.UpdateTcpIpConnectionTypeConfig:output_type -> nem.TcpIpConnectionTypeConfig
+	333, // 998: nem.Nem.ListTcpIpSshConnectionTypeConfig:output_type -> nem.ListTcpIpSshConnectionTypeConfigResponse
+	512, // 999: nem.Nem.CreateTcpIpSshConnectionTypeConfig:output_type -> nem.TcpIpSshConnectionTypeConfig
+	512, // 1000: nem.Nem.UpdateTcpIpSshConnectionTypeConfig:output_type -> nem.TcpIpSshConnectionTypeConfig
+	337, // 1001: nem.Nem.ListUserConnectionExecution:output_type -> nem.ListUserConnectionExecutionResponse
+	513, // 1002: nem.Nem.CreateUserConnectionExecution:output_type -> nem.UserConnectionExecution
+	513, // 1003: nem.Nem.UpdateUserConnectionExecution:output_type -> nem.UserConnectionExecution
+	341, // 1004: nem.Nem.ListUserConnectionLocalConfig:output_type -> nem.ListUserConnectionLocalConfigResponse
+	514, // 1005: nem.Nem.CreateUserConnectionLocalConfig:output_type -> nem.UserConnectionLocalConfig
+	514, // 1006: nem.Nem.UpdateUserConnectionLocalConfig:output_type -> nem.UserConnectionLocalConfig
+	345, // 1007: nem.Nem.ListUserConnectionRemoteConfig:output_type -> nem.ListUserConnectionRemoteConfigResponse
+	515, // 1008: nem.Nem.CreateUserConnectionRemoteConfig:output_type -> nem.UserConnectionRemoteConfig
+	515, // 1009: nem.Nem.UpdateUserConnectionRemoteConfig:output_type -> nem.UserConnectionRemoteConfig
+	349, // 1010: nem.Nem.ListUserConnectionTypeConfig:output_type -> nem.ListUserConnectionTypeConfigResponse
+	516, // 1011: nem.Nem.CreateUserConnectionTypeConfig:output_type -> nem.UserConnectionTypeConfig
+	516, // 1012: nem.Nem.UpdateUserConnectionTypeConfig:output_type -> nem.UserConnectionTypeConfig
+	353, // 1013: nem.Nem.ListVisibility:output_type -> nem.ListVisibilityResponse
+	517, // 1014: nem.Nem.CreateVisibility:output_type -> nem.Visibility
+	517, // 1015: nem.Nem.UpdateVisibility:output_type -> nem.Visibility
+	357, // 1016: nem.Nem.ListChangeRequestScopeConfigLocal:output_type -> nem.ListChangeRequestScopeConfigLocalResponse
+	518, // 1017: nem.Nem.CreateChangeRequestScopeConfigLocal:output_type -> nem.ChangeRequestScopeConfigLocal
+	518, // 1018: nem.Nem.UpdateChangeRequestScopeConfigLocal:output_type -> nem.ChangeRequestScopeConfigLocal
+	361, // 1019: nem.Nem.ListChangeRequestScopeConfigRemote:output_type -> nem.ListChangeRequestScopeConfigRemoteResponse
+	519, // 1020: nem.Nem.CreateChangeRequestScopeConfigRemote:output_type -> nem.ChangeRequestScopeConfigRemote
+	519, // 1021: nem.Nem.UpdateChangeRequestScopeConfigRemote:output_type -> nem.ChangeRequestScopeConfigRemote
+	365, // 1022: nem.Nem.ListAutomation:output_type -> nem.ListAutomationResponse
+	520, // 1023: nem.Nem.CreateAutomation:output_type -> nem.Automation
+	520, // 1024: nem.Nem.UpdateAutomation:output_type -> nem.Automation
+	369, // 1025: nem.Nem.ListAutomationEvent:output_type -> nem.ListAutomationEventResponse
+	521, // 1026: nem.Nem.CreateAutomationEvent:output_type -> nem.AutomationEvent
+	521, // 1027: nem.Nem.UpdateAutomationEvent:output_type -> nem.AutomationEvent
+	373, // 1028: nem.Nem.ListDeployment:output_type -> nem.ListDeploymentResponse
+	522, // 1029: nem.Nem.CreateDeployment:output_type -> nem.Deployment
+	522, // 1030: nem.Nem.UpdateDeployment:output_type -> nem.Deployment
+	377, // 1031: nem.Nem.ListDeploymentProvider:output_type -> nem.ListDeploymentProviderResponse
+	523, // 1032: nem.Nem.CreateDeploymentProvider:output_type -> nem.DeploymentProvider
+	523, // 1033: nem.Nem.UpdateDeploymentProvider:output_type -> nem.DeploymentProvider
+	381, // 1034: nem.Nem.ListDeploymentServer:output_type -> nem.ListDeploymentServerResponse
+	524, // 1035: nem.Nem.CreateDeploymentServer:output_type -> nem.DeploymentServer
+	524, // 1036: nem.Nem.UpdateDeploymentServer:output_type -> nem.DeploymentServer
+	385, // 1037: nem.Nem.ListDeploymentDatabase:output_type -> nem.ListDeploymentDatabaseResponse
+	525, // 1038: nem.Nem.CreateDeploymentDatabase:output_type -> nem.DeploymentDatabase
+	525, // 1039: nem.Nem.UpdateDeploymentDatabase:output_type -> nem.DeploymentDatabase
+	389, // 1040: nem.Nem.ListDeploymentCodegen:output_type -> nem.ListDeploymentCodegenResponse
+	526, // 1041: nem.Nem.CreateDeploymentCodegen:output_type -> nem.DeploymentCodegen
+	526, // 1042: nem.Nem.UpdateDeploymentCodegen:output_type -> nem.DeploymentCodegen
+	393, // 1043: nem.Nem.ListDeploymentRevision:output_type -> nem.ListDeploymentRevisionResponse
+	527, // 1044: nem.Nem.CreateDeploymentRevision:output_type -> nem.DeploymentRevision
+	527, // 1045: nem.Nem.UpdateDeploymentRevision:output_type -> nem.DeploymentRevision
+	397, // 1046: nem.Nem.ListFieldPiiConfig:output_type -> nem.ListFieldPiiConfigResponse
+	528, // 1047: nem.Nem.CreateFieldPiiConfig:output_type -> nem.FieldPiiConfig
+	528, // 1048: nem.Nem.UpdateFieldPiiConfig:output_type -> nem.FieldPiiConfig
+	401, // 1049: nem.Nem.ListObjectStoreR2TypeConfig:output_type -> nem.ListObjectStoreR2TypeConfigResponse
+	529, // 1050: nem.Nem.CreateObjectStoreR2TypeConfig:output_type -> nem.ObjectStoreR2TypeConfig
+	529, // 1051: nem.Nem.UpdateObjectStoreR2TypeConfig:output_type -> nem.ObjectStoreR2TypeConfig
+	405, // 1052: nem.Nem.ListDataChangeBeforeImageValue:output_type -> nem.ListDataChangeBeforeImageValueResponse
+	530, // 1053: nem.Nem.CreateDataChangeBeforeImageValue:output_type -> nem.DataChangeBeforeImageValue
+	530, // 1054: nem.Nem.UpdateDataChangeBeforeImageValue:output_type -> nem.DataChangeBeforeImageValue
+	409, // 1055: nem.Nem.ListDataChangeBeforeImage:output_type -> nem.ListDataChangeBeforeImageResponse
+	531, // 1056: nem.Nem.CreateDataChangeBeforeImage:output_type -> nem.DataChangeBeforeImage
+	531, // 1057: nem.Nem.UpdateDataChangeBeforeImage:output_type -> nem.DataChangeBeforeImage
+	413, // 1058: nem.Nem.ListCodebase:output_type -> nem.ListCodebaseResponse
+	532, // 1059: nem.Nem.CreateCodebase:output_type -> nem.Codebase
+	532, // 1060: nem.Nem.UpdateCodebase:output_type -> nem.Codebase
+	417, // 1061: nem.Nem.ListCodeSnapshot:output_type -> nem.ListCodeSnapshotResponse
+	533, // 1062: nem.Nem.CreateCodeSnapshot:output_type -> nem.CodeSnapshot
+	533, // 1063: nem.Nem.UpdateCodeSnapshot:output_type -> nem.CodeSnapshot
+	421, // 1064: nem.Nem.ListCodeModelComponent:output_type -> nem.ListCodeModelComponentResponse
+	534, // 1065: nem.Nem.CreateCodeModelComponent:output_type -> nem.CodeModelComponent
+	534, // 1066: nem.Nem.UpdateCodeModelComponent:output_type -> nem.CodeModelComponent
+	425, // 1067: nem.Nem.ListCodeModel:output_type -> nem.ListCodeModelResponse
+	535, // 1068: nem.Nem.CreateCodeModel:output_type -> nem.CodeModel
+	535, // 1069: nem.Nem.UpdateCodeModel:output_type -> nem.CodeModel
+	749, // [749:1070] is the sub-list for method output_type
+	428, // [428:749] is the sub-list for method input_type
+	428, // [428:428] is the sub-list for extension type_name
+	428, // [428:428] is the sub-list for extension extendee
+	0,   // [0:428] is the sub-list for field type_name
 }
 
 func init() { file_service_nem_proto_init() }
@@ -29898,13 +31053,17 @@ func file_service_nem_proto_init() {
 	file_object_store_r_2_type_config_proto_init()
 	file_data_change_before_image_value_proto_init()
 	file_data_change_before_image_proto_init()
+	file_codebase_proto_init()
+	file_code_snapshot_proto_init()
+	file_code_model_component_proto_init()
+	file_code_model_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_service_nem_proto_rawDesc), len(file_service_nem_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   412,
+			NumMessages:   428,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

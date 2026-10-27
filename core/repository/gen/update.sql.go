@@ -211,6 +211,125 @@ func (q *Queries) UpdateChangeRequest(ctx context.Context, arg UpdateChangeReque
 	return err
 }
 
+const updateCodeModel = `-- name: UpdateCodeModel :exec
+UPDATE ` + "`" + `code_model` + "`" + `
+SET
+` + "`" + `codebase_uuid` + "`" + ` = ?, ` + "`" + `version` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?, ` + "`" + `created_by_uuid` + "`" + ` = ?, ` + "`" + `updated_by_uuid` + "`" + ` = ?, ` + "`" + `components` + "`" + ` = ?
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+type UpdateCodeModelParams struct {
+	CodebaseUUID  string      `json:"codebase_uuid"`
+	Version       int64       `json:"version"`
+	CreatedAt     time.Time   `json:"created_at"`
+	UpdatedAt     time.Time   `json:"updated_at"`
+	CreatedByUUID string      `json:"created_by_uuid"`
+	UpdatedByUUID string      `json:"updated_by_uuid"`
+	Components    mapper.JSON `json:"components"`
+	UUID          string      `json:"uuid"`
+}
+
+func (q *Queries) UpdateCodeModel(ctx context.Context, arg UpdateCodeModelParams) error {
+	_, err := q.db.ExecContext(ctx, updateCodeModel,
+		arg.CodebaseUUID,
+		arg.Version,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+		arg.Components,
+		arg.UUID,
+	)
+	return err
+}
+
+const updateCodeSnapshot = `-- name: UpdateCodeSnapshot :exec
+UPDATE ` + "`" + `code_snapshot` + "`" + `
+SET
+` + "`" + `codebase_uuid` + "`" + ` = ?, ` + "`" + `commit_sha` + "`" + ` = ?, ` + "`" + `branch` + "`" + ` = ?, ` + "`" + `committed_at` + "`" + ` = ?, ` + "`" + `dirty` + "`" + ` = ?, ` + "`" + `scanner_version` + "`" + ` = ?, ` + "`" + `facts_schema_version` + "`" + ` = ?, ` + "`" + `facts` + "`" + ` = ?, ` + "`" + `summary` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?, ` + "`" + `created_by_uuid` + "`" + ` = ?, ` + "`" + `updated_by_uuid` + "`" + ` = ?
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+type UpdateCodeSnapshotParams struct {
+	CodebaseUUID       string      `json:"codebase_uuid"`
+	CommitSha          string      `json:"commit_sha"`
+	Branch             null.String `json:"branch"`
+	CommittedAt        time.Time   `json:"committed_at"`
+	Dirty              bool        `json:"dirty"`
+	ScannerVersion     string      `json:"scanner_version"`
+	FactsSchemaVersion int64       `json:"facts_schema_version"`
+	Facts              mapper.JSON `json:"facts"`
+	Summary            mapper.JSON `json:"summary"`
+	CreatedAt          time.Time   `json:"created_at"`
+	UpdatedAt          time.Time   `json:"updated_at"`
+	CreatedByUUID      string      `json:"created_by_uuid"`
+	UpdatedByUUID      string      `json:"updated_by_uuid"`
+	UUID               string      `json:"uuid"`
+}
+
+func (q *Queries) UpdateCodeSnapshot(ctx context.Context, arg UpdateCodeSnapshotParams) error {
+	_, err := q.db.ExecContext(ctx, updateCodeSnapshot,
+		arg.CodebaseUUID,
+		arg.CommitSha,
+		arg.Branch,
+		arg.CommittedAt,
+		arg.Dirty,
+		arg.ScannerVersion,
+		arg.FactsSchemaVersion,
+		arg.Facts,
+		arg.Summary,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+		arg.UUID,
+	)
+	return err
+}
+
+const updateCodebase = `-- name: UpdateCodebase :exec
+UPDATE ` + "`" + `codebase` + "`" + `
+SET
+` + "`" + `project_uuid` + "`" + ` = ?, ` + "`" + `identifier` + "`" + ` = ?, ` + "`" + `repo_url` + "`" + ` = ?, ` + "`" + `module_dir` + "`" + ` = ?, ` + "`" + `language` + "`" + ` = ?, ` + "`" + `default_branch` + "`" + ` = ?, ` + "`" + `status` + "`" + ` = ?, ` + "`" + `created_at` + "`" + ` = ?, ` + "`" + `updated_at` + "`" + ` = ?, ` + "`" + `created_by_uuid` + "`" + ` = ?, ` + "`" + `updated_by_uuid` + "`" + ` = ?
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+type UpdateCodebaseParams struct {
+	ProjectUUID   string      `json:"project_uuid"`
+	Identifier    string      `json:"identifier"`
+	RepoURL       null.String `json:"repo_url"`
+	ModuleDir     null.String `json:"module_dir"`
+	Language      int64       `json:"language"`
+	DefaultBranch null.String `json:"default_branch"`
+	Status        int64       `json:"status"`
+	CreatedAt     time.Time   `json:"created_at"`
+	UpdatedAt     time.Time   `json:"updated_at"`
+	CreatedByUUID string      `json:"created_by_uuid"`
+	UpdatedByUUID string      `json:"updated_by_uuid"`
+	UUID          string      `json:"uuid"`
+}
+
+func (q *Queries) UpdateCodebase(ctx context.Context, arg UpdateCodebaseParams) error {
+	_, err := q.db.ExecContext(ctx, updateCodebase,
+		arg.ProjectUUID,
+		arg.Identifier,
+		arg.RepoURL,
+		arg.ModuleDir,
+		arg.Language,
+		arg.DefaultBranch,
+		arg.Status,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+		arg.UUID,
+	)
+	return err
+}
+
 const updateDeployment = `-- name: UpdateDeployment :exec
 UPDATE ` + "`" + `deployment` + "`" + `
 SET

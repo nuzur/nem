@@ -55,6 +55,12 @@ import (
 
 	"github.com/nuzur/nem/core/module/deployment_revision"
 
+	"github.com/nuzur/nem/core/module/codebase"
+
+	"github.com/nuzur/nem/core/module/code_snapshot"
+
+	"github.com/nuzur/nem/core/module/code_model"
+
 	"github.com/nuzur/nem/core/repository"
 )
 
@@ -100,6 +106,12 @@ type Implementation struct {
 	deployment deployment.Module
 
 	deployment_revision deployment_revision.Module
+
+	codebase codebase.Module
+
+	code_snapshot code_snapshot.Module
+
+	code_model code_model.Module
 }
 
 type Params struct {
@@ -270,6 +282,21 @@ func New(params Params) (*Implementation, error) {
 		Logger:     logger,
 	})
 
+	impl.codebase = codebase.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.code_snapshot = code_snapshot.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
+	impl.code_model = code_model.New(coretypes.ModuleParams{
+		Repository: repository,
+		Logger:     logger,
+	})
+
 	return impl, nil
 }
 
@@ -431,4 +458,28 @@ func (i *Implementation) Deployment() deployment.Module {
 // came to be discarded.
 func (i *Implementation) DeploymentRevision() deployment_revision.Module {
 	return i.deployment_revision
+}
+
+// Codebase returns the process-wide codebase module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) Codebase() codebase.Module {
+	return i.codebase
+}
+
+// CodeSnapshot returns the process-wide code_snapshot module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) CodeSnapshot() code_snapshot.Module {
+	return i.code_snapshot
+}
+
+// CodeModel returns the process-wide code_model module built in New.
+// The receiver is a POINTER, like Destroy/DB above: a value receiver here would
+// copy the struct on every call, which is how the previous lazy initialization
+// came to be discarded.
+func (i *Implementation) CodeModel() code_model.Module {
+	return i.code_model
 }

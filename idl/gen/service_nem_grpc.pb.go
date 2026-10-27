@@ -330,6 +330,18 @@ const (
 	Nem_ListDataChangeBeforeImage_FullMethodName               = "/nem.Nem/ListDataChangeBeforeImage"
 	Nem_CreateDataChangeBeforeImage_FullMethodName             = "/nem.Nem/CreateDataChangeBeforeImage"
 	Nem_UpdateDataChangeBeforeImage_FullMethodName             = "/nem.Nem/UpdateDataChangeBeforeImage"
+	Nem_ListCodebase_FullMethodName                            = "/nem.Nem/ListCodebase"
+	Nem_CreateCodebase_FullMethodName                          = "/nem.Nem/CreateCodebase"
+	Nem_UpdateCodebase_FullMethodName                          = "/nem.Nem/UpdateCodebase"
+	Nem_ListCodeSnapshot_FullMethodName                        = "/nem.Nem/ListCodeSnapshot"
+	Nem_CreateCodeSnapshot_FullMethodName                      = "/nem.Nem/CreateCodeSnapshot"
+	Nem_UpdateCodeSnapshot_FullMethodName                      = "/nem.Nem/UpdateCodeSnapshot"
+	Nem_ListCodeModelComponent_FullMethodName                  = "/nem.Nem/ListCodeModelComponent"
+	Nem_CreateCodeModelComponent_FullMethodName                = "/nem.Nem/CreateCodeModelComponent"
+	Nem_UpdateCodeModelComponent_FullMethodName                = "/nem.Nem/UpdateCodeModelComponent"
+	Nem_ListCodeModel_FullMethodName                           = "/nem.Nem/ListCodeModel"
+	Nem_CreateCodeModel_FullMethodName                         = "/nem.Nem/CreateCodeModel"
+	Nem_UpdateCodeModel_FullMethodName                         = "/nem.Nem/UpdateCodeModel"
 )
 
 // NemClient is the client API for Nem service.
@@ -748,6 +760,22 @@ type NemClient interface {
 	ListDataChangeBeforeImage(ctx context.Context, in *ListDataChangeBeforeImageRequest, opts ...grpc.CallOption) (*ListDataChangeBeforeImageResponse, error)
 	CreateDataChangeBeforeImage(ctx context.Context, in *CreateDataChangeBeforeImageRequest, opts ...grpc.CallOption) (*DataChangeBeforeImage, error)
 	UpdateDataChangeBeforeImage(ctx context.Context, in *UpdateDataChangeBeforeImageRequest, opts ...grpc.CallOption) (*DataChangeBeforeImage, error)
+	// codebase start
+	ListCodebase(ctx context.Context, in *ListCodebaseRequest, opts ...grpc.CallOption) (*ListCodebaseResponse, error)
+	CreateCodebase(ctx context.Context, in *CreateCodebaseRequest, opts ...grpc.CallOption) (*Codebase, error)
+	UpdateCodebase(ctx context.Context, in *UpdateCodebaseRequest, opts ...grpc.CallOption) (*Codebase, error)
+	// code_snapshot start
+	ListCodeSnapshot(ctx context.Context, in *ListCodeSnapshotRequest, opts ...grpc.CallOption) (*ListCodeSnapshotResponse, error)
+	CreateCodeSnapshot(ctx context.Context, in *CreateCodeSnapshotRequest, opts ...grpc.CallOption) (*CodeSnapshot, error)
+	UpdateCodeSnapshot(ctx context.Context, in *UpdateCodeSnapshotRequest, opts ...grpc.CallOption) (*CodeSnapshot, error)
+	// code_model_component start
+	ListCodeModelComponent(ctx context.Context, in *ListCodeModelComponentRequest, opts ...grpc.CallOption) (*ListCodeModelComponentResponse, error)
+	CreateCodeModelComponent(ctx context.Context, in *CreateCodeModelComponentRequest, opts ...grpc.CallOption) (*CodeModelComponent, error)
+	UpdateCodeModelComponent(ctx context.Context, in *UpdateCodeModelComponentRequest, opts ...grpc.CallOption) (*CodeModelComponent, error)
+	// code_model start
+	ListCodeModel(ctx context.Context, in *ListCodeModelRequest, opts ...grpc.CallOption) (*ListCodeModelResponse, error)
+	CreateCodeModel(ctx context.Context, in *CreateCodeModelRequest, opts ...grpc.CallOption) (*CodeModel, error)
+	UpdateCodeModel(ctx context.Context, in *UpdateCodeModelRequest, opts ...grpc.CallOption) (*CodeModel, error)
 }
 
 type nemClient struct {
@@ -3848,6 +3876,126 @@ func (c *nemClient) UpdateDataChangeBeforeImage(ctx context.Context, in *UpdateD
 	return out, nil
 }
 
+func (c *nemClient) ListCodebase(ctx context.Context, in *ListCodebaseRequest, opts ...grpc.CallOption) (*ListCodebaseResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCodebaseResponse)
+	err := c.cc.Invoke(ctx, Nem_ListCodebase_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateCodebase(ctx context.Context, in *CreateCodebaseRequest, opts ...grpc.CallOption) (*Codebase, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Codebase)
+	err := c.cc.Invoke(ctx, Nem_CreateCodebase_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateCodebase(ctx context.Context, in *UpdateCodebaseRequest, opts ...grpc.CallOption) (*Codebase, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Codebase)
+	err := c.cc.Invoke(ctx, Nem_UpdateCodebase_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) ListCodeSnapshot(ctx context.Context, in *ListCodeSnapshotRequest, opts ...grpc.CallOption) (*ListCodeSnapshotResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCodeSnapshotResponse)
+	err := c.cc.Invoke(ctx, Nem_ListCodeSnapshot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateCodeSnapshot(ctx context.Context, in *CreateCodeSnapshotRequest, opts ...grpc.CallOption) (*CodeSnapshot, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CodeSnapshot)
+	err := c.cc.Invoke(ctx, Nem_CreateCodeSnapshot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateCodeSnapshot(ctx context.Context, in *UpdateCodeSnapshotRequest, opts ...grpc.CallOption) (*CodeSnapshot, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CodeSnapshot)
+	err := c.cc.Invoke(ctx, Nem_UpdateCodeSnapshot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) ListCodeModelComponent(ctx context.Context, in *ListCodeModelComponentRequest, opts ...grpc.CallOption) (*ListCodeModelComponentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCodeModelComponentResponse)
+	err := c.cc.Invoke(ctx, Nem_ListCodeModelComponent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateCodeModelComponent(ctx context.Context, in *CreateCodeModelComponentRequest, opts ...grpc.CallOption) (*CodeModelComponent, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CodeModelComponent)
+	err := c.cc.Invoke(ctx, Nem_CreateCodeModelComponent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateCodeModelComponent(ctx context.Context, in *UpdateCodeModelComponentRequest, opts ...grpc.CallOption) (*CodeModelComponent, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CodeModelComponent)
+	err := c.cc.Invoke(ctx, Nem_UpdateCodeModelComponent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) ListCodeModel(ctx context.Context, in *ListCodeModelRequest, opts ...grpc.CallOption) (*ListCodeModelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCodeModelResponse)
+	err := c.cc.Invoke(ctx, Nem_ListCodeModel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) CreateCodeModel(ctx context.Context, in *CreateCodeModelRequest, opts ...grpc.CallOption) (*CodeModel, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CodeModel)
+	err := c.cc.Invoke(ctx, Nem_CreateCodeModel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nemClient) UpdateCodeModel(ctx context.Context, in *UpdateCodeModelRequest, opts ...grpc.CallOption) (*CodeModel, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CodeModel)
+	err := c.cc.Invoke(ctx, Nem_UpdateCodeModel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NemServer is the server API for Nem service.
 // All implementations must embed UnimplementedNemServer
 // for forward compatibility.
@@ -4264,6 +4412,22 @@ type NemServer interface {
 	ListDataChangeBeforeImage(context.Context, *ListDataChangeBeforeImageRequest) (*ListDataChangeBeforeImageResponse, error)
 	CreateDataChangeBeforeImage(context.Context, *CreateDataChangeBeforeImageRequest) (*DataChangeBeforeImage, error)
 	UpdateDataChangeBeforeImage(context.Context, *UpdateDataChangeBeforeImageRequest) (*DataChangeBeforeImage, error)
+	// codebase start
+	ListCodebase(context.Context, *ListCodebaseRequest) (*ListCodebaseResponse, error)
+	CreateCodebase(context.Context, *CreateCodebaseRequest) (*Codebase, error)
+	UpdateCodebase(context.Context, *UpdateCodebaseRequest) (*Codebase, error)
+	// code_snapshot start
+	ListCodeSnapshot(context.Context, *ListCodeSnapshotRequest) (*ListCodeSnapshotResponse, error)
+	CreateCodeSnapshot(context.Context, *CreateCodeSnapshotRequest) (*CodeSnapshot, error)
+	UpdateCodeSnapshot(context.Context, *UpdateCodeSnapshotRequest) (*CodeSnapshot, error)
+	// code_model_component start
+	ListCodeModelComponent(context.Context, *ListCodeModelComponentRequest) (*ListCodeModelComponentResponse, error)
+	CreateCodeModelComponent(context.Context, *CreateCodeModelComponentRequest) (*CodeModelComponent, error)
+	UpdateCodeModelComponent(context.Context, *UpdateCodeModelComponentRequest) (*CodeModelComponent, error)
+	// code_model start
+	ListCodeModel(context.Context, *ListCodeModelRequest) (*ListCodeModelResponse, error)
+	CreateCodeModel(context.Context, *CreateCodeModelRequest) (*CodeModel, error)
+	UpdateCodeModel(context.Context, *UpdateCodeModelRequest) (*CodeModel, error)
 	mustEmbedUnimplementedNemServer()
 }
 
@@ -5200,6 +5364,42 @@ func (UnimplementedNemServer) CreateDataChangeBeforeImage(context.Context, *Crea
 }
 func (UnimplementedNemServer) UpdateDataChangeBeforeImage(context.Context, *UpdateDataChangeBeforeImageRequest) (*DataChangeBeforeImage, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateDataChangeBeforeImage not implemented")
+}
+func (UnimplementedNemServer) ListCodebase(context.Context, *ListCodebaseRequest) (*ListCodebaseResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListCodebase not implemented")
+}
+func (UnimplementedNemServer) CreateCodebase(context.Context, *CreateCodebaseRequest) (*Codebase, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateCodebase not implemented")
+}
+func (UnimplementedNemServer) UpdateCodebase(context.Context, *UpdateCodebaseRequest) (*Codebase, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateCodebase not implemented")
+}
+func (UnimplementedNemServer) ListCodeSnapshot(context.Context, *ListCodeSnapshotRequest) (*ListCodeSnapshotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListCodeSnapshot not implemented")
+}
+func (UnimplementedNemServer) CreateCodeSnapshot(context.Context, *CreateCodeSnapshotRequest) (*CodeSnapshot, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateCodeSnapshot not implemented")
+}
+func (UnimplementedNemServer) UpdateCodeSnapshot(context.Context, *UpdateCodeSnapshotRequest) (*CodeSnapshot, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateCodeSnapshot not implemented")
+}
+func (UnimplementedNemServer) ListCodeModelComponent(context.Context, *ListCodeModelComponentRequest) (*ListCodeModelComponentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListCodeModelComponent not implemented")
+}
+func (UnimplementedNemServer) CreateCodeModelComponent(context.Context, *CreateCodeModelComponentRequest) (*CodeModelComponent, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateCodeModelComponent not implemented")
+}
+func (UnimplementedNemServer) UpdateCodeModelComponent(context.Context, *UpdateCodeModelComponentRequest) (*CodeModelComponent, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateCodeModelComponent not implemented")
+}
+func (UnimplementedNemServer) ListCodeModel(context.Context, *ListCodeModelRequest) (*ListCodeModelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListCodeModel not implemented")
+}
+func (UnimplementedNemServer) CreateCodeModel(context.Context, *CreateCodeModelRequest) (*CodeModel, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateCodeModel not implemented")
+}
+func (UnimplementedNemServer) UpdateCodeModel(context.Context, *UpdateCodeModelRequest) (*CodeModel, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateCodeModel not implemented")
 }
 func (UnimplementedNemServer) mustEmbedUnimplementedNemServer() {}
 func (UnimplementedNemServer) testEmbeddedByValue()             {}
@@ -10784,6 +10984,222 @@ func _Nem_UpdateDataChangeBeforeImage_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Nem_ListCodebase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCodebaseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListCodebase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListCodebase_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListCodebase(ctx, req.(*ListCodebaseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateCodebase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCodebaseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateCodebase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateCodebase_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateCodebase(ctx, req.(*CreateCodebaseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateCodebase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCodebaseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateCodebase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateCodebase_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateCodebase(ctx, req.(*UpdateCodebaseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_ListCodeSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCodeSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListCodeSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListCodeSnapshot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListCodeSnapshot(ctx, req.(*ListCodeSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateCodeSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCodeSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateCodeSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateCodeSnapshot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateCodeSnapshot(ctx, req.(*CreateCodeSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateCodeSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCodeSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateCodeSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateCodeSnapshot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateCodeSnapshot(ctx, req.(*UpdateCodeSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_ListCodeModelComponent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCodeModelComponentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListCodeModelComponent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListCodeModelComponent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListCodeModelComponent(ctx, req.(*ListCodeModelComponentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateCodeModelComponent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCodeModelComponentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateCodeModelComponent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateCodeModelComponent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateCodeModelComponent(ctx, req.(*CreateCodeModelComponentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateCodeModelComponent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCodeModelComponentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateCodeModelComponent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateCodeModelComponent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateCodeModelComponent(ctx, req.(*UpdateCodeModelComponentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_ListCodeModel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCodeModelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).ListCodeModel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_ListCodeModel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).ListCodeModel(ctx, req.(*ListCodeModelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_CreateCodeModel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCodeModelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).CreateCodeModel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_CreateCodeModel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).CreateCodeModel(ctx, req.(*CreateCodeModelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Nem_UpdateCodeModel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCodeModelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NemServer).UpdateCodeModel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Nem_UpdateCodeModel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NemServer).UpdateCodeModel(ctx, req.(*UpdateCodeModelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Nem_ServiceDesc is the grpc.ServiceDesc for Nem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -12026,6 +12442,54 @@ var Nem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateDataChangeBeforeImage",
 			Handler:    _Nem_UpdateDataChangeBeforeImage_Handler,
+		},
+		{
+			MethodName: "ListCodebase",
+			Handler:    _Nem_ListCodebase_Handler,
+		},
+		{
+			MethodName: "CreateCodebase",
+			Handler:    _Nem_CreateCodebase_Handler,
+		},
+		{
+			MethodName: "UpdateCodebase",
+			Handler:    _Nem_UpdateCodebase_Handler,
+		},
+		{
+			MethodName: "ListCodeSnapshot",
+			Handler:    _Nem_ListCodeSnapshot_Handler,
+		},
+		{
+			MethodName: "CreateCodeSnapshot",
+			Handler:    _Nem_CreateCodeSnapshot_Handler,
+		},
+		{
+			MethodName: "UpdateCodeSnapshot",
+			Handler:    _Nem_UpdateCodeSnapshot_Handler,
+		},
+		{
+			MethodName: "ListCodeModelComponent",
+			Handler:    _Nem_ListCodeModelComponent_Handler,
+		},
+		{
+			MethodName: "CreateCodeModelComponent",
+			Handler:    _Nem_CreateCodeModelComponent_Handler,
+		},
+		{
+			MethodName: "UpdateCodeModelComponent",
+			Handler:    _Nem_UpdateCodeModelComponent_Handler,
+		},
+		{
+			MethodName: "ListCodeModel",
+			Handler:    _Nem_ListCodeModel_Handler,
+		},
+		{
+			MethodName: "CreateCodeModel",
+			Handler:    _Nem_CreateCodeModel_Handler,
+		},
+		{
+			MethodName: "UpdateCodeModel",
+			Handler:    _Nem_UpdateCodeModel_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -2219,6 +2219,32 @@ LIMIT ?, ?;
 
 
 
+-- codebase selects:
+-- name: FetchCodebaseByUUID :many
+SELECT `uuid`,`project_uuid`,`identifier`,`repo_url`,`module_dir`,`language`,`default_branch`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `codebase`
+WHERE 
+    `uuid` = ? ;
+
+        
+-- name: FetchCodebaseByProjectUUIDAndIdentifier :many
+SELECT `uuid`,`project_uuid`,`identifier`,`repo_url`,`module_dir`,`language`,`default_branch`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `codebase`
+WHERE 
+    `identifier` = ? AND `project_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchCodebaseByUUIDForUpdate :many
+SELECT `uuid`,`project_uuid`,`identifier`,`repo_url`,`module_dir`,`language`,`default_branch`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `codebase`
+WHERE 
+    `uuid` = ? 
+FOR UPDATE;
+        
+
+
+
+
 -- extension_execution selects:
 -- name: FetchExtensionExecutionByUUID :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
@@ -3458,6 +3484,65 @@ ORDER BY created_at DESC
 LIMIT ?, ?;
 
             
+
+
+
+
+-- code_snapshot selects:
+-- name: FetchCodeSnapshotByUUID :many
+SELECT `uuid`,`codebase_uuid`,`commit_sha`,`branch`,`committed_at`,`dirty`,`scanner_version`,`facts_schema_version`,`facts`,`summary`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `code_snapshot`
+WHERE 
+    `uuid` = ? ;
+
+        
+-- name: FetchCodeSnapshotByCodebaseUUIDAndCommitSha :many
+SELECT `uuid`,`codebase_uuid`,`commit_sha`,`branch`,`committed_at`,`dirty`,`scanner_version`,`facts_schema_version`,`facts`,`summary`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `code_snapshot`
+WHERE 
+    `codebase_uuid` = ? AND `commit_sha` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchCodeSnapshotByCodebaseUUID :many
+SELECT `uuid`,`codebase_uuid`,`commit_sha`,`branch`,`committed_at`,`dirty`,`scanner_version`,`facts_schema_version`,`facts`,`summary`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `code_snapshot`
+WHERE 
+    `codebase_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchCodeSnapshotByUUIDForUpdate :many
+SELECT `uuid`,`codebase_uuid`,`commit_sha`,`branch`,`committed_at`,`dirty`,`scanner_version`,`facts_schema_version`,`facts`,`summary`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `code_snapshot`
+WHERE 
+    `uuid` = ? 
+FOR UPDATE;
+        
+
+
+
+
+-- code_model selects:
+-- name: FetchCodeModelByUUID :many
+SELECT `uuid`,`codebase_uuid`,`version`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`components`
+FROM `code_model`
+WHERE 
+    `uuid` = ? ;
+
+        
+-- name: FetchCodeModelByCodebaseUUID :many
+SELECT `uuid`,`codebase_uuid`,`version`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`components`
+FROM `code_model`
+WHERE 
+    `codebase_uuid` = ? 
+LIMIT ?, ?;
+        
+-- name: FetchCodeModelByUUIDForUpdate :many
+SELECT `uuid`,`codebase_uuid`,`version`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`components`
+FROM `code_model`
+WHERE 
+    `uuid` = ? 
+FOR UPDATE;
+        
 
 
 

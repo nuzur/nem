@@ -4200,6 +4200,156 @@ func (DataChangeBeforeImageStatus) EnumDescriptor() ([]byte, []int) {
 	return file_enums_proto_rawDescGZIP(), []int{78}
 }
 
+type CodebaseLanguage int32
+
+const (
+	CodebaseLanguage_CODEBASE_LANGUAGE_INVALID CodebaseLanguage = 0
+	CodebaseLanguage_CODEBASE_LANGUAGE_GO      CodebaseLanguage = 1
+)
+
+// Enum value maps for CodebaseLanguage.
+var (
+	CodebaseLanguage_name = map[int32]string{
+		0: "CODEBASE_LANGUAGE_INVALID",
+		1: "CODEBASE_LANGUAGE_GO",
+	}
+	CodebaseLanguage_value = map[string]int32{
+		"CODEBASE_LANGUAGE_INVALID": 0,
+		"CODEBASE_LANGUAGE_GO":      1,
+	}
+)
+
+func (x CodebaseLanguage) Enum() *CodebaseLanguage {
+	p := new(CodebaseLanguage)
+	*p = x
+	return p
+}
+
+func (x CodebaseLanguage) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CodebaseLanguage) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[79].Descriptor()
+}
+
+func (CodebaseLanguage) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[79]
+}
+
+func (x CodebaseLanguage) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CodebaseLanguage.Descriptor instead.
+func (CodebaseLanguage) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{79}
+}
+
+type CodebaseStatus int32
+
+const (
+	CodebaseStatus_CODEBASE_STATUS_INVALID  CodebaseStatus = 0
+	CodebaseStatus_CODEBASE_STATUS_ACTIVE   CodebaseStatus = 1
+	CodebaseStatus_CODEBASE_STATUS_ARCHIVED CodebaseStatus = 2
+)
+
+// Enum value maps for CodebaseStatus.
+var (
+	CodebaseStatus_name = map[int32]string{
+		0: "CODEBASE_STATUS_INVALID",
+		1: "CODEBASE_STATUS_ACTIVE",
+		2: "CODEBASE_STATUS_ARCHIVED",
+	}
+	CodebaseStatus_value = map[string]int32{
+		"CODEBASE_STATUS_INVALID":  0,
+		"CODEBASE_STATUS_ACTIVE":   1,
+		"CODEBASE_STATUS_ARCHIVED": 2,
+	}
+)
+
+func (x CodebaseStatus) Enum() *CodebaseStatus {
+	p := new(CodebaseStatus)
+	*p = x
+	return p
+}
+
+func (x CodebaseStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CodebaseStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[80].Descriptor()
+}
+
+func (CodebaseStatus) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[80]
+}
+
+func (x CodebaseStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CodebaseStatus.Descriptor instead.
+func (CodebaseStatus) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{80}
+}
+
+type CodeComponentStatus int32
+
+const (
+	CodeComponentStatus_CODE_COMPONENT_STATUS_INVALID    CodeComponentStatus = 0
+	CodeComponentStatus_CODE_COMPONENT_STATUS_ACTIVE     CodeComponentStatus = 1
+	CodeComponentStatus_CODE_COMPONENT_STATUS_LEGACY     CodeComponentStatus = 2
+	CodeComponentStatus_CODE_COMPONENT_STATUS_DEPRECATED CodeComponentStatus = 3
+	CodeComponentStatus_CODE_COMPONENT_STATUS_PLANNED    CodeComponentStatus = 4
+)
+
+// Enum value maps for CodeComponentStatus.
+var (
+	CodeComponentStatus_name = map[int32]string{
+		0: "CODE_COMPONENT_STATUS_INVALID",
+		1: "CODE_COMPONENT_STATUS_ACTIVE",
+		2: "CODE_COMPONENT_STATUS_LEGACY",
+		3: "CODE_COMPONENT_STATUS_DEPRECATED",
+		4: "CODE_COMPONENT_STATUS_PLANNED",
+	}
+	CodeComponentStatus_value = map[string]int32{
+		"CODE_COMPONENT_STATUS_INVALID":    0,
+		"CODE_COMPONENT_STATUS_ACTIVE":     1,
+		"CODE_COMPONENT_STATUS_LEGACY":     2,
+		"CODE_COMPONENT_STATUS_DEPRECATED": 3,
+		"CODE_COMPONENT_STATUS_PLANNED":    4,
+	}
+)
+
+func (x CodeComponentStatus) Enum() *CodeComponentStatus {
+	p := new(CodeComponentStatus)
+	*p = x
+	return p
+}
+
+func (x CodeComponentStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CodeComponentStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[81].Descriptor()
+}
+
+func (CodeComponentStatus) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[81]
+}
+
+func (x CodeComponentStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CodeComponentStatus.Descriptor instead.
+func (CodeComponentStatus) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{81}
+}
+
 var File_enums_proto protoreflect.FileDescriptor
 
 const file_enums_proto_rawDesc = "" +
@@ -4628,7 +4778,20 @@ const file_enums_proto_rawDesc = "" +
 	"(DATA_CHANGE_BEFORE_IMAGE_STATUS_CAPTURED\x10\x01\x127\n" +
 	"3DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_UNSUPPORTED\x10\x02\x126\n" +
 	"2DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_ROW_ABSENT\x10\x03\x121\n" +
-	"-DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_ERROR\x10\x04B+\n" +
+	"-DATA_CHANGE_BEFORE_IMAGE_STATUS_SKIPPED_ERROR\x10\x04*K\n" +
+	"\x10CodebaseLanguage\x12\x1d\n" +
+	"\x19CODEBASE_LANGUAGE_INVALID\x10\x00\x12\x18\n" +
+	"\x14CODEBASE_LANGUAGE_GO\x10\x01*g\n" +
+	"\x0eCodebaseStatus\x12\x1b\n" +
+	"\x17CODEBASE_STATUS_INVALID\x10\x00\x12\x1a\n" +
+	"\x16CODEBASE_STATUS_ACTIVE\x10\x01\x12\x1c\n" +
+	"\x18CODEBASE_STATUS_ARCHIVED\x10\x02*\xc5\x01\n" +
+	"\x13CodeComponentStatus\x12!\n" +
+	"\x1dCODE_COMPONENT_STATUS_INVALID\x10\x00\x12 \n" +
+	"\x1cCODE_COMPONENT_STATUS_ACTIVE\x10\x01\x12 \n" +
+	"\x1cCODE_COMPONENT_STATUS_LEGACY\x10\x02\x12$\n" +
+	" CODE_COMPONENT_STATUS_DEPRECATED\x10\x03\x12!\n" +
+	"\x1dCODE_COMPONENT_STATUS_PLANNED\x10\x04B+\n" +
 	"\x14github.com/nuzur/nemB\x04EnumP\x01Z\vnem/idl/genb\x06proto3"
 
 var (
@@ -4643,7 +4806,7 @@ func file_enums_proto_rawDescGZIP() []byte {
 	return file_enums_proto_rawDescData
 }
 
-var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 79)
+var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 82)
 var file_enums_proto_goTypes = []any{
 	(AiUsageContext)(0),                         // 0: nem.AiUsageContext
 	(AiUsageProvider)(0),                        // 1: nem.AiUsageProvider
@@ -4724,6 +4887,9 @@ var file_enums_proto_goTypes = []any{
 	(FieldPiiConfigMaskStrategy)(0),             // 76: nem.FieldPiiConfigMaskStrategy
 	(RelationshipReferentialAction)(0),          // 77: nem.RelationshipReferentialAction
 	(DataChangeBeforeImageStatus)(0),            // 78: nem.DataChangeBeforeImageStatus
+	(CodebaseLanguage)(0),                       // 79: nem.CodebaseLanguage
+	(CodebaseStatus)(0),                         // 80: nem.CodebaseStatus
+	(CodeComponentStatus)(0),                    // 81: nem.CodeComponentStatus
 }
 var file_enums_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -4743,7 +4909,7 @@ func file_enums_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_enums_proto_rawDesc), len(file_enums_proto_rawDesc)),
-			NumEnums:      79,
+			NumEnums:      82,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,

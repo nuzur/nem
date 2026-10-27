@@ -76,6 +76,13 @@ SET
 WHERE
 `uuid` = ?;
 
+-- name: UpdateCodebase :exec
+UPDATE `codebase`
+SET
+`project_uuid` = ?, `identifier` = ?, `repo_url` = ?, `module_dir` = ?, `language` = ?, `default_branch` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+WHERE
+`uuid` = ?;
+
 -- name: UpdateExtensionExecution :exec
 UPDATE `extension_execution`
 SET
@@ -108,6 +115,20 @@ WHERE
 UPDATE `user_connection`
 SET
 `user_uuid` = ?, `project_uuid` = ?, `project_version_uuid` = ?, `type` = ?, `type_config` = ?, `db_schema` = ?, `executions` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?
+WHERE
+`uuid` = ?;
+
+-- name: UpdateCodeSnapshot :exec
+UPDATE `code_snapshot`
+SET
+`codebase_uuid` = ?, `commit_sha` = ?, `branch` = ?, `committed_at` = ?, `dirty` = ?, `scanner_version` = ?, `facts_schema_version` = ?, `facts` = ?, `summary` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?
+WHERE
+`uuid` = ?;
+
+-- name: UpdateCodeModel :exec
+UPDATE `code_model`
+SET
+`codebase_uuid` = ?, `version` = ?, `created_at` = ?, `updated_at` = ?, `created_by_uuid` = ?, `updated_by_uuid` = ?, `components` = ?
 WHERE
 `uuid` = ?;
 

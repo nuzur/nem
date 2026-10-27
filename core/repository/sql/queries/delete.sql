@@ -54,6 +54,11 @@ DELETE FROM `automation`
 WHERE
 `uuid` = ?;
 
+-- name: DeleteCodebase :execresult
+DELETE FROM `codebase`
+WHERE
+`uuid` = ?;
+
 -- name: DeleteExtensionExecution :execresult
 DELETE FROM `extension_execution`
 WHERE
@@ -76,6 +81,16 @@ WHERE
 
 -- name: DeleteUserConnection :execresult
 DELETE FROM `user_connection`
+WHERE
+`uuid` = ?;
+
+-- name: DeleteCodeSnapshot :execresult
+DELETE FROM `code_snapshot`
+WHERE
+`uuid` = ?;
+
+-- name: DeleteCodeModel :execresult
+DELETE FROM `code_model`
 WHERE
 `uuid` = ?;
 

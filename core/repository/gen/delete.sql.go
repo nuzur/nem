@@ -50,6 +50,36 @@ func (q *Queries) DeleteChangeRequest(ctx context.Context, uuid string) (sql.Res
 	return q.db.ExecContext(ctx, deleteChangeRequest, uuid)
 }
 
+const deleteCodeModel = `-- name: DeleteCodeModel :execresult
+DELETE FROM ` + "`" + `code_model` + "`" + `
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+func (q *Queries) DeleteCodeModel(ctx context.Context, uuid string) (sql.Result, error) {
+	return q.db.ExecContext(ctx, deleteCodeModel, uuid)
+}
+
+const deleteCodeSnapshot = `-- name: DeleteCodeSnapshot :execresult
+DELETE FROM ` + "`" + `code_snapshot` + "`" + `
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+func (q *Queries) DeleteCodeSnapshot(ctx context.Context, uuid string) (sql.Result, error) {
+	return q.db.ExecContext(ctx, deleteCodeSnapshot, uuid)
+}
+
+const deleteCodebase = `-- name: DeleteCodebase :execresult
+DELETE FROM ` + "`" + `codebase` + "`" + `
+WHERE
+` + "`" + `uuid` + "`" + ` = ?
+`
+
+func (q *Queries) DeleteCodebase(ctx context.Context, uuid string) (sql.Result, error) {
+	return q.db.ExecContext(ctx, deleteCodebase, uuid)
+}
+
 const deleteDeployment = `-- name: DeleteDeployment :execresult
 DELETE FROM ` + "`" + `deployment` + "`" + `
 WHERE

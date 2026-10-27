@@ -6371,6 +6371,478 @@ func (q *Queries) FetchChangeRequestByVersionOrderedByUpdatedAtDESC(ctx context.
 	return items, nil
 }
 
+const fetchCodeModelByCodebaseUUID = `-- name: FetchCodeModelByCodebaseUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `codebase_uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `components` + "`" + `
+FROM ` + "`" + `code_model` + "`" + `
+WHERE 
+    ` + "`" + `codebase_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchCodeModelByCodebaseUUIDParams struct {
+	CodebaseUUID string `json:"codebase_uuid"`
+	Offset       int32  `json:"offset"`
+	Limit        int32  `json:"limit"`
+}
+
+func (q *Queries) FetchCodeModelByCodebaseUUID(ctx context.Context, arg FetchCodeModelByCodebaseUUIDParams) ([]CodeModel, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodeModelByCodebaseUUID, arg.CodebaseUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []CodeModel
+	for rows.Next() {
+		var i CodeModel
+		if err := rows.Scan(
+			&i.UUID,
+			&i.CodebaseUUID,
+			&i.Version,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+			&i.Components,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchCodeModelByUUID = `-- name: FetchCodeModelByUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `codebase_uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `components` + "`" + `
+FROM ` + "`" + `code_model` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ?
+`
+
+// code_model selects:
+func (q *Queries) FetchCodeModelByUUID(ctx context.Context, uuid string) ([]CodeModel, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodeModelByUUID, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []CodeModel
+	for rows.Next() {
+		var i CodeModel
+		if err := rows.Scan(
+			&i.UUID,
+			&i.CodebaseUUID,
+			&i.Version,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+			&i.Components,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchCodeModelByUUIDForUpdate = `-- name: FetchCodeModelByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `codebase_uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `components` + "`" + `
+FROM ` + "`" + `code_model` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchCodeModelByUUIDForUpdate(ctx context.Context, uuid string) ([]CodeModel, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodeModelByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []CodeModel
+	for rows.Next() {
+		var i CodeModel
+		if err := rows.Scan(
+			&i.UUID,
+			&i.CodebaseUUID,
+			&i.Version,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+			&i.Components,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchCodeSnapshotByCodebaseUUID = `-- name: FetchCodeSnapshotByCodebaseUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `codebase_uuid` + "`" + `,` + "`" + `commit_sha` + "`" + `,` + "`" + `branch` + "`" + `,` + "`" + `committed_at` + "`" + `,` + "`" + `dirty` + "`" + `,` + "`" + `scanner_version` + "`" + `,` + "`" + `facts_schema_version` + "`" + `,` + "`" + `facts` + "`" + `,` + "`" + `summary` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `code_snapshot` + "`" + `
+WHERE 
+    ` + "`" + `codebase_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchCodeSnapshotByCodebaseUUIDParams struct {
+	CodebaseUUID string `json:"codebase_uuid"`
+	Offset       int32  `json:"offset"`
+	Limit        int32  `json:"limit"`
+}
+
+func (q *Queries) FetchCodeSnapshotByCodebaseUUID(ctx context.Context, arg FetchCodeSnapshotByCodebaseUUIDParams) ([]CodeSnapshot, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodeSnapshotByCodebaseUUID, arg.CodebaseUUID, arg.Offset, arg.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []CodeSnapshot
+	for rows.Next() {
+		var i CodeSnapshot
+		if err := rows.Scan(
+			&i.UUID,
+			&i.CodebaseUUID,
+			&i.CommitSha,
+			&i.Branch,
+			&i.CommittedAt,
+			&i.Dirty,
+			&i.ScannerVersion,
+			&i.FactsSchemaVersion,
+			&i.Facts,
+			&i.Summary,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchCodeSnapshotByCodebaseUUIDAndCommitSha = `-- name: FetchCodeSnapshotByCodebaseUUIDAndCommitSha :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `codebase_uuid` + "`" + `,` + "`" + `commit_sha` + "`" + `,` + "`" + `branch` + "`" + `,` + "`" + `committed_at` + "`" + `,` + "`" + `dirty` + "`" + `,` + "`" + `scanner_version` + "`" + `,` + "`" + `facts_schema_version` + "`" + `,` + "`" + `facts` + "`" + `,` + "`" + `summary` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `code_snapshot` + "`" + `
+WHERE 
+    ` + "`" + `codebase_uuid` + "`" + ` = ? AND ` + "`" + `commit_sha` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchCodeSnapshotByCodebaseUUIDAndCommitShaParams struct {
+	CodebaseUUID string `json:"codebase_uuid"`
+	CommitSha    string `json:"commit_sha"`
+	Offset       int32  `json:"offset"`
+	Limit        int32  `json:"limit"`
+}
+
+func (q *Queries) FetchCodeSnapshotByCodebaseUUIDAndCommitSha(ctx context.Context, arg FetchCodeSnapshotByCodebaseUUIDAndCommitShaParams) ([]CodeSnapshot, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodeSnapshotByCodebaseUUIDAndCommitSha,
+		arg.CodebaseUUID,
+		arg.CommitSha,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []CodeSnapshot
+	for rows.Next() {
+		var i CodeSnapshot
+		if err := rows.Scan(
+			&i.UUID,
+			&i.CodebaseUUID,
+			&i.CommitSha,
+			&i.Branch,
+			&i.CommittedAt,
+			&i.Dirty,
+			&i.ScannerVersion,
+			&i.FactsSchemaVersion,
+			&i.Facts,
+			&i.Summary,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchCodeSnapshotByUUID = `-- name: FetchCodeSnapshotByUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `codebase_uuid` + "`" + `,` + "`" + `commit_sha` + "`" + `,` + "`" + `branch` + "`" + `,` + "`" + `committed_at` + "`" + `,` + "`" + `dirty` + "`" + `,` + "`" + `scanner_version` + "`" + `,` + "`" + `facts_schema_version` + "`" + `,` + "`" + `facts` + "`" + `,` + "`" + `summary` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `code_snapshot` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ?
+`
+
+// code_snapshot selects:
+func (q *Queries) FetchCodeSnapshotByUUID(ctx context.Context, uuid string) ([]CodeSnapshot, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodeSnapshotByUUID, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []CodeSnapshot
+	for rows.Next() {
+		var i CodeSnapshot
+		if err := rows.Scan(
+			&i.UUID,
+			&i.CodebaseUUID,
+			&i.CommitSha,
+			&i.Branch,
+			&i.CommittedAt,
+			&i.Dirty,
+			&i.ScannerVersion,
+			&i.FactsSchemaVersion,
+			&i.Facts,
+			&i.Summary,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchCodeSnapshotByUUIDForUpdate = `-- name: FetchCodeSnapshotByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `codebase_uuid` + "`" + `,` + "`" + `commit_sha` + "`" + `,` + "`" + `branch` + "`" + `,` + "`" + `committed_at` + "`" + `,` + "`" + `dirty` + "`" + `,` + "`" + `scanner_version` + "`" + `,` + "`" + `facts_schema_version` + "`" + `,` + "`" + `facts` + "`" + `,` + "`" + `summary` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `code_snapshot` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchCodeSnapshotByUUIDForUpdate(ctx context.Context, uuid string) ([]CodeSnapshot, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodeSnapshotByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []CodeSnapshot
+	for rows.Next() {
+		var i CodeSnapshot
+		if err := rows.Scan(
+			&i.UUID,
+			&i.CodebaseUUID,
+			&i.CommitSha,
+			&i.Branch,
+			&i.CommittedAt,
+			&i.Dirty,
+			&i.ScannerVersion,
+			&i.FactsSchemaVersion,
+			&i.Facts,
+			&i.Summary,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchCodebaseByProjectUUIDAndIdentifier = `-- name: FetchCodebaseByProjectUUIDAndIdentifier :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `repo_url` + "`" + `,` + "`" + `module_dir` + "`" + `,` + "`" + `language` + "`" + `,` + "`" + `default_branch` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `codebase` + "`" + `
+WHERE 
+    ` + "`" + `identifier` + "`" + ` = ? AND ` + "`" + `project_uuid` + "`" + ` = ? 
+LIMIT ?, ?
+`
+
+type FetchCodebaseByProjectUUIDAndIdentifierParams struct {
+	Identifier  string `json:"identifier"`
+	ProjectUUID string `json:"project_uuid"`
+	Offset      int32  `json:"offset"`
+	Limit       int32  `json:"limit"`
+}
+
+func (q *Queries) FetchCodebaseByProjectUUIDAndIdentifier(ctx context.Context, arg FetchCodebaseByProjectUUIDAndIdentifierParams) ([]Codebase, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodebaseByProjectUUIDAndIdentifier,
+		arg.Identifier,
+		arg.ProjectUUID,
+		arg.Offset,
+		arg.Limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Codebase
+	for rows.Next() {
+		var i Codebase
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.Identifier,
+			&i.RepoURL,
+			&i.ModuleDir,
+			&i.Language,
+			&i.DefaultBranch,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchCodebaseByUUID = `-- name: FetchCodebaseByUUID :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `repo_url` + "`" + `,` + "`" + `module_dir` + "`" + `,` + "`" + `language` + "`" + `,` + "`" + `default_branch` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `codebase` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ?
+`
+
+// codebase selects:
+func (q *Queries) FetchCodebaseByUUID(ctx context.Context, uuid string) ([]Codebase, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodebaseByUUID, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Codebase
+	for rows.Next() {
+		var i Codebase
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.Identifier,
+			&i.RepoURL,
+			&i.ModuleDir,
+			&i.Language,
+			&i.DefaultBranch,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchCodebaseByUUIDForUpdate = `-- name: FetchCodebaseByUUIDForUpdate :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `repo_url` + "`" + `,` + "`" + `module_dir` + "`" + `,` + "`" + `language` + "`" + `,` + "`" + `default_branch` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `codebase` + "`" + `
+WHERE 
+    ` + "`" + `uuid` + "`" + ` = ? 
+FOR UPDATE
+`
+
+func (q *Queries) FetchCodebaseByUUIDForUpdate(ctx context.Context, uuid string) ([]Codebase, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodebaseByUUIDForUpdate, uuid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Codebase
+	for rows.Next() {
+		var i Codebase
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.Identifier,
+			&i.RepoURL,
+			&i.ModuleDir,
+			&i.Language,
+			&i.DefaultBranch,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const fetchDeploymentByStatus = `-- name: FetchDeploymentByStatus :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `host` + "`" + `,` + "`" + `active_revision_uuid` + "`" + `
 FROM ` + "`" + `deployment` + "`" + `

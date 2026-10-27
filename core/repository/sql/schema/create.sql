@@ -269,6 +269,26 @@ CREATE TABLE IF NOT EXISTS `automation` (
     INDEX `updated_at` (`updated_at`)
 ) ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `codebase` (
+    `uuid` CHAR(36) NOT NULL,
+    `project_uuid` CHAR(36) NOT NULL,
+    `identifier` VARCHAR(512) NOT NULL,
+    `repo_url` VARCHAR(512),
+    `module_dir` VARCHAR(512),
+    `language` INT NOT NULL,
+    `default_branch` VARCHAR(255),
+    `status` INT NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_by_uuid` CHAR(36) NOT NULL,
+    `updated_by_uuid` CHAR(36) NOT NULL,
+    PRIMARY KEY (`uuid`),
+    UNIQUE INDEX `project_identifier` (`project_uuid`, `identifier`),
+    CONSTRAINT `codebase_project`
+        FOREIGN KEY (`project_uuid`)
+        REFERENCES `project` (`uuid`)
+) ENGINE = InnoDB;
+
 CREATE TABLE IF NOT EXISTS `extension_execution` (
     `uuid` CHAR(36) NOT NULL,
     `extension_uuid` CHAR(36) NOT NULL,
@@ -397,6 +417,47 @@ CREATE TABLE IF NOT EXISTS `user_connection` (
     INDEX `updated_at` (`updated_at`),
     INDEX `user_uuid` (`user_uuid`),
     INDEX `created_at` (`created_at`)
+) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `code_snapshot` (
+    `uuid` CHAR(36) NOT NULL,
+    `codebase_uuid` CHAR(36) NOT NULL,
+    `commit_sha` VARCHAR(64) NOT NULL,
+    `branch` VARCHAR(255),
+    `committed_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `dirty` TINYINT(1) NOT NULL DEFAULT 0,
+    `scanner_version` VARCHAR(32) NOT NULL,
+    `facts_schema_version` INT NOT NULL,
+    `facts` JSON NOT NULL,
+    `summary` JSON NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_by_uuid` CHAR(36) NOT NULL,
+    `updated_by_uuid` CHAR(36) NOT NULL,
+    PRIMARY KEY (`uuid`),
+    INDEX `codebase_committed_at` (`codebase_uuid`, `committed_at` DESC),
+    UNIQUE INDEX `codebase_commit` (`codebase_uuid`, `commit_sha`),
+    CONSTRAINT `code_snapshot_codebase`
+        FOREIGN KEY (`codebase_uuid`)
+        REFERENCES `codebase` (`uuid`)
+        ON DELETE CASCADE
+) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `code_model` (
+    `uuid` CHAR(36) NOT NULL,
+    `codebase_uuid` CHAR(36) NOT NULL,
+    `version` INT NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_by_uuid` CHAR(36) NOT NULL,
+    `updated_by_uuid` CHAR(36) NOT NULL,
+    `components` JSON NOT NULL,
+    PRIMARY KEY (`uuid`),
+    UNIQUE INDEX `uq_code_model_codebase_uuid` (`codebase_uuid`),
+    CONSTRAINT `code_model_codebase`
+        FOREIGN KEY (`codebase_uuid`)
+        REFERENCES `codebase` (`uuid`)
+        ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `automation_event` (

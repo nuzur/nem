@@ -204,6 +204,119 @@ func (q *Queries) InsertChangeRequest(ctx context.Context, arg InsertChangeReque
 	)
 }
 
+const insertCodeModel = `-- name: InsertCodeModel :execresult
+INSERT INTO ` + "`" + `code_model` + "`" + `
+(` + "`" + `uuid` + "`" + `,` + "`" + `codebase_uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `components` + "`" + `)
+VALUES
+(?,?,?,?,?,?,?,?)
+`
+
+type InsertCodeModelParams struct {
+	UUID          string      `json:"uuid"`
+	CodebaseUUID  string      `json:"codebase_uuid"`
+	Version       int64       `json:"version"`
+	CreatedAt     time.Time   `json:"created_at"`
+	UpdatedAt     time.Time   `json:"updated_at"`
+	CreatedByUUID string      `json:"created_by_uuid"`
+	UpdatedByUUID string      `json:"updated_by_uuid"`
+	Components    mapper.JSON `json:"components"`
+}
+
+func (q *Queries) InsertCodeModel(ctx context.Context, arg InsertCodeModelParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, insertCodeModel,
+		arg.UUID,
+		arg.CodebaseUUID,
+		arg.Version,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+		arg.Components,
+	)
+}
+
+const insertCodeSnapshot = `-- name: InsertCodeSnapshot :execresult
+INSERT INTO ` + "`" + `code_snapshot` + "`" + `
+(` + "`" + `uuid` + "`" + `,` + "`" + `codebase_uuid` + "`" + `,` + "`" + `commit_sha` + "`" + `,` + "`" + `branch` + "`" + `,` + "`" + `committed_at` + "`" + `,` + "`" + `dirty` + "`" + `,` + "`" + `scanner_version` + "`" + `,` + "`" + `facts_schema_version` + "`" + `,` + "`" + `facts` + "`" + `,` + "`" + `summary` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+`
+
+type InsertCodeSnapshotParams struct {
+	UUID               string      `json:"uuid"`
+	CodebaseUUID       string      `json:"codebase_uuid"`
+	CommitSha          string      `json:"commit_sha"`
+	Branch             null.String `json:"branch"`
+	CommittedAt        time.Time   `json:"committed_at"`
+	Dirty              bool        `json:"dirty"`
+	ScannerVersion     string      `json:"scanner_version"`
+	FactsSchemaVersion int64       `json:"facts_schema_version"`
+	Facts              mapper.JSON `json:"facts"`
+	Summary            mapper.JSON `json:"summary"`
+	CreatedAt          time.Time   `json:"created_at"`
+	UpdatedAt          time.Time   `json:"updated_at"`
+	CreatedByUUID      string      `json:"created_by_uuid"`
+	UpdatedByUUID      string      `json:"updated_by_uuid"`
+}
+
+func (q *Queries) InsertCodeSnapshot(ctx context.Context, arg InsertCodeSnapshotParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, insertCodeSnapshot,
+		arg.UUID,
+		arg.CodebaseUUID,
+		arg.CommitSha,
+		arg.Branch,
+		arg.CommittedAt,
+		arg.Dirty,
+		arg.ScannerVersion,
+		arg.FactsSchemaVersion,
+		arg.Facts,
+		arg.Summary,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+	)
+}
+
+const insertCodebase = `-- name: InsertCodebase :execresult
+INSERT INTO ` + "`" + `codebase` + "`" + `
+(` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `repo_url` + "`" + `,` + "`" + `module_dir` + "`" + `,` + "`" + `language` + "`" + `,` + "`" + `default_branch` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?)
+`
+
+type InsertCodebaseParams struct {
+	UUID          string      `json:"uuid"`
+	ProjectUUID   string      `json:"project_uuid"`
+	Identifier    string      `json:"identifier"`
+	RepoURL       null.String `json:"repo_url"`
+	ModuleDir     null.String `json:"module_dir"`
+	Language      int64       `json:"language"`
+	DefaultBranch null.String `json:"default_branch"`
+	Status        int64       `json:"status"`
+	CreatedAt     time.Time   `json:"created_at"`
+	UpdatedAt     time.Time   `json:"updated_at"`
+	CreatedByUUID string      `json:"created_by_uuid"`
+	UpdatedByUUID string      `json:"updated_by_uuid"`
+}
+
+func (q *Queries) InsertCodebase(ctx context.Context, arg InsertCodebaseParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, insertCodebase,
+		arg.UUID,
+		arg.ProjectUUID,
+		arg.Identifier,
+		arg.RepoURL,
+		arg.ModuleDir,
+		arg.Language,
+		arg.DefaultBranch,
+		arg.Status,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+		arg.CreatedByUUID,
+		arg.UpdatedByUUID,
+	)
+}
+
 const insertDeployment = `-- name: InsertDeployment :execresult
 INSERT INTO ` + "`" + `deployment` + "`" + `
 (` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `host` + "`" + `,` + "`" + `active_revision_uuid` + "`" + `)

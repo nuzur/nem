@@ -88,6 +88,49 @@ type ChangeRequest struct {
 	RevertedByChangeRequestUUID null.String `json:"reverted_by_change_request_uuid"`
 }
 
+type CodeModel struct {
+	UUID          string      `json:"uuid"`
+	CodebaseUUID  string      `json:"codebase_uuid"`
+	Version       int64       `json:"version"`
+	CreatedAt     time.Time   `json:"created_at"`
+	UpdatedAt     time.Time   `json:"updated_at"`
+	CreatedByUUID string      `json:"created_by_uuid"`
+	UpdatedByUUID string      `json:"updated_by_uuid"`
+	Components    mapper.JSON `json:"components"`
+}
+
+type CodeSnapshot struct {
+	UUID               string      `json:"uuid"`
+	CodebaseUUID       string      `json:"codebase_uuid"`
+	CommitSha          string      `json:"commit_sha"`
+	Branch             null.String `json:"branch"`
+	CommittedAt        time.Time   `json:"committed_at"`
+	Dirty              bool        `json:"dirty"`
+	ScannerVersion     string      `json:"scanner_version"`
+	FactsSchemaVersion int64       `json:"facts_schema_version"`
+	Facts              mapper.JSON `json:"facts"`
+	Summary            mapper.JSON `json:"summary"`
+	CreatedAt          time.Time   `json:"created_at"`
+	UpdatedAt          time.Time   `json:"updated_at"`
+	CreatedByUUID      string      `json:"created_by_uuid"`
+	UpdatedByUUID      string      `json:"updated_by_uuid"`
+}
+
+type Codebase struct {
+	UUID          string      `json:"uuid"`
+	ProjectUUID   string      `json:"project_uuid"`
+	Identifier    string      `json:"identifier"`
+	RepoURL       null.String `json:"repo_url"`
+	ModuleDir     null.String `json:"module_dir"`
+	Language      int64       `json:"language"`
+	DefaultBranch null.String `json:"default_branch"`
+	Status        int64       `json:"status"`
+	CreatedAt     time.Time   `json:"created_at"`
+	UpdatedAt     time.Time   `json:"updated_at"`
+	CreatedByUUID string      `json:"created_by_uuid"`
+	UpdatedByUUID string      `json:"updated_by_uuid"`
+}
+
 type Deployment struct {
 	UUID               string      `json:"uuid"`
 	UserUUID           string      `json:"user_uuid"`

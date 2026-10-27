@@ -65,6 +65,12 @@ INSERT INTO `automation`
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
+-- name: InsertCodebase :execresult
+INSERT INTO `codebase`
+(`uuid`,`project_uuid`,`identifier`,`repo_url`,`module_dir`,`language`,`default_branch`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?);
+
 -- name: InsertExtensionExecution :execresult
 INSERT INTO `extension_execution`
 (`uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`)
@@ -94,6 +100,18 @@ INSERT INTO `user_connection`
 (`uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`)
 VALUES
 (?,?,?,?,?,?,?,?,?,?,?);
+
+-- name: InsertCodeSnapshot :execresult
+INSERT INTO `code_snapshot`
+(`uuid`,`codebase_uuid`,`commit_sha`,`branch`,`committed_at`,`dirty`,`scanner_version`,`facts_schema_version`,`facts`,`summary`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`)
+VALUES
+(?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+
+-- name: InsertCodeModel :execresult
+INSERT INTO `code_model`
+(`uuid`,`codebase_uuid`,`version`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`components`)
+VALUES
+(?,?,?,?,?,?,?,?);
 
 -- name: InsertAutomationEvent :execresult
 INSERT INTO `automation_event`

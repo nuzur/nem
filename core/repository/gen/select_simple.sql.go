@@ -190,6 +190,127 @@ func (q *Queries) FetchChangeRequest(ctx context.Context) ([]ChangeRequest, erro
 	return items, nil
 }
 
+const fetchCodeModel = `-- name: FetchCodeModel :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `codebase_uuid` + "`" + `,` + "`" + `version` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `components` + "`" + `
+FROM ` + "`" + `code_model` + "`" + `
+`
+
+func (q *Queries) FetchCodeModel(ctx context.Context) ([]CodeModel, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodeModel)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []CodeModel
+	for rows.Next() {
+		var i CodeModel
+		if err := rows.Scan(
+			&i.UUID,
+			&i.CodebaseUUID,
+			&i.Version,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+			&i.Components,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchCodeSnapshot = `-- name: FetchCodeSnapshot :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `codebase_uuid` + "`" + `,` + "`" + `commit_sha` + "`" + `,` + "`" + `branch` + "`" + `,` + "`" + `committed_at` + "`" + `,` + "`" + `dirty` + "`" + `,` + "`" + `scanner_version` + "`" + `,` + "`" + `facts_schema_version` + "`" + `,` + "`" + `facts` + "`" + `,` + "`" + `summary` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `code_snapshot` + "`" + `
+`
+
+func (q *Queries) FetchCodeSnapshot(ctx context.Context) ([]CodeSnapshot, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodeSnapshot)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []CodeSnapshot
+	for rows.Next() {
+		var i CodeSnapshot
+		if err := rows.Scan(
+			&i.UUID,
+			&i.CodebaseUUID,
+			&i.CommitSha,
+			&i.Branch,
+			&i.CommittedAt,
+			&i.Dirty,
+			&i.ScannerVersion,
+			&i.FactsSchemaVersion,
+			&i.Facts,
+			&i.Summary,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const fetchCodebase = `-- name: FetchCodebase :many
+SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `repo_url` + "`" + `,` + "`" + `module_dir` + "`" + `,` + "`" + `language` + "`" + `,` + "`" + `default_branch` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `
+FROM ` + "`" + `codebase` + "`" + `
+`
+
+func (q *Queries) FetchCodebase(ctx context.Context) ([]Codebase, error) {
+	rows, err := q.db.QueryContext(ctx, fetchCodebase)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Codebase
+	for rows.Next() {
+		var i Codebase
+		if err := rows.Scan(
+			&i.UUID,
+			&i.ProjectUUID,
+			&i.Identifier,
+			&i.RepoURL,
+			&i.ModuleDir,
+			&i.Language,
+			&i.DefaultBranch,
+			&i.Status,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.CreatedByUUID,
+			&i.UpdatedByUUID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const fetchDeployment = `-- name: FetchDeployment :many
 SELECT ` + "`" + `uuid` + "`" + `,` + "`" + `user_uuid` + "`" + `,` + "`" + `project_uuid` + "`" + `,` + "`" + `identifier` + "`" + `,` + "`" + `status` + "`" + `,` + "`" + `created_at` + "`" + `,` + "`" + `updated_at` + "`" + `,` + "`" + `created_by_uuid` + "`" + `,` + "`" + `updated_by_uuid` + "`" + `,` + "`" + `host` + "`" + `,` + "`" + `active_revision_uuid` + "`" + `
 FROM ` + "`" + `deployment` + "`" + `

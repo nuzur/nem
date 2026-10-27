@@ -43,6 +43,10 @@ FROM `project_version`;
 SELECT `uuid`,`project_uuid`,`entity_uuid`,`name`,`operation`,`condition`,`action_type`,`action_config`,`enabled`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
 FROM `automation`;
 
+-- name: FetchCodebase :many
+SELECT `uuid`,`project_uuid`,`identifier`,`repo_url`,`module_dir`,`language`,`default_branch`,`status`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `codebase`;
+
 -- name: FetchExtensionExecution :many
 SELECT `uuid`,`extension_uuid`,`extension_version_uuid`,`project_extension_uuid`,`project_uuid`,`project_version_uuid`,`executed_by_uuid`,`metadata`,`status`,`status_msg`,`created_at`,`updated_at`,`queue_priority`,`last_heartbeat_at`
 FROM `extension_execution`;
@@ -62,6 +66,14 @@ FROM `change_request`;
 -- name: FetchUserConnection :many
 SELECT `uuid`,`user_uuid`,`project_uuid`,`project_version_uuid`,`type`,`type_config`,`db_schema`,`executions`,`status`,`created_at`,`updated_at`
 FROM `user_connection`;
+
+-- name: FetchCodeSnapshot :many
+SELECT `uuid`,`codebase_uuid`,`commit_sha`,`branch`,`committed_at`,`dirty`,`scanner_version`,`facts_schema_version`,`facts`,`summary`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`
+FROM `code_snapshot`;
+
+-- name: FetchCodeModel :many
+SELECT `uuid`,`codebase_uuid`,`version`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`,`components`
+FROM `code_model`;
 
 -- name: FetchAutomationEvent :many
 SELECT `uuid`,`automation_uuid`,`project_uuid`,`change_request_uuid`,`payload`,`status`,`attempts`,`next_attempt_at`,`delivered_at`,`last_error`,`created_at`,`updated_at`,`created_by_uuid`,`updated_by_uuid`

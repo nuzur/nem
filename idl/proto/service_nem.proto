@@ -217,6 +217,14 @@ import "data_change_before_image_value.proto";
 
 import "data_change_before_image.proto";
 
+import "codebase.proto";
+
+import "code_snapshot.proto";
+
+import "code_model_component.proto";
+
+import "code_model.proto";
+
 
 service Nem {    
     
@@ -837,6 +845,30 @@ service Nem {
     rpc CreateDataChangeBeforeImage(CreateDataChangeBeforeImageRequest) returns (DataChangeBeforeImage) {}
     rpc UpdateDataChangeBeforeImage(UpdateDataChangeBeforeImageRequest) returns (DataChangeBeforeImage) {}
     // data_change_before_image end
+    
+    // codebase start
+    rpc ListCodebase(ListCodebaseRequest) returns (ListCodebaseResponse){}
+    rpc CreateCodebase(CreateCodebaseRequest) returns (Codebase) {}
+    rpc UpdateCodebase(UpdateCodebaseRequest) returns (Codebase) {}
+    // codebase end
+    
+    // code_snapshot start
+    rpc ListCodeSnapshot(ListCodeSnapshotRequest) returns (ListCodeSnapshotResponse){}
+    rpc CreateCodeSnapshot(CreateCodeSnapshotRequest) returns (CodeSnapshot) {}
+    rpc UpdateCodeSnapshot(UpdateCodeSnapshotRequest) returns (CodeSnapshot) {}
+    // code_snapshot end
+    
+    // code_model_component start
+    rpc ListCodeModelComponent(ListCodeModelComponentRequest) returns (ListCodeModelComponentResponse){}
+    rpc CreateCodeModelComponent(CreateCodeModelComponentRequest) returns (CodeModelComponent) {}
+    rpc UpdateCodeModelComponent(UpdateCodeModelComponentRequest) returns (CodeModelComponent) {}
+    // code_model_component end
+    
+    // code_model start
+    rpc ListCodeModel(ListCodeModelRequest) returns (ListCodeModelResponse){}
+    rpc CreateCodeModel(CreateCodeModelRequest) returns (CodeModel) {}
+    rpc UpdateCodeModel(UpdateCodeModelRequest) returns (CodeModel) {}
+    // code_model end
     
 }
 
@@ -5063,3 +5095,167 @@ message UpdateDataChangeBeforeImageRequest {
     google.protobuf.FieldMask update_mask = 2;
 }
 // data_change_before_image end
+
+// codebase start
+message ListCodebaseRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;  
+    repeated string include_fields = 5;
+    repeated string exclude_fields = 6;
+    bool skip_cache = 7;
+}
+
+message ListCodebaseResponse {
+    repeated Codebase codebase = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateCodebaseRequest {
+    Codebase codebase = 1;
+}
+
+message UpdateCodebaseRequest {
+   
+    Codebase codebase = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// codebase end
+
+// code_snapshot start
+message ListCodeSnapshotRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;  
+    repeated string include_fields = 5;
+    repeated string exclude_fields = 6;
+    bool skip_cache = 7;
+}
+
+message ListCodeSnapshotResponse {
+    repeated CodeSnapshot code_snapshot = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateCodeSnapshotRequest {
+    CodeSnapshot code_snapshot = 1;
+}
+
+message UpdateCodeSnapshotRequest {
+   
+    CodeSnapshot code_snapshot = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// code_snapshot end
+
+// code_model_component start
+message ListCodeModelComponentRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;  
+    repeated string include_fields = 5;
+    repeated string exclude_fields = 6;
+    bool skip_cache = 7;
+}
+
+message ListCodeModelComponentResponse {
+    repeated CodeModelComponent code_model_component = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateCodeModelComponentRequest {
+    CodeModelComponent code_model_component = 1;
+}
+
+message UpdateCodeModelComponentRequest {
+   
+    CodeModelComponent code_model_component = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// code_model_component end
+
+// code_model start
+message ListCodeModelRequest {
+    // The maximum number of records to return. The service may return fewer than
+    // this value.
+    int32 page_size = 1;
+
+    // A page token, received from a previous call.
+    // Provide this to retrieve the subsequent page.    
+    string page_token = 2;
+
+    // https://google.aip.dev/160
+    // https://pkg.go.dev/go.einride.tech/aip@v0.67.1
+    // https://github.com/einride/aip-go    
+    string filter = 3;
+    string order_by = 4;  
+    repeated string include_fields = 5;
+    repeated string exclude_fields = 6;
+    bool skip_cache = 7;
+}
+
+message ListCodeModelResponse {
+    repeated CodeModel code_model = 1;
+
+    // A token that can be sent as `page_token` to retrieve the next page.
+    // If this field is omitted, there are no subsequent pages.
+    string next_page_token = 2;
+}
+
+message CreateCodeModelRequest {
+    CodeModel code_model = 1;
+}
+
+message UpdateCodeModelRequest {
+   
+    CodeModel code_model = 1;
+  
+    // The list of fields to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+// code_model end

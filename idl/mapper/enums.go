@@ -1191,3 +1191,48 @@ func DataChangeBeforeImageStatusSliceFromProto(s []pb.DataChangeBeforeImageStatu
 	}
 	return res
 }
+
+func CodebaseLanguageSliceToProto(s []enums.CodebaseLanguage) []pb.CodebaseLanguage {
+	res := []pb.CodebaseLanguage{}
+	for _, e := range s {
+		res = append(res, pb.CodebaseLanguage(e))
+	}
+	return res
+}
+func CodebaseLanguageSliceFromProto(s []pb.CodebaseLanguage) []enums.CodebaseLanguage {
+	res := []enums.CodebaseLanguage{}
+	for _, e := range s {
+		res = append(res, enums.CodebaseLanguage(e))
+	}
+	return res
+}
+
+func CodebaseStatusSliceToProto(s []enums.CodebaseStatus) []pb.CodebaseStatus {
+	res := []pb.CodebaseStatus{}
+	for _, e := range s {
+		res = append(res, pb.CodebaseStatus(e))
+	}
+	return res
+}
+func CodebaseStatusSliceFromProto(s []pb.CodebaseStatus) []enums.CodebaseStatus {
+	res := []enums.CodebaseStatus{}
+	for _, e := range s {
+		res = append(res, enums.CodebaseStatus(e))
+	}
+	return res
+}
+
+func CodeComponentStatusSliceToProto(s []enums.CodeComponentStatus) []pb.CodeComponentStatus {
+	res := []pb.CodeComponentStatus{}
+	for _, e := range s {
+		res = append(res, pb.CodeComponentStatus(e))
+	}
+	return res
+}
+func CodeComponentStatusSliceFromProto(s []pb.CodeComponentStatus) []enums.CodeComponentStatus {
+	res := []enums.CodeComponentStatus{}
+	for _, e := range s {
+		res = append(res, enums.CodeComponentStatus(e))
+	}
+	return res
+}
