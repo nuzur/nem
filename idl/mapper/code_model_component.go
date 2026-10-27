@@ -15,7 +15,7 @@ func CodeModelComponentToProto(e main_entity.CodeModelComponent) *pb.CodeModelCo
 	return &pb.CodeModelComponent{
 		ComponentId:      e.ComponentId,
 		Summary:          e.Summary.ValueOrZero(),
-		Responsibilities: UUIDSliceToStringSlice(e.Responsibilities),
+		Responsibilities: e.Responsibilities,
 		Status:           pb.CodeComponentStatus(e.Status),
 		UpdatedByUuid:    StringFromUUIDPtr(e.UpdatedByUUID),
 	}
@@ -36,7 +36,7 @@ func CodeModelComponentFromProto(m *pb.CodeModelComponent) main_entity.CodeModel
 	return main_entity.CodeModelComponent{
 		ComponentId:      m.GetComponentId(),
 		Summary:          null.StringFrom(m.Summary),
-		Responsibilities: StringSliceToUUIDSlice(m.GetResponsibilities()),
+		Responsibilities: m.GetResponsibilities(),
 		Status:           enums.CodeComponentStatus(m.GetStatus()),
 		UpdatedByUUID:    StringToUUIDPtr(m.GetUpdatedByUuid()),
 	}

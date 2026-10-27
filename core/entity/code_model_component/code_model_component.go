@@ -16,7 +16,7 @@ import (
 type CodeModelComponent struct {
 	ComponentId      string                    `json:"component_id"`
 	Summary          null.String               `json:"summary"`
-	Responsibilities []uuid.UUID               `json:"responsibilities"`
+	Responsibilities []string                  `json:"responsibilities"`
 	Status           enums.CodeComponentStatus `json:"status"`
 	UpdatedByUUID    *uuid.UUID                `json:"updated_by_uuid"`
 }
